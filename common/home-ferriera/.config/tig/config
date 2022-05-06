@@ -1,0 +1,31 @@
+# vim: set ft=conf:
+
+bind generic A !>git commit --amend
+bind generic I !>git add -i -p
+
+bind main B !>git rebase -i %(commit)
+bind main H !git push
+bind main U !git pull
+
+bind status F !ranger %(directory)
+bind status O !@open-file %(file)
+bind status T !?trash %(file)
+
+bind status H !git push
+bind status U !git pull
+
+# See https://github.com/jonas/tig/issues/595
+set status-show-untracked-files = yes
+
+set line-graphics = utf-8
+set truncation-delimiter = utf-8
+set ignore-case = smart-case
+
+set history-size = 0
+
+set main-view = line-number:no id:yes date:custom author:abbreviated commit-title:yes,graph,refs,overflow=no
+set main-view-date-local = true
+set main-view-date-format = "%F %R"
+
+color cursor black white
+color title-focus black white
