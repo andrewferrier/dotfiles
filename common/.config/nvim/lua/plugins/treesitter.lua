@@ -8,7 +8,7 @@ local function treesitter_on_attach(_, _)
     vim.cmd("vnoremap <buffer> <silent> m :lua require('tsht').nodes()<CR>")
 end
 
-local function disable_function(filetype, bufnr)
+local function disable_other(filetype, bufnr)
     if vim.b.treesitter_enabled == nil then
         local enable = not require("large_file").is_large_file(bufnr)
         vim.b.treesitter_enabled = enable
@@ -21,25 +21,34 @@ local function disable_function(filetype, bufnr)
     return not vim.b.treesitter_enabled
 end
 
+local function disable_indent(filetype, bufnr)
+    if filetype == 'python' then
+        -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
+        return true
+    else
+        return disable_other(filetype, bufnr)
+    end
+end
+
 require("nvim-treesitter.configs").setup({
     highlight = {
         enable = true,
-        disable = disable_function,
+        disable = disable_other,
     },
     refactor = {
         smart_rename = {
             enable = true,
-            disable = disable_function,
+            disable = disable_other,
             keymaps = { smart_rename = "cxr" },
         },
     },
-    indent = { enable = true, disable = disable_function },
-    endwise = { enable = true, disable = disable_function },
-    matchup = { enable = true, disable = disable_function },
+    indent = { enable = true, disable = disable_indent },
+    endwise = { enable = true, disable = disable_other },
+    matchup = { enable = true, disable = disable_other },
     textobjects = {
         select = {
             enable = true,
-            disable = disable_function,
+            disable = disable_other,
             lookahead = true,
             keymaps = {
                 ["ia"] = "@parameter.inner",
