@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+
+import argparse
+import logging
+import sys
+
+logger = logging.getLogger("my-script")
+logger.propagate = False
+logger.setLevel(logging.WARN)
+
+syserr_handler = logging.StreamHandler(stream=sys.stderr)
+syserr_handler.setLevel(logging.WARN)
+syserr_handler.setFormatter(
+    logging.Formatter("my-script: %(levelname)s: %(message)s")
+)
+logger.addHandler(syserr_handler)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--argument_one", default="value")
+parser.add_argument("--argument_two", required=True)
+args = parser.parse_args()
+
+
+def main():
+    # Code goes here
+    pass
+
+
+if __name__ == "__main__":
+    main()

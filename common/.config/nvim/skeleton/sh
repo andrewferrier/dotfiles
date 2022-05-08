@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+#
+# Snippets:
+#
+# ****** HOW TO CREATE A TEMPORARY FILE IN A CROSS-PLATFORM WAY
+# TEMPFILE=$(mktemp "${TMPDIR:-/tmp}/XXXXXXX")
+#
+# ****** HOW TO CHECK IF SCRIPT IS RUNNING INTERACTIVELY
+# if [ -t 1 ]; then
+# ....
+#
+# ****** GETTING OPTIONS
+# usage() {
+#     echo "Usage: $0 [-x] [-s <45|90>] [-p <string>]" 1>&2
+#     exit 1
+# }
+#
+# x=false
+#
+# while getopts "xs:p:" o; do
+#     case "${o}" in
+#     x)
+#         # Boolean option
+#         x=true
+#         ;;
+#     s)
+#         # Enum option
+#         s=${OPTARG}
+#         [ $((s == 45 || s == 90)) -ne 0 ] || usage
+#         ;;
+#     p)
+#         # Generic string option
+#         p=${OPTARG}
+#         ;;
+#     *)
+#         usage
+#         ;;
+#     esac
+# done
+# shift $((OPTIND - 1))
+#
+# [ "${s:-}" ] || usage
+# [ "${p:-}" ] || usage
+#
+# ****** LOGGING FUNCTIONS
+# log() {
+#     echo "$(date "+%Y-%m-%dT%H:%M:%S %Z") ${SCRIPT_NAME}: $*" >>"/tmp/${SCRIPT_NAME}.log"
+#
+#     if [[ ${OSTYPE} == linux* ]]; then
+#         echo "$*" | systemd-cat --identifier="${SCRIPT_NAME}"
+#     fi
+# }
+#
+# logpipe() {
+#     while IFS='' read -r line; do
+#         log "${line}"
+#     done
+# }
+#
+# # Send stdout and stderr to log function ONLY
+# exec 2> >(logpipe)
+#
+# ****** ECHO TO STDERR
+# echo >&2 "xxx"
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+SCRIPT_NAME=$(basename "$0")
+
+trap cleanup INT TERM ERR EXIT
+
+cleanup() {
+    exit
+}
