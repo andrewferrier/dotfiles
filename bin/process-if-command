@@ -11,6 +11,6 @@ for directory in "${DOTFILES_DIR}"/if-command/*; do
     COMMAND=$(basename "$directory")
 
     if command -v "$COMMAND" >/dev/null; then
-        stow --verbose --dir="${directory}" --target="${HOME}" --stow home-ferriera
+        stow --verbose --dir="${DOTFILES_DIR}/if-command" --target="${HOME}" --stow "$COMMAND"
     fi
 done
