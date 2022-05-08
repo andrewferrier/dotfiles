@@ -1,0 +1,5 @@
+{
+    "WantUpdateNotification": false,
+    "dashboard": true,
+    "driver": "virtualbox"
+}
