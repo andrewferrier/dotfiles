@@ -1,0 +1,5 @@
+dns-resolution: yes
+log-scale: yes
+port-display: on
+port-resolution: yes
+show-totals: yes
