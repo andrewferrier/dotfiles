@@ -1,0 +1,4 @@
+configuration {
+    font: "mono 11";
+    case-sensitive: false;
+}

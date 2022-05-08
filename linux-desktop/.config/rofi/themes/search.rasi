@@ -1,0 +1,10 @@
+@import "dmenu"
+
+* {
+  font: "DejaVu Sans Mono 14";
+}
+
+entry {
+  blink: false;
+  width: 90%;
+}

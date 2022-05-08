@@ -1,0 +1,16 @@
+@import "Pop-Dark"
+
+* {
+    text-color:       #ffffff;
+    background-color: #8f3f71;
+    blue:             #6d1d51;
+}
+
+window {
+    height: 70%;
+    width: 90%;
+}
+
+entry {
+    blink: false;
+}
