@@ -1,0 +1,78 @@
+[color "diff"]
+	old = red strike
+
+[user]
+	name = Andrew Ferrier
+	email = andrewferrier@example.com
+
+[core]
+	pager = less -FX
+
+[diff]
+	renames = copies
+	mnemonicprefix = true
+	submodule = log
+	algorithm = minimal
+	colorMoved = default
+
+[rerere]
+	enabled = true
+
+[fetch]
+	prune = true
+
+[branch]
+	autoSetupRebase = always
+
+[pull]
+	rebase = true
+
+[merge]
+	conflictstyle = diff3
+	tool = diffconflicts
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+
+[status]
+	short = true
+
+[interactive]
+	singlekey = true
+
+[include]
+	path = ~/gitco/github/git-utilities/gitaliases
+
+[web]
+	browser = open
+
+[github]
+	user = andrewferrier
+
+[credential]
+	helper = cache --timeout=7200
+
+[alias]
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
+	open = git-open
+	search-historicallines = !git rev-list --all | xargs git grep
+
+[commit]
+	verbose = true
+
+[filter "lfs"]
+	required = false
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+
+[mergetool "diffconflicts"]
+	cmd = $VISUAL -c 'packadd diffconflicts | DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"'
+	trustExitCode = true
+
+[mergetool]
+	keepBackup = false
+
+[init]
+	defaultBranch = master

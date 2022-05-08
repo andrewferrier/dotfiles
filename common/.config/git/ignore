@@ -1,0 +1,22 @@
+# Based on
+# https://github.com/github/gitignore/blob/master/Global/OSX.gitignore, with
+# some dangerous ones removed.
+
+_Store
+.AppleDouble
+.LSOverride
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Based on https://help.github.com/articles/ignoring-files
+
+.DS_Store
+.DS_Store?
+Thumbs.db
+
+# My additions
+
+*.swp
+
+# vim: set filetype=gitignore:
