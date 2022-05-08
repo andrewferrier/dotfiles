@@ -4,8 +4,19 @@
 -- because it seems to be more reliable and supported by more filetypes.
 
 local function treesitter_on_attach(_, _)
-    vim.cmd("omap <buffer> <silent> m :<C-U>lua require('tsht').nodes()<CR>")
-    vim.cmd("vnoremap <buffer> <silent> m :lua require('tsht').nodes()<CR>")
+    vim.keymap.set(
+        "o",
+        "m",
+        ':<C-U>lua require("tsht").nodes()<CR>',
+        { buffer = true, silent = true }
+    )
+
+    vim.keymap.set(
+        "x",
+        "m",
+        ':lua require("tsht").nodes()<CR>',
+        { buffer = true, silent = true }
+    )
 end
 
 local function disable_other(filetype, bufnr)
@@ -22,7 +33,7 @@ local function disable_other(filetype, bufnr)
 end
 
 local function disable_indent(filetype, bufnr)
-    if filetype == 'python' then
+    if filetype == "python" then
         -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
         return true
     else
