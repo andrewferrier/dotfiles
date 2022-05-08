@@ -7,4 +7,4 @@ all: if-command
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow common
 
 if-command:
-	bin/process-if-command
+	.bin/process-if-command
