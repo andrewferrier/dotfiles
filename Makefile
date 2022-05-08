@@ -1,7 +1,7 @@
 export DOTFILES := $(HOME)/dotfiles
 export DOTFILES_COMMON := $(DOTFILES)/common
 
-.PHONY: all all-desktop linux-desktop if-command
+.PHONY: all macos linux common-desktop linux-desktop if-command
 
 DESKTOP := $(shell .bin/target-desktop)
 
@@ -13,10 +13,16 @@ else
 	export OSDISTRIBUTION := $(shell lsb_release --short --id | tr A-Z a-z)
 endif
 
-all: if-command $(if $(DESKTOP), all-desktop)
+all: if-command $(if $(DESKTOP), common-desktop) $(OS)
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow common
 
-all-desktop: $(OS)-desktop
+macos:
+	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow macos
+
+linux:
+
+common-desktop: $(OS)-desktop
+	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow common-desktop
 
 linux-desktop:
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow linux-desktop

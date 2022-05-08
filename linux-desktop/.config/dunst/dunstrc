@@ -1,0 +1,22 @@
+# See 'man 5 dunst' for documentation.
+
+[global]
+width = 400
+offset = 30x50
+separator_height = 1
+padding = 10
+horizontal_padding = 15
+frame_width = 1
+font = Monospace 10
+max_icon_size = 64
+
+[urgency_low]
+timeout = 5
+
+[urgency_normal]
+timeout = 10
+
+[urgency_critical]
+timeout = 0
+
+# vim: ft=cfg
