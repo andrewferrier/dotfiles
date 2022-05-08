@@ -3,7 +3,7 @@
 -- Renaming can be done with LSP, but we are doing it with treesitter instead
 -- because it seems to be more reliable and supported by more filetypes.
 
-local function treesitter_on_attach(_, _)
+local function on_attach(_, _)
     vim.keymap.set(
         "o",
         "m",
@@ -25,7 +25,7 @@ local function disable_other(filetype, bufnr)
         vim.b.treesitter_enabled = enable
 
         if enable then
-            treesitter_on_attach(filetype, bufnr)
+            on_attach(filetype, bufnr)
         end
     end
 
