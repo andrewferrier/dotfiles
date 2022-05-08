@@ -89,6 +89,7 @@
     g!/regex/d - delete all lines that don't match regex
     g/regex/norm gcc - comment out lines that match regex
     grep <pattern> - search and populate quickfix list (using Rg)
+    let @/='text/with/lots/of/slashes' - define search pattern (then use n/N)
     wn - write and move to next file in args list
 
 #### Based on a visual range
@@ -103,7 +104,6 @@
     i#/a# - section (markdown)
     ia/aa - function argument, excluding/including separator
     ii/ai - same or lower indent level/same or lower indent including blank lines
-    in{  - inside next set of {} brackets (etc... for other bracket types)
     m - select area based on Treesitter
 
 ### FZF
