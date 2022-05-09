@@ -27,5 +27,7 @@ desktop: $(OS)-desktop
 linux-desktop:
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow linux-desktop
 
+macos-desktop:
+
 if-command:
 	.bin/process-if-command
