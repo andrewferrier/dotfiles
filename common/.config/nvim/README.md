@@ -127,6 +127,7 @@
 ## Principles
 
 *   Custom operator bindings use either `g<single letter>` or `gy<single letter>`.
+*   "Swap" option keybindings are `yo<single letter>` following the pattern set by vim-unimpaired.
 
 ## TODO
 
