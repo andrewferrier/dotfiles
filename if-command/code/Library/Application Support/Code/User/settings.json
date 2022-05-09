@@ -1,0 +1,70 @@
+{
+    "editor.codeLens": false,
+    "editor.cursorBlinking": "solid",
+    "editor.fontFamily": "Consolas for Powerline, monospace",
+    "editor.fontSize": 16,
+    "editor.highlightActiveIndentGuide": false,
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "editor.occurrencesHighlight": false,
+    "editor.renderFinalNewline": false,
+    "editor.renderIndentGuides": false,
+    "editor.renderLineHighlight": "none",
+    "editor.renderWhitespace": "none",
+    "editor.scrollBeyondLastColumn": 0,
+    "editor.scrollBeyondLastLine": false,
+    "editor.selectionHighlight": false,
+    "editor.wordWrap": "off",
+    "explorer.confirmDelete": false,
+    "extensions.autoUpdate": true,
+    "extensions.ignoreRecommendations": true,
+    "git.confirmSync": false,
+    "json.schemaDownload.enable": false,
+    "redhat.telemetry.enabled": false,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "terminal.integrated.fontSize": 16,
+    "update.mode": "none",
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.cursorStylePerMode.normal": "block",
+    "vim.cursorStylePerMode.replace": "underline",
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+    "vim.normalModeKeyBindings": [
+        {
+            "before": ["[", " "],
+            "after": ["m", "`", "O", "<esc>", "`", "`"]
+        },
+        {
+            "before": ["]", " "],
+            "after": ["m", "`", "o", "<esc>", "`", "`"]
+        },
+        {
+            "before": ["s", "a"],
+            "after": ["y", "s"]
+        },
+        {
+            "before": ["s", "d"],
+            "after": ["d", "s"]
+        },
+        {
+            "before": ["s", "r"],
+            "after": ["c", "s"]
+        }
+    ],
+    "vim.highlightedyank.color": "rgba(250, 240, 170, 0.9)",
+    "vim.highlightedyank.enable": true,
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": true,
+    "window.autoDetectColorScheme": true,
+    "window.nativeFullScreen": false,
+    "window.titleBarStyle": "native",
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.enableExperiments": false,
+    "workbench.preferredDarkColorTheme": "Solarized Dark",
+    "workbench.preferredLightColorTheme": "Solarized Light",
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "vim.showMarksInGutter": true,
+    "vim.statusBarColors.insert": "#00ff00",
+    "vim.statusBarColors.visual": "#0000ff"
+}
