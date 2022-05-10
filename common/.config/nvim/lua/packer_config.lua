@@ -19,7 +19,7 @@ local packer = require("packer")
 packer.init({
     compile_path = vim.fn.stdpath("data")
         .. "/site/pack/packer_generated/start"
-        .. "/packer_generated/lua/packager_compiled.lua",
+        .. "/packer_generated/plugin/packager_compiled.lua",
     disable_commands = true,
     -- profile = {
     --     enable = true,

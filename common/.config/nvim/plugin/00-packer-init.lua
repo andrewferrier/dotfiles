@@ -1,1 +1,0 @@
-require('packager_compiled')
