@@ -25,7 +25,6 @@
     [count]r<char> - replace the next [count] characters with <char>
     ]e, [e - move line down or up
     cvg - Change directory interactively
-    cvr - Turn on 'effective readonly' for file
     d'a - delete to mark "a"
     dV/xyz/-1 - delete linewise up to but not including line with pattern
     g;, g, - jump backwards/forwards through changes
