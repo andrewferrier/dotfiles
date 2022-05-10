@@ -125,13 +125,6 @@ packer.startup(function(use)
     })
 
     use({
-        "tversteeg/registers.nvim",
-        config = function()
-            require("plugins.registers")
-        end,
-    })
-
-    use({
         "norcalli/nvim-colorizer.lua",
         config = function()
             require("plugins.colorizer")
