@@ -2,6 +2,7 @@
 --
 -- TODO:
 -- * Investigate using https://github.com/koekeishiya/skhd as an alternative to Hammerspoon.
+-- * If windows end up totally unfocused, find one to focus on
 
 local SHIFT_PREFIX_ACTION = { "ctrl", "cmd", "alt", "shift" }
 local PREFIX_ACTION = { "ctrl", "cmd", "alt" }
