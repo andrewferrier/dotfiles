@@ -55,7 +55,6 @@ require("nvim-treesitter.configs").setup({
     },
     indent = { enable = true, disable = disable_indent },
     endwise = { enable = true, disable = disable_other },
-    matchup = { enable = true, disable = disable_other },
     textobjects = {
         select = {
             enable = true,
@@ -68,3 +67,6 @@ require("nvim-treesitter.configs").setup({
         },
     },
 })
+
+-- Disable this as it still doesn't seem to work reliably
+-- matchup = { enable = true, disable = disable_other },
