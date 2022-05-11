@@ -1,0 +1,16 @@
+set window library
+set windows library
+
+set hlsearch
+set ignorecase
+set incsearch
+set singlequit
+set smartcase
+set sortignorecase
+set timeremaining
+
+set nomouse
+
+map <Tab> gt
+map h :seek- 10<CR>
+map l :seek+ 10<CR>
