@@ -1,11 +1,5 @@
 -- luacheck: globals vim
 
--- This is adapted from
--- ~/.local/share/nvim/site/pack/packer/start/nvim-treesitter/lua/nvim-treesitter/info.lua
-if #vim.api.nvim_get_runtime_file("parser/markdown.so", false) <= 0 then
-    vim.opt_local.foldmethod = "manual"
-end
-
 require("filetype.section").setup("^#")
 require("filetype.text").setup()
 
