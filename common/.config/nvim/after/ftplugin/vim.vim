@@ -1,2 +1,2 @@
-" Treesitter folding doesn't work well
+" Treesitter folding is over-zealous
 setlocal foldmethod=indent
