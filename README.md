@@ -1,4 +1,4 @@
-# Dotfiles --- Master Cheatsheet
+# Dotfiles - Master Cheatsheet
 
     awk         | <https://github.com/learnbyexample/Command-line-text-processing/blob/master/gnu_awk.md>
     bash        | ~/.config/bash.d/README.md
