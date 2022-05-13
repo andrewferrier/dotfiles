@@ -31,9 +31,9 @@ M.setup = function(mode)
             else
                 vim.fn["vim_wrapping_softhard#SetModeAutomatically"]()
             end
-
-            vim.b.text_based_filetype = 1
         end
+
+        vim.b.text_based_filetype = 1
     end
 end
 
