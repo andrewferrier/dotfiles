@@ -132,7 +132,12 @@ mimetype=$(file --mime-type -Lb "${FILE_PATH}")
 
 case "${mimetype}" in
 image/*)
-    exit 7
+    # shellcheck disable=SC2154
+    if [[ -z "${TMUX}" ]]; then
+        exit 7
+    else
+        exiftool "${FILE_PATH}" && exit 5
+    fi
     ;;
 *);;
 esac
