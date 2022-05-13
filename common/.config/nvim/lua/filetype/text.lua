@@ -13,7 +13,7 @@ M.setup = function(mode)
     -- This might get called multiple times in, for example, the case of
     -- .mkd.txt files, where they are initially detected as .txt by Vim's own
     -- filetype detection, then overridden as markdown in my filetype.lua.
-    if vim.b.text_based_filetype == nil then
+    if not vim.b.text_based_filetype then
         if
             not vim.o.readonly
             and vim.o.modifiable
@@ -33,7 +33,7 @@ M.setup = function(mode)
             end
         end
 
-        vim.b.text_based_filetype = 1
+        vim.b.text_based_filetype = true
     end
 end
 
