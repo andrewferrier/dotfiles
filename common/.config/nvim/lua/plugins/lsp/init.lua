@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 local lspconfig = require("lspconfig")
 local lspconfig_configs = require("lspconfig.configs")
 

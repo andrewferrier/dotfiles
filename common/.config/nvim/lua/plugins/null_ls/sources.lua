@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 local M = {}
 
 local null_ls = require("null-ls")

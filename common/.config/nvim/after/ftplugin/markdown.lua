@@ -23,4 +23,4 @@ table.insert(recipes, {
     match_syntax = 1,
 })
 
-vim.fn['sandwich#util#addlocal'](recipes)
+vim.fn["sandwich#util#addlocal"](recipes)

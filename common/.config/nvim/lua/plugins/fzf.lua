@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 vim.keymap.set("n", "cvh", ":Helptags<CR>", { silent = true })
 vim.keymap.set("n", "cvl", ":Rg<CR>", { silent = true })
 

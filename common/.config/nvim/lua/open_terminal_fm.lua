@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 local M = {}
 
 local get_ford_to_use = function(dir)

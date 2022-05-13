@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 local M = {}
 
 local function find_skeleton(filetype)

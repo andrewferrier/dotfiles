@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 local attach = function(bufnr)
     local function map(l, r, opts)
         opts = vim.tbl_extend("force", { buffer = bufnr }, opts or {})

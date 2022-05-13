@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 local treesitter_parsers = require("nvim-treesitter.parsers")
 
 local WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME = 100

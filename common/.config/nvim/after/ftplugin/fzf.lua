@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 vim.opt.titlestring = "nvim [fzf]"
 
 vim.api.nvim_create_autocmd("BufLeave", {

@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 local opts = { silent = true }
 
 vim.keymap.set("n", "gof", function()

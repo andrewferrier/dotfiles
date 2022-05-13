@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 local set = function(lhs, rhs)
     vim.keymap.set("n", lhs, rhs, {})
 end
