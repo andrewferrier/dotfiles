@@ -175,14 +175,6 @@ packer.startup(function(use)
         end,
     })
 
-    use({
-        "ThePrimeagen/refactoring.nvim",
-        config = function()
-            require("plugins.refactoring")
-        end,
-        keys = "gyr",
-    })
-
     -- LSP and null-ls
     use({
         "neovim/nvim-lspconfig",
