@@ -55,17 +55,6 @@ require("nvim-treesitter.configs").setup({
     },
     indent = { enable = true, disable = disable_indent },
     endwise = { enable = true, disable = disable_other },
-    textobjects = {
-        select = {
-            enable = true,
-            disable = disable_other,
-            lookahead = true,
-            keymaps = {
-                ["ia"] = "@parameter.inner",
-                ["aa"] = "@parameter.outer",
-            },
-        },
-    },
 })
 
 -- Disable this as it still doesn't seem to work reliably
