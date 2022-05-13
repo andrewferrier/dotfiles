@@ -5,8 +5,8 @@ log.i("Initializing ajf-yabai...")
 local M = {}
 
 -- Don't use 8 spaces, as that conflicts with Ctrl-Opt-Alt-8 used to invert
--- colors. Don't use 7 spaces as it doesn't keep one free for external display.
-local NUMBER_OF_SPACES = 6
+-- colors.
+local NUMBER_OF_SPACES = 7
 
 local YABAI_CMD = "/usr/local/bin/yabai"
 
