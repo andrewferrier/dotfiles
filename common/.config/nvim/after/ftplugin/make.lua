@@ -1,5 +1,5 @@
 -- luacheck: globals vim
 
-vim.cmd("setlocal foldmethod=indent")
+vim.opt_local.foldmethod = 'indent'
 
 require("filetype.section").setup("^\\S")

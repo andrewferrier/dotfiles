@@ -20,7 +20,7 @@ M.setup = function(mode)
             and vim.fn.empty(vim.fn.bufname("%")) == 0
             and not vim.o.diff
         then
-            vim.cmd("setlocal spell")
+            vim.opt_local.spell = true
         end
 
         if vim.g.loaded_wrapping_softhard ~= nil then

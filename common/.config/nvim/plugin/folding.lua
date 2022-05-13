@@ -5,13 +5,13 @@ local set_fold_method = function()
     local treesitter_parsers = require("nvim-treesitter.parsers")
 
     if vim.opt.filetype:get() == "markdown" then
-        vim.cmd("setlocal foldmethod=manual")
+        vim.opt_local.foldmethod = 'manual'
     elseif vim.wo.foldmethod == "manual" then
         if not large_file and treesitter_parsers.has_parser() then
-            vim.cmd("setlocal foldexpr=nvim_treesitter#foldexpr()")
-            vim.cmd("setlocal foldmethod=expr")
+            vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
+            vim.opt_local.foldmethod = 'expr'
         else
-            vim.cmd("setlocal foldmethod=indent")
+            vim.opt_local.foldmethod = 'indent'
         end
     end
 end

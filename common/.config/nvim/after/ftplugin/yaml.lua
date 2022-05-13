@@ -1,5 +1,5 @@
 -- luacheck: globals vim
 
-vim.cmd("setlocal cursorcolumn")
+vim.opt_local.cursorcolumn = true
 
 require("filetype.section").setup("^\\S")

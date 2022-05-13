@@ -7,4 +7,4 @@ require("filetype.text").setup("soft")
 -- encoding. This will generally look better in most places that matter (eg.
 -- Gmail), where hard-wrapped email looks terrible and format=flowed is not
 -- supported.'
-vim.cmd("setlocal textwidth=0")
+vim.opt_local.textwidth = 0
