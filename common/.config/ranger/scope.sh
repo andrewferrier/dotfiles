@@ -38,21 +38,21 @@ case "${FILE_EXTENSION_FULL_LOWER}" in
 "md" | "mkd" | "mkd.txt")
     "${HIGHLIGHT[@]}" --syntax=markdown "${FILE_PATH}" && exit 5
     ;;
-"webloc")
-    "${HIGHLIGHT[@]}" --syntax=xml "${FILE_PATH}" && exit 5
-    ;;
-"tar.xz")
-    tar tjvf "${FILE_PATH}" && exit 5
-    exit 1
-    ;;
 "htm" | "html" | "xhtml")
     w3m -dump "${FILE_PATH}" && exit 5
     lynx -dump -- "${FILE_PATH}" && exit 5
     elinks -dump "${FILE_PATH}" && exit 5
     pandoc -s -t markdown -- "${FILE_PATH}" && exit 5
     ;;
+"tar.xz")
+    tar tjvf "${FILE_PATH}" && exit 5
+    exit 1
+    ;;
 "tf")
     head -"${PV_HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" --syntax=terraform 2>/dev/null && exit 5
+    ;;
+"webloc")
+    "${HIGHLIGHT[@]}" --syntax=xml "${FILE_PATH}" && exit 5
     ;;
 *) ;;
 esac
