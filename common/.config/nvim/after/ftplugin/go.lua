@@ -1,0 +1,7 @@
+-- luacheck: globals vim
+
+vim.opt_local.listchars:remove("tab:>·")
+vim.opt_local.listchars:append("tab:  ")
+
+-- No limit: https://golang.org/doc/effective_go#formatting
+vim.opt_local.textwidth = 0
