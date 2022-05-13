@@ -72,7 +72,7 @@ packer.startup(function(use)
     use({ "tyru/capture.vim", cmd = "Capture" })
 
     use({
-        "chentau/marks.nvim",
+        "chentoast/marks.nvim",
         config = function()
             require("plugins.marks")
         end,
