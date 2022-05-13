@@ -145,8 +145,6 @@ esac
 case "${mimetype}" in
 video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
     exiftool "${FILE_PATH}" && exit 5
-    # Use sed to remove spaces so the output fits into the narrow window
-    mediainfo "${FILE_PATH}" | sed 's/  \+:/: /;' && exit 5
     exit 1
     ;;
 *) ;;
