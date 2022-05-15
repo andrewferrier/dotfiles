@@ -1,5 +1,3 @@
-iabbrev <buffer> zTODO <span style="color:red">TODO:</span><Esc>F<i
-
 " Adapted from https://gist.github.com/habamax/4662821a1dad716f5c18205489203a67#markdown-headers
 "
 " Markdown header text object

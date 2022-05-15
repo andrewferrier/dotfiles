@@ -24,3 +24,5 @@ table.insert(recipes, {
 })
 
 vim.fn["sandwich#util#addlocal"](recipes)
+
+vim.cmd("iabbrev <buffer> zTODO <span style=\"color:red\">TODO:</span><Esc>F<i")
