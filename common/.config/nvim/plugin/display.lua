@@ -12,6 +12,7 @@ vim.opt.splitright = true
 -- also find it interesting to see the file summary when opening it.
 vim.opt.shortmess:remove("F")
 vim.opt.shortmess:append("c")
+vim.opt.confirm = true
 
 -- numbers and signs in the same column
 vim.opt.signcolumn = "number"
