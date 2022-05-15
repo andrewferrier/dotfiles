@@ -3,27 +3,25 @@
 local M = {}
 
 local function is_lsp_loaded(client_name)
-    local lsp_loaded = false
-
     for _, client in pairs(vim.lsp.buf_get_clients(0)) do
         if client.name == client_name then
-            lsp_loaded = true
+            return true
         end
     end
 
-    return lsp_loaded
+    return false
+end
+
+local function is_correct_lsp_loaded(filetype)
+    if filetype == "terraform" then
+        return is_lsp_loaded("terraformls")
+    else
+        return true
+    end
 end
 
 local function lsp_document_format()
-    local lsp_loaded
-
-    if vim.bo.filetype == "terraform" then
-        lsp_loaded = is_lsp_loaded("terraformls")
-    else
-        lsp_loaded = true
-    end
-
-    if not lsp_loaded then
+    if not is_correct_lsp_loaded(vim.bo.filetype) then
         vim.notify(
             "Required LSPs not yet loaded, please wait a bit and retry.",
             vim.log.levels.ERROR
