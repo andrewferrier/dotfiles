@@ -1,6 +1,8 @@
 -- luacheck: globals hs
-local log = hs.logger.new("ajf-yabai", "debug")
-log.i("Initializing ajf-yabai...")
+
+local log = hs.logger.new("yabai", "debug")
+
+log.i("Initializing...")
 
 local M = {}
 

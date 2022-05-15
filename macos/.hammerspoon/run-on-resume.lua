@@ -1,6 +1,8 @@
 -- luacheck: globals hs
-local log = hs.logger.new("ajf-run-on-resume", "debug")
-log.i("Initializing ajf-run-on-resume...")
+
+local log = hs.logger.new("run-on-resume", "debug")
+
+log.i("Initializing...")
 
 local M = {}
 
