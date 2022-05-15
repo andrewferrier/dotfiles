@@ -116,7 +116,13 @@ packer.startup(function(use)
     -- Silent enhancement
     use({ "ellisonleao/gruvbox.nvim" })
     use({ "tpope/vim-sleuth" })
-    use({ "vladdoster/remember.nvim" })
+
+    use({
+        "vladdoster/remember.nvim",
+        config = function()
+            require("remember")
+        end,
+    })
 
     use({
         "andymass/vim-matchup",
