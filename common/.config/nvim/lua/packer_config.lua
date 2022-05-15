@@ -69,7 +69,7 @@ packer.startup(function(use)
 
     -- Commands and key bindings
     use({ "tpope/vim-eunuch" })
-    use({ "tyru/capture.vim", cmd = "Capture" })
+    use({ "tyru/capture.vim" })
 
     use({
         "chentoast/marks.nvim",
