@@ -8,6 +8,20 @@ local is_blank_line = function(line)
     return string.match(vim.fn.getline(line), BLANK_LINE_PATTERN)
 end
 
+local function check_indented(start_indent, include_blank_lines, line)
+    return start_indent > 0
+        and (
+            (is_blank_line(line) and include_blank_lines)
+            or vim.fn.indent(line) >= start_indent
+        )
+end
+
+local function check_noindent(start_indent, line)
+    -- This ensures that if I check indent for a block at top level, it doesn't
+    -- capture the whole file.
+    return start_indent == 0 and not is_blank_line(line)
+end
+
 function _G.indent_textobj_select(include_blank_lines)
     local start_indent = vim.fn.indent(vim.fn.line("."))
 
@@ -26,8 +40,8 @@ function _G.indent_textobj_select(include_blank_lines)
     while
         prev_line > 0
         and (
-            (is_blank_line(prev_line) and include_blank_lines)
-            or vim.fn.indent(prev_line) >= start_indent
+            check_indented(start_indent, include_blank_lines, prev_line)
+            or check_noindent(start_indent, prev_line)
         )
     do
         vim.cmd("-")
@@ -41,8 +55,8 @@ function _G.indent_textobj_select(include_blank_lines)
     while
         next_line <= last_line
         and (
-            (is_blank_line(next_line) and include_blank_lines)
-            or vim.fn.indent(next_line) >= start_indent
+            check_indented(start_indent, include_blank_lines, next_line)
+            or check_noindent(start_indent, next_line)
         )
     do
         vim.cmd("+")
