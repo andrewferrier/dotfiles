@@ -36,6 +36,7 @@
     gi - insert in last place I inserted
     gj, gk, g$, g0 - go up and down by screen lines, end and beginning by screen line (useful when wrapped)
     gt - go to next tab
+    m; - toggle (including remove) a mark on a line
     mA - set an uppercase mark, for jumping across files
     q: - open command mode window
     qA - resume recording into macro A

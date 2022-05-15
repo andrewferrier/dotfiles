@@ -7,7 +7,7 @@ require("marks").setup({
     -- Disabling some of these keys is important so that `dm` is not overloaded
     -- and can be used with nvim-treehopper
     mappings = {
-        delete = "m-",
+        delete = false,
         delete_bookmark = false,
         delete_bookmark0 = false,
         delete_bookmark1 = false,
