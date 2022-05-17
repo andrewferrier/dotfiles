@@ -12,7 +12,6 @@ vim.g.did_load_filetypes = 0
 local builtin_plugs = {
     "2html",
     "gzip",
-    "netrwPlugin",
     "remote_plugins",
     "tarPlugin",
     "zipPlugin",
