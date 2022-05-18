@@ -13,12 +13,12 @@ def find_display(space_index):
 
 def find_color(space):
     if space == space_focused:
-        return f"{BLACK}{space}{RESET}"
+        return f"{BLUE}{space}{RESET}"
     else:
         display = find_display(space)
 
         if display == 1:
-            return f"{BLUE}{space}{RESET}"
+            return f"{BLACK}{space}{RESET}"
         else:
             return f"{GREEN}{space}{RESET}"
 
