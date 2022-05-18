@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -o nounset
+set -o pipefail
+
+# For some reason this is required to make special characters like @ work with
+# xdotool, even though setxkbmap -verbose shows the same keymap anyway. See
+# https://stackoverflow.com/a/36480692/27641.
+setxkbmap gb
+
+# 10 minutes
+xset s 600
+xss-lock -- i3lock -i "${HOME}/.config/i3lock/lock.png" --color=000000 &
+xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
+
+redshift -v | logger -t "${USER}-redshift" &
+unclutter --ignore-scrolling --jitter 10 --fork
+picom --daemon
+feh --no-fehbg --bg-scale '/usr/share/backgrounds/archlinux/wave.png'
+dunst &
+
+# Automatically synchronize PRIMARY and CLIPBOARD
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
+# Turn off console beep
+xset b off
+
+# Speed up keyboard a little
+xset r rate 250 60
+
+amixer set Master 0
+amixer set Master unmute
+amixer set Speaker unmute
+amixer set Headphone unmute
+
+amixer set Capture 0
+
+export TERMCMD=kitty
+export BROWSER=qutebrowser
+
+exec i3

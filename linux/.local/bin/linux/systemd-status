@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+
+import argparse
+import logging
+from pathlib import Path
+from subprocess import run
+
+from systemd.journal import JournalHandler
+
+log = logging.getLogger("systemd-status")
+log.addHandler(JournalHandler())
+log.setLevel(logging.WARNING)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--unit-name", required=True)
+parser.add_argument("--notify-threshold", type=int, default=5)
+success_or_failure = parser.add_mutually_exclusive_group()
+success_or_failure.add_argument(
+    "--success", action="store_true", dest="success", default=False
+)
+success_or_failure.add_argument(
+    "--failure", action="store_false", dest="success", default=False
+)
+args = parser.parse_args()
+
+CACHE_DIR = Path.home() / ".cache" / "systemd-status"
+CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def read_state_file(state_file):
+    f = open(state_file, "r")
+    failure_count = int(f.read())
+    f.close()
+
+    return failure_count
+
+
+def write_state_file(state_file, failure_count):
+    f = open(state_file, "w")
+    f.write(str(failure_count))
+    f.close()
+
+
+def notification(message):
+    p = run(
+        [
+            "notify-send",
+            "systemd-status",
+            "--urgency=critical",
+            message,
+        ]
+    )
+
+    if p.returncode != 0:
+        raise Exception(f"Invalid result: {p.returncode} ")
+
+
+def main():
+    state_file = CACHE_DIR / (args.unit_name + ".state")
+
+    if not args.success:
+        log.warning(args.unit_name + " failed")
+        if Path(state_file).is_file():
+            failure_count = read_state_file(state_file)
+            failure_count = failure_count + 1
+        else:
+            failure_count = 1
+    else:
+        log.debug(args.unit_name + " passed.")
+        failure_count = 0
+
+    write_state_file(state_file, failure_count)
+
+    log.info(
+        args.unit_name + " failure count updated to " + str(failure_count)
+    )
+
+    if failure_count > args.notify_threshold:
+        message = (
+            args.unit_name
+            + " over failure count threshold of "
+            + str(args.notify_threshold)
+        )
+        log.error(message)
+        notification(message)
+
+
+if __name__ == "__main__":
+    main()

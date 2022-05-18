@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+
+set -o errexit
+set -o nounset
+
+PATH=${HOME}/.local/bin/common-dotfiles:${PATH}
+
+log() {
+    echo "$@" | systemd-cat --identifier='redshift-day-night-update'
+}
+
+case $1 in
+period-changed)
+    case $3 in
+    daytime)
+        log "Changed to daytime"
+        day-night-update 'day'
+        ;;
+    night)
+        log "Changed to night"
+        day-night-update 'night'
+        ;;
+    *)
+        log "Unknown period $*"
+        ;;
+    esac
+    ;;
+*)
+    log "Unknown action $1"
+    ;;
+
+esac

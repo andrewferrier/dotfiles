@@ -20,6 +20,7 @@ macos:
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow macos
 
 linux:
+	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow linux
 
 desktop: $(OS)-desktop
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow desktop

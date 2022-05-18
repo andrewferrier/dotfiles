@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+PATH="$PATH:$HOME/.local/bin/common"
+
+BATTERY_LEVEL=$(cat /sys/class/power_supply/BAT0/capacity)
+BATTERY_STATUS=$(cat /sys/class/power_supply/BAT0/status)
+
+if [[ $BATTERY_STATUS == 'Discharging' ]]; then
+    if ((BATTERY_LEVEL <= 3)); then
+        notify-send --urgency=critical 'Battery level at 3%; suspending in 10 seconds...'
+        sleep 5
+        notify-send --urgency=critical 'Battery level at 3%; suspending in 5 seconds...'
+        sleep 5
+        systemctl suspend
+    elif ((BATTERY_LEVEL <= 5)); then
+        notify-send --urgency=critical 'Battery level very low; will suspend when it gets to 3%'
+    elif ((BATTERY_LEVEL <= 10)); then
+        notify-send 'Battery level low'
+    fi
+fi
+
+acpi | systemd-cat --identifier=check-battery-level

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+dpkg -l linux-{image,headers,modules}-"[0-9]*" \
+    | awk '/^ii/{ print $2}' \
+    | grep -v -e $(uname -r | cut -f1,2 -d"-") \
+    | grep -e '[0-9]' \
+    | xargs --interactive --no-run-if-empty sudo apt -y purge

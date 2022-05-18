@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if ! command -v apt-rdepends >/dev/null; then
+    echo "apt-rdepends not installed."
+    exit 1
+fi
+
+trap cleanup INT TERM EXIT
+
+install_file="$(mktemp)"
+depended_upon_file="$(mktemp)"
+
+cleanup() {
+    rm "${install_file}" "${depended_upon_file}"
+}
+
+# List of installed packages
+dpkg -l | grep '^i' | cut -f 3 -d ' ' | cut -d':' -f1 | sort | uniq >"${install_file}"
+
+# Grab the list of all packages that are depended upon (does not include recommends/suggests)
+apt-cache dotty | grep -F -- '->' | cut -d '"' -f4 | cut -d ':' -f1 | sort | uniq >"${depended_upon_file}"
+
+while read PKG; do
+    if (($(apt-rdepends --follow=Recommends,Suggests --reverse "${PKG}" 2>/dev/null | wc -l) <= 1)); then
+        echo "${PKG}"
+    fi
+done < <(comm -23 "${install_file}" "${depended_upon_file}")

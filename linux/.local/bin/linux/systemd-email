@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+/usr/bin/env sendmail -t <<ERRMAIL
+To: $1
+From: systemd <${USER}@${HOSTNAME}>
+Subject: $2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+
+$(systemctl --user status --lines 500 --full "$2")
+ERRMAIL
