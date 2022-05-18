@@ -11,7 +11,7 @@ else
 	OS := linux
 endif
 
-common: if-command $(if $(DESKTOP), desktop) $(OS)
+common: if-command $(DESKTOP) $(OS)
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow common
 
 macos:
