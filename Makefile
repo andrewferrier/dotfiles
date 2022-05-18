@@ -7,10 +7,8 @@ DESKTOP := $(shell .bin/target-desktop)
 
 ifeq ($(shell uname | grep -i linux),)
 	OS := macos
-	export OSDISTRIBUTION := macos
 else
 	OS := linux
-	export OSDISTRIBUTION := $(shell lsb_release --short --id | tr A-Z a-z)
 endif
 
 common: if-command $(if $(DESKTOP), desktop) $(OS)
