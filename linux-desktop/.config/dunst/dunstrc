@@ -14,9 +14,9 @@ max_icon_size = 64
 timeout = 5
 
 [urgency_normal]
-timeout = 10
+timeout = 5
 
 [urgency_critical]
-timeout = 0
+timeout = 180
 
 # vim: ft=cfg
