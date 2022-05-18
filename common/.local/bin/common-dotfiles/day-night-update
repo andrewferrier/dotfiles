@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+
+import os
+from pathlib import Path
+import platform
+import subprocess
+import sys
+import traceback
+
+BASE_PATH = Path("~/.cache/day-night").expanduser()
+
+BASE_PATH.mkdir(parents=True, exist_ok=True)
+
+KITTY_COLOR = BASE_PATH.joinpath("kitty-color.conf")
+STATE_FILE_QUTEBROWSER = BASE_PATH.joinpath("state-qutebrowser")
+STATE_FILE_TERMINAL = BASE_PATH.joinpath("state-terminal")
+
+GTKRC20 = Path("~/.gtkrc-2.0").expanduser()
+
+
+def write_to_file(filename, state):
+    with open(filename, "w") as output_file:
+        output_file.write(state)
+
+
+def get_state_macos():
+    if "DARKMODE" in os.environ:
+        # DARKMODE comes from day-night-notifier
+        if int(os.environ["DARKMODE"]) == 1:
+            return "night"
+        else:
+            return "day"
+    else:
+        # Assume 10.15+ and AppleInterfaceStyleSwitchesAutomatically=True, see
+        # https://stackoverflow.com/a/57429660
+        output = subprocess.run(
+            ["defaults", "read", "-g", "AppleInterfaceStyle"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+        )
+
+        if output.returncode > 0:
+            return "day"
+        elif output.stdout == b"Dark\n":
+            return "night"
+        else:
+            raise Exception('Could not run defaults read')
+
+
+def get_state_linux():
+    time_of_day = sys.argv[1]
+    assert time_of_day == "day" or time_of_day == "night"
+    return time_of_day
+
+
+try:
+    if platform.system() == "Linux":
+        general_state = get_state_linux()
+        terminal_state = "night"
+
+        write_to_file(STATE_FILE_QUTEBROWSER, general_state + "\n")
+
+        if general_state == "day":
+            write_to_file(GTKRC20, 'gtk-theme-name="Adwaita"')
+        else:
+            write_to_file(GTKRC20, 'gtk-theme-name="Adwaita-dark"')
+    else:
+        general_state = get_state_macos()
+        terminal_state = general_state
+
+        if general_state == "day":
+            write_to_file(
+                KITTY_COLOR,
+                "include "
+                + str(Path("~/.config/kitty/colors-light.conf").expanduser())
+                + "\n",
+            ),
+        else:
+            write_to_file(
+                KITTY_COLOR,
+                "include "
+                + str(Path("~/.config/kitty/colors-dark.conf").expanduser())
+                + "\n",
+            ),
+
+    write_to_file(STATE_FILE_TERMINAL, terminal_state + "\n")
+
+except Exception:
+    write_to_file(
+        STATE_FILE_TERMINAL,
+        "night-default-failure\n\n" + traceback.format_exc() + "\n",
+    )
+    sys.exit(1)

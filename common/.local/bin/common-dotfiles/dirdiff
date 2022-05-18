@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+DIR1=$(printf '%q' "$1")
+shift
+DIR2=$(printf '%q' "$1")
+shift
+# shellcheck disable=SC2154
+${VISUAL} "$@" -c "DirDiff ${DIR1} ${DIR2}"

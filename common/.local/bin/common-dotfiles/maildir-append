@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+import mailbox
+import email
+import email.parser
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--maildir", required=True, type=str)
+args = parser.parse_args()
+
+stdin_msg_data = sys.stdin.buffer.read()
+
+mdir = mailbox.Maildir(args.maildir)
+message = email.message_from_bytes(stdin_msg_data)
+mdir.add(message)

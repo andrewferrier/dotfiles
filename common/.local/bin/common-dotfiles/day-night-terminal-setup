@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+CACHE_DIR="${HOME}/.cache/day-night"
+STATE_FILE="${CACHE_DIR}/state-terminal"
+STATE_FILE_KITTY_LAST="${CACHE_DIR}/state-kitty-lastset"
+
+if [[ -z "${SSH_CONNECTION}" ]]; then
+    # It seems that occasionally calling 'kitty @ set-colors' is responsible for
+    # swallowing keypresses. However, by checking against the 'KITTY_LAST' file,
+    # the need/frequency to do that is minimized.
+    if [[ ! -f "${STATE_FILE_KITTY_LAST}" ]] || ! cmp --silent "${STATE_FILE}" "${STATE_FILE_KITTY_LAST}"; then
+        if grep -Fxq "day" "${STATE_FILE}"; then
+            kitty @ set-colors -a -c ~/.config/kitty/colors-light.conf
+        else
+            kitty @ set-colors -a -c ~/.config/kitty/colors-dark.conf
+        fi
+
+        command cp "${STATE_FILE}" "${STATE_FILE_KITTY_LAST}"
+    fi
+fi

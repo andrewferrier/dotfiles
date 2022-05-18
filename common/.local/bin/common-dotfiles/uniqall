@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+# If ever we need a faster version of this, look at
+# https://github.com/koraa/huniq
+
+set -o errexit
+set -o nounset
+
+if (( $# == 0 )) ; then
+    awk '!a[$0]++' < /dev/stdin
+else
+    awk '!a[$0]++' "$1"
+fi
