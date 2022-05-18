@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+#
+# * MacOS: terminal-notifier should be configured this way:
+#          Alerts
+#          Lock screen = yes
+#          Notification Preview = always
+#          Notification Centre = no
+#          Badge App Icon = no
+#          Play sound = yes
+
+import argparse
+import os
+import subprocess
+import pathlib
+
+from sys import platform
+
+parser = argparse.ArgumentParser()
+parser.add_argument("body")
+parser.add_argument("--title", default='notify')
+parser.add_argument("--icon", default=None)
+parser.add_argument("--severity", type=int, default=2, help='Severity; 1=high, 2=medium (default), 3=low')
+args = parser.parse_args()
+
+TIMEOUT_SEVERITY_HIGH   = 60 * 3
+TIMEOUT_SEVERITY_MEDIUM = 5
+TIMEOUT_SEVERITY_LOW    = 5
+
+
+def main():
+    command_args = []
+
+    if platform == "darwin":
+        command_args = ["alerter", "-message", args.body, "-title", args.title]
+        if args.severity == 1:
+            command_args.append('-timeout')
+            command_args.append(str(TIMEOUT_SEVERITY_HIGH))
+        if args.severity == 2:
+            command_args.append('-timeout')
+            command_args.append(str(TIMEOUT_SEVERITY_MEDIUM))
+        elif args.severity == 3:
+            command_args.append('-timeout')
+            command_args.append(str(TIMEOUT_SEVERITY_LOW))
+
+        if args.icon:
+            iconUrl = pathlib.Path(os.path.abspath(args.icon)).as_uri()
+            command_args.append("-appIcon")
+            command_args.append(iconUrl)
+
+
+    elif platform == "linux":
+        command_args = ["notify-send"]
+        command_args.append(args.body)
+
+        if args.severity == 1:
+            command_args.append('--urgency=critical')
+        elif args.severity == 2:
+            command_args.append('--urgency=normal')
+        if args.severity == 3:
+            command_args.append('--urgency=low')
+
+        if args.icon:
+            command_args.extend(["--icon", os.path.abspath(args.icon)])
+
+    subprocess.run(command_args)
+
+
+if __name__ == '__main__':
+    main()
