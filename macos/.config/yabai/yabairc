@@ -22,7 +22,10 @@ yabai -m config left_padding        0
 yabai -m config right_padding       0
 yabai -m config window_gap          0
 
+yabai -m rule --add app="AnyConnect" manage=off
 yabai -m rule --add app="GIMP" manage=off
+yabai -m rule --add app="WhatsApp" manage=off
+yabai -m rule --add app="^Calendar$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Preview$" manage=off
 yabai -m rule --add app="^System Preferences$" manage=off
