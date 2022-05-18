@@ -31,8 +31,6 @@
     gJ - Join lines w/o additional space, but include indent
     gM - move cursor to half-way along line
     gO - show file outline (e.g. for Man)
-    gX{motion} - open file/website
-    gY{motion} - search for phrase
     gi - insert in last place I inserted
     gj, gk, g$, g0 - go up and down by screen lines, end and beginning by screen line (useful when wrapped)
     gt - go to next tab
