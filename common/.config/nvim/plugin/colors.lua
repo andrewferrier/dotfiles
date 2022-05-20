@@ -21,6 +21,8 @@ vim.cmd(
     "highlight TermCursorNC guibg=#00ff00 guifg=#FFFFFF ctermbg=1 ctermfg=6"
 )
 
+vim.cmd("highlight clear QuickFixLine")
+vim.cmd("highlight link QuickFixLine CurSearch")
 vim.cmd("highlight link StatusLineSecondary SignColumn")
 
 vim.api.nvim_create_autocmd("TextYankPost", {
