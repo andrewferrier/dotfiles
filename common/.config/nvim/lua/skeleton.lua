@@ -32,11 +32,14 @@ M.show_prompt = function(autocmd)
         if skeleton ~= nil and skeleton ~= "" then
             handle_skeleton(filetype, skeleton)
         elseif not autocmd then
-            vim.notify("No skeleton found for filetype '" .. filetype .. "'")
+            vim.notify(
+                "No skeleton found for filetype '" .. filetype .. "'",
+                vim.log.levels.ERROR
+            )
             vim.cmd("silent split " .. vim.fn.stdpath("config") .. "/skeleton")
         end
     else
-        vim.notify("No filetype")
+        vim.notify("No filetype", vim.log.levels.ERROR)
     end
 end
 
