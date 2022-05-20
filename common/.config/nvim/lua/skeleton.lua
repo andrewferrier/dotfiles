@@ -2,19 +2,6 @@
 
 local M = {}
 
-local function find_skeleton(filetype)
-    local runtimepath = vim.opt.runtimepath._value
-
-    local skeletons = vim.fn.globpath(
-        runtimepath,
-        "skeleton/" .. filetype,
-        0,
-        1
-    )
-
-    return skeletons[1]
-end
-
 local function handle_skeleton(filetype, skeleton)
     vim.ui.select({
         "Open it in a split",
@@ -37,7 +24,10 @@ M.show_prompt = function(autocmd)
     local filetype = vim.opt.filetype:get()
 
     if filetype ~= nil and filetype ~= "" then
-        local skeleton = find_skeleton(filetype)
+        local skeleton = vim.api.nvim_get_runtime_file(
+            "skeleton/" .. filetype,
+            false
+        )[1]
 
         if skeleton ~= nil and skeleton ~= "" then
             handle_skeleton(filetype, skeleton)
