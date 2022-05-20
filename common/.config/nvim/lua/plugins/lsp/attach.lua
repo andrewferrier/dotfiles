@@ -38,7 +38,7 @@ local function lsp_document_format()
 
     local TIMEOUT = 3000
 
-    if vim.fn.has("nvim-0.8") == 1 then
+    if vim.lsp.buf.format then
         vim.lsp.buf.format({ timeout_ms = TIMEOUT })
     else
         vim.lsp.buf.formatting_seq_sync({}, TIMEOUT)
