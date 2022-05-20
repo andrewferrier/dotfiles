@@ -5,7 +5,7 @@
 -- an error. 'xclip' will be selected by default if it is installed, and other
 -- apps do appear to need it.
 
-if vim.loop.os_uname().sysname == "Linux" then
+if vim.fn.executable("xsel") then
     vim.g.clipboard = {
         name = "xsel",
         copy = {
