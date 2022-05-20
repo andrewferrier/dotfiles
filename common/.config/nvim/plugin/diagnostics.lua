@@ -74,11 +74,7 @@ vim.keymap.set(
     { silent = true }
 )
 
-vim.api.nvim_create_user_command(
-    "DiagnosticQFList",
-    function()
-        vim.diagnostic.setqflist({open = false })
-        require('quickfix').open()
-    end,
-    {}
-)
+vim.api.nvim_create_user_command("DiagnosticQFList", function()
+    vim.diagnostic.setqflist({ open = false })
+    require("quickfix").open()
+end, {})
