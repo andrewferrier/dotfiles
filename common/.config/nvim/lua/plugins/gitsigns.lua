@@ -45,7 +45,19 @@ require("gitsigns").setup({
     on_attach = attach,
 })
 
+local in_git_dir = function()
+    local dir = vim.fn.getcwd()
+    local cmd = "cd " .. dir .. "; git rev-parse --show-toplevel"
+    vim.fn.system(cmd)
+
+    return vim.v.shell_error == 0
+end
+
 vim.api.nvim_create_user_command("GitQFList", function()
-    require("gitsigns").setqflist("all")
-    -- gitsigns always opens QuickFix list, async, even if empty
+    if in_git_dir() then
+        -- gitsigns always opens QuickFix list, async, even if empty
+        require("gitsigns").setqflist("all")
+    else
+        vim.notify("Not in git directory.", vim.log.levels.ERROR)
+    end
 end, {})
