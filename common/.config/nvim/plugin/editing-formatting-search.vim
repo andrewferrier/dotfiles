@@ -11,10 +11,6 @@ set textwidth=80 " This is the default for many/most languages: https://en.wikip
 set virtualedit=block
 set wildmode=longest:full
 
-if has('nvim-0.5.0')
-    set nrformats+=unsigned
-endif
-
 iabbrev zDATE     <C-R>=strftime("%F")<CR>
 iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>
 
