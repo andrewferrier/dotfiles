@@ -130,6 +130,5 @@
 
 *   Generic operator-pending wrapper, e.g. for refactoring.nvim
 *   Fix chewing up CPU when editing a large gitcommit file
-*   Disable diagnostics when in insert mode (they might be out-of-date)
 *   See if I can use anything in <https://dpaste.org/zpHnu/slim>
 *   Make a 'cxr' for visual mode that doesn't clobber a register
