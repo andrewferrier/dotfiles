@@ -1,1 +1,1 @@
-require("filetype.section").setup("^[")
+require("filetype.section").setup("^\\[")
