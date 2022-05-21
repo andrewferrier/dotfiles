@@ -16,7 +16,6 @@
     Ctrl-o - on opening vim, go immediately to last file edited
     H, M, L - go to top, middle, bottom of the screen
     Mkdir - create directory for current file
-    S - split line
     Use uppercase registers to append
     X - delete the character before the cursor
     [count]. - repeat edit [count] times

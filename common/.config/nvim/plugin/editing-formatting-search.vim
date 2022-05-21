@@ -22,8 +22,3 @@ iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>
 " supported.
 nnoremap cxr :%s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>
 xnoremap cxr "zy:%s/<C-R>z/<C-R>z/gc<Left><Left><Left>
-
-nnoremap S i<CR><ESC>k:silent! keepp s/\v +$//<CR>:noh<CR>j^
-
-" Use mouse in a more useful way to yank areas
-vnoremap <LeftRelease> y
