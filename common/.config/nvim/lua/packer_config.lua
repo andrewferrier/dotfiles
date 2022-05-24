@@ -58,7 +58,7 @@ packer.startup(function(use)
         end,
     })
 
-    -- https://joereynoldsaudio.com/2020/01/22/vim-sandwich-is-better-than-surround.html
+    -- https://web.archive.org/web/20211213094136/https://joereynoldsaudio.com/2020/01/22/vim-sandwich-is-better-than-surround.html
     -- highlights the area it's operating on.
     use({
         "machakann/vim-sandwich",
