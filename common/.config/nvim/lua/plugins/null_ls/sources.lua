@@ -56,6 +56,16 @@ end
 local REGEX_TODO = vim.regex("TODO")
 local REGEX_FIXME = vim.regex("FIXME")
 
+local whitespace_str = function(length)
+    local indent_str = ""
+
+    while indent_str:len() < length do
+        indent_str = indent_str .. " "
+    end
+
+    return indent_str
+end
+
 M.sources = {
     -- Code actions
 
@@ -63,6 +73,15 @@ M.sources = {
 
     -- Formatters
 
+    null_ls.builtins.formatting.latexindent.with({
+        extra_args = function(params)
+            return {
+                "-y=defaultIndent:'" .. whitespace_str(
+                    vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth")
+                ) .. "'",
+            }
+        end,
+    }),
     null_ls.builtins.formatting.prettier.with({
         filetypes = { "css", "html", "less", "scss", "toml", "yaml" },
         extra_args = function(params)
