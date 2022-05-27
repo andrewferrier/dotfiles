@@ -128,6 +128,5 @@
 
 ## TODO
 
-*   Generic operator-pending wrapper, e.g. for refactoring.nvim
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Make a 'cxr' for visual mode that doesn't clobber a register
