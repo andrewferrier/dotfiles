@@ -152,6 +152,8 @@ M.on_attach = function(client, bufnr)
         "Capture call v:lua.show_capabilities()",
         {}
     )
+
+    require("lsp_signature").on_attach({}, bufnr)
 end
 
 return M
