@@ -76,7 +76,8 @@ M.sources = {
     null_ls.builtins.formatting.latexindent.with({
         extra_args = function(params)
             return {
-                "-y=defaultIndent:'" .. whitespace_str(
+                "--cruft=/tmp",
+                "--yaml=defaultIndent:'" .. whitespace_str(
                     vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth")
                 ) .. "'",
             }
