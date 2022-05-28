@@ -169,6 +169,7 @@ M.sources = {
             "mail",
         },
     }),
+    null_ls.builtins.diagnostics.vale,
     null_ls.builtins.diagnostics.zsh,
     diagnostics_by_line({
         name = "todo-fixme",

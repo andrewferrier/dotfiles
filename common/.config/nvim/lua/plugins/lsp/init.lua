@@ -33,14 +33,6 @@ local yaml_schemas = {
 
 -- luacheck: pop
 
-local prosemd_cmd
-
-if vim.loop.os_uname().sysname == "Darwin" then
-    prosemd_cmd = "prosemd-lsp-macos"
-else
-    prosemd_cmd = "prosemd-lsp-linux"
-end
-
 local servers = {
     bashls = {},
     cssls = css_settings.settings,
@@ -49,7 +41,6 @@ local servers = {
     jsonls = {},
     lualsp = {},
     pyright = {},
-    prosemd_lsp = { cmd = { prosemd_cmd, "--stdio" } },
     terraformls = {},
     tflint = {},
     tsserver = {},
