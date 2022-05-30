@@ -119,7 +119,7 @@
 *   [Vim regexs](https://vi.stackexchange.com/a/2279/91)
 *   [Vim's useful lists](https://codeinthehole.com/tips/vim-lists/)
 *   [bufdo/argdo/windo](https://jovica.org/posts/vim-edit-multiple-files/)
-*   `help ex-cmd-index` — list ex commands that can be used directly or after g/pat/
+*   `help ex-cmd-index` — list ex commands - e.g. after g/pat/
 
 ## Principles
 
