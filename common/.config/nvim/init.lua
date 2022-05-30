@@ -15,6 +15,11 @@ local builtin_plugs = {
     "remote_plugins",
     "tarPlugin",
     "zipPlugin",
+
+    -- These lines are needed to avoid open directories from command line in
+    -- netrw: https://github.com/elihunter173/dirbuf.nvim#notes
+    "netrw",
+    "netrwPlugin",
 }
 
 for i = 1, #builtin_plugs do
