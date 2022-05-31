@@ -12,7 +12,7 @@ local function handle_skeleton(filetype, skeleton)
     }, function(_, idx)
         if idx == 1 then
             vim.cmd("split " .. skeleton)
-            vim.cmd("set filetype=" .. filetype)
+            vim.opt.filetype = filetype
         elseif idx == 2 then
             vim.cmd("read " .. skeleton)
             vim.cmd("norm kdd")
