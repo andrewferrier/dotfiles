@@ -20,7 +20,7 @@ local attach = function(bufnr)
     )
 
     map("gbhs", function()
-        vim.cmd(":update")
+        vim.cmd("update")
         require("gitsigns").stage_hunk()
     end)
 
@@ -29,7 +29,7 @@ local attach = function(bufnr)
     end)
 
     map("gba", function()
-        vim.cmd(":update")
+        vim.cmd("update")
         require("gitsigns").stage_buffer()
     end)
 

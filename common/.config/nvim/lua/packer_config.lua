@@ -32,7 +32,7 @@ local function install_treesitter_parsers()
     local treesitter_install = require("nvim-treesitter.install")
 
     treesitter_install.ensure_installed("all")
-    vim.cmd(":TSUpdate")
+    vim.cmd("TSUpdate")
 end
 
 packer.startup(function(use)
