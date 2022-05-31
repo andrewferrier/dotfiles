@@ -4,8 +4,7 @@ let g:autosplit_ft = ['man', 'fugitive', 'gitcommit']
 let g:autosplit_bt = ['help']
 
 fun! s:NewSplit()
-    if (index(get(g:, 'autosplit_bt', []), &buftype) != -1 ||
-      \ index(get(g:, 'autosplit_ft', []), &filetype) != -1)
+    if (index(get(g:, 'autosplit_bt', []), &buftype) != -1 || index(get(g:, 'autosplit_ft', []), &filetype) != -1)
         let b = bufnr()
         let p = winnr('#')
         let v = winwidth(p) >= getwinvar(p, '&tw', 80) + getwinvar(winnr(), '&tw', 80)
