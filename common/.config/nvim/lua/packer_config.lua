@@ -70,7 +70,8 @@ packer.startup(function(use)
     -- Commands and key bindings
     use({ "tpope/vim-eunuch" })
 
-    -- Eventually this can be replaced with https://github.com/neovim/neovim/issues/5054
+    -- Eventually this can be replaced with
+    -- https://github.com/neovim/neovim/issues/5054
     use({ "tyru/capture.vim" })
 
     use({
