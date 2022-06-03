@@ -1,8 +1,8 @@
 # Vim Config README
 
-## Keybinding cheat sheet
+## Keybinding Cheat Sheet
 
-### Normal mode
+### Normal Mode
 
     !{motion}<command> - filter {motion} through command line
     + - go to the beginning of the next line
@@ -46,12 +46,12 @@
     z<CR> - put current line near top of the screen
     zM/R - close/open all folds
 
-### Normal mode (markdown)
+### Normal Mode (Markdown)
 
     sa{text object}l - add link with text as link text
     sa{text object}L - add link with text as URL
 
-### Insert mode
+### Insert Mode
 
     Ctrl-A - insert last text inserted
     Ctrl-K HT - insert <Tab>
@@ -64,13 +64,13 @@
     Ctrl-U - wipe out line (like 'cc')
     Ctrl-W - delete word before cursor
 
-### Visual mode
+### Visual Mode
 
     !figlet - Take lines and pass through figlet to create ASCII art
     g Ctrl-A Increment each line in visual selection by one more
     m - select area based on Treesitter
 
-### Command mode
+### Command Mode
 
     %!<command> - capture output of [shell] command into current buffer
     %norm ... - run normal mode commands on every line
@@ -89,12 +89,12 @@
     let @/='text/with/lots/of/slashes' - define search pattern (then use n/N)
     wn - write and move to next file in args list
 
-#### Based on a visual range
+#### Based on a Visual Range
 
     '<,'>:norm . - apply previous change to all lines
     '<,'>!uniqall - filter out duplicate (non-consecutive) lines
 
-### Text object/Operator-pending mode
+### Text Object/Operator Pending Mode
 
     gc - comment
     gn/gN - next/previous search match
@@ -119,7 +119,7 @@
 *   [Vim regexs](https://vi.stackexchange.com/a/2279/91)
 *   [Vim's useful lists](https://codeinthehole.com/tips/vim-lists/)
 *   [bufdo/argdo/windo](https://jovica.org/posts/vim-edit-multiple-files/)
-*   `help ex-cmd-index` — list ex commands - e.g. after g/pat/
+*   `help ex-cmd-index` — list ex commands - e.g., after g/pat/
 
 ## Principles
 
