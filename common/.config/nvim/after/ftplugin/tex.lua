@@ -2,19 +2,19 @@
 
 require("filetype.text").setup()
 
-local function create_pdf_from_tex(absoluteTexPath)
+local function create_pdf_from_tex(absolute_tex_path)
     vim.cmd("update")
-    local directory = vim.fn.fnamemodify(absoluteTexPath, ":p:h")
-    local withoutExtension = vim.fn.fnamemodify(absoluteTexPath, ":p:r")
+    local directory = vim.fn.fnamemodify(absolute_tex_path, ":p:h")
+    local without_extension = vim.fn.fnamemodify(absolute_tex_path, ":p:r")
 
     local output = vim.fn.system({
         "pdflatex",
         "-output-directory=" .. directory,
-        absoluteTexPath,
+        absolute_tex_path,
     })
 
     if vim.v.shell_error == 0 then
-        vim.fn.system({ "open", withoutExtension .. ".pdf" })
+        vim.fn.system({ "open", without_extension .. ".pdf" })
     else
         vim.notify(
             "Could not convert to PDF:\n\n" .. output,
