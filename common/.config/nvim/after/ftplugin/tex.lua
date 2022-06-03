@@ -3,6 +3,7 @@
 require("filetype.text").setup()
 
 local function create_pdf_from_tex(absoluteTexPath)
+    vim.cmd("update")
     local directory = vim.fn.fnamemodify(absoluteTexPath, ":p:h")
     local withoutExtension = vim.fn.fnamemodify(absoluteTexPath, ":p:r")
 
