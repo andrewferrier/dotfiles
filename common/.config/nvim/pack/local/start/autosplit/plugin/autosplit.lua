@@ -3,7 +3,7 @@
 -- Based on
 -- https://www.reddit.com/r/neovim/comments/lmhcmj/the_help_window_is_a_bit_wonky/gnvk5pr
 
-local autosplit_ft = { "man", "fugitive", "gitcommit" }
+local autosplit_ft = { "man", "gitcommit" }
 local autosplit_bt = { "help" }
 
 local new_split = function()
