@@ -37,8 +37,6 @@ M.show_prompt = function(autocmd)
                 vim.log.levels.ERROR
             )
         end
-    else
-        vim.notify("No filetype", vim.log.levels.ERROR)
     end
 end
 
