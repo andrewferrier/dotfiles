@@ -1,6 +1,7 @@
 -- luacheck: globals vim
 
 vim.opt.breakindent = true
+vim.opt.display:append("uhex")
 vim.opt.equalalways = false
 vim.opt.hidden = false -- https://github.com/neovim/neovim/pull/15410
 vim.opt.scrolloff = 5
