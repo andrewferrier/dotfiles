@@ -124,7 +124,8 @@ function _G.Statusline_Indent()
     end
 
     if vim.opt.textwidth:get() ~= 80 then
-        -- If shiftwidth is very high, we are in 'soft' wrapping mode, don't display shiftwidth.
+        -- If shiftwidth is very high, we are in 'soft' wrapping mode, don't
+        -- display shiftwidth.
         if vim.opt.textwidth:get() < 9999 then
             returnstring = returnstring .. ",tw=" .. vim.opt.textwidth:get()
         end
