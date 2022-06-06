@@ -129,5 +129,4 @@
 ## TODO
 
 *   Fix chewing up CPU when editing a large gitcommit file
-*   Make a 'cxr' for visual mode that doesn't clobber a register
 *   Add support for Ctrl-W I, open definition in another window
