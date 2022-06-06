@@ -1,23 +1,12 @@
 -- luacheck: globals vim
 
 local lspconfig = require("lspconfig")
-local lspconfig_configs = require("lspconfig.configs")
 
 local attach = require("plugins.lsp.attach")
 local css_settings = require("plugins.lsp.css_settings")
 
 -- For doing diagnostics:
 -- vim.lsp.set_log_level("info")
-
-lspconfig_configs.lualsp = {
-    default_config = {
-        cmd = { "lua-lsp" },
-        filetypes = { "lua" },
-        root_dir = function(file)
-            return lspconfig.util.find_git_ancestor(file) or vim.fn.getcwd()
-        end,
-    },
-}
 
 -- luacheck: push no max line length
 
@@ -33,14 +22,25 @@ local yaml_schemas = {
 
 -- luacheck: pop
 
+local sumneko_settings = {
+    settings = {
+        Lua = {
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim" } },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            telemetry = { enable = false },
+        },
+    },
+}
+
 local servers = {
     bashls = {},
     cssls = css_settings.settings,
     dockerls = {},
     gopls = {},
     jsonls = {},
-    lualsp = {},
     pyright = {},
+    sumneko_lua = sumneko_settings,
     terraformls = {},
     tflint = {},
     tsserver = {},
