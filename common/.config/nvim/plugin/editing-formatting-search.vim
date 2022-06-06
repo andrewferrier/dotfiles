@@ -15,6 +15,5 @@ iabbrev zDATE     <C-R>=strftime("%F")<CR>
 iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>
 
 " This generic behaviour for rename will be overwritten by treesitter.lua where
-" supported.
+" supported. Don't use 'cxr' in visual mode as it will block 'c'.
 nnoremap cxr :%s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>
-xnoremap cxr "zy:%s/<C-R>z/<C-R>z/gc<Left><Left><Left>
