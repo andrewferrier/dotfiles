@@ -14,7 +14,7 @@ local builtin_plugs = {
     "tarPlugin",
     "zipPlugin",
 
-    -- These lines are needed to avoid open directories from command line in
+    -- These lines are needed to avoid opening directories from command line in
     -- netrw: https://github.com/elihunter173/dirbuf.nvim#notes
     "netrw",
     "netrwPlugin",
