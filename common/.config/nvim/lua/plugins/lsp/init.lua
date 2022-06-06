@@ -23,6 +23,9 @@ local yaml_schemas = {
 local sumneko_settings = {
     settings = {
         Lua = {
+            -- Formatting is disabled because it doesn't reflow nicely; we use
+            -- stylua instead.
+            format = { enable = false },
             runtime = { version = "LuaJIT" },
             diagnostics = { globals = { "vim" } },
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
