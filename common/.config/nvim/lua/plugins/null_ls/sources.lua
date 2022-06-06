@@ -71,6 +71,16 @@ M.sources = {
 
     -- Formatters
 
+    null_ls.builtins.formatting.black.with({
+        extra_args = function(params)
+            return {
+                "--line-length=" .. vim.api.nvim_buf_get_option(
+                    params.bufnr,
+                    "textwidth"
+                ),
+            }
+        end,
+    }),
     null_ls.builtins.formatting.latexindent.with({
         extra_args = function(params)
             return {
@@ -110,16 +120,6 @@ M.sources = {
                 vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth"),
                 "--indent-type",
                 "spaces",
-            }
-        end,
-    }),
-    null_ls.builtins.formatting.black.with({
-        extra_args = function(params)
-            return {
-                "--line-length=" .. vim.api.nvim_buf_get_option(
-                    params.bufnr,
-                    "textwidth"
-                ),
             }
         end,
     }),
