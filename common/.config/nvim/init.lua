@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 -- See ~/.config/nvim/filetype.lua for custom filetype overrides
 
 -- Use exclusively filetype.lua file detection, see

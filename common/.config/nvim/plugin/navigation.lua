@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.opt.path:remove("/usr/include")
 
 local change_to_root = function()

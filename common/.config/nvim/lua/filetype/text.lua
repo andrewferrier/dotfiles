@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local M = {}
 
 M.setup = function(mode)

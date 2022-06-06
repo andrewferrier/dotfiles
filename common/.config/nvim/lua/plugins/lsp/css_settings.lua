@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local M = {}
 
 local css_settings = {

@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.opt.breakindent = true
 vim.opt.display:append("uhex")
 vim.opt.equalalways = false

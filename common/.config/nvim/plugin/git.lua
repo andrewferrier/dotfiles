@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local opts = {
     silent = true,
 }

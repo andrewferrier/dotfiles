@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local M = {}
 
 local function is_lsp_loaded(client_name)

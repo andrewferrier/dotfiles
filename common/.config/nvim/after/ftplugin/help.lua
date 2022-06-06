@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.opt_local.cursorline = true
 
 -- Cannot turn off hlsearch here as it is a global option

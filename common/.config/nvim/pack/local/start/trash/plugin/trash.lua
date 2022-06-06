@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.api.nvim_create_user_command("Trash", function(opts)
     local file = vim.fn.fnamemodify(vim.fn.bufname(opts.args), ":p")
     vim.api.nvim_buf_delete(0, { force = opts.bang })

@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 -- Renaming can be done with LSP, but we are doing it with treesitter instead
 -- because it seems to be more reliable and supported by more filetypes.
 

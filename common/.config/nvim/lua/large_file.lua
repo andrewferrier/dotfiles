@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local M = {}
 
 M.is_large_file = function(bufnr)

@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 -- Mnemonic: dqp = debug quickly print
 vim.keymap.set("n", "dqp", "<Plug>DumpDebugStringVar", { unique = true })
 vim.keymap.set("n", "dqP", "k<Plug>DumpDebugStringVar", { unique = true })

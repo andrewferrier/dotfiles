@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.keymap.set("n", "cvo", function()
     require('readonly').make_readonly()
     vim.notify("Effective R/O on.")

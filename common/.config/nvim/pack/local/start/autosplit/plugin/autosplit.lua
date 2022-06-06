@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 -- Based on
 -- https://www.reddit.com/r/neovim/comments/lmhcmj/the_help_window_is_a_bit_wonky/gnvk5pr
 

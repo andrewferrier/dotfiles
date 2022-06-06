@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.api.nvim_create_user_command("PackerProfile", function()
     require("packer_config")
     require("packer").profile_output()

@@ -1,5 +1,3 @@
--- luacheck: globals vim
---
 -- Based on https://thevaluable.dev/vim-create-text-objects/
 
 local chars = {

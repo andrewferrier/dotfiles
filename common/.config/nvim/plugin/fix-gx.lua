@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 -- This is required because netrw normally provides this capability, but we've
 -- disabled it here: ../init.lua
 

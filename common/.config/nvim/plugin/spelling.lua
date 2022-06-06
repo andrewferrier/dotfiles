@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local spelldir = vim.fn.stdpath("data") .. "/spell"
 vim.fn.mkdir(vim.fn.expand(spelldir), "p")
 

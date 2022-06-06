@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local M = {}
 
 M.hide_silent = function()

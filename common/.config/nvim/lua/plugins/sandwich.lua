@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.keymap.set('n', 's', '<Nop>')
 vim.keymap.set('x', 's', '<Nop>')
 

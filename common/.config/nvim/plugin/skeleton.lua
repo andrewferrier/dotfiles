@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.api.nvim_create_autocmd("BufNewFile", {
     group = vim.api.nvim_create_augroup("skeleton", {}),
     pattern = { "*" },

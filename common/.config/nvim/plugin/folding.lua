@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local set_fold_method = function()
     local large_file = require("large_file").is_large_file()
     local treesitter_parsers = require("nvim-treesitter.parsers")

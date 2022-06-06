@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local M = {}
 
 local function handle_skeleton(filetype, skeleton)

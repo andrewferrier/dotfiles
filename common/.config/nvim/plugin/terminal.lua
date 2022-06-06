@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local id = vim.api.nvim_create_augroup("neovim_terminal", {})
 
 vim.api.nvim_create_autocmd("TermOpen", {

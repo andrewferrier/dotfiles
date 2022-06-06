@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.b.sleuth_automatic=0
 
 -- Always use Terraform standard: https://www.terraform.io/language/syntax/style

@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 require("filetype.text").setup()
 
 local function create_pdf_from_tex(absolute_tex_path)

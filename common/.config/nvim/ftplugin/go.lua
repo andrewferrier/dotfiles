@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.b.sleuth_automatic=0
 
 -- These settings use tabs for indentation, but display them as 4 spaces wide.

@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local null_ls = require("null-ls")
 
 local null_ls_sources = require("plugins.null_ls.sources")

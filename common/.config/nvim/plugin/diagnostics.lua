@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local diagnostic_format = function(diagnostic)
     local message = diagnostic.message
 

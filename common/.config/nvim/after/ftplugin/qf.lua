@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 vim.opt_local.cursorline = true
 
 vim.keymap.set("n", "q", function()

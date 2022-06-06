@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local install_path = vim.fn.stdpath("data")
     .. "/site/pack/packer/opt/packer.nvim"
 

@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 local lspconfig = require("lspconfig")
 
 local attach = require("plugins.lsp.attach")

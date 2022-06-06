@@ -1,5 +1,3 @@
--- luacheck: globals vim
-
 require("filetype.section").setup("^#")
 require("filetype.text").setup()
 
