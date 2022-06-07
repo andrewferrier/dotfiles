@@ -51,10 +51,9 @@ packer.startup(function(use)
     }) -- gl
 
     use({
-        "arthurxavierx/vim-caser",
-        keys = "gyc",
-        setup = function()
-            vim.g.caser_prefix = "gyc"
+        "johmsalas/text-case.nvim",
+        config = function()
+            require("plugins.text_case")
         end,
     })
 
