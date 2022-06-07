@@ -11,9 +11,9 @@ BATTERY_STATUS=$(cat /sys/class/power_supply/BAT0/status)
 
 if [[ $BATTERY_STATUS == 'Discharging' ]]; then
     if ((BATTERY_LEVEL <= 3)); then
-        notify-send --urgency=critical 'Battery level at 3%; suspending in 10 seconds...'
+        notify-send --urgency=critical --expire-time=5000 'Battery level at 3%; suspending in 10 seconds...'
         sleep 5
-        notify-send --urgency=critical 'Battery level at 3%; suspending in 5 seconds...'
+        notify-send --urgency=critical --expire-time=5000 'Battery level at 3%; suspending in 5 seconds...'
         sleep 5
         systemctl suspend
     elif ((BATTERY_LEVEL <= 5)); then
