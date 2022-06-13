@@ -12,5 +12,13 @@ for directory in "${DOTFILES_DIR}"/if-command/*; do
 
     if command -v "$COMMAND" >/dev/null; then
         stow --verbose --dir="${DOTFILES_DIR}/if-command" --target="${HOME}" --stow "$COMMAND"
+
+        AFTER_SCRIPT=$(realpath "${DOTFILES_DIR}/if-command-after/${COMMAND}")
+        if [ -f "${AFTER_SCRIPT}" ]; then
+            printf "Running %s..." "${AFTER_SCRIPT}"
+            echo ""
+            ${AFTER_SCRIPT}
+            echo "${AFTER_SCRIPT} complete."
+        fi
     fi
 done
