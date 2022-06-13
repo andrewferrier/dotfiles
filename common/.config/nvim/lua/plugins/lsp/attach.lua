@@ -31,9 +31,6 @@ local function lsp_document_format()
     -- Doing formatting sequentially ensures that multiple LSPs can be used,
     -- e.g. null-ls and terraform-ls, without prompting.
 
-    vim.notify("Formatting document synchronously, please wait...")
-    vim.cmd("redraw")
-
     local TIMEOUT = 3000
 
     if vim.lsp.buf.format then

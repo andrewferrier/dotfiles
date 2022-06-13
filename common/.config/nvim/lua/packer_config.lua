@@ -160,6 +160,13 @@ packer.startup(function(use)
         end,
     })
 
+    use({
+        "rcarriga/nvim-notify",
+        config = function()
+            require("plugins.notify")
+        end,
+    })
+
     -- Syntax
     use({ "gisphm/vim-gitignore" })
     use({ "qnighy/vim-ssh-annex" })
