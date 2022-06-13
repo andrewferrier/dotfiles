@@ -33,10 +33,7 @@ local function install_treesitter_parsers()
     vim.cmd("TSUpdate")
 end
 
-packer.startup(function(use)
-    use({ "wbthomason/packer.nvim", opt = true })
-
-    -- Operators
+local function packages_operators(use)
     use({ "christoomey/vim-sort-motion", keys = "gs" })
     use({ "tpope/vim-commentary" }) -- gc
 
@@ -63,8 +60,9 @@ packer.startup(function(use)
             require("plugins.sandwich")
         end,
     }) -- sa, sd, sr
+end
 
-    -- Commands and key bindings
+local function packages_commands(use)
     use({ "tpope/vim-eunuch" })
 
     -- Eventually this can be replaced with
@@ -98,8 +96,9 @@ packer.startup(function(use)
             require("plugins.fzf")
         end,
     })
+end
 
-    -- Navigation and Window Management
+local function packages_navigation(use)
     use({ "sedm0784/vim-resize-mode", keys = "<C-W>" })
 
     use({
@@ -108,12 +107,9 @@ packer.startup(function(use)
             require("plugins.dirbuf")
         end,
     })
+end
 
-    -- Git and diffing
-    use({ "whiteinge/diffconflicts", opt = true }) -- invoked by `git mergetool`
-    use({ "will133/vim-dirdiff", cmd = "DirDiff" })
-
-    -- Silent enhancement
+local function packages_silent(use)
     use({ "ellisonleao/gruvbox.nvim" })
     use({ "tpope/vim-sleuth" })
 
@@ -166,8 +162,14 @@ packer.startup(function(use)
             require("plugins.notify")
         end,
     })
+end
 
-    -- Syntax
+local function packages_git(use)
+    use({ "whiteinge/diffconflicts", opt = true }) -- invoked by `git mergetool`
+    use({ "will133/vim-dirdiff", cmd = "DirDiff" })
+end
+
+local function packages_syntax(use)
     use({ "gisphm/vim-gitignore" })
     use({ "qnighy/vim-ssh-annex" })
     use({ "fatih/vim-go", opt = true }) -- Used for hugo layouts
@@ -180,8 +182,9 @@ packer.startup(function(use)
             require("plugins.markdown_preview")
         end,
     })
+end
 
-    -- Treesitter
+local function packages_treesitter(use)
     use({ "RRethy/nvim-treesitter-endwise" })
     use({ "mfussenegger/nvim-treehopper" })
     use({ "nvim-treesitter/nvim-treesitter-refactor" })
@@ -193,8 +196,9 @@ packer.startup(function(use)
             require("plugins.treesitter")
         end,
     })
+end
 
-    -- LSP and null-ls
+local function packages_lsp(use)
     use({
         "neovim/nvim-lspconfig",
         config = function()
@@ -213,6 +217,19 @@ packer.startup(function(use)
             require("plugins.null_ls")
         end,
     })
+end
+
+packer.startup(function(use)
+    use({ "wbthomason/packer.nvim", opt = true })
+
+    packages_operators(use)
+    packages_commands(use)
+    packages_navigation(use)
+    packages_git(use)
+    packages_silent(use)
+    packages_syntax(use)
+    packages_treesitter(use)
+    packages_lsp(use)
 
     -- My plugins/forks
     use({ "git@github.com:andrewferrier/vim-wrapping-softhard" })
