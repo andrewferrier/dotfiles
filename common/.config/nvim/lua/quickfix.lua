@@ -2,7 +2,6 @@ local M = {}
 
 M.close = function()
     vim.cmd("cclose")
-    vim.notify("Quickfix list closed.")
 end
 
 M.open = function()
@@ -15,7 +14,6 @@ M.open = function()
         )
     else
         vim.cmd("copen")
-        vim.notify("Quickfix list opened.")
     end
 end
 
