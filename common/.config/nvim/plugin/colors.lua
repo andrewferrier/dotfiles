@@ -15,9 +15,9 @@ end
 
 vim.cmd("colorscheme gruvbox")
 
-vim.api.nvim_set_hl(0, "TermCursorNC", { bg = "#00FF00", fg = "#FFFFFF" })
 vim.api.nvim_set_hl(0, "QuickFixLine", { link = "CurSearch" })
 vim.api.nvim_set_hl(0, "StatusLineSecondary", { link = "SignColumn" })
+vim.api.nvim_set_hl(0, "TermCursorNC", { bg = "#00FF00", fg = "#FFFFFF" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("HighlightYanked", {}),
