@@ -1,4 +1,4 @@
-if vim.fn.has("nvim-0.8.0") then
+if vim.fn.has("nvim-0.8.0") == 1 then
     vim.opt.cmdheight = 0
 end
 
