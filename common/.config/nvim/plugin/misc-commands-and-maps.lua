@@ -1,7 +1,7 @@
-vim.keymap.set("n", "cvo", function()
-    require('readonly').make_readonly()
+vim.api.nvim_create_user_command("ReadonlyEffective", function()
+    require("readonly").make_readonly()
     vim.notify("Effective R/O on.")
-end)
+end, {})
 
 vim.keymap.set("n", "Q", "<Nop>")
 vim.keymap.set("n", "<C-Z>", "<Nop>")
