@@ -131,7 +131,6 @@ M.sources = {
 
     null_ls.builtins.diagnostics.checkmake,
     null_ls.builtins.diagnostics.chktex,
-    null_ls.builtins.diagnostics.editorconfig_checker,
     null_ls.builtins.diagnostics.gitlint.with({
         extra_args = {
             "--ignore",
