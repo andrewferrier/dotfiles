@@ -138,6 +138,7 @@ M.sources = {
             "B6",
         },
     }),
+    null_ls.builtins.diagnostics.hadolint,
     null_ls.builtins.diagnostics.mdl.with({
         extra_args = {
             "--ignore-front-matter",
