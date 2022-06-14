@@ -10,6 +10,7 @@ vim.opt.splitright = true
 -- Fix https://github.com/neovim/neovim/issues/12288#issuecomment-626276240; I
 -- also find it interesting to see the file summary when opening it.
 vim.opt.shortmess:remove("F")
+vim.opt.shortmess:append("S") -- Because we have our own search counter
 vim.opt.shortmess:append("c")
 vim.opt.confirm = true
 
