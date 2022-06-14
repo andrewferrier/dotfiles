@@ -6,16 +6,25 @@ local attach = function(bufnr)
         vim.keymap.set(mode, l, r, opts)
     end
 
-    map(
-        "]c",
-        "&diff ? ']c' : '<cmd>lua require\"gitsigns\".next_hunk()<CR>'",
-        { expr = true }
-    )
-    map(
-        "[c",
-        "&diff ? '[c' : '<cmd>lua require\"gitsigns\".prev_hunk()<CR>'",
-        { expr = true }
-    )
+    map("]c", function()
+        if vim.wo.diff then
+            return "]c"
+        end
+        vim.schedule(function()
+            require("gitsigns").next_hunk()
+        end)
+        return "<Ignore>"
+    end, { expr = true })
+
+    map("[c", function()
+        if vim.wo.diff then
+            return "[c"
+        end
+        vim.schedule(function()
+            require("gitsigns").prev_hunk()
+        end)
+        return "<Ignore>"
+    end, { expr = true })
 
     map("gbhs", function()
         vim.cmd("update")
