@@ -7,9 +7,13 @@
 import subprocess
 import json
 
+
 def find_display(space_index):
-    space_focused = [space['display'] for space in spaces if space['index'] == space_index][0]
+    space_focused = [
+        space["display"] for space in spaces if space["index"] == space_index
+    ][0]
     return space_focused
+
 
 def find_color(space):
     if space == space_focused:
@@ -28,12 +32,6 @@ BLACK = "\\\\e[0;30m"
 GREEN = "\\\\e[0;35m"
 RESET = "\\\\e[0m"
 
-windows = json.loads(
-    subprocess.run(
-        ["yabai", "-m", "query", "--windows"], stdout=subprocess.PIPE
-    ).stdout
-)
-
 spaces = json.loads(
     subprocess.run(
         ["yabai", "-m", "query", "--spaces"], stdout=subprocess.PIPE
@@ -43,16 +41,11 @@ spaces = json.loads(
 space_focused = [space for (space) in spaces if space["has-focus"]][0]["index"]
 
 spaces_to_list = [
-    window["space"]
-    for (window) in windows
-    if (not window["is-hidden"] and not window["is-minimized"])
+    space["index"] for (space) in spaces if len(space["windows"]) > 0
 ] + [space_focused]
 
 spaces_to_list = sorted(set(spaces_to_list))
 
-spaces_to_list = map(
-    find_color,
-    spaces_to_list
-)
+spaces_to_list = map(find_color, spaces_to_list)
 
 print("🖥️ " + " ".join(spaces_to_list) + " | ansi=true")
