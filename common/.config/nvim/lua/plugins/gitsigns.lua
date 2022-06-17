@@ -42,7 +42,12 @@ local attach = function(bufnr)
 
     map("yog", function()
         require("gitsigns").toggle_deleted()
-        vim.notify("Deleted lines toggled.")
+        local show_deleted = require("gitsigns.config").config.show_deleted
+        if show_deleted then
+            vim.notify("Deleted lines shown.")
+        else
+            vim.notify("Deleted lines hidden.")
+        end
     end)
 end
 
