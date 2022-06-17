@@ -188,10 +188,8 @@ function _G.Titlestring_Filename()
     return vim.fn.pathshorten(filename)
 end
 
-local id = vim.api.nvim_create_augroup("recalculate_bufferitems", {})
-
 vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
-    group = id,
+    group = vim.api.nvim_create_augroup("ResetSpellingCount", {}),
     callback = function()
         vim.b.spelling_warning = nil
     end,
