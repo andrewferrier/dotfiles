@@ -249,11 +249,14 @@ end
 
 function _G.Statusline_Search()
     if vim.v.hlsearch == 1 then
-        local searchcount =vim.fn.searchcount()
-        return '[srch: ' .. searchcount["current"] .. "/" .. searchcount["total"] .. "] "
-    else
-        return ""
+        local searchcount = vim.fn.searchcount()
+
+        if searchcount["total"] > 0 then
+            return '[srch: ' .. searchcount["current"] .. "/" .. searchcount["total"] .. "] "
+        end
     end
+
+    return ""
 end
 
 local RESET_HIGHLIGHTING = "%*"
