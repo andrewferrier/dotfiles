@@ -3,10 +3,6 @@ local treesitter_parsers = require("nvim-treesitter.parsers")
 local WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME = 100
 local WIN_WIDTH_COMPRESS_THRESHOLD_PATH = 200
 
-local function lsp_available_count()
-    return vim.tbl_count(vim.lsp.buf_get_clients(0))
-end
-
 local function is_diagnostic_enabled()
     return vim.b.diagnostic_enabled == nil or vim.b.diagnostic_enabled == true
 end
@@ -28,12 +24,6 @@ function _G.Statusline_FeaturesEnabled()
     local return_string = ""
 
     if vim.opt.filetype:get() ~= "dirbuf" then
-        local lsps = lsp_available_count()
-
-        if lsps > 0 then
-            return_string = return_string .. ",L" .. lsps
-        end
-
         if not is_diagnostic_enabled() then
             return_string = return_string .. ",¬D"
         end
@@ -53,7 +43,7 @@ function _G.Statusline_FeaturesEnabled()
 end
 
 function _G.Statusline_DiagnosticStatus()
-    if lsp_available_count() > 0 and is_diagnostic_enabled() then
+    if is_diagnostic_enabled() then
         local diagnostics = {}
 
         for prefix, count in pairs(get_diagnostic_types()) do
