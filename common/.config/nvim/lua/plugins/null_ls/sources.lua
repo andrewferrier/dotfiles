@@ -159,16 +159,6 @@ M.sources = {
     }),
     null_ls.builtins.diagnostics.sqlfluff,
     null_ls.builtins.diagnostics.tidy,
-    null_ls.builtins.diagnostics.trail_space.with({
-        -- for 'mail' it's just annoying
-        disabled_filetypes = {
-            "dirbuf",
-            "gitcommit",
-            "lua",
-            "markdown",
-            "mail",
-        },
-    }),
     null_ls.builtins.diagnostics.vale,
     null_ls.builtins.diagnostics.zsh,
     diagnostics_by_line({
