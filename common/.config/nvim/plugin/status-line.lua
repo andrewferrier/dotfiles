@@ -220,7 +220,8 @@ function _G.Statusline_SpellingErrorCount()
                 vim.cmd("normal! ]S")
                 if
                     (
-                        vim.fn.line(".") == lastline
+                        vim.fn.line(".")
+                            == lastline
                         and vim.fn.col(".") == lastcol
                     ) or mycount > MAX_SPELL_ERRORS
                 then
@@ -252,7 +253,11 @@ function _G.Statusline_Search()
         local searchcount = vim.fn.searchcount()
 
         if searchcount["total"] > 0 then
-            return '[srch: ' .. searchcount["current"] .. "/" .. searchcount["total"] .. "] "
+            return "[srch: "
+                .. searchcount["current"]
+                .. "/"
+                .. searchcount["total"]
+                .. "] "
         end
     end
 
