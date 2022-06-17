@@ -6,7 +6,7 @@ M.make_readonly = function()
         vim.opt_local.list = false
         vim.opt_local.readonly = true
 
-        require("diagnostics").hide_silent()
+        require("diagnostics").hide()
         require("gitsigns").detach()
 
         if vim.fn.exists("b:text_based_filetype") then
