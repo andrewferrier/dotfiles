@@ -197,11 +197,6 @@ vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave" }, {
-    group = id,
-    command = "redrawstatus!",
-})
-
 local MAX_SPELL_ERRORS = 20
 
 function _G.Statusline_SpellingErrorCount()
