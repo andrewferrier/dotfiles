@@ -81,7 +81,7 @@ function _G.Statusline_List()
         and vim.opt.buftype:get() ~= "terminal"
         and vim.opt.filetype:get() ~= "dirbuf"
     then
-        return "[!list]"
+        return ",nolist"
     else
         return ""
     end
@@ -275,7 +275,6 @@ statusline = statusline .. "%{v:lua.Statusline_Search()}"
 statusline = statusline .. "%m"
 statusline = statusline .. "%{v:lua.Statusline_DiagnosticStatus()}"
 statusline = statusline .. "%{v:lua.Statusline_SpellingErrorCount()}"
-statusline = statusline .. "%{v:lua.Statusline_List()}"
 statusline = statusline .. "%{v:lua.Statusline_GitSigns()}"
 statusline = statusline .. SEPARATOR
 
@@ -287,6 +286,7 @@ statusline = statusline .. "%R"
 statusline = statusline .. "%{v:lua.Statusline_Wrappingmode()}"
 statusline = statusline .. "%{&spell?',S':''}"
 statusline = statusline .. "%{v:lua.Statusline_FeaturesEnabled()}"
+statusline = statusline .. "%{v:lua.Statusline_List()}"
 statusline = statusline .. SEPARATOR
 
 -- RHS - Location
