@@ -240,7 +240,7 @@ function _G.Statusline_Search()
         local searchcount = vim.fn.searchcount()
 
         if searchcount["total"] > 0 then
-            return "[srch: "
+            return "[Srch "
                 .. searchcount["current"]
                 .. "/"
                 .. searchcount["total"]
