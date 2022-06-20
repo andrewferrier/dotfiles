@@ -155,13 +155,6 @@ local function packages_silent(use)
     }) -- gb
 
     use({
-        "lewis6991/spaceless.nvim",
-        config = function()
-            require("spaceless").setup()
-        end,
-    })
-
-    use({
         "rcarriga/nvim-notify",
         config = function()
             require("plugins.notify")
