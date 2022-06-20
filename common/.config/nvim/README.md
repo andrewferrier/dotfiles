@@ -11,6 +11,7 @@
     =p, =P - Paste correcting indent (from vim-unimpaired)
     Ctrl-E/Y - scroll window without moving cursor
     Ctrl-W Ctrl-F - open the file under cursor in a split (similar to gf)
+    Ctrl-W Ctrl-] - jump to definition in new window
     Ctrl-^ - Open last file
     Ctrl-i - "in" - opposite of Ctrl-o
     Ctrl-o - on opening vim, go immediately to last file edited
