@@ -133,3 +133,4 @@
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Add support for Ctrl-W I, open definition in another window
 *   Show LSP progress/loading (important for sumneko) - maybe use <https://github.com/nvim-lua/lsp-status.nvim>?
+*   Write a custom quickfixtextfunc
