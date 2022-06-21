@@ -134,3 +134,4 @@
 *   Add support for Ctrl-W I, open definition in another window
 *   Show LSP progress/loading (important for sumneko) - maybe use <https://github.com/nvim-lua/lsp-status.nvim>?
 *   Write a custom quickfixtextfunc
+*   Port hard/soft to lua, including introducing a 'bias' concept for new or uncertain files (also use unit testing)
