@@ -222,6 +222,14 @@ local function packages_lsp(use)
             require("plugins.null_ls")
         end,
     })
+
+    use({
+        "kosayoda/nvim-lightbulb",
+        requires = "antoinemadec/FixCursorHold.nvim",
+        config = function()
+            require("plugins.lightbulb")
+        end,
+    })
 end
 
 packer.startup(function(use)
