@@ -223,6 +223,13 @@ local function packages_lsp(use)
             require("plugins.lightbulb")
         end,
     })
+
+    use({
+        "smjonas/inc-rename.nvim",
+        config = function()
+            require("inc_rename").setup({ cmd_name = "LspRename" })
+        end,
+    })
 end
 
 packer.startup(function(use)

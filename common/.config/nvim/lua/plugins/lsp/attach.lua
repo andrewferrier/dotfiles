@@ -79,8 +79,12 @@ M.keybindings_defaults = function()
     map("gQ", "document format")
 end
 
-local map_buf = function(bufnr, lhs, rhs)
-    local opts = { buffer = bufnr, silent = true }
+local map_buf = function(bufnr, lhs, rhs, opts)
+    opts = vim.tbl_deep_extend(
+        "force",
+        { buffer = bufnr, silent = true },
+        opts or {}
+    )
 
     vim.keymap.set("n", lhs, rhs, opts)
 end
@@ -93,6 +97,25 @@ M.keybindings_codeaction = function(bufnr)
     map_buf(bufnr, "cxa", vim.lsp.buf.code_action)
 end
 
+M.keybindings_rename = function(bufnr)
+    map_buf(bufnr, "cxr", function()
+        return ":LspRename " .. vim.fn.expand("<cword>")
+    end, {
+        expr = true,
+        silent = false,
+    })
+end
+
+M.lsp_supports_rename = function(bufnr)
+    for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
+        if client.server_capabilities.renameProvider then
+            return true
+        end
+    end
+
+    return false
+end
+
 local function keybindings_formatting_check(bufnr, server_capabilities)
     if server_capabilities.documentFormattingProvider == true then
         M.keybindings_formatting(bufnr)
@@ -102,6 +125,12 @@ end
 local function keybindings_codeaction_check(bufnr, server_capabilities)
     if server_capabilities.codeActionProvider then
         M.keybindings_codeaction(bufnr)
+    end
+end
+
+local function keybindings_rename_check(bufnr, server_capabilities)
+    if server_capabilities.renameProvider then
+        M.keybindings_rename(bufnr)
     end
 end
 
@@ -139,6 +168,7 @@ M.on_attach = function(client, bufnr)
 
     keybindings_formatting_check(bufnr, server_capabilities)
     keybindings_codeaction_check(bufnr, server_capabilities)
+    keybindings_rename_check(bufnr, server_capabilities)
     keybindings_hover_keyword(bufnr, server_capabilities, filetype)
     keybindings_organizeimports(bufnr, lsp_name)
 

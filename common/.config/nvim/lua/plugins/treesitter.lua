@@ -1,7 +1,7 @@
 -- Renaming can be done with LSP, but we are doing it with treesitter instead
 -- because it seems to be more reliable and supported by more filetypes.
 
-local function on_attach(_, _)
+local function on_attach(_, bufnr)
     vim.keymap.set(
         "o",
         "m",
@@ -15,6 +15,15 @@ local function on_attach(_, _)
         ':lua require("tsht").nodes()<CR>',
         { buffer = true, silent = true }
     )
+
+    if not require("plugins.lsp.attach").lsp_supports_rename(bufnr) then
+        vim.keymap.set("n", "cxr", function()
+            require("nvim-treesitter-refactor.smart_rename").smart_rename(bufnr)
+        end, {
+            buffer = true,
+            silent = true,
+        })
+    end
 end
 
 local function disable_other(filetype, bufnr)
@@ -48,7 +57,6 @@ require("nvim-treesitter.configs").setup({
         smart_rename = {
             enable = true,
             disable = disable_other,
-            keymaps = { smart_rename = "cxr" },
         },
     },
     indent = { enable = true, disable = disable_indent },
