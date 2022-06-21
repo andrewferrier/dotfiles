@@ -5,7 +5,7 @@ end
 vim.notify = require("notify")
 
 require("notify").setup({
-    timeout = 400,
+    timeout = 1500,
     render = "minimal",
-    stages = "fade",
+    stages = "static",
 })
