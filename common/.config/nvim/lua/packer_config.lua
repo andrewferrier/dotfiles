@@ -96,11 +96,16 @@ local function packages_commands(use)
             require("plugins.fzf")
         end,
     })
+
+    use({
+        "anuvyklack/hydra.nvim",
+        config = function()
+            require("plugins.hydra")
+        end,
+    })
 end
 
 local function packages_navigation(use)
-    use({ "sedm0784/vim-resize-mode", keys = "<C-W>" })
-
     use({
         "elihunter173/dirbuf.nvim",
         config = function()
