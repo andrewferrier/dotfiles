@@ -27,6 +27,24 @@ def find_color(space):
             return f"{GREEN}{space}{RESET}"
 
 
+def has_visible_windows(space):
+    windows = json.loads(
+        subprocess.run(
+            ["yabai", "-m", "query", "--windows", "--space", str(space)],
+            stdout=subprocess.PIPE,
+        ).stdout
+    )
+
+    # Cannot use 'is-visible' because when you are on another space they are considered not visible.
+    visible_window_list = [
+        window
+        for window in windows
+        if window["is-minimized"] == False and window["is-hidden"] == False
+    ]
+
+    return len(visible_window_list) > 0
+
+
 BLUE = "\\\\e[0;34m"
 BLACK = "\\\\e[0;30m"
 GREEN = "\\\\e[0;35m"
@@ -41,7 +59,7 @@ spaces = json.loads(
 space_focused = [space for (space) in spaces if space["has-focus"]][0]["index"]
 
 spaces_to_list = [
-    space["index"] for (space) in spaces if len(space["windows"]) > 0
+    space["index"] for (space) in spaces if has_visible_windows(space["index"])
 ] + [space_focused]
 
 spaces_to_list = sorted(set(spaces_to_list))
