@@ -106,11 +106,14 @@ case "${FILE_EXTENSION_LOWER}" in
     "7z")
 
     macos_check
+
     atool --list -- "${FILE_PATH}" && exit 5
     bsdtar --list --file "${FILE_PATH}" && exit 5
     exit 1
     ;;
 "pdf")
+    macos_check
+
     pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | fmt -w "${PV_WIDTH}" && exit 5
     mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | fmt -w "${PV_WIDTH}" && exit 5
     exiftool "${FILE_PATH}" && exit 5
