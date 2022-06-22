@@ -2,8 +2,8 @@ local M = {}
 
 local function handle_skeleton(filetype, skeleton)
     vim.ui.select({
-        "Open it in a split",
-        "Read it into the file",
+        "Open " .. skeleton .. " in a split",
+        "Read " .. skeleton .. " into the file",
         "Ignore it",
     }, {
         prompt = "What do you want to do with the skeleton?",
