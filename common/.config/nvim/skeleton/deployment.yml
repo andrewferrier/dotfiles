@@ -17,3 +17,6 @@ spec:
       containers:
       - name: hello-world
         image: docker.io/hello-world
+        ports:
+            - containerPort: 80
+              name: http
