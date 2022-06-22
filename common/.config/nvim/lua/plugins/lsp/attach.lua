@@ -98,12 +98,16 @@ M.keybindings_codeaction = function(bufnr)
 end
 
 M.keybindings_rename = function(bufnr)
-    map_buf(bufnr, "cxr", function()
-        return ":LspRename " .. vim.fn.expand("<cword>")
-    end, {
-        expr = true,
-        silent = false,
-    })
+    if vim.fn.has("nvim-0.8.0") == 1 then
+        map_buf(bufnr, "cxr", function()
+            return ":LspRename " .. vim.fn.expand("<cword>")
+        end, {
+            expr = true,
+            silent = false,
+        })
+    else
+        map_buf(bufnr, "cxr", vim.lsp.buf.rename)
+    end
 end
 
 M.lsp_supports_rename = function(bufnr)

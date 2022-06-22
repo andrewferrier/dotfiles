@@ -224,12 +224,14 @@ local function packages_lsp(use)
         end,
     })
 
-    use({
-        "smjonas/inc-rename.nvim",
-        config = function()
-            require("inc_rename").setup({ cmd_name = "LspRename" })
-        end,
-    })
+    if vim.fn.has("nvim-0.8.0") == 1 then
+        use({
+            "smjonas/inc-rename.nvim",
+            config = function()
+                require("plugins.inc_rename")
+            end,
+        })
+    end
 end
 
 packer.startup(function(use)
