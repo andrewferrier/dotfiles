@@ -18,23 +18,36 @@ local function handle_skeleton(filetype, skeleton)
     end)
 end
 
-M.show_prompt = function(autocmd)
-    local filetype = vim.opt.filetype:get()
-
-    if filetype ~= nil and filetype ~= "" then
-        local skeleton = vim.api.nvim_get_runtime_file(
-            "skeleton/" .. filetype,
+local function get_skeleton_match(tail)
+    local skeleton =
+        vim.api.nvim_get_runtime_file(
+            "skeleton/" .. tail,
             false
         )[1]
 
-        if skeleton ~= nil and skeleton ~= "" then
-            handle_skeleton(filetype, skeleton)
-        elseif not autocmd then
-            vim.notify(
-                "No skeleton found for filetype '" .. filetype .. "'",
-                vim.log.levels.ERROR
-            )
-        end
+    if skeleton == "" then
+        return nil
+    else
+        return skeleton
+    end
+end
+
+M.show_prompt = function(autocmd)
+    local filetype = vim.opt.filetype:get()
+
+    local skeleton = get_skeleton_match(vim.fn.expand("%:t"))
+
+    if skeleton == nil then
+        skeleton = get_skeleton_match(filetype)
+    end
+
+    if skeleton ~= nil then
+        handle_skeleton(filetype, skeleton)
+    elseif not autocmd then
+        vim.notify(
+            "No skeleton found for filetype '" .. filetype .. "'",
+            vim.log.levels.ERROR
+        )
     end
 end
 
