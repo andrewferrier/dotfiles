@@ -1,5 +1,3 @@
--- luacheck: globals hs
---
 -- TODO:
 -- * Investigate using https://github.com/koekeishiya/skhd as an alternative to Hammerspoon.
 -- * If windows end up totally unfocused, find one to focus on

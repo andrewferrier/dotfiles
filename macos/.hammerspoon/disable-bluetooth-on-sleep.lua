@@ -1,5 +1,3 @@
--- luacheck: globals hs
-
 -- Based on https://gist.github.com/ysimonson/fea48ee8a68ed2cbac12473e87134f58
 
 local log = hs.logger.new("disable-bluetooth-on-sleep", "debug")

@@ -1,5 +1,3 @@
--- luacheck: globals hs
-
 local log = hs.logger.new("run-on-resume", "debug")
 
 log.i("Initializing...")

@@ -1,5 +1,3 @@
--- luacheck: globals hs
-
 local log = hs.logger.new("yabai", "debug")
 
 log.i("Initializing...")
