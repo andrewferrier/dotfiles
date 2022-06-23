@@ -134,3 +134,4 @@
 *   Show LSP progress/loading (important for sumneko) - maybe use <https://github.com/nvim-lua/lsp-status.nvim>?
 *   Port hard/soft to lua, including introducing a 'bias' concept for new or uncertain files (also use unit testing)
 *   Try to replace bits of vim-unimpaired I use with hydra
+*   Fix why debugstring is not working with repeat
