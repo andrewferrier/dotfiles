@@ -33,11 +33,11 @@ local function get_skeleton_match(tail)
 end
 
 M.show_prompt = function(autocmd)
-    local filetype = vim.opt.filetype:get()
-
     local skeleton = get_skeleton_match(vim.fn.expand("%:t"))
 
-    if skeleton == nil then
+    local filetype = vim.opt.filetype:get()
+
+    if skeleton == nil and filetype ~= "" then
         skeleton = get_skeleton_match(filetype)
     end
 
