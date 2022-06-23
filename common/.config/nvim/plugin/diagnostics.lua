@@ -18,6 +18,10 @@ vim.diagnostic.config({
     virtual_text = {
         source = false,
         format = diagnostic_format,
+        severity = {
+            min = vim.diagnostic.severity.WARN,
+            max = vim.diagnostic.severity.ERROR,
+        },
     },
     float = {
         source = false,
