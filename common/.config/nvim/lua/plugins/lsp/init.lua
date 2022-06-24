@@ -6,20 +6,6 @@ local css_settings = require("plugins.lsp.css_settings")
 -- For doing diagnostics:
 -- vim.lsp.set_log_level("info")
 
--- luacheck: push no max line length
-
--- You can find more schemas in the catalogue:
--- https://github.com/SchemaStore/schemastore/blob/master/src/api/json/catalog.json
-
-local yaml_schemas = {
-    ["http://json.schemastore.org/kustomization"] = "kustomization.yaml",
-    ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
-    ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
-    ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose.y*ml",
-}
-
--- luacheck: pop
-
 local sumneko_settings = {
     settings = {
         Lua = {
@@ -30,6 +16,24 @@ local sumneko_settings = {
             diagnostics = { globals = { "hs", "vim" } },
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
             telemetry = { enable = false },
+        },
+    },
+}
+
+local yaml_settings = {
+    settings = {
+        yaml = {
+            schemaStore = {
+                url = "https://www.schemastore.org/api/json/catalog.json",
+                enable = true,
+            },
+            schemas = {
+                kubernetes = {
+                    "cronjob.y*ml",
+                    "deployment.y*ml",
+                    "service.y*ml",
+                },
+            },
         },
     },
 }
@@ -46,7 +50,7 @@ local servers = {
     tflint = {},
     tsserver = {},
     vimls = {},
-    yamlls = { schemas = yaml_schemas, completion = true },
+    yamlls = yaml_settings,
 }
 
 for lsp, settings in pairs(servers) do
