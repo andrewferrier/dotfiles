@@ -1,7 +1,7 @@
 require("marks").setup({
     builtin_marks = { "^", "<", ">" },
     force_write_shada = true,
-    sign_priority = { lower = 11, upper = 11, builtin = 1, bookmark = 11 },
+    sign_priority = { lower = 11, upper = 11, builtin = 8, bookmark = 11 },
     -- Disabling some of these keys is important so that `dm` is not overloaded
     -- and can be used with nvim-treehopper
     mappings = {
