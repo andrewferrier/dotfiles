@@ -247,7 +247,13 @@ packer.startup(function(use)
     packages_lsp(use)
 
     -- My plugins/forks
-    use({ "git@github.com:andrewferrier/vim-wrapping-softhard" })
+    use({
+        "git@github.com:andrewferrier/vim-wrapping-softhard",
+        branch = "neovim-lua",
+        config = function()
+            require("plugins.wrapping")
+        end,
+    })
 end)
 
 return packer

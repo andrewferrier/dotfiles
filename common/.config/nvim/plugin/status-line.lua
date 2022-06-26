@@ -162,13 +162,9 @@ function _G.Statusline_Getcwd()
 end
 
 function _G.Statusline_Wrappingmode()
-    local currentmode = vim.fn["vim_wrapping_softhard#GetCurrentMode"]()
+    local currentmode = require('wrapping').get_current_mode()
 
-    if currentmode ~= "off" then
-        return "," .. currentmode
-    end
-
-    return ""
+    return "," .. currentmode
 end
 
 function _G.Titlestring_Filename()

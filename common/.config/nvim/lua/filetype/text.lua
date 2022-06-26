@@ -1,13 +1,6 @@
 local M = {}
 
-M.setup = function(mode)
-    local targetmode
-    if mode ~= nil then
-        targetmode = mode
-    else
-        targetmode = ""
-    end
-
+M.setup = function()
     -- This might get called multiple times in, for example, the case of
     -- .mkd.txt files, where they are initially detected as .txt by Vim's own
     -- filetype detection, then overridden as markdown in my filetype.lua.
@@ -21,15 +14,7 @@ M.setup = function(mode)
             vim.opt_local.spell = true
         end
 
-        if vim.g.loaded_wrapping_softhard ~= nil then
-            if targetmode == "hard" then
-                vim.fn["vim_wrapping_softhard#HardWrapMode"]()
-            elseif targetmode == "soft" then
-                vim.fn["vim_wrapping_softhard#SoftWrapMode"]()
-            else
-                vim.fn["vim_wrapping_softhard#SetModeAutomatically"]()
-            end
-        end
+        require("wrapping").set_mode_heuristically()
 
         vim.b.text_based_filetype = true
     end
