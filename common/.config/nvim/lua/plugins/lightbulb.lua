@@ -5,4 +5,4 @@ require("nvim-lightbulb").setup({
     autocmd = { enabled = true },
 })
 
-vim.fn.sign_define('LightBulbSign', { text = "α", texthl="LineNr" })
+vim.fn.sign_define('LightBulbSign', { text = "◌", texthl="LineNr" })
