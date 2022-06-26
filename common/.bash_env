@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#
+# Executed only for non-login, non-interactive instances of bash. Kept empty
+# in case an installation process tries to add to it.
