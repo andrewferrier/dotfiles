@@ -25,6 +25,7 @@ vim.api.nvim_set_hl(0, "NotifyWARNBorder", { link = "Normal" })
 vim.api.nvim_set_hl(0, "NotifyWARNIcon", { link = "DiagnosticWarn" })
 vim.api.nvim_set_hl(0, "NotifyWARNTitle", { link = "Normal" })
 
+vim.api.nvim_set_hl(0, "FidgetTitle", { link = "LineNr" })
 vim.api.nvim_set_hl(0, "QuickFixLine", { link = "CurSearch" })
 vim.api.nvim_set_hl(0, "StatusLineSecondary", { link = "SignColumn" })
 vim.api.nvim_set_hl(0, "TermCursorNC", { bg = "#00FF00", fg = "#FFFFFF" })
