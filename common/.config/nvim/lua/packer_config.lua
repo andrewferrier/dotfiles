@@ -232,6 +232,13 @@ local function packages_lsp(use)
             end,
         })
     end
+
+    use({
+        "j-hui/fidget.nvim",
+        config = function()
+            require("plugins.fidget")
+        end,
+    })
 end
 
 packer.startup(function(use)
