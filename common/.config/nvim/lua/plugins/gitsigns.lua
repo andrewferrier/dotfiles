@@ -1,3 +1,13 @@
+local gitsigns = require("gitsigns")
+
+local function visual_stage()
+    local first_line = vim.fn.line('v')
+    local last_line = vim.fn.getpos('.')[2]
+    gitsigns.stage_hunk({ first_line, last_line })
+    -- Switch back to normal mode, there may be a cleaner way to do this
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 't', false)
+end
+
 local attach = function(bufnr)
     local function map(l, r, opts)
         opts = vim.tbl_extend("force", { buffer = bufnr }, opts or {})
@@ -31,6 +41,10 @@ local attach = function(bufnr)
         require("gitsigns").stage_hunk()
     end)
 
+    vim.keymap.set("v", "gbhs", function()
+        visual_stage()
+    end)
+
     map("gbhr", function()
         require("gitsigns").reset_hunk()
     end)
@@ -45,7 +59,7 @@ local attach = function(bufnr)
     end)
 end
 
-require("gitsigns").setup({
+gitsigns.setup({
     signs = { change = { text = "~" }, changedelete = { text = "⋍" } },
     sign_priority = 10,
     on_attach = attach,
