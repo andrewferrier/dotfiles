@@ -26,10 +26,5 @@ vim.filetype.add({
         [".*mkd%.txt"] = "markdown",
         [".*my%-ublock.*"] = "json",
         ["muttrc%..*"] = "muttrc",
-
-        [".*/pack/packer/.*%.md"] = function()
-            require("readonly").make_readonly()
-            return "markdown"
-        end,
     },
 })
