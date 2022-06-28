@@ -32,7 +32,7 @@ local function get_skeleton_match(tail)
     end
 end
 
-M.show_prompt = function(autocmd)
+local function show_prompt(autocmd)
     local skeleton = get_skeleton_match(vim.fn.expand("%:t"))
 
     local filetype = vim.opt.filetype:get()
@@ -49,6 +49,20 @@ M.show_prompt = function(autocmd)
             vim.log.levels.ERROR
         )
     end
+end
+
+M.setup = function()
+    vim.api.nvim_create_autocmd("BufNewFile", {
+        group = vim.api.nvim_create_augroup("skeleton", {}),
+        pattern = { "*" },
+        callback = function()
+            show_prompt(true)
+        end,
+    })
+
+    vim.api.nvim_create_user_command("Skeleton", function()
+        show_prompt(false)
+    end, {})
 end
 
 return M
