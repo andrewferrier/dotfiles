@@ -10,7 +10,7 @@ M.make_readonly = function()
         require("gitsigns").detach()
 
         if vim.fn.exists("b:text_based_filetype") then
-            vim.fn["vim_wrapping_softhard#SoftWrapMode"]()
+            require("wrapping").soft_wrap_mode()
         end
 
         vim.b.effective_ro_loaded = true
