@@ -115,7 +115,13 @@ local function packages_navigation(use)
 end
 
 local function packages_silent(use)
-    use({ "ellisonleao/gruvbox.nvim" })
+    use({
+        "ellisonleao/gruvbox.nvim",
+        config = function()
+            require("plugins.gruvbox")
+        end,
+    })
+
     use({ "tpope/vim-sleuth" })
 
     use({
