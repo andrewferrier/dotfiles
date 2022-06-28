@@ -132,5 +132,4 @@
 
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Port hard/soft to lua, including introducing a 'bias' concept for new or uncertain files (also use unit testing)
-*   Fix why debugstring is not working with repeat
 *   Make MatchParen highlight group more subtle/distinct (maybe use an underline/italic?)
