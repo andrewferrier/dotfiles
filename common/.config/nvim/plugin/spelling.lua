@@ -6,6 +6,7 @@ vim.opt.dictionary:append("/usr/share/dict/words")
 vim.opt.dictionary:append(vim.opt.spellfile:get())
 
 vim.opt.spelllang = "en_gb"
+vim.opt.spelloptions:append("camel")
 
 vim.keymap.set("n", "zg", "zg]s")
 
