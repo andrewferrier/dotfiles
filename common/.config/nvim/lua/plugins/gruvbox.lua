@@ -12,8 +12,9 @@ end
 require("gruvbox").setup({
     contrast = "hard",
     overrides = {
-        String = { italic = false },
+        MatchParen = { bg = require("gruvbox.palette").faded_orange },
         QuickFixLine = { link = "IncSearch" },
+        String = { italic = false },
     },
 })
 
