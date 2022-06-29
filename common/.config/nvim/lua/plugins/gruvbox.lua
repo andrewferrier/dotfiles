@@ -11,7 +11,6 @@ end
 
 require("gruvbox").setup({
     contrast = "hard",
-    inverse = true, -- See https://github.com/ellisonleao/gruvbox.nvim/issues/127
     overrides = {
         String = { italic = false },
         QuickFixLine = { link = "IncSearch" },
