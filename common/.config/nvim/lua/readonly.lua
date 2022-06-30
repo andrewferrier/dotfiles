@@ -5,6 +5,7 @@ M.make_readonly = function()
         vim.opt_local.spell = false
         vim.opt_local.list = false
         vim.opt_local.readonly = true
+        vim.opt_local.conceallevel = 2
 
         require("diagnostics").hide()
         require("gitsigns").detach()
