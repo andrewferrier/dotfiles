@@ -261,8 +261,8 @@ packer.startup(function(use)
 
     -- My plugins/forks
     use({
-        "git@github.com:andrewferrier/vim-wrapping-softhard",
-        branch = "neovim-lua",
+        "git@github.com:andrewferrier/wrapping.nvim",
+        branch = "master",
         config = function()
             require("plugins.wrapping")
         end,
