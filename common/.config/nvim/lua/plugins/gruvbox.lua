@@ -28,6 +28,7 @@ require("gruvbox").setup({
         NotifyWARNTitle = { link = "Normal" },
 
         FidgetTitle = { link = "LineNr" },
+        HydraBlue = { link = "GruvboxBlue" },
         StatusLineSecondary = { link = "SignColumn" },
     },
 })

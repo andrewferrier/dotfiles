@@ -12,5 +12,3 @@ hydra({
         { "<Esc>", nil, { exit = true } },
     },
 })
-
-vim.api.nvim_set_hl(0, "HydraBlue", { link = "GruvboxBlue" })
