@@ -15,4 +15,10 @@ require("fidget").setup({
             )
         end,
     },
+    sources = {
+        ["null-ls"] = {
+            -- null-ls seems to just generate noise in the fidget widget
+            ignore = true
+        }
+    }
 })
