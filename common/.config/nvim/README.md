@@ -113,6 +113,7 @@
 
 *   [Advanced Search and Replace](https://gosukiwi.github.io/vim/2022/04/19/vim-advanced-search-and-replace.html)
 *   [Available lowercase key pairs](https://gist.github.com/romainl/1f93db9dc976ba851bbb)
+*   [Dot repeat/count/operator-pending](https://www.vikasraj.dev/blog/vim-dot-repeat)
 *   [Getting started using Lua in Neovim](https://github.com/nanotee/nvim-lua-guide)
 *   [History and effective use of Vim](https://begriffs.com/posts/2019-07-19-history-use-vim.html)
 *   [Power of :g](https://vim.fandom.com/wiki/Power_of_g)
