@@ -8,9 +8,7 @@ set -o pipefail
 # https://stackoverflow.com/a/36480692/27641.
 setxkbmap gb
 
-# 10 minutes
-xset s 600
-xss-lock -- i3lock -i "${HOME}/.config/i3lock/lock.png" --color=000000 &
+xscreensaver -no-splash &
 xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
 
 redshift -v | logger -t "${USER}-redshift" &
