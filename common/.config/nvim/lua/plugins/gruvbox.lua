@@ -12,8 +12,12 @@ end
 require("gruvbox").setup({
     contrast = "hard",
     overrides = {
+        FidgetTitle = { link = "LineNr" },
+        HydraBlue = { fg = require("gruvbox.palette").neutral_blue, bold = true },
+        HydraHint = { link = "TabLineSel" },
         MatchParen = { bg = require("gruvbox.palette").faded_orange },
         QuickFixLine = { link = "IncSearch" },
+        StatusLineSecondary = { link = "SignColumn" },
         String = { italic = false },
         TermCursorNC = { bg = "#00FF00", fg = "#FFFFFF" },
 
@@ -26,11 +30,6 @@ require("gruvbox").setup({
         NotifyWARNBorder = { link = "Normal" },
         NotifyWARNIcon = { link = "DiagnosticWarn" },
         NotifyWARNTitle = { link = "Normal" },
-
-        FidgetTitle = { link = "LineNr" },
-        HydraBlue = { fg = require("gruvbox.palette").neutral_blue, bold = true },
-        HydraHint = { link = "TabLineSel" },
-        StatusLineSecondary = { link = "SignColumn" },
     },
 })
 
