@@ -28,7 +28,8 @@ require("gruvbox").setup({
         NotifyWARNTitle = { link = "Normal" },
 
         FidgetTitle = { link = "LineNr" },
-        HydraBlue = { link = "GruvboxBlue" },
+        HydraBlue = { fg = require("gruvbox.palette").neutral_blue, bold = true },
+        HydraHint = { link = "TabLineSel" },
         StatusLineSecondary = { link = "SignColumn" },
     },
 })
