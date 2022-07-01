@@ -162,13 +162,6 @@ local function packages_silent(use)
             require("plugins.gitsigns")
         end,
     }) -- gb
-
-    use({
-        "rcarriga/nvim-notify",
-        config = function()
-            require("plugins.notify")
-        end,
-    })
 end
 
 local function packages_git(use)
