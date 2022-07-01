@@ -213,10 +213,6 @@ local function packages_lsp(use)
     }) -- gyq, gQ, cx
 
     use({
-        "ray-x/lsp_signature.nvim",
-    })
-
-    use({
         "jose-elias-alvarez/null-ls.nvim",
         requires = { "nvim-lua/plenary.nvim" },
         config = function()
