@@ -47,6 +47,7 @@ local function packages_operators(use)
 
     use({
         "johmsalas/text-case.nvim",
+        requires = { "anuvyklack/hydra.nvim" },
         config = function()
             require("plugins.text_case")
         end,
