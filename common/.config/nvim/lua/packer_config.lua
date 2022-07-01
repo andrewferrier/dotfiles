@@ -51,7 +51,7 @@ local function packages_operators(use)
         config = function()
             require("plugins.text_case")
         end,
-        keys = "gyc"
+        keys = "gyc",
     })
 
     -- https://web.archive.org/web/20211213094136/https://joereynoldsaudio.com/2020/01/22/vim-sandwich-is-better-than-surround.html
@@ -104,7 +104,7 @@ local function packages_commands(use)
         config = function()
             require("plugins.hydra")
         end,
-        keys = "<C-W>"
+        keys = "<C-W>",
     })
 end
 
