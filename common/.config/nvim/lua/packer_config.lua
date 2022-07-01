@@ -104,7 +104,6 @@ local function packages_commands(use)
         config = function()
             require("plugins.hydra")
         end,
-        keys = "<C-W>",
     })
 end
 
