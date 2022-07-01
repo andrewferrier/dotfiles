@@ -1,6 +1,7 @@
 local hydra = require("hydra")
 
 hydra({
+    name = "Window resizing",
     mode = "n",
     body = "<C-W>",
     heads = {
