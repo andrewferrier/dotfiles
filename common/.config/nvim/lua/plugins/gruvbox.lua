@@ -16,7 +16,7 @@ require("gruvbox").setup({
         FidgetTitle = { link = "LineNr" },
         HydraBlue = { fg = require("gruvbox.palette").neutral_blue, bold = true },
         HydraHint = { link = "TabLineSel" },
-        MatchParen = { bg = require("gruvbox.palette").faded_orange },
+        MatchParen = { bg = require("gruvbox.palette").neutral_orange, fg = require("gruvbox.palette").dark0 },
         QuickFixLine = { link = "IncSearch" },
         StatusLineSecondary = { link = "SignColumn" },
         String = { italic = false },
