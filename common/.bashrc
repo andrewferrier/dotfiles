@@ -12,10 +12,12 @@ for file in "${HOME}"/.config/sh.d/*.sh; do
     source "${file}"
 done
 
-for file in "${HOME}"/.config/sh-local.d/*.sh; do
-    # shellcheck source=/dev/null
-    source "${file}"
-done
+if [ -L "${HOME}"/.config/sh-local.d ]; then
+    for file in "${HOME}"/.config/sh-local.d/*.sh; do
+        # shellcheck source=/dev/null
+        source "${file}"
+    done
+fi
 
 for file in "${HOME}"/.config/bash.d/*.bashrc; do
     # shellcheck source=/dev/null
