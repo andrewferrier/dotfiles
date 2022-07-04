@@ -54,14 +54,12 @@ local function packages_operators(use)
         keys = "gyc",
     })
 
-    -- https://web.archive.org/web/20211213094136/https://joereynoldsaudio.com/2020/01/22/vim-sandwich-is-better-than-surround.html
-    -- highlights the area it's operating on.
     use({
-        "machakann/vim-sandwich",
+        "kylechui/nvim-surround",
         config = function()
-            require("plugins.sandwich")
+            require("plugins.surround")
         end,
-    }) -- sa, sd, sr
+    })
 end
 
 local function packages_commands(use)
