@@ -14,7 +14,13 @@ M.setup = function()
             vim.opt_local.spell = true
         end
 
-        require("wrapping").set_mode_heuristically()
+        vim.api.nvim_create_autocmd("BufWinEnter", {
+            group = vim.api.nvim_create_augroup("my-wrapping", {}),
+            callback = function()
+                require("wrapping").set_mode_heuristically()
+            end,
+            once = true
+        })
 
         vim.b.text_based_filetype = true
     end
