@@ -136,10 +136,10 @@ mimetype=$(file --mime-type -Lb "${FILE_PATH}")
 case "${mimetype}" in
 image/*)
     # shellcheck disable=SC2154
-    if [[ -z "${TMUX}" ]]; then
-        exit 7
-    else
+    if [[ -n "${TMUX-}" ]]; then
         exiftool "${FILE_PATH}" && exit 5
+    else
+        exit 7
     fi
     ;;
 *);;
@@ -147,6 +147,7 @@ esac
 
 case "${mimetype}" in
 video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
+    echo "[scope.sh:150] DEBUGGING STRING ==> 0"
     exiftool "${FILE_PATH}" && exit 5
     exit 1
     ;;
