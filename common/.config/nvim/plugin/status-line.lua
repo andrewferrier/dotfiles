@@ -162,9 +162,13 @@ function _G.Statusline_Getcwd()
 end
 
 function _G.Statusline_Wrappingmode()
-    local currentmode = require('wrapping').get_current_mode()
+    local currentmode = require("wrapping").get_current_mode()
 
-    return "," .. currentmode
+    if currentmode ~= nil then
+        return "," .. currentmode
+    end
+
+    return ""
 end
 
 function _G.Titlestring_Filename()
