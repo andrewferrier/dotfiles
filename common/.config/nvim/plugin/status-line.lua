@@ -207,8 +207,7 @@ function _G.Statusline_SpellingErrorCount()
                 vim.cmd("normal! ]S")
                 if
                     (
-                        vim.fn.line(".")
-                            == lastline
+                        vim.fn.line(".") == lastline
                         and vim.fn.col(".") == lastcol
                     ) or mycount > MAX_SPELL_ERRORS
                 then
