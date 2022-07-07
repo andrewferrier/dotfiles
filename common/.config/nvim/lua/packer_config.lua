@@ -212,14 +212,6 @@ local function packages_lsp(use)
         end,
     })
 
-    use({
-        "kosayoda/nvim-lightbulb",
-        requires = "antoinemadec/FixCursorHold.nvim",
-        config = function()
-            require("plugins.lightbulb")
-        end,
-    })
-
     if vim.fn.has("nvim-0.8.0") == 1 then
         use({
             "smjonas/inc-rename.nvim",
