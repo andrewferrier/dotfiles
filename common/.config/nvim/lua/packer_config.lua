@@ -151,6 +151,11 @@ local function packages_silent(use)
             require("plugins.colorizer")
         end,
     })
+end
+
+local function packages_git(use)
+    use({ "whiteinge/diffconflicts", opt = true }) -- invoked by `git mergetool`
+    use({ "will133/vim-dirdiff", cmd = "DirDiff" })
 
     use({
         "lewis6991/gitsigns.nvim",
@@ -159,11 +164,6 @@ local function packages_silent(use)
             require("plugins.gitsigns")
         end,
     }) -- gb
-end
-
-local function packages_git(use)
-    use({ "whiteinge/diffconflicts", opt = true }) -- invoked by `git mergetool`
-    use({ "will133/vim-dirdiff", cmd = "DirDiff" })
 end
 
 local function packages_syntax(use)
