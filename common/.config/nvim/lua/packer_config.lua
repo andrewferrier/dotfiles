@@ -194,6 +194,8 @@ local function packages_treesitter(use)
             require("plugins.treesitter")
         end,
     })
+
+    use({ "nvim-treesitter/playground", command = "TSPlaygroundToggle" })
 end
 
 local function packages_lsp(use)
@@ -229,10 +231,6 @@ local function packages_lsp(use)
     })
 end
 
-local function packages_nvim_optional(use)
-    use({ "nvim-treesitter/playground", opt = true })
-end
-
 packer.startup(function(use)
     use({ "wbthomason/packer.nvim", opt = true })
 
@@ -244,7 +242,6 @@ packer.startup(function(use)
     packages_syntax(use)
     packages_treesitter(use)
     packages_lsp(use)
-    packages_nvim_optional(use)
 
     -- My plugins/forks
     use({
