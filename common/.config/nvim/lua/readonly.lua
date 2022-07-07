@@ -10,7 +10,7 @@ M.make_readonly = function()
         require("diagnostics").hide()
         require("gitsigns").detach()
 
-        if vim.fn.exists("b:text_based_filetype") then
+        if vim.b.text_based_filetype then
             require("wrapping").soft_wrap_mode()
         end
 
