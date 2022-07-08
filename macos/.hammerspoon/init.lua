@@ -24,13 +24,8 @@ hs.dockicon.hide()
 local function web_search(key, message, url)
     hs.hotkey.bind(PREFIX_ACTION, key, function()
         hs.focus()
-        local button, query = hs.dialog.textPrompt(
-            message,
-            "",
-            "",
-            "OK",
-            "Cancel"
-        )
+        local button, query =
+            hs.dialog.textPrompt(message, "", "", "OK", "Cancel")
         if button == "OK" then
             query = hs.http.encodeForQuery(query)
             local finalUrl = url .. query
