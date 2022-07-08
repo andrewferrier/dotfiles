@@ -38,40 +38,40 @@ end
 -- These mappings replace ones provided by vim-unimpaired which I don't use, as
 -- they affect the 'diff' setting.
 
-vim.keymap.set("n", "yod", function()
+vim.keymap.set("n", "yog", function()
     require("diagnostics").swap()
 end)
-vim.keymap.set("n", "]od", function()
+vim.keymap.set("n", "]og", function()
     require("diagnostics").hide()
 end)
-vim.keymap.set("n", "[od", function()
+vim.keymap.set("n", "[og", function()
     require("diagnostics").show()
 end)
 
 vim.keymap.set(
     "n",
-    "[d",
+    "[g",
     "<cmd>lua vim.diagnostic.goto_prev({float = {focus = false}})<CR>",
     { silent = true }
 )
 
 vim.keymap.set(
     "n",
-    "]d",
+    "]g",
     "<cmd>lua vim.diagnostic.goto_next({float = {focus = false}})<CR>",
     { silent = true }
 )
 
 vim.keymap.set(
     "n",
-    "[D",
+    "[G",
     "1G<bar><cmd>lua vim.diagnostic.goto_next({float = {focus = false}})<CR>",
     { silent = true }
 )
 
 vim.keymap.set(
     "n",
-    "]D",
+    "]G",
     "G<bar><cmd>lua vim.diagnostic.goto_prev({float = {focus = false}})<CR>",
     { silent = true }
 )

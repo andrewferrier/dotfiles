@@ -58,7 +58,7 @@ local attach = function(bufnr)
         require("gitsigns").stage_buffer()
     end)
 
-    map("yog", function()
+    map("yod", function()
         require("gitsigns").toggle_deleted()
     end)
 end
