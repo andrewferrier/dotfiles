@@ -7,15 +7,10 @@ local PREFIX_ACTION = { "ctrl", "cmd", "alt" }
 
 local HOME = os.getenv("HOME")
 
-local disable_bluetooth_on_sleep = require("disable-bluetooth-on-sleep")
-local run_on_resume = require("run-on-resume")
-local track_battery = require("track-battery")
-local yabai = require("yabai")
-
-disable_bluetooth_on_sleep.init()
-run_on_resume.init()
-track_battery.init()
-yabai.init(SHIFT_PREFIX_ACTION, PREFIX_ACTION)
+require("disable-bluetooth-on-sleep").init()
+require("run-on-resume").init()
+require("track-battery").init()
+require("yabai").init(SHIFT_PREFIX_ACTION, PREFIX_ACTION)
 
 hs.dockicon.hide()
 
