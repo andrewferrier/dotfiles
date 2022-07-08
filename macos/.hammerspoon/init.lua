@@ -39,7 +39,13 @@ local function web_search(key, message, url)
     end)
 end
 
-local function global_hotkey_app(key, app_path)
+local function launch(key, app_path)
+    hs.hotkey.bind(PREFIX_ACTION, key, function()
+        hs.execute("open --new " .. app_path)
+    end)
+end
+
+local function launch_or_find(key, app_path)
     hs.hotkey.bind(PREFIX_ACTION, key, function()
         hs.application.launchOrFocus(app_path)
     end)
@@ -117,11 +123,12 @@ hs.hotkey.bind(PREFIX_ACTION, ".", function()
     hs.eventtap.keyStrokes("andrew.ferrier@gmail.com")
 end)
 
-global_hotkey_app("A", "/System/Applications/Mail.app")
-global_hotkey_app("B", "/Applications/Firefox.app")
-global_hotkey_app("C", "/System/Applications/Calendar.app")
-global_hotkey_app("L", "/Applications/Slack.app")
-global_hotkey_app("R", "/Applications/Remember The Milk.app")
+launch_or_find("A", "/System/Applications/Mail.app")
+launch_or_find("C", "/System/Applications/Calendar.app")
+launch_or_find("L", "/Applications/Slack.app")
+launch_or_find("R", "/Applications/Remember The Milk.app")
+
+launch("B", "/Applications/Firefox.app")
 
 web_search("P", "W3 People Search:", "https://w3.ibm.com/#/results?page=people&q=")
 web_search("S", "DuckDuckGo Search:", "https://duckduckgo.com/?q=")
