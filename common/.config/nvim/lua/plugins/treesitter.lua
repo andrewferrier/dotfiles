@@ -1,7 +1,7 @@
 -- Renaming can be done with LSP, but we are doing it with treesitter instead
 -- because it seems to be more reliable and supported by more filetypes.
 
-local function on_attach(_, bufnr)
+local function on_attach(filetype, bufnr)
     vim.keymap.set(
         "o",
         "m",
@@ -16,7 +16,12 @@ local function on_attach(_, bufnr)
         { buffer = true, silent = true }
     )
 
-    if not require("plugins.lsp.attach").lsp_supports_rename(bufnr) then
+    local TREESITTER_RENAME_INEFFECTIVE = { "latex" }
+
+    if
+        not require("plugins.lsp.attach").lsp_supports_rename(bufnr)
+        and not vim.tbl_contains(TREESITTER_RENAME_INEFFECTIVE, filetype)
+    then
         vim.keymap.set("n", "cxr", function()
             require("nvim-treesitter-refactor.smart_rename").smart_rename(bufnr)
         end, {
