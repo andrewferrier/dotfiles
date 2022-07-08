@@ -8,11 +8,4 @@ require("nvim-surround").setup({
         delete = "sd",
         change = "sr",
     },
-    delimiters = {
-        pairs = {
-            -- These are really only intended for use with markdown
-            ["l"] = { "[", "]()" },
-            ["L"] = { "[](", ")" },
-        },
-    }
 })
