@@ -31,7 +31,9 @@ end
 
 local function launch(key, app_path)
     hs.hotkey.bind(PREFIX_ACTION, key, function()
-        hs.execute("open --new " .. app_path)
+        -- See
+        -- https://arunvelsriram.dev/preventing-firefox-from-entering-safe-mode
+        hs.execute("MOZ_DISABLE_SAFE_MODE_KEY=1 open --new " .. app_path)
     end)
 end
 
