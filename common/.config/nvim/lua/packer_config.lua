@@ -220,6 +220,7 @@ local function packages_lsp(use)
             config = function()
                 require("plugins.inc_rename")
             end,
+            event = "LspAttach",
         })
     end
 
@@ -228,6 +229,7 @@ local function packages_lsp(use)
         config = function()
             require("plugins.fidget")
         end,
+        event = "LspAttach",
     })
 end
 
