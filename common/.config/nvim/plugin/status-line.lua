@@ -152,9 +152,9 @@ function _G.Statusline_Getcwd()
         local path = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
 
         if vim.fn.winwidth(0) < WIN_WIDTH_COMPRESS_THRESHOLD_PATH then
-            return " " .. vim.fn.pathshorten(path)
+            return vim.fn.pathshorten(path)
         else
-            return " " .. path
+            return path
         end
     else
         return ""
@@ -257,12 +257,12 @@ local SEPARATOR = " | "
 
 -- LHS - Filename & Filetype
 local statusline = " %{v:lua.Statusline_Filename()}"
-statusline = statusline .. " %y "
+statusline = statusline .. " %y"
 statusline = statusline .. TRUNCATOR_POSITION
 
 -- LHS - Cwd
-statusline = statusline .. "%#StatusLineSecondary#"
-statusline = statusline .. "%{v:lua.Statusline_Getcwd()} "
+statusline = statusline .. SEPARATOR
+statusline = statusline .. "%{v:lua.Statusline_Getcwd()}"
 statusline = statusline .. RESET_HIGHLIGHTING
 
 statusline = statusline .. ALIGN_RHS

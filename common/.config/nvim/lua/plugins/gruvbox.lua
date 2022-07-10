@@ -17,7 +17,6 @@ require("gruvbox").setup({
         HydraHint = { link = "TabLineSel" },
         MatchParen = { bg = require("gruvbox.palette").neutral_orange, fg = require("gruvbox.palette").dark0 },
         QuickFixLine = { link = "IncSearch" },
-        StatusLineSecondary = { link = "SignColumn" },
         String = { italic = false },
         TermCursorNC = { bg = "#00FF00", fg = "#FFFFFF" },
     },
