@@ -167,6 +167,8 @@ M.on_attach = function(client, bufnr)
     local server_capabilities = client.server_capabilities
     local filetype = vim.bo.filetype
 
+    -- These lines can be removed once
+    -- https://github.com/neovim/neovim/pull/19003 is implemented
     vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
     vim.opt_local.tagfunc = "v:lua.vim.lsp.tagfunc"
 
