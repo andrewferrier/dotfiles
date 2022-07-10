@@ -228,8 +228,7 @@ local function packages_lsp(use)
         "j-hui/fidget.nvim",
         config = function()
             require("plugins.fidget")
-        end,
-        event = "LspAttach",
+        end
     })
 end
 
