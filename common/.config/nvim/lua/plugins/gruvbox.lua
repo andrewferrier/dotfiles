@@ -12,7 +12,6 @@ end
 require("gruvbox").setup({
     contrast = "hard",
     overrides = {
-        Directory = { link = "GruvboxBlueBold" },
         FidgetTitle = { link = "LineNr" },
         HydraBlue = { fg = require("gruvbox.palette").neutral_blue, bold = true },
         HydraHint = { link = "TabLineSel" },
