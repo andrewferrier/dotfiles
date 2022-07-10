@@ -7,12 +7,12 @@ if vim.fn.executable("xsel") == 1 then
     vim.g.clipboard = {
         name = "xsel",
         copy = {
-            ["*"] = { "xsel", "--nodetach", "-i", "-p" },
-            ["+"] = { "xsel", "--nodetach", "-i", "-b" },
+            ["*"] = { "xsel", "--nodetach", "--input", "--primary" },
+            ["+"] = { "xsel", "--nodetach", "--input", "--clipboard" },
         },
         paste = {
-            ["*"] = { "xsel", "-o", "-p" },
-            ["+"] = { "xsel", "-o", "-b" },
+            ["*"] = { "xsel", "--output", "--primary" },
+            ["+"] = { "xsel", "--output", "--clipboard" },
         },
         cache_enabled = 1,
     }
