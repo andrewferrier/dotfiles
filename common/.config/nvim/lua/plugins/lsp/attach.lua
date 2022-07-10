@@ -33,7 +33,7 @@ local function lsp_document_format()
 
     local TIMEOUT = 3000
 
-    if vim.lsp.buf.format then
+    if vim.fn.has("nvim-0.8.0") == 1 then
         vim.lsp.buf.format({ timeout_ms = TIMEOUT })
     else
         vim.lsp.buf.formatting_seq_sync({}, TIMEOUT)
@@ -167,10 +167,10 @@ M.on_attach = function(client, bufnr)
     local server_capabilities = client.server_capabilities
     local filetype = vim.bo.filetype
 
-    -- These lines can be removed once
-    -- https://github.com/neovim/neovim/pull/19003 is implemented
-    vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-    vim.opt_local.tagfunc = "v:lua.vim.lsp.tagfunc"
+    if vim.fn.has("nvim-0.8.0") ~= 1 then
+        vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
+        vim.opt_local.tagfunc = "v:lua.vim.lsp.tagfunc"
+    end
 
     keybindings_formatting_check(bufnr, server_capabilities)
     keybindings_codeaction_check(bufnr, server_capabilities)
