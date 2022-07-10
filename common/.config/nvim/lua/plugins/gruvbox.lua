@@ -21,16 +21,6 @@ require("gruvbox").setup({
         StatusLineSecondary = { link = "SignColumn" },
         String = { italic = false },
         TermCursorNC = { bg = "#00FF00", fg = "#FFFFFF" },
-
-        NotifyERRORBorder = { link = "Normal" },
-        NotifyERRORIcon = { link = "DiagnosticError" },
-        NotifyERRORTitle = { link = "Normal" },
-        NotifyINFOBorder = { link = "Normal" },
-        NotifyINFOIcon = { link = "Normal" },
-        NotifyINFOTitle = { link = "Normal" },
-        NotifyWARNBorder = { link = "Normal" },
-        NotifyWARNIcon = { link = "DiagnosticWarn" },
-        NotifyWARNTitle = { link = "Normal" },
     },
 })
 
