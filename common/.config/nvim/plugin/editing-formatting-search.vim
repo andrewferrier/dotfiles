@@ -3,7 +3,7 @@ set diffopt+=algorithm:patience,indent-heuristic,vertical " see https://vimways.
 set expandtab
 set formatoptions+=l
 set ignorecase
-set mouse=nv
+set mouse=nv " Can be removed once https://github.com/neovim/neovim/pull/19290 is implemented
 set shiftround
 set shiftwidth=4
 set smartcase
