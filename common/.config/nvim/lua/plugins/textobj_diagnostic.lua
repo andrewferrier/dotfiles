@@ -1,0 +1,1 @@
+require('textobj-diagnostic').setup()

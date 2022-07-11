@@ -252,6 +252,13 @@ packer.startup(function(use)
             require("plugins.wrapping")
         end,
     })
+
+    use({
+        "git@github.com:andrewferrier/textobj-diagnostic.nvim",
+        config = function()
+            require("plugins.textobj_diagnostic")
+        end,
+    })
 end)
 
 return packer
