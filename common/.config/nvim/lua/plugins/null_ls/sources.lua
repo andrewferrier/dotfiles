@@ -161,11 +161,11 @@ M.sources = {
     null_ls.builtins.diagnostics.tidy,
     null_ls.builtins.diagnostics.trail_space.with({
         -- for 'mail' it's just annoying
+        -- for 'markdown' it's more accurate than mdl
         disabled_filetypes = {
             "dirbuf",
             "gitcommit",
             "lua",
-            "markdown",
             "mail",
         },
     }),
