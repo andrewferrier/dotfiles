@@ -11,7 +11,7 @@ class FileListDirectorySwitch(Command):
         file_list = self.fm.execute_command(
             "file-list -d -s", stdout=subprocess.PIPE
         )
-        stdout, stderr = file_list.communicate()
+        stdout, _ = file_list.communicate()
         if file_list.returncode == 0:
             dir = os.path.abspath(
                 os.path.expanduser(stdout.decode("utf-8").rstrip("\n"))
@@ -28,7 +28,7 @@ class FileListFileFind(Command):
         file_list = self.fm.execute_command(
             "file-list -f -s", stdout=subprocess.PIPE
         )
-        stdout, stderr = file_list.communicate()
+        stdout, _ = file_list.communicate()
         if file_list.returncode == 0:
             file = os.path.abspath(
                 os.path.expanduser(stdout.decode("utf-8").rstrip("\n"))

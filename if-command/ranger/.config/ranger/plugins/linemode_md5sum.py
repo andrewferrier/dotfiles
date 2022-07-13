@@ -12,10 +12,10 @@ class MD5Linemode(ranger.core.linemode.LinemodeBase):
     def get_file_hash(self, path):
         return hashlib.md5(pathlib.Path(path).read_bytes()).hexdigest()
 
-    def filetitle(self, file, metadata):
+    def filetitle(self, file, _):
         return file.relative_path
 
-    def infostring(self, file, metadata):
+    def infostring(self, file, _):
         if os.path.isdir(file.path):
             raise NotImplementedError
         else:
