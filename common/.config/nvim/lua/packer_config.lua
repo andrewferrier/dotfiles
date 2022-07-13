@@ -232,19 +232,7 @@ local function packages_lsp(use)
     })
 end
 
-packer.startup(function(use)
-    use({ "wbthomason/packer.nvim", opt = true })
-
-    packages_operators(use)
-    packages_commands(use)
-    packages_navigation(use)
-    packages_git(use)
-    packages_silent(use)
-    packages_syntax(use)
-    packages_treesitter(use)
-    packages_lsp(use)
-
-    -- My plugins/forks
+local function packages_mine(use)
     use({
         "git@github.com:andrewferrier/wrapping.nvim",
         branch = "master",
@@ -259,6 +247,20 @@ packer.startup(function(use)
             require("plugins.textobj_diagnostic")
         end,
     })
+end
+
+packer.startup(function(use)
+    use({ "wbthomason/packer.nvim", opt = true })
+
+    packages_operators(use)
+    packages_commands(use)
+    packages_navigation(use)
+    packages_git(use)
+    packages_silent(use)
+    packages_syntax(use)
+    packages_treesitter(use)
+    packages_lsp(use)
+    packages_mine(use)
 end)
 
 return packer
