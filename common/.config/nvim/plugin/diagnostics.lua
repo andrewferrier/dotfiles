@@ -25,7 +25,6 @@ vim.diagnostic.config({
     },
     float = {
         source = false,
-        format = diagnostic_format,
     },
 })
 
@@ -48,33 +47,34 @@ vim.keymap.set("n", "[og", function()
     require("diagnostics").show()
 end)
 
-vim.keymap.set(
-    "n",
-    "[g",
-    "<cmd>lua vim.diagnostic.goto_prev({float = {focus = false}})<CR>",
-    { silent = true }
-)
+SEVERITY_MAP = {
+    "DiagnosticError",
+    "DiagnosticWarn",
+    "DiagnosticInfo",
+    "DiagnosticHint",
+}
 
-vim.keymap.set(
-    "n",
-    "]g",
-    "<cmd>lua vim.diagnostic.goto_next({float = {focus = false}})<CR>",
-    { silent = true }
-)
+local show_diagnostic = function(diagnostic)
+    if diagnostic ~= nil then
+        vim.cmd("echohl " .. SEVERITY_MAP[diagnostic.severity])
+        vim.cmd('echo "' .. diagnostic_format(diagnostic) .. '"')
+        vim.cmd("echohl None")
+        vim.fn.setcursorcharpos(diagnostic.lnum + 1, diagnostic.col + 1)
+    end
+end
 
-vim.keymap.set(
-    "n",
-    "[G",
-    "1G<bar><cmd>lua vim.diagnostic.goto_next({float = {focus = false}})<CR>",
-    { silent = true }
-)
+vim.keymap.set("n", "]g", function()
+    local diagnostic = vim.diagnostic.get_next()
+    show_diagnostic(diagnostic)
+end)
 
-vim.keymap.set(
-    "n",
-    "]G",
-    "G<bar><cmd>lua vim.diagnostic.goto_prev({float = {focus = false}})<CR>",
-    { silent = true }
-)
+vim.keymap.set("n", "[g", function()
+    local diagnostic = vim.diagnostic.get_prev()
+    show_diagnostic(diagnostic)
+end)
+
+vim.keymap.set("n", "[G", "1G]g", { silent = true, remap = true })
+vim.keymap.set("n", "]G", "G[g", { silent = true, remap = true })
 
 vim.api.nvim_create_user_command("DiagnosticQFList", function()
     vim.diagnostic.setqflist({ open = false })
