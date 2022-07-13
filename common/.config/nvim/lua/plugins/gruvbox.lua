@@ -9,13 +9,15 @@ else
     vim.opt.background = "dark"
 end
 
+local palette = require("gruvbox.palette")
+
 require("gruvbox").setup({
     contrast = "hard",
     overrides = {
         FidgetTitle = { link = "FidgetTask" },
-        HydraBlue = { fg = require("gruvbox.palette").neutral_blue, bold = true },
+        HydraBlue = { fg = palette.neutral_blue, bold = true },
         HydraHint = { link = "TabLineSel" },
-        MatchParen = { bg = require("gruvbox.palette").neutral_orange, fg = require("gruvbox.palette").dark0 },
+        MatchParen = { bg = palette.neutral_orange, fg = palette.dark0 },
         QuickFixLine = { link = "IncSearch" },
         String = { italic = false },
         TermCursorNC = { bg = "#00FF00", fg = "#FFFFFF" },
