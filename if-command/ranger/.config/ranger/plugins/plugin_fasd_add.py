@@ -12,7 +12,7 @@ old_hook_init = ranger.api.hook_init
 def hook_init(fm):
     def fasd_add():
         for fobj in fm.thistab.get_selection():
-            fm.execute_console("shell fasd --add " + quote(fm.thisfile.path))
+            fm.execute_console("shell fasd --add " + quote(fobj.path))
     fm.signal_bind('execute.before', fasd_add)
     return old_hook_init(fm)
 
