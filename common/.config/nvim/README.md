@@ -5,6 +5,7 @@
 ### Normal Mode
 
     !{motion}<command> - filter {motion} through command line
+    & - redo :s on another line
     + - go to the beginning of the next line
     1z= - replace with first choice from spellcheck dictionary
     <number> Ctrl-A/X - add/decrement specific amount

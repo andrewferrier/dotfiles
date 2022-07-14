@@ -17,3 +17,8 @@ iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>
 " This generic behaviour for rename will be overwritten by treesitter.lua where
 " supported. Don't use 'cxr' in visual mode as it will block 'c'.
 nnoremap cxr :%s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>
+
+" See https://github.com/neovim/neovim/issues/19354#issue-1303638463 - can be
+" removed if ever merged in
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
