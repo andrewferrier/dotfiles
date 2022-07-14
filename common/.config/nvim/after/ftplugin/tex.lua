@@ -1,5 +1,22 @@
 require("filetype.text").setup()
 
+require("nvim-surround").buffer_setup({
+    delimiters = {
+        pairs = {
+            ["c"] = function()
+                local cmd =
+                    require("nvim-surround.utils").get_input("Command: ")
+                return { "\\" .. cmd .. "{", "}" }
+            end,
+            ["e"] = function()
+                local env =
+                    require("nvim-surround.utils").get_input("Environment: ")
+                return { "\\begin{" .. env .. "}", "\\end{" .. env .. "}" }
+            end,
+        },
+    },
+})
+
 local function create_pdf_from_tex(absolute_tex_path)
     vim.cmd("update")
     local directory = vim.fn.fnamemodify(absolute_tex_path, ":p:h")
