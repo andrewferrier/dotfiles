@@ -40,6 +40,8 @@ local attach = function(bufnr)
         return "<Ignore>"
     end, { expr = true })
 
+    map("ih", ":<C-U>Gitsigns select_hunk<CR>", { mode = { "o", "x" } })
+
     map("gbhs", function()
         vim.cmd("update")
         require("gitsigns").stage_hunk()
