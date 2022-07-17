@@ -20,7 +20,7 @@ require("gruvbox").setup({
         MatchParen = { bg = palette.neutral_orange, fg = palette.dark0 },
         QuickFixLine = { link = "IncSearch" },
         String = { italic = false },
-        TermCursorNC = { bg = "#00FF00", fg = "#FFFFFF" },
+        TermCursorNC = { bg = "#00FF00" },
     },
 })
 
