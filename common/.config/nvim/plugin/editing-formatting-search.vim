@@ -3,13 +3,16 @@ set diffopt+=algorithm:patience,indent-heuristic,vertical " see https://vimways.
 set expandtab
 set formatoptions+=l
 set ignorecase
-set mouse=nv " Can be removed once https://github.com/neovim/neovim/pull/19290 is implemented
 set shiftround
 set shiftwidth=4
 set smartcase
 set textwidth=80 " This is the default for many/most languages: https://en.wikipedia.org/wiki/Characters_per_line#In_programming
 set virtualedit=block
 set wildmode=longest:full
+
+if ! has('nvim-0.8.0')
+    set mouse=nvi
+end
 
 iabbrev zDATE     <C-R>=strftime("%F")<CR>
 iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>
