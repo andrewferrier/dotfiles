@@ -23,9 +23,6 @@ vim.diagnostic.config({
             max = vim.diagnostic.severity.ERROR,
         },
     },
-    float = {
-        source = false,
-    },
 })
 
 local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "ℹ" }
