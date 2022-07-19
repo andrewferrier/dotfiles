@@ -4,13 +4,11 @@ require("nvim-surround").buffer_setup({
     delimiters = {
         pairs = {
             ["c"] = function()
-                local cmd =
-                    require("nvim-surround.utils").get_input("Command: ")
+                local cmd = vim.fn.input("Command: ")
                 return { "\\" .. cmd .. "{", "}" }
             end,
             ["e"] = function()
-                local env =
-                    require("nvim-surround.utils").get_input("Environment: ")
+                local env = vim.fn.input("Environment: ")
                 return { "\\begin{" .. env .. "}", "\\end{" .. env .. "}" }
             end,
         },
