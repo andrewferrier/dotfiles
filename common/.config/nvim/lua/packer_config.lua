@@ -235,7 +235,6 @@ end
 local function packages_mine(use)
     use({
         "git@github.com:andrewferrier/wrapping.nvim",
-        branch = "master",
         config = function()
             require("plugins.wrapping")
         end,
