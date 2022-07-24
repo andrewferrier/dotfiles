@@ -57,6 +57,8 @@
 ### Insert Mode
 
     Ctrl-A - insert last text inserted
+    Ctrl-K ,. - insert …
+    Ctrl-K Co - insert ©
     Ctrl-K HT - insert <Tab>
     Ctrl-K OK - insert ✓
     Ctrl-K XX - insert ✗
@@ -134,3 +136,5 @@
 
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Port hard/soft to lua, including introducing a 'bias' concept for new or uncertain files (also use unit testing)
+*   Raise bug on gitsigns not displaying tabs in Makefiles properly
+*   Raise bug that docs for nvim_create_namespace is wrong in that it doesn't talk about diagnostics
