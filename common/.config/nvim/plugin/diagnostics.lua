@@ -15,14 +15,7 @@ local diagnostic_format = function(diagnostic)
 end
 
 vim.diagnostic.config({
-    virtual_text = {
-        source = false,
-        format = diagnostic_format,
-        severity = {
-            min = vim.diagnostic.severity.WARN,
-            max = vim.diagnostic.severity.ERROR,
-        },
-    },
+    virtual_text = false
 })
 
 local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "ℹ" }

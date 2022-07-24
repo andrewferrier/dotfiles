@@ -230,6 +230,13 @@ local function packages_lsp(use)
             require("plugins.fidget")
         end,
     })
+
+    use({
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function()
+            require("plugins.lsp_lines")
+        end,
+    })
 end
 
 local function packages_mine(use)
