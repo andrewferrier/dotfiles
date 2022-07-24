@@ -134,4 +134,3 @@
 
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Port hard/soft to lua, including introducing a 'bias' concept for new or uncertain files (also use unit testing)
-*   Build a text object for diagnostics
