@@ -237,6 +237,13 @@ local function packages_lsp(use)
             require("plugins.lsp_lines")
         end,
     })
+
+    use({
+        "zbirenbaum/neodim",
+        config = function()
+            require("plugins.neodim")
+        end,
+    })
 end
 
 local function packages_mine(use)
