@@ -179,6 +179,8 @@ local function packages_syntax(use)
             require("plugins.markdown_preview")
         end,
     })
+
+    use({ "jkramer/vim-checkbox" })
 end
 
 local function packages_treesitter(use)
