@@ -235,6 +235,7 @@ local function packages_lsp(use)
 
     use({
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        commit = "22ef87c6b2039a", -- temporary until https://todo.sr.ht/~whynothugo/lsp_lines.nvim/14 is resolved
         config = function()
             require("plugins.lsp_lines")
         end,
