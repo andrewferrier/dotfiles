@@ -136,3 +136,5 @@
 
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Port hard/soft to lua, including introducing a 'bias' concept for new or uncertain files (also use unit testing)
+*   Find out why sleuth.vim is setting sw=36 in packing.tex
+*   Look at https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim
