@@ -18,6 +18,7 @@ require("gruvbox").setup({
         HydraBlue = { fg = palette.neutral_blue, bold = true },
         HydraHint = { link = "TabLineSel" },
         MatchParen = { bg = palette.neutral_orange, fg = palette.dark0 },
+        Operator = { italic = false },
         QuickFixLine = { link = "IncSearch" },
         String = { italic = false },
         TermCursorNC = { bg = "#00FF00" },
