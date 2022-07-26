@@ -26,11 +26,22 @@ packer.init({
     -- },
 })
 
-local function install_treesitter_parsers()
-    local treesitter_install = require("nvim-treesitter.install")
+local function packages_installers(use)
+    use({
+        "williamboman/mason.nvim",
+        config = function()
+            require("mason").setup()
+        end,
+    })
 
-    treesitter_install.ensure_installed("all")
-    vim.cmd("TSUpdate")
+    use({
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        opt = true,
+        requires = "williamboman/mason.nvim",
+        config = function()
+            require("plugins.mason_tool_installer")
+        end,
+    })
 end
 
 local function packages_operators(use)
@@ -191,7 +202,6 @@ local function packages_treesitter(use)
 
     use({
         "nvim-treesitter/nvim-treesitter",
-        run = install_treesitter_parsers,
         config = function()
             require("plugins.treesitter")
         end,
@@ -267,6 +277,7 @@ end
 packer.startup(function(use)
     use({ "wbthomason/packer.nvim", opt = true })
 
+    packages_installers(use)
     packages_operators(use)
     packages_commands(use)
     packages_navigation(use)
