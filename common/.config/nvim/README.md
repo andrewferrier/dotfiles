@@ -135,6 +135,6 @@
 ## TODO
 
 *   Fix chewing up CPU when editing a large gitcommit file
-*   Port hard/soft to lua, including introducing a 'bias' concept for new or uncertain files (also use unit testing)
+*   Publish wrapping.lua (with enough testing in place)
 *   Find out why sleuth.vim is setting sw=36 in packing.tex
 *   Add key for quickfix list to go to item without switching away from window
