@@ -234,13 +234,6 @@ local function packages_lsp(use)
     })
 
     use({
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        config = function()
-            require("plugins.lsp_lines")
-        end,
-    })
-
-    use({
         "zbirenbaum/neodim",
         config = function()
             require("plugins.neodim")
