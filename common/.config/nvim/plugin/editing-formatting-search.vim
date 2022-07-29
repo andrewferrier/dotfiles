@@ -23,7 +23,7 @@ iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>
 " supported. Don't use 'cxr' in visual mode as it will block 'c'.
 nnoremap cxr :%s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>
 
-" See https://github.com/neovim/neovim/issues/19354#issue-1303638463 - can be
-" removed if ever merged in
-nnoremap & :&&<CR>
-xnoremap & :&&<CR>
+if ! has('nvim-0.8.0')
+    " See https://github.com/neovim/neovim/pull/19365
+    nnoremap & :&&<CR>
+end
