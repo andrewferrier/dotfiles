@@ -33,18 +33,19 @@ local chain = function(movements)
         local screen = win:screen()
 
         if
-            lastSeenChain ~= movements
-            or lastSeenAt < now - chainResetInterval
-            or lastSeenWindow ~= id
+            LastSeenChain ~= movements
+            or LastSeenAt < now - chainResetInterval
+            or LastSeenWindow ~= id
         then
             sequenceNumber = 1
-            lastSeenChain = movements
+            LastSeenChain = movements
         elseif sequenceNumber == 1 then
             -- At end of chain, restart chain on next screen.
             screen = screen:next()
         end
-        lastSeenAt = now
-        lastSeenWindow = id
+
+        LastSeenAt = now
+        LastSeenWindow = id
 
         hs.grid.set(win, movements[sequenceNumber], screen)
         sequenceNumber = sequenceNumber % cycleLength + 1
