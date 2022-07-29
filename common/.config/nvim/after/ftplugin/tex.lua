@@ -21,8 +21,8 @@ local function create_pdf_from_tex(absolute_tex_path)
     local without_extension = vim.fn.fnamemodify(absolute_tex_path, ":p:r")
 
     local output = vim.fn.system({
-        "pdflatex",
-        "-output-directory=" .. directory,
+        "latexmk",
+        "-pdf",
         absolute_tex_path,
     })
 
