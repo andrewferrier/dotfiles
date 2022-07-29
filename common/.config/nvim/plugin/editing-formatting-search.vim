@@ -10,7 +10,9 @@ set textwidth=80 " This is the default for many/most languages: https://en.wikip
 set virtualedit=block
 set wildmode=longest:full
 
-if ! has('nvim-0.8.0')
+if has('nvim-0.8.0')
+    set mousemodel=extend
+else
     set mouse=nvi
 end
 
