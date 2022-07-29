@@ -10,7 +10,7 @@ local HOME = os.getenv("HOME")
 require("disable-bluetooth-on-sleep").init()
 require("run-on-resume").init()
 require("track-battery").init()
-require("yabai").init(SHIFT_PREFIX_ACTION, PREFIX_ACTION)
+require("window-management").init(PREFIX_ACTION)
 
 hs.dockicon.hide()
 
