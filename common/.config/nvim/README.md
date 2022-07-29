@@ -136,4 +136,3 @@
 
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Publish wrapping.lua (with enough testing in place)
-*   Add key for quickfix list to go to item without switching away from window
