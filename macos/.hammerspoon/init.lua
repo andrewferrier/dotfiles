@@ -124,6 +124,7 @@ end)
 
 launch_or_find("A", "/System/Applications/Mail.app")
 launch_or_find("C", "/System/Applications/Calendar.app")
+launch_or_find("K", "/Applications/KeePassXC.app/")
 launch_or_find("L", "/Applications/Slack.app")
 launch_or_find("R", "/Applications/Remember The Milk.app")
 
