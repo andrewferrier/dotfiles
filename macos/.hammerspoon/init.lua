@@ -15,7 +15,7 @@ require("window-management").init(PREFIX_ACTION, SHIFT_PREFIX_ACTION)
 hs.dockicon.hide()
 
 for _, v in ipairs(hs.audiodevice.allOutputDevices()) do
-    v:setOutputMuted(false)
+    v:setOutputMuted(true)
     v:setOutputVolume(0)
 end
 
