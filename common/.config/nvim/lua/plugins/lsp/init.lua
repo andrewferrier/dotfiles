@@ -13,7 +13,9 @@ local sumneko_settings = {
             -- stylua instead.
             format = { enable = false },
             runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "IMAP", "Set", "hs", "options", "pipe_to", "vim" } },
+            diagnostics = {
+                globals = { "IMAP", "Set", "hs", "options", "pipe_to", "vim" },
+            },
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
             telemetry = { enable = false },
         },
