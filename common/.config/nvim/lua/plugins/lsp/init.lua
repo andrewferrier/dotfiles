@@ -47,7 +47,14 @@ local servers = {
     pyright = {},
     sumneko_lua = sumneko_settings,
     terraformls = {},
-    tflint = {},
+    tflint = {
+        cmd = {
+            "tflint",
+            "--langserver",
+            "--config",
+            vim.env.XDG_CONFIG_HOME .. "/.tflint.hcl",
+        },
+    },
     tsserver = {},
     vimls = {},
     yamlls = yaml_settings,
