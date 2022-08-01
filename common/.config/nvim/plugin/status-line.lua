@@ -207,7 +207,8 @@ function _G.Statusline_SpellingErrorCount()
                 vim.cmd("normal! ]S")
                 if
                     (
-                        vim.fn.line(".") == lastline
+                        vim.fn.line(".")
+                            == lastline
                         and vim.fn.col(".") == lastcol
                     ) or mycount > MAX_SPELL_ERRORS
                 then
@@ -234,22 +235,6 @@ function _G.Statusline_SpellingErrorCount()
     return vim.b.spelling_warning
 end
 
-function _G.Statusline_Search()
-    if vim.v.hlsearch == 1 then
-        local searchcount = vim.fn.searchcount()
-
-        if searchcount["total"] > 0 then
-            return "[Srch "
-                .. searchcount["current"]
-                .. "/"
-                .. searchcount["total"]
-                .. "] "
-        end
-    end
-
-    return ""
-end
-
 local RESET_HIGHLIGHTING = "%*"
 local TRUNCATOR_POSITION = "%<"
 local ALIGN_RHS = "%="
@@ -266,9 +251,6 @@ statusline = statusline .. "%{v:lua.Statusline_Getcwd()}"
 statusline = statusline .. RESET_HIGHLIGHTING
 
 statusline = statusline .. ALIGN_RHS
-
--- RHS - Temporary Status
-statusline = statusline .. "%{v:lua.Statusline_Search()}"
 
 -- RHS - Warnings
 statusline = statusline .. "%m"
