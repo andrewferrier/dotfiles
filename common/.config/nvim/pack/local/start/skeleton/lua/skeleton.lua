@@ -1,29 +1,8 @@
 local M = {}
 
-local function handle_skeleton(filetype, skeleton)
-    vim.ui.select({
-        "Open " .. skeleton .. " in a split",
-        "Read " .. skeleton .. " into the file",
-        "Ignore it",
-    }, {
-        prompt = "What do you want to do with the skeleton?",
-    }, function(_, idx)
-        if idx == 1 then
-            vim.cmd("split " .. skeleton)
-            vim.opt.filetype = filetype
-        elseif idx == 2 then
-            vim.cmd("read " .. skeleton)
-            vim.cmd("norm kdd")
-        end
-    end)
-end
-
 local function get_skeleton_match(tail)
     local skeleton =
-        vim.api.nvim_get_runtime_file(
-            "skeleton/" .. tail,
-            false
-        )[1]
+        vim.api.nvim_get_runtime_file("skeleton/" .. tail, false)[1]
 
     if skeleton == "" then
         return nil
@@ -32,21 +11,36 @@ local function get_skeleton_match(tail)
     end
 end
 
-local function show_prompt(autocmd)
+local function find_skeleton()
     local skeleton = get_skeleton_match(vim.fn.expand("%:t"))
 
-    local filetype = vim.opt.filetype:get()
+    local filetype = vim.o.filetype
 
     if skeleton == nil and filetype ~= "" then
         skeleton = get_skeleton_match(filetype)
     end
 
-    if skeleton ~= nil then
-        handle_skeleton(filetype, skeleton)
-    elseif not autocmd then
+    return skeleton
+end
+
+local function find_skeleton_with_warning()
+    local skeleton = find_skeleton()
+
+    if skeleton == nil then
         vim.notify(
-            "No skeleton found for filetype '" .. filetype .. "'",
-            vim.log.levels.ERROR
+            "No skeleton found for filetype '" .. vim.o.filetype .. "'",
+            vim.log.levels.WARN
+        )
+    end
+
+    return skeleton
+end
+
+local function check_for_skeleton()
+    if find_skeleton() ~= nil then
+        vim.notify(
+            "Skeleton available; cvsr to read it in; cvss to open in a split.",
+            vim.log.levels.WARN
         )
     end
 end
@@ -54,15 +48,28 @@ end
 M.setup = function()
     vim.api.nvim_create_autocmd("BufNewFile", {
         group = vim.api.nvim_create_augroup("skeleton", {}),
-        pattern = { "*" },
-        callback = function()
-            show_prompt(true)
-        end,
+        pattern = "*",
+        callback = check_for_skeleton,
     })
 
-    vim.api.nvim_create_user_command("Skeleton", function()
-        show_prompt(false)
-    end, {})
+    vim.keymap.set("n", "cvsr", function()
+        local skeleton = find_skeleton_with_warning()
+
+        if skeleton ~= nil then
+            vim.cmd("read " .. skeleton)
+            vim.cmd("normal! kdd")
+        end
+    end)
+
+    vim.keymap.set("n", "cvss", function()
+        local existing_filetype = vim.o.filetype
+        local skeleton = find_skeleton_with_warning()
+
+        if skeleton ~= nil then
+            vim.cmd("split " .. skeleton)
+            vim.opt.filetype = existing_filetype
+        end
+    end)
 end
 
 return M
