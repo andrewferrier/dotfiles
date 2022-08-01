@@ -11,8 +11,12 @@ hs.window.animationDuration = 0 -- disable animations
 
 local grid = {
     topHalf = "0,0 12x6",
+    rightTwoThirds = "4,0 8x12",
+    rightThird = "8,0 4x12",
     rightHalf = "6,0 6x12",
     bottomHalf = "0,6 12x6",
+    leftTwoThirds = "0,0 8x12",
+    leftThird = "0,0 4x12",
     leftHalf = "0,0 6x12",
     topLeft = "0,0 6x6",
     topRight = "6,0 6x6",
@@ -84,13 +88,13 @@ module.init = function(prefixAction, prefixShiftAction)
     hs.hotkey.bind(
         prefixAction,
         "right",
-        chain({ grid.rightHalf, grid.topRight, grid.bottomRight })
+        chain({ grid.rightTwoThirds, grid.rightHalf, grid.rightThird, grid.topRight, grid.bottomRight })
     )
 
     hs.hotkey.bind(
         prefixAction,
         "left",
-        chain({ grid.leftHalf, grid.topLeft, grid.bottomLeft })
+        chain({ grid.leftTwoThirds, grid.leftHalf, grid.leftThird, grid.topLeft, grid.bottomLeft })
     )
 
     hs.hotkey.bind(prefixAction, "=", chain({ grid.fullScreen }))
