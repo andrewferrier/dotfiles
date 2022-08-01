@@ -27,3 +27,8 @@ if ! has('nvim-0.8.0')
     " See https://github.com/neovim/neovim/pull/19365
     nnoremap & :&&<CR>
 end
+
+if ! has('nvim-0.5.0')
+    " Will be overwritten by fzf.lua configuration
+    nnoremap <silent> cvf :browse oldfiles<CR>
+end

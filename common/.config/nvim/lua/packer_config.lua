@@ -90,8 +90,7 @@ local function packages_commands(use)
     }) -- quite slow
 
     use({
-        "junegunn/fzf.vim",
-        requires = { "junegunn/fzf", run = "./install --bin" },
+        "ibhagwan/fzf-lua",
         config = function()
             require("plugins.fzf")
         end,
