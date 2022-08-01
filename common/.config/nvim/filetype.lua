@@ -5,6 +5,7 @@ vim.filetype.add({
         gitlint = "toml",
         jad = "java",
         rasi = "rasi",
+        tex = "latex", -- We always want LaTeX, avoid slow detection logic
     },
     filename = {
         [".dockerignore"] = "gitignore",
