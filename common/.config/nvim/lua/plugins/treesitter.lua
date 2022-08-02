@@ -78,6 +78,3 @@ require("nvim-treesitter.configs").setup({
     indent = { enable = true, disable = disable_indent },
     endwise = { enable = true, disable = disable_other },
 })
-
--- Disable this as it still doesn't seem to work reliably
--- matchup = { enable = true, disable = disable_other },
