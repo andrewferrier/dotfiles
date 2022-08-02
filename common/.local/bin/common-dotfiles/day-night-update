@@ -15,7 +15,7 @@ KITTY_COLOR = BASE_PATH.joinpath("kitty-color.conf")
 STATE_FILE_QUTEBROWSER = BASE_PATH.joinpath("state-qutebrowser")
 STATE_FILE_TERMINAL = BASE_PATH.joinpath("state-terminal")
 
-if os.environ["XDG_CONFIG_HOME"] is not None:
+if "XDG_CONFIG_HOME" in os.environ and os.environ["XDG_CONFIG_HOME"] is not None:
     GTKRC20_DIR = Path(os.environ["XDG_CONFIG_HOME"] + "/gtk-2.0").expanduser()
 else:
     GTKRC20_DIR = Path("~/.config/gtk-2.0").expanduser()
