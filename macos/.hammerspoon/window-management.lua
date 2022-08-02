@@ -88,13 +88,13 @@ module.init = function(prefixAction, prefixShiftAction)
     hs.hotkey.bind(
         prefixAction,
         "right",
-        chain({ grid.rightTwoThirds, grid.rightHalf, grid.rightThird, grid.topRight, grid.bottomRight })
+        chain({ grid.rightHalf, grid.rightTwoThirds, grid.rightThird, grid.topRight, grid.bottomRight })
     )
 
     hs.hotkey.bind(
         prefixAction,
         "left",
-        chain({ grid.leftTwoThirds, grid.leftHalf, grid.leftThird, grid.topLeft, grid.bottomLeft })
+        chain({ grid.leftHalf, grid.leftTwoThirds, grid.leftThird, grid.topLeft, grid.bottomLeft })
     )
 
     hs.hotkey.bind(prefixAction, "=", chain({ grid.fullScreen }))
