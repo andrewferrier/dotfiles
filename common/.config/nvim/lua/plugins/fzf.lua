@@ -14,7 +14,6 @@ fzf_lua.setup({
     border = "single",
     fzf_opts = {
         ["--layout"] = "default",
-        ["--tiebreak"] = "end",
         ["--color"] = "dark,gutter:-1",
     },
     previewers = {
