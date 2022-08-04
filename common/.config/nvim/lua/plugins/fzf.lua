@@ -39,6 +39,8 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufWritePost" }, {
     end,
 })
 
+vim.keymap.set("n", "cvb", fzf_lua.buffers)
+
 vim.keymap.set("n", "cvf", function()
     fzf_lua.fzf_exec("~/.local/bin/common/file-list -t -r", {
         actions = {
