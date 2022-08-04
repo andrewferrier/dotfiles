@@ -9,6 +9,10 @@
     ranger      | ~/.config/ranger/rc.conf
     zsh         | ~/.config/zsh/README.md
 
+## MacOS
+
+    caffeinate -i <somecommand> | prevent system from sleeping whilst command is running
+
 ## Firefox
 
     Cmd-Opt-R   | reader view
