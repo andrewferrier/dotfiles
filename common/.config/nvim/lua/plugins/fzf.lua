@@ -26,8 +26,6 @@ fzf_lua.setup({
 vim.keymap.set("n", "cvh", fzf_lua.help_tags)
 vim.keymap.set("n", "cvl", fzf_lua.live_grep)
 
-vim.api.nvim_create_user_command("Maps", fzf_lua.keymaps, {})
-
 -- TODO: Find a replacement for
 -- vim.keymap.set("i", "<C-X><C-F>", "<Plug>(fzf-complete-path)")
 
