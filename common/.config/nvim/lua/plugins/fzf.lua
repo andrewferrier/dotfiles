@@ -42,11 +42,7 @@ vim.keymap.set("n", "cvb", fzf_lua.buffers)
 
 vim.keymap.set("n", "cvf", function()
     fzf_lua.fzf_exec("~/.local/bin/common/file-list -t -r", {
-        actions = {
-            ["default"] = fzf_lua.actions.file_edit,
-            ["ctrl-x"] = fzf_lua.actions.file_split,
-            ["ctrl-t"] = fzf_lua.actions.file_tabedit,
-        },
+        actions = require("fzf-lua.config").globals.actions.files,
         previewer = "builtin",
     })
 end)
@@ -57,7 +53,7 @@ vim.keymap.set("n", "cvg", function()
             ["default"] = function(selected, opts)
                 require("fzf-lua.actions").vimcmd("lcd", selected, opts)
             end,
-            ["ctrl-x"] = function(selected, _)
+            ["ctrl-s"] = function(selected, _)
                 require("open_terminal_fm").open_file_manager(selected[1])
             end,
         },
