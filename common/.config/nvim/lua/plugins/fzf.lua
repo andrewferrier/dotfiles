@@ -9,6 +9,7 @@ fzf_lua.setup({
             winopts = {
                 number = false,
             },
+            flip_columns = 200,
         },
     },
     border = "single",
