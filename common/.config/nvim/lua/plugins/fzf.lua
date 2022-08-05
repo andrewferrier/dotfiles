@@ -44,6 +44,9 @@ vim.keymap.set("n", "cvf", function()
     fzf_lua.fzf_exec("~/.local/bin/common/file-list -t -r", {
         actions = require("fzf-lua.config").globals.actions.files,
         previewer = "builtin",
+        fzf_opts = {
+            ["--tiebreak"] = "end",
+        },
     })
 end)
 
@@ -58,6 +61,7 @@ vim.keymap.set("n", "cvg", function()
             end,
         },
         fzf_opts = {
+            ["--tiebreak"] = "end",
             ["--preview"] = fzf_lua.shell.preview_action_cmd(function(items)
                 return "exa --tree --color=always " .. items[1]
             end),
