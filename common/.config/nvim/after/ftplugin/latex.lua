@@ -1,15 +1,24 @@
 require("filetype.text").setup()
 
+local config = require("nvim-surround.config")
+
 require("nvim-surround").buffer_setup({
-    delimiters = {
-        pairs = {
-            ["c"] = function()
-                local cmd = vim.fn.input("Command: ")
-                return { "\\" .. cmd .. "{", "}" }
+    surrounds = {
+        ["c"] = {
+            add = function()
+                local cmd = config.get_input("Command: ")
+                return { { "\\" .. cmd .. "{" }, { "}" } }
             end,
-            ["e"] = function()
-                local env = vim.fn.input("Environment: ")
-                return { "\\begin{" .. env .. "}", "\\end{" .. env .. "}" }
+        },
+        ["e"] = {
+            add = function()
+                local env = config.get_input("Environment: ")
+                return {
+                    { "\\begin{" .. env .. "}" },
+                    {
+                        "\\end{" .. env .. "}",
+                    },
+                }
             end,
         },
     },
