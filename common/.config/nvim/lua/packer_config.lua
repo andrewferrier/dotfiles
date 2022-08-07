@@ -235,13 +235,6 @@ local function packages_lsp(use)
             require("plugins.fidget")
         end,
     })
-
-    use({
-        "zbirenbaum/neodim",
-        config = function()
-            require("plugins.neodim")
-        end,
-    })
 end
 
 local function packages_mine(use)
