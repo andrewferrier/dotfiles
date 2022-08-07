@@ -26,7 +26,6 @@ require("nvim-surround").buffer_setup({
 
 local function create_pdf_from_tex(absolute_tex_path)
     vim.cmd("update")
-    local directory = vim.fn.fnamemodify(absolute_tex_path, ":p:h")
     local without_extension = vim.fn.fnamemodify(absolute_tex_path, ":p:r")
 
     local output = vim.fn.system({
