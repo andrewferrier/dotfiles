@@ -30,7 +30,10 @@ end
 M.debugprint = function(above)
     local current_line = vim.api.nvim_win_get_cursor(0)[1]
     local filetype = vim.api.nvim_get_option_value("filetype", {})
-    local line_to_insert = opts.filetypes[filetype][1]
+    local indent = string.rep(" ", vim.fn.indent(current_line))
+
+    local line_to_insert = indent
+        .. opts.filetypes[filetype][1]
         .. debuginfo()
         .. opts.filetypes[filetype][2]
 
