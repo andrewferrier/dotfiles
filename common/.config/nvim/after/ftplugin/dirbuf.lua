@@ -4,7 +4,7 @@ vim.opt_local.listchars:append("tab:  ")
 require("diagnostics").hide()
 
 -- These keybindings are intentionally similar to fzf
-vim.keymap.set("n", "<C-X>", function()
+vim.keymap.set("n", "<C-S>", function()
     require("dirbuf").enter("split")
 end, { buffer = true })
 vim.keymap.set("n", "<C-T>", function()
