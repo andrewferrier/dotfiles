@@ -136,3 +136,4 @@
 
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Publish wrapping.lua (with enough testing in place)
+*   Override debugstring for vim.inspect and/or look at doing it with nvim-surround
