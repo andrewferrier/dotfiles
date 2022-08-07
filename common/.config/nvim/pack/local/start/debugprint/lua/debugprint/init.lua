@@ -3,9 +3,13 @@ local M = {}
 local opts
 
 -- TODO:
+-- * Implement debugprintvar()
+-- * Implement if on top of a variable using treesitter, then debugprintvar() is one-click
 -- * Make dot-repeatable
 -- * Make debuginfo() overridable
 -- * Support callbacks for different filetype surroundings, with example for NeoVim lua
+-- * Indent correctly
+-- * Use treesitter to get location
 
 OPTION_DEFAULTS = {
     create_keymaps = true,
