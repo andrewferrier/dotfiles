@@ -77,14 +77,6 @@ local function packages_commands(use)
     })
 
     use({
-        "bergercookie/vim-debugstring",
-        requires = { "tpope/vim-repeat" },
-        config = function()
-            require("plugins.debugstring")
-        end,
-    }) -- dq
-
-    use({
         "tpope/vim-unimpaired",
         requires = { "tpope/vim-repeat" },
     }) -- quite slow
@@ -249,6 +241,13 @@ local function packages_mine(use)
         "git@github.com:andrewferrier/textobj-diagnostic.nvim",
         config = function()
             require("plugins.textobj_diagnostic")
+        end,
+    })
+
+    use({
+        "git@github.com:andrewferrier/debugprint.nvim",
+        config = function()
+            require("plugins.debugprint")
         end,
     })
 end
