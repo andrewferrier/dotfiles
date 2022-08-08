@@ -8,7 +8,7 @@ local opts
 -- * Make dot-repeatable
 -- * Make debuginfo() overridable
 -- * Support callbacks for different filetype surroundings, with example for NeoVim lua
--- * Indent correctly
+-- * Indent correctly (look at how nvim-surround does it)
 -- * Use treesitter to get location
 
 OPTION_DEFAULTS = {
