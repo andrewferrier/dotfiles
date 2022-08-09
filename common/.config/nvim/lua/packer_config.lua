@@ -141,7 +141,7 @@ local function packages_silent(use)
     })
 
     use({
-        "norcalli/nvim-colorizer.lua",
+        "NvChad/nvim-colorizer.lua",
         config = function()
             require("plugins.colorizer")
         end,
