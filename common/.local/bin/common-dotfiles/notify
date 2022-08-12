@@ -20,8 +20,10 @@ parser.add_argument("body")
 parser.add_argument("--title", default='notify')
 parser.add_argument("--icon", default=None)
 parser.add_argument("--severity", type=int, default=2, help='Severity; 1=high, 2=medium (default), 3=low')
+parser.add_argument('--allow-timeout', action=argparse.BooleanOptionalAction, default=True)
 args = parser.parse_args()
 
+TIMEOUT_NONE = 60 * 60 * 24 * 365
 TIMEOUT_SEVERITY_HIGH   = 60 * 3
 TIMEOUT_SEVERITY_MEDIUM = 5
 TIMEOUT_SEVERITY_LOW    = 5
@@ -32,10 +34,13 @@ def main():
 
     if platform == "darwin":
         command_args = ["alerter", "-message", args.body, "-title", args.title]
-        if args.severity == 1:
+        if args.allow_timeout == False:
+            command_args.append('-timeout')
+            command_args.append(str(TIMEOUT_NONE))
+        elif args.severity == 1:
             command_args.append('-timeout')
             command_args.append(str(TIMEOUT_SEVERITY_HIGH))
-        if args.severity == 2:
+        elif args.severity == 2:
             command_args.append('-timeout')
             command_args.append(str(TIMEOUT_SEVERITY_MEDIUM))
         elif args.severity == 3:
