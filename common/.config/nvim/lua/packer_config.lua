@@ -245,6 +245,7 @@ local function packages_mine(use)
         config = function()
             require("plugins.debugprint")
         end,
+        requires = "nvim-treesitter/nvim-treesitter"
     })
 end
 
