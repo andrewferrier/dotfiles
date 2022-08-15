@@ -5,6 +5,7 @@
 *   `<Ctrl-Q>` to stack current command, run another one, then come back to the original.
 *   `<Ctrl-T>` to run tig
 *   `<Ctrl-U>` to erase current line and start again.
+*   `<Ctrl-V>` to run NeoVim
 *   `<Ctrl-W>` to backspace by word.
 *   `<Ctrl-X> <Ctrl-E>` to edit command line in editor.
 *   `NQDIR=/tmp/somedir nq` to add items to queue.
