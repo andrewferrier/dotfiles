@@ -46,6 +46,7 @@ vim.keymap.set("n", "cvf", function()
         previewer = "builtin",
         fzf_opts = {
             ["--exact"] = "",
+            ["--no-sort"] = "",
         },
     })
 end)
@@ -64,6 +65,7 @@ vim.keymap.set("n", "cvg", function()
             ["--preview"] = fzf_lua.shell.preview_action_cmd(function(items)
                 return "exa --tree --color=always " .. items[1]
             end),
+            ["--no-sort"] = "",
         },
     })
 end)
