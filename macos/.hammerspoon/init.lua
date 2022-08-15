@@ -2,12 +2,13 @@
 -- * Investigate using https://github.com/koekeishiya/skhd as an alternative to Hammerspoon.
 -- * If windows end up totally unfocused, find one to focus on
 
+local log = hs.logger.new("ajf", "debug")
+
 local SHIFT_PREFIX_ACTION = { "ctrl", "cmd", "alt", "shift" }
 local PREFIX_ACTION = { "ctrl", "cmd", "alt" }
 
 local HOME = os.getenv("HOME")
 
-require("disable-bluetooth-on-sleep").init()
 require("run-on-resume").init()
 require("track-battery").init()
 require("window-management").init(PREFIX_ACTION, SHIFT_PREFIX_ACTION)
@@ -19,7 +20,26 @@ for _, v in ipairs(hs.audiodevice.allOutputDevices()) do
     v:setOutputVolume(0)
 end
 
-hs.alert.show("All audio devices muted")
+local function check_bluetooth_result(rc, stdout, stderr)
+    if rc ~= 0 then
+        log.e(
+            string.format(
+                "Unexpected result executing `blueutil`: rc=%d stderr=%s stdout=%s",
+                rc,
+                stderr,
+                stdout
+            )
+        )
+    end
+end
+
+local t = hs.task.new(
+    "/usr/local/bin/blueutil",
+    check_bluetooth_result,
+    { "--power", "off" }
+)
+
+t:start()
 
 -- Action keys
 
@@ -130,7 +150,11 @@ launch_or_find("R", "/Applications/Remember The Milk.app")
 
 launch("B", "/Applications/Firefox.app")
 
-web_search("P", "W3 People Search:", "https://w3.ibm.com/#/results?page=people&q=")
+web_search(
+    "P",
+    "W3 People Search:",
+    "https://w3.ibm.com/#/results?page=people&q="
+)
 web_search("S", "DuckDuckGo Search:", "https://duckduckgo.com/?q=")
 web_search("W", "W3 Search:", "https://w3.ibm.com/#/results?q=")
 web_search("X", "Box Search:", "https://ibm.ent.box.com/folder/0/search?query=")
