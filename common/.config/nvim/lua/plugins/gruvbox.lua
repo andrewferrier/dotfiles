@@ -17,7 +17,6 @@ require("gruvbox").setup({
         FidgetTitle = { link = "FidgetTask" },
         HydraBlue = { fg = palette.neutral_blue, bold = true },
         HydraHint = { link = "TabLineSel" },
-        MatchParen = { bg = palette.neutral_orange, fg = palette.dark0 },
         Operator = { italic = false },
         QuickFixLine = { link = "IncSearch" },
         String = { italic = false },
@@ -26,6 +25,8 @@ require("gruvbox").setup({
 })
 
 vim.cmd("colorscheme gruvbox")
+
+vim.api.nvim_set_hl(0, 'MatchParen', {})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("HighlightYanked", {}),

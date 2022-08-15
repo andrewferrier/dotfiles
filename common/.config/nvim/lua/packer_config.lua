@@ -122,17 +122,6 @@ local function packages_silent(use)
         end,
     })
 
-    if vim.fn.has("nvim-0.8.0") ~= 1 then
-        -- This works around a common bug where you highlight matched pairs and
-        -- it shows through to an fzf-lua window. Appears fixed in NeoVim 0.8.
-        use({
-            "andymass/vim-matchup",
-            config = function()
-                require("plugins.matchup")
-            end,
-        })
-    end
-
     use({
         "tversteeg/registers.nvim",
         config = function()
