@@ -90,10 +90,10 @@ module.init = function(prefixAction, prefixShiftAction)
         "right",
         chain({
             grid.rightHalf,
-            grid.rightTwoThirds,
-            grid.rightThird,
             grid.topRight,
             grid.bottomRight,
+            grid.rightTwoThirds,
+            grid.rightThird,
         })
     )
 
@@ -102,10 +102,10 @@ module.init = function(prefixAction, prefixShiftAction)
         "left",
         chain({
             grid.leftHalf,
-            grid.leftTwoThirds,
-            grid.leftThird,
             grid.topLeft,
             grid.bottomLeft,
+            grid.leftTwoThirds,
+            grid.leftThird,
         })
     )
 
