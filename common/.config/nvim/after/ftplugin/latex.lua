@@ -1,3 +1,5 @@
+vim.opt_local.commentstring = "% %s"
+
 require("filetype.text").setup()
 
 local config = require("nvim-surround.config")
