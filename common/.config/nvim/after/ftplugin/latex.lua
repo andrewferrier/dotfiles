@@ -29,9 +29,12 @@ require("nvim-surround").buffer_setup({
 local function create_pdf_from_tex(absolute_tex_path)
     vim.cmd("update")
     local without_extension = vim.fn.fnamemodify(absolute_tex_path, ":p:r")
+    local directory = vim.fn.fnamemodify(absolute_tex_path, ":p:h")
 
     local output = vim.fn.system({
         "latexmk",
+        "-aux-directory=/tmp",
+        "-output-directory=" .. directory,
         "-pdf",
         absolute_tex_path,
     })
