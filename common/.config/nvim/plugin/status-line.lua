@@ -127,12 +127,8 @@ function _G.Statusline_Indent()
 end
 
 function _G.Statusline_Filename()
-    local filename = vim.fn.substitute(
-        vim.fn.expand("%"),
-        "^" .. vim.env.HOME,
-        "~",
-        ""
-    )
+    local filename =
+        vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
 
     if vim.fn.winwidth(0) < WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME then
         return vim.fn.pathshorten(filename)
@@ -172,12 +168,8 @@ function _G.Statusline_Wrappingmode()
 end
 
 function _G.Titlestring_Filename()
-    local filename = vim.fn.substitute(
-        vim.fn.expand("%"),
-        "^" .. vim.env.HOME,
-        "~",
-        ""
-    )
+    local filename =
+        vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
 
     return vim.fn.pathshorten(filename)
 end
@@ -207,8 +199,7 @@ function _G.Statusline_SpellingErrorCount()
                 vim.cmd("normal! ]S")
                 if
                     (
-                        vim.fn.line(".")
-                            == lastline
+                        vim.fn.line(".") == lastline
                         and vim.fn.col(".") == lastcol
                     ) or mycount > MAX_SPELL_ERRORS
                 then
@@ -235,6 +226,22 @@ function _G.Statusline_SpellingErrorCount()
     return vim.b.spelling_warning
 end
 
+function _G.Statusline_Search()
+    if vim.v.hlsearch == 1 then
+        local searchcount = vim.fn.searchcount()
+
+        if searchcount["total"] > 0 then
+            return "[Srch "
+                .. searchcount["current"]
+                .. "/"
+                .. searchcount["total"]
+                .. "]"
+        end
+    end
+
+    return ""
+end
+
 local RESET_HIGHLIGHTING = "%*"
 local TRUNCATOR_POSITION = "%<"
 local ALIGN_RHS = "%="
@@ -251,6 +258,11 @@ statusline = statusline .. "%{v:lua.Statusline_Getcwd()}"
 statusline = statusline .. RESET_HIGHLIGHTING
 
 statusline = statusline .. ALIGN_RHS
+
+-- RHS - Search Counter
+if vim.fn.has("nvim-0.8.0") == 1 then
+    statusline = statusline .. "%{v:lua.Statusline_Search()}"
+end
 
 -- RHS - Warnings
 statusline = statusline .. "%m"

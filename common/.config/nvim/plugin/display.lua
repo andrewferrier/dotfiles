@@ -6,6 +6,10 @@ vim.opt.sidescrolloff = 15
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+if vim.fn.has("nvim-0.8.0") == 1 then
+    vim.opt.shortmess:append("S") -- Because we have our own search counter
+end
+
 -- Fix https://github.com/neovim/neovim/issues/12288#issuecomment-626276240; I
 -- also find it interesting to see the file summary when opening it.
 vim.opt.shortmess:append("c")
