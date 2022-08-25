@@ -29,7 +29,7 @@ require("gruvbox").setup({
 
 vim.cmd("colorscheme gruvbox")
 
-vim.api.nvim_set_hl(0, 'MatchParen', {})
+vim.api.nvim_set_hl(0, "MatchParen", {})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("HighlightYanked", {}),
