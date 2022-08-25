@@ -39,7 +39,7 @@ end
 local function check_for_skeleton()
     if find_skeleton() ~= nil then
         vim.notify(
-            "Skeleton available; cvsr to read it in; cvss to open in a split.",
+            "Skeleton available - use SkeletonRead / SkeletionSplit commands.",
             vim.log.levels.WARN
         )
     end
@@ -52,16 +52,16 @@ M.setup = function()
         callback = check_for_skeleton,
     })
 
-    vim.keymap.set("n", "cvsr", function()
+    vim.api.nvim_create_user_command("SkeletonRead", function()
         local skeleton = find_skeleton_with_warning()
 
         if skeleton ~= nil then
             vim.cmd("read " .. skeleton)
             vim.cmd("normal! kdd")
         end
-    end)
+    end, {})
 
-    vim.keymap.set("n", "cvss", function()
+    vim.api.nvim_create_user_command("SkeletonSplit", function()
         local existing_filetype = vim.o.filetype
         local skeleton = find_skeleton_with_warning()
 
@@ -69,7 +69,7 @@ M.setup = function()
             vim.cmd("split " .. skeleton)
             vim.opt.filetype = existing_filetype
         end
-    end)
+    end, {})
 end
 
 return M
