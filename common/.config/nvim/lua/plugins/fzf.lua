@@ -63,7 +63,8 @@ vim.keymap.set("n", "cvg", function()
         },
         fzf_opts = {
             ["--preview"] = fzf_lua.shell.preview_action_cmd(function(items)
-                return "exa --tree --color=always " .. items[1]
+                return "exa --tree --color=always "
+                    .. vim.fn.escape(items[1], " ")
             end),
             ["--no-sort"] = "",
         },
