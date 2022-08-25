@@ -1,6 +1,6 @@
 local treesitter_parsers = require("nvim-treesitter.parsers")
 
-local WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME = 100
+local WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME = 150
 local WIN_WIDTH_COMPRESS_THRESHOLD_PATH = 200
 
 local function is_diagnostic_enabled()
