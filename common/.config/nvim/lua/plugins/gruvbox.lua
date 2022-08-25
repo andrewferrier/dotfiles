@@ -1,5 +1,17 @@
 local statefile = vim.fn.expand("~/.cache/day-night/state-terminal")
 
+local palette = require("gruvbox.palette")
+
+local overrides = {
+    FidgetTitle = { link = "FidgetTask" },
+    HydraBlue = { fg = palette.neutral_blue, bold = true },
+    HydraHint = { link = "TabLineSel" },
+    Operator = { italic = false },
+    QuickFixLine = { link = "IncSearch" },
+    String = { italic = false },
+    TermCursorNC = { bg = "#00FF00" },
+}
+
 if
     vim.fn.filereadable(statefile)
     and vim.fn.index(vim.fn.readfile(statefile), "day") >= 0
@@ -7,21 +19,12 @@ then
     vim.opt.background = "light"
 else
     vim.opt.background = "dark"
+    overrides.StatusLineNC = { fg = palette.dark0, bg = palette.dark4 }
 end
-
-local palette = require("gruvbox.palette")
 
 require("gruvbox").setup({
     contrast = "hard",
-    overrides = {
-        FidgetTitle = { link = "FidgetTask" },
-        HydraBlue = { fg = palette.neutral_blue, bold = true },
-        HydraHint = { link = "TabLineSel" },
-        Operator = { italic = false },
-        QuickFixLine = { link = "IncSearch" },
-        String = { italic = false },
-        TermCursorNC = { bg = "#00FF00" },
-    },
+    overrides = overrides,
 })
 
 vim.cmd("colorscheme gruvbox")
