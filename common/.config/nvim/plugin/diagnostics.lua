@@ -44,20 +44,37 @@ vim.keymap.set("n", "[og", function()
     require("diagnostics").show()
 end)
 
-SEVERITY_MAP = {
+SEVERITY_ECHO_MAP = {
     "DiagnosticError",
     "DiagnosticWarn",
     "DiagnosticInfo",
     "DiagnosticHint",
 }
 
+SEVERITY_NOTIFY_MAP = {
+    vim.log.levels.ERROR,
+    vim.log.levels.WARN,
+    vim.log.levels.INFO,
+    vim.log.levels.INFO,
+}
+
 local show_diagnostic = function(diagnostic)
     if diagnostic ~= nil then
-        vim.cmd("echohl " .. SEVERITY_MAP[diagnostic.severity])
-        vim.cmd(
-            'echo "' .. vim.fn.escape(diagnostic_format(diagnostic), '"') .. '"'
-        )
-        vim.cmd("echohl None")
+        if vim.fn.has("nvim-0.8.0") == 1 then
+            vim.notify(
+                diagnostic_format(diagnostic),
+                SEVERITY_NOTIFY_MAP[diagnostic.severity]
+            )
+        else
+            vim.cmd("echohl " .. SEVERITY_ECHO_MAP[diagnostic.severity])
+            vim.cmd(
+                'echo "'
+                    .. vim.fn.escape(diagnostic_format(diagnostic), '"')
+                    .. '"'
+            )
+            vim.cmd("echohl None")
+        end
+
         vim.fn.setcursorcharpos(diagnostic.lnum + 1, diagnostic.col + 1)
     end
 end
