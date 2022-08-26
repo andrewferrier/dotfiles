@@ -148,15 +148,6 @@ local function packages_git(use)
             require("plugins.gitsigns")
         end,
     }) -- gb
-
-    if vim.fn.has("nvim-0.8.0") == 1 then
-        use({
-            "rcarriga/nvim-notify",
-            config = function()
-                require("plugins.notify")
-            end,
-        })
-    end
 end
 
 local function packages_syntax(use)
@@ -254,7 +245,7 @@ local function packages_mine(use)
         config = function()
             require("plugins.debugprint")
         end,
-        requires = "nvim-treesitter/nvim-treesitter",
+        requires = "nvim-treesitter/nvim-treesitter"
     })
 end
 
