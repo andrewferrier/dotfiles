@@ -20,7 +20,6 @@ vim.filetype.add({
         [".*/%.config/kitty/.*%.conf"] = "conf",
         [".*/%.config/systemd/user/.*"] = "systemd",
         [".*/%.kaf/config"] = "yaml",
-        [".*/hugo/layouts/.*%.html"] = "gohtmltmpl",
         [".*Dockerfile.*"] = "dockerfile",
         [".*Jenkinsfile.*"] = "groovy",
         [".*envrc.*"] = "sh",

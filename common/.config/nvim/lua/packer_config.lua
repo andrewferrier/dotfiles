@@ -152,7 +152,6 @@ end
 
 local function packages_syntax(use)
     use({ "qnighy/vim-ssh-annex" })
-    use({ "fatih/vim-go", opt = true }) -- Used for hugo layouts
 
     use({
         "iamcco/markdown-preview.nvim",
