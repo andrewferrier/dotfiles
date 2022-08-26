@@ -151,7 +151,6 @@ local function packages_git(use)
 end
 
 local function packages_syntax(use)
-    use({ "gisphm/vim-gitignore" })
     use({ "qnighy/vim-ssh-annex" })
     use({ "fatih/vim-go", opt = true }) -- Used for hugo layouts
 
