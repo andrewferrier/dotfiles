@@ -1,9 +1,8 @@
-@import "Pop-Dark"
+@import "DarkBlue"
 
 * {
     text-color:       #ffffff;
     background-color: #0f4771;
-    blue:             #000066;
 }
 
 window {
