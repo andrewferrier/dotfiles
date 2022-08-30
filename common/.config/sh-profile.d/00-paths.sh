@@ -68,6 +68,7 @@ pupdate_prepend_single /usr/local/bin
 pupdate_prepend_single /usr/local/sbin
 pupdate_prepend_single /usr/local/opt/ruby/bin # for brew-installed ruby
 pupdate_prepend_single /opt/nvim-linux64/bin
+pupdate_prepend_single /opt/homebrew/bin
 pupdate_append_singlex "${HOME}/.local/bin"
 pupdate_append_globxxx "${HOME}/.local/bin/*"
 pupdate_append_globxxx "${HOME}/.local/bin/*/*"
