@@ -2,7 +2,7 @@
 local module = {}
 
 -- From https://github.com/asmagill/hs._asm.undocumented.spaces
-local spaces = require("hs._asm.undocumented.spaces")
+local spaces = require("hs.spaces")
 
 hs.grid.setGrid("12x12") -- allows us to place on quarters, thirds and halves
 hs.grid.MARGINX = 0
@@ -58,16 +58,16 @@ end
 
 local function moveToSpace(space)
     local win = hs.window.focusedWindow()
-    local uuid = win:screen():spacesUUID()
-    local spaceID = spaces.layout()[uuid][space]
-    spaces.changeToSpace(spaceID)
+    local screen = win:screen()
+    local spaceID = hs.spaces.spacesForScreen(screen)[space]
+    spaces.gotoSpace(spaceID)
     hs.alert.show("Desktop " .. space)
 end
 
 local function moveWindowToSpace(space)
     local win = hs.window.focusedWindow()
-    local uuid = win:screen():spacesUUID()
-    local spaceID = spaces.layout()[uuid][space]
+    local screen = win:screen()
+    local spaceID = hs.spaces.spacesForScreen(screen)[space]
     spaces.moveWindowToSpace(win:id(), spaceID)
     hs.alert.show(win:title() .. " moved to Desktop " .. space)
 end
