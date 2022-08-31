@@ -8,6 +8,7 @@ local SHIFT_PREFIX_ACTION = { "ctrl", "cmd", "alt", "shift" }
 local PREFIX_ACTION = { "ctrl", "cmd", "alt" }
 
 local HOME = os.getenv("HOME")
+local HOMEBREW_BIN = '/opt/homebrew/bin'
 
 require("run-on-resume").init()
 require("track-battery").init()
@@ -34,7 +35,7 @@ local function check_bluetooth_result(rc, stdout, stderr)
 end
 
 local t = hs.task.new(
-    "/usr/local/bin/blueutil",
+    HOMEBREW_BIN .. "/blueutil",
     check_bluetooth_result,
     { "--power", "off" }
 )
@@ -87,7 +88,7 @@ hs.hotkey.bind(PREFIX_ACTION, "Return", function()
 end)
 
 hs.hotkey.bind(PREFIX_ACTION, "M", function()
-    open_terminal("/usr/local/bin/vimpc")
+    open_terminal(HOMEBREW_BIN .. "/vimpc")
 end)
 
 hs.hotkey.bind(PREFIX_ACTION, "F", function()
