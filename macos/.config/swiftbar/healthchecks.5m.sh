@@ -7,4 +7,4 @@ set -o nounset
 set -o errexit
 
 "${HOME}/.local/bin/common/status-healthchecks"
-echo ' | color=#aa0000'
+echo ' | color=#aa0000 length=10'
