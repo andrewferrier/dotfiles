@@ -161,7 +161,7 @@ web_search("W", "W3 Search:", "https://w3.ibm.com/#/results?q=")
 web_search("X", "Box Search:", "https://ibm.ent.box.com/folder/0/search?query=")
 
 hs.urlevent.bind("vimpc", function(eventName, params)
-    open_terminal("/usr/local/bin/vimpc")
+    open_terminal(HOMEBREW_BIN .. "/vimpc")
 end)
 
 hs.alert.show("Hammerspoon loaded")
