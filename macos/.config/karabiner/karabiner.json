@@ -50,6 +50,17 @@
                         "description": "Durgod Taurus K320: Get multimedia keys working with mpc",
                         "manipulators": [
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 130,
+                                                "vendor_id": 12136
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "f1",
                                     "modifiers": {
@@ -59,12 +70,23 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/mpc toggle"
+                                        "shell_command": "/opt/homebrew/bin/mpc toggle"
                                     }
                                 ],
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 130,
+                                                "vendor_id": 12136
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "f2",
                                     "modifiers": {
@@ -74,12 +96,23 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/mpc stop"
+                                        "shell_command": "/opt/homebrew/bin/mpc stop"
                                     }
                                 ],
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 130,
+                                                "vendor_id": 12136
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "f3",
                                     "modifiers": {
@@ -89,12 +122,23 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/mpc prev"
+                                        "shell_command": "/opt/homebrew/bin/mpc prev"
                                     }
                                 ],
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 130,
+                                                "vendor_id": 12136
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "f4",
                                     "modifiers": {
@@ -104,12 +148,23 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/mpc next"
+                                        "shell_command": "/opt/homebrew/bin/mpc next"
                                     }
                                 ],
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 130,
+                                                "vendor_id": 12136
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "f9",
                                     "modifiers": {
@@ -119,12 +174,23 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/mpc seek -10"
+                                        "shell_command": "/opt/homebrew/bin/mpc seek -10"
                                     }
                                 ],
                                 "type": "basic"
                             },
                             {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 130,
+                                                "vendor_id": 12136
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
                                 "from": {
                                     "key_code": "f10",
                                     "modifiers": {
@@ -134,7 +200,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/mpc seek +10"
+                                        "shell_command": "/opt/homebrew/bin/mpc seek +10"
                                     }
                                 ],
                                 "type": "basic"
@@ -308,7 +374,7 @@
                                     {
                                         "halt": true,
                                         "repeat": false,
-                                        "shell_command": "/usr/local/bin/mpc toggle"
+                                        "shell_command": "/opt/homebrew/bin/mpc toggle"
                                     }
                                 ],
                                 "type": "basic"
@@ -335,7 +401,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/mpc prev"
+                                        "shell_command": "/opt/homebrew/bin/mpc prev"
                                     }
                                 ],
                                 "type": "basic"
@@ -362,7 +428,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "/usr/local/bin/mpc next"
+                                        "shell_command": "/opt/homebrew/bin/mpc next"
                                     }
                                 ],
                                 "type": "basic"
