@@ -216,6 +216,16 @@ local function packages_lsp(use)
     })
 end
 
+local function packages_misc(use)
+    use({
+        "echasnovski/mini.nvim",
+        branch = "stable",
+        config = function()
+            require("plugins.mini")
+        end,
+    })
+end
+
 local function packages_mine(use)
     use({
         "git@github.com:andrewferrier/wrapping.nvim",
@@ -236,7 +246,7 @@ local function packages_mine(use)
         config = function()
             require("plugins.debugprint")
         end,
-        requires = "nvim-treesitter/nvim-treesitter"
+        requires = "nvim-treesitter/nvim-treesitter",
     })
 end
 
@@ -251,6 +261,7 @@ packer.startup(function(use)
     packages_syntax(use)
     packages_treesitter(use)
     packages_lsp(use)
+    packages_misc(use)
     packages_mine(use)
 end)
 
