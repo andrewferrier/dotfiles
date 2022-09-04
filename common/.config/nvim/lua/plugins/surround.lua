@@ -4,7 +4,6 @@ vim.keymap.set("x", "s", "<Nop>")
 require("nvim-surround").setup({
     keymaps = {
         normal = "sa",
-        visual = "s",
         delete = "sd",
         change = "sr",
     },
