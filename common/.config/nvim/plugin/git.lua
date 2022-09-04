@@ -19,7 +19,7 @@ vim.keymap.set("n", "gbs", function()
 end, opts)
 
 vim.keymap.set("n", "gbt", function()
-    require("open_terminal_fm").open_terminal("tig --all", "%:p:h")
+    require("open_terminal_fm").open_terminal("tig", "%:p:h")
 end, opts)
 
 vim.keymap.set("n", "gbo", function()
