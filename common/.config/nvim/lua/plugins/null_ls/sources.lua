@@ -22,10 +22,8 @@ M.sources = {
     null_ls.builtins.formatting.black.with({
         extra_args = function(params)
             return {
-                "--line-length=" .. vim.api.nvim_buf_get_option(
-                    params.bufnr,
-                    "textwidth"
-                ),
+                "--line-length="
+                    .. vim.api.nvim_buf_get_option(params.bufnr, "textwidth"),
             }
         end,
     }),
@@ -33,9 +31,11 @@ M.sources = {
         extra_args = function(params)
             return {
                 "--cruft=/tmp",
-                "--yaml=defaultIndent:'" .. whitespace_str(
-                    vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth")
-                ) .. "'",
+                "--yaml=defaultIndent:'"
+                    .. whitespace_str(
+                        vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth")
+                    )
+                    .. "'",
             }
         end,
     }),
