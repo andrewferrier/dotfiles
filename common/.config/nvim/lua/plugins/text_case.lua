@@ -3,6 +3,16 @@
 
 local hydra = require("hydra")
 
+local head = function(key, operator_name, desc)
+    return {
+        key,
+        function()
+            require("textcase").operator(operator_name)
+        end,
+        { desc = desc },
+    }
+end
+
 hydra({
     config = {
         exit = true,
@@ -11,71 +21,15 @@ hydra({
     mode = "n",
     body = "gyc",
     heads = {
-        {
-            "k",
-            function()
-                require("textcase").operator("to_snake_case")
-            end,
-            { desc = "snake case" },
-        },
-        {
-            "-",
-            function()
-                require("textcase").operator("to_dash_case")
-            end,
-            { desc = "dash-case" },
-        },
-        {
-            "C",
-            function()
-                require("textcase").operator("to_constant_case")
-            end,
-            { desc = "CONSTANT CASE" },
-        },
-        {
-            ".",
-            function()
-                require("textcase").operator("to_dot_case")
-            end,
-            { desc = "dot.case" },
-        },
-        {
-            "c",
-            function()
-                require("textcase").operator("to_camel_case")
-            end,
-            { desc = "camelCase" },
-        },
-        {
-            "t",
-            function()
-                require("textcase").operator("to_title_case")
-            end,
-            { desc = "Title Case" },
-        },
-        {
-            "/",
-            function()
-                require("textcase").operator("to_path_case")
-            end,
-            { desc = "path/case" },
-        },
-        {
-            -- sentence
-            "s",
-            function()
-                require("textcase").operator("to_phrase_case")
-            end,
-            { desc = "Sentence case" },
-        },
-        {
-            -- mixed case
-            "m",
-            function()
-                require("textcase").operator("to_pascal_case")
-            end,
-            { desc = "MixedCase" },
-        },
+        head("k", "to_snake_case", "snake case"),
+        head("-", "to_dash_case", "dash-case"),
+        head("C", "to_constant_case", "CONSTANT CASE"),
+        head(".", "to_dot_case", "dot.case"),
+        head("c", "to_camel_case", "camelCase"),
+        head("t", "to_title_case", "Title Case"),
+        head("/", "to_path_case", "path/case"),
+        head("s", "to_phrase_case", "Sentence case"),
+        head("m", "to_pascal_case", "MixedCase"),
 
         { "<Esc>", nil, { exit = true } },
     },
