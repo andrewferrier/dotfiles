@@ -19,6 +19,7 @@ then
     vim.opt.background = "light"
 else
     vim.opt.background = "dark"
+    overrides.StatusLineNC = { fg = palette.dark0, bg = palette.dark4 }
 end
 
 require("gruvbox").setup({
