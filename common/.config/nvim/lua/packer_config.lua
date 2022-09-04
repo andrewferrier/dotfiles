@@ -35,7 +35,6 @@ end
 
 local function packages_operators(use)
     use({ "christoomey/vim-sort-motion", keys = "gs" })
-    use({ "tpope/vim-commentary" }) -- gc
 
     use({
         "junegunn/vim-easy-align",
