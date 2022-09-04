@@ -1,2 +1,5 @@
 vim.opt.termguicolors = true
-require("colorizer").setup(nil, { RGB = false, names = false })
+
+require("colorizer").setup({
+    user_default_options = { RGB = false, names = false },
+})
