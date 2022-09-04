@@ -142,7 +142,6 @@ local function packages_git(use)
 
     use({
         "lewis6991/gitsigns.nvim",
-        requires = { "tpope/vim-repeat" },
         config = function()
             require("plugins.gitsigns")
         end,
