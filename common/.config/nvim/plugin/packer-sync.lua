@@ -4,5 +4,5 @@ vim.api.nvim_create_user_command("PackerProfile", function()
 end, {})
 
 vim.api.nvim_create_user_command("PackerSync", function()
-    require("packer_config").sync()
+    require("packer_config").sync({ preview_updates = true, compact = true })
 end, {})
