@@ -134,6 +134,15 @@ local function packages_silent(use)
             require("plugins.colorizer")
         end,
     })
+
+    if vim.fn.has("nvim-0.8.0") == 1 then
+        use({
+            "levouh/tint.nvim",
+            config = function()
+                require("plugins.tint")
+            end,
+        })
+    end
 end
 
 local function packages_git(use)
