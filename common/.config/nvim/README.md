@@ -137,4 +137,4 @@
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Publish wrapping.lua (with enough testing in place)
 *   Make sqlfluff work with local .sqlfluff
-*   Revert 401daee0 and fix diagnostics with Makefiles
+*   Re-enable TODO checker in null_ls and fix diagnostics with Makefiles
