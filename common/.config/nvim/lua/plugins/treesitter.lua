@@ -53,7 +53,7 @@ local function disable_indent(filetype, bufnr)
     end
 end
 
-require("nvim-treesitter.configs").setup({
+local setup_object = {
     highlight = {
         enable = true,
         disable = disable_other,
@@ -77,4 +77,10 @@ require("nvim-treesitter.configs").setup({
     },
     indent = { enable = true, disable = disable_indent },
     endwise = { enable = true, disable = disable_other },
-})
+}
+
+if vim.fn.has("nvim-0.8.0") == 1 then
+    setup_object.ignore_install = { "c", "lua", "vim" }
+end
+
+require("nvim-treesitter.configs").setup(setup_object)
