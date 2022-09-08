@@ -18,9 +18,9 @@ require("fidget").setup({
     sources = {
         ["null-ls"] = {
             -- null-ls seems to just generate noise in the fidget widget
-            ignore = true
-        }
-    }
+            ignore = true,
+        },
+    },
 })
 
 -- Workaround for bug here: https://github.com/j-hui/fidget.nvim/issues/86
