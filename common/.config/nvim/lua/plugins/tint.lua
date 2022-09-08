@@ -1,1 +1,1 @@
-require("tint").setup()
+require("tint").setup({})
