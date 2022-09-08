@@ -4,6 +4,8 @@ local module = {}
 -- From https://github.com/asmagill/hs._asm.spaces
 local spaces = require("hs.spaces")
 
+spaces.setDefaultMCwaitTime(0.5)
+
 hs.grid.setGrid("12x12") -- allows us to place on quarters, thirds and halves
 hs.grid.MARGINX = 0
 hs.grid.MARGINY = 0
