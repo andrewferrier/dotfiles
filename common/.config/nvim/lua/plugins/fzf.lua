@@ -27,9 +27,6 @@ fzf_lua.setup({
 vim.keymap.set("n", "cvh", fzf_lua.help_tags)
 vim.keymap.set("n", "cvl", fzf_lua.live_grep)
 
--- TODO: Find a replacement for
--- vim.keymap.set("i", "<C-X><C-F>", "<Plug>(fzf-complete-path)")
-
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufWritePost" }, {
     group = vim.api.nvim_create_augroup("file-list.lua", {}),
     callback = function()
