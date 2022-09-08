@@ -1,1 +1,1 @@
-require('textobj-diagnostic').setup()
+require("textobj-diagnostic").setup()
