@@ -1,7 +1,7 @@
 -- Based on https://github.com/wincent/wincent/blob/master/aspects/dotfiles/files/.hammerspoon/init.lua
 local module = {}
 
--- From https://github.com/asmagill/hs._asm.undocumented.spaces
+-- From https://github.com/asmagill/hs._asm.spaces
 local spaces = require("hs.spaces")
 
 hs.grid.setGrid("12x12") -- allows us to place on quarters, thirds and halves
