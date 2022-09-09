@@ -171,6 +171,13 @@ local function packages_syntax(use)
     })
 
     use({ "jkramer/vim-checkbox" })
+
+    use({
+        "gaoDean/autolist.nvim",
+        config = function()
+            require("autolist").setup({})
+        end,
+    })
 end
 
 local function packages_treesitter(use)
