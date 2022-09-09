@@ -54,6 +54,9 @@ local function disable_indent(filetype, bufnr)
 end
 
 local setup_object = {
+    -- phpdoc is broken on M1 Mac because of
+    -- https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
+    ignore_install = { "phpdoc" },
     highlight = {
         enable = true,
         disable = disable_other,
@@ -80,7 +83,9 @@ local setup_object = {
 }
 
 if vim.fn.has("nvim-0.8.0") == 1 then
-    setup_object.ignore_install = { "c", "lua", "vim" }
+    table.insert(setup_object.ignore_install, "c")
+    table.insert(setup_object.ignore_install, "lua")
+    table.insert(setup_object.ignore_install, "vim")
 end
 
 require("nvim-treesitter.configs").setup(setup_object)
