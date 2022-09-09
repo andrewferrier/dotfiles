@@ -137,5 +137,4 @@
 
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Publish wrapping.lua (with enough testing in place)
-*   Make sqlfluff work with local .sqlfluff (see <https://github.com/jose-elias-alvarez/null-ls.nvim/pull/1069>)
 *   Re-enable TODO checker in null_ls and fix diagnostics with Makefiles
