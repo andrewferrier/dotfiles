@@ -15,14 +15,10 @@ local overrides = {
 if vim.fn.has("nvim-0.8.0") == 1 then
     -- Workarounds for tint.nvim; see
     -- https://github.com/levouh/tint.nvim/issues/11
-    overrides = vim.tbl_extend(
-        "keep",
-        overrides,
-        {
-            NormalNC = { link = "Normal" },
-            CurSearch = { reverse = true },
-        }
-    )
+    overrides = vim.tbl_extend("keep", overrides, {
+        NormalNC = { link = "Normal" },
+        CurSearch = { reverse = true },
+    })
 end
 
 if
