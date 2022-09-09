@@ -23,7 +23,7 @@ end
 function _G.Statusline_FeaturesEnabled()
     local return_string = ""
 
-    if vim.opt.filetype:get() ~= "dirbuf" then
+    if vim.bo.filetype ~= "dirbuf" then
         if require("gitsigns.config").config.show_deleted then
             return_string = return_string .. ",git_del_lns"
         end
@@ -76,10 +76,10 @@ end
 
 function _G.Statusline_List()
     if
-        not vim.opt.list:get()
-        and not vim.opt.readonly:get()
-        and vim.opt.buftype:get() ~= "terminal"
-        and vim.opt.filetype:get() ~= "dirbuf"
+        not vim.wo.list
+        and not vim.bo.readonly
+        and vim.bo.buftype ~= "terminal"
+        and vim.bo.filetype ~= "dirbuf"
     then
         return ",nolist"
     else
@@ -89,14 +89,14 @@ end
 
 function _G.Statusline_Fileencoding()
     if
-        vim.opt.filetype:get() == "dirbuf"
-        or vim.opt.buftype:get() == "terminal"
+        vim.bo.filetype == "dirbuf"
+        or vim.bo.filetype == "terminal"
     then
         return ""
-    elseif vim.opt.fileencoding:get() == "" then
+    elseif vim.bo.fileencoding == "" then
         return ",fenc=?"
-    elseif vim.opt.fileencoding:get() ~= "utf-8" then
-        return ",fenc=" .. vim.opt.fileencoding:get()
+    elseif vim.bo.fileencoding ~= "utf-8" then
+        return ",fenc=" .. vim.bo.fileencoding
     end
 
     return ""
@@ -105,21 +105,21 @@ end
 function _G.Statusline_Indent()
     local returnstring = ""
 
-    if vim.opt.buftype:get() == "terminal" then
+    if vim.bo.buftype == "terminal" then
         return returnstring
     end
 
-    if vim.opt.expandtab:get() then
-        returnstring = returnstring .. "sw=" .. vim.opt.shiftwidth:get()
+    if vim.bo.expandtab then
+        returnstring = returnstring .. "sw=" .. vim.bo.shiftwidth
     else
-        returnstring = returnstring .. "ts=" .. vim.opt.tabstop:get()
+        returnstring = returnstring .. "ts=" .. vim.bo.tabstop
     end
 
-    if vim.opt.textwidth:get() ~= 80 then
+    if vim.bo.textwidth ~= 80 then
         -- If shiftwidth is very high, we are in 'soft' wrapping mode, don't
         -- display shiftwidth.
-        if vim.opt.textwidth:get() < 9999 then
-            returnstring = returnstring .. ",tw=" .. vim.opt.textwidth:get()
+        if vim.bo.textwidth < 9999 then
+            returnstring = returnstring .. ",tw=" .. vim.bo.textwidth
         end
     end
 
@@ -127,12 +127,8 @@ function _G.Statusline_Indent()
 end
 
 function _G.Statusline_Filename()
-    local filename = vim.fn.substitute(
-        vim.fn.expand("%"),
-        "^" .. vim.env.HOME,
-        "~",
-        ""
-    )
+    local filename =
+        vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
 
     if vim.fn.winwidth(0) < WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME then
         return vim.fn.pathshorten(filename)
@@ -144,9 +140,9 @@ end
 function _G.Statusline_Getcwd()
     if
         not (
-            vim.opt.filetype == "help"
-            or vim.opt.filetype == "man"
-            or vim.opt.buftype == "terminal"
+            vim.bo.filetype == "help"
+            or vim.bo.filetype == "man"
+            or vim.bo.buftype == "terminal"
         )
     then
         local path = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
@@ -172,12 +168,8 @@ function _G.Statusline_Wrappingmode()
 end
 
 function _G.Titlestring_Filename()
-    local filename = vim.fn.substitute(
-        vim.fn.expand("%"),
-        "^" .. vim.env.HOME,
-        "~",
-        ""
-    )
+    local filename =
+        vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
 
     return vim.fn.pathshorten(filename)
 end
@@ -192,11 +184,11 @@ vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
 local MAX_SPELL_ERRORS = 20
 
 function _G.Statusline_SpellingErrorCount()
-    if vim.opt.spell:get() == true then
+    if vim.wo.spell == true then
         if vim.b.spelling_warning == nil then
             local view = vim.fn.winsaveview()
-            local oldwrapscan = vim.opt.wrapscan:get()
-            vim.opt.wrapscan = false
+            local oldwrapscan = vim.o.wrapscan
+            vim.o.wrapscan = false
 
             local mycount = 0
             vim.fn.cursor(1, 1)
@@ -207,8 +199,7 @@ function _G.Statusline_SpellingErrorCount()
                 vim.cmd("normal! ]S")
                 if
                     (
-                        vim.fn.line(".")
-                            == lastline
+                        vim.fn.line(".") == lastline
                         and vim.fn.col(".") == lastcol
                     ) or mycount > MAX_SPELL_ERRORS
                 then
@@ -218,7 +209,7 @@ function _G.Statusline_SpellingErrorCount()
             end
 
             vim.fn.winrestview(view)
-            vim.opt.wrapscan = oldwrapscan
+            vim.o.wrapscan = oldwrapscan
 
             if mycount > MAX_SPELL_ERRORS then
                 vim.b.spelling_warning = "[S " .. MAX_SPELL_ERRORS .. "+]"
@@ -273,11 +264,11 @@ statusline = statusline .. SEPARATOR
 -- RHS - Location
 statusline = statusline .. "%l/%L,%c "
 
-vim.opt.statusline = statusline
+vim.o.statusline = statusline
 
 -- Title string
 vim.g.general_titlestring = "nvim [%{v:lua.Titlestring_Filename()}%( %M%)]"
-vim.opt.titlestring = vim.g.general_titlestring
+vim.o.titlestring = vim.g.general_titlestring
 
 -- Window title
-vim.opt.title = true
+vim.o.title = true
