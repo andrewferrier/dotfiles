@@ -11,7 +11,7 @@ M.setup = function()
             and vim.fn.empty(vim.fn.bufname("%")) == 0
             and not vim.o.diff
         then
-            vim.opt_local.spell = true
+            vim.wo.spell = true
         end
 
         vim.b.text_based_filetype = true

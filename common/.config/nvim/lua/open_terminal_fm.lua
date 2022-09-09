@@ -1,9 +1,9 @@
 local M = {}
 
 local get_ford_to_use = function(dir)
-    if vim.opt.filetype:get() == "dirbuf" then
+    if vim.bo.filetype == "dirbuf" then
         return require("dirbuf").get_cursor_path()
-    elseif vim.opt.buftype:get() == "" then
+    elseif vim.bo.buftype == "" then
         return vim.fn.expand(dir, 1)
     else
         return vim.env.HOME

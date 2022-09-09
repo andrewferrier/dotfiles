@@ -67,7 +67,7 @@ M.setup = function()
 
         if skeleton ~= nil then
             vim.cmd("split " .. skeleton)
-            vim.opt.filetype = existing_filetype
+            vim.bo.filetype = existing_filetype
         end
     end, {})
 end
