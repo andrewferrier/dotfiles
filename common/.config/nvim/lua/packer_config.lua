@@ -26,19 +26,8 @@ packer.init({
     -- },
 })
 
-local function install_treesitter_parsers()
-    local treesitter_install = require("nvim-treesitter.install")
-
-    local number_of_parsers_available =
-        #require("nvim-treesitter.info").installed_parsers()
-
-    if number_of_parsers_available < 10 then
-        -- This is probably a fresh install or reinstall
-        treesitter_install.ensure_installed("all")
-    else
-        treesitter_install.ensure_installed_sync("all")
-        treesitter_install.update()
-    end
+local function update_treesitter_parsers()
+    require("nvim-treesitter.install").update()
 end
 
 local function packages_operators(use)
@@ -196,7 +185,7 @@ local function packages_treesitter(use)
 
     use({
         "nvim-treesitter/nvim-treesitter",
-        run = install_treesitter_parsers,
+        run = update_treesitter_parsers,
         config = function()
             require("plugins.treesitter")
         end,
