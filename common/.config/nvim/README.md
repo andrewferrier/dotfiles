@@ -59,6 +59,7 @@
     Ctrl-A - insert last text inserted
     Ctrl-K ,. - insert …
     Ctrl-K Co - insert ©
+    Ctrl-K DG - insert °
     Ctrl-K HT - insert <Tab>
     Ctrl-K OK - insert ✓
     Ctrl-K XX - insert ✗
