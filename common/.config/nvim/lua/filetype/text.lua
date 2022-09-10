@@ -11,8 +11,9 @@ M.setup = function()
             and vim.fn.empty(vim.fn.bufname("%")) == 0
             and not vim.o.diff
         then
-            -- This has to be opt_local, because setting it using vim.wo means
-            -- affecting all future files loaded into this buffer
+            -- FIXME: This does not work with vim.wo.spell = true; this has to
+            -- be opt_local, because setting it using vim.wo means affecting all
+            -- future files loaded into this buffer.
             vim.opt_local.spell = true
         end
 
