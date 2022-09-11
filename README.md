@@ -2,6 +2,7 @@
 
     awk         | <https://github.com/learnbyexample/Command-line-text-processing/blob/master/gnu_awk.md>
     bash        | ~/.config/bash.d/README.md
+    i3          | ~/.config/i3/config
     kitty       | ~/.config/kitty/kitty.conf
     mutt        | ~/.mutt/muttrc.common
     neovim      | ~/.config/nvim/README.md
