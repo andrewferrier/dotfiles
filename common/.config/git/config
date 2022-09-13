@@ -29,7 +29,6 @@
 
 [merge]
 	conflictstyle = diff3
-	tool = diffconflicts
 
 [rebase]
 	autoSquash = true
@@ -66,10 +65,6 @@
 	required = false
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-
-[mergetool "diffconflicts"]
-	cmd = $VISUAL -c 'packadd diffconflicts | DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"'
-	trustExitCode = true
 
 [mergetool]
 	keepBackup = false
