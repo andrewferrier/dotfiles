@@ -10,7 +10,6 @@ local HOME = os.getenv("HOME")
 local HOMEBREW_BIN = '/opt/homebrew/bin'
 
 require("run-on-resume").init()
-require("track-battery").init()
 require("window-management").init(PREFIX_ACTION, SHIFT_PREFIX_ACTION)
 
 hs.dockicon.hide()
