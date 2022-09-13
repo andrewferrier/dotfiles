@@ -58,14 +58,6 @@ local chain = function(movements)
     end
 end
 
-local function moveToSpace(space)
-    local win = hs.window.focusedWindow()
-    local screen = win:screen()
-    local spaceID = hs.spaces.spacesForScreen(screen)[space]
-    spaces.gotoSpace(spaceID)
-    hs.alert.show("Desktop " .. space)
-end
-
 local function moveWindowToSpace(space)
     local win = hs.window.focusedWindow()
     local screen = win:screen()
@@ -122,28 +114,6 @@ module.init = function(prefixAction, prefixShiftAction)
     end)
 
     -- Stop at 7 because Ctrl-Option-Cmd-8 inverts colors
-
-    hs.hotkey.bind(prefixAction, "1", function()
-        moveToSpace(1)
-    end)
-    hs.hotkey.bind(prefixAction, "2", function()
-        moveToSpace(2)
-    end)
-    hs.hotkey.bind(prefixAction, "3", function()
-        moveToSpace(3)
-    end)
-    hs.hotkey.bind(prefixAction, "4", function()
-        moveToSpace(4)
-    end)
-    hs.hotkey.bind(prefixAction, "5", function()
-        moveToSpace(5)
-    end)
-    hs.hotkey.bind(prefixAction, "6", function()
-        moveToSpace(6)
-    end)
-    hs.hotkey.bind(prefixAction, "7", function()
-        moveToSpace(7)
-    end)
 
     hs.hotkey.bind(prefixShiftAction, "1", function()
         moveWindowToSpace(1)
