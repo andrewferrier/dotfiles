@@ -156,6 +156,7 @@ local function packages_silent(use)
 end
 
 local function packages_git(use)
+    use({ "whiteinge/diffconflicts", opt = true }) -- invoked by `git mergetool`
     use({ "will133/vim-dirdiff", cmd = "DirDiff" })
 
     use({
