@@ -1,3 +1,19 @@
+Backups/
+Cache/
+CachedData/
 CachedExtensionVSIXs/
+CachedExtensions/
+Code Cache/
+GPUCache/
+Local Storage/
+Network Persistent State
+Preferences
+Service Worker/
+Session Storage/
+TransportSecurity
+User/
+WebStorage/
+databases/
+languagepacks.json
 logs/
 machineid
