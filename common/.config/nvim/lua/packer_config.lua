@@ -186,7 +186,6 @@ local function packages_treesitter(use)
     use({ "RRethy/nvim-treesitter-endwise" })
     use({ "mfussenegger/nvim-treehopper" })
     use({ "nvim-treesitter/nvim-treesitter-refactor" })
-    use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
     use({
         "nvim-treesitter/nvim-treesitter",

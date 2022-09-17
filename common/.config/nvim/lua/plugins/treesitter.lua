@@ -67,17 +67,6 @@ local setup_object = {
             disable = disable_other,
         },
     },
-    textobjects = {
-        select = {
-            enable = true,
-            disable = disable_other,
-            lookahead = true,
-            keymaps = {
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
-            },
-        },
-    },
     indent = { enable = true, disable = disable_indent },
     endwise = { enable = true, disable = disable_other },
 }
