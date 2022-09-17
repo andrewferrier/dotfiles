@@ -230,6 +230,7 @@ local function packages_lsp(use)
         config = function()
             require("plugins.fidget")
         end,
+        event = "LspAttach",
     })
 end
 
