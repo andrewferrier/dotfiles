@@ -186,6 +186,7 @@ local function packages_treesitter(use)
     use({ "RRethy/nvim-treesitter-endwise" })
     use({ "mfussenegger/nvim-treehopper" })
     use({ "nvim-treesitter/nvim-treesitter-refactor" })
+    use({ "nvim-treesitter/playground", command = "TSPlaygroundToggle" })
 
     use({
         "nvim-treesitter/nvim-treesitter",
@@ -194,8 +195,6 @@ local function packages_treesitter(use)
             require("plugins.treesitter")
         end,
     })
-
-    use({ "nvim-treesitter/playground", command = "TSPlaygroundToggle" })
 end
 
 local function packages_lsp(use)
