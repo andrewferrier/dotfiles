@@ -21,9 +21,9 @@ hydra({
     mode = "n",
     body = "gyc",
     heads = {
-        head("k", "to_snake_case", "snake case"),
+        head("_", "to_snake_case", "snake_case"),
         head("-", "to_dash_case", "dash-case"),
-        head("C", "to_constant_case", "CONSTANT CASE"),
+        head("C", "to_constant_case", "CONSTANT_CASE"),
         head(".", "to_dot_case", "dot.case"),
         head("c", "to_camel_case", "camelCase"),
         head("t", "to_title_case", "Title Case"),
