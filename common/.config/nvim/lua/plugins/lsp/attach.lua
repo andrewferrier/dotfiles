@@ -69,9 +69,7 @@ M.keybindings_defaults = function()
                 "Don't know how to " .. action_desc .. " this filetype.",
                 vim.log.levels.ERROR
             )
-        end, {
-            silent = true,
-        })
+        end)
     end
 
     map("cxo", "organize imports for")
@@ -80,11 +78,7 @@ M.keybindings_defaults = function()
 end
 
 local map_buf = function(bufnr, lhs, rhs, opts)
-    opts = vim.tbl_deep_extend(
-        "force",
-        { buffer = bufnr, silent = true },
-        opts or {}
-    )
+    opts = vim.tbl_deep_extend("force", { buffer = bufnr }, opts or {})
 
     vim.keymap.set("n", lhs, rhs, opts)
 end
@@ -103,7 +97,6 @@ M.keybindings_rename = function(bufnr)
             return ":LspRename " .. vim.fn.expand("<cword>")
         end, {
             expr = true,
-            silent = false,
         })
     else
         map_buf(bufnr, "cxr", vim.lsp.buf.rename)

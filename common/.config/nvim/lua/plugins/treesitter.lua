@@ -26,7 +26,6 @@ local function on_attach(filetype, bufnr)
             require("nvim-treesitter-refactor.smart_rename").smart_rename(bufnr)
         end, {
             buffer = true,
-            silent = true,
         })
     end
 end
