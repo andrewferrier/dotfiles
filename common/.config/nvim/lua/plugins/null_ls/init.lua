@@ -23,6 +23,7 @@ local on_attach = function(_, bufnr)
 end
 
 null_ls.setup({
+    -- debug = true,
     sources = null_ls_sources.sources,
     on_attach = on_attach,
     should_attach = function(bufnr)
