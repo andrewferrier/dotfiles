@@ -13,6 +13,7 @@
 ## MacOS
 
     caffeinate -i <somecommand> | prevent system from sleeping whilst command is running
+    Ctrl-1/2/3                  | switch desktop
 
 ## Firefox
 
