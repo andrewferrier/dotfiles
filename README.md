@@ -21,8 +21,9 @@
 
 ## Slack
 
-    Cmd-K | Jump to existing conversation
-    Cmd-N | Start new conversation
+    Cmd-K        | Jump to existing conversation
+    Cmd-N        | Start new conversation
+    Cmd-1/2/3... | Switch workspace
 
 ## zathura (PDF viewer)
 
