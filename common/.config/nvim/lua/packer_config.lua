@@ -223,13 +223,22 @@ local function packages_lsp(use)
         })
     end
 
-    use({
-        "j-hui/fidget.nvim",
-        config = function()
-            require("plugins.fidget")
-        end,
-        event = "LspAttach",
-    })
+    if vim.fn.has("nvim-0.8.0") == 1 then
+        use({
+            "j-hui/fidget.nvim",
+            config = function()
+                require("plugins.fidget")
+            end,
+            event = "LspAttach",
+        })
+    else
+        use({
+            "j-hui/fidget.nvim",
+            config = function()
+                require("plugins.fidget")
+            end,
+        })
+    end
 end
 
 local function packages_misc(use)
