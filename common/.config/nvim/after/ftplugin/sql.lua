@@ -1,1 +1,1 @@
-vim.opt_local.omnifunc = nil
+vim.bo.omnifunc = nil

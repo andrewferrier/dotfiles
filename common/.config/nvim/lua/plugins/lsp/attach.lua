@@ -133,7 +133,7 @@ end
 
 local function keybindings_hover_keyword(bufnr, server_capabilities, filetype)
     if filetype == "lua" then
-        vim.opt_local.keywordprg = ":help"
+        vim.bo.keywordprg = ":help"
     elseif server_capabilities.hoverProvider then
         if filetype ~= "vim" then
             map_buf(bufnr, "K", vim.lsp.buf.hover)
@@ -161,8 +161,8 @@ M.on_attach = function(client, bufnr)
     local filetype = vim.bo.filetype
 
     if vim.fn.has("nvim-0.8.0") ~= 1 then
-        vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-        vim.opt_local.tagfunc = "v:lua.vim.lsp.tagfunc"
+        vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+        vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
     end
 
     keybindings_formatting_check(bufnr, server_capabilities)

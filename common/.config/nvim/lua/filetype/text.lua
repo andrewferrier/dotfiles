@@ -11,10 +11,6 @@ M.setup = function()
             and vim.fn.empty(vim.fn.bufname("%")) == 0
             and not vim.o.diff
         then
-            -- FIXME: This does not work with vim.wo.spell = true; this has to
-            -- be opt_local, because setting it using vim.wo means affecting all
-            -- future files loaded into this window. See
-            -- https://github.com/neovim/neovim/issues/20271
             vim.opt_local.spell = true
         end
 

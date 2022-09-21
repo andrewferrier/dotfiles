@@ -125,6 +125,7 @@
 *   [Vim galore](https://github.com/mhinz/vim-galore)
 *   [Vim regexs](https://vi.stackexchange.com/a/2279/91)
 *   [Vim's useful lists](https://codeinthehole.com/tips/vim-lists/)
+*   [Why do we use opt_local and not vim.wo](https://github.com/neovim/neovim/issues/20271)
 *   [bufdo/argdo/windo](https://jovica.org/posts/vim-edit-multiple-files/)
 *   [lua reference manual](https://www.lua.org/manual/5.1/manual.html)
 *   `help ex-cmd-index` — list ex commands - e.g., after g/pat/
