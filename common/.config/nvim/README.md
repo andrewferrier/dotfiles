@@ -138,4 +138,3 @@
 
 *   Fix chewing up CPU when editing a large gitcommit file
 *   Publish wrapping.lua (with enough testing in place)
-*   Raise/review issue about vim.opt_local and vim.wo equivalence - see lua/filetype/text.lua
