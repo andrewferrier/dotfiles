@@ -179,7 +179,7 @@ local function packages_syntax(use)
         end,
     })
 
-    use({ "jkramer/vim-checkbox" })
+    use({ "jkramer/vim-checkbox", ft = "markdown" })
 end
 
 local function packages_treesitter(use)
