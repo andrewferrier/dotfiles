@@ -45,14 +45,6 @@ local function packages_operators(use)
     use({ "christoomey/vim-sort-motion", keys = "gs" })
 
     use({
-        "junegunn/vim-easy-align",
-        requires = { "tpope/vim-repeat" },
-        config = function()
-            require("plugins.easy_align")
-        end,
-    }) -- gl
-
-    use({
         "johmsalas/text-case.nvim",
         requires = { "anuvyklack/hydra.nvim" },
         config = function()
@@ -246,7 +238,6 @@ end
 local function packages_misc(use)
     use({
         "echasnovski/mini.nvim",
-        branch = "stable",
         config = function()
             require("plugins.mini")
         end,
