@@ -86,6 +86,7 @@ local function packages_commands(use)
         config = function()
             require("plugins.fzf")
         end,
+        keys = { "cv" },
     })
 
     use({

@@ -24,21 +24,9 @@ fzf_lua.setup({
     },
 })
 
+vim.keymap.set("n", "cvb", fzf_lua.buffers)
 vim.keymap.set("n", "cvh", fzf_lua.help_tags)
 vim.keymap.set("n", "cvl", fzf_lua.live_grep)
-
-vim.api.nvim_create_autocmd({ "BufReadPre", "BufWritePost" }, {
-    group = vim.api.nvim_create_augroup("file-list.lua", {}),
-    callback = function()
-        local file = vim.fn.expand("%:p")
-        vim.fn.jobstart(
-            { "fasd", "-A", file },
-            { detach = true, on_stderr = require("utils").job_stderr }
-        )
-    end,
-})
-
-vim.keymap.set("n", "cvb", fzf_lua.buffers)
 
 vim.keymap.set("n", "cvf", function()
     fzf_lua.fzf_exec("~/.local/bin/common/file-list -t -r", {
