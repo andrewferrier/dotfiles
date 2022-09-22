@@ -13,7 +13,7 @@ end
 vim.keymap.set("n", "cvr", function()
     require("readonly").make_readonly()
     vim.notify("Effective R/O on.")
-end, {})
+end)
 
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     desc = "Make files readonly when outside of home directory",

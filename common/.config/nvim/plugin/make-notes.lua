@@ -1,5 +1,5 @@
 local set = function(lhs, rhs)
-    vim.keymap.set("n", "<Leader>" .. lhs, rhs, {})
+    vim.keymap.set("n", "<Leader>" .. lhs, rhs)
 end
 
 local DATE = "=strftime('%F')"
