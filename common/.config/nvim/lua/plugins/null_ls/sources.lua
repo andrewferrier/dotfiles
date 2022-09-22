@@ -7,16 +7,6 @@ local custom_diagnostics = require("plugins.null_ls.custom_diagnostics")
 
 local SEVERITIES = null_ls_helpers.diagnostics.severities
 
-local whitespace_str = function(length)
-    local indent_str = ""
-
-    while indent_str:len() < length do
-        indent_str = indent_str .. " "
-    end
-
-    return indent_str
-end
-
 M.sources = {
     -- Code actions
 
@@ -37,7 +27,8 @@ M.sources = {
             return {
                 "--cruft=/tmp",
                 "--yaml=defaultIndent:'"
-                    .. whitespace_str(
+                    .. string.rep(
+                        " ",
                         vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth")
                     )
                     .. "'",
