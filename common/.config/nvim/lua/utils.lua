@@ -78,4 +78,11 @@ M.visual_selection_range = function()
     return table.concat(lines)
 end
 
+M.job_stderr = function(_, stderr_line, _)
+    stderr_line = stderr_line[1]
+    if #stderr_line > 0 then
+        vim.notify(stderr_line, vim.log.levels.ERROR)
+    end
+end
+
 return M
