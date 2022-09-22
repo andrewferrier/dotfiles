@@ -72,6 +72,7 @@ local setup_object = {
 
 if vim.fn.has("nvim-0.8.0") == 1 then
     table.insert(setup_object.ignore_install, "c")
+    table.insert(setup_object.ignore_install, "help")
     table.insert(setup_object.ignore_install, "lua")
     table.insert(setup_object.ignore_install, "vim")
 end
