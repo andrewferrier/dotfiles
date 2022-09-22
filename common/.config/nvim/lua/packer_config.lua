@@ -143,7 +143,7 @@ local function packages_silent(use)
         use({
             "levouh/tint.nvim",
             config = function()
-                require("plugins.tint")
+                require("tint").setup({})
             end,
             requires = { "ellisonleao/gruvbox.nvim" },
         })
