@@ -12,6 +12,7 @@ set wildmode=longest:full
 
 if has('nvim-0.8.0')
     set mousemodel=extend
+    set mousescroll=ver:3,hor:1
 else
     set mouse=nvi
 end
