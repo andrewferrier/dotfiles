@@ -16,3 +16,10 @@ vim.keymap.set("n", "cdf", ":lcd %:p:h<CR>", { silent = true })
 vim.keymap.set("n", "cdh", ":lcd ~<CR>", { silent = true })
 vim.keymap.set("n", "cdu", ":lcd ..<CR>", { silent = true })
 vim.keymap.set("n", "cdg", change_to_root, { silent = true })
+
+vim.keymap.set("n", "cvd", function()
+    local cwd = vim.fn.getcwd()
+
+    vim.cmd("split")
+    vim.cmd("Dirbuf " .. cwd)
+end, { silent = true })
