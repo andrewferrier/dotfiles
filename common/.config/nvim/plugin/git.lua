@@ -19,7 +19,11 @@ vim.keymap.set("n", "gbt", function()
 end)
 
 vim.keymap.set("n", "gbo", function()
-    require("open_terminal_fm").open_terminal("git open", "%:p:h")
+    vim.fn.jobstart({ "git", "open" }, {
+        cwd = vim.fn.expand("%:p:h"),
+        detach = true,
+        on_stderr = require("utils").job_stderr,
+    })
 end)
 
 vim.keymap.set("n", "[C", "gg]c", { remap = true })
