@@ -139,15 +139,16 @@ local function packages_silent(use)
         end,
     })
 
-    if vim.fn.has("nvim-0.8.0") == 1 then
-        use({
-            "levouh/tint.nvim",
-            config = function()
-                require("tint").setup({})
-            end,
-            requires = { "ellisonleao/gruvbox.nvim" },
-        })
-    end
+    use({
+        "levouh/tint.nvim",
+        config = function()
+            require("tint").setup({})
+        end,
+        cond = function()
+            return vim.fn.has("nvim-0.8.0") == 1
+        end,
+        requires = { "ellisonleao/gruvbox.nvim" },
+    })
 end
 
 local function packages_git(use)
@@ -208,32 +209,24 @@ local function packages_lsp(use)
         end,
     })
 
-    if vim.fn.has("nvim-0.8.0") == 1 then
-        use({
-            "smjonas/inc-rename.nvim",
-            config = function()
-                require("plugins.inc_rename")
-            end,
-            event = "LspAttach",
-        })
-    end
+    -- FIXME: event = "LspAttach" can be added to inc-rename and fidget once 0.7
+    -- fully removed
+    use({
+        "smjonas/inc-rename.nvim",
+        config = function()
+            require("plugins.inc_rename")
+        end,
+        cond = function()
+            return vim.fn.has("nvim-0.8.0") == 1
+        end,
+    })
 
-    if vim.fn.has("nvim-0.8.0") == 1 then
-        use({
-            "j-hui/fidget.nvim",
-            config = function()
-                require("plugins.fidget")
-            end,
-            event = "LspAttach",
-        })
-    else
-        use({
-            "j-hui/fidget.nvim",
-            config = function()
-                require("plugins.fidget")
-            end,
-        })
-    end
+    use({
+        "j-hui/fidget.nvim",
+        config = function()
+            require("plugins.fidget")
+        end,
+    })
 end
 
 local function packages_misc(use)
