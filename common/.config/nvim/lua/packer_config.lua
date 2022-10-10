@@ -142,7 +142,7 @@ local function packages_silent(use)
     use({
         "levouh/tint.nvim",
         config = function()
-            require("tint").setup({})
+            require("plugins.tint")
         end,
         cond = function()
             return vim.fn.has("nvim-0.8.0") == 1
