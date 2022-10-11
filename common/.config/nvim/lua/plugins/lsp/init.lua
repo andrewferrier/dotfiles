@@ -48,7 +48,11 @@ local servers = {
     jsonls = {},
     pyright = {},
     sumneko_lua = sumneko_settings,
-    terraformls = {},
+    terraformls = {
+        on_attach = function(_, _)
+            require("treesitter-terraform-doc").setup()
+        end,
+    },
     tflint = {
         cmd = {
             "tflint",
@@ -63,8 +67,19 @@ local servers = {
 }
 
 for lsp, settings in pairs(servers) do
-    local opts = { on_attach = attach.on_attach }
-    opts = vim.tbl_extend("keep", opts, settings)
+    local opts
+
+    if settings.on_attach then
+        opts = {
+            on_attach = function(client, bufnr)
+                settings.on_attach(client, bufnr)
+                attach.on_attach(client, bufnr)
+            end,
+        }
+    else
+        opts = { on_attach = settings.on_attach }
+    end
+
     lspconfig[lsp].setup(opts)
 end
 
