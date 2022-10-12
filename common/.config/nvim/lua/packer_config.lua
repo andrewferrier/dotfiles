@@ -192,11 +192,7 @@ local function packages_treesitter(use)
         end,
     })
 
-    use({
-        "https://github.com/Afourcat/treesitter-terraform-doc.nvim",
-        branch = "feature/provider-source-mapping",
-        filetype = "terraform",
-    })
+    use({ "Afourcat/treesitter-terraform-doc.nvim", filetype = "terraform" })
 end
 
 local function packages_lsp(use)
