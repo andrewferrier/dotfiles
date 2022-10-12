@@ -134,6 +134,9 @@ end
 local function keybindings_hover_keyword(bufnr, server_capabilities, filetype)
     if filetype == "lua" then
         vim.bo.keywordprg = ":help"
+    elseif filetype == "terraform" then
+        -- Don't map "K"; this is handled in
+        -- ~/.config/nvim/after/ftplugin/terraform.lua
     elseif server_capabilities.hoverProvider then
         if filetype ~= "vim" then
             map_buf(bufnr, "K", vim.lsp.buf.hover)

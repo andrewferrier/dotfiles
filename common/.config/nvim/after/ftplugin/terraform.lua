@@ -2,3 +2,7 @@
 vim.bo.commentstring = "# %s"
 
 require("filetype.section").setup("^data\\|resource", "^}$")
+
+vim.keymap.set("n", "K", function()
+    vim.cmd("OpenDoc")
+end, { buffer = 0 })
