@@ -42,8 +42,7 @@
     q: - open command mode window
     qA - resume recording into macro A
     qaq:g/regex/y A - empty register 'a', then append each line matching regex to register 'a'
-    sa{text object}i - add 'instant' leader and footer around text object
-    sa{text object}tp.someclass - add a <p class="someclass"> around text object
+    sa{text object}? - add 'instant' leader and footer around text object
     v{motion}"{reg}P - replace with register/clipboard, and DON'T yank what's being replaced
     y{motion} :%s/<Ctrl-R>"/replacement/g - replace text object globally
     y{motion}, /<Ctrl-R>" - Search for yanked text

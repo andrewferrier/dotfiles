@@ -2,29 +2,27 @@ vim.bo.commentstring = "% %s"
 
 require("filetype.text").setup()
 
-local config = require("nvim-surround.config")
+local surround = require("mini.surround")
 
-require("nvim-surround").buffer_setup({
-    surrounds = {
-        ["c"] = {
-            add = function()
-                local cmd = config.get_input("Command: ")
-                return { { "\\" .. cmd .. "{" }, { "}" } }
+vim.b.minisurround_config = {
+    custom_surroundings = {
+        c = {
+            output = function()
+                local cmd = surround.user_input("Command: ")
+                return { left = "\\" .. cmd .. "{", right = "}" }
             end,
         },
-        ["e"] = {
-            add = function()
-                local env = config.get_input("Environment: ")
+        e = {
+            output = function()
+                local env = surround.user_input("Environment: ")
                 return {
-                    { "\\begin{" .. env .. "}" },
-                    {
-                        "\\end{" .. env .. "}",
-                    },
+                    left = "\\begin{" .. env .. "}",
+                    right = "\\end{" .. env .. "}",
                 }
             end,
         },
     },
-})
+}
 
 local function create_pdf_from_tex(absolute_tex_path)
     vim.cmd("update")

@@ -52,14 +52,6 @@ local function packages_operators(use)
         end,
         keys = "gyc",
     })
-
-    use({
-        "kylechui/nvim-surround",
-        tag = "*", -- stable
-        config = function()
-            require("plugins.surround")
-        end,
-    })
 end
 
 local function packages_commands(use)
