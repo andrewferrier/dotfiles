@@ -169,10 +169,10 @@ local function packages_syntax(use)
     use({
         "iamcco/markdown-preview.nvim",
         run = "cd app && yarn install",
-        opt = true,
         config = function()
             require("plugins.markdown_preview")
         end,
+        filetype = "markdown",
     })
 
     use({ "jkramer/vim-checkbox", ft = "markdown" })
