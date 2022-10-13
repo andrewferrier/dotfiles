@@ -62,13 +62,6 @@ local function packages_commands(use)
     use({ "tyru/capture.vim" })
 
     use({
-        "chentoast/marks.nvim",
-        config = function()
-            require("plugins.marks")
-        end,
-    })
-
-    use({
         "tpope/vim-unimpaired",
         requires = { "tpope/vim-repeat" },
     }) -- quite slow
