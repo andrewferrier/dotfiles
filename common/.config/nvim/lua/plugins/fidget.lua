@@ -24,7 +24,4 @@ require("fidget").setup({
 })
 
 -- Workaround for bug here: https://github.com/j-hui/fidget.nvim/issues/86
-vim.api.nvim_create_autocmd(
-    "VimLeavePre",
-    { command = [[silent! FidgetClose]] }
-)
+vim.api.nvim_create_autocmd("VimLeavePre", { command = "silent! FidgetClose" })
