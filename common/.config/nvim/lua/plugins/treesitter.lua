@@ -2,19 +2,10 @@
 -- because it seems to be more reliable and supported by more filetypes.
 
 local function on_attach(filetype, bufnr)
-    vim.keymap.set(
-        "o",
-        "m",
-        ':<C-U>lua require("tsht").nodes()<CR>',
-        { buffer = true, silent = true }
-    )
+    local opts = { buffer = true, silent = true }
 
-    vim.keymap.set(
-        "x",
-        "m",
-        ':lua require("tsht").nodes()<CR>',
-        { buffer = true, silent = true }
-    )
+    vim.keymap.set("o", "m", ':<C-U>lua require("tsht").nodes()<CR>', opts)
+    vim.keymap.set("x", "m", ':lua require("tsht").nodes()<CR>', opts)
 
     local TREESITTER_RENAME_INEFFECTIVE = { "latex" }
 
@@ -32,10 +23,10 @@ end
 
 local function disable_other(filetype, bufnr)
     if vim.b.treesitter_enabled == nil then
-        local enable = not require("large_file").is_large_file(bufnr)
-        vim.b.treesitter_enabled = enable
+        vim.b.treesitter_enabled =
+            not require("large_file").is_large_file(bufnr)
 
-        if enable then
+        if vim.b.treesitter_enabled then
             on_attach(filetype, bufnr)
         end
     end
