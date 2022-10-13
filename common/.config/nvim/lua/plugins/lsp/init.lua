@@ -67,20 +67,18 @@ local servers = {
 }
 
 for lsp, settings in pairs(servers) do
-    local opts
-
     if settings.on_attach then
-        opts = {
-            on_attach = function(client, bufnr)
-                settings.on_attach(client, bufnr)
-                attach.on_attach(client, bufnr)
-            end,
-        }
+        local custom_on_attach = settings.on_attach
+
+        settings.on_attach = function(client, bufnr)
+            custom_on_attach(client, bufnr)
+            attach.on_attach(client, bufnr)
+        end
     else
-        opts = { on_attach = settings.on_attach }
+        settings.on_attach = attach.on_attach
     end
 
-    lspconfig[lsp].setup(opts)
+    lspconfig[lsp].setup(settings)
 end
 
 attach.keybindings_defaults()
