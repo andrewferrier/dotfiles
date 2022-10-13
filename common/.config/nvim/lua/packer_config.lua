@@ -157,7 +157,7 @@ local function packages_syntax(use)
         config = function()
             require("plugins.markdown_preview")
         end,
-        filetype = "markdown",
+        ft = "markdown",
     })
 
     use({ "jkramer/vim-checkbox", ft = "markdown" })
@@ -177,7 +177,7 @@ local function packages_treesitter(use)
         end,
     })
 
-    use({ "Afourcat/treesitter-terraform-doc.nvim", filetype = "terraform" })
+    use({ "Afourcat/treesitter-terraform-doc.nvim", ft = "terraform" })
 end
 
 local function packages_lsp(use)
