@@ -24,7 +24,7 @@ local attach = function(bufnr)
             return "]c"
         end
         vim.schedule(function()
-            require("gitsigns").next_hunk()
+            gitsigns.next_hunk()
         end)
         return "<Ignore>"
     end, { expr = true })
@@ -34,7 +34,7 @@ local attach = function(bufnr)
             return "[c"
         end
         vim.schedule(function()
-            require("gitsigns").prev_hunk()
+            gitsigns.prev_hunk()
         end)
         return "<Ignore>"
     end, { expr = true })
@@ -43,7 +43,7 @@ local attach = function(bufnr)
 
     map("gbhs", function()
         vim.cmd("update")
-        require("gitsigns").stage_hunk()
+        gitsigns.stage_hunk()
     end)
 
     vim.keymap.set("v", "gbhs", function()
@@ -51,16 +51,16 @@ local attach = function(bufnr)
     end)
 
     map("gbhr", function()
-        require("gitsigns").reset_hunk()
+        gitsigns.reset_hunk()
     end)
 
     map("gba", function()
         vim.cmd("update")
-        require("gitsigns").stage_buffer()
+        gitsigns.stage_buffer()
     end)
 
     map("yod", function()
-        require("gitsigns").toggle_deleted()
+        gitsigns.toggle_deleted()
     end)
 end
 
@@ -82,7 +82,7 @@ end
 vim.api.nvim_create_user_command("GitQFList", function()
     if in_git_dir() then
         -- gitsigns always opens QuickFix list, async, even if empty
-        require("gitsigns").setqflist("all")
+        gitsigns.setqflist("all")
     else
         vim.notify("Not in git directory.", vim.log.levels.ERROR)
     end
