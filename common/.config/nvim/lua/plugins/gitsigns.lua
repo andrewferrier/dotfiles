@@ -68,7 +68,7 @@ gitsigns.setup({
     signs = { change = { text = "~" }, changedelete = { text = "⋍" } },
     sign_priority = 10,
     on_attach = attach,
-    max_file_length = require('large_file').LARGE_FILE_LINE_COUNT
+    max_file_length = require("large_file").LARGE_FILE_LINE_COUNT,
 })
 
 local in_git_dir = function()
