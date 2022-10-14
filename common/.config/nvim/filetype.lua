@@ -16,8 +16,6 @@ vim.filetype.add({
         ["%.secrets.*"] = "sh",
         [".*%.gitignore.*"] = "gitignore",
         [".*%.properties.*"] = "jproperties",
-        [".*/%.config/kitty/.*%.conf"] = "conf",
-        [".*/%.config/systemd/user/.*"] = "systemd",
         [".*/%.kaf/config"] = "yaml",
         [".*Dockerfile.*"] = "dockerfile",
         [".*Jenkinsfile.*"] = "groovy",
