@@ -1,4 +1,4 @@
--- See ~/.config/nvim/filetype.lua for custom filetype overrides
+-- See ~/.config/nvim/plugins/filetype.lua for custom filetype overrides
 
 -- In NeoVim 0.8+ this is the default - see
 -- https://github.com/neovim/neovim/issues/14090#issuecomment-1177933661
