@@ -1,5 +1,5 @@
-local install_path = vim.fn.stdpath("data")
-    .. "/site/pack/packer/opt/packer.nvim"
+local install_path = vim.fn.stdpath("data") .. "/site/pack"
+local packer_path = install_path .. "/packer/opt/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.fn.system({
@@ -8,7 +8,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
         "--depth",
         "1",
         "https://github.com/wbthomason/packer.nvim",
-        install_path,
+        packer_path,
     })
 end
 
@@ -16,8 +16,8 @@ vim.cmd("packadd packer.nvim")
 local packer = require("packer")
 
 packer.init({
-    compile_path = vim.fn.stdpath("data")
-        .. "/site/pack/packer_generated/start"
+    compile_path = install_path
+        .. "/packer_generated/start"
         .. "/packer_generated/plugin/packager_compiled.lua",
     disable_commands = true,
     -- profile = {
