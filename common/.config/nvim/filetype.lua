@@ -1,6 +1,5 @@
 vim.filetype.add({
     extension = {
-        ant = "ant",
         equivs = "debcontrol",
         gitlint = "toml",
         jad = "java",
