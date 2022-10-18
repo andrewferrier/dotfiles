@@ -201,7 +201,7 @@ local function packages_lsp(use)
     use({
         "smjonas/inc-rename.nvim",
         config = function()
-            require("plugins.inc_rename")
+            require("inc_rename").setup({ cmd_name = "LspRename" })
         end,
         cond = function()
             return vim.fn.has("nvim-0.8.0") == 1
@@ -236,14 +236,14 @@ local function packages_mine(use)
     use({
         "git@github.com:andrewferrier/textobj-diagnostic.nvim",
         config = function()
-            require("plugins.textobj_diagnostic")
+            require("textobj-diagnostic").setup()
         end,
     })
 
     use({
         "git@github.com:andrewferrier/debugprint.nvim",
         config = function()
-            require("plugins.debugprint")
+            require("debugprint").setup()
         end,
         requires = "nvim-treesitter/nvim-treesitter",
     })

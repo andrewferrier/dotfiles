@@ -1,1 +1,0 @@
-require("textobj-diagnostic").setup()
