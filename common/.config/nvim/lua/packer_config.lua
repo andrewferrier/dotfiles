@@ -36,8 +36,10 @@ local function install_treesitter_parsers()
         -- This is probably a fresh install or reinstall
         treesitter_install.ensure_installed("all")
     else
-        treesitter_install.ensure_installed_sync("all")
-        treesitter_install.update()
+        -- Neither of these are sync, but that shouldn't matter as there is no
+        -- intersection in the parsers they will touch
+        vim.cmd('TSUpdate')
+        vim.cmd('TSInstall')
     end
 end
 
