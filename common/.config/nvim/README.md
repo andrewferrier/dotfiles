@@ -9,7 +9,6 @@
     + - go to the beginning of the next line
     1z= - replace with first choice from spellcheck dictionary
     <number> Ctrl-A/X - add/decrement specific amount
-    =p, =P - Paste correcting indent (from vim-unimpaired)
     Ctrl-E/Y - scroll window without moving cursor
     Ctrl-W Ctrl-F - open the file under cursor in a split (similar to gf)
     Ctrl-W Ctrl-] - jump to definition in new window
@@ -38,7 +37,6 @@
     gj, gk, g$, g0 - go up and down by screen lines, end and beginning by screen line (useful when wrapped)
     gt - go to next tab
     gyc{style}{text object} - change case of text object as per ~/.config/nvim/lua/plugins/text_case.lua
-    m; - toggle (including remove) a mark on a line
     mA - set an uppercase mark, for jumping across files
     q: - open command mode window
     qA - resume recording into macro A
@@ -75,7 +73,6 @@
 
     !figlet - Take lines and pass through figlet to create ASCII art
     g Ctrl-A Increment each line in visual selection by one more
-    m - select area based on Treesitter
 
 ### Command Mode
 
@@ -84,7 +81,6 @@
     %s/\v(pattern)/\U\1\e/ - convert to uppercase
     /\Vpattern/ - very nomagic (most chars literal; don't use regexes)
     /\vpattern/ - very magic (most chars non-literal)
-    Capture <vimcommand> - capture output of vim command into a buffer
     Ctrl-R Ctrl-w/a - insert the word/WORD under cursor
     DiagnosticQFList - put all diagnostic items in a quickfix buffer
     GitQFList - show all git hunks in a quickfix buffer
