@@ -31,8 +31,15 @@
 	rebase = true
 
 [merge]
-	conflictstyle = diff3
-	tool = diffconflicts
+	tool = nvim
+
+[mergetool "nvim"]
+	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+	trustExitCode = true
+
+[mergetool]
+	keepBackup = false
+	prompt = false
 
 [rebase]
 	autoSquash = true
@@ -69,13 +76,6 @@
 	required = false
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-
-[mergetool "diffconflicts"]
-	cmd = $VISUAL -c 'packadd diffconflicts | DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"'
-	trustExitCode = true
-
-[mergetool]
-	keepBackup = false
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
