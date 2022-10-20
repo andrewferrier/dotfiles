@@ -20,6 +20,7 @@
     Mkdir - create directory for current file
     Use uppercase registers to append
     X - delete the character before the cursor
+    [buffer]do - pull hunk from numbered buffer
     [count]. - repeat edit [count] times
     [count]ch|j|k|l - Delete [count] characters in direction and start insert
     [count]i-<Esc>, [count]I-<Esc> - insert 10 dashes at cursor or beginning of line
@@ -89,6 +90,7 @@
     GitQFList - show all git hunks in a quickfix buffer
     args files/file.* | :argdo %s/pattern/replacement/g | :argdo update - search and replace across files
     cfdo %s/x/y/g | update - search and replace in quickfix list
+    cquit - quit with an exit code
     g!/regex/d - delete all lines that don't match regex
     g/regex/norm gcc - comment out lines that match regex
     grep <pattern> - search and populate quickfix list (using Rg)
