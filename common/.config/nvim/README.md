@@ -16,7 +16,6 @@
     Ctrl-i - "in" - opposite of Ctrl-o
     Ctrl-o - on opening vim, go immediately to last file edited
     H, M, L - go to top, middle, bottom of the screen
-    Mkdir - create directory for current file
     Use uppercase registers to append
     X - delete the character before the cursor
     [buffer]do - pull hunk from numbered buffer
@@ -84,6 +83,7 @@
     Ctrl-R Ctrl-w/a - insert the word/WORD under cursor
     DiagnosticQFList - put all diagnostic items in a quickfix buffer
     GitQFList - show all git hunks in a quickfix buffer
+    Mkdir - create directory for current file
     args files/file.* | :argdo %s/pattern/replacement/g | :argdo update - search and replace across files
     cfdo %s/x/y/g | update - search and replace in quickfix list
     cquit - quit with an exit code
@@ -98,7 +98,7 @@
     '<,'>:norm . - apply previous change to all lines
     '<,'>!uniqall - filter out duplicate (non-consecutive) lines
 
-### Text Object/Operator Pending Mode
+### Text Object/Operator Pending Mode/Visual Mode Select
 
     gc - comment
     gn/gN - next/previous search match
