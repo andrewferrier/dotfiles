@@ -12,7 +12,9 @@ end
 
 M.setup_outline = function(pattern_start)
     vim.keymap.set("n", "gO", function()
+        local view = vim.fn.winsaveview()
         vim.cmd("vimgrep '" .. pattern_start .. "' %")
+        vim.fn.winrestview(view)
         vim.cmd("copen")
     end, OPTS)
 end
