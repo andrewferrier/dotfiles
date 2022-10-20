@@ -28,6 +28,7 @@
     cvg - Change directory interactively
     d'a - delete to mark "a"
     dV/xyz/-1 - delete linewise up to but not including line with pattern
+    <CR> - save file if needed
     g;, g, - jump backwards/forwards through changes
     gJ - Join lines w/o additional space, but include indent
     gM - move cursor to half-way along line
