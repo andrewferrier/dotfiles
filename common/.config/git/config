@@ -8,6 +8,9 @@
 [core]
 	pager = less -FX
 
+[init]
+	defaultBranch = main
+
 [diff]
 	renames = copies
 	mnemonicprefix = true
@@ -47,9 +50,6 @@
 [web]
 	browser = open
 
-[github]
-	user = andrewferrier
-
 [credential]
 	helper = cache --timeout=7200
 
@@ -62,6 +62,9 @@
 [commit]
 	verbose = true
 
+[github]
+	user = andrewferrier
+
 [filter "lfs"]
 	required = false
 	clean = git-lfs clean -- %f
@@ -73,9 +76,6 @@
 
 [mergetool]
 	keepBackup = false
-
-[init]
-	defaultBranch = main
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
