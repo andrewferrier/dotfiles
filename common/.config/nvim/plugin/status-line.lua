@@ -20,6 +20,10 @@ local function get_diagnostic_types()
     }
 end
 
+local function get_filename_homedir()
+    return vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
+end
+
 local function get_spelling_count()
     local view = vim.fn.winsaveview()
     local oldwrapscan = vim.o.wrapscan
@@ -199,10 +203,7 @@ function _G.Statusline_Wrappingmode()
 end
 
 function _G.Titlestring_Filename()
-    local filename =
-        vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
-
-    return vim.fn.pathshorten(filename)
+    return vim.fn.pathshorten(get_filename_homedir())
 end
 
 vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
