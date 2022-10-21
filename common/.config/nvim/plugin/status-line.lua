@@ -5,6 +5,7 @@ local diagnostics = require("diagnostics")
 local WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME = 150
 local WIN_WIDTH_COMPRESS_THRESHOLD_PATH = 200
 
+local MAX_SPELL_ERRORS = 20
 
 local function get_diagnostic_count(severity)
     return #vim.diagnostic.get(0, { severity = severity })
@@ -17,6 +18,37 @@ local function get_diagnostic_types()
         i = get_diagnostic_count(vim.diagnostic.severity.INFO),
         h = get_diagnostic_count(vim.diagnostic.severity.HINT),
     }
+end
+
+local function get_spelling_count()
+    local view = vim.fn.winsaveview()
+    local oldwrapscan = vim.o.wrapscan
+    vim.o.wrapscan = false
+
+    local spell_count = 0
+    vim.fn.cursor(1, 1)
+
+    while true do
+        local lastline = vim.fn.line(".")
+        local lastcol = vim.fn.col(".")
+        vim.cmd("normal! ]S")
+        if
+            (vim.fn.line(".") == lastline and vim.fn.col(".") == lastcol)
+            or spell_count > MAX_SPELL_ERRORS
+        then
+            break
+        end
+        spell_count = spell_count + 1
+    end
+
+    vim.fn.winrestview(view)
+    vim.o.wrapscan = oldwrapscan
+
+    if spell_count > MAX_SPELL_ERRORS then
+        spell_count = MAX_SPELL_ERRORS
+    end
+
+    return spell_count
 end
 
 function _G.Statusline_FeaturesEnabled()
@@ -180,40 +212,13 @@ vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
     end,
 })
 
-local MAX_SPELL_ERRORS = 20
-
 function _G.Statusline_SpellingErrorCount()
     if vim.wo.spell == true then
         if vim.b.spelling_warning == nil then
-            local view = vim.fn.winsaveview()
-            local oldwrapscan = vim.o.wrapscan
-            vim.o.wrapscan = false
+            local spelling_count = get_spelling_count()
 
-            local mycount = 0
-            vim.fn.cursor(1, 1)
-
-            while true do
-                local lastline = vim.fn.line(".")
-                local lastcol = vim.fn.col(".")
-                vim.cmd("normal! ]S")
-                if
-                    (
-                        vim.fn.line(".") == lastline
-                        and vim.fn.col(".") == lastcol
-                    ) or mycount > MAX_SPELL_ERRORS
-                then
-                    break
-                end
-                mycount = mycount + 1
-            end
-
-            vim.fn.winrestview(view)
-            vim.o.wrapscan = oldwrapscan
-
-            if mycount > MAX_SPELL_ERRORS then
-                vim.b.spelling_warning = "[S " .. MAX_SPELL_ERRORS .. "+]"
-            elseif mycount > 0 then
-                vim.b.spelling_warning = "[S " .. mycount .. "]"
+            if spelling_count > 0 then
+                vim.b.spelling_warning = "[S " .. spelling_count .. "]"
             else
                 vim.b.spelling_warning = ""
             end
