@@ -123,10 +123,7 @@ function _G.Statusline_List()
 end
 
 function _G.Statusline_Fileencoding()
-    if
-        vim.bo.filetype == "dirbuf"
-        or vim.bo.filetype == "terminal"
-    then
+    if vim.bo.filetype == "dirbuf" or vim.bo.filetype == "terminal" then
         return ""
     elseif vim.bo.fileencoding == "" then
         return ",fenc=?"
@@ -138,47 +135,40 @@ function _G.Statusline_Fileencoding()
 end
 
 function _G.Statusline_Indent()
-    local returnstring = ""
-
     if vim.bo.buftype == "terminal" then
-        return returnstring
+        return ""
     end
+
+    local returnstring
 
     if vim.bo.expandtab then
-        returnstring = returnstring .. "sw=" .. vim.bo.shiftwidth
+        returnstring = "sw=" .. vim.bo.shiftwidth
     else
-        returnstring = returnstring .. "ts=" .. vim.bo.tabstop
+        returnstring = "ts=" .. vim.bo.tabstop
     end
 
-    if vim.bo.textwidth ~= 80 then
-        -- If shiftwidth is very high, we are in 'soft' wrapping mode, don't
-        -- display shiftwidth.
-        if vim.bo.textwidth < 9999 then
-            returnstring = returnstring .. ",tw=" .. vim.bo.textwidth
-        end
+    if vim.bo.textwidth ~= 80 and vim.bo.textwidth < 9999 then
+        -- If textwidth is very high, we are in 'soft' wrapping mode, don't
+        -- display textwidth.
+        returnstring = returnstring .. ",tw=" .. vim.bo.textwidth
     end
 
     return returnstring
 end
 
 function _G.Statusline_Filename()
-    local filename =
-        vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
-
     if vim.fn.winwidth(0) < WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME then
-        return vim.fn.pathshorten(filename)
+        return vim.fn.pathshorten(get_filename_homedir())
     else
-        return filename
+        return get_filename_homedir()
     end
 end
 
 function _G.Statusline_Getcwd()
     if
-        not (
-            vim.bo.filetype == "help"
-            or vim.bo.filetype == "man"
-            or vim.bo.buftype == "terminal"
-        )
+        vim.bo.filetype ~= "help"
+        and vim.bo.filetype ~= "man"
+        and vim.bo.buftype ~= "terminal"
     then
         local path = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
 
