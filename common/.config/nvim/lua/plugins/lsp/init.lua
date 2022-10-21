@@ -50,7 +50,7 @@ local servers = {
     sumneko_lua = sumneko_settings,
     terraformls = {
         on_attach = function(_, _)
-            require("treesitter-terraform-doc").setup()
+            require("treesitter-terraform-doc").setup({})
         end,
     },
     tflint = {
