@@ -1,11 +1,10 @@
 local treesitter_parsers = require("nvim-treesitter.parsers")
 
+local diagnostics = require("diagnostics")
+
 local WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME = 150
 local WIN_WIDTH_COMPRESS_THRESHOLD_PATH = 200
 
-local function is_diagnostic_enabled()
-    return vim.b.diagnostic_enabled == nil or vim.b.diagnostic_enabled == true
-end
 
 local function get_diagnostic_count(severity)
     return #vim.diagnostic.get(0, { severity = severity })
@@ -28,7 +27,7 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",git_del_lns"
         end
 
-        if not is_diagnostic_enabled() then
+        if not diagnostics.enabled() then
             return_string = return_string .. ",¬D"
         end
 
@@ -47,17 +46,17 @@ function _G.Statusline_FeaturesEnabled()
 end
 
 function _G.Statusline_DiagnosticStatus()
-    if is_diagnostic_enabled() then
-        local diagnostics = {}
+    if diagnostics.enabled() then
+        local diagnostics_counts = {}
 
         for prefix, count in pairs(get_diagnostic_types()) do
             if count > 0 then
-                table.insert(diagnostics, prefix .. count)
+                table.insert(diagnostics_counts, prefix .. count)
             end
         end
 
-        if #diagnostics > 0 then
-            return "[D " .. table.concat(diagnostics, ",") .. "]"
+        if #diagnostics_counts > 0 then
+            return "[D " .. table.concat(diagnostics_counts, ",") .. "]"
         else
             return ""
         end

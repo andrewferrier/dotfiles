@@ -1,5 +1,9 @@
 local M = {}
 
+M.enabled = function()
+    return vim.b.diagnostic_enabled == nil or vim.b.diagnostic_enabled == true
+end
+
 M.hide = function()
     vim.b.diagnostic_enabled = false
     vim.diagnostic.disable(0)
