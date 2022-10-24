@@ -1,7 +1,7 @@
 local M = {}
 
 M.get_git_dir = function()
-    local dir = vim.fn.getcwd()
+    local dir = vim.fn.expand("%:p:h", 1)
     local cmd = "cd " .. dir .. "; git rev-parse --show-toplevel"
     local root = vim.fn.system(cmd)
 
