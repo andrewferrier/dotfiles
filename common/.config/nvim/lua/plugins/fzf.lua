@@ -46,7 +46,10 @@ vim.keymap.set("n", "cvg", function()
                 require("fzf-lua.actions").vimcmd("lcd", selected, opts)
             end,
             ["ctrl-s"] = function(selected, _)
-                require("open_terminal_fm").open_file_manager(selected[1])
+                require("open_filedirterm").open_file_manager(selected[1])
+            end,
+            ["ctrl-d"] = function(selected, _)
+                require("open_filedirterm").open_split_dirbuf(selected[1])
             end,
         },
         fzf_opts = {

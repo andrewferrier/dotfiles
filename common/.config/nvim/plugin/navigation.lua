@@ -17,9 +17,26 @@ vim.keymap.set("n", "cdh", ":lcd ~<CR>", { silent = true })
 vim.keymap.set("n", "cdu", ":lcd ..<CR>", { silent = true })
 vim.keymap.set("n", "cdg", change_to_root, { silent = true })
 
-vim.keymap.set("n", "cvd", function()
-    local cwd = vim.fn.getcwd()
+vim.keymap.set("n", "gof", function()
+    require("open_filedirterm").open_file_manager("%:p")
+end)
 
-    vim.cmd("split")
-    vim.cmd("Dirbuf " .. cwd)
-end, { silent = true })
+vim.keymap.set("n", "goF", function()
+    require("open_filedirterm").open_file_manager(vim.fn.getcwd())
+end)
+
+vim.keymap.set("n", "got", function()
+    require("open_filedirterm").open_terminal(vim.o.shell, "%:p:h")
+end)
+
+vim.keymap.set("n", "goT", function()
+    require("open_filedirterm").open_terminal(vim.o.shell, vim.fn.getcwd())
+end)
+
+vim.keymap.set("n", "god", function()
+    require("open_filedirterm").open_split_dirbuf("%:p:h")
+end)
+
+vim.keymap.set("n", "goD", function()
+    require("open_filedirterm").open_split_dirbuf(vim.fn.getcwd())
+end)
