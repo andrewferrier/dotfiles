@@ -71,16 +71,8 @@ gitsigns.setup({
     max_file_length = require("large_file").LARGE_FILE_LINE_COUNT,
 })
 
-local in_git_dir = function()
-    local dir = vim.fn.getcwd()
-    local cmd = "cd " .. dir .. "; git rev-parse --show-toplevel"
-    vim.fn.system(cmd)
-
-    return vim.v.shell_error == 0
-end
-
 vim.api.nvim_create_user_command("GitQFList", function()
-    if in_git_dir() then
+    if require("git").get_git_dir() then
         -- gitsigns always opens QuickFix list, async, even if empty
         gitsigns.setqflist("all")
     else
