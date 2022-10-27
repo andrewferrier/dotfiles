@@ -8,6 +8,7 @@
     & - redo :s on another line
     + - go to the beginning of the next line
     1z= - replace with first choice from spellcheck dictionary
+    <CR> - save file if needed
     <number> Ctrl-A/X - add/decrement specific amount
     Ctrl-E/Y - scroll window without moving cursor
     Ctrl-W Ctrl-F - open the file under cursor in a split (similar to gf)
@@ -29,7 +30,6 @@
     cvm - Man pages
     d'a - delete to mark "a"
     dV/xyz/-1 - delete linewise up to but not including line with pattern
-    <CR> - save file if needed
     g;, g, - jump backwards/forwards through changes
     gJ - Join lines w/o additional space, but include indent
     gM - move cursor to half-way along line
