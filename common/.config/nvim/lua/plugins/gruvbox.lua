@@ -15,10 +15,7 @@ local overrides = {
 if vim.fn.has("nvim-0.8.0") == 1 then
     -- Workarounds for tint.nvim; see
     -- https://github.com/levouh/tint.nvim/issues/11
-    overrides = vim.tbl_extend("keep", overrides, {
-        NormalNC = { link = "Normal" },
-        CurSearch = { reverse = true },
-    })
+    overrides.CurSearch = { reverse = true }
 end
 
 if
@@ -33,6 +30,7 @@ end
 require("gruvbox").setup({
     contrast = "hard",
     overrides = overrides,
+    dim_inactive = false, -- this is handled by tint.nvim
 })
 
 vim.cmd("colorscheme gruvbox")
