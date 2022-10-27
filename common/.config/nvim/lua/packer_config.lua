@@ -213,6 +213,7 @@ local function packages_misc(use)
         config = function()
             require("plugins.mini")
         end,
+        branch = "stable",
     })
 end
 
