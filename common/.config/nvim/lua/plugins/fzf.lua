@@ -27,6 +27,7 @@ fzf_lua.setup({
 vim.keymap.set("n", "cvb", fzf_lua.buffers)
 vim.keymap.set("n", "cvh", fzf_lua.help_tags)
 vim.keymap.set("n", "cvl", fzf_lua.live_grep)
+vim.keymap.set("n", "cvm", fzf_lua.man_pages)
 
 vim.keymap.set("n", "cvf", function()
     fzf_lua.fzf_exec("~/.local/bin/common/file-list -t -r", {

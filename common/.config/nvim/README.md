@@ -26,6 +26,7 @@
     ]e, [e - move line down or up
     cvd - Open Dirbuf buffer for current directory
     cvg - Change directory interactively
+    cvm - Man pages
     d'a - delete to mark "a"
     dV/xyz/-1 - delete linewise up to but not including line with pattern
     <CR> - save file if needed
