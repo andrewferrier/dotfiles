@@ -120,6 +120,7 @@
 *   [Dot repeat/count/operator-pending](https://www.vikasraj.dev/blog/vim-dot-repeat)
 *   [Getting started using Lua in Neovim](https://github.com/nanotee/nvim-lua-guide)
 *   [History and effective use of Vim](https://begriffs.com/posts/2019-07-19-history-use-vim.html)
+*   [NeoVim default mappings](https://docs.google.com/spreadsheets/d/1EJMLr_MPrYiO1TKJ2MjNkR-fA5Wgxa782-f0Wtdpz0w)
 *   [Power of :g](https://vim.fandom.com/wiki/Power_of_g)
 *   [Using LibUV in Neovim](https://teukka.tech/vimloop.html)
 *   [Vim galore](https://github.com/mhinz/vim-galore)
