@@ -36,6 +36,7 @@
     gO - show file outline (e.g. for Man)
     gi - insert in last place I inserted
     gj, gk, g$, g0 - go up and down by screen lines, end and beginning by screen line (useful when wrapped)
+    gp, gP - paste, but leave cursor after text
     gt - go to next tab
     gyc{style}{text object} - change case of text object as per ~/.config/nvim/lua/plugins/text_case.lua
     mA - set an uppercase mark, for jumping across files
