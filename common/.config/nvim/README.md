@@ -95,6 +95,7 @@
     grep <pattern> - search and populate quickfix list (using Rg)
     let @/='text/with/lots/of/slashes' - define search pattern (then use n/N)
     wn - write and move to next file in args list
+    write ++p <filename> - create parent dirs
 
 #### Based on a Visual Range
 
