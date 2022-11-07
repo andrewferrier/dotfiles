@@ -44,9 +44,6 @@ local function disable_indent(filetype, bufnr)
 end
 
 local setup_object = {
-    -- phpdoc is broken on M1 Mac because of
-    -- https://github.com/claytonrcarter/tree-sitter-phpdoc/issues/15
-    ignore_install = { "phpdoc" },
     highlight = {
         enable = true,
         disable = disable_other,
