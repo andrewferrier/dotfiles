@@ -67,13 +67,7 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",¬D"
         end
 
-        local treesitter_enabled = treesitter_parsers.has_parser()
-            and (
-                vim.b.treesitter_enabled == nil
-                or vim.b.treesitter_enabled == true
-            )
-
-        if not treesitter_enabled then
+        if not treesitter_parsers.has_parser() then
             return_string = return_string .. ",¬T"
         end
     end
