@@ -1,7 +1,11 @@
 require("filetype.section").setup("^#")
 require("filetype.text").setup()
 
-vim.cmd('iabbrev <buffer> zTODO <span style="color:red">TODO:</span><Esc>F<i')
+vim.cmd.iabbrev(
+    "<buffer>",
+    "zTODO",
+    '<span style="color:red">TODO:</span><Esc>F<i'
+)
 
 local surround = require("mini.surround")
 

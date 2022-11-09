@@ -4,7 +4,7 @@ local change_to_root = function()
     local dir = require("git").get_git_dir()
 
     if dir ~= nil then
-        vim.cmd("lcd " .. dir)
+        vim.cmd.lcd(dir)
     else
         vim.notify("Not in git directory.", vim.log.levels.ERROR)
     end

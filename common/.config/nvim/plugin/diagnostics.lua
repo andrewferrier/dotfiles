@@ -53,11 +53,9 @@ SEVERITY_MAP = {
 
 local show_diagnostic = function(diagnostic)
     if diagnostic ~= nil then
-        vim.cmd("echohl " .. SEVERITY_MAP[diagnostic.severity])
-        vim.cmd(
-            'echo "' .. vim.fn.escape(diagnostic_format(diagnostic), '"') .. '"'
-        )
-        vim.cmd("echohl None")
+        vim.cmd.echohl(SEVERITY_MAP[diagnostic.severity])
+        vim.cmd.echo("'" .. vim.fn.escape(diagnostic_format(diagnostic), "'") .. "'")
+        vim.cmd.echohl("None")
         vim.fn.setcursorcharpos(diagnostic.lnum + 1, diagnostic.col + 1)
     end
 end

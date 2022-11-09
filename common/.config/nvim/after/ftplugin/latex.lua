@@ -25,7 +25,7 @@ vim.b.minisurround_config = {
 }
 
 local function create_pdf_from_tex(absolute_tex_path)
-    vim.cmd("update")
+    vim.cmd.update()
     local without_extension = vim.fn.fnamemodify(absolute_tex_path, ":p:r")
     local directory = vim.fn.fnamemodify(absolute_tex_path, ":p:h")
 

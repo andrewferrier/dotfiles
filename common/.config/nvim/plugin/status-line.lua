@@ -35,7 +35,7 @@ local function get_spelling_count()
     while true do
         local lastline = vim.fn.line(".")
         local lastcol = vim.fn.col(".")
-        vim.cmd("normal! ]S")
+        vim.cmd.normal({ args = { "]S" }, bang = true })
         if
             (vim.fn.line(".") == lastline and vim.fn.col(".") == lastcol)
             or spell_count > MAX_SPELL_ERRORS

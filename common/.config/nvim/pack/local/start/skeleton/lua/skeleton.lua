@@ -56,8 +56,8 @@ M.setup = function()
         local skeleton = find_skeleton_with_warning()
 
         if skeleton ~= nil then
-            vim.cmd("read " .. skeleton)
-            vim.cmd("normal! kdd")
+            vim.cmd.read(skeleton)
+            vim.cmd.normal({ args = { "kdd" }, bang = true })
         end
     end, {})
 
@@ -66,7 +66,7 @@ M.setup = function()
         local skeleton = find_skeleton_with_warning()
 
         if skeleton ~= nil then
-            vim.cmd("split " .. skeleton)
+            vim.cmd.split(skeleton)
             vim.bo.filetype = existing_filetype
         end
     end, {})

@@ -7,7 +7,7 @@ local function visual_stage()
 
     local mode = vim.fn.mode():lower()
     if mode:find("^v") or mode:find("^ctrl-v") then
-        vim.cmd("normal! V")
+        vim.cmd.normal({ args = { "V" }, bang = true })
     end
 end
 
@@ -42,7 +42,7 @@ local attach = function(bufnr)
     map("ih", ":<C-U>Gitsigns select_hunk<CR>", { mode = { "o", "x" } })
 
     map("gbhs", function()
-        vim.cmd("update")
+        vim.cmd.update()
         gitsigns.stage_hunk()
     end)
 
@@ -55,7 +55,7 @@ local attach = function(bufnr)
     end)
 
     map("gba", function()
-        vim.cmd("update")
+        vim.cmd.update()
         gitsigns.stage_buffer()
     end)
 

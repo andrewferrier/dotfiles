@@ -139,7 +139,7 @@ local function keybindings_organizeimports(bufnr, lsp_name)
         map_buf(bufnr, "cxo", tsserver_organize_imports)
     elseif lsp_name == "pyright" then
         map_buf(bufnr, "cxo", function()
-            vim.cmd("silent PyrightOrganizeImports")
+            vim.cmd.silent("PyrightOrganizeImports")
         end)
     end
 end

@@ -1,7 +1,7 @@
 local M = {}
 
 M.close = function()
-    vim.cmd("cclose")
+    vim.cmd.cclose()
 end
 
 M.open = function()
@@ -11,7 +11,7 @@ M.open = function()
             vim.log.levels.WARN
         )
     else
-        vim.cmd("copen")
+        vim.cmd.copen()
     end
 end
 

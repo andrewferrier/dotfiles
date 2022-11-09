@@ -20,20 +20,20 @@ end
 
 M.open_terminal = function(command, dir)
     local expanded_dir = select_fileordir(dir, true)
-    vim.cmd("wincmd n")
+    vim.cmd.wincmd("n")
     vim.fn.termopen(command, { cwd = expanded_dir })
 end
 
 M.open_file_manager = function(file_or_dir)
     local expanded_ford = select_fileordir(file_or_dir, false)
-    vim.cmd("wincmd n")
+    vim.cmd.wincmd("n")
     vim.fn.termopen("ranger --selectfile=" .. vim.fn.shellescape(expanded_ford))
 end
 
 M.open_split_dirbuf = function(dir)
     local expanded_dir = select_fileordir(dir, true)
-    vim.cmd("split")
-    vim.cmd("Dirbuf " .. expanded_dir)
+    vim.cmd.split()
+    vim.cmd.Dirbuf(expanded_dir)
 end
 
 return M

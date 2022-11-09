@@ -20,13 +20,13 @@ local new_split = function()
                 + vim.fn.getwinvar(vim.fn.winnr(), "&textwidth", 80)
             )
 
-        vim.cmd("wincmd J")
-        vim.cmd("wincmd p")
+        vim.cmd.wincmd("J")
+        vim.cmd.wincmd("p")
 
         if vertical_split then
-            vim.cmd("vsplit")
+            vim.cmd.vsplit()
         else
-            vim.cmd("split")
+            vim.cmd.split()
         end
 
         vim.cmd(bufnr .. "b")

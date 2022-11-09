@@ -12,7 +12,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     })
 end
 
-vim.cmd("packadd packer.nvim")
+vim.cmd.packadd("packer.nvim")
 local packer = require("packer")
 
 packer.init({
@@ -29,11 +29,11 @@ packer.init({
 local function install_treesitter_parsers()
     -- Neither of these are sync, but that shouldn't matter as there is no
     -- intersection in the parsers they will touch
-    vim.cmd("TSUpdate")
+    vim.cmd.TSUpdate()
     -- In practice TSInstall may not install new parsers until after NeoVim is
     -- restarted. I don't consider that a major problem, just means we might lag
     -- behind a bit.
-    vim.cmd("TSInstall all")
+    vim.cmd.TSInstall()
 end
 
 local function packages_operators(use)
