@@ -17,11 +17,6 @@ fzf_lua.setup({
         ["--layout"] = "default",
         ["--color"] = "dark,gutter:-1",
     },
-    previewers = {
-        builtin = {
-            syntax_limit_l = require("large_file").LARGE_FILE_LINE_COUNT,
-        },
-    },
 })
 
 vim.keymap.set("n", "cvb", fzf_lua.buffers)
