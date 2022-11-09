@@ -28,17 +28,7 @@ local function lsp_document_format()
         return
     end
 
-    -- Doing formatting sequentially ensures that multiple LSPs can be used,
-    -- e.g. null-ls and terraform-ls, without prompting.
-
-    local TIMEOUT = 3000
-
-    if vim.fn.has("nvim-0.8.0") == 1 then
-        vim.lsp.buf.format({ timeout_ms = TIMEOUT })
-    else
-        vim.lsp.buf.formatting_seq_sync({}, TIMEOUT)
-    end
-
+    vim.lsp.buf.format({ timeout_ms = 3000 })
     vim.notify("Formatted document using LSP.")
 end
 
@@ -92,15 +82,11 @@ M.keybindings_codeaction = function(bufnr)
 end
 
 M.keybindings_rename = function(bufnr)
-    if vim.fn.has("nvim-0.8.0") == 1 then
-        map_buf(bufnr, "cxr", function()
-            return ":LspRename " .. vim.fn.expand("<cword>")
-        end, {
-            expr = true,
-        })
-    else
-        map_buf(bufnr, "cxr", vim.lsp.buf.rename)
-    end
+    map_buf(bufnr, "cxr", function()
+        return ":LspRename " .. vim.fn.expand("<cword>")
+    end, {
+        expr = true,
+    })
 end
 
 M.lsp_supports_rename = function(bufnr)
@@ -162,11 +148,6 @@ M.on_attach = function(client, bufnr)
     local lsp_name = client.name
     local server_capabilities = client.server_capabilities
     local filetype = vim.bo.filetype
-
-    if vim.fn.has("nvim-0.8.0") ~= 1 then
-        vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
-        vim.bo.tagfunc = "v:lua.vim.lsp.tagfunc"
-    end
 
     keybindings_formatting_check(bufnr, server_capabilities)
     keybindings_codeaction_check(bufnr, server_capabilities)

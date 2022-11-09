@@ -3,6 +3,7 @@ local statefile = vim.fn.expand("~/.cache/day-night/state-terminal")
 local palette = require("gruvbox.palette")
 
 local overrides = {
+    CurSearch = { reverse = true }, -- Workaround for tint.nvim; see https://github.com/levouh/tint.nvim/issues/11
     FidgetTitle = { link = "FidgetTask" },
     HydraBlue = { fg = palette.neutral_blue, bold = true },
     HydraHint = { link = "TabLineSel" },
@@ -11,12 +12,6 @@ local overrides = {
     String = { italic = false },
     TermCursorNC = { bg = "#00FF00" },
 }
-
-if vim.fn.has("nvim-0.8.0") == 1 then
-    -- Workarounds for tint.nvim; see
-    -- https://github.com/levouh/tint.nvim/issues/11
-    overrides.CurSearch = { reverse = true }
-end
 
 if
     vim.fn.filereadable(statefile)

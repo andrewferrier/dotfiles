@@ -124,9 +124,6 @@ local function packages_silent(use)
         config = function()
             require("plugins.tint")
         end,
-        cond = function()
-            return vim.fn.has("nvim-0.8.0") == 1
-        end,
         requires = { "ellisonleao/gruvbox.nvim" },
     })
 end
@@ -190,16 +187,12 @@ local function packages_lsp(use)
         end,
     })
 
-    -- FIXME: event = "LspAttach" can be added to inc-rename and fidget once 0.7
-    -- fully removed
     use({
         "smjonas/inc-rename.nvim",
         config = function()
             require("inc_rename").setup({ cmd_name = "LspRename" })
         end,
-        cond = function()
-            return vim.fn.has("nvim-0.8.0") == 1
-        end,
+        event = "LspAttach",
     })
 
     use({
@@ -207,6 +200,7 @@ local function packages_lsp(use)
         config = function()
             require("plugins.fidget")
         end,
+        event = "LspAttach",
     })
 end
 
