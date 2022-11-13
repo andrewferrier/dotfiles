@@ -25,10 +25,10 @@ function mkdir-assistance-in-place-named () {
     PATHTOMKDIR=${~PATHTOMKDIR}
 
     if [[ -e "${PATHTOMKDIR}" ]]; then
-        zle -M "Path ${PWD}/${PATHTOMKDIR} already exists, doing nothing."
+        zle -M "Path ${PATHTOMKDIR} already exists, doing nothing."
     else
-        mkdir -p "${PATHTOMKDIR}"
-        zle -M "Path ${PWD}/${PATHTOMKDIR} made."
+        mkdir -p "${PATHTOMKDIR}" > /dev/null
+        zle -M "Path ${PATHTOMKDIR} made."
     fi
 }
 
