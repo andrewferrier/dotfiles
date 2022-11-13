@@ -34,7 +34,8 @@ function mkdir-assistance-in-place-named () {
 
 # Adapted from https://github.com/grml/grml-etc-core/blob/master/etc/zsh/zshrc
 function mkdir-assistance-in-place-temp() {
-    DIR=$(mktemp -d /tmp/XXXXXX)
+    DIR=/tmp/$(date +%Y-%m-%dT%H:%M:%S)
+    mkdir $DIR > /dev/null
     zle -U "$DIR "
 }
 
