@@ -1,5 +1,5 @@
 if (( $+commands[fasd] )); then
-    eval "$(fasd --init zsh-hook)"
+    eval "$(cat $ZSH_CACHE_FOLDER/fasd-zsh-hook.zsh)"
 fi
 
 if (( $+commands[direnv] )); then
