@@ -83,6 +83,7 @@
     %s/\v(pattern)/\U\1\e/ - convert to uppercase
     /\Vpattern/ - very nomagic (most chars literal; don't use regexes)
     /\vpattern/ - very magic (most chars non-literal)
+    Cfilter <pattern> - filter quickfix list
     Ctrl-R Ctrl-w/a - insert the word/WORD under cursor
     DiagnosticQFList - put all diagnostic items in a quickfix buffer
     GitQFList - show all git hunks in a quickfix buffer
