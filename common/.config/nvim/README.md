@@ -116,6 +116,10 @@
 
     Ctrl-T - open file in new tab
 
+### Search Pattern
+
+    \zs, \ze - indicate where match starts within pattern (useful for search and replace)
+
 ## Links
 
 *   [Advanced Search and Replace](https://gosukiwi.github.io/vim/2022/04/19/vim-advanced-search-and-replace.html)
