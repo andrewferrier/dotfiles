@@ -55,7 +55,7 @@ vim.keymap.set("n", "cvg", function()
         fzf_opts = {
             ["--preview"] = fzf_lua.shell.preview_action_cmd(function(items)
                 return "exa --level 2 --tree --color=always --group-directories-first "
-                    .. vim.fn.shellescape(items[1], " ")
+                    .. vim.fn.escape(items[1], " ")
             end),
             ["--no-sort"] = "",
         },
