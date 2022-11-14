@@ -64,6 +64,7 @@
 # echo >&2 "xxx"
 
 set -o errexit
+set -o noglob
 set -o nounset
 set -o pipefail
 
