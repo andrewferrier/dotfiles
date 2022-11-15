@@ -33,7 +33,7 @@ local function install_treesitter_parsers()
     -- In practice TSInstall may not install new parsers until after NeoVim is
     -- restarted. I don't consider that a major problem, just means we might lag
     -- behind a bit.
-    vim.cmd.TSInstall()
+    vim.cmd.TSInstall("all")
 end
 
 local function packages_operators(use)
