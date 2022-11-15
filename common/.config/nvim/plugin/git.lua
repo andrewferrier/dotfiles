@@ -6,8 +6,16 @@ vim.keymap.set("n", "gbs", function()
     require("open_filedirterm").open_terminal("tig status", "%:p:h")
 end)
 
+vim.keymap.set("n", "gbS", function()
+    require("open_filedirterm").open_terminal("tig status", vim.fn.getcwd())
+end)
+
 vim.keymap.set("n", "gbt", function()
     require("open_filedirterm").open_terminal("tig", "%:p:h")
+end)
+
+vim.keymap.set("n", "gbT", function()
+    require("open_filedirterm").open_terminal("tig", vim.fn.getcwd())
 end)
 
 vim.keymap.set("n", "gbo", function()
