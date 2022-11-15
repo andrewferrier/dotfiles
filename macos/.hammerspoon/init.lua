@@ -81,6 +81,10 @@ local function open_terminal(command)
     end
 end
 
+local function open_bash_terminal(command)
+    open_terminal("bash --login -c '" .. command .. "'")
+end
+
 hs.hotkey.bind(PREFIX_ACTION, "Return", function()
     open_terminal()
 end)
@@ -98,11 +102,11 @@ hs.hotkey.bind(PREFIX_ACTION, "G", function()
 end)
 
 hs.hotkey.bind(PREFIX_ACTION, "O", function()
-    open_terminal(HOME .. "/bookmarks/bin/bookmark-select-and-open")
+    open_bash_terminal(HOME .. "/bookmarks/bin/bookmark-select-and-open")
 end)
 
 hs.hotkey.bind(PREFIX_ACTION, "I", function()
-    open_terminal(
+    open_bash_terminal(
         HOME
             .. "/bookmarks/bin/bookmark-select-and-open "
             .. HOME
