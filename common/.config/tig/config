@@ -14,9 +14,6 @@ bind status T !?trash %(file)
 bind status H !git push
 bind status U !git pull
 
-# See https://github.com/jonas/tig/issues/595
-set status-show-untracked-files = yes
-
 set line-graphics = utf-8
 set truncation-delimiter = utf-8
 set ignore-case = smart-case
