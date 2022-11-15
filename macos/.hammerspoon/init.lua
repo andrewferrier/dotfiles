@@ -93,6 +93,10 @@ hs.hotkey.bind(PREFIX_ACTION, "M", function()
     open_terminal(HOMEBREW_BIN .. "/vimpc")
 end)
 
+hs.hotkey.bind(PREFIX_ACTION, "V", function()
+    open_bash_terminal(HOMEBREW_BIN .. "/nvim")
+end)
+
 hs.hotkey.bind(PREFIX_ACTION, "F", function()
     open_terminal(HOME .. "/.local/bin/common/file-list-find-and-open -f")
 end)
@@ -132,7 +136,7 @@ hs.hotkey.bind(PREFIX_ACTION, "U", function()
 end tell]])
 end)
 
-hs.hotkey.bind(PREFIX_ACTION, "V", function()
+hs.hotkey.bind(PREFIX_ACTION, "'", function()
     -- Pseudo-"paste" for webforms that don't allow passwords
     hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
