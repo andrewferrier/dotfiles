@@ -1,7 +1,9 @@
 vim.opt.breakindent = true
+vim.opt.confirm = true
 vim.opt.display:append("uhex")
 vim.opt.equalalways = false
 vim.opt.scrolloff = 5
+vim.opt.shortmess:append("c")
 vim.opt.sidescrolloff = 15
 vim.opt.splitbelow = true
 vim.opt.splitright = true
@@ -10,11 +12,6 @@ if vim.fn.has("nvim-0.9.0") == 1 and not vim.fn.has('gui_vimr') then
     -- VimR presents as NeoVim 0.9 even though it's really 0.8
     vim.opt.splitkeep = "screen"
 end
-
--- Fix https://github.com/neovim/neovim/issues/12288#issuecomment-626276240; I
--- also find it interesting to see the file summary when opening it.
-vim.opt.shortmess:append("c")
-vim.opt.confirm = true
 
 -- numbers and signs in the same column
 vim.opt.signcolumn = "number"
