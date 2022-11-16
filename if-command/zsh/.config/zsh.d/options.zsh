@@ -13,6 +13,11 @@ setopt PUSHDMINUS
 setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_SILENT
 
+# Input/output
+setopt CLOBBER_EMPTY
+setopt NO_CLOBBER
+unsetopt FLOW_CONTROL
+
 # History configuration
 HISTFILE="${XDG_DATA_HOME}/.zsh_history"
 HISTSIZE=1000000
@@ -26,4 +31,3 @@ setopt HIST_VERIFY
 setopt INC_APPEND_HISTORY
 
 unsetopt BEEP # This stops visual beeping (flash) when completing.
-unsetopt FLOW_CONTROL
