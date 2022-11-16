@@ -3,7 +3,7 @@ setopt AUTO_CONTINUE
 setopt CHECK_JOBS
 setopt NO_HUP
 
-# Misc
+# Completion
 setopt NO_LIST_BEEP
 
 # Directory changing
