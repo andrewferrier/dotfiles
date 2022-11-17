@@ -9,8 +9,7 @@ vim.opt.sidescrolloff = 15
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-if vim.fn.has("nvim-0.9.0") == 1 and not vim.fn.has('gui_vimr') then
-    -- VimR presents as NeoVim 0.9 even though it's really 0.8
+if vim.fn.has("nvim-0.9.0") == 1 then
     vim.opt.splitkeep = "screen"
 end
 
