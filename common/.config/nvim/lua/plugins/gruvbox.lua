@@ -25,7 +25,6 @@ end
 require("gruvbox").setup({
     contrast = "hard",
     overrides = overrides,
-    dim_inactive = false, -- this is handled by tint.nvim
 })
 
 vim.cmd.colorscheme("gruvbox")
