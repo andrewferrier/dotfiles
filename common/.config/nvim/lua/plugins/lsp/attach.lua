@@ -73,6 +73,7 @@ end
 
 M.keybindings_codeaction = function(bufnr)
     vim.keymap.set("n", "cxa", vim.lsp.buf.code_action, { buffer = bufnr })
+    vim.keymap.set("x", "cxa", vim.lsp.buf.code_action, { buffer = bufnr })
 end
 
 M.keybindings_rename = function(bufnr)
