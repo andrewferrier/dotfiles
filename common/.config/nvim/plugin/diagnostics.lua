@@ -3,8 +3,6 @@ local diagnostic_format = function(diagnostic)
 
     if diagnostic.code then
         message = message .. " [" .. diagnostic.code .. "]"
-    elseif diagnostic.lsp and diagnostic.lsp.code then
-        message = message .. " [" .. diagnostic.lsp.code .. "]"
     end
 
     if diagnostic.source then
