@@ -67,25 +67,20 @@ M.keybindings_defaults = function()
     map("gQ", "document format")
 end
 
-local map_buf = function(bufnr, lhs, rhs, opts)
-    opts = vim.tbl_deep_extend("force", { buffer = bufnr }, opts or {})
-
-    vim.keymap.set("n", lhs, rhs, opts)
-end
-
 M.keybindings_formatting = function(bufnr)
-    map_buf(bufnr, "gQ", lsp_document_format)
+    vim.keymap.set("n", "gQ", lsp_document_format, { buffer = bufnr })
 end
 
 M.keybindings_codeaction = function(bufnr)
-    map_buf(bufnr, "cxa", vim.lsp.buf.code_action)
+    vim.keymap.set("n", "cxa", vim.lsp.buf.code_action, { buffer = bufnr })
 end
 
 M.keybindings_rename = function(bufnr)
-    map_buf(bufnr, "cxr", function()
+    vim.keymap.set("n", "cxr", function()
         return ":LspRename " .. vim.fn.expand("<cword>")
     end, {
         expr = true,
+        buffer = bufnr,
     })
 end
 
@@ -125,22 +120,27 @@ local function keybindings_hover_keyword(bufnr, server_capabilities, filetype)
         -- ~/.config/nvim/after/ftplugin/terraform.lua
     elseif server_capabilities.hoverProvider then
         if filetype ~= "vim" then
-            map_buf(bufnr, "K", vim.lsp.buf.hover)
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
         end
     else
-        map_buf(bufnr, "K", function()
+        vim.keymap.set("n", "K", function()
             vim.notify("Hover not supported by LSP.", vim.log.levels.ERROR)
-        end)
+        end, { buffer = bufnr })
     end
 end
 
 local function keybindings_organizeimports(bufnr, lsp_name)
     if lsp_name == "tsserver" then
-        map_buf(bufnr, "cxo", tsserver_organize_imports)
+        vim.keymap.set(
+            "n",
+            "cxo",
+            tsserver_organize_imports,
+            { buffer = bufnr }
+        )
     elseif lsp_name == "pyright" then
-        map_buf(bufnr, "cxo", function()
+        vim.keymap.set("n", "cxo", function()
             vim.cmd.silent("PyrightOrganizeImports")
-        end)
+        end, { buffer = bufnr })
     end
 end
 
