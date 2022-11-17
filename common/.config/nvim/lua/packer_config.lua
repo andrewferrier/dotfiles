@@ -124,7 +124,7 @@ local function packages_silent(use)
         config = function()
             require("plugins.tint")
         end,
-        requires = { "ellisonleao/gruvbox.nvim" },
+        after = { "gruvbox.nvim" },
     })
 end
 
