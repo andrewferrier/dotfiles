@@ -85,6 +85,7 @@
     /\vpattern/ - very magic (most chars non-literal)
     Cfilter <pattern> - filter quickfix list
     Ctrl-R Ctrl-w/a - insert the word/WORD under cursor
+    Ctrl-W - backspace over word
     DiagnosticQFList - put all diagnostic items in a quickfix buffer
     GitQFList - show all git hunks in a quickfix buffer
     Mkdir - create directory for current file
