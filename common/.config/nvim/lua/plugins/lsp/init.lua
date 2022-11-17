@@ -41,7 +41,10 @@ local yaml_settings = {
 }
 
 local servers = {
-    bashls = {},
+    bashls = {
+        -- Disable shellcheck because we use it from null-ls where we have more control
+        cmd_env = { SHELLCHECK_PATH = "" },
+    },
     cssls = css_settings.settings,
     dockerls = {},
     gopls = {},
