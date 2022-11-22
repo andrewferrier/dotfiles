@@ -16,7 +16,10 @@ local sumneko_settings = {
             diagnostics = {
                 globals = { "IMAP", "Set", "hs", "options", "pipe_to", "vim" },
             },
-            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file("", true),
+                checkThirdParty = false,
+            },
             telemetry = { enable = false },
             -- hint = { enable = true }, -- these hints seem fairly useless for now
         },
