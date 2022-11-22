@@ -18,6 +18,34 @@ local sumneko_settings = {
             },
             workspace = { library = vim.api.nvim_get_runtime_file("", true) },
             telemetry = { enable = false },
+            -- hint = { enable = true }, -- these hints seem fairly useless for now
+        },
+    },
+}
+
+local tsserver_settings = {
+    settings = {
+        typescript = {
+            inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+            },
+        },
+        javascript = {
+            inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+            },
         },
     },
 }
@@ -64,7 +92,7 @@ local servers = {
             vim.env.XDG_CONFIG_HOME .. "/.tflint.hcl",
         },
     },
-    tsserver = {},
+    tsserver = tsserver_settings,
     vimls = {},
     yamlls = yaml_settings,
 }

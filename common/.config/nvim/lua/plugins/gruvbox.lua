@@ -7,6 +7,7 @@ local overrides = {
     FidgetTitle = { link = "FidgetTask" },
     HydraBlue = { fg = palette.neutral_blue, bold = true },
     HydraHint = { link = "TabLineSel" },
+    LspInlayHint = { link = "Folded" },
     Operator = { italic = false },
     QuickFixLine = { link = "IncSearch" },
     String = { italic = false },

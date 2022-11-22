@@ -202,6 +202,13 @@ local function packages_lsp(use)
         end,
         event = "LspAttach",
     })
+
+    use({
+        "lvimuser/lsp-inlayhints.nvim",
+        config = function()
+            require("plugins.inlayhints")
+        end,
+    })
 end
 
 local function packages_misc(use)
