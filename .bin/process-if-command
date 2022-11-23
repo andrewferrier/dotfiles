@@ -12,7 +12,13 @@ for directory in "${ROOT_DIR}"/if-command/*; do
 
     if command -v "$COMMAND" >/dev/null; then
         stow --verbose --dir="${ROOT_DIR}/if-command" --target="${HOME}" --stow "$COMMAND"
+    fi
+done
 
+for directory in "${ROOT_DIR}"/if-command-after/*; do
+    COMMAND=$(basename "$directory")
+
+    if command -v "$COMMAND" >/dev/null; then
         AFTER_SCRIPT=$(realpath "${ROOT_DIR}/if-command-after")
 
         if [ -d "${AFTER_SCRIPT}" ]; then
