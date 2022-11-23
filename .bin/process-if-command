@@ -5,20 +5,25 @@ set -o nounset
 set -o pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-DOTFILES_DIR=${SCRIPT_DIR}/..
+ROOT_DIR=${1:-${SCRIPT_DIR}/..}
 
-for directory in "${DOTFILES_DIR}"/if-command/*; do
+for directory in "${ROOT_DIR}"/if-command/*; do
     COMMAND=$(basename "$directory")
 
     if command -v "$COMMAND" >/dev/null; then
-        stow --verbose --dir="${DOTFILES_DIR}/if-command" --target="${HOME}" --stow "$COMMAND"
+        stow --verbose --dir="${ROOT_DIR}/if-command" --target="${HOME}" --stow "$COMMAND"
 
-        AFTER_SCRIPT=$(realpath "${DOTFILES_DIR}/if-command-after/${COMMAND}")
-        if [ -f "${AFTER_SCRIPT}" ]; then
-            printf "Running %s..." "${AFTER_SCRIPT}"
-            echo ""
-            ${AFTER_SCRIPT}
-            echo "${AFTER_SCRIPT} complete."
+        AFTER_SCRIPT=$(realpath "${ROOT_DIR}/if-command-after")
+
+        if [ -d "${AFTER_SCRIPT}" ]; then
+            AFTER_SCRIPT="${AFTER_SCRIPT}/${COMMAND}"
+
+            if [ -f "${AFTER_SCRIPT}" ]; then
+                printf "Running %s..." "${AFTER_SCRIPT}"
+                echo ""
+                ${AFTER_SCRIPT}
+                echo "${AFTER_SCRIPT} complete."
+            fi
         fi
     fi
 done
