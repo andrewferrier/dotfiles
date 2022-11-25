@@ -209,6 +209,8 @@ local function packages_lsp(use)
             require("plugins.inlayhints")
         end,
     })
+
+    use({ "yioneko/nvim-type-fmt" })
 end
 
 local function packages_misc(use)
