@@ -14,7 +14,10 @@ setopt PUSHD_IGNORE_DUPS
 setopt PUSHD_SILENT
 
 # Input/output
-setopt CLOBBER_EMPTY
+if is-at-least 5.9; then
+    setopt CLOBBER_EMPTY
+fi
+
 setopt NO_CLOBBER
 unsetopt FLOW_CONTROL
 
