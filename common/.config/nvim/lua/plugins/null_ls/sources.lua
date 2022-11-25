@@ -90,22 +90,7 @@ M.sources = {
             vim.env.HOME .. "/.config/mdl/.mdl.rb",
         },
     }),
-    null_ls.builtins.diagnostics.shellcheck.with({
-        extra_args = {
-            "--enable",
-            "add-default-case",
-            "--enable",
-            "avoid-nullary-conditions",
-            "--enable",
-            "check-extra-masked-returns",
-            "--enable",
-            "check-set-e-suppressed",
-            "--enable",
-            "check-unassigned-uppercase",
-            "--enable",
-            "deprecate-which",
-        },
-    }),
+    null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.sqlfluff,
     null_ls.builtins.diagnostics.tidy,
     null_ls.builtins.diagnostics.trail_space.with({
