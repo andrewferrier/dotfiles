@@ -32,15 +32,6 @@ local function lsp_document_format()
     vim.notify("Formatted document using LSP.")
 end
 
-local function tsserver_organize_imports()
-    vim.lsp.buf.execute_command({
-        command = "_typescript.organizeImports",
-        arguments = { vim.api.nvim_buf_get_name(0) },
-    })
-
-    vim.notify("Imports organized.")
-end
-
 function _G.show_capabilities()
     for _, client in pairs(vim.lsp.buf_get_clients(0)) do
         print(
@@ -132,12 +123,9 @@ end
 
 local function keybindings_organizeimports(bufnr, lsp_name)
     if lsp_name == "tsserver" then
-        vim.keymap.set(
-            "n",
-            "cxo",
-            tsserver_organize_imports,
-            { buffer = bufnr }
-        )
+        vim.keymap.set("n", "cxo", function()
+            require("typescript").actions.organizeImports()
+        end, { buffer = bufnr })
     elseif lsp_name == "pyright" then
         vim.keymap.set("n", "cxo", function()
             vim.cmd.silent("PyrightOrganizeImports")

@@ -95,7 +95,6 @@ local servers = {
             vim.env.XDG_CONFIG_HOME .. "/.tflint.hcl",
         },
     },
-    tsserver = tsserver_settings,
     vimls = {},
     yamlls = yaml_settings,
 }
@@ -114,5 +113,11 @@ for lsp, settings in pairs(servers) do
 
     lspconfig[lsp].setup(settings)
 end
+
+tsserver_settings.on_attach = attach.on_attach
+
+require("typescript").setup({
+    server = tsserver_settings
+})
 
 attach.keybindings_defaults()

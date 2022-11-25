@@ -131,6 +131,8 @@ M.sources = {
             match_regex(vim.regex("FIXME"), "FIXME", SEVERITIES.hint)
         end,
     }),
+
+    require("typescript.extensions.null-ls.code-actions"),
 }
 
 return M
