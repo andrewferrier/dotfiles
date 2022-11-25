@@ -7,9 +7,10 @@ vim.filetype.add({
     },
     filename = {
         [".dockerignore"] = "gitignore",
-        [".sqlfluff"] = "cfg",
         [".gitlint"] = "toml",
+        [".sqlfluff"] = "cfg",
         ["control_template"] = "debcontrol",
+        ["shellcheckrc"] = "conf",
     },
     pattern = {
         ["%.secrets.*"] = "sh",
