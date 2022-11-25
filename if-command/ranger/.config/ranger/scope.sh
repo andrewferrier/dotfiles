@@ -12,12 +12,9 @@ IFS=$'\n'
 
 FILE_PATH="${1}"
 PV_WIDTH="${2:-80}"
-# shellcheck disable=SC2034
 PV_HEIGHT="${3:-30}"
-# shellcheck disable=SC2034
-IMAGE_CACHE_PATH="${4:-/tmp}"
-# shellcheck disable=SC2034
-PV_IMAGE_ENABLED="${5:-False}"
+# IMAGE_CACHE_PATH="${4:-/tmp}"
+# PV_IMAGE_ENABLED="${5:-False}"
 
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_PATH##*.}" | tr '[:upper:]' '[:lower:]')"
 FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_PATH#*.}" | tr '[:upper:]' '[:lower:]')
