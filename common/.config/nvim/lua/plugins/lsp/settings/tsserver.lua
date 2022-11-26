@@ -10,7 +10,7 @@ local inlayHints = {
 
 return {
     settings = {
-        typescript = inlayHints,
-        javascript = inlayHints,
+        typescript = { inlayHints = inlayHints },
+        javascript = { inlayHints = inlayHints },
     },
 }
