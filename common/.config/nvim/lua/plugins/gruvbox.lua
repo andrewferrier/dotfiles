@@ -7,7 +7,8 @@ local overrides = {
     FidgetTitle = { link = "FidgetTask" },
     HydraBlue = { fg = palette.neutral_blue, bold = true },
     HydraHint = { link = "TabLineSel" },
-    LspInlayHint = { link = "Folded" },
+    LspInlayHint = { link = "Folded" }, -- lsp-inlayhints.nvim
+    LspReadonly = { italic = true }, -- nvim-semantic-tokens
     Operator = { italic = false },
     QuickFixLine = { link = "IncSearch" },
     String = { italic = false },
