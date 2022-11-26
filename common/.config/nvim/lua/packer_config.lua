@@ -168,7 +168,7 @@ local function packages_treesitter(use)
         end,
     })
 
-    use({ "Afourcat/treesitter-terraform-doc.nvim", ft = "terraform" })
+    use({ "Afourcat/treesitter-terraform-doc.nvim" })
 end
 
 local function packages_lsp(use)

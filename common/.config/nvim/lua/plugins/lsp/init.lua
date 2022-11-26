@@ -82,11 +82,7 @@ local servers = {
     jsonls = {},
     pyright = {},
     sumneko_lua = sumneko_settings,
-    terraformls = {
-        on_attach = function(_, _)
-            require("treesitter-terraform-doc").setup({})
-        end,
-    },
+    terraformls = {},
     tflint = {
         cmd = {
             "tflint",
@@ -100,24 +96,11 @@ local servers = {
 }
 
 for lsp, settings in pairs(servers) do
-    if settings.on_attach then
-        local custom_on_attach = settings.on_attach
-
-        settings.on_attach = function(client, bufnr)
-            custom_on_attach(client, bufnr)
-            attach.on_attach(client, bufnr)
-        end
-    else
-        settings.on_attach = attach.on_attach
-    end
-
+    settings.on_attach = attach.on_attach
     lspconfig[lsp].setup(settings)
 end
 
 tsserver_settings.on_attach = attach.on_attach
-
-require("typescript").setup({
-    server = tsserver_settings
-})
+require("typescript").setup({ server = tsserver_settings })
 
 attach.keybindings_defaults()
