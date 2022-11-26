@@ -1,5 +1,3 @@
-local M = {}
-
 local css_settings = {
     validate = true,
     lint = {
@@ -29,7 +27,7 @@ local parsedcss_settings = vim.deepcopy(css_settings)
 parsedcss_settings.lint.importStatement = "warning"
 parsedcss_settings.lint.float = "warning"
 
-M.settings = {
+return {
     settings = {
         css = css_settings,
         scss = parsedcss_settings,
@@ -37,5 +35,3 @@ M.settings = {
     },
     filetypes = { "css", "scss", "sass", "less" },
 }
-
-return M
