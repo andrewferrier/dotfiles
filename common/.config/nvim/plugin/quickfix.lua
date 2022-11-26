@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
-    group = vim.api.nvim_create_augroup("after_quick_fix", {}),
+    group = vim.api.nvim_create_augroup("QuickFixCmdPost_openlist", {}),
     callback = function()
         require("quickfix").open()
     end,

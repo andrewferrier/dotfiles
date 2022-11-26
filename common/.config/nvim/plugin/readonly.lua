@@ -18,7 +18,7 @@ end)
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     desc = "Make files readonly when outside of home directory",
     pattern = "*",
-    group = vim.api.nvim_create_augroup("readonly.lua", { clear = true }),
+    group = vim.api.nvim_create_augroup("BufReadPost_readonly.lua", {}),
     callback = function()
         if not is_excluded(vim.api.nvim_buf_get_name(0), EXCLUDED_DIRS) then
             require("readonly").make_readonly()

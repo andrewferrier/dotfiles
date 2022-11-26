@@ -33,7 +33,7 @@ require("nvim-treesitter.configs").setup(setup_object)
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
     desc = "Treesitter on_attach simulation",
     pattern = "*",
-    group = vim.api.nvim_create_augroup("treesitter.lua", { clear = true }),
+    group = vim.api.nvim_create_augroup("BufReadPost_treesitter.lua", {}),
     callback = function()
         if require("nvim-treesitter.parsers").has_parser() then
             on_attach()
