@@ -26,6 +26,21 @@ vim.b.minisurround_config = {
                 }
             end,
         },
+        l = {
+            output = function()
+                local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                return { left = "\\href{" .. clipboard .. "}{", right = "}" }
+            end,
+        },
+        L = {
+            output = function()
+                local link_name = surround.user_input("Enter the link name: ")
+                return {
+                    left = "\\href{",
+                    right = "}{" .. link_name .. "}",
+                }
+            end,
+        },
     },
 }
 
