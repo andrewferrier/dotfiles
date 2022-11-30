@@ -169,6 +169,13 @@ local function packages_treesitter(use)
     })
 
     use({ "Afourcat/treesitter-terraform-doc.nvim" })
+
+    use({
+        "cshuaimin/ssr.nvim",
+        config = function()
+            require("plugins.ssr")
+        end,
+    })
 end
 
 local function packages_lsp(use)
