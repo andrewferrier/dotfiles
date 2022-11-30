@@ -3,7 +3,6 @@ vim.filetype.add({
         equivs = "debcontrol",
         jad = "java",
         rasi = "rasi",
-        tex = "latex", -- We always want LaTeX, avoid slow detection logic
     },
     filename = {
         [".dockerignore"] = "gitignore",
