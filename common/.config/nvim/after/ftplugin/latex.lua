@@ -3,7 +3,7 @@ vim.bo.commentstring = "% %s"
 vim.cmd.iabbrev(
     "<buffer>",
     "zTODO",
-    '\\textcolor{red}{TODO:}<Esc>i'
+    '\\textcolor{red}{TODO\\@:}<Esc>i'
 )
 
 require("filetype.text").setup()
