@@ -6,7 +6,7 @@
 # 10-minute average
 UPTIME=$(sysctl -n vm.loadavg | cut -d' ' -f 3)
 
-if (( $(echo "$UPTIME > 5.00" | bc -l) )); then
+if (( $(echo "$UPTIME > 10.00" | bc -l) )); then
     echo -n "⚠️ "
     echo "CPU Load $UPTIME | color=#ff0000"
 else
