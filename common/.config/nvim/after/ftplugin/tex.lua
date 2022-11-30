@@ -1,12 +1,11 @@
+require("filetype.section").setup(
+    "\\\\section\\|\\\\subsection\\|\\\\begin{document}\\|\\\\end{document}"
+)
+require("filetype.text").setup()
+
 vim.bo.commentstring = "% %s"
 
-vim.cmd.iabbrev(
-    "<buffer>",
-    "zTODO",
-    '\\textcolor{red}{TODO\\@:}<Esc>i'
-)
-
-require("filetype.text").setup()
+vim.cmd.iabbrev("<buffer>", "zTODO", "\\textcolor{red}{TODO\\@:}<Esc>i")
 
 local surround = require("mini.surround")
 
