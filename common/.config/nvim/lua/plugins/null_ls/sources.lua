@@ -24,14 +24,19 @@ M.sources = {
     }),
     null_ls.builtins.formatting.latexindent.with({
         extra_args = function(params)
+            local COLUMNS = "modifyLineBreaks:textWrapOptions:columns:"
+                .. vim.api.nvim_buf_get_option(params.bufnr, "textwidth")
+            local INDENT = "defaultIndent:'"
+                .. string.rep(
+                    " ",
+                    vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth")
+                )
+                .. "'"
+
             return {
+                "-m",
                 "--cruft=/tmp",
-                "--yaml=defaultIndent:'"
-                    .. string.rep(
-                        " ",
-                        vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth")
-                    )
-                    .. "'",
+                "--yaml=" .. COLUMNS .. "," .. INDENT,
             }
         end,
         filetypes = { "tex", "latex" },
