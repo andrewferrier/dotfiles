@@ -147,7 +147,6 @@
 
 ## TODO
 
-*   Fix chewing up CPU when editing a large gitcommit file
 *   Publish wrapping.lua (with enough testing in place)
 *   Play with treesitter to highlight inside alias strings in bash/zsh
 *   Check why mini surround doesn't highlight

@@ -22,7 +22,12 @@ local function on_attach()
 end
 
 local setup_object = {
-    highlight = { enable = true },
+    highlight = {
+        enable = true,
+        disable = function()
+            return require("large_file").is_large_file()
+        end,
+    },
     refactor = { smart_rename = { enable = true } },
     indent = { enable = true, disable = { "python" } }, -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
     endwise = { enable = true },
