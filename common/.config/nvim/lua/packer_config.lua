@@ -152,6 +152,13 @@ local function packages_syntax(use)
     })
 
     use({ "jkramer/vim-checkbox", ft = "markdown" })
+
+    use({
+        "lervag/vimtex",
+        config = function()
+            require("plugins.vimtex")
+        end,
+    })
 end
 
 local function packages_treesitter(use)

@@ -107,6 +107,8 @@
 
 ### Text Object/Operator Pending Mode/Visual Mode Select
 
+    ac (TeX) - command
+    ae (TeX) - environment
     gc - comment
     gn/gN - next/previous search match
     i#/a# - section (markdown)
@@ -121,6 +123,12 @@
 ### Search Pattern
 
     \zs, \ze - indicate where match starts within pattern (useful for search and replace)
+
+### VimTeX Filetype
+
+    \ll - build file
+    \lo - open PDF
+    \lc - clean build directory
 
 ## Links
 
