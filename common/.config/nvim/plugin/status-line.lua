@@ -1,5 +1,3 @@
-local treesitter_parsers = require("nvim-treesitter.parsers")
-
 local diagnostics = require("diagnostics")
 
 local WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME = 150
@@ -67,7 +65,7 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",¬D"
         end
 
-        if not treesitter_parsers.has_parser() then
+        if not vim.treesitter.highlighter.active[vim.fn.bufnr()] then
             return_string = return_string .. ",¬T"
         end
     end
