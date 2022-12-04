@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-TRASH_DIR="/tmp/trash-$(date +%Y-%M-%d)"
+TRASH_DIR="/tmp/trash-$(date +%Y-%m-%d)"
 
 TEMP_IFS=${IFS}
 IFS=$'\n'
