@@ -58,24 +58,29 @@ M.visual_selection_range = function()
 
     local region, start, finish = get_marked_region("v", ".", options)
 
-    local lines =
-        vim.api.nvim_buf_get_lines(bufnr, start[1], finish[1] + 1, false)
-    local line1_end
-    if region[start[1]][2] - region[start[1]][1] < 0 then
-        line1_end = #lines[1] - region[start[1]][1]
-    else
-        line1_end = region[start[1]][2] - region[start[1]][1]
-    end
+    if region ~= nil and start ~= nil and finish ~= nil then
+        local lines =
+            vim.api.nvim_buf_get_lines(bufnr, start[1], finish[1] + 1, false)
+        local line1_end
+        if region[start[1]][2] - region[start[1]][1] < 0 then
+            line1_end = #lines[1] - region[start[1]][1]
+        else
+            line1_end = region[start[1]][2] - region[start[1]][1]
+        end
 
-    lines[1] = vim.fn.strpart(lines[1], region[start[1]][1], line1_end, true)
-    if start[1] ~= finish[1] then
-        lines[#lines] = vim.fn.strpart(
-            lines[#lines],
-            region[finish[1]][1],
-            region[finish[1]][2] - region[finish[1]][1]
-        )
+        lines[1] =
+            vim.fn.strpart(lines[1], region[start[1]][1], line1_end, true)
+        if start[1] ~= finish[1] then
+            lines[#lines] = vim.fn.strpart(
+                lines[#lines],
+                region[finish[1]][1],
+                region[finish[1]][2] - region[finish[1]][1]
+            )
+        end
+        return table.concat(lines)
+    else
+        return nil
     end
-    return table.concat(lines)
 end
 
 M.job_stderr = function(_, stderr_line, _)
