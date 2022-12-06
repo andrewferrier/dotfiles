@@ -2,7 +2,7 @@
 
 function generate-password-human() {
     WORDS_LENGTH=${1:-4}
-    shuf -n${WORDS_LENGTH} /usr/share/dict/words | tr -d "'\n\r" && echo ""
+    shuf -n"${WORDS_LENGTH}" /usr/share/dict/words | tr -d "'\n\r" && echo ""
 }
 
 function generate-password-machine() {
