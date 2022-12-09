@@ -226,13 +226,6 @@ local function packages_lsp(use)
         end,
     })
 
-    use({
-        "theHamsta/nvim-semantic-tokens",
-        config = function()
-            require("plugins.semantic_tokens")
-        end,
-    })
-
     use({ "yioneko/nvim-type-fmt" })
     use({ "jose-elias-alvarez/typescript.nvim" })
 end
