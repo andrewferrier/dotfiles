@@ -159,6 +159,8 @@ local function packages_syntax(use)
             require("plugins.vimtex")
         end,
     })
+
+    use({ "mechatroner/rainbow_csv" })
 end
 
 local function packages_treesitter(use)
