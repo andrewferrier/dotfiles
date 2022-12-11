@@ -226,7 +226,6 @@ local function packages_lsp(use)
         end,
     })
 
-    use({ "yioneko/nvim-type-fmt" })
     use({ "jose-elias-alvarez/typescript.nvim" })
 end
 
