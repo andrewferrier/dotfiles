@@ -15,7 +15,7 @@ M.setup_outline = function(pattern_start)
         local view = vim.fn.winsaveview()
         vim.cmd.vimgrep("'" .. pattern_start .. "'", "%")
         vim.fn.winrestview(view)
-        vim.cmd.copen()                   
+        vim.cmd.copen()
     end, OPTS)
 end
 
