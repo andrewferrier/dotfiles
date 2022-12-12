@@ -160,7 +160,13 @@ local function packages_syntax(use)
         end,
     })
 
-    use({ "mechatroner/rainbow_csv" })
+    use({
+        "mechatroner/rainbow_csv",
+        ft = { "csv", "tsv" },
+        config = function()
+            require("plugins.rainbow_csv")
+        end,
+    })
 end
 
 local function packages_treesitter(use)
