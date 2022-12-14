@@ -94,7 +94,7 @@ M.sources = {
         extra_args = {
             "--ignore-front-matter",
             "-s",
-            vim.env.HOME .. "/.config/mdl/.mdl.rb",
+            vim.env.XDG_CONFIG_HOME .. "/mdl/.mdl.rb",
         },
     }),
     null_ls.builtins.diagnostics.shellcheck,
