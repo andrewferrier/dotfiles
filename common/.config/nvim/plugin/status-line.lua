@@ -5,19 +5,6 @@ local WIN_WIDTH_COMPRESS_THRESHOLD_PATH = 200
 
 local MAX_SPELL_ERRORS = 20
 
-local function get_diagnostic_count(severity)
-    return #vim.diagnostic.get(0, { severity = severity })
-end
-
-local function get_diagnostic_types()
-    return {
-        e = get_diagnostic_count(vim.diagnostic.severity.ERROR),
-        w = get_diagnostic_count(vim.diagnostic.severity.WARN),
-        i = get_diagnostic_count(vim.diagnostic.severity.INFO),
-        h = get_diagnostic_count(vim.diagnostic.severity.HINT),
-    }
-end
-
 local function get_filename_homedir()
     return vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
 end
@@ -77,7 +64,14 @@ function _G.Statusline_DiagnosticStatus()
     if diagnostics.enabled() then
         local diagnostics_counts = {}
 
-        for prefix, count in pairs(get_diagnostic_types()) do
+        for prefix, severity in pairs({
+            e = vim.diagnostic.severity.ERROR,
+            w = vim.diagnostic.severity.WARN,
+            i = vim.diagnostic.severity.INFO,
+            h = vim.diagnostic.severity.HINT,
+        }) do
+            local count = #vim.diagnostic.get(0, { severity = severity })
+
             if count > 0 then
                 table.insert(diagnostics_counts, prefix .. count)
             end
