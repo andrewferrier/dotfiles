@@ -1,4 +1,4 @@
-local EXCLUDED_DIRS = { vim.fn.expand("~"), "/private/tmp", "/private/var", "/tmp" }
+local EXCLUDED_DIRS = { vim.env.HOME, "/private/tmp", "/private/var", "/tmp" }
 
 local function is_excluded(bufname, dirs)
     for _, val in pairs(dirs) do
