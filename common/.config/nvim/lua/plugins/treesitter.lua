@@ -1,8 +1,8 @@
 local function on_attach()
-    local opts = { buffer = true, silent = true }
+    local OPTS = { buffer = true, silent = true }
 
-    vim.keymap.set("o", "m", ':<C-U>lua require("tsht").nodes()<CR>', opts)
-    vim.keymap.set("x", "m", ':lua require("tsht").nodes()<CR>', opts)
+    vim.keymap.set("o", "m", ':<C-U>lua require("tsht").nodes()<CR>', OPTS)
+    vim.keymap.set("x", "m", ':lua require("tsht").nodes()<CR>', OPTS)
 
     local TREESITTER_RENAME_INEFFECTIVE = { "latex" }
 

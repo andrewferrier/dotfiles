@@ -20,11 +20,11 @@ vim.api.nvim_create_autocmd("TermClose", {
     end,
 })
 
-local opts = { silent = true }
+local OPTS = { silent = true }
 
 -- Set window navigation to work like in other windows
 local map = function(lhs, rhs)
-    vim.keymap.set("t", lhs, "<C-\\><C-N>" .. rhs, opts)
+    vim.keymap.set("t", lhs, "<C-\\><C-N>" .. rhs, OPTS)
 end
 
 map("<C-W>+", "<C-W>+")
@@ -45,6 +45,6 @@ map("<C-W>o", ":only<CR>")
 map("<C-W>w", "<C-W><C-W>")
 
 -- For some reason these need explicit remapping
-vim.keymap.set("t", "<M-Left>", "<M-Left>", opts)
-vim.keymap.set("t", "<M-Right>", "<M-Right>", opts)
-vim.keymap.set("t", "<M-Up>", "<M-Up>", opts)
+vim.keymap.set("t", "<M-Left>", "<M-Left>", OPTS)
+vim.keymap.set("t", "<M-Right>", "<M-Right>", OPTS)
+vim.keymap.set("t", "<M-Up>", "<M-Up>", OPTS)
