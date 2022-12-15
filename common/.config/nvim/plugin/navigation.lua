@@ -1,13 +1,9 @@
 vim.opt.path:remove("/usr/include")
 
 local change_to_root = function()
-    local dir = require("git").get_git_dir()
-
-    if dir ~= nil then
+    require("git").if_in_git(function(dir)
         vim.cmd.lcd(dir)
-    else
-        vim.notify("Not in git directory.", vim.log.levels.ERROR)
-    end
+    end)
 end
 
 vim.keymap.set("n", "cdf", ":lcd %:p:h<CR>", { silent = true })

@@ -1,7 +1,14 @@
 local M = {}
 
-M.get_git_dir = function()
-    local dir = vim.fn.expand("%:p:h", 1)
+local expand_input_dir = function(dir)
+    if dir then
+        return vim.fn.expand(dir, 1)
+    else
+        return vim.fn.expand("%:p:h", 1)
+    end
+end
+
+local get_git_root_dir = function(dir)
     local cmd = "cd " .. dir .. "; git rev-parse --show-toplevel"
     local root = vim.fn.system(cmd)
 
@@ -9,6 +16,17 @@ M.get_git_dir = function()
         return vim.fn.trim(root)
     else
         return nil
+    end
+end
+
+M.if_in_git = function(callback, dir)
+    local input_dir = expand_input_dir(dir)
+    local git_root_dir = get_git_root_dir(input_dir)
+
+    if git_root_dir then
+        callback(git_root_dir)
+    else
+        vim.notify(dir .. " is not in a git directory.", vim.log.levels.ERROR)
     end
 end
 

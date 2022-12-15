@@ -75,10 +75,8 @@ gitsigns.setup({
 })
 
 vim.api.nvim_create_user_command("GitQFList", function()
-    if require("git").get_git_dir() then
+    require("git").if_in_git(function()
         -- gitsigns always opens QuickFix list, async, even if empty
         gitsigns.setqflist("all")
-    else
-        vim.notify("Not in git directory.", vim.log.levels.ERROR)
-    end
+    end, vim.fn.getcwd())
 end, {})
