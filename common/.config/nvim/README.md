@@ -160,3 +160,7 @@
 *   Check why mini surround doesn't highlight
 *   Follow symlinks for directory with 'gbc/gbs'
 *   Allow for setup_outline using treesitter
+
+## Presentation Ideas
+
+*   "<Leader> is wrong"
