@@ -2,6 +2,7 @@ vim.opt.breakindent = true
 vim.opt.confirm = true
 vim.opt.display:append("uhex")
 vim.opt.equalalways = false
+vim.opt.hidden = false -- https://github.com/neovim/neovim/pull/15410
 vim.opt.scrolloff = 5
 vim.opt.shortmess:append("c")
 vim.opt.showmode = false

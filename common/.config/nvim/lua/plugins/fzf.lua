@@ -19,7 +19,6 @@ fzf_lua.setup({
     },
 })
 
-vim.keymap.set("n", "cvb", fzf_lua.buffers)
 vim.keymap.set("n", "cvh", fzf_lua.help_tags)
 vim.keymap.set("n", "cvl", fzf_lua.live_grep)
 
