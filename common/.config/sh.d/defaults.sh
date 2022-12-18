@@ -5,7 +5,7 @@ alias ip='ip --color=auto'
 alias lzip="lzip --best -m128 -s128MiB"
 alias mkdir="mkdir -v"
 alias mv="mv -v"
-alias rsync='rsync --human-readable --progress --partial --verbose --times'
+alias rsync='rsync --human-readable --progress --partial --verbose --times --links'
 alias watch='watch --color'
 
 # See also ~/.config/fd/ignore
