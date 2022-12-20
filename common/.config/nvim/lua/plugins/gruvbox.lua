@@ -38,27 +38,3 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         require("vim.highlight").on_yank({ timeout = 200 })
     end,
 })
-
--- See https://www.reddit.com/r/neovim/comments/ziryqg/comment/izs6lhl/
-vim.api.nvim_create_user_command("DisplayExtMarks", function()
-    local namespaces = vim.api.nvim_get_namespaces()
-    local row = vim.fn.line(".")
-    local column = vim.fn.col(".")
-    local hl_groups = {}
-
-    for _, ns_id in pairs(namespaces) do
-        local extmarks = vim.api.nvim_buf_get_extmarks(
-            0,
-            ns_id,
-            { row - 1, column - 1 },
-            { row, column },
-            { details = 1 }
-        )
-
-        for _, extmark in pairs(extmarks) do
-            hl_groups[#hl_groups + 1] = extmark[4].hl_group
-        end
-    end
-
-    vim.pretty_print(hl_groups)
-end, {})
