@@ -12,6 +12,7 @@ local overrides = {
     QuickFixLine = { link = "IncSearch" },
     String = { italic = false },
     TermCursorNC = { bg = "#00FF00" },
+    ['@readonly'] = { bold = true },
 }
 
 if
