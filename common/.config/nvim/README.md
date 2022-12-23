@@ -158,7 +158,6 @@
 *   Publish wrapping.lua (with enough testing in place)
 *   Play with treesitter to highlight inside alias strings in bash/zsh
 *   Check why mini surround doesn't highlight
-*   Follow symlinks for directory with 'gbc/gbs' (needs recreation instructions)
 *   Allow for setup_outline using treesitter
 
 ## Presentation Ideas
