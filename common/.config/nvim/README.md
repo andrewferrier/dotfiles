@@ -160,7 +160,6 @@
 *   Check why mini surround doesn't highlight
 *   Follow symlinks for directory with 'gbc/gbs' (needs recreation instructions)
 *   Allow for setup_outline using treesitter
-*   FIXME: Check for whether packer is installed doesn't seem to work
 
 ## Presentation Ideas
 

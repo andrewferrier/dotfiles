@@ -1,7 +1,7 @@
 local install_path = vim.fn.stdpath("data") .. "/site/pack"
 local packer_path = install_path .. "/packer/opt/packer.nvim"
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
     vim.fn.system({
         "git",
         "clone",
