@@ -20,13 +20,13 @@ local get_git_root_dir = function(dir)
 end
 
 M.if_in_git = function(callback, dir)
-    local input_dir = expand_input_dir(dir)
-    local git_root_dir = get_git_root_dir(input_dir)
+    local use_dir = expand_input_dir(dir)
+    local git_root_dir = get_git_root_dir(use_dir)
 
     if git_root_dir then
         callback(git_root_dir)
     else
-        vim.notify(dir .. " is not in a git directory.", vim.log.levels.ERROR)
+        vim.notify(use_dir .. " is not in a git directory.", vim.log.levels.ERROR)
     end
 end
 
