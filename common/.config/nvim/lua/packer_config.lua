@@ -2,6 +2,7 @@ local install_path = vim.fn.stdpath("data") .. "/site/pack"
 local packer_path = install_path .. "/packer/opt/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
+    vim.notify("Bootstrapping packer.nvim...")
     vim.fn.system({
         "git",
         "clone",
@@ -10,6 +11,7 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
         "https://github.com/wbthomason/packer.nvim",
         packer_path,
     })
+    vim.notify("Done.")
 end
 
 vim.cmd.packadd("packer.nvim")
