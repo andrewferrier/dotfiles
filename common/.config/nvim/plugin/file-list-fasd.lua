@@ -1,9 +1,8 @@
 vim.api.nvim_create_autocmd({ "BufReadPre", "BufWritePost" }, {
     group = vim.api.nvim_create_augroup("file-list.lua", {}),
-    callback = function()
-        local file = vim.fn.expand("%:p")
+    callback = function(event)
         vim.fn.jobstart(
-            { "fasd", "-A", file },
+            { "fasd", "-A", event.file },
             { detach = true, on_stderr = require("utils").job_stderr }
         )
     end,
