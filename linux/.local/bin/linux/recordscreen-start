@@ -1,0 +1,13 @@
+#!/bin/bash
+
+screenkey &
+notify-send --urgency low --expire-time=2000 "screenkey started."
+notify-send --urgency low --expire-time=950 "Screen recording starting in 5..."
+sleep 1
+notify-send --urgency low --expire-time=950 "Screen recording starting in 4..."
+sleep 1
+notify-send --urgency low --expire-time=950 "Screen recording starting in 3..."
+sleep 1
+notify-send --urgency low --expire-time=950 "Screen recording starting in 2..."
+sleep 2
+ffmpeg -f x11grab -s 1366x723 -i :0+0,22 "$HOME/$(date --iso-8601=seconds || true).mp4"

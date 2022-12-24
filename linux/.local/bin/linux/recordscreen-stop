@@ -1,0 +1,5 @@
+#!/bin/bash
+
+killall ffmpeg
+killall screenkey
+notify-send --urgency low "screenkey/ffmpeg stopped."
