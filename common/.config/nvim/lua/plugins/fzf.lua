@@ -12,7 +12,7 @@ fzf_lua.setup({
             flip_columns = 200,
         },
     },
-    border = "single",
+    border = "thicc",
     fzf_opts = {
         ["--layout"] = "default",
         ["--color"] = "dark,gutter:-1",
