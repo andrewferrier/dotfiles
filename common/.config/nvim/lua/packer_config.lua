@@ -51,6 +51,15 @@ local function packages_operators(use)
     })
 end
 
+local function packages_textobjs(use)
+    use({
+        "chrisgrieser/nvim-various-textobjs",
+        config = function()
+            require("plugins.various_textobjs")
+        end,
+    })
+end
+
 local function packages_commands(use)
     use({ "tpope/vim-eunuch" })
 
@@ -275,6 +284,7 @@ packer.startup(function(use)
     use({ "wbthomason/packer.nvim", opt = true })
 
     packages_operators(use)
+    packages_textobjs(use)
     packages_commands(use)
     packages_navigation(use)
     packages_git(use)
