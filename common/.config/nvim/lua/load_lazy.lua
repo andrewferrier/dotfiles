@@ -30,6 +30,7 @@ require("lazy").setup("lazy-plugin-spec", {
                 "netrw",
                 "netrwPlugin",
             },
+            paths = { vim.fn.stdpath("data") .. "/skeleton" },
         },
         -- Required to make built-in NeoVim packs work
         reset_packpath = false,
