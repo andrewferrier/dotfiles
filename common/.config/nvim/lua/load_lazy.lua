@@ -30,15 +30,11 @@ require("lazy").setup("lazy-plugin-spec", {
                 "netrwPlugin",
             },
         },
+        -- Required to make built-in NeoVim packs work
+        reset_packpath = false,
     },
     change_detection = {
         enabled = false,
         notify = false,
     },
 })
-
-vim.cmd(
-    "source "
-        .. vim.env.VIMRUNTIME
-        .. "/pack/dist/opt/cfilter/plugin/cfilter.vim"
-)
