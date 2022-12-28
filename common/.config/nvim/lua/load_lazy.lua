@@ -22,6 +22,7 @@ require("lazy").setup("lazy-plugin-spec", {
                 "gzip",
                 "remote_plugins",
                 "tarPlugin",
+                "tutor",
                 "zipPlugin",
 
                 -- These lines are needed to avoid opening directories from command line in
