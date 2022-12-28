@@ -1,5 +1,11 @@
 require("various-textobjs").setup({ useDefaultKeymaps = false })
 
+vim.keymap.set({ "o", "x" }, "ak", function()
+    require("various-textobjs").key(false)
+end)
+vim.keymap.set({ "o", "x" }, "ik", function()
+    require("various-textobjs").key(true)
+end)
 vim.keymap.set({ "o", "x" }, "av", function()
     require("various-textobjs").value(false)
 end)
