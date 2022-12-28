@@ -38,4 +38,19 @@ require("lazy").setup("lazy-plugin-spec", {
         enabled = false,
         notify = false,
     },
+    ui = {
+        icons = {
+            cmd = "⌘",
+            config = "🛠",
+            event = "📅",
+            ft = "📂",
+            init = "⚙",
+            keys = "🗝",
+            plugin = "🔌",
+            runtime = "💻",
+            source = "📄",
+            start = "🚀",
+            task = "📌",
+        },
+    },
 })
