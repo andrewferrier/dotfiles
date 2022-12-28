@@ -12,5 +12,3 @@ vim.keymap.set("n", "yoq", function()
         require("quickfix").open()
     end
 end)
-
-vim.cmd.packadd('cfilter')
