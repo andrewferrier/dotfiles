@@ -16,6 +16,7 @@ return {
             require("plugins.hydra")
         end,
     },
+
     {
         "ibhagwan/fzf-lua",
         config = function()
