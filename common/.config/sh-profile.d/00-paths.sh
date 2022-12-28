@@ -80,6 +80,7 @@ pupdate_append_globxxx "${HOME}/Library/Python/*/bin" # from pip install --user
 pupdate_append_singlex "${GITCO}/github/misc-scripts"
 pupdate_append_singlex "${GITCO}/github/git-utilities"
 pupdate_append_globxxx "/usr/local/texlive/*/bin/x86_64-darwin"
+pupdate_append_singlex /usr/share/nodejs/yarn/bin # yarnpkg → yarn
 pupdate_append_singlex "${GOPATH}/bin"
 pupdate_append_singlex "${GEM_HOME}/bin"
 pupdate_append_globxxx "${GEM_HOME}/ruby/*/bin"
