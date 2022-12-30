@@ -12,7 +12,7 @@ return {
     "RRethy/nvim-treesitter-endwise",
     "mfussenegger/nvim-treehopper",
     "nvim-treesitter/nvim-treesitter-refactor",
-    { "nvim-treesitter/playground", command = "TSPlaygroundToggle" },
+    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
 
     {
         "nvim-treesitter/nvim-treesitter",

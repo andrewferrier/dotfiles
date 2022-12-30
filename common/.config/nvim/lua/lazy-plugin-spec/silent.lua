@@ -34,6 +34,5 @@ return {
         config = function()
             require("plugins.tint")
         end,
-        after = { "gruvbox.nvim" },
     },
 }
