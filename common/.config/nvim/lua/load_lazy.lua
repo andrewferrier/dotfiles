@@ -32,8 +32,6 @@ require("lazy").setup("lazy-plugin-spec", {
             },
             paths = { vim.fn.stdpath("data") .. "/skeleton" },
         },
-        -- Required to make built-in NeoVim packs work
-        reset_packpath = false,
     },
     change_detection = {
         enabled = false,
