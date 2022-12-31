@@ -13,7 +13,7 @@ end
 
 vim.opt.runtimepath:prepend(lazypath)
 
-require("lazy").setup("lazy-plugin-spec", {
+require("lazy").setup("plugin-spec", {
     lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",
     performance = {
         rtp = {
