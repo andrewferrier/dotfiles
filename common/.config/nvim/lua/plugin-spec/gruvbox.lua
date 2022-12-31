@@ -1,8 +1,6 @@
 return {
     "ellisonleao/gruvbox.nvim",
     config = function()
-        local statefile = vim.fn.expand("~/.cache/day-night/state-terminal")
-
         local palette = require("gruvbox.palette")
 
         local overrides = {
@@ -17,15 +15,6 @@ return {
             TermCursorNC = { bg = "#00FF00" },
             ["@readonly"] = { bold = true },
         }
-
-        if
-            vim.fn.filereadable(statefile)
-            and vim.fn.index(vim.fn.readfile(statefile), "day") >= 0
-        then
-            vim.opt.background = "light"
-        else
-            vim.opt.background = "dark"
-        end
 
         require("gruvbox").setup({
             contrast = "hard",
