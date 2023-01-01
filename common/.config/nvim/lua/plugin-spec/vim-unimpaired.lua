@@ -6,4 +6,5 @@ return {
         vim.keymap.del("n", "[CC")
         vim.keymap.del("n", "]CC")
     end,
+    keys = { "[", "]", "yo" },
 } -- quite slow
