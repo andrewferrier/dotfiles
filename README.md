@@ -48,6 +48,7 @@
     journalctl --since=yesterday                 | output from beginning of yesterday
     journalctl --since=-1week                    | output from 1 week ago
     journalctl CONTAINER_NAME="docker_container" | output from docker container
+    journalctl --user -u xyz.service             | output from specific user service
 
 ## Linux
 
