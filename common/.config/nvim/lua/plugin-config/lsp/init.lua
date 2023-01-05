@@ -18,7 +18,7 @@ local servers = {
     sumneko_lua = require("plugin-config.lsp.settings.sumneko"),
     terraformls = {},
     tflint = require("plugin-config.lsp.settings.tflint"),
-    tsserver = require("plugin-config.lsp.settings.tsserver"),
+    tsserver = {},
     vimls = {},
     yamlls = require("plugin-config.lsp.settings.yaml"),
 }
