@@ -1,6 +1,8 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
+    vim.notify("Installing lazy...")
+
     vim.fn.system({
         "git",
         "clone",
@@ -41,17 +43,17 @@ require("lazy").setup("plugin-spec", {
     },
     ui = {
         icons = {
-            cmd = "⌘",
-            config = "🛠",
-            event = "📅",
-            ft = "📂",
-            init = "⚙",
-            keys = "🗝",
-            plugin = "🔌",
-            runtime = "💻",
-            source = "📄",
-            start = "🚀",
-            task = "📌",
+            cmd = "(cmd)",
+            config = "(config)",
+            event = "(event)",
+            ft = "(ft)",
+            init = "(init)",
+            keys = "(keys)",
+            plugin = "(plugin)",
+            runtime = "(runtime)",
+            source = "(source)",
+            start = "",
+            task = "(task)",
         },
     },
 })
