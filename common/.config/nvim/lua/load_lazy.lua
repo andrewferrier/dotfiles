@@ -15,6 +15,9 @@ vim.opt.runtimepath:prepend(lazypath)
 
 require("lazy").setup("plugin-spec", {
     lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",
+    install = {
+        colorscheme = { "gruvbox" },
+    },
     performance = {
         rtp = {
             disabled_plugins = {
