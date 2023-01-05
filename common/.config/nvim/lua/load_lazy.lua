@@ -38,7 +38,6 @@ require("lazy").setup("plugin-spec", {
     },
     change_detection = {
         enabled = false,
-        notify = false,
     },
     ui = {
         icons = {
