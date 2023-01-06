@@ -17,4 +17,5 @@ return {
             },
         })
     end,
+    keys = "<C-W>",
 }

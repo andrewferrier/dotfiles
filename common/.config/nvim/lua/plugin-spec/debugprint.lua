@@ -4,4 +4,5 @@ return {
         require("debugprint").setup()
     end,
     dependencies = "nvim-treesitter/nvim-treesitter",
+    keys = "g?",
 }
