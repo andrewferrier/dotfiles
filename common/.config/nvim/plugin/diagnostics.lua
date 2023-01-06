@@ -75,3 +75,11 @@ vim.api.nvim_create_user_command("DiagnosticQFList", function()
     vim.diagnostic.setqflist({ open = false })
     require("quickfix").open()
 end, {})
+
+if vim.fn.has("nvim-0.9.0") == 1 then
+    require("editorconfig").properties.diagnostics = function(bufnr, val, opts)
+        if val == 'false' then
+            require("diagnostics").hide()
+        end
+    end
+end
