@@ -10,4 +10,5 @@ notify-send --urgency low --expire-time=950 "Screen recording starting in 3..."
 sleep 1
 notify-send --urgency low --expire-time=950 "Screen recording starting in 2..."
 sleep 2
-ffmpeg -f x11grab -s 1366x723 -i :0+0,22 "$HOME/$(date --iso-8601=seconds || true).mp4"
+# See https://support.mozilla.org/sv/questions/1316956, https://video.stackexchange.com/questions/13164/encoding-422-in-10-bit-with-libx264
+ffmpeg -f x11grab -s 1366x723 -i :0+0,22 -vcodec libx264 -profile:v high422 -pix_fmt yuv422p "$HOME/$(date --iso-8601=seconds || true).mp4"
