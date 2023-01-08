@@ -60,12 +60,6 @@
 [credential]
 	helper = cache --timeout=7200
 
-[alias]
-	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-	oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
-	open = git-open
-	search-historicallines = !git rev-list --all | xargs git grep
-
 [commit]
 	verbose = true
 
@@ -85,3 +79,29 @@
 
 [url "git@gitlab.com:"]
 	insteadOf = https://gitlab.com/
+
+# * findpull - Find all the git repos which are direct children of the current
+#   directory, and run pull on each. Based on
+#   https://medium.com/@codenameyau/updating-multiple-repos-with-one-command-9768c8cdfe46.
+#
+# * pullall - Pulls a base repository (using a rebase for a clean history) and
+#   recursively updates all referenced submodules also. (Based on this
+#   StackOverflow answer: http://stackoverflow.com/a/19095988/27641)
+#
+# * remove-gitignored - Based on a clean working copy, removes all files and
+#   adds them back again, which has the effect of "de-tracking" any files which
+#   "should" be ignored by .gitignore rules, but currently aren't. Does not
+#   commit anything, so you can double-check what it's done and then commit.
+#
+# FIXME: remove-gitignored doesn't work on submodules that are currently not
+# checked out in the local copy but should nevertheless be part of the main
+# repo.
+
+[alias]
+	findpull = !sh -c 'find . -maxdepth 2 -name .git -type d | sort | rev | cut -c 6- | rev | xargs -t -I {} git -C {} pull --rebase'
+	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
+	oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
+	open = git-open
+	pullall = !git pull --rebase && git submodule foreach 'git pull --rebase'
+	remove-gitignored = !git rm -r --cached . && git add .
+	search-historicallines = !git rev-list --all | xargs git grep
