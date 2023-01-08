@@ -2,4 +2,4 @@
 
 killall ffmpeg
 killall screenkey
-notify-send --urgency low "screenkey/ffmpeg stopped."
+notify-send --urgency low "Screen recording stopped."
