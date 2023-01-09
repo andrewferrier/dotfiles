@@ -13,7 +13,7 @@ local get_git_root_dir = function(dir)
     local root = vim.fn.system(cmd)
 
     if vim.v.shell_error == 0 then
-        return vim.fn.trim(root)
+        return vim.trim(root)
     else
         return nil
     end

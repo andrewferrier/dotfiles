@@ -12,7 +12,7 @@ local new_split = function()
         vim.tbl_contains(autosplit_bt, buftype)
         or vim.tbl_contains(autosplit_ft, filetype)
     then
-        local bufnr = vim.fn.bufnr()
+        local bufnr = vim.api.nvim_get_current_buf()
         local winnr = vim.fn.winnr("#")
         local vertical_split = vim.fn.winwidth(winnr)
             >= (

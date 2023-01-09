@@ -79,7 +79,7 @@ local configure = function()
         require("git").if_in_git(function()
             -- gitsigns always opens QuickFix list, async, even if empty
             gitsigns.setqflist("all")
-        end, vim.fn.getcwd())
+        end, vim.loop.cwd())
     end, {})
 end
 

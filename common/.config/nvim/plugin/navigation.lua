@@ -16,7 +16,7 @@ vim.keymap.set("n", "gof", function()
 end)
 
 vim.keymap.set("n", "goF", function()
-    require("open_filedirterm").open_file_manager(vim.fn.getcwd())
+    require("open_filedirterm").open_file_manager(vim.loop.cwd())
 end)
 
 vim.keymap.set("n", "got", function()
@@ -24,7 +24,7 @@ vim.keymap.set("n", "got", function()
 end)
 
 vim.keymap.set("n", "goT", function()
-    require("open_filedirterm").open_terminal(vim.o.shell, vim.fn.getcwd())
+    require("open_filedirterm").open_terminal(vim.o.shell, vim.loop.cwd())
 end)
 
 vim.keymap.set("n", "god", function()
@@ -32,5 +32,5 @@ vim.keymap.set("n", "god", function()
 end)
 
 vim.keymap.set("n", "goD", function()
-    require("open_filedirterm").open_split_dirbuf(vim.fn.getcwd())
+    require("open_filedirterm").open_split_dirbuf(vim.loop.cwd())
 end)

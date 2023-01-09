@@ -52,7 +52,9 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",¬D"
         end
 
-        if not vim.treesitter.highlighter.active[vim.fn.bufnr()] then
+        local bufnr = vim.api.nvim_get_current_buf()
+
+        if not vim.treesitter.highlighter.active[bufnr] then
             return_string = return_string .. ",¬T"
         end
     end
@@ -156,7 +158,7 @@ function _G.Statusline_Getcwd()
         and vim.bo.filetype ~= "man"
         and vim.bo.buftype ~= "terminal"
     then
-        local path = vim.fn.fnamemodify(vim.fn.getcwd(), ":~")
+        local path = vim.fn.fnamemodify(vim.loop.cwd(), ":~")
 
         if vim.fn.winwidth(0) < WIN_WIDTH_COMPRESS_THRESHOLD_PATH then
             return vim.fn.pathshorten(path)
