@@ -45,7 +45,7 @@ function _G.Statusline_FeaturesEnabled()
 
     if vim.bo.filetype ~= "dirbuf" then
         if require("gitsigns.config").config.show_deleted then
-            return_string = return_string .. ",git_del_lns"
+            return_string = return_string .. ",¬_"
         end
 
         if not diagnostics.enabled() then
