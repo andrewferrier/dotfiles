@@ -26,7 +26,7 @@
 #     s)
 #         # Enum option
 #         s=${OPTARG}
-#         [ $((s == 45 || s == 90)) -ne 0 ] || usage
+#         [[ $((s == 45 || s == 90)) -ne 0 ]] || usage
 #         ;;
 #     p)
 #         # Generic string option
@@ -39,12 +39,12 @@
 # done
 # shift $((OPTIND - 1))
 #
-# [ "${s:-}" ] || usage
-# [ "${p:-}" ] || usage
+# [[ "${s:-}" ]] || usage
+# [[ "${p:-}" ]] || usage
 #
 # ****** LOGGING FUNCTIONS
 # log() {
-#     echo "$(date "+%Y-%m-%dT%H:%M:%S %Z") ${SCRIPT_NAME}: $*" >>"/tmp/${SCRIPT_NAME}.log"
+#     echo "$(date "+%Y-%m-%dT%H:%M:%S %Z" || true) ${SCRIPT_NAME}: $*" >>"/tmp/${SCRIPT_NAME}.log"
 #
 #     if [[ ${OSTYPE} == linux* ]]; then
 #         echo "$*" | systemd-cat --identifier="${SCRIPT_NAME}"
