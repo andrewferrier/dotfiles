@@ -14,11 +14,6 @@ if vim.fn.has("nvim-0.9.0") == 1 then
     vim.opt.splitkeep = "screen"
 end
 
--- numbers and signs in the same column
-vim.opt.signcolumn = "number"
-vim.opt.relativenumber = true
-vim.opt.number = true
-
 vim.opt.foldlevel = 99
 
 vim.opt.list = true

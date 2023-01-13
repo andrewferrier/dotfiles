@@ -5,7 +5,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
     callback = function()
         vim.wo.number = false
         vim.wo.relativenumber = false
-    end
+
+        if vim.fn.has("nvim-0.9.0") == 1 then
+            vim.wo.statuscolumn = ""
+        end
+    end,
 })
 
 vim.api.nvim_create_autocmd("TermOpen", {

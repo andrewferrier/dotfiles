@@ -8,6 +8,10 @@ M.make_readonly = function()
         vim.opt_local.list = false
         vim.opt_local.spell = false
 
+        if vim.fn.has("nvim-0.9.0") == 1 then
+            vim.opt_local.signcolumn = "no"
+        end
+
         require("diagnostics").hide()
         require("gitsigns").detach()
 
