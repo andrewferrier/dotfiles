@@ -14,8 +14,8 @@ xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
 redshift -v | logger -t "${USER}-redshift" &
 unclutter --ignore-scrolling --jitter 10 --fork
 picom --daemon
-feh --no-fehbg --bg-scale '/usr/share/backgrounds/archlinux/wave.png'
 dunst &
+variety &
 
 # Automatically synchronize PRIMARY and CLIPBOARD
 autocutsel -fork &
