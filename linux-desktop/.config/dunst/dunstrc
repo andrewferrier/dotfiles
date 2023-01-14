@@ -19,4 +19,4 @@ timeout = 5
 [urgency_critical]
 timeout = 180
 
-# vim: ft=cfg
+# vim: filetype=cfg

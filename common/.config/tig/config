@@ -1,5 +1,3 @@
-# vim: set ft=conf:
-
 bind generic A !>git commit --amend
 bind generic I !>git add -i -p
 
@@ -26,3 +24,5 @@ set main-view-date-format = "%F %R"
 
 color cursor black white
 color title-focus black white
+
+# vim: set filetype=conf
