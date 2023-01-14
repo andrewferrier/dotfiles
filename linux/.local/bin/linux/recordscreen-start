@@ -25,4 +25,4 @@ ffmpeg \
     -c:v libx264 -crf 23 -profile:v baseline -level 3.0 -pix_fmt yuv420p \
     -c:a aac -ac 2 -b:a 128k \
     -movflags faststart \
-    "$HOME/$(date --iso-8601=seconds || true).mp4"
+    "$HOME/$(date --iso-8601=seconds || true).mp4" 2>&1 | logger -t 'recordscreen'
