@@ -79,7 +79,7 @@ end, {})
 
 if vim.fn.has("nvim-0.9.0") == 1 then
     require("editorconfig").properties.diagnostics = function(_, val, _)
-        if val == 'false' then
+        if val == "false" then
             require("diagnostics").hide()
         end
     end
