@@ -15,7 +15,7 @@ redshift -v | logger -t "${USER}-redshift" &
 unclutter --ignore-scrolling --jitter 10 --fork
 picom --daemon
 dunst &
-variety &
+variety 2>&1 | logger -t "${USER}-variety" &
 
 # Automatically synchronize PRIMARY and CLIPBOARD
 autocutsel -fork &
