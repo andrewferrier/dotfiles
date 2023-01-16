@@ -25,6 +25,7 @@
     [count]i-<Esc>, [count]I-<Esc> - insert 10 dashes at cursor or beginning of line
     [count]r<char> - replace the next [count] characters with <char>
     ]e, [e - move line down or up
+    ]n, [n - jump git conflict markers
     cvd - Open Dirbuf buffer for current directory
     cvg - Change directory interactively
     cvm - Man pages
