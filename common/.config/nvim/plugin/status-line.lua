@@ -158,7 +158,7 @@ function _G.Statusline_Getcwd()
         and vim.bo.filetype ~= "man"
         and vim.bo.buftype ~= "terminal"
     then
-        local path = vim.fn.fnamemodify(vim.loop.cwd(), ":~")
+        local path = vim.fn.fnamemodify(vim.fn.getcwd(0), ":~")
 
         if vim.fn.winwidth(0) < WIN_WIDTH_COMPRESS_THRESHOLD_PATH then
             return vim.fn.pathshorten(path)

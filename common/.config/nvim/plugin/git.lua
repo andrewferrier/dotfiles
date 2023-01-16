@@ -13,7 +13,7 @@ vim.keymap.set("n", "gbs", function()
 end)
 
 vim.keymap.set("n", "gbS", function()
-    run_git_cmd("tig status", vim.loop.cwd())
+    run_git_cmd("tig status", vim.fn.getcwd(0))
 end)
 
 vim.keymap.set("n", "gbt", function()
@@ -21,7 +21,7 @@ vim.keymap.set("n", "gbt", function()
 end)
 
 vim.keymap.set("n", "gbT", function()
-    run_git_cmd("tig", vim.loop.cwd())
+    run_git_cmd("tig", vim.fn.getcwd(0))
 end)
 
 vim.keymap.set("n", "gbo", function()
