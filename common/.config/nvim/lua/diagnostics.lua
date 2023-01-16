@@ -1,24 +1,41 @@
 local M = {}
 
-M.enabled = function()
-    return vim.b.diagnostic_enabled == nil or vim.b.diagnostic_enabled == true
+if vim.fn.has("nvim-0.9.0") ~= 1 then
+    M.enabled = function()
+        return vim.b.diagnostic_enabled == nil
+            or vim.b.diagnostic_enabled == true
+    end
 end
 
 M.hide = function()
-    vim.b.diagnostic_enabled = false
+    if vim.fn.has("nvim-0.9.0") ~= 1 then
+        vim.b.diagnostic_enabled = false
+    end
+
     vim.diagnostic.disable(0)
 end
 
 M.show = function()
-    vim.b.diagnostic_enabled = true
+    if vim.fn.has("nvim-0.9.0") ~= 1 then
+        vim.b.diagnostic_enabled = true
+    end
+
     vim.diagnostic.enable(0)
 end
 
 M.swap = function()
-    if vim.b.diagnostic_enabled == false then
-        M.show()
+    if vim.fn.has("nvim-0.9.0") == 1 then
+        if vim.diagnostic.is_disabled() then
+            M.show()
+        else
+            M.hide()
+        end
     else
-        M.hide()
+        if vim.b.diagnostic_enabled == false then
+            M.show()
+        else
+            M.hide()
+        end
     end
 end
 

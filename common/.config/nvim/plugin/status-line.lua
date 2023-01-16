@@ -48,8 +48,14 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",¬_"
         end
 
-        if not diagnostics.enabled() then
-            return_string = return_string .. ",¬D"
+        if vim.fn.has("nvim-0.9.0") == 1 then
+            if vim.diagnostic.is_disabled() then
+                return_string = return_string .. ",¬D"
+            end
+        else
+            if not diagnostics.enabled() then
+                return_string = return_string .. ",¬D"
+            end
         end
 
         local bufnr = vim.api.nvim_get_current_buf()
