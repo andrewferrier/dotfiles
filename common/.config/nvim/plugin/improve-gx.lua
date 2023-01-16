@@ -18,7 +18,7 @@ vim.keymap.set("n", "gx", function()
     else
         vim.notify("Cannot find URL.", vim.log.levels.WARN)
     end
-end, { desc = "Smart URL Opener" })
+end)
 
 vim.keymap.set("x", "gx", function()
     local url = require("utils").visual_selection_range()
