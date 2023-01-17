@@ -86,5 +86,5 @@ end
 return {
     "lewis6991/gitsigns.nvim",
     config = configure,
-    tag = "release",
+    version = "*",
 } -- gb

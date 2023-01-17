@@ -12,4 +12,5 @@ return {
             stages = "static",
         })
     end,
+    version = "*"
 }

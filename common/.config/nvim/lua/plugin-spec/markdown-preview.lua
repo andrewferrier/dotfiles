@@ -6,4 +6,5 @@ return {
         vim.g.mkdp_preview_options = { disable_filename = 1 }
     end,
     ft = "markdown",
+    version = "*",
 }

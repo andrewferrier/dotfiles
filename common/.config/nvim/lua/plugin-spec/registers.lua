@@ -9,4 +9,5 @@ return {
             },
         })
     end,
+    version = "*"
 }

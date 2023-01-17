@@ -6,4 +6,5 @@ return {
         vim.g.vimtex_toc_config = { show_help = 0 }
         vim.g.vimtex_view_automatic = 0
     end,
+    version = "*",
 }
