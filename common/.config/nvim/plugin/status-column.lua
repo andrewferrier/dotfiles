@@ -1,9 +1,9 @@
 if vim.fn.has("nvim-0.9.0") == 1 then
     _G.custom_statuscol = function()
-        if vim.v.wrap then
-            return ""
-        else
+        if vim.v.virtnum == 0 then
             return "%s%=" .. vim.v.relnum .. " "
+        else
+            return ""
         end
     end
 
