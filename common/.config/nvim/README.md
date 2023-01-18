@@ -166,6 +166,7 @@
 *   Allow for setup_outline using treesitter
 *   Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
 *   Replace 'jobstart' with 'spawn'?
+*   If I click on a diagnostic (in 0.9), display that diagnostic
 
 ## Presentation Ideas
 
