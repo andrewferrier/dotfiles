@@ -1,7 +1,11 @@
 if vim.fn.has("nvim-0.9.0") == 1 then
     _G.custom_statuscol = function()
         if vim.v.virtnum == 0 then
-            return "%s%=" .. vim.v.relnum .. " "
+            if vim.o.relativenumber == true then
+                return "%s%=%r "
+            else
+                return "%s%=%l "
+            end
         else
             return ""
         end
