@@ -5,6 +5,9 @@ local WIN_WIDTH_COMPRESS_THRESHOLD_PATH = 200
 
 local MAX_SPELL_ERRORS = 20
 
+local LEFT_BRACE = "‹"
+local RIGHT_BRACE = "›"
+
 local function get_filename_homedir()
     return vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
 end
@@ -45,17 +48,17 @@ function _G.Statusline_FeaturesEnabled()
 
     if vim.bo.filetype ~= "dirbuf" then
         if require("gitsigns.config").config.show_deleted then
-            return_string = return_string .. ",¬_"
+            return_string = return_string .. ",_̸"
         end
 
         if not diagnostics.enabled() then
-            return_string = return_string .. ",¬D"
+            return_string = return_string .. ",D̸"
         end
 
         local bufnr = vim.api.nvim_get_current_buf()
 
         if not vim.treesitter.highlighter.active[bufnr] then
-            return_string = return_string .. ",¬T"
+            return_string = return_string .. ",T̸"
         end
     end
 
@@ -80,7 +83,11 @@ function _G.Statusline_DiagnosticStatus()
         end
 
         if #diagnostics_counts > 0 then
-            return "[D " .. table.concat(diagnostics_counts, ",") .. "]"
+            return LEFT_BRACE
+                .. "D "
+                .. table.concat(diagnostics_counts, ",")
+                .. RIGHT_BRACE
+                .. " "
         else
             return ""
         end
@@ -91,7 +98,7 @@ end
 
 function _G.Statusline_GitSigns()
     if vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" then
-        return "[" .. vim.b.gitsigns_status .. "]"
+        return LEFT_BRACE .. vim.b.gitsigns_status .. RIGHT_BRACE .. " "
     else
         return ""
     end
@@ -197,7 +204,11 @@ function _G.Statusline_SpellingErrorCount()
             local spelling_count = get_spelling_count()
 
             if spelling_count > 0 then
-                vim.b.spelling_warning = "[S " .. spelling_count .. "]"
+                vim.b.spelling_warning = LEFT_BRACE
+                    .. "S "
+                    .. spelling_count
+                    .. RIGHT_BRACE
+                    .. " "
             else
                 vim.b.spelling_warning = ""
             end
@@ -214,11 +225,11 @@ function _G.Statusline_Search()
         local searchcount = vim.fn.searchcount()
 
         if searchcount["total"] > 0 then
-            return "[Srch "
+            return " "
+                .. " "
                 .. searchcount["current"]
-                .. "/"
+                .. "∕"
                 .. searchcount["total"]
-                .. "]"
         end
     end
 
@@ -228,7 +239,7 @@ end
 local RESET_HIGHLIGHTING = "%*"
 local TRUNCATOR_POSITION = "%<"
 local ALIGN_RHS = "%="
-local SEPARATOR = " | "
+local SEPARATOR = "│ "
 
 -- LHS - Filename & Filetype
 local statusline = " %{v:lua.Statusline_Filename()}"
@@ -236,17 +247,18 @@ statusline = statusline .. " %y"
 statusline = statusline .. TRUNCATOR_POSITION
 
 -- LHS - Cwd
-statusline = statusline .. SEPARATOR
+statusline = statusline .. " " .. SEPARATOR
 statusline = statusline .. "%{v:lua.Statusline_Getcwd()}"
 statusline = statusline .. RESET_HIGHLIGHTING
 
 statusline = statusline .. ALIGN_RHS
 
 -- RHS - Search Counter
+statusline = statusline .. "%S"
 statusline = statusline .. "%{v:lua.Statusline_Search()}"
+statusline = statusline .. " " .. SEPARATOR
 
 -- RHS - Warnings
-statusline = statusline .. "%m"
 statusline = statusline .. "%{v:lua.Statusline_DiagnosticStatus()}"
 statusline = statusline .. "%{v:lua.Statusline_SpellingErrorCount()}"
 statusline = statusline .. "%{v:lua.Statusline_GitSigns()}"
@@ -256,12 +268,12 @@ statusline = statusline .. SEPARATOR
 statusline = statusline .. "%{v:lua.Statusline_Indent()}"
 statusline = statusline .. "%{v:lua.Statusline_Fileencoding()}"
 statusline = statusline .. "%{&fileformat!=#'unix'?',ff='.&fileformat:''}"
-statusline = statusline .. "%R"
 statusline = statusline .. "%{v:lua.Statusline_Wrappingmode()}"
 statusline = statusline .. "%{&spell?',S':''}"
 statusline = statusline .. "%{v:lua.Statusline_FeaturesEnabled()}"
 statusline = statusline .. "%{v:lua.Statusline_List()}"
-statusline = statusline .. SEPARATOR
+statusline = statusline .. "%M"
+statusline = statusline .. " " .. SEPARATOR
 
 -- RHS - Location
 statusline = statusline .. "%l/%L,%c "

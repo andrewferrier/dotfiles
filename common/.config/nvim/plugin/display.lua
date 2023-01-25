@@ -26,3 +26,4 @@ vim.opt.list = true
 vim.opt.listchars = "tab:>⋅,trail:·,extends:▷,precedes:◁,nbsp:␣"
 
 vim.opt.cmdheight = 0
+vim.opt.showcmdloc = 'statusline'
