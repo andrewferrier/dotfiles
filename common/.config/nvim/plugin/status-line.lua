@@ -226,7 +226,7 @@ function _G.Statusline_Search()
 
         if searchcount["total"] > 0 then
             return " "
-                .. " "
+                .. "s "
                 .. searchcount["current"]
                 .. "∕"
                 .. searchcount["total"]
