@@ -1,7 +1,7 @@
 local diagnostics = require("diagnostics")
 
-local WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME = 150
-local WIN_WIDTH_COMPRESS_THRESHOLD_PATH = 200
+local WIN_WIDTH_FILENAME_FRACTION = 0.07
+local WIN_WIDTH_DIR_FRACTION = 0.03
 
 local MAX_SPELL_ERRORS = 20
 
@@ -152,11 +152,10 @@ function _G.Statusline_Indent()
 end
 
 function _G.Statusline_Filename()
-    if vim.fn.winwidth(0) < WIN_WIDTH_COMPRESS_THRESHOLD_FILENAME then
-        return vim.fn.pathshorten(get_filename_homedir())
-    else
-        return get_filename_homedir()
-    end
+    return vim.fn.pathshorten(
+        get_filename_homedir(),
+        math.floor(vim.fn.winwidth(0) * WIN_WIDTH_FILENAME_FRACTION)
+    )
 end
 
 function _G.Statusline_Getcwd()
@@ -167,11 +166,10 @@ function _G.Statusline_Getcwd()
     then
         local path = vim.fn.fnamemodify(vim.fn.getcwd(0), ":~")
 
-        if vim.fn.winwidth(0) < WIN_WIDTH_COMPRESS_THRESHOLD_PATH then
-            return vim.fn.pathshorten(path)
-        else
-            return path
-        end
+        return vim.fn.pathshorten(
+            path,
+            math.floor(vim.fn.winwidth(0) * WIN_WIDTH_DIR_FRACTION)
+        )
     else
         return ""
     end
