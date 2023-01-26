@@ -242,10 +242,10 @@ local SEPARATOR = "│ "
 -- LHS - Filename & Filetype
 local statusline = " %{v:lua.Statusline_Filename()}"
 statusline = statusline .. " %y"
-statusline = statusline .. TRUNCATOR_POSITION
 
 -- LHS - Cwd
 statusline = statusline .. " " .. SEPARATOR
+statusline = statusline .. TRUNCATOR_POSITION
 statusline = statusline .. "%{v:lua.Statusline_Getcwd()}"
 statusline = statusline .. RESET_HIGHLIGHTING
 
