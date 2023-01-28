@@ -41,6 +41,9 @@ case "${FILE_EXTENSION_FULL_LOWER}" in
 "tf")
     head -"${PV_HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" --syntax=terraform 2>/dev/null && exit 5
     ;;
+"tfstate")
+    head -"${PV_HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" --syntax=json 2>/dev/null && exit 5
+    ;;
 "webloc")
     "${HIGHLIGHT[@]}" --syntax=xml "${FILE_PATH}" && exit 5
     ;;
