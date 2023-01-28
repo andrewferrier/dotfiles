@@ -112,7 +112,6 @@ case "${FILE_EXTENSION_LOWER}" in
 
     atool --list -- "${FILE_PATH}" && exit 5
     bsdtar --list --file "${FILE_PATH}" && exit 5
-    exit 1
     ;;
 "pdf")
     macos_check
@@ -151,6 +150,6 @@ image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
 *) ;;
 esac
 
-file --dereference --brief -- "${FILE_PATH}" | fmt -w "${PV_WIDTH}" && exit 5
+file --dereference --uncompress --brief -- "${FILE_PATH}" | fmt -w "${PV_WIDTH}" && exit 5
 
 exit 1
