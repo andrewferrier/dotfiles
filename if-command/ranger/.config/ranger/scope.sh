@@ -31,6 +31,16 @@ macos_check() {
     fi
 }
 
+case $(basename "${FILE_PATH}") in
+"Dockerfile")
+    "${HIGHLIGHT[@]}" --syntax=Dockerfile "${FILE_PATH}" && exit 5
+    ;;
+"Makefile")
+    "${HIGHLIGHT[@]}" --syntax=Makefile "${FILE_PATH}" && exit 5
+    ;;
+*) ;;
+esac
+
 case "${FILE_EXTENSION_FULL_LOWER}" in
 "md" | "mkd" | "mkd.txt")
     "${HIGHLIGHT[@]}" --syntax=markdown "${FILE_PATH}" && exit 5
