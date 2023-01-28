@@ -254,7 +254,6 @@ statusline = statusline .. RESET_HIGHLIGHTING
 statusline = statusline .. ALIGN_RHS
 
 -- RHS - Search Counter
-statusline = statusline .. "%S"
 statusline = statusline .. "%{v:lua.Statusline_Search()}"
 statusline = statusline .. " " .. SEPARATOR
 
