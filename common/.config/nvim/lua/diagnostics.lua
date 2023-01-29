@@ -17,7 +17,7 @@ M.hide = function()
     vim.diagnostic.disable(0)
 end
 
-M.show = function()
+local show = function()
     if vim.fn.has("nvim-0.9.0") ~= 1 then
         vim.b.diagnostic_enabled = true
     end
@@ -28,13 +28,13 @@ end
 M.swap = function()
     if vim.fn.has("nvim-0.9.0") == 1 then
         if vim.diagnostic.is_disabled() then
-            M.show()
+            show()
         else
             M.hide()
         end
     else
         if vim.b.diagnostic_enabled == false then
-            M.show()
+            show()
         else
             M.hide()
         end

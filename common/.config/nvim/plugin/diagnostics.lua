@@ -35,12 +35,6 @@ end
 vim.keymap.set("n", "yog", function()
     require("diagnostics").swap()
 end)
-vim.keymap.set("n", "]og", function()
-    require("diagnostics").hide()
-end)
-vim.keymap.set("n", "[og", function()
-    require("diagnostics").show()
-end)
 
 local SEVERITY_NOTIFY_MAP = {
     vim.log.levels.ERROR,
