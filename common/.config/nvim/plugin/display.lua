@@ -12,6 +12,8 @@ vim.opt.splitright = true
 
 if vim.fn.has("nvim-0.9.0") == 1 then
     vim.opt.splitkeep = "screen"
+
+    vim.opt.shortmess:append("C") -- Reduce command line messages
 end
 
 vim.opt.shortmess:append("S") -- Because we have our own search counter
