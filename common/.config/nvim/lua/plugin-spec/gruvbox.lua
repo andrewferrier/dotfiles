@@ -66,12 +66,5 @@ return {
         vim.cmd.colorscheme("gruvbox")
 
         vim.api.nvim_set_hl(0, "MatchParen", { bold = true })
-
-        vim.api.nvim_create_autocmd("TextYankPost", {
-            group = vim.api.nvim_create_augroup("HighlightYanked", {}),
-            callback = function()
-                require("vim.highlight").on_yank({ timeout = 200 })
-            end,
-        })
     end,
 }

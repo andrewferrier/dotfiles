@@ -12,11 +12,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
     end,
 })
 
-vim.api.nvim_create_autocmd("TermOpen", {
-    group = id,
-    command = "startinsert",
-})
-
 vim.api.nvim_create_autocmd("TermClose", {
     group = id,
     callback = function()

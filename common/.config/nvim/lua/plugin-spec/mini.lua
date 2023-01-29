@@ -10,9 +10,15 @@ return {
             },
         })
 
+        require("mini.basics").setup({
+            options = { basic = false },
+            autocommands = { basic = true },
+        })
+
         require("mini.comment").setup({})
 
         require("mini.surround").setup({})
     end,
-    branch = "stable",
+    -- TODO: Reinstate once mini.lua basics promoted to stable
+    -- branch = "stable",
 }
