@@ -7,7 +7,7 @@ vim.filetype.add({
     filename = {
         [".ansible-lint"] = "yaml",
         [".dockerignore"] = "gitignore",
-        [".gitlint"] = "toml",
+        [".gitlint"] = "cfg",
         [".sqlfluff"] = "cfg",
         ["control_template"] = "debcontrol",
         ["shellcheckrc"] = "conf",
