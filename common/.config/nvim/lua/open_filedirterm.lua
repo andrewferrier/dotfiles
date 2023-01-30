@@ -14,7 +14,7 @@ local select_fileordir = function(fileordir, force_dir, opening_dirbuf)
     if vim.fn.isdirectory(fileordir_t) == 1 or not force_dir then
         return fileordir_t
     else
-        return fileordir_t:gsub("(.*)/.*$", "%1")
+        return vim.fs.dirname(fileordir_t)
     end
 end
 
