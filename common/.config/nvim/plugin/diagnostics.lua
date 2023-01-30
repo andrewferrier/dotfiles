@@ -13,6 +13,9 @@ local diagnostic_format = function(diagnostic)
 end
 
 vim.diagnostic.config({
+    float = {
+        format = diagnostic_format,
+    },
     virtual_text = {
         source = false,
         format = diagnostic_format,
@@ -36,32 +39,8 @@ vim.keymap.set("n", "yog", function()
     require("diagnostics").swap()
 end)
 
-local SEVERITY_NOTIFY_MAP = {
-    vim.log.levels.ERROR,
-    vim.log.levels.WARN,
-    vim.log.levels.INFO,
-    vim.log.levels.INFO,
-}
-
-local show_diagnostic = function(diagnostic)
-    if diagnostic ~= nil then
-        local diagnostic_f = diagnostic_format(diagnostic)
-
-        vim.notify(diagnostic_f, SEVERITY_NOTIFY_MAP[diagnostic.severity])
-
-        vim.fn.setcursorcharpos(diagnostic.lnum + 1, diagnostic.col + 1)
-    end
-end
-
-vim.keymap.set("n", "]g", function()
-    local diagnostic = vim.diagnostic.get_next()
-    show_diagnostic(diagnostic)
-end)
-
-vim.keymap.set("n", "[g", function()
-    local diagnostic = vim.diagnostic.get_prev()
-    show_diagnostic(diagnostic)
-end)
+vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 
 vim.keymap.set("n", "[G", "1G]g", { silent = true, remap = true })
 vim.keymap.set("n", "]G", "G[g", { silent = true, remap = true })
