@@ -123,6 +123,7 @@
 ### FZF
 
     Ctrl-T - open file in new tab
+    Tab - select file (then <CR> to open in Quickfix)
 
 ### Search Pattern
 
@@ -133,6 +134,10 @@
     \ll - build file
     \lo - open PDF
     \lc - clean build directory
+
+### Quickfix Window
+
+    gyr - enter modifiable mode
 
 ## Links
 
