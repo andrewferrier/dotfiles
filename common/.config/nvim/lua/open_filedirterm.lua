@@ -1,9 +1,9 @@
 local M = {}
 
-local select_fileordir = function(fileordir, force_dir)
+local select_fileordir = function(fileordir, force_dir, opening_dirbuf)
     local fileordir_t
 
-    if vim.bo.filetype == "dirbuf" then
+    if vim.bo.filetype == "dirbuf" and not opening_dirbuf then
         fileordir_t = require("dirbuf").get_cursor_path()
     elseif vim.bo.buftype == "" then
         fileordir_t = vim.fn.expand(fileordir, 1)
@@ -19,7 +19,7 @@ local select_fileordir = function(fileordir, force_dir)
 end
 
 M.open_terminal = function(command, dir)
-    local expanded_dir = select_fileordir(dir, true)
+    local expanded_dir = select_fileordir(dir, true, false)
     vim.schedule(function()
         vim.cmd.wincmd("n")
         vim.fn.termopen(command, { cwd = expanded_dir })
@@ -27,7 +27,7 @@ M.open_terminal = function(command, dir)
 end
 
 M.open_file_manager = function(file_or_dir)
-    local expanded_ford = select_fileordir(file_or_dir, false)
+    local expanded_ford = select_fileordir(file_or_dir, false, false)
     vim.schedule(function()
         vim.cmd.wincmd("n")
         vim.fn.termopen(
@@ -37,7 +37,7 @@ M.open_file_manager = function(file_or_dir)
 end
 
 M.open_split_dirbuf = function(dir)
-    local expanded_dir = select_fileordir(dir, true)
+    local expanded_dir = select_fileordir(dir, true, true)
     vim.schedule(function()
         vim.cmd.split()
         vim.cmd.Dirbuf(expanded_dir)
