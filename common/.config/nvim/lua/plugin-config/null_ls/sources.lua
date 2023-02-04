@@ -111,6 +111,7 @@ M.sources = {
         },
     }),
     null_ls.builtins.diagnostics.vale,
+    null_ls.builtins.diagnostics.yamllint,
     null_ls.builtins.diagnostics.zsh,
     custom_diagnostics.diagnostics_by_line({
         name = "todo-fixme",
