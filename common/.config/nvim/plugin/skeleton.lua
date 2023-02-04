@@ -21,25 +21,13 @@ local function find_skeleton()
     return skeleton
 end
 
-local function find_skeleton_with_warning()
+local function check_for_skeleton()
     local skeleton = find_skeleton()
 
-    if skeleton == nil then
-        vim.notify(
-            "No skeleton found for filetype '" .. vim.o.filetype .. "'",
-            vim.log.levels.WARN
-        )
-    end
-
-    return skeleton
-end
-
-local function check_for_skeleton()
-    if find_skeleton() ~= nil then
-        vim.notify(
-            "Skeleton available - use SkeletonRead / SkeletionSplit commands.",
-            vim.log.levels.WARN
-        )
+    if skeleton ~= nil then
+        vim.cmd.read(skeleton)
+        vim.cmd.normal({ args = { "kdd" }, bang = true })
+        vim.notify('Added skeleton ' .. skeleton)
     end
 end
 
@@ -48,22 +36,3 @@ vim.api.nvim_create_autocmd("BufNewFile", {
     pattern = "*",
     callback = check_for_skeleton,
 })
-
-vim.api.nvim_create_user_command("SkeletonRead", function()
-    local skeleton = find_skeleton_with_warning()
-
-    if skeleton ~= nil then
-        vim.cmd.read(skeleton)
-        vim.cmd.normal({ args = { "kdd" }, bang = true })
-    end
-end, {})
-
-vim.api.nvim_create_user_command("SkeletonSplit", function()
-    local existing_filetype = vim.o.filetype
-    local skeleton = find_skeleton_with_warning()
-
-    if skeleton ~= nil then
-        vim.cmd.split(skeleton)
-        vim.bo.filetype = existing_filetype
-    end
-end, {})
