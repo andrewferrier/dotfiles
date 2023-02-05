@@ -138,13 +138,35 @@ fi
 case "${mimetype}" in
 image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
     exiftool -g \
-        '--Red*' \
-        '--Green*' \
+        '--Balance*' \
         '--Blue*' \
-        '--White*' \
+        '--Compatible*' \
+        '--Create*' \
+        '--Current*' \
         '--Directory' \
-        '--ExifTool*' \
         '--Exif*' \
+        '--ExifTool*' \
+        '--Graphics*' \
+        '--Green*' \
+        '--Handler*' \
+        '--Matrix*' \
+        '--Media*' \
+        '--Minor*' \
+        '--Modify*' \
+        '--Movie*' \
+        '--Op*' \
+        '--Poster*' \
+        '--Preferred*' \
+        '--Preview*' \
+        '--Red*' \
+        '--Selection*' \
+        '--Source*' \
+        '--Time*' \
+        '--Track*' \
+        '--Warning*' \
+        '--White*' \
+        '--X*' \
+        '--Y*' \
         "${FILE_PATH}" && exit 5
     exit 1
     ;;
