@@ -79,7 +79,6 @@ M.sources = {
 
     -- Diagnostics
 
-    null_ls.builtins.diagnostics.ansiblelint,
     null_ls.builtins.diagnostics.checkmake,
     null_ls.builtins.diagnostics.chktex.with({
         filetypes = { "tex", "latex" },

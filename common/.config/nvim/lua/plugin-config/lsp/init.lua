@@ -6,6 +6,7 @@ local attach = require("plugin-config.lsp.attach")
 -- vim.lsp.set_log_level("info")
 
 local servers = {
+    ansiblels = {},
     bashls = {
         -- Disable shellcheck because we use it from null-ls where we have more control
         cmd_env = { SHELLCHECK_PATH = "" },
