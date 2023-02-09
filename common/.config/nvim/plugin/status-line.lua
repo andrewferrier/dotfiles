@@ -234,6 +234,16 @@ function _G.Statusline_Search()
     return ""
 end
 
+function _G.Statusline_MacroRecording()
+    local recording_register = vim.fn.reg_recording()
+
+    if recording_register == "" then
+        return ""
+    else
+        return LEFT_BRACE .. "rec @" .. recording_register .. RIGHT_BRACE .. " "
+    end
+end
+
 local RESET_HIGHLIGHTING = "%*"
 local TRUNCATOR_POSITION = "%<"
 local ALIGN_RHS = "%="
@@ -259,6 +269,7 @@ statusline = statusline .. " " .. SEPARATOR
 statusline = statusline .. "%{v:lua.Statusline_DiagnosticStatus()}"
 statusline = statusline .. "%{v:lua.Statusline_SpellingErrorCount()}"
 statusline = statusline .. "%{v:lua.Statusline_GitSigns()}"
+statusline = statusline .. "%{v:lua.Statusline_MacroRecording()}"
 statusline = statusline .. SEPARATOR
 
 -- RHS - File and feature info
