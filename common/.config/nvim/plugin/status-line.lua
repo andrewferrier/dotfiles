@@ -223,11 +223,13 @@ function _G.Statusline_Search()
         local searchcount = vim.fn.searchcount()
 
         if searchcount["total"] > 0 then
-            return " "
-                .. "s "
+            return LEFT_BRACE
+                .. "⚲ "
                 .. searchcount["current"]
                 .. "∕"
                 .. searchcount["total"]
+                .. RIGHT_BRACE
+                .. " "
         end
     end
 
@@ -261,15 +263,12 @@ statusline = statusline .. RESET_HIGHLIGHTING
 
 statusline = statusline .. ALIGN_RHS
 
--- RHS - Search Counter
-statusline = statusline .. "%{v:lua.Statusline_Search()}"
-statusline = statusline .. " " .. SEPARATOR
-
 -- RHS - Warnings
+statusline = statusline .. "%{v:lua.Statusline_Search()}"
+statusline = statusline .. "%{v:lua.Statusline_MacroRecording()}"
 statusline = statusline .. "%{v:lua.Statusline_DiagnosticStatus()}"
 statusline = statusline .. "%{v:lua.Statusline_SpellingErrorCount()}"
 statusline = statusline .. "%{v:lua.Statusline_GitSigns()}"
-statusline = statusline .. "%{v:lua.Statusline_MacroRecording()}"
 statusline = statusline .. SEPARATOR
 
 -- RHS - File and feature info
