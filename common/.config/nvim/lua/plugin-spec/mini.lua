@@ -19,6 +19,5 @@ return {
 
         require("mini.surround").setup({})
     end,
-    -- TODO: Reinstate once mini.lua basics promoted to stable
-    -- branch = "stable",
+    branch = "stable",
 }
