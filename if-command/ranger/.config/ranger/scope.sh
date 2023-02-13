@@ -144,6 +144,7 @@ image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
         '--White*' \
         '--Directory' \
         '--ExifTool*' \
+        '--Exif*' \
         "${FILE_PATH}" && exit 5
     exit 1
     ;;
