@@ -46,7 +46,7 @@ end
 function _G.Statusline_FeaturesEnabled()
     local return_string = ""
 
-    if vim.bo.filetype ~= "dirbuf" then
+    if vim.bo.filetype ~= "dirbuf" and vim.bo.buftype ~= "terminal" then
         if require("gitsigns.config").config.show_deleted then
             return_string = return_string .. ",_̸"
         end
@@ -118,7 +118,7 @@ function _G.Statusline_List()
 end
 
 function _G.Statusline_Fileencoding()
-    if vim.bo.filetype == "dirbuf" or vim.bo.filetype == "terminal" then
+    if vim.bo.filetype == "dirbuf" or vim.bo.buftype == "terminal" then
         return ""
     elseif vim.bo.fileencoding == "" then
         return ",fenc=?"
