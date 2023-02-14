@@ -11,6 +11,6 @@ vim.keymap.set("n", "yoq", function()
     else
         require("quickfix").open()
     end
-end)
+end, { desc = "Toggle quickfix window" })
 
-vim.cmd.packadd('cfilter')
+vim.cmd.packadd("cfilter")

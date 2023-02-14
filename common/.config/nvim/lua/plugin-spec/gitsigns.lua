@@ -28,7 +28,7 @@ local configure = function()
                 gitsigns.next_hunk()
             end)
             return "<Ignore>"
-        end, { expr = true })
+        end, { expr = true, desc = 'Next diff/hunk' })
 
         map("[c", function()
             if vim.wo.diff then
@@ -38,7 +38,7 @@ local configure = function()
                 gitsigns.prev_hunk()
             end)
             return "<Ignore>"
-        end, { expr = true })
+        end, { expr = true, desc = 'Previous diff/hunk' })
 
         map("ih", ":<C-U>Gitsigns select_hunk<CR>", { mode = { "o", "x" } })
 
@@ -48,24 +48,24 @@ local configure = function()
             vim.schedule(function()
                 gitsigns.next_hunk()
             end)
-        end)
+        end, { desc = "Stage hunk" })
 
         vim.keymap.set("v", "gbhs", function()
             visual_stage()
-        end)
+        end, { desc = "Stage hunk" })
 
         map("gbhr", function()
             gitsigns.reset_hunk()
-        end)
+        end, { desc = "Reset hunk" })
 
         map("gba", function()
             vim.cmd.update()
             gitsigns.stage_buffer()
-        end)
+        end, { desc = "Stage/add entire file" })
 
         map("yod", function()
             gitsigns.toggle_deleted()
-        end)
+        end, { desc = "Toggle deleted lines" })
     end
 
     gitsigns.setup({
