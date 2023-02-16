@@ -99,6 +99,7 @@ M.sources = {
     }),
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.sqlfluff,
+    null_ls.builtins.diagnostics.terraform_validate,
     null_ls.builtins.diagnostics.tidy,
     null_ls.builtins.diagnostics.trail_space.with({
         -- for 'mail' it's just annoying
