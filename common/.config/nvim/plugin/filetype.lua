@@ -3,6 +3,7 @@ vim.filetype.add({
         equivs = "debcontrol",
         jad = "java",
         rasi = "rasi",
+        tfstate = "json",
     },
     filename = {
         [".ansible-lint"] = "yaml",
