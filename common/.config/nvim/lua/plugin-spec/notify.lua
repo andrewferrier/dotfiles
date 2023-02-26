@@ -15,12 +15,6 @@ return {
             render = "minimal",
             stages = "static",
         })
-
-        vim.api.nvim_echo = function(chunks, _, _)
-            for _, chunk in ipairs(chunks) do
-                vim.notify(chunk[1])
-            end
-        end
     end,
     version = "*",
 }
