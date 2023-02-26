@@ -24,9 +24,9 @@ GTKRC20_DIR.mkdir(parents=True, exist_ok=True)
 GTKRC20 = GTKRC20_DIR.joinpath("gtkrc2")
 
 
-def write_to_file(filename, state):
+def write_to_file(filename, contents):
     with open(filename, "w") as output_file:
-        output_file.write(state)
+        output_file.write(contents)
 
 
 def get_state_macos():
