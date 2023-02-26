@@ -25,6 +25,7 @@ return {
         require("mini.bracketed").setup({
             comment = { suffix = "o" },
             diagnostic = { options = { float = false } },
+            indent = { options = { change_type = "diff" } },
             jump = { suffix = "" },
             oldfile = { suffix = "" },
             window = { suffix = "" },
