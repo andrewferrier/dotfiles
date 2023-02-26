@@ -20,13 +20,13 @@ local configure = function()
         },
     })
 
-    vim.keymap.set("n", "cvh", fzf_lua.help_tags)
-    vim.keymap.set("n", "cvl", fzf_lua.live_grep)
+    vim.keymap.set("n", "cvh", fzf_lua.help_tags, { desc = "Open helptag" })
+    vim.keymap.set("n", "cvl", fzf_lua.live_grep, { desc = "Live grep" })
 
     vim.keymap.set("n", "cvm", function()
         -- `man -c` doesn't work on Arch
         fzf_lua.man_pages({ previewer = "man_native" })
-    end)
+    end, { desc = "Open manpage" })
 
     vim.keymap.set("n", "cvf", function()
         fzf_lua.fzf_exec("~/.local/bin/common/file-list -t -r", {
@@ -37,7 +37,7 @@ local configure = function()
                 ["--no-sort"] = "",
             },
         })
-    end)
+    end, { desc = "Find file" })
 
     vim.keymap.set("n", "cvg", function()
         fzf_lua.fzf_exec("~/.local/bin/common/file-list -d", {
@@ -62,15 +62,18 @@ local configure = function()
                 ["--no-sort"] = "",
             },
         })
-    end)
+    end, { desc = "Find directory" })
 
     -- Workaround for warning, see https://github.com/ibhagwan/fzf-lua/issues/589
     local buffer_is_dirty_orig = require("fzf-lua.utils").buffer_is_dirty
 
-    require("fzf-lua.utils").buffer_is_dirty =
-        function(bufnr, _, only_if_last_buffer)
-            buffer_is_dirty_orig(bufnr, false, only_if_last_buffer)
-        end
+    require("fzf-lua.utils").buffer_is_dirty = function(
+        bufnr,
+        _,
+        only_if_last_buffer
+    )
+        buffer_is_dirty_orig(bufnr, false, only_if_last_buffer)
+    end
 end
 
 return {
