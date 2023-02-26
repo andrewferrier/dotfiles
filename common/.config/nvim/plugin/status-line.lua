@@ -52,13 +52,13 @@ function _G.Statusline_FeaturesEnabled()
         end
 
         if not diagnostics.enabled() then
-            return_string = return_string .. ",D̸"
+            return_string = return_string .. ",¬D"
         end
 
         local bufnr = vim.api.nvim_get_current_buf()
 
         if not vim.treesitter.highlighter.active[bufnr] then
-            return_string = return_string .. ",T̸"
+            return_string = return_string .. ",¬T"
         end
     end
 
