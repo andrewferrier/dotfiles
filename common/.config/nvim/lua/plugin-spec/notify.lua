@@ -22,5 +22,5 @@ return {
             end
         end
     end,
-    version = "*"
+    version = "*",
 }
