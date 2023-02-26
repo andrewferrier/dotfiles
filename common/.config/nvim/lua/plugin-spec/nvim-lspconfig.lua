@@ -4,4 +4,4 @@ return {
         require("plugin-config.lsp")
     end,
     event = "VeryLazy",
-} -- gyq, gQ, cx
+} -- gQ, cx
