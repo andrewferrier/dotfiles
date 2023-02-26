@@ -20,28 +20,22 @@ local configure = function()
             vim.keymap.set(mode, l, r, opts)
         end
 
-        map("]c", function()
-            if vim.wo.diff then
-                return "]c"
-            end
+        map("]h", function()
             vim.schedule(function()
                 gitsigns.next_hunk()
             end)
             return "<Ignore>"
-        end, { expr = true, desc = "Diff/hunk forward" })
+        end, { expr = true, desc = "Hunk forward" })
 
-        map("[c", function()
-            if vim.wo.diff then
-                return "[c"
-            end
+        map("[h", function()
             vim.schedule(function()
                 gitsigns.prev_hunk()
             end)
             return "<Ignore>"
-        end, { expr = true, desc = "Diff/hunk backward" })
+        end, { expr = true, desc = "Hunk backward" })
 
-        map("[C", "gg]c", { remap = true, desc = "Diff/junk first" })
-        map("]C", "G[c", { remap = true, desc = "Diff/junk last" })
+        map("[H", "gg]h", { remap = true, desc = 'Hunk first' })
+        map("]H", "G[h", { remap = true, desc = 'Hunk last' })
 
         map("ih", ":<C-U>Gitsigns select_hunk<CR>", { mode = { "o", "x" } })
 
