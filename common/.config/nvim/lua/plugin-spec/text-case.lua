@@ -1,43 +1,24 @@
 return {
     "johmsalas/text-case.nvim",
-    dependencies = { "anuvyklack/hydra.nvim" },
     config = function()
         -- Do NOT run setup, otherwise it creates default keybindings
         -- require("textcase").setup({})
 
-        local hydra = require("hydra")
-
-        local head = function(key, operator_name, desc)
-            return {
-                key,
-                function()
-                    require("textcase").operator(operator_name)
-                end,
-                { desc = desc },
-            }
+        local map_key = function(key, operator_name, desc)
+            vim.keymap.set("n", "gyc" .. key, function()
+                require("textcase").operator(operator_name)
+            end, { desc = "Convert to " .. desc })
         end
 
-        hydra({
-            config = {
-                exit = true,
-            },
-            name = "Change case",
-            mode = "n",
-            body = "gyc",
-            heads = {
-                head("_", "to_snake_case", "snake_case"),
-                head("-", "to_dash_case", "dash-case"),
-                head("C", "to_constant_case", "CONSTANT_CASE"),
-                head(".", "to_dot_case", "dot.case"),
-                head("c", "to_camel_case", "camelCase"),
-                head("t", "to_title_case", "Title Case"),
-                head("/", "to_path_case", "path/case"),
-                head("s", "to_phrase_case", "Sentence case"),
-                head("m", "to_pascal_case", "MixedCase"),
-
-                { "<Esc>", nil, { exit = true } },
-            },
-        })
+        map_key("_", "to_snake_case", "snake_case")
+        map_key("-", "to_dash_case", "dash-case")
+        map_key("C", "to_constant_case", "CONSTANT_CASE")
+        map_key(".", "to_dot_case", "dot.case")
+        map_key("c", "to_camel_case", "camelCase")
+        map_key("t", "to_title_case", "Title Case")
+        map_key("/", "to_path_case", "path/case")
+        map_key("s", "to_phrase_case", "Sentence case")
+        map_key("m", "to_pascal_case", "MixedCase")
     end,
     keys = "gyc",
 }
