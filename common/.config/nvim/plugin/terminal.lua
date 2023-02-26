@@ -3,14 +3,8 @@ local id = vim.api.nvim_create_augroup("neovim_terminal", {})
 vim.api.nvim_create_autocmd("TermOpen", {
     group = id,
     callback = function()
-        vim.wo.number = false
-        vim.wo.relativenumber = false
-
-        if vim.fn.has("nvim-0.9.0") == 1 then
-            vim.wo.signcolumn = "no"
-            vim.wo.statuscolumn = ""
-        end
-    end,
+        require('filetype.status_column').remove_all()
+    end
 })
 
 vim.api.nvim_create_autocmd("TermClose", {
