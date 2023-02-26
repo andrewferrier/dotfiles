@@ -35,35 +35,9 @@ end
 -- These mappings replace ones provided by vim-unimpaired which I don't use, as
 -- they affect the 'diff' setting.
 
-vim.keymap.set("n", "yog", function()
+vim.keymap.set("n", "yod", function()
     require("diagnostics").swap()
 end, { desc = "Toggle diagnostics" })
-
-vim.keymap.set(
-    "n",
-    "]g",
-    vim.diagnostic.goto_next,
-    { desc = "Go to next diagnostic" }
-)
-vim.keymap.set(
-    "n",
-    "[g",
-    vim.diagnostic.goto_prev,
-    { desc = "Go to previous diagnostic" }
-)
-
-vim.keymap.set(
-    "n",
-    "[G",
-    "1G]g",
-    { silent = true, remap = true, desc = "Go to first diagnostic" }
-)
-vim.keymap.set(
-    "n",
-    "]G",
-    "G[g",
-    { silent = true, remap = true, desc = "Go to last diagnostic" }
-)
 
 vim.api.nvim_create_user_command("DiagnosticQFList", function()
     vim.diagnostic.setqflist({ open = false })

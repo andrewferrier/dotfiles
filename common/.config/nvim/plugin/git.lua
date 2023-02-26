@@ -31,6 +31,3 @@ vim.keymap.set("n", "gbo", function()
         on_stderr = require("utils").job_stderr,
     })
 end, { desc = "Open git repo in browser" })
-
-vim.keymap.set("n", "[C", "gg]c", { remap = true })
-vim.keymap.set("n", "]C", "G[c", { remap = true })
