@@ -1,9 +1,14 @@
 local M = {}
 
-local OPTS = {
-    buffer = true,
-    silent = true,
-}
+local create_opts = function(desc)
+    local opts = vim.deepcopy({
+        buffer = true,
+        silent = true,
+    })
+
+    opts.desc = desc
+    return opts
+end
 
 M.setup = function(pattern_start, pattern_end)
     M.setup_outline(pattern_start)
@@ -16,52 +21,52 @@ M.setup_outline = function(pattern_start)
         vim.cmd.vimgrep("'" .. pattern_start .. "'", "%")
         vim.fn.winrestview(view)
         vim.cmd.copen()
-    end, OPTS)
+    end, create_opts("Show file outline"))
 end
 
 M.setup_navigation = function(pattern_start, pattern_end)
     vim.keymap.set("n", "]]", function()
         vim.cmd.mark("'")
         vim.fn.search(pattern_start, "W")
-    end, OPTS)
+    end, create_opts("Move to start of next section"))
 
     vim.keymap.set("n", "[[", function()
         vim.cmd.mark("'")
         vim.fn.search(pattern_start, "bW")
-    end, OPTS)
+    end, create_opts("Move to start of previous section"))
 
     vim.keymap.set("v", "]]", function()
         vim.cmd.normal({ args = { "gv" }, bang = true })
         vim.fn.search(pattern_start, "W")
-    end, OPTS)
+    end, create_opts("Move to start of next section"))
 
     vim.keymap.set("v", "[[", function()
         vim.cmd.normal({ args = { "gv" }, bang = true })
         vim.fn.search(pattern_start, "bW")
-    end, OPTS)
+    end, create_opts("Move to start of previous section"))
 
     if pattern_end ~= nil then
         vim.keymap.set("n", "][", function()
             vim.cmd.mark("'")
             vim.fn.search(pattern_end, "W")
-        end, OPTS)
+        end, create_opts("Move to end of next section"))
 
         vim.keymap.set("n", "[]", function()
             vim.cmd.mark("'")
             vim.fn.search(pattern_end, "bW")
-        end, OPTS)
+        end, create_opts("Move to start of previous section"))
 
         vim.keymap.set("v", "][", function()
             vim.cmd.mark("'")
             vim.cmd.normal({ args = { "gv" }, bang = true })
             vim.fn.search(pattern_end, "W")
-        end, OPTS)
+        end, create_opts("Move to end of next section"))
 
         vim.keymap.set("v", "[]", function()
             vim.cmd.mark("'")
             vim.cmd.normal({ args = { "gv" }, bang = true })
             vim.fn.search(pattern_end, "bW")
-        end, OPTS)
+        end, create_opts("Move to start of previous section"))
     end
 end
 

@@ -1,5 +1,7 @@
 local M = {}
 
+local DISABLED_DESC = "Disabled for this filetype"
+
 local function is_lsp_loaded(client_name)
     for _, client in pairs(vim.lsp.buf_get_clients(0)) do
         if client.name == client_name then
@@ -50,7 +52,7 @@ M.keybindings_defaults = function()
                 "Don't know how to " .. action_desc .. " this filetype.",
                 vim.log.levels.ERROR
             )
-        end)
+        end, { desc = DISABLED_DESC })
     end
 
     map("cxo", "organize imports for")
@@ -59,12 +61,29 @@ M.keybindings_defaults = function()
 end
 
 M.keybindings_formatting = function(bufnr)
-    vim.keymap.set("n", "gQ", lsp_document_format, { buffer = bufnr })
+    vim.keymap.set(
+        "n",
+        "gQ",
+        lsp_document_format,
+        { buffer = bufnr, desc = "Format buffer" }
+    )
 end
 
 M.keybindings_codeaction = function(bufnr)
-    vim.keymap.set("n", "cxa", vim.lsp.buf.code_action, { buffer = bufnr })
-    vim.keymap.set("x", "cxa", vim.lsp.buf.code_action, { buffer = bufnr })
+    local DESC = "Apply code action"
+
+    vim.keymap.set(
+        "n",
+        "cxa",
+        vim.lsp.buf.code_action,
+        { buffer = bufnr, desc = DESC }
+    )
+    vim.keymap.set(
+        "x",
+        "cxa",
+        vim.lsp.buf.code_action,
+        { buffer = bufnr, desc = DESC }
+    )
 end
 
 M.keybindings_rename = function(bufnr)
@@ -73,6 +92,7 @@ M.keybindings_rename = function(bufnr)
     end, {
         expr = true,
         buffer = bufnr,
+        desc = "Rename identifier using LSP",
     })
 end
 
@@ -112,24 +132,31 @@ local function keybindings_hover_keyword(bufnr, server_capabilities, filetype)
         -- ~/.config/nvim/after/ftplugin/terraform.lua
     elseif server_capabilities.hoverProvider then
         if filetype ~= "vim" then
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
+            vim.keymap.set(
+                "n",
+                "K",
+                vim.lsp.buf.hover,
+                { buffer = bufnr, desc = "Show definition using LSP" }
+            )
         end
     else
         vim.keymap.set("n", "K", function()
             vim.notify("Hover not supported by LSP.", vim.log.levels.ERROR)
-        end, { buffer = bufnr })
+        end, { buffer = bufnr, desc = DISABLED_DESC })
     end
 end
 
 local function keybindings_organizeimports(bufnr, lsp_name)
+    local DESC = "Organize imports"
+
     if lsp_name == "tsserver" then
         vim.keymap.set("n", "cxo", function()
             require("typescript").actions.organizeImports()
-        end, { buffer = bufnr })
+        end, { buffer = bufnr, desc = DESC })
     elseif lsp_name == "pyright" then
         vim.keymap.set("n", "cxo", function()
             vim.cmd("silent! PyrightOrganizeImports")
-        end, { buffer = bufnr })
+        end, { buffer = bufnr, desc = DESC })
     end
 end
 
