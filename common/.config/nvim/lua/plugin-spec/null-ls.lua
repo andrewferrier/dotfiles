@@ -4,4 +4,5 @@ return {
     config = function()
         require("plugin-config.null_ls")
     end,
+    event = "VeryLazy",
 }

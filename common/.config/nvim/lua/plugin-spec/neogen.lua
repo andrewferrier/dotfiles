@@ -8,5 +8,6 @@ return {
 
         require("neogen").setup({})
     end,
+    event = "VeryLazy",
     version = "*",
 }

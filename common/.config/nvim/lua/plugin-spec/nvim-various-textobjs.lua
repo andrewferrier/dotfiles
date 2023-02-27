@@ -28,4 +28,5 @@ return {
             require("various-textobjs").diagnostic()
         end)
     end,
+    event = "VeryLazy",
 }
