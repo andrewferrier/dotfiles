@@ -34,6 +34,8 @@ return {
 
         require("mini.comment").setup({})
 
+        require("mini.misc").setup_restore_cursor()
+
         require("mini.surround").setup({})
     end,
 }
