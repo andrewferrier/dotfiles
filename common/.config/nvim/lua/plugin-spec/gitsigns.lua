@@ -40,8 +40,8 @@ local configure = function()
             return "<Ignore>"
         end, { expr = true, desc = "Diff/hunk backward" })
 
-        map("[C", "gg]c", { remap = true, desc = 'Diff/junk first' })
-        map("]C", "G[c", { remap = true, desc = 'Diff/junk last' })
+        map("[C", "gg]c", { remap = true, desc = "Diff/junk first" })
+        map("]C", "G[c", { remap = true, desc = "Diff/junk last" })
 
         map("ih", ":<C-U>Gitsigns select_hunk<CR>", { mode = { "o", "x" } })
 
