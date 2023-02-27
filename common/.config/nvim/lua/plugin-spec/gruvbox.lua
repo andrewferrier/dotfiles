@@ -1,8 +1,6 @@
 return {
     "ellisonleao/gruvbox.nvim",
     config = function()
-        local statefile = vim.fn.expand("~/.cache/day-night/state-terminal")
-
         local overrides = {
             FidgetTitle = { link = "FidgetTask" },
             HydraHint = { link = "TabLineSel" },
@@ -44,9 +42,11 @@ return {
             })
         end
 
+        local STATEFILE = vim.fn.expand("~/.cache/day-night/state-terminal")
+
         if
-            vim.fn.filereadable(statefile)
-            and vim.fn.index(vim.fn.readfile(statefile), "day") >= 0
+            vim.fn.filereadable(STATEFILE)
+            and vim.fn.index(vim.fn.readfile(STATEFILE), "day") >= 0
         then
             vim.opt.background = "light"
         else
