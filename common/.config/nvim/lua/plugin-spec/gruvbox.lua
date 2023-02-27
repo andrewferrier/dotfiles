@@ -3,14 +3,9 @@ return {
     config = function()
         local statefile = vim.fn.expand("~/.cache/day-night/state-terminal")
 
-        local palette = require("gruvbox.palette")
-
         local overrides = {
-            CurSearch = { reverse = true }, -- Workaround for tint.nvim; see https://github.com/levouh/tint.nvim/issues/11
             FidgetTitle = { link = "FidgetTask" },
-            HydraBlue = { fg = palette.neutral_blue, bold = true },
             HydraHint = { link = "TabLineSel" },
-            LspInlayHint = { link = "Folded" }, -- lsp-inlayhints.nvim
             NotifyDEBUGBorder = { link = "GruvboxBlue" },
             NotifyDEBUGIcon = { link = "GruvboxBlue" },
             NotifyDEBUGTitle = { link = "GruvboxBlue" },
