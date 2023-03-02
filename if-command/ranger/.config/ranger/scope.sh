@@ -24,13 +24,6 @@ HIGHLIGHT=("highlight" "--out-format=ansi")
 HIGHLIGHT_SUPPORTS_SYNTAX_BY_NAME=false
 highlight --out-format=truecolor --syntax-by-name=c </dev/null >/dev/null 2>/dev/null && HIGHLIGHT_SUPPORTS_SYNTAX_BY_NAME=true
 
-macos_check() {
-    if [[ ${OSTYPE} == darwin* ]]; then
-        echo "Cannot display on MacOS, see https://github.com/ranger/ranger/issues/1787."
-        exit 0
-    fi
-}
-
 case $(basename "${FILE_PATH}") in
 "Dockerfile")
     "${HIGHLIGHT[@]}" --syntax=Dockerfile "${FILE_PATH}" && exit 5
@@ -130,8 +123,6 @@ case "${FILE_EXTENSION_LOWER}" in
     ;;
 *) ;;
 esac
-
-macos_check
 
 mimetype=$(file --mime-type -Lb "${FILE_PATH}")
 
