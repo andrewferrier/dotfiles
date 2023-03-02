@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # help on structure: /usr/share/doc/ranger/config/scope.sh or
-# https://github.com/ranger/ranger/blob/master/ranger/data/scope.sh
+# https://github.com/ranger/ranger/blob/master/ranger/data/scope.sh.
 
 set -o noclobber
 set -o noglob
@@ -23,6 +23,13 @@ HIGHLIGHT=("highlight" "--out-format=ansi")
 
 HIGHLIGHT_SUPPORTS_SYNTAX_BY_NAME=false
 highlight --out-format=truecolor --syntax-by-name=c </dev/null >/dev/null 2>/dev/null && HIGHLIGHT_SUPPORTS_SYNTAX_BY_NAME=true
+
+macos_check() {
+    if [[ ${OSTYPE} == darwin* ]]; then
+        echo "Cannot display on MacOS, see https://github.com/ranger/ranger/issues/1787."
+        exit 0
+    fi
+}
 
 case $(basename "${FILE_PATH}") in
 "Dockerfile")
@@ -124,16 +131,9 @@ case "${FILE_EXTENSION_LOWER}" in
 *) ;;
 esac
 
-mimetype=$(file --mime-type -Lb "${FILE_PATH}")
+macos_check
 
-if [[ ${OSTYPE} == darwin* ]]; then
-    case "${mimetype}" in
-    image/*)
-        exit 7
-        ;;
-    *) ;;
-    esac
-fi
+mimetype=$(file --mime-type -Lb "${FILE_PATH}")
 
 case "${mimetype}" in
 image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
