@@ -24,7 +24,7 @@ return {
         vim.keymap.set({ "o", "x" }, "iS", function()
             require("various-textobjs").subword(true)
         end)
-        vim.keymap.set({ "o", "x" }, "ig", function()
+        vim.keymap.set({ "o", "x" }, "id", function()
             require("various-textobjs").diagnostic()
         end)
     end,
