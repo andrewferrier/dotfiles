@@ -7,4 +7,5 @@ return {
             user_default_options = { RGB = false, names = false },
         })
     end,
+    event = "BufEnter",
 }

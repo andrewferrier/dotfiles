@@ -1,4 +1,4 @@
 return {
     "mfussenegger/nvim-treehopper",
-    event = "VeryLazy",
+    event = "BufEnter",
 }

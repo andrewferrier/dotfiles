@@ -83,6 +83,6 @@ end
 return {
     "lewis6991/gitsigns.nvim",
     config = configure,
-    event = "VeryLazy",
+    event = "BufEnter",
     version = "*",
 } -- gb
