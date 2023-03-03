@@ -3,5 +3,5 @@ return {
     config = function()
         require("plugin-config.lsp")
     end,
-    event = "VeryLazy",
+    event = "BufEnter",
 } -- gQ, cx
