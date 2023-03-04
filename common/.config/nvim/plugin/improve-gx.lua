@@ -9,7 +9,7 @@ local open_url = function(url)
 end
 
 vim.keymap.set("n", "gx", function()
-    require("various-textobjs").url()
+    require("various-textobjs").url() -- Select URL visually
 
     if vim.fn.mode():find("v") then
         local url = require("utils").visual_selection_range()
