@@ -33,6 +33,7 @@ return {
 
         require("mini.comment").setup({})
 
+        -- Will be replaced with https://github.com/neovim/neovim/issues/16339
         require("mini.misc").setup_restore_cursor()
 
         require("mini.surround").setup({})
