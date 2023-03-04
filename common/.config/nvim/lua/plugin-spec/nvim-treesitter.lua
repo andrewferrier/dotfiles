@@ -29,12 +29,6 @@ local function on_attach()
             buffer = true,
         })
     end
-
-    if vim.fn.has("nvim-0.9.0") == 1 then
-        vim.api.nvim_create_user_command("TSTree", function()
-            vim.treesitter.show_tree({ command = "botright 60vnew" })
-        end, {})
-    end
 end
 
 local setup_object = {
