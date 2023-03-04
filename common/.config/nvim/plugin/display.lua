@@ -23,7 +23,5 @@ vim.opt.shortmess:append("S") -- Because we have our own search counter
 -- also find it interesting to see the file summary when opening it.
 vim.opt.shortmess:append("c")
 
-vim.opt.foldlevel = 99
-
 vim.opt.list = true
 vim.opt.listchars = "tab:>⋅,trail:·,extends:▷,precedes:◁,nbsp:␣"

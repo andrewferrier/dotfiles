@@ -15,6 +15,8 @@ local set_fold_method = function()
             vim.wo.foldmethod = "indent"
         end
     end
+
+    vim.wo.foldlevel = 99
 end
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
