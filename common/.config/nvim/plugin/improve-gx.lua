@@ -15,8 +15,6 @@ vim.keymap.set("n", "gx", function()
         local url = require("utils").visual_selection_range()
         open_url(url)
         vim.fn.feedkeys("v")
-    else
-        vim.notify("Cannot find URL.", vim.log.levels.WARN)
     end
 end)
 
