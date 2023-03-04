@@ -1,4 +1,5 @@
 vim.opt.breakindent = true
+vim.opt.cmdheight = 0
 vim.opt.confirm = true
 vim.opt.display:append("uhex")
 vim.opt.equalalways = false
@@ -26,5 +27,3 @@ vim.opt.foldlevel = 99
 
 vim.opt.list = true
 vim.opt.listchars = "tab:>⋅,trail:·,extends:▷,precedes:◁,nbsp:␣"
-
-vim.opt.cmdheight = 0
