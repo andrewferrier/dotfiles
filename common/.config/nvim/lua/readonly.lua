@@ -2,7 +2,6 @@ local M = {}
 
 M.make_readonly = function()
     vim.bo.readonly = true
-    vim.bo.syntax = ""
     vim.opt_local.concealcursor = "nc"
     vim.opt_local.conceallevel = 2
     vim.opt_local.list = false
