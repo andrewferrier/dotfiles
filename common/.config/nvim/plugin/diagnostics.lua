@@ -32,13 +32,6 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- These mappings replace ones provided by vim-unimpaired which I don't use, as
--- they affect the 'diff' setting.
-
-vim.keymap.set("n", "yod", function()
-    require("diagnostics").swap()
-end, { desc = "Toggle diagnostics" })
-
 vim.api.nvim_create_user_command("DiagnosticQFList", function()
     vim.diagnostic.setqflist({ open = false })
     require("quickfix").open()
