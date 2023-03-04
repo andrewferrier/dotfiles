@@ -4,10 +4,15 @@ local set_fold_method = function()
 
     if vim.wo.foldmethod == "manual" then
         if not large_file and treesitter_parsers.has_parser() then
-            vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-            vim.wo.foldmethod = 'expr'
+            if vim.fn.has("nvim-0.9.0") == 1 then
+                vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+            else
+                vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+            end
+
+            vim.wo.foldmethod = "expr"
         else
-            vim.wo.foldmethod = 'indent'
+            vim.wo.foldmethod = "indent"
         end
     end
 end
