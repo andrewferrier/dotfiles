@@ -30,4 +30,10 @@ M.if_in_git = function(callback, dir)
     end
 end
 
+M.run_git_cmd = function(command, dir)
+    M.if_in_git(function()
+        require("open_filedirterm").open_terminal(command, dir)
+    end, dir)
+end
+
 return M
