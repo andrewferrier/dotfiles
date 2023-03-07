@@ -21,10 +21,10 @@ for directory in "${ROOT_DIR}"/if-command-after/*; do
     if command -v "$COMMAND" >/dev/null; then
         AFTER_SCRIPT=$(realpath "${ROOT_DIR}/if-command-after")
 
-        if [ -d "${AFTER_SCRIPT}" ]; then
+        if [[ -d "${AFTER_SCRIPT}" ]]; then
             AFTER_SCRIPT="${AFTER_SCRIPT}/${COMMAND}"
 
-            if [ -f "${AFTER_SCRIPT}" ]; then
+            if [[ -f "${AFTER_SCRIPT}" ]]; then
                 printf "Running %s..." "${AFTER_SCRIPT}"
                 echo ""
                 ${AFTER_SCRIPT}
