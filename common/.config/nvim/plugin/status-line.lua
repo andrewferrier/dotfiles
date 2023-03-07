@@ -220,9 +220,10 @@ end
 
 function _G.Statusline_Search()
     if vim.v.hlsearch == 1 then
-        local searchcount = vim.fn.searchcount()
+        -- searchcount can fail e.g. if unbalanced braces in search pattern
+        local ok, searchcount = pcall(vim.fn.searchcount)
 
-        if searchcount["total"] > 0 then
+        if ok and searchcount["total"] > 0 then
             return LEFT_BRACE
                 .. "⚲ "
                 .. searchcount["current"]
