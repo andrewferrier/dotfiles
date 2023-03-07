@@ -41,6 +41,7 @@ pupdate_append_globxxx() {
 }
 
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
 export GEM_HOME="${XDG_DATA_HOME}/gem"
 export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
@@ -53,6 +54,7 @@ export MINIKUBE_HOME="${XDG_DATA_HOME}/minikube"
 export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export NPM_PACKAGES="${XDG_DATA_HOME}/npm" # Defined in ~/.npmrc
+export SQLITE_HISTORY="${XDG_CACHE_HOME}"/sqlite_history
 
 mkdir -pv \
     "${GEM_HOME}" \
