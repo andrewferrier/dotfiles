@@ -9,11 +9,6 @@ local function install_treesitter_parsers()
 end
 
 local function on_attach()
-    local OPTS = { buffer = true, silent = true }
-
-    vim.keymap.set("o", "m", ':<C-U>lua require("tsht").nodes()<CR>', OPTS)
-    vim.keymap.set("x", "m", ':lua require("tsht").nodes()<CR>', OPTS)
-
     local TREESITTER_RENAME_INEFFECTIVE = { "latex" }
 
     if
