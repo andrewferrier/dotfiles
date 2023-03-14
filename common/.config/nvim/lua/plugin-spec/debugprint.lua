@@ -4,5 +4,5 @@ return {
         require("debugprint").setup()
     end,
     dependencies = "nvim-treesitter/nvim-treesitter",
-    keys = "g?",
+    -- Don't use 'keys'; won't work if visual mode is used first
 }
