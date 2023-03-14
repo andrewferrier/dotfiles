@@ -150,6 +150,7 @@
 *   [Lua function parity against VimScript](https://github.com/neovim/neovim/issues/18393)
 *   [NeoVim default mappings](https://docs.google.com/spreadsheets/d/1EJMLr_MPrYiO1TKJ2MjNkR-fA5Wgxa782-f0Wtdpz0w)
 *   [Power of :g](https://vim.fandom.com/wiki/Power_of_g)
+*   [Semantic highlighting](https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316)
 *   [Using LibUV in Neovim](https://teukka.tech/vimloop.html)
 *   [Vim galore](https://github.com/mhinz/vim-galore)
 *   [Vim regexs](https://vi.stackexchange.com/a/2279/91)
