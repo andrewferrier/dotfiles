@@ -63,17 +63,6 @@ local configure = function()
             },
         })
     end, { desc = "Find directory" })
-
-    -- Workaround for warning, see https://github.com/ibhagwan/fzf-lua/issues/589
-    local buffer_is_dirty_orig = require("fzf-lua.utils").buffer_is_dirty
-
-    require("fzf-lua.utils").buffer_is_dirty = function(
-        bufnr,
-        _,
-        only_if_last_buffer
-    )
-        buffer_is_dirty_orig(bufnr, false, only_if_last_buffer)
-    end
 end
 
 return {
