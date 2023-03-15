@@ -1,22 +1,46 @@
-local set = function(lhs, rhs)
-    vim.keymap.set("n", "<Leader>" .. lhs, rhs)
+local set = function(lhs, directory, includetime, createfile, immediate)
+    local command, postfix, date, desc
+
+    if createfile then
+        command = ":split "
+        desc = "Create new file in "
+    else
+        command = ":save "
+        desc = "Save file in "
+    end
+
+    desc = desc .. directory
+
+    if immediate then
+        postfix = ".md<CR>"
+        desc = desc .. " immediately"
+    else
+        postfix = "-"
+    end
+
+    if includetime then
+        date = "=strftime('%FT%T%z')"
+    else
+        date = "=strftime('%F')"
+    end
+
+    local rhs = command .. directory .. "<C-R>" .. date .. "<CR>" .. postfix
+
+    vim.keymap.set("n", "<Leader>" .. lhs, rhs, { desc = desc })
 end
 
-local DATE = "=strftime('%F')"
-local DATETIME = "=strftime('%FT%T%z')"
+set("n.", "./", false, true, false)
+set("nk", "~/Desktop/", false, true, false)
+set("nm", "~/Documents/meetings/", false, true, false)
+set("nn", "~/notes/", false, true, false)
 
-set("n.", ":split ./<C-R>" .. DATE .. "<CR>-")
-set("nk", ":split ~/Desktop/<C-R>" .. DATE .. "<CR>-")
-set("nm", ":split ~/Documents/meetings/<C-R>" .. DATE .. "<CR>-")
-set("nn", ":split ~/notes/<C-R>" .. DATE .. "<CR>-")
+set("nT", "/tmp/", true, true, true)
+set("nt", "/tmp/", true, true, false)
 
-set("nT", ":split /tmp/<C-R>" .. DATETIME .. "<CR>.md<CR>")
-set("nt", ":split /tmp/<C-R>" .. DATETIME .. "<CR>-")
+set("s.", "./", false, false, false)
+set("sk", "~/Desktop/", false, false, false)
+set("sm", "~/Documents/meetings/", false, false, false)
+set("sn", "~/notes/", false, false, false)
 
-set("s.", ":save ./<C-R>" .. DATE .. "<CR>-")
-set("sk", ":save ~/Desktop/<C-R>" .. DATE .. "<CR>-")
-set("sm", ":save ~/Documents/meetings/<C-R>" .. DATE .. "<CR>-")
-set("sn", ":save ~/notes/<C-R>" .. DATE .. "<CR>-")
-
-set("sT", ":save /tmp/<C-R>" .. DATETIME .. "<CR>.md<CR>")
-set("st", ":save /tmp/<C-R>" .. DATETIME .. "<CR>-")
+set("sT", "/tmp/", true, false, true)
+set("st", "/tmp/", true, false, false)
