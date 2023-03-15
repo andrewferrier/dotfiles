@@ -22,6 +22,7 @@ local function on_attach()
             require("nvim-treesitter-refactor.smart_rename").smart_rename(0)
         end, {
             buffer = true,
+            desc = "Rename identifier using Treesitter rename",
         })
     end
 end

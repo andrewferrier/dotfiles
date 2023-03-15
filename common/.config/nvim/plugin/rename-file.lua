@@ -4,4 +4,4 @@ vim.keymap.set("n", "<Leader>r", function()
     else
         return ':Rename <C-R>=expand("%:t")<CR>'
     end
-end, { expr = true })
+end, { expr = true, desc = 'Rename file' })
