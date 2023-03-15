@@ -17,4 +17,5 @@ return {
         })
     end,
     version = "*",
+    event = "VeryLazy",
 }

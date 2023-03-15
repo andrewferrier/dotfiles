@@ -7,4 +7,5 @@ return {
             require("tint").setup({ saturation = 0.4 })
         end
     end,
+    event = "VeryLazy",
 }
