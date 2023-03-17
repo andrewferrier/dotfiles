@@ -30,7 +30,7 @@ return {
                 vim.keymap.del("n", "yoi")
 
                 require("mini.bracketed").setup({
-                    comment = { suffix = "o" },
+                    comment = { suffix = "o" }, -- 'c' is used in diff mode for diffs
                     indent = { options = { change_type = "diff" } },
                     jump = { suffix = "" },
                     oldfile = { suffix = "" },
