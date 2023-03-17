@@ -5,10 +5,8 @@
 ### Normal Mode
 
     !{motion}<command> - filter {motion} through command line
-    & - redo :s on another line
     + - go to the beginning of the next line
     1z= - replace with first choice from spellcheck dictionary
-    <CR> - save file if needed
     <number> Ctrl-A/X - add/decrement specific amount
     Ctrl-E/Y - scroll window without moving cursor
     Ctrl-W Ctrl-F - open the file under cursor in a split (similar to gf)
@@ -24,11 +22,7 @@
     [count]ch|j|k|l - Delete [count] characters in direction and start insert
     [count]i-<Esc>, [count]I-<Esc> - insert 10 dashes at cursor or beginning of line
     [count]r<char> - replace the next [count] characters with <char>
-    ]e, [e - move line down or up
-    ]n, [n - jump git conflict markers
-    cvd - Open Dirbuf buffer for current directory
-    cvg - Change directory interactively
-    cvm - Man pages
+    ]i, [i - move by indents
     d'a - delete to mark "a"
     dV/xyz/-1 - delete linewise up to but not including line with pattern
     g;, g, - jump backwards/forwards through changes
@@ -137,7 +131,7 @@
 
 ### Quickfix Window
 
-    gyr - enter modifiable mode
+    Replacer (command) - enter modifiable mode
 
 ## Links
 
