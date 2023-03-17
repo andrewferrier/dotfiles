@@ -27,15 +27,17 @@ local function show_unconst_caps(args)
     )
 end
 
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-        local filetype = vim.api.nvim_buf_get_option(args.buf, 'filetype')
+if vim.fn.has("nvim-0.9.0") == 1 then
+    vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+            local filetype = vim.api.nvim_buf_get_option(args.buf, "filetype")
 
-        if filetype ~= "lua" then
-            vim.api.nvim_create_autocmd("LspTokenUpdate", {
-                buffer = args.buf,
-                callback = show_unconst_caps,
-            })
-        end
-    end,
-})
+            if filetype ~= "lua" then
+                vim.api.nvim_create_autocmd("LspTokenUpdate", {
+                    buffer = args.buf,
+                    callback = show_unconst_caps,
+                })
+            end
+        end,
+    })
+end
