@@ -19,7 +19,6 @@ return {
             NotifyWARNBorder = { link = "GruvboxYellow" },
             NotifyWARNIcon = { link = "GruvboxYellow" },
             NotifyWARNTitle = { link = "GruvboxYellow" },
-            QuickFixLine = { link = "IncSearch" },
             TermCursorNC = { bg = "#00FF00" },
         }
 
