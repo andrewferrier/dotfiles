@@ -28,6 +28,7 @@ require("lazy").setup("plugin-spec", {
                 "gzip",
                 "remote_plugins",
                 "tarPlugin",
+                "tohtml",
                 "tutor",
                 "zipPlugin",
 
