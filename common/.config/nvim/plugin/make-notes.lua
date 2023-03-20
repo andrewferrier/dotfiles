@@ -1,4 +1,4 @@
-local set = function(lhs, directory, includetime, createfile, immediate)
+local set = function(lhs, directory, createfile, includetime, immediate)
     local command, postfix, date, desc
 
     if createfile then
@@ -29,10 +29,10 @@ local set = function(lhs, directory, includetime, createfile, immediate)
     vim.keymap.set("n", "<Leader>" .. lhs, rhs, { desc = desc })
 end
 
-set("n.", "./", false, true, false)
-set("nk", "~/Desktop/", false, true, false)
-set("nm", "~/Documents/meetings/", false, true, false)
-set("nn", "~/notes/", false, true, false)
+set("n.", "./", true, false, false)
+set("nk", "~/Desktop/", true, false, false)
+set("nm", "~/Documents/meetings/", true, false, false)
+set("nn", "~/notes/", true, false, false)
 
 set("nT", "/tmp/", true, true, true)
 set("nt", "/tmp/", true, true, false)
@@ -42,5 +42,5 @@ set("sk", "~/Desktop/", false, false, false)
 set("sm", "~/Documents/meetings/", false, false, false)
 set("sn", "~/notes/", false, false, false)
 
-set("sT", "/tmp/", true, false, true)
-set("st", "/tmp/", true, false, false)
+set("sT", "/tmp/", false, true, true)
+set("st", "/tmp/", false, true, false)
