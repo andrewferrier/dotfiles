@@ -19,9 +19,7 @@ return {
             NotifyWARNBorder = { link = "GruvboxYellow" },
             NotifyWARNIcon = { link = "GruvboxYellow" },
             NotifyWARNTitle = { link = "GruvboxYellow" },
-            Operator = { italic = false },
             QuickFixLine = { link = "IncSearch" },
-            String = { italic = false },
             TermCursorNC = { bg = "#00FF00" },
         }
 
@@ -73,6 +71,12 @@ return {
         require("gruvbox").setup({
             contrast = "hard",
             overrides = overrides,
+            italic = {
+                strings = false,
+                comments = true,
+                operators = false,
+                folds = true,
+            },
         })
 
         vim.cmd.colorscheme("gruvbox")
