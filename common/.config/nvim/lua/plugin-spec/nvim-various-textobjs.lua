@@ -1,11 +1,6 @@
 return {
     "chrisgrieser/nvim-various-textobjs",
     config = function()
-        require("various-textobjs").setup({
-            useDefaultKeymaps = false,
-            lookForwardLines = 10,
-        })
-
         vim.keymap.set({ "o", "x" }, "ak", function()
             require("various-textobjs").key(false)
         end, { desc = "'key'/lhs including assignment" })
