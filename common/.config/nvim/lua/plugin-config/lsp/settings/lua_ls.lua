@@ -1,12 +1,14 @@
+-- See https://github.com/LuaLS/lua-language-server/issues/1788#issuecomment-1464886248
+local LOG_PATH = vim.fn.stdpath("log") .. "/lua-language-server/"
+local META_PATH = vim.fn.stdpath("cache") .. "/lua-language-server/meta/"
+
 return {
-    -- See
-    -- https://github.com/LuaLS/lua-language-server/issues/1788#issuecomment-1464886248
     cmd = {
         "lua-language-server",
         "--logpath",
-        vim.fn.stdpath("log") .. "/lua-language-server/",
+        LOG_PATH,
         "--metapath",
-        vim.fn.stdpath("cache") .. "/lua-language-server/meta/",
+        META_PATH,
     },
     settings = {
         Lua = {
@@ -18,7 +20,12 @@ return {
                 globals = { "IMAP", "Set", "hs", "options", "pipe_to", "vim" },
             },
             workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
+                library = vim.tbl_extend(
+                    "keep",
+                    { META_PATH },
+                    vim.api.nvim_get_runtime_file("", true)
+                ),
+
                 checkThirdParty = false,
             },
             -- hint = { enable = true }, -- these hints seem fairly useless for now
