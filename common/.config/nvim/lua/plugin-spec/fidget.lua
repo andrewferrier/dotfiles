@@ -1,8 +1,6 @@
 return {
     "j-hui/fidget.nvim",
     opts = {
-        timer = { fidget_decay = 500, task_decay = 500 },
-        text = { spinner = "star" },
         fmt = {
             task = function(task_name, _, percentage)
                 return string.format(
