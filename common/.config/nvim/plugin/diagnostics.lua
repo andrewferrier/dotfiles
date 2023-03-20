@@ -1,12 +1,12 @@
 local diagnostic_format = function(diagnostic)
     local message = diagnostic.message
 
-    if diagnostic.code then
-        message = message .. " [" .. diagnostic.code .. "]"
+    if diagnostic.code and not string.find(message, diagnostic.code) then
+        message = message .. "\n[" .. diagnostic.code .. "]"
     end
 
     if diagnostic.source then
-        message = message .. " (" .. diagnostic.source .. ")"
+        message = message .. "\n(" .. diagnostic.source .. ")"
     end
 
     return message
@@ -15,6 +15,8 @@ end
 vim.diagnostic.config({
     float = {
         format = diagnostic_format,
+        header = "",
+        width = math.floor(vim.fn.winwidth(0) / 2),
     },
     virtual_text = {
         source = false,
