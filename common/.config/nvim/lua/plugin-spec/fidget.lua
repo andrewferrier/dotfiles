@@ -4,8 +4,8 @@ return {
         fmt = {
             task = function(task_name, _, percentage)
                 return string.format(
-                    "%s [%s]",
-                    percentage and string.format(" (%s%%)", percentage) or "",
+                    "%s - %s",
+                    percentage and string.format(" %s%%", percentage) or "",
                     task_name
                 )
             end,
