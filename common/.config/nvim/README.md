@@ -91,6 +91,7 @@
     g/regex/norm gcc - comment out lines that match regex
     grep <pattern> - search and populate quickfix list (using Rg)
     let @/='text/with/lots/of/slashes' - define search pattern (then use n/N)
+    lua =<expression> - print expression
     w ++p - write and create parent dirs (0.9+ only)
     wn - write and move to next file in args list
     write ++p <filename> - create parent dirs
