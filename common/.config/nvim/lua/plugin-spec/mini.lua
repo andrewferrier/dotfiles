@@ -40,7 +40,7 @@ return {
                 require("mini.comment").setup({})
 
                 require("mini.surround").setup({
-                    mappings = { find = '', find_left = '', highlight = '' },
+                    mappings = { find = "", find_left = "", highlight = "" },
                 })
             end,
         })
