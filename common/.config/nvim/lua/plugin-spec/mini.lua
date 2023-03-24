@@ -7,6 +7,11 @@ return {
             mappings = { basic = false, option_toggle_prefix = "yo" },
         })
 
+        -- Delete option-toggling prefixes I don't use to avoid accidentally
+        -- turning them off
+        vim.keymap.del("n", "yoh")
+        vim.keymap.del("n", "yoi")
+
         -- Will be replaced with https://github.com/neovim/neovim/issues/16339
         require("mini.misc").setup_restore_cursor()
 
@@ -22,11 +27,6 @@ return {
                         start_with_preview = "gl",
                     },
                 })
-
-                -- Delete option-toggling prefixes I don't use to avoid accidentally
-                -- turning them off
-                vim.keymap.del("n", "yoh")
-                vim.keymap.del("n", "yoi")
 
                 require("mini.bracketed").setup({
                     comment = { suffix = "o" }, -- 'c' is used in diff mode for diffs
