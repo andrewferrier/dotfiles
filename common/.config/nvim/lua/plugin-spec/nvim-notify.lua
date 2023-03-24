@@ -17,5 +17,5 @@ return {
         })
     end,
     version = "*",
-    event = "VeryLazy",
+    -- Don't use 'event' as it causes flicker on startup
 }
