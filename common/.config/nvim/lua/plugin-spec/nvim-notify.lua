@@ -1,7 +1,19 @@
+local started = false
+
 return {
     "rcarriga/nvim-notify",
     config = function()
         vim.notify = function(msg, level, opts)
+            if not started then
+                require("notify").setup({
+                    timeout = 1500,
+                    render = "minimal",
+                    stages = "static",
+                })
+
+                started = true
+            end
+
             msg = vim.trim(msg)
 
             if msg ~= "" then
@@ -9,12 +21,6 @@ return {
                 require("notify")(msg, level, opts)
             end
         end
-
-        require("notify").setup({
-            timeout = 1500,
-            render = "minimal",
-            stages = "static",
-        })
     end,
     version = "*",
     -- Don't use 'event' as it causes flicker on startup
