@@ -1,9 +1,8 @@
 return {
     "echasnovski/mini.nvim",
     config = function()
-        vim.g.minibasics_silence = true
-
         require("mini.basics").setup({
+            silent = true,
             options = { basic = false },
             mappings = { basic = false, option_toggle_prefix = "yo" },
         })
