@@ -35,7 +35,7 @@ local setup_object = {
         end,
     },
     refactor = { smart_rename = { enable = true } },
-    indent = { enable = true, disable = { "python" } }, -- See https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
+    indent = { enable = true },
     endwise = { enable = true },
 }
 
