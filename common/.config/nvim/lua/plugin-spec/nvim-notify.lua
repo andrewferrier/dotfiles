@@ -23,5 +23,5 @@ return {
         end
     end,
     version = "*",
-    -- Don't use 'event' as it causes flicker on startup
+    event = "VeryLazy",
 }
