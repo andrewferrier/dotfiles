@@ -72,9 +72,7 @@ return {
             overrides = overrides,
             italic = {
                 strings = false,
-                comments = true,
                 operators = false,
-                folds = true,
             },
         })
 
