@@ -18,6 +18,11 @@ else
     alias sparseness="find . -type f -printf '%S\t%p\n' | column -t -s $'\t' | sort -n -r"
 fi
 
+if [[ -n $VISUAL ]]; then
+    # shellcheck disable=SC2139
+    alias vi="${VISUAL}"
+fi
+
 if [[ ${OSTYPE} == darwin* ]]; then
     # http://superuser.com/a/341429/3021
     function bundleid() {
