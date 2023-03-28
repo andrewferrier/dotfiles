@@ -2,7 +2,7 @@ for file in $HOME/.config/sh.d/*.sh; do
     source_sh $file
 done
 
-if [ -L "${HOME}"/.config/sh-local.d ]; then
+if test -n "$(find . -maxdepth 1 -name '~/.config/sh-local.d/*;' -print -quit)"; then
     for file in $HOME/.config/sh-local.d/*.sh; do
         source_sh $file
     done
