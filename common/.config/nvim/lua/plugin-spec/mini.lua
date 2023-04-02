@@ -39,4 +39,5 @@ return {
             mappings = { find = "", find_left = "", highlight = "" },
         })
     end,
+    version = "*",
 }
