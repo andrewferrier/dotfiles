@@ -4,7 +4,7 @@ end, { desc = "git commit" })
 
 vim.keymap.set("n", "gbs", function()
     require("git").run_git_cmd("tig status", "%:p:h")
-end, { desc = "tig status in file directory" })
+end, { desc = "tig status in filedir" })
 
 vim.keymap.set("n", "gbS", function()
     require("git").run_git_cmd("tig status", vim.fn.getcwd(0))
@@ -12,11 +12,11 @@ end, { desc = "tig status in lcd" })
 
 vim.keymap.set("n", "gbt", function()
     require("git").run_git_cmd("tig", "%:p:h")
-end, { desc = "tig commit history" })
+end, { desc = "tig history in filedir" })
 
 vim.keymap.set("n", "gbT", function()
     require("git").run_git_cmd("tig", vim.fn.getcwd(0))
-end, { desc = "git commit" })
+end, { desc = "tig history in lcd" })
 
 vim.keymap.set("n", "gbo", function()
     vim.fn.jobstart({ "git", "open" }, {
