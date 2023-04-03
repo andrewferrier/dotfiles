@@ -10,13 +10,6 @@ set textwidth=80 " This is the default for many/most languages: https://en.wikip
 set virtualedit=block
 set wildmode=longest:full
 
-if has('nvim-0.8.0')
-    set mousemodel=extend
-    set mousescroll=ver:3,hor:1
-else
-    set mouse=nvi
-end
-
 iabbrev zDATE     <C-R>=strftime("%F")<CR>
 iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>
 
@@ -27,6 +20,8 @@ nnoremap cxr :%s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>
 if ! has('nvim-0.8.0')
     " See https://github.com/neovim/neovim/pull/19365
     nnoremap & :&&<CR>
+
+    set mouse=nvi
 end
 
 if ! has('nvim-0.5.0')

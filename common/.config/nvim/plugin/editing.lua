@@ -1,3 +1,6 @@
+vim.opt.mousemodel = "extend"
+vim.opt.mousescroll = "ver:3,hor:1"
+
 vim.opt.completeopt:remove("noinsert")
 vim.opt.completeopt:remove("menuone")
 vim.opt.completeopt:append("preview") -- Doesn't reliably close
