@@ -13,5 +13,5 @@ if (command -v ffmpeg >/dev/null 2>&1); then
         OUTPUT="${2:-${INPUT%.*}-lowres.mp4}"
 
         ffmpeg -i "${INPUT}" -filter:v scale="trunc(oh*a/2)*2:480" -c:v libx265 -crf 28 -codec:a libmp3lame -q:a 7 "${OUTPUT}"
-}
+    }
 fi
