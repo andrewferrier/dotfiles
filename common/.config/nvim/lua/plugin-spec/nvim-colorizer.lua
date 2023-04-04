@@ -7,5 +7,5 @@ return {
             user_default_options = { RGB = false, names = false },
         })
     end,
-    event = "BufEnter",
+    -- Don't override event as it makes plugin not work for first file opened.
 }
