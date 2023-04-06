@@ -25,8 +25,6 @@ local servers = {
 }
 
 for lsp, settings in pairs(servers) do
-    settings.on_attach = attach.on_attach
-
     if lsp == "tsserver" then
         require("typescript").setup({ server = settings })
     else
@@ -34,4 +32,4 @@ for lsp, settings in pairs(servers) do
     end
 end
 
-attach.keybindings_defaults()
+attach.setup_attach()

@@ -45,7 +45,7 @@ function _G.show_capabilities()
     end
 end
 
-M.keybindings_defaults = function()
+local function keybindings_defaults()
     local map = function(keys, action_desc)
         vim.keymap.set("n", keys, function()
             vim.notify(
@@ -160,10 +160,14 @@ local function keybindings_organizeimports(bufnr, lsp_name)
     end
 end
 
-M.on_attach = function(client, bufnr)
+local function lsp_callback(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    local bufnr = event.buf
     local lsp_name = client.name
     local server_capabilities = client.server_capabilities
     local filetype = vim.bo.filetype
+
+    vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
     keybindings_formatting_check(bufnr, server_capabilities)
     keybindings_codeaction_check(bufnr, server_capabilities)
@@ -176,6 +180,15 @@ M.on_attach = function(client, bufnr)
         "Capture call v:lua.show_capabilities()",
         {}
     )
+end
+
+M.setup_attach = function()
+    vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+        callback = lsp_callback,
+    })
+
+    keybindings_defaults()
 end
 
 return M
