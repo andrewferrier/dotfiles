@@ -1,6 +1,6 @@
 local M = {}
 
-local DISABLED_DESC = "Disabled for this filetype"
+local DISABLED_DESC = "DISABLED FOR THIS FILETYPE"
 
 local function is_lsp_loaded(client_name)
     for _, client in pairs(vim.lsp.buf_get_clients(0)) do
