@@ -8,11 +8,21 @@ local function install_treesitter_parsers()
     vim.cmd.TSInstall("all")
 end
 
+local function lsp_supports_rename(bufnr)
+    for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
+        if client.server_capabilities.renameProvider then
+            return true
+        end
+    end
+
+    return false
+end
+
 local function on_attach()
     local TREESITTER_RENAME_INEFFECTIVE = { "latex" }
 
     if
-        not require("plugin-config.lsp.attach").lsp_supports_rename(0)
+        not lsp_supports_rename(0)
         and not vim.tbl_contains(
             TREESITTER_RENAME_INEFFECTIVE,
             vim.opt.filetype

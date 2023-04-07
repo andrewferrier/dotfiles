@@ -1,38 +1,6 @@
-local M = {}
-
 local DISABLED_DESC = "DISABLED FOR THIS FILETYPE"
 
-local function is_lsp_loaded(client_name)
-    for _, client in pairs(vim.lsp.buf_get_clients(0)) do
-        if client.name == client_name then
-            return true
-        end
-    end
-
-    return false
-end
-
-local function is_correct_lsp_loaded(filetype)
-    if filetype == "terraform" then
-        return is_lsp_loaded("terraformls")
-    else
-        return true
-    end
-end
-
-local function lsp_document_format()
-    if not is_correct_lsp_loaded(vim.bo.filetype) then
-        vim.notify(
-            "Required LSPs not yet loaded, please wait a bit and retry.",
-            vim.log.levels.ERROR
-        )
-
-        return
-    end
-
-    vim.lsp.buf.format({ timeout_ms = 3000 })
-    vim.notify("Formatted document using LSP.")
-end
+local lsp_keybindings = require("lsp-keybindings")
 
 function _G.show_capabilities()
     for _, client in pairs(vim.lsp.buf_get_clients(0)) do
@@ -45,48 +13,7 @@ function _G.show_capabilities()
     end
 end
 
-local function keybindings_defaults()
-    local map = function(keys, action_desc)
-        vim.keymap.set("n", keys, function()
-            vim.notify(
-                "Don't know how to " .. action_desc .. " this filetype.",
-                vim.log.levels.ERROR
-            )
-        end, { desc = DISABLED_DESC })
-    end
-
-    map("cxo", "organize imports for")
-    map("cxa", "apply code actions for")
-    map("gQ", "document format")
-end
-
-M.keybindings_formatting = function(bufnr)
-    vim.keymap.set(
-        "n",
-        "gQ",
-        lsp_document_format,
-        { buffer = bufnr, desc = "Format buffer" }
-    )
-end
-
-M.keybindings_codeaction = function(bufnr)
-    local DESC = "Apply code action"
-
-    vim.keymap.set(
-        "n",
-        "cxa",
-        vim.lsp.buf.code_action,
-        { buffer = bufnr, desc = DESC }
-    )
-    vim.keymap.set(
-        "x",
-        "cxa",
-        vim.lsp.buf.code_action,
-        { buffer = bufnr, desc = DESC }
-    )
-end
-
-M.keybindings_rename = function(bufnr)
+local function keybindings_rename(bufnr)
     vim.keymap.set("n", "cxr", function()
         return ":LspRename " .. vim.fn.expand("<cword>")
     end, {
@@ -96,31 +23,21 @@ M.keybindings_rename = function(bufnr)
     })
 end
 
-M.lsp_supports_rename = function(bufnr)
-    for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
-        if client.server_capabilities.renameProvider then
-            return true
-        end
-    end
-
-    return false
-end
-
 local function keybindings_formatting_check(bufnr, server_capabilities)
     if server_capabilities.documentFormattingProvider == true then
-        M.keybindings_formatting(bufnr)
+        lsp_keybindings.formatting(bufnr)
     end
 end
 
 local function keybindings_codeaction_check(bufnr, server_capabilities)
     if server_capabilities.codeActionProvider then
-        M.keybindings_codeaction(bufnr)
+        lsp_keybindings.codeaction(bufnr)
     end
 end
 
 local function keybindings_rename_check(bufnr, server_capabilities)
     if server_capabilities.renameProvider then
-        M.keybindings_rename(bufnr)
+        keybindings_rename(bufnr)
     end
 end
 
@@ -182,13 +99,20 @@ local function lsp_callback(event)
     )
 end
 
-M.setup_attach = function()
-    vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = lsp_callback,
-    })
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    callback = lsp_callback,
+})
 
-    keybindings_defaults()
+local map = function(keys, action_desc)
+    vim.keymap.set("n", keys, function()
+        vim.notify(
+            "Don't know how to " .. action_desc .. " this filetype.",
+            vim.log.levels.ERROR
+        )
+    end, { desc = DISABLED_DESC })
 end
 
-return M
+map("cxo", "organize imports for")
+map("cxa", "apply code actions for")
+map("gQ", "document format")

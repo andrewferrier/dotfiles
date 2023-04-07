@@ -11,14 +11,14 @@ end
 local on_attach = function(_, bufnr)
     local filetype = vim.bo.filetype
 
-    local attach = require("plugin-config.lsp.attach")
+    local lsp_keybindings = require("lsp-keybindings")
 
     if supports_method_for_filetype(filetype, "NULL_LS_FORMATTING") then
-        attach.keybindings_formatting(bufnr)
+        lsp_keybindings.formatting(bufnr)
     end
 
     if supports_method_for_filetype(filetype, "NULL_LS_CODE_ACTION") then
-        attach.keybindings_codeaction(bufnr)
+        lsp_keybindings.codeaction(bufnr)
     end
 end
 
