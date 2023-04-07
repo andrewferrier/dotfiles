@@ -9,10 +9,6 @@ return {
 
         if vim.fn.has("nvim-0.9.0") == 1 then
             overrides = vim.tbl_extend("error", overrides, {
-                SignColumn = { link = "Normal" },
-                GitSignsAdd = { link = "GruvboxGreen" },
-                GitSignsChange = { link = "GruvboxAqua" },
-                GitSignsDelete = { link = "GruvboxRed" },
                 GruvboxAquaSign = { link = "GruvboxAqua" },
                 GruvboxBlueSign = { link = "GruvboxBlue" },
                 GruvboxGreenSign = { link = "GruvboxGreen" },
