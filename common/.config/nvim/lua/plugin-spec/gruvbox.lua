@@ -5,37 +5,33 @@ return {
             FidgetTitle = { link = "FidgetTask" },
             HydraHint = { link = "TabLineSel" },
             TermCursorNC = { bg = "#00DD00" },
+
+            GruvboxAquaSign = { link = "GruvboxAqua" },
+            GruvboxBlueSign = { link = "GruvboxBlue" },
+            GruvboxGreenSign = { link = "GruvboxGreen" },
+            GruvboxOrangeSign = { link = "GruvboxOrange" },
+            GruvboxPurpleSign = { link = "GruvboxPurple" },
+            GruvboxRedSign = { link = "GruvboxRed" },
+            GruvboxYellowSign = { link = "GruvboxYellow" },
+
+            -- https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
+            ["@lsp.type.class"] = { link = "@type" },
+            ["@lsp.type.decorator"] = { link = "@function" },
+            ["@lsp.type.enum"] = { link = "@type" },
+            ["@lsp.type.enumMember"] = { link = "@constant" },
+            ["@lsp.type.function"] = { link = "@function" },
+            ["@lsp.type.interface"] = { link = "@type" },
+            ["@lsp.type.macro"] = { link = "@macro" },
+            ["@lsp.type.method"] = { link = "@method" },
+            ["@lsp.type.namespace"] = { link = "@namespace" },
+            ["@lsp.type.parameter"] = { link = "@parameter" },
+            ["@lsp.type.property"] = { link = "@property" },
+            ["@lsp.type.struct"] = { link = "@structure" },
+            ["@lsp.type.type"] = { link = "@type" },
+            ["@lsp.type.variable"] = { link = "@variable" },
+
+            ["@lsp.mod.readonly"] = { bold = true },
         }
-
-        if vim.fn.has("nvim-0.9.0") == 1 then
-            overrides = vim.tbl_extend("error", overrides, {
-                GruvboxAquaSign = { link = "GruvboxAqua" },
-                GruvboxBlueSign = { link = "GruvboxBlue" },
-                GruvboxGreenSign = { link = "GruvboxGreen" },
-                GruvboxOrangeSign = { link = "GruvboxOrange" },
-                GruvboxPurpleSign = { link = "GruvboxPurple" },
-                GruvboxRedSign = { link = "GruvboxRed" },
-                GruvboxYellowSign = { link = "GruvboxYellow" },
-
-                -- https://gist.github.com/swarn/fb37d9eefe1bc616c2a7e476c0bc0316
-                ["@lsp.type.class"] = { link = "@type" },
-                ["@lsp.type.decorator"] = { link = "@function" },
-                ["@lsp.type.enum"] = { link = "@type" },
-                ["@lsp.type.enumMember"] = { link = "@constant" },
-                ["@lsp.type.function"] = { link = "@function" },
-                ["@lsp.type.interface"] = { link = "@type" },
-                ["@lsp.type.macro"] = { link = "@macro" },
-                ["@lsp.type.method"] = { link = "@method" },
-                ["@lsp.type.namespace"] = { link = "@namespace" },
-                ["@lsp.type.parameter"] = { link = "@parameter" },
-                ["@lsp.type.property"] = { link = "@property" },
-                ["@lsp.type.struct"] = { link = "@structure" },
-                ["@lsp.type.type"] = { link = "@type" },
-                ["@lsp.type.variable"] = { link = "@variable" },
-
-                ["@lsp.mod.readonly"] = { bold = true },
-            })
-        end
 
         local STATEFILE = vim.fn.expand("~/.cache/day-night/state-terminal")
 

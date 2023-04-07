@@ -2,10 +2,7 @@ local M = {}
 
 M.remove_signs = function()
     vim.opt_local.signcolumn = "no"
-
-    if vim.fn.has("nvim-0.9.0") == 1 then
-        vim.opt_local.statuscolumn = ""
-    end
+    vim.opt_local.statuscolumn = ""
 end
 
 M.remove_all = function()

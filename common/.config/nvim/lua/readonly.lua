@@ -8,8 +8,9 @@ M.make_readonly = function()
     vim.opt_local.spell = false
 
     require("filetype.status_column").remove_signs()
-    require("diagnostics").hide()
     require("gitsigns").detach()
+
+    vim.diagnostic.disable(0)
 
     if vim.b.text_based_filetype then
         require("wrapping").soft_wrap_mode()

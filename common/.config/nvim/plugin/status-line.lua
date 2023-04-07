@@ -1,5 +1,3 @@
-local diagnostics = require("diagnostics")
-
 local WIN_WIDTH_FILENAME_FRACTION = 0.07
 local WIN_WIDTH_DIR_FRACTION = 0.03
 
@@ -51,7 +49,7 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",_̸"
         end
 
-        if not diagnostics.enabled() then
+        if vim.diagnostic.is_disabled() then
             return_string = return_string .. ",¬D"
         end
 
@@ -66,7 +64,7 @@ function _G.Statusline_FeaturesEnabled()
 end
 
 function _G.Statusline_DiagnosticStatus()
-    if diagnostics.enabled() then
+    if not vim.diagnostic.is_disabled() then
         local diagnostics_counts = {}
 
         for prefix, severity in pairs({
