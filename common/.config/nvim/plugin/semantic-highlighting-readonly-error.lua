@@ -28,6 +28,7 @@ local function show_unconst_caps(args)
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("LspAttach_SemanticHighlighting", {}),
     callback = function(args)
         local filetype = vim.api.nvim_buf_get_option(args.buf, "filetype")
 
