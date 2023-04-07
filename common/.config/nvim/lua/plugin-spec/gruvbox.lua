@@ -4,21 +4,6 @@ return {
         local overrides = {
             FidgetTitle = { link = "FidgetTask" },
             HydraHint = { link = "TabLineSel" },
-            NotifyDEBUGBorder = { link = "GruvboxBlue" },
-            NotifyDEBUGIcon = { link = "GruvboxBlue" },
-            NotifyDEBUGTitle = { link = "GruvboxBlue" },
-            NotifyERRORBorder = { link = "GruvboxRed" },
-            NotifyERRORIcon = { link = "GruvboxRed" },
-            NotifyERRORTitle = { link = "GruvboxRed" },
-            NotifyINFOBorder = { link = "GruvboxGreen" },
-            NotifyINFOIcon = { link = "GruvboxGreen" },
-            NotifyINFOTitle = { link = "GruvboxGreen" },
-            NotifyTRACEBorder = { link = "GruvboxPurple" },
-            NotifyTRACEIcon = { link = "GruvboxPurple" },
-            NotifyTRACETitle = { link = "GruvboxPurple" },
-            NotifyWARNBorder = { link = "GruvboxYellow" },
-            NotifyWARNIcon = { link = "GruvboxYellow" },
-            NotifyWARNTitle = { link = "GruvboxYellow" },
             TermCursorNC = { bg = "#00FF00" },
         }
 
