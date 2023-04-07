@@ -37,20 +37,18 @@ local function on_attach()
     end
 end
 
-local setup_object = {
-    highlight = {
-        enable = true,
-        disable = function()
-            return require("utils").is_large_file()
-        end,
-    },
-    refactor = { smart_rename = { enable = true } },
-    indent = { enable = true },
-    endwise = { enable = true },
-}
-
 local configure = function()
-    require("nvim-treesitter.configs").setup(setup_object)
+    require("nvim-treesitter.configs").setup({
+        highlight = {
+            enable = true,
+            disable = function()
+                return require("utils").is_large_file()
+            end,
+        },
+        refactor = { smart_rename = { enable = true } },
+        indent = { enable = true },
+        endwise = { enable = true },
+    })
 
     vim.api.nvim_create_autocmd({ "BufReadPost" }, {
         desc = "Treesitter on_attach simulation",

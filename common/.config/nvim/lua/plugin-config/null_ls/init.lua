@@ -1,7 +1,3 @@
-local null_ls = require("null-ls")
-
-local null_ls_sources = require("plugin-config.null_ls.sources")
-
 local supports_method_for_filetype = function(filetype, method)
     local sources = require("null-ls.sources")
     local available = sources.get_available(filetype, method)
@@ -22,9 +18,9 @@ local on_attach = function(_, bufnr)
     end
 end
 
-null_ls.setup({
+require("null-ls").setup({
     -- debug = true,
-    sources = null_ls_sources.sources,
+    sources = require("plugin-config.null_ls.sources").sources,
     on_attach = on_attach,
     should_attach = function(bufnr)
         return not require("utils").is_large_file(bufnr)

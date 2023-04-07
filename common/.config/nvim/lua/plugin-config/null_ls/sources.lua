@@ -1,11 +1,10 @@
 local M = {}
 
 local null_ls = require("null-ls")
-local diagnostics = require("null-ls.helpers.diagnostics")
 
 local custom_diagnostics = require("plugin-config.null_ls.custom_diagnostics")
 
-local SEVERITIES = diagnostics.severities
+local SEVERITIES = require("null-ls.helpers.diagnostics").severities
 
 M.sources = {
     -- Code actions
