@@ -1,6 +1,6 @@
 return {
     "chrishrb/gx.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    event = { "BufEnter" },
+    keys = "gx",
     config = true,
 }
