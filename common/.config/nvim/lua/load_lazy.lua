@@ -44,6 +44,7 @@ require("lazy").setup("plugin-spec", {
         enabled = false,
     },
     ui = {
+        border = "single",
         icons = {
             cmd = "(cmd)",
             config = "(cfg)",
