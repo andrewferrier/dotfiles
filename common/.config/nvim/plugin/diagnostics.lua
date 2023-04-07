@@ -35,10 +35,11 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
-vim.api.nvim_create_user_command("DiagnosticQFList", function()
-    vim.diagnostic.setqflist({ open = false })
-    require("quickfix").open()
-end, {})
+vim.api.nvim_create_user_command(
+    "DiagnosticQFList",
+    vim.diagnostic.setqflist,
+    {}
+)
 
 require("editorconfig").properties.diagnostics = function(_, val, _)
     if val == "false" then
