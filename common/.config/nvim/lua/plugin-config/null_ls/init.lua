@@ -27,6 +27,6 @@ null_ls.setup({
     sources = null_ls_sources.sources,
     on_attach = on_attach,
     should_attach = function(bufnr)
-        return not require("large_file").is_large_file(bufnr)
+        return not require("utils").is_large_file(bufnr)
     end,
 })

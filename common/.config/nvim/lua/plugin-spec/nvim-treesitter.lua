@@ -31,7 +31,7 @@ local setup_object = {
     highlight = {
         enable = true,
         disable = function()
-            return require("large_file").is_large_file()
+            return require("utils").is_large_file()
         end,
     },
     refactor = { smart_rename = { enable = true } },

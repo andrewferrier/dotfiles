@@ -69,7 +69,6 @@ local configure = function()
         signs = { change = { text = "~" }, changedelete = { text = "⋍" } },
         sign_priority = 10,
         on_attach = attach,
-        max_file_length = require("large_file").LARGE_FILE_LINE_COUNT,
     })
 
     vim.api.nvim_create_user_command("GitQFList", function()
