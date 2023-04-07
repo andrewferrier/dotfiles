@@ -216,6 +216,35 @@ function _G.Statusline_SpellingErrorCount()
     return vim.b.spelling_warning
 end
 
+function _G.Statusline_LSPProgress()
+    local messages = vim.lsp.util.get_progress_messages()
+
+    if vim.tbl_count(messages) > 0 then
+        local message1 = messages[1]
+
+        local name = message1.name
+        local message = message1.title or message1.message or nil
+        local percentage = message1.percentage or 100
+        local progress = message1.progress or true
+
+        if
+            name ~= "null-ls"
+            and message ~= nil
+            and (percentage < 100 or progress)
+        then
+            return LEFT_BRACE
+                .. name
+                .. " "
+                .. message
+                .. (message1.percentage and (" " .. message1.percentage .. "%") or "")
+                .. RIGHT_BRACE
+                .. " "
+        end
+    end
+
+    return ""
+end
+
 function _G.Statusline_Search()
     if vim.v.hlsearch == 1 then
         -- searchcount can fail e.g. if unbalanced braces in search pattern
@@ -263,6 +292,7 @@ statusline = statusline .. RESET_HIGHLIGHTING
 statusline = statusline .. ALIGN_RHS
 
 -- RHS - Warnings
+statusline = statusline .. "%{v:lua.Statusline_LSPProgress()}"
 statusline = statusline .. "%{v:lua.Statusline_Search()}"
 statusline = statusline .. "%{v:lua.Statusline_MacroRecording()}"
 statusline = statusline .. "%{v:lua.Statusline_DiagnosticStatus()}"
@@ -292,3 +322,15 @@ vim.o.titlestring = vim.g.general_titlestring
 
 -- Window title
 vim.o.title = true
+
+function _G.RedrawAgain()
+    vim.cmd.redrawstatus()
+end
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "LspProgressUpdate",
+    callback = function()
+        vim.cmd.redrawstatus()
+        vim.fn.timer_start(1000, "v:lua.RedrawAgain")
+    end,
+})
