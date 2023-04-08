@@ -45,6 +45,8 @@ function _G.Statusline_FeaturesEnabled()
     local return_string = ""
 
     if vim.bo.filetype ~= "dirbuf" and vim.bo.buftype ~= "terminal" then
+        local bufnr = vim.api.nvim_get_current_buf()
+
         if require("gitsigns.config").config.show_deleted then
             return_string = return_string .. ",_̸"
         end
@@ -53,10 +55,12 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",¬D"
         end
 
-        local bufnr = vim.api.nvim_get_current_buf()
-
         if not vim.treesitter.highlighter.active[bufnr] then
             return_string = return_string .. ",¬T"
+        end
+
+        if not vim.wo.list and not vim.bo.readonly then
+            return_string = return_string .. ",¬list"
         end
     end
 
@@ -97,19 +101,6 @@ end
 function _G.Statusline_GitSigns()
     if vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" then
         return LEFT_BRACE .. vim.b.gitsigns_status .. RIGHT_BRACE .. " "
-    else
-        return ""
-    end
-end
-
-function _G.Statusline_List()
-    if
-        not vim.wo.list
-        and not vim.bo.readonly
-        and vim.bo.buftype ~= "terminal"
-        and vim.bo.filetype ~= "dirbuf"
-    then
-        return ",nolist"
     else
         return ""
     end
@@ -307,7 +298,6 @@ statusline = statusline .. "%{&fileformat!=#'unix'?',ff='.&fileformat:''}"
 statusline = statusline .. "%{v:lua.Statusline_Wrappingmode()}"
 statusline = statusline .. "%{&spell?',S':''}"
 statusline = statusline .. "%{v:lua.Statusline_FeaturesEnabled()}"
-statusline = statusline .. "%{v:lua.Statusline_List()}"
 statusline = statusline .. "%M"
 statusline = statusline .. " " .. SEPARATOR
 
