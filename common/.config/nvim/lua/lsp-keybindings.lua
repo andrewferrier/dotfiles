@@ -47,13 +47,13 @@ M.codeaction = function(bufnr)
     vim.keymap.set(
         "n",
         "cxa",
-        vim.lsp.buf.code_action,
+        require("fzf-lua").lsp_code_actions,
         { buffer = bufnr, desc = DESC }
     )
     vim.keymap.set(
         "x",
         "cxa",
-        vim.lsp.buf.code_action,
+        require("fzf-lua").lsp_code_actions,
         { buffer = bufnr, desc = DESC }
     )
 end
