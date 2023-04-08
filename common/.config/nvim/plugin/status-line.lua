@@ -6,10 +6,6 @@ local MAX_SPELL_ERRORS = 20
 local LEFT_BRACE = "‹"
 local RIGHT_BRACE = "›"
 
-local function get_filename_homedir()
-    return vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
-end
-
 local function get_spelling_count()
     local view = vim.fn.winsaveview()
     local oldwrapscan = vim.o.wrapscan
@@ -136,7 +132,7 @@ end
 
 function _G.Statusline_Filename()
     return vim.fn.pathshorten(
-        get_filename_homedir(),
+        require("utils").get_filename_homedir(),
         math.floor(vim.fn.winwidth(0) * WIN_WIDTH_FILENAME_FRACTION)
     )
 end
@@ -166,10 +162,6 @@ function _G.Statusline_Wrappingmode()
     end
 
     return ""
-end
-
-function _G.Titlestring_Filename()
-    return vim.fn.pathshorten(get_filename_homedir())
 end
 
 vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
@@ -298,13 +290,6 @@ statusline = statusline .. " " .. SEPARATOR
 statusline = statusline .. "%l/%L,%c "
 
 vim.o.statusline = statusline
-
--- Title string
-vim.g.general_titlestring = "nvim [%{v:lua.Titlestring_Filename()}%( %M%)]"
-vim.o.titlestring = vim.g.general_titlestring
-
--- Window title
-vim.o.title = true
 
 function _G.RedrawAgain()
     vim.cmd.redrawstatus()
