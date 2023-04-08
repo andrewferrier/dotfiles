@@ -1,13 +1,11 @@
 local M = {}
 
 local create_opts = function(desc)
-    local opts = vim.deepcopy({
+    return {
         buffer = true,
         silent = true,
-    })
-
-    opts.desc = desc
-    return opts
+        desc = desc,
+    }
 end
 
 M.setup = function(pattern_start, pattern_end)
