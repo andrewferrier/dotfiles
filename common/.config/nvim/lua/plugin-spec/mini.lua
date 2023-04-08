@@ -4,9 +4,9 @@ return {
         require("mini.ai").setup()
 
         require("mini.align").setup({
+            silent = true,
             mappings = {
-                start = nil,
-                start_with_preview = "gl",
+                start = "gl",
             },
         })
 
