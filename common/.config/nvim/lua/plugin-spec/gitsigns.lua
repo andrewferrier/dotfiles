@@ -84,4 +84,4 @@ return {
     config = configure,
     event = "BufEnter",
     version = "*",
-} -- gb
+}
