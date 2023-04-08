@@ -62,6 +62,12 @@ function _G.Statusline_FeaturesEnabled()
         if not vim.wo.list and not vim.bo.readonly then
             return_string = return_string .. ",¬list"
         end
+
+        if vim.bo.fileencoding == "" then
+            return_string = return_string .. ",fenc=?"
+        elseif vim.bo.fileencoding ~= "utf-8" then
+            return_string = return_string .. ",fenc=" .. vim.bo.fileencoding
+        end
     end
 
     return return_string
@@ -104,18 +110,6 @@ function _G.Statusline_GitSigns()
     else
         return ""
     end
-end
-
-function _G.Statusline_Fileencoding()
-    if vim.bo.filetype == "dirbuf" or vim.bo.buftype == "terminal" then
-        return ""
-    elseif vim.bo.fileencoding == "" then
-        return ",fenc=?"
-    elseif vim.bo.fileencoding ~= "utf-8" then
-        return ",fenc=" .. vim.bo.fileencoding
-    end
-
-    return ""
 end
 
 function _G.Statusline_Indent()
@@ -293,7 +287,6 @@ statusline = statusline .. SEPARATOR
 
 -- RHS - File and feature info
 statusline = statusline .. "%{v:lua.Statusline_Indent()}"
-statusline = statusline .. "%{v:lua.Statusline_Fileencoding()}"
 statusline = statusline .. "%{&fileformat!=#'unix'?',ff='.&fileformat:''}"
 statusline = statusline .. "%{v:lua.Statusline_Wrappingmode()}"
 statusline = statusline .. "%{&spell?',S':''}"
