@@ -1,4 +1,3 @@
-vim.opt.mousemodel = "extend"
 vim.opt.mousescroll = "ver:3,hor:1"
 
 vim.opt.completeopt:remove("noinsert")
