@@ -1,7 +1,5 @@
 local DISABLED_DESC = "DISABLED FOR THIS FILETYPE"
 
-local lsp_keybindings = require("lsp-keybindings")
-
 function _G.show_capabilities()
     for _, client in pairs(vim.lsp.buf_get_clients(0)) do
         print(
@@ -25,13 +23,13 @@ end
 
 local function keybindings_formatting_check(bufnr, server_capabilities)
     if server_capabilities.documentFormattingProvider == true then
-        lsp_keybindings.formatting(bufnr)
+        require("lsp-keybindings").formatting(bufnr)
     end
 end
 
 local function keybindings_codeaction_check(bufnr, server_capabilities)
     if server_capabilities.codeActionProvider then
-        lsp_keybindings.codeaction(bufnr)
+        require("lsp-keybindings").codeaction(bufnr)
     end
 end
 

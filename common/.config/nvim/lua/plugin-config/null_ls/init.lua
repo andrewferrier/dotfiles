@@ -7,14 +7,12 @@ end
 local on_attach = function(_, bufnr)
     local filetype = vim.bo.filetype
 
-    local lsp_keybindings = require("lsp-keybindings")
-
     if supports_method_for_filetype(filetype, "NULL_LS_FORMATTING") then
-        lsp_keybindings.formatting(bufnr)
+        require("lsp-keybindings").formatting(bufnr)
     end
 
     if supports_method_for_filetype(filetype, "NULL_LS_CODE_ACTION") then
-        lsp_keybindings.codeaction(bufnr)
+        require("lsp-keybindings").codeaction(bufnr)
     end
 end
 

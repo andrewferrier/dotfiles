@@ -1,8 +1,8 @@
 local set_fold_method = function()
-    local large_file = require("utils").is_large_file()
-    local treesitter_parsers = require("nvim-treesitter.parsers")
-
     if vim.wo.foldmethod == "manual" then
+        local large_file = require("utils").is_large_file()
+        local treesitter_parsers = require("nvim-treesitter.parsers")
+
         if not large_file and treesitter_parsers.has_parser() then
             vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
             vim.opt_local.foldmethod = "expr"
