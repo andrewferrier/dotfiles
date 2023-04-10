@@ -17,13 +17,14 @@ return {
             HydraHint = { link = "TabLineSel" },
             TermCursorNC = { bg = "#00DD00" },
 
-            GruvboxAquaSign = { link = "GruvboxAqua" },
-            GruvboxBlueSign = { link = "GruvboxBlue" },
-            GruvboxGreenSign = { link = "GruvboxGreen" },
-            GruvboxOrangeSign = { link = "GruvboxOrange" },
-            GruvboxPurpleSign = { link = "GruvboxPurple" },
-            GruvboxRedSign = { link = "GruvboxRed" },
-            GruvboxYellowSign = { link = "GruvboxYellow" },
+            -- See https://github.com/ellisonleao/gruvbox.nvim/issues/230#issuecomment-1493883602
+            GruvboxAquaSign = { bg = "" },
+            GruvboxBlueSign = { bg = "" },
+            GruvboxGreenSign = { bg = "" },
+            GruvboxOrangeSign = { bg = "" },
+            GruvboxPurpleSign = { bg = "" },
+            GruvboxRedSign = { bg = "" },
+            GruvboxYellowSign = { bg = "" },
 
             ["@lsp.mod.readonly"] = { bold = true },
         }
