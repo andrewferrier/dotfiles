@@ -66,4 +66,5 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = install_treesitter_parsers,
     config = configure,
+    version = "*",
 }
