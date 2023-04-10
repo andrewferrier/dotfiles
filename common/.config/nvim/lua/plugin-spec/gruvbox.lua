@@ -1,6 +1,17 @@
 return {
     "ellisonleao/gruvbox.nvim",
     config = function()
+        local STATEFILE = vim.fn.expand("~/.cache/day-night/state-terminal")
+
+        if
+            vim.fn.filereadable(STATEFILE)
+            and vim.fn.index(vim.fn.readfile(STATEFILE), "day") >= 0
+        then
+            vim.opt.background = "light"
+        else
+            vim.opt.background = "dark"
+        end
+
         local overrides = {
             FidgetTitle = { link = "FidgetTask" },
             HydraHint = { link = "TabLineSel" },
@@ -16,17 +27,6 @@ return {
 
             ["@lsp.mod.readonly"] = { bold = true },
         }
-
-        local STATEFILE = vim.fn.expand("~/.cache/day-night/state-terminal")
-
-        if
-            vim.fn.filereadable(STATEFILE)
-            and vim.fn.index(vim.fn.readfile(STATEFILE), "day") >= 0
-        then
-            vim.opt.background = "light"
-        else
-            vim.opt.background = "dark"
-        end
 
         require("gruvbox").setup({
             contrast = "hard",
