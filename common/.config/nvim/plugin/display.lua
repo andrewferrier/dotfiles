@@ -3,7 +3,7 @@ vim.opt.cmdheight = 0
 vim.opt.confirm = true
 vim.opt.display:append("uhex")
 vim.opt.equalalways = false
-vim.opt.hidden = false -- https://github.com/neovim/neovim/pull/15410
+vim.opt.hidden = false
 vim.opt.scrolloff = 5
 vim.opt.sidescrolloff = 15
 vim.opt.splitbelow = true
