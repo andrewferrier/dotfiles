@@ -291,14 +291,20 @@ statusline = statusline .. "%l/%L,%c "
 
 vim.o.statusline = statusline
 
-function _G.RedrawAgain()
+local redraw_timer
+
+local function delayed_redraw()
     vim.cmd.redrawstatus()
+    redraw_timer = nil
 end
 
 vim.api.nvim_create_autocmd("User", {
     pattern = "LspProgressUpdate",
     callback = function()
+        if redraw_timer == nil then
+            redraw_timer = vim.fn.timer_start(1000, delayed_redraw)
+        end
+
         vim.cmd.redrawstatus()
-        vim.fn.timer_start(1000, "v:lua.RedrawAgain")
     end,
 })
