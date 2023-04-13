@@ -6,6 +6,12 @@ XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-${HOME}/.cache/xdg-runtime}" # This will probably only need to be set on MacOS
 XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
 
+export XDG_CACHE_HOME
+export XDG_CONFIG_HOME
+export XDG_DATA_HOME
+export XDG_RUNTIME_DIR
+export XDG_STATE_HOME
+
 mkdir -pv \
     "${XDG_CACHE_HOME}" \
     "${XDG_CONFIG_HOME}" \
@@ -13,18 +19,36 @@ mkdir -pv \
     "${XDG_RUNTIME_DIR}" \
     "${XDG_STATE_HOME}"
 
-export XDG_CACHE_HOME
-export XDG_CONFIG_HOME
-export XDG_DATA_HOME
-export XDG_RUNTIME_DIR
-export XDG_STATE_HOME
-
 GITCO=${HOME}/gitco
+
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+export GEM_HOME="${XDG_DATA_HOME}/gem"
+export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+export GOPATH="${XDG_DATA_HOME}/go"
+export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc2"
+export GTK_RC_FILES="${XDG_CONFIG_HOME}/gtk-1.0/gtkrc"
+export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
+export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
+export MINIKUBE_HOME="${XDG_DATA_HOME}/minikube"
+export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+export NPM_PACKAGES="${XDG_DATA_HOME}/npm" # Defined in ~/.npmrc
+export SQLITE_HISTORY="${XDG_CACHE_HOME}/sqlite_history"
+
+mkdir -pv \
+    "${GEM_HOME}" \
+    "${GNUPGHOME}" \
+    "${GOPATH}" \
+    "${NPM_PACKAGES}" \
+    "${XDG_DATA_HOME}/tig"
+
+chmod 700 "${GNUPGHOME}"
 
 pupdate_prepend_single() { [[ -d $1 ]] && case ":${PATH:=$1}:" in *:$1:*) ;; *) PATH="$1:${PATH}" ;; esac }
 pupdate_append_singlex() { [[ -d $1 ]] && case ":${PATH:=$1}:" in *:$1:*) ;; *) PATH="${PATH}:$1" ;; esac }
 nupdate_append_singlex() { [[ -d $1 ]] && case ":${NODE_PATH:=$1}:" in *:$1:*) ;; *) NODE_PATH="${NODE_PATH}:$1" ;; esac }
-
 pupdate_append_globxxx() {
     glob=$1
 
@@ -39,31 +63,6 @@ pupdate_append_globxxx() {
         unset IFS
     fi
 }
-
-export CARGO_HOME="${XDG_DATA_HOME}/cargo"
-export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
-export GEM_HOME="${XDG_DATA_HOME}/gem"
-export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
-export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
-export GOPATH="${XDG_DATA_HOME}/go"
-export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc2"
-export GTK_RC_FILES="${XDG_CONFIG_HOME}/gtk-1.0/gtkrc"
-export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
-export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
-export MINIKUBE_HOME="${XDG_DATA_HOME}/minikube"
-export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
-export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
-export NPM_PACKAGES="${XDG_DATA_HOME}/npm" # Defined in ~/.npmrc
-export SQLITE_HISTORY="${XDG_CACHE_HOME}"/sqlite_history
-
-mkdir -pv \
-    "${GEM_HOME}" \
-    "${GNUPGHOME}" \
-    "${GOPATH}" \
-    "${NPM_PACKAGES}" \
-    "${XDG_DATA_HOME}/tig"
-
-chmod 700 "${GNUPGHOME}"
 
 # generic
 pupdate_prepend_single /usr/local/bin
