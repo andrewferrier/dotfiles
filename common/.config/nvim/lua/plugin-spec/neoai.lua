@@ -17,7 +17,8 @@ return {
         "NeoAIInjectContextCode",
     },
     keys = {
-        { "gyhs", desc = "Summarize text" },
+        { "gyhs", desc = "Summarize text", mode = "v" },
+        { "gyhr", desc = "Refactor code", mode = "v" },
     },
     config = function()
         require("neoai").setup({
@@ -29,10 +30,22 @@ return {
                     key = "gyhs",
                     use_context = true,
                     prompt = [[
-                Please rewrite the text to make it more readable, clear,
+                Rewrite the following text to make it more readable, clear,
                 concise, and fix any grammatical, punctuation, or spelling
-                errors
-            ]],
+                errors:
+            ]]
+                        .. require("utils").visual_selection_range(),
+                    modes = { "v" },
+                    strip_function = nil,
+                },
+                {
+                    key = "gyhr",
+                    use_context = false,
+                    prompt = [[
+                Refactor this code to make it more readable and maintainable,
+                also making it more concise where possible:
+            ]]
+                        .. require("utils").visual_selection_range(),
                     modes = { "v" },
                     strip_function = nil,
                 },
