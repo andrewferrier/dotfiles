@@ -1,5 +1,15 @@
 local started = false
 
+local function get_message(...)
+    local print_safe_args = {}
+
+    for _, arg in ipairs({ ... }) do
+        table.insert(print_safe_args, tostring(arg))
+    end
+
+    return table.concat(print_safe_args, " ")
+end
+
 return {
     "rcarriga/nvim-notify",
     config = function()
@@ -27,6 +37,18 @@ return {
 
                 require("notify")(msg, level, opts)
             end
+        end
+
+        vim.print = function(...)
+            vim.notify(get_message(...), vim.log.levels.INFO)
+        end
+
+        _G.print = function(...)
+            vim.notify(get_message(...), vim.log.levels.INFO)
+        end
+
+        _G.error = function(...)
+            vim.notify(get_message(...), vim.log.levels.ERROR)
         end
     end,
     version = "*",
