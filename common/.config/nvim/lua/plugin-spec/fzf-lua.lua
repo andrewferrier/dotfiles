@@ -29,7 +29,7 @@ local configure = function()
     end, { desc = "Open manpage" })
 
     vim.keymap.set("n", "cvf", function()
-        fzf_lua.fzf_exec("~/.local/bin/common/file-list -t -r", {
+        fzf_lua.fzf_exec("file-list -t -r", {
             actions = require("fzf-lua.config").globals.actions.files,
             previewer = "builtin",
             fzf_opts = {
@@ -40,7 +40,7 @@ local configure = function()
     end, { desc = "Find file" })
 
     vim.keymap.set("n", "cvg", function()
-        fzf_lua.fzf_exec("~/.local/bin/common/file-list -d", {
+        fzf_lua.fzf_exec("file-list -d", {
             actions = {
                 ["default"] = function(selected, opts)
                     require("fzf-lua.actions").vimcmd("lcd", selected, opts)

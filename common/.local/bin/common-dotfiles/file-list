@@ -1,0 +1,193 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+
+CONFIG_FILE=${XDG_CONFIG_HOME}/file-list/config.sh
+# shellcheck source=/dev/null
+source "${CONFIG_FILE}"
+
+FILES=false
+DIRS=false
+TEXT_ONLY=false
+SELECT=false
+PLAIN=false
+RECENT_ONLY=false
+MULTISELECT=false
+NULL=false
+
+while getopts "rsmfdtp0" o; do
+    case "$o" in
+    f)
+        FILES=true
+        ;;
+    d)
+        DIRS=true
+        ;;
+    t)
+        # Don't display files deemed to be binary.
+        TEXT_ONLY=true
+        ;;
+    s)
+        # Provide an 'inbuilt' fzf selector.
+        SELECT=true
+        ;;
+    m)
+        MULTISELECT=true
+        ;;
+    p)
+        # Don't add colorization to output.
+        PLAIN=true
+        ;;
+    r)
+        # Only look at recency, ignore frequency, with fasd.
+        RECENT_ONLY=true
+        ;;
+    0)
+        NULL=true
+        ;;
+    *)
+        exit 1
+        ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+[[ ":${PATH}:" != *":/usr/local/bin:"* ]] && PATH="/usr/local/bin:$PATH"
+
+if (command -v fdfind >/dev/null 2>&1); then
+    FD=fdfind
+else
+    FD=fd
+fi
+
+if "$FILES" && "$DIRS"; then
+    echo >&2 "Cannot select -f and -d at the same time."
+    exit 1
+fi
+
+if "$DIRS" && "$TEXT_ONLY"; then
+    echo >&2 "Cannot select -d and -t at the same time."
+    exit 1
+fi
+
+if ! "$FILES" && ! "$DIRS"; then
+    FILES=true
+fi
+
+if "$MULTISELECT"; then
+    SELECT=true
+fi
+
+if "$TEXT_ONLY"; then
+    # shellcheck disable=SC2154
+    EXCLUDE_PATTERN="$ALL_EXCLUDE_PATTERN|$BINARY_EXCLUDE_PATTERN"
+else
+    EXCLUDE_PATTERN="$ALL_EXCLUDE_PATTERN"
+fi
+
+if "$DIRS"; then
+    PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | xargs -I% exa --level 2 --tree --color=always --group-directories-first %"
+    FD_TYPE='d'
+    FASD_PARAMS="-dRl"
+else
+    PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | tr '\n' '\0' | xargs -0 head -200 | highlight --force --out-format=truecolor --syntax-by-name={}"
+    FD_TYPE='f'
+    FASD_PARAMS="-fRl"
+fi
+
+if "$RECENT_ONLY"; then
+    FASD_PARAMS="${FASD_PARAMS}t"
+fi
+
+if command -v ggrep &>/dev/null; then
+    GREP=(ggrep)
+else
+    GREP=(grep)
+fi
+
+function wrapper_fasd() {
+    if [[ -f "${XDG_CACHE_HOME}/fasd" ]]; then
+        FASD_LOCATION="${XDG_CACHE_HOME}/fasd"
+    else
+        FASD_LOCATION="${HOME}/.fasd"
+    fi
+
+    FASD_FILTERED_DATA=$(mktemp /tmp/file-list.XXXXXX)
+    grep -v "/mnt" "${FASD_LOCATION}" >"$FASD_FILTERED_DATA"
+    _FASD_DATA=$FASD_FILTERED_DATA fasd "$FASD_PARAMS"
+    rm "$FASD_FILTERED_DATA"
+}
+
+function wrapper_fd() {
+    FD_DIRS=("$@")
+
+    for i in "${!FD_DIRS[@]}"; do
+        if [[ ! -d ${FD_DIRS[i]} ]]; then
+            unset 'FD_DIRS[i]'
+        else
+            # If $1 is mounted without a filesystem that looks local, it might be
+            # slow; skip it.
+            if mount | grep "on ${FD_DIRS[i]}" | grep -v 'ext.\|vfat' >/dev/null; then
+                unset 'FD_DIRS[i]'
+            fi
+        fi
+    done
+
+    # Don't use fd's "--max-results" flag, it's not supported on older
+    # versions. Exclude directories which tend to have a lot of files
+    # but are not that interesting.
+    "$FD" \
+        --absolute-path \
+        --hidden \
+        --no-ignore-vcs \
+        -E .git/ \
+        -E node_modules/ \
+        . "${FD_DIRS[@]}" \
+        --type "$FD_TYPE" | sed 's|/$||'
+}
+
+function wrapper_mdfind() {
+    if [[ ${OSTYPE} == darwin* ]]; then
+        if "$DIRS"; then
+            # shellcheck disable=SC2016
+            mdfind -onlyin / 'kMDItemLastUsedDate >= $time.today(-90) && kMDItemContentType == public.folder'
+        else
+            # shellcheck disable=SC2016
+            mdfind -onlyin / 'kMDItemLastUsedDate >= $time.today(-90) && ! kMDItemContentType == public.folder'
+        fi
+    fi
+}
+
+# Cannot use MULTISELECT_ARGS as an array because it seems to cause a bug when
+# zsh is nested and Ctrl-G is used
+if "$MULTISELECT"; then
+    MULTISELECT_ARGS="--multi"
+else
+    MULTISELECT_ARGS=""
+fi
+
+ESCAPED_HOME=${HOME//\//\\\/}
+
+COLOR_BLUE=$(tput setaf 4)
+COLOR_RESET=$(tput sgr0)
+
+readonly COLOR_BLUE COLOR_RESET
+
+# shellcheck disable=SC2016
+# shellcheck disable=SC2068
+# shellcheck disable=SC2154
+cat \
+    <(wrapper_fasd) \
+    <(wrapper_mdfind) \
+    <(wrapper_fd ${SEARCH_DIRS[@]}) |
+    "${GREP[@]}" -E -v -i --binary-files=text "$EXCLUDE_PATTERN" |
+    sed -e "s/$ESCAPED_HOME\//~\//" |
+    awk '!seen[$0]++' |
+    if "$DIRS"; then sed 's/\/\.$//'; else cat; fi |
+    if "$PLAIN"; then cat; else perl -pe "s|(.*)/(.*?)$|\1/${COLOR_BLUE}\2${COLOR_RESET}|g"; fi |
+    if "$SELECT"; then fzf --exact --ansi --height "${FZF_TMUX_HEIGHT:-40%}" --no-sort --tiebreak=end ${MULTISELECT_ARGS} --preview="$PREVIEW_COMMAND | head -\$LINES" | tee >(xargs -n1 fasd -A); else cat; fi |
+    if "$NULL"; then tr '\n' '\0'; else cat; fi
