@@ -1,0 +1,66 @@
+#!/usr/bin/env python
+
+import argparse
+from datetime import datetime, timedelta
+from email import utils
+import logging
+from mailbox import Maildir
+import sys
+
+import pytz
+
+logger = logging.getLogger("maildir-archive")
+logger.propagate = False
+logger.setLevel(logging.WARN)
+
+syserr_handler = logging.StreamHandler(stream=sys.stderr)
+syserr_handler.setLevel(logging.WARN)
+syserr_handler.setFormatter(
+    logging.Formatter("maildir-archive: %(levelname)s: %(message)s")
+)
+logger.addHandler(syserr_handler)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("src_mailbox_path", type=str)
+parser.add_argument("dest_mailbox_path", type=str)
+parser.add_argument("--age-limit", type=int, default=365)
+parser.add_argument(
+    "--remove-from-src-mailbox",
+    action=argparse.BooleanOptionalAction,
+    default=False,
+)
+args = parser.parse_args()
+
+age_limit = datetime.now(tz=pytz.timezone("Europe/London")) - timedelta(
+    days=args.age_limit
+)
+
+src_mailbox = Maildir(args.src_mailbox_path)
+
+counter = 0
+
+for key, message in src_mailbox.iteritems():
+    date_str = message.get("Date")
+    if date_str:
+        date = utils.parsedate_to_datetime(date_str)
+
+        if date.tzinfo is None or date.tzinfo.utcoffset(date) is None:
+            date = pytz.utc.localize(date)
+            logger.warning(f"date {date} is missing timezone, timezone added.")
+
+        if date < age_limit:
+            dest_mailbox = Maildir(args.dest_mailbox_path)
+            dest_mailbox.add(message)
+            counter = counter + 1
+
+            if args.remove_from_src_mailbox:
+                src_mailbox.remove(key)
+
+            dest_mailbox.close()
+    else:
+        subject = message.get("Subject")
+        logger.warning(f"message with subject {subject} missing date")
+
+src_mailbox.close()
+
+logger.info(f"{counter} items copied to {args.dest_mailbox_path}.")
