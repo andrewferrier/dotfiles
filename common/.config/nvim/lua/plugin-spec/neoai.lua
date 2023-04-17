@@ -28,6 +28,7 @@ return {
             shortcuts = {
                 {
                     key = "gyhs",
+                    desc = "Improve natural text",
                     use_context = true,
                     prompt = [[
                 Rewrite the following text to make it more readable, clear,
@@ -40,6 +41,7 @@ return {
                 },
                 {
                     key = "gyhr",
+                    desc = "Improve code",
                     use_context = false,
                     prompt = [[
                 Refactor this code to make it more readable and maintainable,
