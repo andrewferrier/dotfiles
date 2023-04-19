@@ -5,8 +5,21 @@ local diagnostic_format = function(diagnostic)
         message = message .. "\n[" .. diagnostic.code .. "]"
     end
 
+    local source
+
     if diagnostic.source then
-        message = message .. "\n(" .. diagnostic.source .. ")"
+        source = diagnostic.source
+    else
+        local namespace = diagnostic.namespace
+
+        if namespace then
+            local namespaces = vim.diagnostic.get_namespaces()
+            source = namespaces[namespace].name
+        end
+    end
+
+    if source then
+        message = message .. "\n(" .. source .. ")"
     end
 
     return message
