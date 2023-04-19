@@ -109,15 +109,6 @@ hs.hotkey.bind(PREFIX_ACTION, "O", function()
     open_bash_terminal(HOME .. "/bookmarks/bin/bookmark-select-and-open")
 end)
 
-hs.hotkey.bind(PREFIX_ACTION, "I", function()
-    open_bash_terminal(
-        HOME
-            .. "/bookmarks/bin/bookmark-select-and-open "
-            .. HOME
-            .. "/bookmarks/ibm.csv"
-    )
-end)
-
 -- Enable hot corners by default
 hs.execute("$HOME/.local/bin/macos/hot-corners -e")
 
@@ -157,14 +148,7 @@ launch_or_find("R", "/Applications/Remember The Milk.app")
 
 launch("B", "/Applications/Firefox.app")
 
-web_search(
-    "P",
-    "W3 People Search:",
-    "https://w3.ibm.com/#/results?page=people&q="
-)
 web_search("S", "DuckDuckGo Search:", "https://duckduckgo.com/?q=")
-web_search("W", "W3 Search:", "https://w3.ibm.com/#/results?q=")
-web_search("X", "Box Search:", "https://ibm.ent.box.com/folder/0/search?query=")
 
 hs.urlevent.bind("vimpc", function(eventName, params)
     open_terminal(HOMEBREW_BIN .. "/vimpc")

@@ -2,8 +2,6 @@
 
 if (command -v kubectl >/dev/null 2>&1); then
     alias kubectl-run-debian-bash='kubectl run --rm -i --tty --image=debian debian'
-    alias kubectl-run-ibm-alpine-bash='kubectl run --rm -i --tty --image=icr.io/armada-master/alpine:latest alpine'
-    alias kubectl-run-ibm-alpine-node-bash='kubectl debug node/$(kubectl get nodes | head -2 | tail -1 | cut -f1 -d" ") -i --tty --image=icr.io/armada-master/alpine:latest'
 
     function kubectl-context-select {
         kubectl config use-context "$(kubectl config get-contexts -o name | fzf)"
