@@ -44,10 +44,6 @@ return {
             end
         end
 
-        vim.print = function(...)
-            vim.notify(get_message(...), vim.log.levels.INFO)
-        end
-
         _G.print = function(...)
             vim.notify(get_message(...), vim.log.levels.INFO)
         end
@@ -55,6 +51,8 @@ return {
         _G.error = function(...)
             vim.notify(get_message(...), vim.log.levels.ERROR)
         end
+
+        vim.print = _G.print
     end,
     version = "*",
     event = "VeryLazy",
