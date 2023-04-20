@@ -45,7 +45,7 @@ return {
                     use_context = false,
                     prompt = [[
                 Refactor this code to make it more readable and maintainable,
-                also making it more concise where possible:
+                ensuring that best practices are used wherever practical.
             ]]
                         .. require("utils").visual_selection_range(),
                     modes = { "v" },
