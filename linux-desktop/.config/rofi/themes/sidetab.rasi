@@ -19,7 +19,7 @@ configuration {
 
   selected-normal-foreground:  @winbg;
   normal-foreground:           @text-color;
-  selected-normal-background:  @actbg;
+  selected-normal-background:  @selbg;
   normal-background:           @background-color;
 
   selected-urgent-foreground:  @background-color;
