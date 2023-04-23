@@ -31,8 +31,8 @@ M.diagnostics_by_line = function(options)
     return {
         method = null_ls.methods.DIAGNOSTICS,
         name = options.name,
-        filetypes = {},
-        disabled_filetypes = options.disabled_filetypes,
+        filetypes = options.filetypes or {},
+        disabled_filetypes = options.disabled_filetypes or {},
         generator = {
             async = true,
             fn = function(params, done)

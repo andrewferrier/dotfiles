@@ -114,10 +114,9 @@ M.sources = {
     null_ls.builtins.diagnostics.zsh,
     custom_diagnostics.diagnostics_by_line({
         name = "todo-fixme",
-        -- disabled for 'gitcommit'/'gitrebase' because it doesn't make any
-        -- sense, sometimes we will want to write TODO and that's a valid part
-        -- of the message.
-        disabled_filetypes = { "dirbuf", "gitcommit", "gitrebase" },
+        -- disabled for most filetypes as treesitter highlighting now takes care
+        -- of that.
+        filetypes = { "asciidoc", "latex", "markdown", "rst", "tex", "text" },
         fn = function(match_regex)
             match_regex(vim.regex("TODO"), "TODO", SEVERITIES.hint)
             match_regex(vim.regex("FIXME"), "FIXME", SEVERITIES.hint)
