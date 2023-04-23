@@ -74,12 +74,6 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 
-[url "git@github.ibm.com:"]
-	insteadOf = https://github.ibm.com/
-
-[url "git@gitlab.com:"]
-	insteadOf = https://gitlab.com/
-
 # * findpull - Find all the git repos which are direct children of the current
 #   directory, and run pull on each. Based on
 #   https://medium.com/@codenameyau/updating-multiple-repos-with-one-command-9768c8cdfe46.
