@@ -94,7 +94,6 @@
     lua =<expression> - print expression
     w ++p - write and create parent dirs (0.9+ only)
     wn - write and move to next file in args list
-    write ++p <filename> - create parent dirs
 
 #### Based on a Visual Range
 
