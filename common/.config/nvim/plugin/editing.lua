@@ -8,8 +8,6 @@ vim.opt.nrformats:append("unsigned")
 
 vim.opt.diffopt:append("linematch:60")
 
-vim.opt.exrc = true
-
 vim.keymap.set(
     "n",
     "[<Space>",
