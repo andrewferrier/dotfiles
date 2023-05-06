@@ -1,6 +1,7 @@
 [Default Applications]
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
 audio/mpeg=mpv.desktop
+image/jpeg=feh.desktop
 inode/directory=ranger.desktop
 text/html=org.qutebrowser.qutebrowser.desktop
 text/xml=org.qutebrowser.qutebrowser.desktop
