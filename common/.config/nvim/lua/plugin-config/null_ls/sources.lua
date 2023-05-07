@@ -41,7 +41,7 @@ M.sources = {
         filetypes = { "tex", "latex" },
     }),
     null_ls.builtins.formatting.prettier.with({
-        filetypes = { "css", "html", "less", "scss", "toml", "yaml" },
+        filetypes = { "css", "html", "less", "scss", "toml", "yaml", "xml" },
         extra_args = function(params)
             return {
                 "--print-width",
@@ -98,7 +98,6 @@ M.sources = {
     null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.sqlfluff,
     null_ls.builtins.diagnostics.terraform_validate,
-    null_ls.builtins.diagnostics.tidy,
     null_ls.builtins.diagnostics.trail_space.with({
         -- for 'mail' it's just annoying
         -- for 'markdown' it's more accurate than mdl
