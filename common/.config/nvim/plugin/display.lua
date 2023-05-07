@@ -10,6 +10,10 @@ vim.opt.splitbelow = true
 vim.opt.splitkeep = "screen"
 vim.opt.splitright = true
 
+if vim.fn.has("nvim-0.10.0") == 1 then
+    vim.opt.smoothscroll = true
+end
+
 -- Reduce command line messages since we can't see them properly anyway with
 -- cmdheight = 0
 vim.opt.shortmess:append("C")
