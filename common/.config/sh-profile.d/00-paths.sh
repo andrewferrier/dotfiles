@@ -23,6 +23,7 @@ GITCO=${HOME}/gitco
 
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+export DVDCSS_CACHE="${XDG_DATA_HOME}/dvdcss"
 export GEM_HOME="${XDG_DATA_HOME}/gem"
 export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
