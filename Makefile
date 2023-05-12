@@ -15,6 +15,7 @@ common: if-command $(DESKTOP) $(OS)
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow common
 
 macos:
+	(cd pkgs-macos && make)
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow macos
 
 linux:

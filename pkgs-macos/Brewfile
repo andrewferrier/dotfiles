@@ -1,0 +1,81 @@
+brew "alerter"
+brew "ansible-language-server"
+brew "ansible-lint"
+brew "aria2"
+brew "atool"
+brew "automake"
+brew "bash" # for improved performance
+brew "blueutil" # for Hammerspoon
+brew "coreutils"
+brew "curl"
+brew "defaultbrowser"
+brew "direnv"
+brew "docx2txt" # for ranger
+brew "duti"
+brew "eget"
+brew "entr"
+brew "exa"
+brew "exiftool" # for ranger's scope.sh
+brew "fasd"
+brew "fd"
+brew "fdupes"
+brew "figlet"
+brew "findutils"
+brew "fzf"
+brew "git"
+brew "grep" # for file-list
+brew "gzip"
+brew "hexedit"
+brew "highlight"
+brew "httpie"
+brew "hyperfine"
+brew "iftop"
+brew "isync"
+brew "jq"
+brew "latexindent" # for NeoVim
+brew "libqalculate" # includes CLI
+brew "lua-language-server"
+brew "lua@5.3" # for lua-lsp
+brew "luarocks"
+brew "lzip"
+brew "make" # GNU make with Mac OS is ancient
+brew "mas"
+brew "moreutils" # isutf8 for Hammerspoon
+brew "ncdu"
+brew "neovim"
+brew "pandoc"
+brew "poppler" # pdftotext for ranger
+brew "pstree"
+brew "pwgen"
+brew "python3"
+brew "ripgrep"
+brew "ripgrep-all"
+brew "rsync"
+brew "shellcheck"
+brew "shellharden"
+brew "shfmt"
+brew "smudge/smudge/nightlight"
+brew "stow"
+brew "stylua"
+brew "terminal-notifier"
+brew "tig"
+brew "tmux"
+brew "trash"
+brew "vale" # for neovim null-ls
+brew "w3m"
+brew "watch"
+brew "wget"
+brew "yamllint"
+brew "yarn" # for yaml-language-server
+brew "yq"
+brew "zsh-lovers"
+
+tap "homebrew/cask"
+tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
+
+cask "drawio"
+cask "font-consolas-for-powerline" # for kitty
+cask "hammerspoon"
+cask "kitty"
+
+# vim: set filetype=ruby:
