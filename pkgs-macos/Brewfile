@@ -71,6 +71,7 @@ brew "yq"
 brew "zsh-lovers"
 
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
 
 cask "drawio"
