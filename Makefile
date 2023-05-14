@@ -8,14 +8,30 @@ else
 	OS := linux
 endif
 
-common: if-command $(DESKTOP) $(OS)
+# ******* EXTERNAL TARGETS
+
+common: pkgs cfg if-command
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow common
 
-macos:
-	(cd pkgs-macos && make)
+pkgs: pkgs-$(OS)
+
+cfg: $(DESKTOP) cfg-$(OS)
+
+# *******
+
+macos: pkgs-macos cfg-macos
+
+pkgs-macos:
+	(cd pkgs/macos && make)
+
+cfg-macos:
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow macos
 
-linux:
+linux: cfg-$(OS)
+
+pkgs-linux:
+
+cfg-linux:
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow linux
 
 desktop: $(OS)-desktop

@@ -1,12 +1,11 @@
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-PKGS_BASE := $(MKFILE_PATH)/..
 
 .PHONY: brew_file brew_install
 
 brew_file: brew_install brew_cleanup
 	brew upgrade
 
-	brew bundle --verbose --no-lock --file=$(PKGS_BASE)/pkgs-macos/Brewfile
+	brew bundle --verbose --no-lock --file=$(MKFILE_PATH)/Brewfile
 
 	# Upgrade all brew casks; provided by https://github.com/buo/homebrew-cask-upgrade
 	brew cu --all --yes
