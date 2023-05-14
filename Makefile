@@ -1,7 +1,4 @@
 export DOTFILES := $(HOME)/dotfiles
-export DOTFILES_COMMON := $(DOTFILES)/common
-
-.PHONY: common macos linux desktop linux-desktop if-command
 
 DESKTOP := $(shell .bin/target-desktop)
 
