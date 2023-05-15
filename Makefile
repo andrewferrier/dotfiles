@@ -1,3 +1,6 @@
+MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+PATH := $(MKFILE_PATH)/bin:$(PATH)
+
 export DOTFILES := $(HOME)/dotfiles
 
 DESKTOP := $(shell .bin/target-desktop)
@@ -26,6 +29,7 @@ pkgs-macos:
 
 cfg-macos:
 	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow macos
+	cfg-macos
 
 linux: cfg-$(OS)
 
