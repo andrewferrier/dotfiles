@@ -9,6 +9,7 @@ alias socks-ssh-setup='ssh -f -N -D 1080 '
 alias speedtest="docker run --rm --net=host docker.io/tianon/speedtest --accept-license --accept-gdpr"
 alias testssl='docker run -t --rm docker.io/mvance/testssl'
 alias webshare='python3 -m http.server'
+alias wgetmirror='wget --execute robots=off --mirror --page-requisites --adjust-extension --no-parent --convert-links'
 
 if [[ ${OSTYPE} == darwin* ]]; then
     alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
