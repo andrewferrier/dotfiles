@@ -35,7 +35,7 @@ end
 local t = hs.task.new(
     HOMEBREW_BIN .. "/blueutil",
     check_bluetooth_result,
-    { "--power", "off" }
+    { "--power", "on" }
 )
 
 t:start()
