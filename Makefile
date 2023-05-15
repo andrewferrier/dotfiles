@@ -1,5 +1,5 @@
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-PATH := $(MKFILE_PATH)/bin:$(PATH)
+PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
 export DOTFILES := $(HOME)/dotfiles
 
