@@ -6,13 +6,13 @@ set -o nounset
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 
+declare -a SEARCH_DIRS=()
+
 CONFIG_FILE=${XDG_CONFIG_HOME}/file-list/config.sh
 # shellcheck source=/dev/null
 source "${CONFIG_FILE}"
 
-declare -a SEARCH_DIRS=()
-
-readonly DEFAULT_SEARCH_DIRS=("$HOME/dotfiles"
+DEFAULT_SEARCH_DIRS=("$HOME/dotfiles"
     "$HOME/.local/share/nvim"
     "$HOME/Documents"
     "$HOME/Downloads"
