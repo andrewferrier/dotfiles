@@ -10,6 +10,16 @@ CONFIG_FILE=${XDG_CONFIG_HOME}/file-list/config.sh
 # shellcheck source=/dev/null
 source "${CONFIG_FILE}"
 
+declare -a SEARCH_DIRS=()
+
+readonly DEFAULT_SEARCH_DIRS=("$HOME/dotfiles"
+    "$HOME/.local/share/nvim"
+    "$HOME/Documents"
+    "$HOME/Downloads"
+    "$HOME/Desktop")
+
+SEARCH_DIRS+=(${DEFAULT_SEARCH_DIRS[@]})
+
 FILES=false
 DIRS=false
 TEXT_ONLY=false
