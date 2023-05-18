@@ -32,7 +32,6 @@ brew "hyperfine"
 brew "iftop"
 brew "isync"
 brew "jq"
-brew "keepassxc"
 brew "latexindent" # for NeoVim
 brew "libqalculate" # includes CLI
 brew "lua-language-server"
@@ -78,6 +77,7 @@ tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
 cask "drawio"
 cask "font-consolas-for-powerline" # for kitty
 cask "hammerspoon"
+cask "keepassxc"
 cask "kitty"
 
 # vim: set filetype=ruby:
