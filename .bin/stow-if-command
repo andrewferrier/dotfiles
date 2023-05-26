@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+ROOT_DIR=${1:?Root dir not provided}
+
+for directory in "${ROOT_DIR}"/*; do
+    COMMAND=$(basename "$directory")
+
+    if command -v "$COMMAND" >/dev/null; then
+        stow --verbose --dir="${ROOT_DIR}" --target="${HOME}" --stow "$COMMAND"
+    fi
+done

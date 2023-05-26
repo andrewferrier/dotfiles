@@ -1,3 +1,5 @@
+.PHONY: if-os
+
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
@@ -9,40 +11,47 @@ else
 	OS := linux
 endif
 
-# ******* EXTERNAL TARGETS
+# TOP-LEVEL
 
-common: pkgs cfg if-command
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
+common: stow pkgs configure
 
 pkgs: pkgs-$(OS)
 
-cfg: $(DESKTOP) cfg-$(OS)
+stow: stow-$(OS) $(DESKTOP) stow-if-command
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
 
-# *******
+configure: configure-if-os configure-if-command
 
-macos: pkgs-macos cfg-macos
+# STOW
+
+stow-macos:
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow macos
+
+stow-linux:
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux
+
+stow-desktop: stow-$(OS)-desktop
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow desktop
+
+stow-linux-desktop:
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux-desktop
+
+stow-macos-desktop:
+
+stow-if-command:
+	stow-if-command $(MKFILE_PATH)/if-command
+
+# PKGS
+
+pkgs-linux:
 
 pkgs-macos:
 	(cd pkgs/macos && make)
 
-cfg-macos:
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow macos
-	cfg-macos
+# CONFIGURE
 
-linux: cfg-$(OS)
+configure-if-os:
+	run-directory $(MKFILE_PATH)/if-os/$(OS)
 
-pkgs-linux:
-
-cfg-linux:
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux
-
-desktop: $(OS)-desktop
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow desktop
-
-linux-desktop:
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux-desktop
-
-macos-desktop:
-
-if-command:
-	.bin/process-if-command
+configure-if-command:
+	run-if-command $(MKFILE_PATH)/if-command-after

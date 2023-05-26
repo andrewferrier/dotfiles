@@ -4,22 +4,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-ROOT_DIR=${1:-${SCRIPT_DIR}/..}
+ROOT_DIR=$(realpath "${1:?Root dir not provided}")
 
-for directory in "${ROOT_DIR}"/if-command/*; do
+for directory in "${ROOT_DIR}"/*; do
     COMMAND=$(basename "$directory")
 
     if command -v "$COMMAND" >/dev/null; then
-        stow --verbose --dir="${ROOT_DIR}/if-command" --target="${HOME}" --stow "$COMMAND"
-    fi
-done
-
-for directory in "${ROOT_DIR}"/if-command-after/*; do
-    COMMAND=$(basename "$directory")
-
-    if command -v "$COMMAND" >/dev/null; then
-        AFTER_SCRIPT=$(realpath "${ROOT_DIR}/if-command-after")
+        AFTER_SCRIPT=$(realpath "${ROOT_DIR}")
 
         if [[ -d "${AFTER_SCRIPT}" ]]; then
             AFTER_SCRIPT="${AFTER_SCRIPT}/${COMMAND}"

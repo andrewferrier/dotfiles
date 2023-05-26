@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+ROOT_DIR=$(realpath "${1:?Root dir not provided}")
+
+for file in "${ROOT_DIR}"/*; do
+    printf "Running %s..." "${file}"
+    echo ""
+    ${file}
+    echo "${file} complete."
+done
