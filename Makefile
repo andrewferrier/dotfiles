@@ -1,8 +1,6 @@
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
-export DOTFILES := $(HOME)/dotfiles
-
 DESKTOP := $(shell .bin/target-desktop)
 
 ifeq ($(shell uname | grep -i linux),)
@@ -14,7 +12,7 @@ endif
 # ******* EXTERNAL TARGETS
 
 common: pkgs cfg if-command
-	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow common
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
 
 pkgs: pkgs-$(OS)
 
@@ -28,7 +26,7 @@ pkgs-macos:
 	(cd pkgs/macos && make)
 
 cfg-macos:
-	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow macos
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow macos
 	cfg-macos
 
 linux: cfg-$(OS)
@@ -36,13 +34,13 @@ linux: cfg-$(OS)
 pkgs-linux:
 
 cfg-linux:
-	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow linux
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux
 
 desktop: $(OS)-desktop
-	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow desktop
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow desktop
 
 linux-desktop:
-	stow --verbose --dir=$(DOTFILES) --target=$(HOME) --stow linux-desktop
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux-desktop
 
 macos-desktop:
 
