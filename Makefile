@@ -3,6 +3,9 @@
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
+CONFIGURE := $(MKFILE_PATH)/configure
+PKGS := $(MKFILE_PATH)/pkgs
+
 DESKTOP := $(shell .bin/target-desktop)
 
 ifeq ($(shell uname | grep -i linux),)
@@ -50,15 +53,15 @@ pkgs-arch:
 pkgs-debian:
 
 pkgs-alpine:
-	(cd pkgs/alpine && make)
+	(cd $(PKGS)/alpine && make)
 
 pkgs-macos:
-	(cd pkgs/macos && make)
+	(cd $(PKGS)/macos && make)
 
 # CONFIGURE
 
 configure-if-osdistribution:
-	run-directory $(MKFILE_PATH)/if-osdistribution/$(OSDISTRIBUTION)
+	run-directory $(CONFIGURE)/if-osdistribution/$(OSDISTRIBUTION)
 
 configure-if-command:
-	run-if-command $(MKFILE_PATH)/if-command-after
+	run-if-command $(CONFIGURE)/if-command-after
