@@ -66,5 +66,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = install_treesitter_parsers,
     config = configure,
-    version = "*",
+    -- Re-enable once on NeoVim 0.10
+    -- version = "*",
 }
