@@ -20,14 +20,10 @@ endif
 
 common: stow pkgs configure
 
-pkgs: pkgs-$(OSDISTRIBUTION)
+# STOW
 
 stow: stow-$(OS) $(DESKTOP) stow-if-command
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
-
-configure: configure-if-osdistribution configure-if-command
-
-# STOW
 
 stow-macos:
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow macos
@@ -48,6 +44,8 @@ stow-if-command:
 
 # PKGS
 
+pkgs: pkgs-$(OSDISTRIBUTION)
+
 pkgs-arch:
 
 pkgs-debian:
@@ -59,6 +57,8 @@ pkgs-macos:
 	(cd $(PKGS)/macos && make)
 
 # CONFIGURE
+
+configure: configure-if-osdistribution configure-if-command
 
 configure-if-osdistribution:
 	run-directory $(CONFIGURE)/if-osdistribution/$(OSDISTRIBUTION)
