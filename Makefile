@@ -10,14 +10,14 @@ ifeq ($(shell uname | grep -i linux),)
 	OSDISTRIBUTION := macos
 else
 	OS := linux
-	OSDISTRIBUTION := $(shell lsb_release --short --id | tr A-Z a-z)
+	OSDISTRIBUTION := $(shell cat /etc/*-release | grep ^ID | sed -e 's/^.*=//')
 endif
 
 # TOP-LEVEL
 
 common: stow pkgs configure
 
-pkgs: pkgs-$(OS)
+pkgs: pkgs-$(OSDISTRIBUTION)
 
 stow: stow-$(OS) $(DESKTOP) stow-if-command
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
@@ -45,7 +45,12 @@ stow-if-command:
 
 # PKGS
 
-pkgs-linux:
+pkgs-arch:
+
+pkgs-debian:
+
+pkgs-alpine:
+	(cd pkgs/alpine && make)
 
 pkgs-macos:
 	(cd pkgs/macos && make)
