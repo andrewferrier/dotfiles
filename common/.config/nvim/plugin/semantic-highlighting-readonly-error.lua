@@ -30,7 +30,7 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LspAttach_SemanticHighlighting", {}),
     callback = function(args)
-        local filetype = vim.api.nvim_buf_get_option(args.buf, "filetype")
+        local filetype = vim.api.nvim_get_option_value("filetype", { buf = 0 })
 
         if filetype ~= "lua" then
             vim.api.nvim_create_autocmd("LspTokenUpdate", {

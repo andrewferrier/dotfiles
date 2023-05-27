@@ -16,19 +16,27 @@ M.sources = {
     null_ls.builtins.formatting.black.with({
         extra_args = function(params)
             return {
-                "--line-length="
-                    .. vim.api.nvim_buf_get_option(params.bufnr, "textwidth"),
+                "--line-length=" .. vim.api.nvim_get_option_value(
+                    "textwidth",
+                    { buf = params.bufnr }
+                ),
             }
         end,
     }),
     null_ls.builtins.formatting.latexindent.with({
         extra_args = function(params)
             local COLUMNS = "modifyLineBreaks:textWrapOptions:columns:"
-                .. vim.api.nvim_buf_get_option(params.bufnr, "textwidth")
+                .. vim.api.nvim_get_option_value(
+                    "textwidth",
+                    { buf = params.bufnr }
+                )
             local INDENT = "defaultIndent:'"
                 .. string.rep(
                     " ",
-                    vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth")
+                    vim.api.nvim_get_option_value(
+                        "shiftwidth",
+                        { buf = params.bufnr }
+                    )
                 )
                 .. "'"
 
@@ -45,9 +53,15 @@ M.sources = {
         extra_args = function(params)
             return {
                 "--print-width",
-                vim.api.nvim_buf_get_option(params.bufnr, "textwidth"),
+                vim.api.nvim_get_option_value(
+                    "textwidth",
+                    { buf = params.bufnr }
+                ),
                 "--tab-width",
-                vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth"),
+                vim.api.nvim_get_option_value(
+                    "shiftwidth",
+                    { buf = params.bufnr }
+                ),
             }
         end,
     }),
@@ -56,7 +70,10 @@ M.sources = {
         extra_args = function(params)
             return {
                 "-i",
-                vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth"),
+                vim.api.nvim_get_option_value(
+                    "shiftwidth",
+                    { buf = params.bufnr }
+                ),
             }
         end,
     }),
@@ -64,9 +81,15 @@ M.sources = {
         extra_args = function(params)
             return {
                 "--column-width",
-                vim.api.nvim_buf_get_option(params.bufnr, "textwidth"),
+                vim.api.nvim_get_option_value(
+                    "textwidth",
+                    { buf = params.bufnr }
+                ),
                 "--indent-width",
-                vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth"),
+                vim.api.nvim_get_option_value(
+                    "shiftwidth",
+                    { buf = params.bufnr }
+                ),
                 "--indent-type",
                 "spaces",
             }
