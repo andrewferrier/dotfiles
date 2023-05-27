@@ -7,8 +7,10 @@ DESKTOP := $(shell .bin/target-desktop)
 
 ifeq ($(shell uname | grep -i linux),)
 	OS := macos
+	OSDISTRIBUTION := macos
 else
 	OS := linux
+	OSDISTRIBUTION := $(shell lsb_release --short --id | tr A-Z a-z)
 endif
 
 # TOP-LEVEL
@@ -20,7 +22,7 @@ pkgs: pkgs-$(OS)
 stow: stow-$(OS) $(DESKTOP) stow-if-command
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
 
-configure: configure-if-os configure-if-command
+configure: configure-if-osdistribution configure-if-command
 
 # STOW
 
@@ -50,8 +52,8 @@ pkgs-macos:
 
 # CONFIGURE
 
-configure-if-os:
-	run-directory $(MKFILE_PATH)/if-os/$(OS)
+configure-if-osdistribution:
+	run-directory $(MKFILE_PATH)/if-osdistribution/$(OSDISTRIBUTION)
 
 configure-if-command:
 	run-if-command $(MKFILE_PATH)/if-command-after
