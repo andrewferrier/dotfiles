@@ -28,11 +28,24 @@ local configure = function()
         fzf_lua.man_pages({ previewer = "man_native" })
     end, { desc = "Open manpage" })
 
+    local cvf_previewer
+
+    if vim.fn.executable("bat") then
+        cvf_previewer = function(items)
+            return "bat --style=plain --color=always "
+                .. vim.fn.escape(items[1], " ")
+        end
+    else
+        cvf_previewer = function(items)
+            return "cat " .. vim.fn.escape(items[1], " ")
+        end
+    end
+
     vim.keymap.set("n", "cvf", function()
         fzf_lua.fzf_exec("file-list -t -r", {
             actions = require("fzf-lua.config").globals.actions.files,
-            previewer = "builtin",
             fzf_opts = {
+                ["--preview"] = fzf_lua.shell.preview_action_cmd(cvf_previewer),
                 ["--exact"] = "",
                 ["--no-sort"] = "",
             },

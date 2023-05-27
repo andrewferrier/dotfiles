@@ -5,6 +5,7 @@ brew "aria2"
 brew "atool"
 brew "automake"
 brew "bash" # for improved performance
+brew "bat"
 brew "blueutil" # for Hammerspoon
 brew "coreutils"
 brew "curl"
