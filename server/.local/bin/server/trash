@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+TRASH_DIR="/tmp/trash-$(date +%Y-%m-%d)"
+
+TEMP_IFS=${IFS}
+IFS=$'\n'
+
+for ITEM in "$@"; do
+    if [[ -L "${ITEM}" ]]; then
+        echo >&2 "trash: Cannot trash '${ITEM}'; is a symbolic link."
+        exit 1
+    elif [[ -e "${ITEM}" ]]; then
+        mkdir -p "${TRASH_DIR}"
+        ITEM_NAME=$(basename "${ITEM}")
+
+        if [[ -e "${TRASH_DIR}/${ITEM_NAME}" ]]; then
+            mv -f "${ITEM}" "${TRASH_DIR}/${ITEM_NAME} $(date "+%H-%M-%S")"
+        else
+            mv -f "${ITEM}" "${TRASH_DIR}/"
+        fi
+    else
+        echo >&2 "trash: Cannot trash '${ITEM}'; no such file or directory."
+        exit 1
+    fi
+done
+
+IFS=${TEMP_IFS}

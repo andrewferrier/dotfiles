@@ -20,7 +20,7 @@ common: stow pkgs configure
 
 # STOW
 
-stow: stow-$(OS) $(DESKTOP) stow-if-command
+stow: stow-$(OS) $(if $(DESKTOP),stow-desktop,stow-server) stow-if-command
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
 
 stow-macos:
@@ -28,6 +28,9 @@ stow-macos:
 
 stow-linux:
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux
+
+stow-server:
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow server
 
 stow-desktop: stow-$(OS)-desktop
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow desktop
