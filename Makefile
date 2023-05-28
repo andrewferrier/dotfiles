@@ -59,7 +59,10 @@ pkgs-macos:
 
 # CONFIGURE
 
-configure: configure-if-osdistribution configure-if-command
+configure: configure-all configure-if-osdistribution configure-if-command
+
+configure-all:
+	run-directory $(CONFIGURE)/all
 
 configure-if-osdistribution:
 	run-directory $(CONFIGURE)/if-osdistribution/$(OSDISTRIBUTION)

@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+if type zsh >/dev/null 2>/dev/null; then
+    zsh -i -c 'antidote update'
+fi
