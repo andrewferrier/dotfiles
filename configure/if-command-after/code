@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+set -o errexit
+set -o noglob
+set -o nounset
+
+code --install-extension hashicorp.terraform
+code --install-extension ms-python.python
+code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension vscodevim.vim
