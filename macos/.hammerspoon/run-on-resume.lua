@@ -4,11 +4,13 @@ log.i("Initializing...")
 
 local M = {}
 
+local HOME = os.getenv("HOME")
+
 local function f(event)
     if event == hs.caffeinate.watcher.screensDidWake then
         log.i("Awoken")
         log.i("Running day-night-update")
-        hs.execute("/Users/ferriera/.local/bin/common-dotfiles/day-night-update")
+        hs.execute(HOME .. "/.local/bin/common-dotfiles/day-night-update")
         log.i("day-night-update complete")
     end
 end
