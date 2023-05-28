@@ -20,12 +20,6 @@
     Cmd-Opt-R   | reader view
     Vimium keys | <https://github.com/philc/vimium#keyboard-bindings>
 
-## Slack
-
-    Cmd-K        | Jump to existing conversation
-    Cmd-N        | Start new conversation
-    Cmd-1/2/3... | Switch workspace
-
 ## zathura (PDF viewer)
 
     a | zoom out to page
