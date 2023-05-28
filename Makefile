@@ -16,7 +16,21 @@ endif
 
 # TOP-LEVEL
 
-common: stow pkgs configure
+common: pkgs stow configure
+
+# PKGS
+
+pkgs: pkgs-$(OSDISTRIBUTION)
+
+pkgs-arch:
+
+pkgs-debian:
+
+pkgs-alpine:
+	(cd $(PKGS)/alpine && make)
+
+pkgs-macos:
+	(cd $(PKGS)/macos && make)
 
 # STOW
 
@@ -42,20 +56,6 @@ stow-macos-desktop:
 
 stow-if-command:
 	stow-if-command $(MKFILE_PATH)/if-command
-
-# PKGS
-
-pkgs: pkgs-$(OSDISTRIBUTION)
-
-pkgs-arch:
-
-pkgs-debian:
-
-pkgs-alpine:
-	(cd $(PKGS)/alpine && make)
-
-pkgs-macos:
-	(cd $(PKGS)/macos && make)
 
 # CONFIGURE
 
