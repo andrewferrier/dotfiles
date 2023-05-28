@@ -27,10 +27,10 @@ pkgs-arch:
 pkgs-debian:
 
 pkgs-alpine:
-	(cd $(PKGS)/alpine && make)
+	(cd $(PKGS)/alpine && $(MAKE))
 
 pkgs-macos:
-	(cd $(PKGS)/macos && make)
+	(cd $(PKGS)/macos && $(MAKE))
 
 # STOW
 
