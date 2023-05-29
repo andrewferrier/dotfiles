@@ -16,7 +16,9 @@ endif
 
 # TOP-LEVEL
 
-common: pkgs stow configure
+all: pkgs quick
+
+quick: stow configure
 
 # PKGS
 
