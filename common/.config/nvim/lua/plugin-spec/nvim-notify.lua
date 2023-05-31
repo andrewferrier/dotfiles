@@ -10,6 +10,8 @@ local function get_message(...)
     return table.concat(print_safe_args, " ")
 end
 
+local previous_msg
+
 return {
     "rcarriga/nvim-notify",
     config = function()
@@ -25,6 +27,13 @@ return {
             end
 
             msg = vim.trim(msg)
+
+            -- Debounce notifications
+            if msg == previous_msg then
+                return
+            else
+                previous_msg = msg
+            end
 
             if msg ~= "" then
                 local filename = vim.trim(vim.fn.expand("%:t"))
