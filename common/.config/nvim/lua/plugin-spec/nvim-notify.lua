@@ -64,5 +64,6 @@ return {
         vim.print = _G.print
     end,
     version = "*",
-    event = "VeryLazy",
+    -- Don't load this lazily, it causes issues when opening files straight away
+    -- that generate notifications
 }
