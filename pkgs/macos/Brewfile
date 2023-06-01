@@ -80,5 +80,6 @@ cask "font-consolas-for-powerline" # for kitty
 cask "hammerspoon"
 cask "keepassxc"
 cask "kitty"
+cask "whatsapp"
 
 # vim: set filetype=ruby:
