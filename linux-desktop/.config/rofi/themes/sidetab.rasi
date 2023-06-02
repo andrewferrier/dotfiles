@@ -8,6 +8,10 @@ configuration {
   sidebar-mode:    true;
 }
 
+element-icon {
+  size: 1.8ch;
+}
+
 * {
   font: "mono 14";
   background-color:            #080808;
