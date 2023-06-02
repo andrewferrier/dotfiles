@@ -3,7 +3,7 @@ local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.notify("Installing lazy...")
 
-    vim.fn.system({
+    local result = vim.fn.system({
         "git",
         "clone",
         "--filter=blob:none",
@@ -11,6 +11,10 @@ if not vim.loop.fs_stat(lazypath) then
         "--branch=stable",
         lazypath,
     })
+
+    if vim.v.shell_error ~= 0 then
+        print('ERROR: ' .. result)
+    end
 end
 
 vim.opt.runtimepath:prepend(lazypath)
