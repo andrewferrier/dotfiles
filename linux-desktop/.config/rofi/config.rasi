@@ -1,4 +1,4 @@
 configuration {
-    font: "mono 11";
+    dpi: 1;
     case-sensitive: false;
 }
