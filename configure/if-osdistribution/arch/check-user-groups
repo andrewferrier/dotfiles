@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+add-to-group-if-missing() {
+    GROUP=$1
+
+    if getent group "${GROUP}" | grep -v -q "\b${USER}\b"; then
+        echo "User \`$USER\` missing from group \`$GROUP\`, adding..."
+        sudo usermod -a -G "${GROUP}" "${USER}"
+    fi
+}
+
+add-to-group-if-missing informant
+add-to-group-if-missing vboxusers
