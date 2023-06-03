@@ -1,8 +1,9 @@
+.PHONY: pkgs
+
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
 CONFIGURE := $(MKFILE_PATH)/configure
-PKGS := $(MKFILE_PATH)/pkgs
 
 DESKTOP := $(shell .bin/target-desktop)
 
@@ -22,17 +23,8 @@ quick: stow configure
 
 # PKGS
 
-pkgs: pkgs-$(OSDISTRIBUTION)
-
-pkgs-arch:
-
-pkgs-debian:
-
-pkgs-alpine:
-	(cd $(PKGS)/alpine && $(MAKE))
-
-pkgs-macos:
-	(cd $(PKGS)/macos && $(MAKE))
+pkgs:
+	(cd $(MKFILE_PATH)/pkgs/$(OSDISTRIBUTION) && $(MAKE))
 
 # STOW
 

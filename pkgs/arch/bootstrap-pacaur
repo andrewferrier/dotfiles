@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if ! type pacaur > /dev/null 2> /dev/null; then
+    TMPDIR=$(mktemp -d)
+    git clone https://aur.archlinux.org/auracle-git.git "${TMPDIR}"
+    cd "${TMPDIR}" && makepkg -si --noconfirm
+
+    TMPDIR=$(mktemp -d)
+    git clone https://aur.archlinux.org/expac.git "${TMPDIR}"
+    cd "${TMPDIR}" && makepkg -si --noconfirm
+
+    TMPDIR=$(mktemp -d)
+    git clone https://aur.archlinux.org/pacaur.git "${TMPDIR}"
+    cd "${TMPDIR}" && makepkg -si --noconfirm
+fi
