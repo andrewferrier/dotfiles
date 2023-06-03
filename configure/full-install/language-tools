@@ -51,5 +51,5 @@ if [[ $(uname -s) == Linux* ]]; then
     eget --to "${LOCAL_BIN}" LuaLS/lua-language-server --download-only --asset=^musl
     rm -rf "${LOCAL_BIN}"/lua-language-server-*/
     cd "${LOCAL_BIN}"
-    aunpack lua-language-server*.tar.gz && rm lua-language-server*.tar.gz
+    aunpack --quiet lua-language-server*.tar.gz && rm lua-language-server*.tar.gz
 fi
