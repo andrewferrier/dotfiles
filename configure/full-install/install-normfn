@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+if ! command -v "normfn" >/dev/null 2>&1; then
+    TEMPDIR=$(mktemp -d)
+    OSDISTRIBUTION=$(cat /etc/*-release | grep ^ID | sed -e 's/^.*=//')
+
+    # shellcheck disable=SC2154
+    if [[ ${OSDISTRIBUTION} == "arch" ]]; then
+        git clone https://github.com/andrewferrier/normfn.git "${TEMPDIR}"
+        (cd "${TEMPDIR}" && make buildarch && sudo pacman -U --noconfirm ./*.pkg.tar.zst)
+    elif [[ ${OSDISTRIBUTION} == "macos" ]]; then
+        git clone https://github.com/andrewferrier/normfn.git "${TEMPDIR}"
+        (cd "${TEMPDIR}" && make reinstall_osx_brew install_osx_finder)
+    else
+        git clone https://github.com/andrewferrier/normfn.git "${TEMPDIR}"
+        (cd "${TEMPDIR}" && make builddeb && sudo dpkg -i normfn*.deb)
+    fi
+fi
+
+if [[ ${OSDISTRIBUTION} == "macos" ]]; then
+    pip3 install coloredlogs
+fi
