@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+set -o errexit
+set -o nounset
+
 install-if-missing() {
     PACKAGE_NAME=$1
 
-    if ! pacman -Qi "${PACKAGE_NAME}"; then
+    if ! pacman -Qi "${PACKAGE_NAME}" > /dev/null; then
         pacaur -S --noconfirm --noedit "${PACKAGE_NAME}"
     fi
 }
