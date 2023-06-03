@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+install-if-missing() {
+    PACKAGE_NAME=$1
+
+    if ! pacman -Qi "${PACKAGE_NAME}"; then
+        pacaur -S --noconfirm --noedit "${PACKAGE_NAME}"
+    fi
+}
+
+install-if-missing abcde
+install-if-missing autotrash
+install-if-missing bkt
+install-if-missing dragon-drop
+install-if-missing eget-bin
+install-if-missing informant
+install-if-missing keepmenu
+install-if-missing librewolf-bin
+install-if-missing mpd-notification
+install-if-missing ocrmypdf
+install-if-missing pandoc-bin
+install-if-missing rememberthemilk
+install-if-missing ripmime
+install-if-missing terraform-ls
+install-if-missing terraform-lsp
+install-if-missing texlive-moderncv-git # my CV template
+install-if-missing tflint
+install-if-missing trickle
+install-if-missing tzupdate
+install-if-missing vale-bin # for neovim null-ls
+install-if-missing verapdf
+install-if-missing vimpc-git
+install-if-missing virtualbox-ext-oracle
