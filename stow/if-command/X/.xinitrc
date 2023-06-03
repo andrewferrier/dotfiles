@@ -8,7 +8,7 @@ set -o pipefail
 # https://stackoverflow.com/a/36480692/27641.
 setxkbmap gb
 
-[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+[[ -f ~/.Xresources ]] && xrdb -merge -I"${HOME}" ~/.Xresources
 
 xscreensaver -no-splash &
 xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
