@@ -1,4 +1,4 @@
-.PHONY: pkgs
+.PHONY: pkgs stow
 
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
@@ -29,22 +29,10 @@ pkgs:
 
 # STOW
 
-stow: stow-$(DESKTOP_OR_SERVER) stow-if-command
+stow:
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
-
-stow-server:
-	stow --verbose --dir=$(STOW) --target=$(HOME) --stow server
-
-stow-desktop: stow-$(OS)-desktop
-	stow --verbose --dir=$(STOW) --target=$(HOME) --stow desktop
-
-stow-linux-desktop:
-	stow --verbose --dir=$(STOW) --target=$(HOME) --stow linux-desktop
-
-stow-macos-desktop:
-
-stow-if-command:
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(DESKTOP_OR_SERVER)
 	stow-if-command $(STOW)/if-command
 
 # CONFIGURE
