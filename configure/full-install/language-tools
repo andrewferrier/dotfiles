@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 set -o errexit
-set -o noglob
 set -o nounset
 set -o pipefail
 
@@ -50,7 +49,7 @@ ${PIP_INSTALL_UPGRADE} sqlfluff
 
 if [[ $(uname -s) == Linux* ]]; then
     eget --to "${LOCAL_BIN}" LuaLS/lua-language-server --download-only --asset=^musl
-    rm -r "${LOCAL_BIN}"/lua-language-server-*
+    rm -rf "${LOCAL_BIN}"/lua-language-server-*/
     cd "${LOCAL_BIN}"
     aunpack lua-language-server*.tar.gz && rm lua-language-server*.tar.gz
 fi
