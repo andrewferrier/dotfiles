@@ -41,7 +41,5 @@ export BROWSER=qutebrowser
 
 # https://wiki.archlinux.org/title/HiDPI#X_Resources
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
-export QT_FONT_DPI=144
-xrandr --dpi 192
 
 exec i3

@@ -1,11 +1,11 @@
 # See https://wiki.archlinux.org/title/HiDPI#X_Resources
 
-Xft.dpi: 192
+Xft.dpi: 168
 
 ! These might also be useful depending on your monitor and personal preference:
 Xft.autohint: 0
-Xft.lcdfilter:  lcddefault
-Xft.hintstyle:  hintfull
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
 Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
