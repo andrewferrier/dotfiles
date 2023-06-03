@@ -13,7 +13,6 @@ install-if-missing() {
 
 install-if-missing abcde
 install-if-missing autotrash
-install-if-missing bkt
 install-if-missing dragon-drop
 install-if-missing eget-bin
 install-if-missing informant
