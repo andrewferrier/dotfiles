@@ -6,8 +6,6 @@ PATH := $(MKFILE_PATH)/.bin:$(PATH)
 CONFIGURE := $(MKFILE_PATH)/configure
 STOW := $(MKFILE_PATH)/stow
 
-DESKTOP_OR_SERVER := $(shell .bin/target-desktop-or-server)
-
 ifeq ($(shell uname | grep -i linux),)
 	OS := macos
 	OSDISTRIBUTION := macos
@@ -32,7 +30,6 @@ pkgs:
 stow:
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
-	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(DESKTOP_OR_SERVER)
 	stow-if-command $(STOW)/if-command
 
 # CONFIGURE

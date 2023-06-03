@@ -4,6 +4,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+if [[ -x /usr/bin/trash ]]; then
+    # If we already have trash-cli installed, use that in preference
+    /usr/bin/trash "$@"
+    exit $?
+fi
+
 TRASH_DIR="/tmp/trash-$(date +%Y-%m-%d)"
 
 TEMP_IFS=${IFS}
