@@ -4,6 +4,7 @@ MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
 CONFIGURE := $(MKFILE_PATH)/configure
+STOW := $(MKFILE_PATH)/stow
 
 DESKTOP_OR_SERVER := $(shell .bin/target-desktop-or-server)
 
@@ -29,22 +30,22 @@ pkgs:
 # STOW
 
 stow: stow-$(DESKTOP_OR_SERVER) stow-if-command
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow $(OS)
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
 
 stow-server:
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow server
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow server
 
 stow-desktop: stow-$(OS)-desktop
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow desktop
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow desktop
 
 stow-linux-desktop:
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux-desktop
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow linux-desktop
 
 stow-macos-desktop:
 
 stow-if-command:
-	stow-if-command $(MKFILE_PATH)/if-command
+	stow-if-command $(STOW)/if-command
 
 # CONFIGURE
 
