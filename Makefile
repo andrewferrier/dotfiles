@@ -5,7 +5,7 @@ PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
 CONFIGURE := $(MKFILE_PATH)/configure
 
-DESKTOP := $(shell .bin/target-desktop)
+DESKTOP_OR_SERVER := $(shell .bin/target-desktop-or-server)
 
 ifeq ($(shell uname | grep -i linux),)
 	OS := macos
@@ -28,14 +28,9 @@ pkgs:
 
 # STOW
 
-stow: stow-$(OS) $(if $(DESKTOP),stow-desktop,stow-server) stow-if-command
+stow: stow-$(DESKTOP_OR_SERVER) stow-if-command
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow common
-
-stow-macos:
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow macos
-
-stow-linux:
-	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow linux
+	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow $(OS)
 
 stow-server:
 	stow --verbose --dir=$(MKFILE_PATH) --target=$(HOME) --stow server
