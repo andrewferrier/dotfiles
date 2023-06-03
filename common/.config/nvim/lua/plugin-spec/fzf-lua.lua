@@ -30,12 +30,12 @@ local configure = function()
 
     local cvf_previewer
 
-    if vim.fn.executable("batcat") then
+    if vim.fn.executable("batcat") == 1 then
         cvf_previewer = function(items)
             return "batcat --style=plain --color=always "
                 .. vim.fn.escape(items[1], " ")
         end
-    elseif vim.fn.executable("bat") then
+    elseif vim.fn.executable("bat") == 1 then
         cvf_previewer = function(items)
             return "bat --style=plain --color=always "
                 .. vim.fn.escape(items[1], " ")
