@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if command -v pip3 &>/dev/null; then
+    PIP=pip3
+else
+    PIP=pip
+fi
+
+PIP_INSTALL_UPGRADE="${PIP} install --user --upgrade"
+
+${PIP_INSTALL_UPGRADE} black
+${PIP_INSTALL_UPGRADE} gitlint
+${PIP_INSTALL_UPGRADE} sqlfluff

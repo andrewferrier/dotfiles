@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+LOCAL_BIN="${HOME}/.local/bin"
+
+gem install mdl -v 0.11.0
+
+if [[ $(uname -s) == Linux* ]]; then
+    eget --to "${LOCAL_BIN}" LuaLS/lua-language-server --download-only --asset=^musl
+    rm -rf "${LOCAL_BIN}"/lua-language-server-*/
+    cd "${LOCAL_BIN}"
+    aunpack --quiet lua-language-server*.tar.gz && rm lua-language-server*.tar.gz
+fi
+
+eget --to "${LOCAL_BIN}" hadolint/hadolint --upgrade-only
