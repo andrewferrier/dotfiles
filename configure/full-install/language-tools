@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+LOCAL_BIN="${HOME}/.local/bin"
+
+if command -v pip3 &>/dev/null; then
+    PIP=pip3
+else
+    PIP=pip
+fi
+
+PIP_INSTALL_UPGRADE="${PIP} install --user --upgrade"
+
+if command -v yarnpkg &>/dev/null; then
+    YARN=yarn
+else
+    YARN=yarnpkg
+fi
+
+NPM_PACKAGES=("bash-language-server"
+    "dockerfile-language-server-nodejs"
+    "prettier"
+    "prettier-plugin-toml"
+    "prettier-plugin-xml"
+    "pyright"
+    "remark-cli"
+    "remark-frontmatter"
+    "remark-gfm"
+    "typescript"
+    "typescript-language-server"
+    "vim-language-server"
+    # css, html, json
+    "vscode-langservers-extracted")
+
+npm install -g --production ${NPM_PACKAGES[*]}
+npm update -g --production ${NPM_PACKAGES[*]}
+
+# Does not support npm
+${YARN} global add yaml-language-server
+
+gem install mdl -v 0.11.0
+
+${PIP_INSTALL_UPGRADE} black
+${PIP_INSTALL_UPGRADE} gitlint
+${PIP_INSTALL_UPGRADE} sqlfluff
+
+if [[ $(uname -s) == Linux* ]]; then
+    eget --to "${LOCAL_BIN}" LuaLS/lua-language-server --download-only --asset=^musl
+    rm -r "${LOCAL_BIN}"/lua-language-server-*
+    cd "${LOCAL_BIN}"
+    aunpack lua-language-server*.tar.gz && rm lua-language-server*.tar.gz
+fi

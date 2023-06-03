@@ -61,7 +61,7 @@ stow-if-command:
 
 # CONFIGURE
 
-configure: configure-all configure-if-osdistribution configure-if-command
+configure: configure-all configure-if-osdistribution configure-if-command configure-fullinstall
 
 configure-all:
 	run-directory $(CONFIGURE)/all
@@ -71,3 +71,14 @@ configure-if-osdistribution:
 
 configure-if-command:
 	run-if-command $(CONFIGURE)/if-command-after
+
+ifeq ($(origin FULLINSTALL),undefined)
+
+configure-fullinstall:
+
+else
+
+configure-fullinstall:
+	run-directory $(CONFIGURE)/full-install
+
+endif
