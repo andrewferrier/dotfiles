@@ -36,6 +36,9 @@ amixer set Headphone unmute
 
 amixer set Capture 0
 
+rfkill block bluetooth
+rfkill block wwan
+
 export TERMCMD=kitty
 export BROWSER=qutebrowser
 
