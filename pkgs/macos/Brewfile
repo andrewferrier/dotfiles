@@ -78,6 +78,7 @@ tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
 cask "drawio"
 cask "font-consolas-for-powerline" # for kitty
 cask "hammerspoon"
+cask "karabiner-elements"
 cask "keepassxc"
 cask "kitty"
 cask "whatsapp"
