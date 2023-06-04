@@ -3,7 +3,11 @@
 set -o errexit
 set -o nounset
 
-OSDISTRIBUTION=$(cat /etc/*-release | grep ^ID | sed -e 's/^.*=//')
+if uname | grep -iv linux > /dev/null; then
+    OSDISTRIBUTION='macos'
+else
+    OSDISTRIBUTION=$(cat /etc/*-release | grep ^ID | sed -e 's/^.*=//')
+fi
 
 if ! command -v "normfn" >/dev/null 2>&1; then
     TEMPDIR=$(mktemp -d)
