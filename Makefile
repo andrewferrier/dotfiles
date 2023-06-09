@@ -30,6 +30,7 @@ pkgs:
 stow:
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OSDISTRIBUTION)
 	stow-if-command $(STOW)/if-command
 
 # CONFIGURE

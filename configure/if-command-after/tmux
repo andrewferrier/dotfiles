@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+if [[ ! -d ${HOME}/.tmux/plugins/tpm ]]; then
+    git clone --quiet --depth 1 https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
+else
+    (cd "${HOME}/.tmux/plugins/tpm" &&
+        git checkout master &&
+        git fetch --all &&
+        git reset --hard origin/master &&
+        git clean -xf)
+fi
+
+# This is necessary if not running from within tmux.
+export TMUX_PLUGIN_MANAGER_PATH=${TMUX_PLUGIN_MANAGER_PATH:-${HOME}/.tmux/plugins}
+
+"${HOME}"/.tmux/plugins/tpm/bin/install_plugins
+"${HOME}"/.tmux/plugins/tpm/bin/update_plugins all
+"${HOME}"/.tmux/plugins/tpm/bin/clean_plugins
