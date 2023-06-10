@@ -18,7 +18,7 @@ if [[ ${OSTYPE} == darwin* ]]; then
 else
     alias cp='cp -v --sparse=always --reflink=auto'
     alias df='df --print-type --human-readable'
-    alias lsblk='lsblk -o NAME,MOUNTPOINT,FSUSED,SIZE,TYPE,FSTYPE,UUID,LABEL,PARTLABEL --paths'
+    alias lsblk='lsblk -o NAME,RM,RO,MOUNTPOINT,TYPE,FSTYPE,SIZE,FSUSED,UUID,LABEL,PARTLABEL --paths'
     alias ps='ps -e -f --forest'
     alias rm='rm -I'
 fi
