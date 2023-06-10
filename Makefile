@@ -28,6 +28,7 @@ pkgs:
 # STOW
 
 stow:
+	mkdir -p ${HOME}/.config ${HOME}/.local/share ${HOME}/.local/state
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OSDISTRIBUTION)
