@@ -269,7 +269,12 @@ statusline = statusline .. RESET_HIGHLIGHTING
 statusline = statusline .. ALIGN_RHS
 
 -- RHS - Warnings
-statusline = statusline .. "%{v:lua.Statusline_LSPProgress()}"
+
+-- FIXME: This doesn't work correctly on NeoVim 0.10+
+if vim.fn.has("nvim-0.10.0") == 0 then
+    statusline = statusline .. "%{v:lua.Statusline_LSPProgress()}"
+end
+
 statusline = statusline .. "%{v:lua.Statusline_Search()}"
 statusline = statusline .. "%{v:lua.Statusline_MacroRecording()}"
 statusline = statusline .. "%{v:lua.Statusline_DiagnosticStatus()}"
