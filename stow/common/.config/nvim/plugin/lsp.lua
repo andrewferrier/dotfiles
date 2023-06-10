@@ -1,3 +1,5 @@
+-- FIXME: Dynamically calculate whether to support keybindings based on client.supports_method()
+
 local DISABLED_DESC = "DISABLED FOR THIS FILETYPE"
 
 function _G.show_capabilities()
