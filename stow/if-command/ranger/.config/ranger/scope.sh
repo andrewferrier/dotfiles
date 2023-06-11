@@ -21,9 +21,6 @@ FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_PATH#*.}" | tr '[:upper:]' '[:lo
 
 HIGHLIGHT=("highlight" "--out-format=ansi")
 
-HIGHLIGHT_SUPPORTS_SYNTAX_BY_NAME=false
-highlight --out-format=truecolor --syntax-by-name=c </dev/null >/dev/null 2>/dev/null && HIGHLIGHT_SUPPORTS_SYNTAX_BY_NAME=true
-
 case $(basename "${FILE_PATH}") in
 "Dockerfile")
     "${HIGHLIGHT[@]}" --syntax=Dockerfile "${FILE_PATH}" && exit 5
@@ -56,7 +53,7 @@ esac
 if isutf8 "${FILE_PATH}" >/dev/null; then
     # Only highlight the relevant lines to speed up highlighting, make this more
     # robust on MacOS.
-    if ${HIGHLIGHT_SUPPORTS_SYNTAX_BY_NAME}; then
+    if "${HIGHLIGHT[@]}" --syntax-supported --syntax-by-name="${FILE_PATH}" >/dev/null 2>/dev/null; then
         head -"${PV_HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" --syntax-by-name="${FILE_PATH}" 2>/dev/null && exit 5
     fi
     head -"${PV_HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" 2>/dev/null && exit 5
