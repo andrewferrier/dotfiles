@@ -43,6 +43,8 @@ export TERMCMD=kitty
 export BROWSER=qutebrowser
 
 # https://wiki.archlinux.org/title/HiDPI#X_Resources
-export QT_AUTO_SCREEN_SCALE_FACTOR=1
+
+# Affects qutebrowser, KeepassXC
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
 exec i3
