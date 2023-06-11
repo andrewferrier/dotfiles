@@ -44,12 +44,7 @@ return {
 
                 msg = " " .. filename .. msg
 
-                -- The schedule() seems to be needed to avoid errors with some
-                -- vim.notify() calls, e.g. when debugprint doesn't have a
-                -- filetype definition
-                vim.schedule(function()
-                    require("notify")(msg, level, opts)
-                end)
+                require("notify")(msg, level, opts)
             end
         end
 
