@@ -165,7 +165,8 @@
 *   Check why mini surround doesn't highlight
 *   Allow for `setup_outline` using treesitter
 *   Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
-*   Replace 'jobstart' with 'spawn'?
+*   Replace 'jobstart' with vim.system
+*   Once 0.10 out, consider replacing gruvbox with retrobox
 
 ## Presentation Ideas
 
