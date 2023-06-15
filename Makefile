@@ -27,8 +27,15 @@ pkgs:
 
 # STOW
 
-stow:
+pre-stow-macos:
+
+pre-stow-linux:
+	mkdir -p ${HOME}/.config/system/user
+
+pre-stow: pre-stow-$(OS)
 	mkdir -p ${HOME}/.config ${HOME}/.local/share ${HOME}/.local/state
+
+stow: pre-stow
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OSDISTRIBUTION)

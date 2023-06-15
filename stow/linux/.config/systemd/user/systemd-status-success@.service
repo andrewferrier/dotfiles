@@ -1,0 +1,8 @@
+[Unit]
+Description=Update systemd-status success count for %i
+RefuseManualStart=true
+RefuseManualStop=true
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/linux/systemd-status --success --unit-name %i
