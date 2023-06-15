@@ -7,6 +7,5 @@ set -o pipefail
 
 shopt -s inherit_errexit
 
-killall ffmpeg
-killall screenkey
+killall ffmpeg screenkey
 notify-send --urgency low "Screen recording stopped."
