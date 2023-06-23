@@ -25,7 +25,6 @@ install-if-missing rememberthemilk
 install-if-missing ripmime
 install-if-missing terraform-ls
 install-if-missing terraform-lsp
-install-if-missing texlive-moderncv-git # my CV template
 install-if-missing tflint
 install-if-missing trickle
 install-if-missing tzupdate
