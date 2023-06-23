@@ -4,6 +4,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+NORMAL=$(tput sgr0)
+GREY=$(tput setaf 7)
+
 ROOT_DIR=$(realpath "${1:?Root dir not provided}")
 
 for directory in "${ROOT_DIR}"/*; do
@@ -16,10 +19,9 @@ for directory in "${ROOT_DIR}"/*; do
             AFTER_SCRIPT="${AFTER_SCRIPT}/${COMMAND}"
 
             if [[ -f "${AFTER_SCRIPT}" ]]; then
-                printf "Running %s..." "${AFTER_SCRIPT}"
-                echo ""
+                printf "${GREY}Running %s...${NORMAL}\n" "${AFTER_SCRIPT}"
                 ${AFTER_SCRIPT}
-                echo "${AFTER_SCRIPT} complete."
+                printf "${GREY}${AFTER_SCRIPT} complete.${NORMAL}\n"
             fi
         fi
     fi
