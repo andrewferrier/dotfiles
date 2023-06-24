@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+systemctl enable --user --now mpd
+systemctl enable --user --now mpd-notification
+systemctl enable --user --now autotrash.timer
+systemctl enable --user --now check-battery-level.timer
+systemctl enable --user --now check-stuck-files.timer
+systemctl enable --user --now mbsync.timer
+systemctl enable --user --now msmtp-runqueue.timer
+systemctl enable --user --now sync-with-server-music.timer
+systemctl enable --user --now vdirsyncer.timer
