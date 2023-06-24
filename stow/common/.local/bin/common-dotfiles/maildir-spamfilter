@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+
+import argparse
+import mailbox
+import sys
+import subprocess
+import logging
+from tqdm import tqdm
+from pathlib import Path
+
+logger = logging.getLogger("maildir-spamfilter")
+logger.propagate = False
+logger.setLevel(logging.WARN)
+
+
+def is_spam(message, subject):
+    proc = subprocess.Popen(
+        ["spamc", "--check"], stdin=subprocess.PIPE, stdout=subprocess.PIPE
+    )
+    stdout, _ = proc.communicate(input=message)
+
+    if stdout.strip() == b"0/0":
+        if spam_count == 0 and non_spam_count == 0:
+            logging.error("Could not connect to spamd")
+            sys.exit(1)
+        else:
+            logging.warning(
+                f"Message with subject {subject} could not be processed"
+            )
+
+    if proc.returncode != 0 and args.verbose:
+        print(f"Spam detected with subject {subject}, score {stdout}")
+
+    return proc.returncode != 0
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Process a Maildir-formatted mail folder for spam detection."
+    )
+    parser.add_argument("source_folder", help="Path to the source folder")
+    parser.add_argument("spam_folder", help="Path to the spam folder")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--verbose", action="store_true")
+    parser.add_argument("--progress", action="store_true")
+    args = parser.parse_args()
+
+    mbox = mailbox.Maildir(args.source_folder, create=False)
+    spam_mbox = mailbox.Maildir(args.spam_folder, create=True)
+
+    # Initialize counters
+    spam_count = 0
+    non_spam_count = 0
+
+    total_messages = len(mbox)
+
+    if args.progress:
+        mbox_iter = tqdm(
+            mbox.iterkeys(),
+            total=total_messages,
+            desc="Processing",
+            smoothing=0,
+        )
+    else:
+        mbox_iter = mbox.iterkeys()
+
+    for message_key in mbox_iter:
+        message = mbox.get_message(message_key)
+        subject = message["Subject"]
+
+        if is_spam(message.as_bytes(), subject):
+            spam_count += 1
+
+            if args.dry_run:
+                spam_mbox.add(message)
+            else:
+                mbox.remove(message_key)
+                spam_mbox.add(message)
+        else:
+            non_spam_count += 1
+
+        if args.progress:
+            mbox_iter.set_postfix(spam=spam_count, non_spam=non_spam_count)
+
+    if args.progress:
+        mbox_iter.set_postfix(spam=spam_count, non_spam=non_spam_count)
