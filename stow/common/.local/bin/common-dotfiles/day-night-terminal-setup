@@ -10,9 +10,9 @@ if [[ -z "${SSH_CONNECTION}" ]]; then
     # the need/frequency to do that is minimized.
     if [[ ! -f "${STATE_FILE_KITTY_LAST}" ]] || ! cmp --silent "${STATE_FILE}" "${STATE_FILE_KITTY_LAST}"; then
         if grep -Fxq "day" "${STATE_FILE}"; then
-            kitty @ set-colors -a -c ~/.config/kitty/colors-light.conf
+            kitty @ set-colors --all --configured ~/.config/kitty/colors-light.conf
         else
-            kitty @ set-colors -a -c ~/.config/kitty/colors-dark.conf
+            kitty @ set-colors --all --configured ~/.config/kitty/colors-dark.conf
         fi
 
         command cp "${STATE_FILE}" "${STATE_FILE_KITTY_LAST}"
