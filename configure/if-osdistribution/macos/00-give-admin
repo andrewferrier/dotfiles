@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if dscl . -read /Groups/admin GroupMembership | grep -v "${USER}"; then
+    sudo dscl . -merge /Groups/admin GroupMembership "${USER}"
+fi
