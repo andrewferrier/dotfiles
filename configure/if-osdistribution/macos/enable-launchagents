@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+mkdir -p "${HOME}/Library/Logs/launchagent"
+
+cd "${HOME}/Library/LaunchAgents"
+
+# This mechanism may stop working at some point:
+# https://www.reddit.com/r/MacOS/comments/kbko61/comment/gpv2to1/
+
+for PLIST in *.plist; do
+    PLIST="${PLIST%.*}"
+    echo "Checking $PLIST..."
+    plutil -lint "${PLIST}.plist"
+    if ! (launchctl list | grep "${PLIST}" > /dev/null); then
+        echo "$PLIST is not marked as loaded, loading..."
+        launchctl load -w "${PLIST}.plist"
+    else
+        echo "$PLIST, resetting with unload/load..."
+        launchctl unload -w "${PLIST}.plist"
+        sleep 3
+        launchctl load -w "${PLIST}.plist"
+    fi
+done
