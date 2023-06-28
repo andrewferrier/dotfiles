@@ -1,0 +1,127 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+if [[ -t 0 ]]; then
+    INTERACTIVE=true
+else
+    INTERACTIVE=false
+fi
+
+# shellcheck disable=SC2312
+if [[ $(ps -o args= "${PPID}") == *"ranger"* ]]; then
+    CALLED_FROM_RANGER=true
+else
+    CALLED_FROM_RANGER=false
+fi
+
+if [[ -n "${DISPLAY:-}" ]] || [[ ${OSTYPE} == darwin* ]]; then
+    GRAPHICAL=true
+else
+    GRAPHICAL=false
+fi
+
+function open-directory() {
+    if [[ -d "${FILE}/cur" && -d "${FILE}/new" && -d "${FILE}/tmp" ]] && ${INTERACTIVE}; then
+        # This is a maildir directory
+        # shellcheck disable=SC1091,1090
+        source "${HOME}/.config/bash/mutt.bashrc"
+        mutt -f "${FILE}"
+    else
+        if [[ ${OSTYPE} == darwin* ]]; then
+            if ${INTERACTIVE} && ! ${CALLED_FROM_RANGER}; then
+                ranger "${FILE}"
+            else
+                # -n seems to make this more reliable, otherwise window can open
+                # behind others
+                open -n "${FILE}"
+            fi
+        else
+            # shellcheck disable=SC2154
+            ${TERMCMD} ranger "${FILE}" &
+        fi
+    fi
+}
+
+function open-text() {
+    if [[ ${OSTYPE} == darwin* ]]; then
+        if ${INTERACTIVE}; then
+            # shellcheck disable=SC2154
+            ${VISUAL} "${FILE}"
+        else
+            open -t "${FILE}"
+        fi
+    else
+        if ${GRAPHICAL}; then
+            ${TERMCMD} "${VISUAL}" "${FILE}" >/dev/null 2>&1 &
+        else
+            ${VISUAL} "${FILE}"
+        fi
+    fi
+}
+
+function open-system() {
+    if [[ ${OSTYPE} == darwin* ]]; then
+        open "${FILE}"
+    else
+        # 'nohup' is needed to ensure that when files are opened from ranger
+        # that closing ranger doesn't close the target app.
+        nohup xdg-open "${FILE}" >/dev/null 2>&1 &
+    fi
+}
+
+function text-treat-as-binary() {
+    LIST="drawio html svg webloc"
+
+    if [[ ${LIST} =~ (^|[[:space:]])$1($|[[:space:]]) ]]; then
+        true
+    else
+        false
+    fi
+}
+
+function is-archive() {
+    LIST="7z ace ar arc bz2? cab cpio cpt deb dgc dmg gz iso jar msi pkg rar shar tar tgz xar xpi xz zip"
+
+    if [[ ${LIST} =~ (^|[[:space:]])$1($|[[:space:]]) ]]; then
+        true
+    else
+        false
+    fi
+}
+
+for FILE in "$@"; do
+    # If a ~ has been passed in (e.g. from file-list), expand it.
+    FILE=${FILE/\~/${HOME}}
+    # Remove any newlines from FILE
+    FILE=${FILE//$'\n'/}
+
+    if [[ ${FILE} == http* ]]; then
+        open-system "${FILE}"
+    else
+        if [[ -e ${FILE} ]]; then
+            FILE_EXTENSION_LOWER="$(printf "%s" "${FILE##*.}" | tr '[:upper:]' '[:lower:]')"
+
+            fasd -A "${FILE}" &
+
+            MIME_TYPE=$(file --brief --mime-type "${FILE}")
+            readonly MIME_TYPE
+
+            # shellcheck disable=SC2310
+            if [[ -d "${FILE}" ]]; then
+                open-directory "${FILE}"
+            elif is-archive "${FILE_EXTENSION_LOWER}" && command -v aunpack &>/dev/null; then
+                DIR=$(dirname "${FILE}")
+                (cd "${DIR}" && aunpack "${FILE}")
+            elif (isutf8 -q "${FILE}" || [[ ${MIME_TYPE} == "text/plain" ]]) && (! text-treat-as-binary "${FILE_EXTENSION_LOWER}"); then
+                open-text "${FILE}"
+            else
+                open-system "${FILE}"
+            fi
+        else
+            echo >&2 "${FILE} does not exist."
+            exit 1
+        fi
+    fi
+done
