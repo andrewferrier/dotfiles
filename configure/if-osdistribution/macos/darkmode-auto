@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# FIXME: Not 100% sure if this works, need to test log out/log in cycle
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+CACHE_DIR="${HOME}/.cache/day-night"
+STATE_FILE="${CACHE_DIR}/state-terminal"
+if grep -Fxq "day" "${STATE_FILE}"; then
+    defaults delete -globalDomain AppleInterfaceStyle || true # Don't fail script if item already missing
+else
+    defaults write -globalDomain AppleInterfaceStyle -string 'Dark'
+fi
+
+defaults write -globalDomain AppleInterfaceStyleSwitchesAutomatically -bool true # Dark mode - Auto

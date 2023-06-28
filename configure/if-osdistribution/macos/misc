@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# Use 'defaults read > /tmp/before; defaults read /tmp/after; diff /tmp/before /tmp/after' to find preferences
+
+# Keyboard
+defaults write -globalDomain InitialKeyRepeat -int 10
+defaults write -globalDomain KeyRepeat -int 1
+
+# Misc
+defaults write -globalDomain AppleAccentColor -int 0 # https://stackoverflow.com/a/51695756/27641
+defaults write -globalDomain AppleHighlightColor -string "1.000000 0.733333 0.721569 Red"
+defaults write -globalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+defaults write -globalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write -globalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write -globalDomain NSQuitAlwaysKeepsWindows -bool false
+defaults write -globalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write -globalDomain PMPrintingExpandedStateForPrint2 -bool true
+defaults write -globalDomain com.apple.trackpad.rotateGesture -int 0
+defaults write -globalDomain com.apple.trackpad.threeFingerDragGesture -int 1
+defaults write -globalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
+defaults write -globalDomain com.apple.trackpad.threeFingerTapGesture -int 0
+defaults write -globalDomain com.apple.trackpad.threeFingerVertSwipeGesture -int 1
+defaults write com.apple.Accessibility EnhancedBackgroundContrastEnabled -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadHorizSwipeGesture -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDraft -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadVertSwipeGesture -int 1
+defaults write com.apple.Bluetooth RemoteWakeEnabled -bool false
+defaults write com.apple.CrashReporter DialogType none
+defaults write com.apple.ImageCapture disableHotPlug -bool YES
+defaults write com.apple.PowerChime ChimeOnAllHardware -bool true && open /System/Library/CoreServices/PowerChime.app
+defaults write com.apple.TextEdit RichText -int 0
+defaults write com.apple.airplay showInMenuBarIfPresent -int 0
+defaults write com.apple.appstore ShowDebugMenu -bool true
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true # Don't write .DS_Store on remote volumes
+defaults write com.apple.dock autohide -int 1
+defaults write com.apple.dock mru-spaces -int 0
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -int 1
+defaults write com.apple.finder AppleShowAllFiles -bool false
+defaults write com.apple.finder FXPreferredViewStyle Nlsv
+defaults write com.apple.finder FXRemoveOldTrashItems -int 1 # Delete items from Trash/Bin after 30 days
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder QLEnableTextSelection -bool true
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+defaults write com.apple.finder ShowRecentTags -bool false
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+defaults write com.apple.iTunes DeviceBackupsDisabled -bool true
+defaults write com.apple.iTunes dontAutomaticallySyncIPods -bool true
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool false
+defaults write com.apple.safari IncludeDebugMenu -bool YES
+defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu"
+defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool false
+defaults write org.pqrs.Karabiner isStatusbarEnable -bool false
+
+killall Finder
