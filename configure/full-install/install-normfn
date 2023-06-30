@@ -26,5 +26,7 @@ if ! command -v "normfn" >/dev/null 2>&1; then
 fi
 
 if [[ ${OSDISTRIBUTION} == "macos" ]]; then
-    pip3 install coloredlogs
+    if ! pip3 show coloredlogs >/dev/null; then
+        pip3 install coloredlogs
+    fi
 fi
