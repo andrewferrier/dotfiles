@@ -4,7 +4,11 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DISTRIBUTION=$(cat /etc/*-release | grep ^ID | sed 's/.*=//')
+DISTRIBUTION=$(uname -s)
+
+if [[ $DISTRIBUTION != 'Darwin' ]]; then
+    DISTRIBUTION=$(cat /etc/*-release | grep ^ID | sed 's/.*=//')
+fi
 
 if [[ $DISTRIBUTION == 'arch' ]]; then
     PIPX="pipx install --include-deps"
