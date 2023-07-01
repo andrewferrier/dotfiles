@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -o errexit
+
+if [[ -z "${FULL_INSTALL}" ]]; then
+    # Required for imapfilter
+    luarocks install --local base64
+fi
