@@ -6,7 +6,6 @@ import sys
 import subprocess
 import logging
 from tqdm import tqdm
-from pathlib import Path
 
 logger = logging.getLogger("maildir-spamfilter")
 logger.propagate = False
