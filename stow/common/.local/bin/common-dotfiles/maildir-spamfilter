@@ -68,15 +68,20 @@ if __name__ == "__main__":
         message = mbox.get_message(message_key)
         subject = message["Subject"]
 
-        if is_spam(message.as_bytes(), subject):
-            spam_count += 1
+        try:
+            message_as_bytes = message.as_bytes()
 
-            if args.dry_run:
-                spam_mbox.add(message)
+            if is_spam(message_as_bytes, subject):
+                spam_count += 1
+
+                if args.dry_run:
+                    spam_mbox.add(message)
+                else:
+                    mbox.remove(message_key)
+                    spam_mbox.add(message)
             else:
-                mbox.remove(message_key)
-                spam_mbox.add(message)
-        else:
+                non_spam_count += 1
+        except UnicodeEncodeError:
             non_spam_count += 1
 
         if args.progress:
