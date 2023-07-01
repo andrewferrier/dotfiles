@@ -2,6 +2,7 @@
 
 alias docker-cleanup="docker container prune -f ; docker image prune -f ; docker volume prune -f ; docker network prune -f"
 alias docker-rmi-interactive="docker images | sed -E 's%([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+).*%\\1:\\2 \\3%g' | tail -n +2 | sort -r | fzf -d' ' -m --with-nth=1 | cut -d' ' -f2 | xargs -t docker image rm"
+alias docs-python="open /usr/share/doc/python/html/index.html &"
 alias external-ip="curl -4 ifconfig.co"
 alias icat='kitty +kitten icat'
 alias rm-broken-links='find . -xtype l | fzf -m | xargs rm'
