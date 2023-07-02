@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+PROFILE_DIR=$(find "${HOME}/.librewolf/" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.default-(release|default|esr)')
+
+mkdir -p "${PROFILE_DIR}/chrome"
+
+ln -sf "${HOME}/.config/qutebrowser/all.css" "${PROFILE_DIR}/chrome/userContent.css"
