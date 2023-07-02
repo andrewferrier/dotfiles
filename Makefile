@@ -1,10 +1,11 @@
-.PHONY: pkgs stow
+.PHONY: pkgs stow pre-stow
 
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
 CONFIGURE := $(MKFILE_PATH)/configure
 STOW := $(MKFILE_PATH)/stow
+PRE_STOW := $(MKFILE_PATH)/pre-stow
 
 ifeq ($(shell uname | grep -i linux),)
 	OS := macos
@@ -27,13 +28,9 @@ pkgs:
 
 # STOW
 
-pre-stow-macos:
-
-pre-stow-linux:
-	mkdir -p ${HOME}/.config/systemd/user
-
-pre-stow: pre-stow-$(OS)
-	mkdir -p ${HOME}/.config ${HOME}/.local/share ${HOME}/.local/state
+pre-stow:
+	run-directory $(PRE_STOW)/common
+	run-directory $(PRE_STOW)/$(OS)
 
 stow: pre-stow
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common

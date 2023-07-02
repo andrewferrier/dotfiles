@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+mkdir -p "${HOME}/.config" "${HOME}/.local/share" "${HOME}/.local/state"
