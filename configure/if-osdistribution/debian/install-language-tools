@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -o errexit
+
+LOCAL_BIN=${HOME}/.local/bin
+
+if [[ -n "${FULLINSTALL}" ]]; then
+    "${LOCAL_BIN}/eget" --upgrade-only --to "${LOCAL_BIN}" JohnnyMorganz/StyLua
+    "${LOCAL_BIN}/eget" --upgrade-only --to "${LOCAL_BIN}" --asset=64-bit errata-ai/vale
+fi
