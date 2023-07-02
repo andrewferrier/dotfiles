@@ -2,7 +2,7 @@
 
 set -o errexit
 
-if [[ -z "${FULLINSTALL}" ]]; then
+if [[ -n "${FULLINSTALL}" ]]; then
     # Required for imapfilter
     luarocks install --local base64
 fi
