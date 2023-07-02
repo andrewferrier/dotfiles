@@ -30,7 +30,7 @@ pkgs:
 pre-stow-macos:
 
 pre-stow-linux:
-	mkdir -p ${HOME}/.config/system/user
+	mkdir -p ${HOME}/.config/systemd/user
 
 pre-stow: pre-stow-$(OS)
 	mkdir -p ${HOME}/.config ${HOME}/.local/share ${HOME}/.local/state
