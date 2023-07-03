@@ -222,35 +222,6 @@ function _G.Statusline_LSPProgress()
     return ""
 end
 
-function _G.Statusline_Search()
-    if vim.v.hlsearch == 1 then
-        -- searchcount can fail e.g. if unbalanced braces in search pattern
-        local ok, searchcount = pcall(vim.fn.searchcount)
-
-        if ok and searchcount["total"] and searchcount["total"] > 0 then
-            return LEFT_BRACE
-                .. "⚲ "
-                .. searchcount["current"]
-                .. "∕"
-                .. searchcount["total"]
-                .. RIGHT_BRACE
-                .. " "
-        end
-    end
-
-    return ""
-end
-
-function _G.Statusline_MacroRecording()
-    local recording_register = vim.fn.reg_recording()
-
-    if recording_register == "" then
-        return ""
-    else
-        return LEFT_BRACE .. "rec @" .. recording_register .. RIGHT_BRACE .. " "
-    end
-end
-
 local RESET_HIGHLIGHTING = "%*"
 local TRUNCATOR_POSITION = "%<"
 local ALIGN_RHS = "%="
@@ -275,8 +246,6 @@ if vim.fn.has("nvim-0.10.0") == 0 then
     statusline = statusline .. "%{v:lua.Statusline_LSPProgress()}"
 end
 
-statusline = statusline .. "%{v:lua.Statusline_Search()}"
-statusline = statusline .. "%{v:lua.Statusline_MacroRecording()}"
 statusline = statusline .. "%{v:lua.Statusline_DiagnosticStatus()}"
 statusline = statusline .. "%{v:lua.Statusline_SpellingErrorCount()}"
 statusline = statusline .. "%{v:lua.Statusline_GitSigns()}"
