@@ -29,6 +29,9 @@ xset b off
 # Speed up keyboard a little
 xset r rate 250 60
 
+# Disable touchscreen
+xinput | grep -i 'touch system' | grep -Po 'id=\d+' | cut -d= -f2 | xargs xinput disable
+
 amixer set Master 0
 amixer set Master unmute
 amixer set Speaker unmute
