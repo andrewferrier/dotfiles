@@ -40,15 +40,9 @@ stow: pre-stow
 
 # CONFIGURE
 
-configure: configure-all configure-if-osdistribution configure-if-command configure-fullinstall
-
-configure-all:
+configure: configure-fullinstall
 	run-directory $(CONFIGURE)/all
-
-configure-if-osdistribution:
 	run-directory $(CONFIGURE)/if-osdistribution/$(OSDISTRIBUTION)
-
-configure-if-command:
 	run-if-command $(CONFIGURE)/if-command-after
 
 ifeq ($(origin FULLINSTALL),undefined)
