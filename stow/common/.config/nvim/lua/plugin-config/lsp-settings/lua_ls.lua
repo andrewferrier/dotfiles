@@ -10,6 +10,9 @@ return {
         "--metapath",
         META_PATH,
     },
+    on_attach = function(_, bufnr)
+        vim.lsp.inlay_hint(bufnr, true)
+    end,
     settings = {
         Lua = {
             -- Formatting is disabled because it doesn't reflow nicely; we use
@@ -28,7 +31,7 @@ return {
 
                 checkThirdParty = false,
             },
-            -- hint = { enable = true }, -- these hints seem fairly useless for now
+            hint = { arrayIndex = "Disable", enable = true },
         },
     },
 }

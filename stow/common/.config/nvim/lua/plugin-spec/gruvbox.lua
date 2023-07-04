@@ -14,6 +14,7 @@ return {
 
         local overrides = {
             TermCursorNC = { bg = "#00DD00" },
+            LspInlayHint = { link = 'StatusLineNC' },
 
             -- See https://github.com/ellisonleao/gruvbox.nvim/issues/230#issuecomment-1493883602
             GruvboxAquaSign = { bg = "" },
