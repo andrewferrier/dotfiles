@@ -39,13 +39,7 @@ return {
             mappings = { find = "", find_left = "", highlight = "" },
         })
 
-        local hipatterns = require("mini.hipatterns")
-
-        hipatterns.setup({
-            highlighters = {
-                hex_color = hipatterns.gen_highlighter.hex_color(),
-            },
-        })
+        require("plugin-config.mini.hipatterns")
     end,
     version = "*",
 }

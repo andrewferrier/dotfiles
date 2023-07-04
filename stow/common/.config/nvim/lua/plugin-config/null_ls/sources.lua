@@ -2,10 +2,6 @@ local M = {}
 
 local null_ls = require("null-ls")
 
-local custom_diagnostics = require("plugin-config.null_ls.custom_diagnostics")
-
-local SEVERITIES = require("null-ls.helpers.diagnostics").severities
-
 M.sources = {
     -- Code actions
 
@@ -134,16 +130,6 @@ M.sources = {
     null_ls.builtins.diagnostics.vale,
     null_ls.builtins.diagnostics.yamllint,
     null_ls.builtins.diagnostics.zsh,
-    custom_diagnostics.diagnostics_by_line({
-        name = "todo-fixme",
-        -- disabled for most filetypes as treesitter highlighting now takes care
-        -- of that.
-        filetypes = { "asciidoc", "latex", "markdown", "rst", "tex", "text" },
-        fn = function(match_regex)
-            match_regex(vim.regex("TODO"), "TODO", SEVERITIES.hint)
-            match_regex(vim.regex("FIXME"), "FIXME", SEVERITIES.hint)
-        end,
-    }),
 
     require("typescript.extensions.null-ls.code-actions"),
 }
