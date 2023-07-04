@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Requires https://github.com/smudge/nightlight; this should be installed by Brewfile
+nightlight schedule start

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Adaptation of https://blog.fox21.at/2015/11/20/control-cmus-with-media-keys.html.
+sudo launchctl disable system/com.apple.rcd.plist
