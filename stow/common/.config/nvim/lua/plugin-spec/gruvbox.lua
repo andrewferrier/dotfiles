@@ -13,7 +13,6 @@ return {
         end
 
         local overrides = {
-            HydraHint = { link = "TabLineSel" },
             TermCursorNC = { bg = "#00DD00" },
 
             -- See https://github.com/ellisonleao/gruvbox.nvim/issues/230#issuecomment-1493883602
