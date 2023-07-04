@@ -13,7 +13,6 @@ return {
         end
 
         local overrides = {
-            FidgetTitle = { link = "FidgetTask" },
             HydraHint = { link = "TabLineSel" },
             TermCursorNC = { bg = "#00DD00" },
 
