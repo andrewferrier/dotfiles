@@ -81,6 +81,7 @@ cask "hammerspoon"
 cask "karabiner-elements"
 cask "keepassxc"
 cask "kitty"
+cask "notunes"
 cask "whatsapp"
 
 # vim: set filetype=ruby:

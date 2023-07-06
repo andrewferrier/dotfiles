@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+open -gj /Applications/noTunes.app
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/noTunes.app", hidden:false}'
+defaults write digital.twisted.noTunes hideIcon 1
