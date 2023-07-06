@@ -4,3 +4,5 @@ LOCAL_BIN=${HOME}/.local/bin
 
 curl --silent --location https://github.com/Narasimha1997/fake-sms/blob/main/bin/fake-sms?raw=true >"${LOCAL_BIN}/fake-sms"
 curl --silent --location https://git.io/tmpmail >"${LOCAL_BIN}/tmpmail"
+
+chmod +x "${LOCAL_BIN}/fake-sms" "${LOCAL_BIN}/tmpmail"
