@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# https://apple.stackexchange.com/a/178488
+cupsctl --no-share-printers
