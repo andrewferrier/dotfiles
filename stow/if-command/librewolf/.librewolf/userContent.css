@@ -1,0 +1,13 @@
+/* reddit.com */
+div.promotedlink {
+    display: none;
+}
+
+div[slot='cookie-banner-text'] {
+    display: none;
+}
+
+/* tfl.gov.uk */
+div.top-banner-advert {
+    display: none;
+}
