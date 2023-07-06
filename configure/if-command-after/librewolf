@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 
-PROFILE_DIR=$(find "${HOME}/.librewolf/" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.default-(release|default|esr)')
+if [[ $(uname -s) == Linux* ]]; then
+    FIND_CMD="find"
+    BASE_DIR="${HOME}/.librewolf/"
+else
+    FIND_CMD="gfind"
+    BASE_DIR="${HOME}/Library/Application Support/librewolf/Profiles"
+fi
+
+PROFILE_DIR=$(${FIND_CMD} "${BASE_DIR}" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.default-(release|default|esr)')
 
 mkdir -p "${PROFILE_DIR}/chrome"
 
-ln -sf "${HOME}/.config/qutebrowser/all.css" "${PROFILE_DIR}/chrome/userContent.css"
+ln -sf "${HOME}/.librewolf/userContent.css" "${PROFILE_DIR}/chrome/userContent.css"
