@@ -16,7 +16,7 @@ if [[ ${OSTYPE} == darwin* ]]; then
     alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
 else
     alias listening='sudo ss --listening --tcp --udp --numeric --process'
-    alias monitor-wifi='watch "nmcli --colors yes dev wifi list"'
+    alias monitor-wifi='watch "nmcli --colors yes device wifi list"'
     alias sparseness="find . -type f -printf '%S\t%p\n' | column -t -s $'\t' | sort -n -r"
 fi
 
