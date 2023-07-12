@@ -34,6 +34,7 @@ defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDraft -int 1
 defaults write com.apple.AppleMultitouchTrackpad TrackpadVertSwipeGesture -int 1
 defaults write com.apple.Bluetooth RemoteWakeEnabled -bool false
 defaults write com.apple.CrashReporter DialogType none
+defaults write com.apple.Dock showhidden -boolean yes # Show greyed icon for hidden windows
 defaults write com.apple.ImageCapture disableHotPlug -bool YES
 defaults write com.apple.PowerChime ChimeOnAllHardware -bool true && open /System/Library/CoreServices/PowerChime.app
 defaults write com.apple.TextEdit RichText -int 0
@@ -65,3 +66,4 @@ defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool
 defaults write org.pqrs.Karabiner isStatusbarEnable -bool false
 
 killall Finder
+killall Dock
