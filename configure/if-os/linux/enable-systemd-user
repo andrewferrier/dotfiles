@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+BASEDIR=${HOME}/.config/systemd/user
+
+if [[ -d "${BASEDIR}" ]]; then
+    for UNIT in "${BASEDIR}"/*.service; do
+        UNIT_NOEXT="${UNIT%.*}"
+
+        if [[ -f $UNIT_NOEXT.timer ]]; then
+            echo "Enabling timer $UNIT_NOEXT.timer"
+            systemctl --user enable --now "$UNIT_NOEXT.timer"
+        elif [[ ! $UNIT_NOEXT =~ "@" ]]; then
+            echo "Enabling service $UNIT_NOEXT.service"
+            systemctl --user enable --now "$UNIT_NOEXT.service"
+        else
+            echo "Ignoring service $UNIT_NOEXT.service"
+        fi
+    done
+fi

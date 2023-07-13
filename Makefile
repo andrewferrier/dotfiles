@@ -42,6 +42,7 @@ stow: pre-stow
 
 configure: configure-fullinstall
 	run-directory $(CONFIGURE)/all
+	run-directory $(CONFIGURE)/if-os/$(OS)
 	run-directory $(CONFIGURE)/if-osdistribution/$(OSDISTRIBUTION)
 	run-if-command $(CONFIGURE)/if-command-after
 
