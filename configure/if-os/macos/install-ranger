@@ -8,4 +8,4 @@ set -o nounset
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 pip3 install --user --upgrade ranger-fm
-patch --forward "${HOME}"/Library/Python/3.*/lib/python/site-packages/ranger/core/loader.py "${SCRIPT_DIR}/ranger_loader.patch" || true
+patch --forward "${HOME}"/Library/Python/3.*/lib/python/site-packages/ranger/core/loader.py "${SCRIPT_DIR}/patches/ranger_loader.patch" || true

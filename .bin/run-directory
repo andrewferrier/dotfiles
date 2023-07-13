@@ -9,8 +9,10 @@ GREY=$(tput setaf 7)
 
 ROOT_DIR=$(realpath "${1:?Root dir not provided}")
 
-for file in "${ROOT_DIR}"/*; do
-    printf "${GREY}Running %s...${NORMAL}\n" "${file}"
-    ${file}
-    printf "${GREY}${file} complete.${NORMAL}\n"
+for file_or_dir in "${ROOT_DIR}"/*; do
+    if [[ -f $file_or_dir ]]; then
+        printf "${GREY}Running %s...${NORMAL}\n" "${file_or_dir}"
+        ${file_or_dir}
+        printf "${GREY}${file_or_dir} complete.${NORMAL}\n"
+    fi
 done
