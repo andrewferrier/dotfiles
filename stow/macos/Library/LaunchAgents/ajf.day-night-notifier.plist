@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>ajf.day-night-notifier</string>
+    <key>KeepAlive</key>
+    <true/>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/sh</string>
+        <string>-c</string>
+        <string>$HOME/.local/bin/macos/day-night-notifier</string>
+        <string>$HOME/.local/bin/common-dotfiles/day-night-update</string>
+    </array>
+    <key>StandardErrorPath</key>
+    <string>$HOME/Library/Logs/launchagent/day-night-notifier.err</string>
+    <key>StandardOutPath</key>
+    <string>$HOME/Library/Logs/launchagent/day-night-notifier.log</string>
+    <key>Nice</key>
+    <integer>10</integer>
+  </dict>
+</plist>
