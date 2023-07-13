@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Not installed in ~/.config/systemd/user
+
+systemctl enable --user --now mpd
+systemctl enable --user --now mpd-notification
