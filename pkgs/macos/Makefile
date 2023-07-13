@@ -1,6 +1,9 @@
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-.PHONY: brew_file brew_install
+all: mas brew_file
+
+mas: brew_file
+	mas upgrade
 
 brew_file: brew_install brew_cleanup
 	brew upgrade
