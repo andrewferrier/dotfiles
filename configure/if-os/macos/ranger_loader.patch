@@ -1,0 +1,25 @@
+--- loader.py	2023-02-06 18:35:32.000000000 +0000
++++ /tmp/loader.py	2023-02-06 18:35:19.000000000 +0000
+@@ -210,21 +210,21 @@
+                     robjs, _, _ = select.select(selectlist, [], [], 0.03)
+                     if robjs:
+                         robjs = robjs[0]
+                         if robjs == process.stderr:
+                             read = robjs.readline()
+                             if py3:
+                                 read = safe_decode(read)
+                             if read:
+                                 self.fm.notify(read, bad=True)
+                         elif robjs == process.stdout:
+-                            read = robjs.read(512)
++                            read = os.read(robjs.fileno(), 512)
+                             if read:
+                                 if read_stdout is None:
+                                     read_stdout = read
+                                 else:
+                                     read_stdout += read
+                 except select.error:
+                     sleep(0.03)
+             if not self.silent:
+                 for line in process.stderr:
+                     if py3:
