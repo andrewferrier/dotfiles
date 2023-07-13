@@ -1,3 +1,10 @@
+/* ALL */
+
+textarea {
+    min-width: 50ex !important;
+    min-height: 12em !important;
+}
+
 /* reddit.com */
 div.promotedlink {
     display: none;
