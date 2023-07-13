@@ -16,9 +16,9 @@
         <string>$HOME/.local/bin/common-dotfiles/day-night-update</string>
     </array>
     <key>StandardErrorPath</key>
-    <string>$HOME/Library/Logs/launchagent/day-night-notifier.err</string>
+    <string>/tmp/day-night-notifier.err</string>
     <key>StandardOutPath</key>
-    <string>$HOME/Library/Logs/launchagent/day-night-notifier.log</string>
+    <string>/tmp/day-night-notifier.log</string>
     <key>Nice</key>
     <integer>10</integer>
   </dict>
