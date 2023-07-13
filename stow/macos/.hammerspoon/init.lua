@@ -150,8 +150,4 @@ launch("B", "/Applications/Firefox.app")
 
 web_search("S", "DuckDuckGo Search:", "https://duckduckgo.com/?q=")
 
-hs.urlevent.bind("vimpc", function(eventName, params)
-    open_terminal(HOMEBREW_BIN .. "/vimpc")
-end)
-
 hs.alert.show("Hammerspoon loaded")
