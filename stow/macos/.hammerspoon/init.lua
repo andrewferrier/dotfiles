@@ -109,9 +109,6 @@ hs.hotkey.bind(PREFIX_ACTION, "O", function()
     open_bash_terminal(HOME .. "/bookmarks/bin/bookmark-select-and-open")
 end)
 
--- Enable hot corners by default
-hs.execute("$HOME/.local/bin/macos/hot-corners -e")
-
 hs.hotkey.bind(PREFIX_ACTION, "U", function()
     hs.osascript.applescript([[tell application "System Events"
     tell process "Webex Meetings"

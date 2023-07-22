@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+set -o errexit
+set -o nounset
+
+CORNER=4
+MODIFIER=0
+
+defaults write com.apple.dock wvous-bl-corner -int "${CORNER}"
+defaults write com.apple.dock wvous-bl-modifier -int "${MODIFIER}"
+defaults write com.apple.dock wvous-br-corner -int "${CORNER}"
+defaults write com.apple.dock wvous-br-modifier -int "${MODIFIER}"
+defaults write com.apple.dock wvous-tl-corner -int "${CORNER}"
+defaults write com.apple.dock wvous-tl-modifier -int "${MODIFIER}"
+defaults write com.apple.dock wvous-tr-corner -int "${CORNER}"
+defaults write com.apple.dock wvous-tr-modifier -int "${MODIFIER}"
+killall Dock
+terminal-notifier -message 'Hot Corners enabled!'
