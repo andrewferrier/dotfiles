@@ -30,7 +30,7 @@ xset b off
 xset r rate 250 60
 
 # Disable touchscreen
-xinput | grep -i 'touch system' | grep -Po 'id=\d+' | cut -d= -f2 | xargs xinput disable
+xinput disable "Raydium Corporation Raydium Touch System"
 
 amixer set Master 0
 amixer set Master unmute
