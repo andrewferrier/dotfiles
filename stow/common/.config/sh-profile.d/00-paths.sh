@@ -56,12 +56,10 @@ pupdate_append_globxxx() {
     # based on https://stackoverflow.com/a/4264351
     # shellcheck disable=SC2086
     if stat ${glob} >/dev/null 2>/dev/null; then
-        IFS=$'\n'
         # shellcheck disable=SC2044
         for dir in $(find -L ${glob} -maxdepth 0 -type d); do
             pupdate_append_singlex "${dir}"
         done
-        unset IFS
     fi
 }
 
