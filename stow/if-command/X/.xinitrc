@@ -29,8 +29,9 @@ xset b off
 # Speed up keyboard a little
 xset r rate 250 60
 
-# Disable touchscreen
+# Disable touchscreen/Trackpoint
 xinput disable "Raydium Corporation Raydium Touch System"
+xinput disable "TPPS/2 Elan TrackPoint"
 
 amixer set Master 0
 amixer set Master unmute
