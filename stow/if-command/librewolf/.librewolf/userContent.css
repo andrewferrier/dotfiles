@@ -1,5 +1,4 @@
 /* ALL */
-
 textarea {
     min-width: 50ex !important;
     min-height: 12em !important;
@@ -16,5 +15,14 @@ div[slot="cookie-banner-text"] {
 
 /* tfl.gov.uk */
 div.top-banner-advert {
+    display: none;
+}
+
+/* youtube.com */
+div.player-ads {
+    display: none;
+}
+
+div.ytd-in-feed-ad-layout-renderer {
     display: none;
 }
