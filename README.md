@@ -53,4 +53,8 @@
 
     eyeD3 --add-image "cover.jpg:FRONT_COVER" test.mp3 | add image to MP3
 
+## General Configuration Help
+
+    * MacOS - <https://git.herrbischoff.com/awesome-macos-command-line/about/>
+
 <!-- vim: set nospell: -->
