@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-readonly PLISTBUDDY=/usr/libexec/PlistBuddy
-
-SERVICE_IDENTIFIER=$1
-
-${PLISTBUDDY} -c "Delete :NSServicesStatus:'${SERVICE_IDENTIFIER}':enabled_context_menu" ~/Library/Preferences/pbs.plist || true
-${PLISTBUDDY} -c "Delete :NSServicesStatus:'${SERVICE_IDENTIFIER}':enabled_services" ~/Library/Preferences/pbs.plist || true
