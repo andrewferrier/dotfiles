@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+set -o errexit
+
+xrandr --output DP2 --auto
+xrandr --output eDP1 --off
