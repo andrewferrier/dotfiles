@@ -1,13 +1,3 @@
-local function install_treesitter_parsers()
-    -- Neither of these are sync, but that shouldn't matter as there is no
-    -- intersection in the parsers they will touch
-    vim.cmd.TSUpdate()
-    -- In practice TSInstall may not install new parsers until after NeoVim is
-    -- restarted. I don't consider that a major problem, just means we might lag
-    -- behind a bit.
-    vim.cmd.TSInstall("all")
-end
-
 local function lsp_supports_rename(bufnr)
     for _, client in pairs(vim.lsp.buf_get_clients(bufnr)) do
         if client.server_capabilities.renameProvider then
@@ -39,6 +29,8 @@ end
 
 local configure = function()
     require("nvim-treesitter.configs").setup({
+        ensure_installed = "all",
+
         highlight = {
             enable = true,
             disable = function()
@@ -64,7 +56,6 @@ end
 
 return {
     "nvim-treesitter/nvim-treesitter",
-    build = install_treesitter_parsers,
     config = configure,
     -- Re-enable once on NeoVim 0.10
     -- version = "*",
