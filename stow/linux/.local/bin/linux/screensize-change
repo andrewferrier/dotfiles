@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-
-set -o errexit
-
-variety -q 2>/dev/null || true
-nohup sh -c "variety 2>&1 | logger -t '${USER}-variety'" >/dev/null 2>/dev/null &

@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+set -o errexit
+set -o nounset
+
+# Restart variety
+variety -q 2>/dev/null || true
+nohup sh -c "variety 2>&1 | logger -t '${USER}-variety'" >/dev/null 2>/dev/null &
+
+# Change screen blanking timeout
+if xrandr | grep " connected " | awk '{ print$1 }' | grep DP2 > /dev/null; then
+    # External monitor connected
+    xset s 3600 3600
+else
+    # External monitor disconnected
+    xset s 60 60
+fi
