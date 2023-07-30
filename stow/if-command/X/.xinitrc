@@ -10,6 +10,7 @@ setxkbmap gb
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I"${HOME}" ~/.Xresources
 
+xset s 60 60
 xscreensaver -no-splash &
 xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
 
