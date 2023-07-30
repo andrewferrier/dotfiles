@@ -5,6 +5,7 @@ alias docker-rmi-interactive="docker images | sed -E 's%([^[:space:]]+)[[:space:
 alias docs-python="open /usr/share/doc/python/html/index.html &"
 alias external-ip="curl -4 ifconfig.co"
 alias icat='kitty +kitten icat'
+alias reenable-printer='lpq | head -1 | cut -d" " -f1 | xargs lpadmin -E -p'
 alias rm-broken-links='find . -xtype l | fzf -m | xargs rm'
 alias socks-ssh-setup='ssh -f -N -D 1080 '
 alias speedtest="docker run --rm --net=host docker.io/tianon/speedtest --accept-license --accept-gdpr"
