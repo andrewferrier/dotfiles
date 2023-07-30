@@ -1,6 +1,9 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -o errexit
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
 xrandr --output DP2 --auto
 xrandr --output eDP1 --off
+"${SCRIPT_DIR}/screensize-change"
