@@ -6,6 +6,7 @@ brew "atool"
 brew "automake"
 brew "bash" # for improved performance
 brew "bat"
+brew "bitwarden-cli"
 brew "blueutil" # for Hammerspoon
 brew "coreutils"
 brew "curl"
