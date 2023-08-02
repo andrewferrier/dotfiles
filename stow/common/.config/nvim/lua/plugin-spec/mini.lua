@@ -30,6 +30,8 @@ return {
             undo = { suffix = "" }, -- Undo causes a lot of flicker with cmdheight=0
         })
 
+        require("plugin-config.mini.clue")
+
         require("mini.comment").setup()
 
         -- Will be replaced with https://github.com/neovim/neovim/issues/16339
@@ -41,5 +43,6 @@ return {
 
         require("plugin-config.mini.hipatterns")
     end,
-    version = "*",
+    -- Uncomment once mini.clue promoted to stable
+    -- version = "*",
 }
