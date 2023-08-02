@@ -27,7 +27,6 @@ return {
             jump = { suffix = "" },
             oldfile = { suffix = "" },
             window = { suffix = "" },
-            undo = { suffix = "" }, -- Undo causes a lot of flicker with cmdheight=0
         })
 
         require("plugin-config.mini.clue")
