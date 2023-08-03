@@ -18,7 +18,7 @@ redshift -v | logger -t "${USER}-redshift" &
 unclutter --ignore-scrolling --jitter 10 --fork
 picom --daemon
 dunst &
-${HOME}/.local/bin/linux/screensize-change
+"${HOME}/.local/bin/linux/screensize-change"
 
 # Automatically synchronize PRIMARY and CLIPBOARD
 autocutsel -fork &
