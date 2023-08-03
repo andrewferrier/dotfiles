@@ -31,6 +31,8 @@ miniclue.setup({
         { mode = "n", keys = "]" },
         { mode = "x", keys = "[" },
         { mode = "x", keys = "]" },
+
+        { mode = "n", keys = "cv" },
     },
     clues = {
         miniclue.gen_clues.builtin_completion(),
