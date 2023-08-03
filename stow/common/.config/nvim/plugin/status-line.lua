@@ -51,10 +51,6 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",¬D"
         end
 
-        if not vim.treesitter.highlighter.active[bufnr] then
-            return_string = return_string .. ",¬T"
-        end
-
         if not vim.wo.list and not vim.bo.readonly then
             return_string = return_string .. ",¬list"
         end
