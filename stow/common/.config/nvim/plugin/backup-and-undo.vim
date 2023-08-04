@@ -13,9 +13,4 @@ augroup END
 
 set undofile
 
-if has('nvim-0.5.0')
-    set shada='100,s10,/1000,:1000,h
-else
-    " Remember a max of 25 files so that the oldfiles prompt doesn't overflow
-    set shada='25,s10,/1000,:1000,h
-endif
+set shada='100,s10,/1000,:1000,h

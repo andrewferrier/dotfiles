@@ -16,8 +16,3 @@ iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>
 " This generic behaviour for rename will be overwritten by treesitter.lua where
 " supported. Don't use 'cxr' in visual mode as it will block 'c'.
 nnoremap cxr :%s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>
-
-if ! has('nvim-0.5.0')
-    " Will be overwritten by fzf.lua configuration
-    nnoremap <silent> cvf :browse oldfiles<CR>
-end

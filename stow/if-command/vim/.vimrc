@@ -14,3 +14,9 @@ call plug#end()
 
 set nowrap
 set number
+set undofile
+
+nnoremap <silent> cvf :browse oldfiles<CR>
+
+" Remember a max of 25 files so that the oldfiles prompt doesn't overflow
+set viminfo='25,s10,/1000,:1000,h
