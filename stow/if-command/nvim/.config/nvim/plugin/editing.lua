@@ -25,7 +25,7 @@ vim.keymap.set(
 -- Move to appropriate indent on 'i'. See
 -- https://www.reddit.com/r/neovim/comments/12rqyl8/comment/jgvs6im/?utm_source=share&utm_medium=web2x&context=3
 local move_to_indent = function()
-    if #vim.fn.getline(".") == 0 then
+    if #vim.fn.getline(vim.fn.line(".")) == 0 then
         return [["_cc]]
     else
         return "i"
