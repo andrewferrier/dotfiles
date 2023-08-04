@@ -168,6 +168,7 @@
 *   Replace 'jobstart' with vim.system
 *   Once 0.10 out, consider replacing gruvbox with retrobox
 *   Fix debugprint error in e.g. yaml file because it doesn't have a configuration
+*   Add keybinding to toggle inlay hints
 
 ## Presentation Ideas
 
