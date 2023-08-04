@@ -32,6 +32,14 @@ local function lsp_document_format()
     vim.notify("Formatted document using LSP.")
 end
 
+M.inlay_hints = function(bufnr)
+    vim.lsp.inlay_hint(bufnr, true)
+
+    vim.keymap.set("n", "yoi", function()
+        vim.lsp.inlay_hint(bufnr, nil)
+    end, { buffer = bufnr, desc = "Toggle inlay hints" })
+end
+
 M.formatting = function(bufnr)
     vim.keymap.set(
         "n",

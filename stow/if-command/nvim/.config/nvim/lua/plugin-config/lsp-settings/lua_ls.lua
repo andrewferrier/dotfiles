@@ -11,7 +11,7 @@ return {
         META_PATH,
     },
     on_attach = function(_, bufnr)
-        vim.lsp.inlay_hint(bufnr, true)
+        require('lsp-keybindings').inlay_hints(bufnr)
     end,
     settings = {
         Lua = {
