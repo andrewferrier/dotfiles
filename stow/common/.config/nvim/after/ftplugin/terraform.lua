@@ -5,6 +5,4 @@ require("filetype.section").setup("^data\\|resource", "^}$")
 
 require("treesitter-terraform-doc").setup({})
 
-vim.keymap.set("n", "K", function()
-    vim.cmd.OpenDoc()
-end, { buffer = 0 })
+vim.keymap.set("n", "K", vim.cmd.OpenDoc, { buffer = 0 })
