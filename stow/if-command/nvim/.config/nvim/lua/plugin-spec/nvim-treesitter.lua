@@ -31,6 +31,9 @@ local configure = function()
     require("nvim-treesitter.configs").setup({
         ensure_installed = "all",
 
+        -- Ignore parsers I've had issues with and don't need
+        ignore_install = { "julia", "smali" },
+
         highlight = {
             enable = true,
             disable = function()
