@@ -2,9 +2,9 @@ local M = {}
 
 local expand_input_dir = function(dir)
     if dir then
-        return vim.fn.expand(dir, 1)
+        return vim.fn.expand(dir, true)
     else
-        return vim.fn.expand("%:p:h", 1)
+        return vim.fn.expand("%:p:h", true)
     end
 end
 
