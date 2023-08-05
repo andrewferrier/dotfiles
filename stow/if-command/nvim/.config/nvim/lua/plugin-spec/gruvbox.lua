@@ -3,6 +3,7 @@ return {
     config = function()
         local STATEFILE = vim.fn.expand("~/.cache/day-night/state-terminal")
 
+        ---@cast STATEFILE string
         if
             vim.fn.filereadable(STATEFILE)
             and vim.fn.index(vim.fn.readfile(STATEFILE), "day") >= 0

@@ -1,5 +1,7 @@
 local spelldir = vim.fn.stdpath("data") .. "/spell"
-vim.fn.mkdir(vim.fn.expand(spelldir), "p")
+local spelldir_expanded = vim.fn.expand(spelldir)
+---@cast spelldir_expanded string
+vim.fn.mkdir(spelldir_expanded, "p")
 
 vim.opt.spellfile = vim.fn.expand(spelldir .. "/en.utf-8.add")
 vim.opt.dictionary:append("/usr/share/dict/words")

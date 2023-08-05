@@ -95,7 +95,9 @@ M.is_large_file = function(bufnr)
 end
 
 M.get_filename_homedir = function()
-    return vim.fn.substitute(vim.fn.expand("%"), "^" .. vim.env.HOME, "~", "")
+    local curfile = vim.fn.expand("%")
+    ---@cast curfile string
+    return vim.fn.substitute(curfile, "^" .. vim.env.HOME, "~", "")
 end
 
 return M

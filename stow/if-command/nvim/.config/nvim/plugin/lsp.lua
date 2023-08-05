@@ -82,24 +82,27 @@ end
 
 local function lsp_callback(event)
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    local bufnr = event.buf
-    local lsp_name = client.name
-    local server_capabilities = client.server_capabilities
-    local filetype = vim.bo.filetype
 
-    vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+    if client ~= nil then
+        local bufnr = event.buf
+        local lsp_name = client.name
+        local server_capabilities = client.server_capabilities
+        local filetype = vim.bo.filetype
 
-    keybindings_formatting_check(bufnr, server_capabilities)
-    keybindings_codeaction_check(bufnr, server_capabilities)
-    keybindings_rename_check(bufnr, server_capabilities)
-    keybindings_hover_keyword(bufnr, server_capabilities, filetype)
-    keybindings_organizeimports(bufnr, lsp_name)
+        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-    vim.api.nvim_create_user_command(
-        "LspWhatCapabilities",
-        "Capture call v:lua.show_capabilities()",
-        {}
-    )
+        keybindings_formatting_check(bufnr, server_capabilities)
+        keybindings_codeaction_check(bufnr, server_capabilities)
+        keybindings_rename_check(bufnr, server_capabilities)
+        keybindings_hover_keyword(bufnr, server_capabilities, filetype)
+        keybindings_organizeimports(bufnr, lsp_name)
+
+        vim.api.nvim_create_user_command(
+            "LspWhatCapabilities",
+            "Capture call v:lua.show_capabilities()",
+            {}
+        )
+    end
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
