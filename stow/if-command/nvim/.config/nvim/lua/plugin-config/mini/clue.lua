@@ -45,6 +45,7 @@ miniclue.setup({
         miniclue.gen_clues.z(),
     },
     window = {
+        delay = 0.25,
         config = {
             width = "auto",
         },
