@@ -41,8 +41,6 @@ function _G.Statusline_FeaturesEnabled()
     local return_string = ""
 
     if vim.bo.filetype ~= "dirbuf" and vim.bo.buftype ~= "terminal" then
-        local bufnr = vim.api.nvim_get_current_buf()
-
         if require("gitsigns.config").config.show_deleted then
             return_string = return_string .. ",_̸"
         end
