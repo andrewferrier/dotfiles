@@ -37,11 +37,20 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Process a Maildir-formatted mail folder for spam detection."
     )
+
     parser.add_argument("source_folder", help="Path to the source folder")
-    parser.add_argument("spam_folder", help="Path to the spam folder")
-    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "spam_folder",
+        help="Path to the spam folder (created if doesn't exist)",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Don't remove mail from source folder",
+    )
     parser.add_argument("--verbose", action="store_true")
     parser.add_argument("--progress", action="store_true")
+
     args = parser.parse_args()
 
     mbox = mailbox.Maildir(args.source_folder, create=False)
