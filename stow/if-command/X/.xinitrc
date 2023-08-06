@@ -8,6 +8,12 @@ set -o pipefail
 # https://stackoverflow.com/a/36480692/27641.
 setxkbmap gb
 
+# Keyboard fixes; use xmodmap -pke to find current mappings
+#
+# FIXME: Do this only for the appropriate keyboard
+# Correct inaccuracy on Durgod keyboard
+# xmodmap -e "keycode 51 = asciitilde numbersign numbersign asciitilde dead_grave dead_breve dead_grave"
+
 [[ -f ~/.Xresources ]] && xrdb -merge -I"${HOME}" ~/.Xresources
 
 xset s 60 60
