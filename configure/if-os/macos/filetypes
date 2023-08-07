@@ -17,8 +17,11 @@ net.kovidgoyal.kitty      .log                                         all
 net.kovidgoyal.kitty      .mkd                                         all
 net.kovidgoyal.kitty      .mkd.txt                                     all
 net.kovidgoyal.kitty      .tex                                         all
+net.kovidgoyal.kitty      com.netscape.javascript-source               all
 net.kovidgoyal.kitty      public.json                                  all
 net.kovidgoyal.kitty      public.plain-text                            all
+net.kovidgoyal.kitty      public.python-script                         all
+net.kovidgoyal.kitty      public.yaml                                  all
 org.libreoffice.script    org.oasis-open.opendocument.spreadsheet      all
 EOF
 
