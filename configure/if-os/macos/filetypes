@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# http://superuser.com/a/341429/3021
+# http://duti.org/documentation.html
+
+# NOTES:
+# * Modifying OpenOffice spreadsheets in Excel messes up columns etc.
+
+duti <<EOF
+# bundle id               UTI/ext/MIME type                            role
+
+com.jgraph.drawio.desktop public.svg-image                             all
+com.microsoft.Excel       org.openxmlformats.spreadsheetml.sheet       all
+com.microsoft.Word        org.openxmlformats.wordprocessingml.document all
+net.kovidgoyal.kitty      .asc                                         all
+net.kovidgoyal.kitty      .log                                         all
+net.kovidgoyal.kitty      .mkd                                         all
+net.kovidgoyal.kitty      .mkd.txt                                     all
+net.kovidgoyal.kitty      .tex                                         all
+net.kovidgoyal.kitty      public.json                                  all
+net.kovidgoyal.kitty      public.plain-text                            all
+org.libreoffice.script    org.oasis-open.opendocument.spreadsheet      all
+EOF
+
+echo 'In addition, locate an extensionless document in Finder (e.g. a Makefile),'
+echo 'select "Get Info", under "Open With", change to kitty, and click "Change All"...'
