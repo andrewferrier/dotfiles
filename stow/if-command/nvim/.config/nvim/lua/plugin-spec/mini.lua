@@ -36,12 +36,20 @@ return {
         -- Will be replaced with https://github.com/neovim/neovim/issues/16339
         require("mini.misc").setup_restore_cursor()
 
+        require("mini.operators").setup({
+            evaluate = { prefix = "" },
+            exchange = { prefix = "" },
+            multiply = { prefix = "" },
+            replace = { prefix = "" },
+            sort = { prefix = "gs" },
+        })
+
         require("mini.surround").setup({
             mappings = { find = "", find_left = "", highlight = "" },
         })
 
         require("plugin-config.mini.hipatterns")
     end,
-    -- Uncomment once mini.clue promoted to stable
+    -- Uncomment once mini.clue/operators promoted to stable
     -- version = "*",
 }
