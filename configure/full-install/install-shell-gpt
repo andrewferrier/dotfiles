@@ -4,12 +4,4 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-if command -v pip3 &>/dev/null; then
-    PIP=pip3
-else
-    PIP=pip
-fi
-
-PIP_INSTALL_UPGRADE="${PIP} install --user --upgrade"
-
-$PIP_INSTALL_UPGRADE shell-gpt
+pipx install shell-gpt || pipx upgrade shell-gpt

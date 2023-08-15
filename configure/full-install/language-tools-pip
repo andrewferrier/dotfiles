@@ -4,28 +4,21 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DISTRIBUTION=$(uname -s)
-
-if [[ $DISTRIBUTION != 'Darwin' ]]; then
-    DISTRIBUTION=$(cat /etc/*-release | grep ^ID | sed 's/.*=//')
+if [[ -f /etc/debian_version ]]; then
+    # Installed via package manager
+    exit 0
 fi
 
-if [[ $DISTRIBUTION == 'arch' ]]; then
+DISTRIBUTION=$(uname -s)
+
+if [[ $DISTRIBUTION == 'Darwin' ]]; then
+    pipx install black || pipx upgrade black
+    pipx install gitlint || pipx upgrade gitlint
+    pipx install sqlfluff || pipx upgrade sqlfluff
+else
     PIPX="pipx install --include-deps"
 
-    sudo pacman -S --noconfirm python-black python-pipx
+    sudo pacman -S --noconfirm python-black
     ${PIPX} gitlint
     ${PIPX} sqlfluff
-else
-    if command -v pip3 &>/dev/null; then
-        PIP=pip3
-    else
-        PIP=pip
-    fi
-
-    PIP_INSTALL_UPGRADE="${PIP} install --user --upgrade"
-
-    ${PIP_INSTALL_UPGRADE} black
-    ${PIP_INSTALL_UPGRADE} gitlint
-    ${PIP_INSTALL_UPGRADE} sqlfluff
 fi
