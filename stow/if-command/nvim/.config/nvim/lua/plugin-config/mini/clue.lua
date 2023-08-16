@@ -33,7 +33,6 @@ miniclue.setup({
         { mode = "x", keys = "]" },
 
         { mode = "n", keys = "cv" },
-        { mode = "n", keys = "gy" },
         { mode = "n", keys = "yo" },
     },
     clues = {
