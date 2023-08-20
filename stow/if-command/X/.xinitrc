@@ -40,13 +40,6 @@ xset r rate 250 60
 xinput disable "Raydium Corporation Raydium Touch System"
 xinput disable "TPPS/2 Elan TrackPoint"
 
-amixer set Master 0
-amixer set Master unmute
-amixer set Speaker unmute
-amixer set Headphone unmute
-
-amixer set Capture 0
-
 rfkill block bluetooth
 rfkill block wwan
 
