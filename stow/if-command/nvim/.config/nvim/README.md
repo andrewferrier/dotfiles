@@ -26,6 +26,7 @@
     d'a - delete to mark "a"
     dV/xyz/-1 - delete linewise up to but not including line with pattern
     g;, g, - jump backwards/forwards through changes
+    g={motion} - evaluate
     gJ - Join lines w/o additional space, but include indent
     gM - move cursor to half-way along line
     gO - show file outline (e.g. for Man)

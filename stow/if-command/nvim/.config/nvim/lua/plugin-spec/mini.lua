@@ -37,7 +37,7 @@ return {
         require("mini.misc").setup_restore_cursor()
 
         require("mini.operators").setup({
-            evaluate = { prefix = "" },
+            evaluate = { prefix = "g=" },
             exchange = { prefix = "" },
             multiply = { prefix = "" },
             replace = { prefix = "" },
