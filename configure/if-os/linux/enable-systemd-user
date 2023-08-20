@@ -2,6 +2,21 @@
 
 BASEDIR=${HOME}/.config/systemd/user
 
+DEFAULT_DIR="${XDG_CONFIG_HOME}/systemd/user/default.target.wants"
+TIMERS_DIR="${XDG_CONFIG_HOME}/systemd/user/timers.target.wants"
+
+mkdir -p "${DEFAULT_DIR}" "${TIMERS_DIR}"
+
+if [[ -h $DEFAULT_DIR ]]; then
+    echo >&2 "${DEFAULT_DIR} cannot be a symlink."
+    exit 1
+fi
+
+if [[ -h $TIMERS_DIR ]]; then
+    echo >&2 "${TIMERS_DIR} cannot be a symlink."
+    exit 1
+fi
+
 if [[ -d "${BASEDIR}" ]]; then
     for UNIT in "${BASEDIR}"/*.service; do
         UNIT_NOEXT="${UNIT%.*}"

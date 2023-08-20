@@ -2,5 +2,13 @@
 
 # Not installed in ~/.config/systemd/user
 
-systemctl enable --user --now mpd
-systemctl enable --user --now mpd-notification
+TARGET_DIR="${XDG_CONFIG_HOME}/systemd/user/default.target.wants"
+
+mkdir -p "$TARGET_DIR"
+
+if [ ! -h "${TARGET_DIR}" ]; then
+    systemctl enable --user --now mpd
+    systemctl enable --user --now mpd-notification
+else
+    echo >&2 "${TARGET_DIR} cannot be a symlink."
+fi
