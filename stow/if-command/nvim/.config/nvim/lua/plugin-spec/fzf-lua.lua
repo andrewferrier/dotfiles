@@ -67,7 +67,7 @@ local configure = function()
                     require("open_filedirterm").open_file_manager(selected[1])
                 end,
                 ["ctrl-d"] = function(selected, _)
-                    require("open_filedirterm").open_split_dirbuf(selected[1])
+                    require("open_filedirterm").open_split_oil(selected[1])
                 end,
             },
             fzf_opts = {

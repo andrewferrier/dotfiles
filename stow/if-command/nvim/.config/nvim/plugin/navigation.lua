@@ -43,9 +43,9 @@ vim.keymap.set("n", "goT", function()
 end, { desc = "Open terminal in lcd" })
 
 vim.keymap.set("n", "god", function()
-    require("open_filedirterm").open_split_dirbuf("%:p:h")
-end, { desc = "Open dirbuf in directory of file" })
+    require("open_filedirterm").open_split_oil("%:p:h")
+end, { desc = "Open oil in directory of file" })
 
 vim.keymap.set("n", "goD", function()
-    require("open_filedirterm").open_split_dirbuf(vim.fn.getcwd(0))
-end, { desc = "Open dirbuf in lcd" })
+    require("open_filedirterm").open_split_oil(vim.fn.getcwd(0))
+end, { desc = "Open oil in lcd" })

@@ -1,11 +1,13 @@
 local M = {}
 
 ---@return string
-local select_fileordir = function(fileordir, force_dir, opening_dirbuf)
+local select_fileordir = function(fileordir, force_dir, opening_oil)
     local fileordir_t
 
-    if vim.bo.filetype == "dirbuf" and not opening_dirbuf then
-        fileordir_t = require("dirbuf").get_cursor_path()
+    if vim.bo.filetype == "oil" and not opening_oil then
+        fileordir_t = require("oil").get_current_dir()
+            .. "/"
+            .. require("oil").get_cursor_entry()["name"]
     elseif vim.bo.buftype == "" then
         fileordir_t = vim.fn.expand(fileordir, true)
     else
@@ -41,11 +43,11 @@ M.open_file_manager = function(file_or_dir)
     end)
 end
 
-M.open_split_dirbuf = function(dir)
+M.open_split_oil = function(dir)
     local expanded_dir = select_fileordir(dir, true, true)
     vim.schedule(function()
         vim.cmd.split()
-        vim.cmd.Dirbuf(expanded_dir)
+        vim.cmd.Oil(expanded_dir)
     end)
 end
 
