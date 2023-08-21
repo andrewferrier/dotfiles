@@ -1,6 +1,7 @@
 vim.filetype.add({
     extension = {
         equivs = "debcontrol",
+        hurl = "hurl",
         jad = "java",
         rasi = "rasi",
         tfstate = "json",

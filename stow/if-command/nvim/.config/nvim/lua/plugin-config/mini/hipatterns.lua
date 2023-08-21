@@ -5,6 +5,7 @@ local if_textfile = function(pattern)
         if
             vim.tbl_contains({
                 "asciidoc",
+                "hurl",
                 "latex",
                 "markdown",
                 "rst",
