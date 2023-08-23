@@ -12,7 +12,7 @@ for file in "${HOME}"/.config/sh.d/*.sh; do
     source "${file}"
 done
 
-if [ -L "${HOME}"/.config/sh-local.d ]; then
+if [[ -L "${HOME}"/.config/sh-local.d ]]; then
     for file in "${HOME}"/.config/sh-local.d/*.sh; do
         # shellcheck source=/dev/null
         source "${file}"

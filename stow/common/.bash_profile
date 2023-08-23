@@ -7,7 +7,7 @@ for file in "${HOME}"/.config/sh-profile.d/*; do
     source "${file}"
 done
 
-if [ -f "$HOME/.bashrc" ]; then
+if [[ -f "$HOME/.bashrc" ]]; then
     # shellcheck source=/dev/null
     source "${HOME}/.bashrc"
 else
