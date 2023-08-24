@@ -15,6 +15,7 @@ return {
 
         require("gruvbox").setup({
             contrast = "hard",
+            dim_inactive = true,
             overrides = {
                 TermCursorNC = { bg = "#00DD00" },
 
