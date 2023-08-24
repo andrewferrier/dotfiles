@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+function watch_func() {
+    if [[ ${OSTYPE} == darwin* ]]; then
+        launchctl list | grep ajf | sort -k 3
+        echo
+    else
+        systemctl --user list-timers --all | head -n-2
+        echo
+        systemctl --user list-units --type=service 2>&1 | grep -E -v 'LOAD|ACTIVE|SUB|JOB|loaded units listed|list-unit-files'
+    fi
+
+    DOCKER_FORMAT="table {{.Image}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Status}}"
+
+    if (command -v podman >/dev/null 2>&1); then
+        podman ps --format "${DOCKER_FORMAT}"
+    elif (command -v docker >/dev/null 2>&1); then
+        docker ps --format "${DOCKER_FORMAT}"
+    fi
+}
+
+export -f watch_func
+
+watch -x bash -c watch_func
