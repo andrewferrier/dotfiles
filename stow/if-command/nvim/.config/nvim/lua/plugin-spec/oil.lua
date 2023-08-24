@@ -6,7 +6,7 @@ return {
             view_options = { show_hidden = true },
         }
 
-        if not vim.fn.executable('trash-put') then
+        if not vim.fn.executable("trash-put") then
             opts.delete_to_trash = false
         end
 
