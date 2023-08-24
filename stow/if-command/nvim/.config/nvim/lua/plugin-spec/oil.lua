@@ -19,4 +19,5 @@ return {
             { desc = "Open parent directory" }
         )
     end,
+    version = "*",
 }
