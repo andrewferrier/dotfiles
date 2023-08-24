@@ -71,6 +71,7 @@ brew "yamllint"
 brew "yarn" # for yaml-language-server
 brew "yq"
 brew "zsh-lovers"
+cask "platypus"
 
 tap "homebrew/cask-fonts"
 tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
