@@ -17,10 +17,12 @@ defaults write -globalDomain KeyRepeat -int 1
 # Misc
 defaults write -globalDomain AppleAccentColor -int 0 # https://stackoverflow.com/a/51695756/27641
 defaults write -globalDomain AppleHighlightColor -string "1.000000 0.733333 0.721569 Red"
+defaults write -globalDomain AppleShowScrollBars -string "Always"
 defaults write -globalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 defaults write -globalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write -globalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 defaults write -globalDomain NSQuitAlwaysKeepsWindows -bool false
+defaults write -globalDomain NSWindowResizeTime -float 0.001
 defaults write -globalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write -globalDomain PMPrintingExpandedStateForPrint2 -bool true
 defaults write -globalDomain com.apple.trackpad.rotateGesture -int 0
@@ -61,7 +63,9 @@ defaults write com.apple.iTunes DeviceBackupsDisabled -bool true
 defaults write com.apple.iTunes dontAutomaticallySyncIPods -bool true
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool false
 defaults write com.apple.safari IncludeDebugMenu -bool YES
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 defaults write com.apple.systemuiserver menuExtras -array "/System/Library/CoreServices/Menu Extras/Bluetooth.menu" "/System/Library/CoreServices/Menu Extras/AirPort.menu" "/System/Library/CoreServices/Menu Extras/Battery.menu"
+defaults write com.apple.universalaccess reduceTransparency -bool true
 defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool false
 defaults write org.pqrs.Karabiner isStatusbarEnable -bool false
 
