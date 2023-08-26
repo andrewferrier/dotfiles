@@ -69,11 +69,7 @@ end
 local function keybindings_organizeimports(bufnr, lsp_name)
     local DESC = "Organize imports"
 
-    if lsp_name == "tsserver" then
-        vim.keymap.set("n", "cxo", function()
-            require("typescript").actions.organizeImports()
-        end, { buffer = bufnr, desc = DESC })
-    elseif lsp_name == "pyright" then
+    if lsp_name == "pyright" then
         vim.keymap.set("n", "cxo", function()
             vim.cmd("silent! PyrightOrganizeImports")
         end, { buffer = bufnr, desc = DESC })

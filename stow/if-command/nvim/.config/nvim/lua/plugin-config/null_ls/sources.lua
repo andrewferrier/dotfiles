@@ -130,8 +130,6 @@ M.sources = {
     null_ls.builtins.diagnostics.vale,
     null_ls.builtins.diagnostics.yamllint,
     null_ls.builtins.diagnostics.zsh,
-
-    require("typescript.extensions.null-ls.code-actions"),
 }
 
 return M

@@ -23,11 +23,7 @@ return {
         }
 
         for lsp, settings in pairs(servers) do
-            if lsp == "tsserver" then
-                require("typescript").setup({ server = settings })
-            else
-                lspconfig[lsp].setup(settings)
-            end
+            lspconfig[lsp].setup(settings)
         end
     end,
     event = "BufEnter",

@@ -1,5 +1,3 @@
--- See https://github.com/jose-elias-alvarez/typescript.nvim#faq
-
 return {
     on_attach = function(_, bufnr)
         require('lsp-keybindings').inlay_hints(bufnr)
