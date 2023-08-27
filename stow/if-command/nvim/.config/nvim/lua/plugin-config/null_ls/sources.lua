@@ -3,10 +3,6 @@ local M = {}
 local null_ls = require("null-ls")
 
 M.sources = {
-    -- Code actions
-
-    null_ls.builtins.code_actions.shellcheck,
-
     -- Formatters
 
     null_ls.builtins.formatting.black.with({
@@ -114,7 +110,6 @@ M.sources = {
             vim.env.XDG_CONFIG_HOME .. "/mdl/.mdl.rb",
         },
     }),
-    null_ls.builtins.diagnostics.shellcheck,
     null_ls.builtins.diagnostics.sqlfluff,
     null_ls.builtins.diagnostics.terraform_validate,
     null_ls.builtins.diagnostics.trail_space.with({

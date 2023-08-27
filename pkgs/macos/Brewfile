@@ -53,7 +53,7 @@ brew "python3"
 brew "ripgrep"
 brew "ripgrep-all"
 brew "rsync"
-brew "shellcheck"
+brew "shellcheck" # to support bash-language-server
 brew "shellharden"
 brew "shfmt"
 brew "smudge/smudge/nightlight"

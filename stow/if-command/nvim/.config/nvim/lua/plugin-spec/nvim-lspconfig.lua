@@ -8,7 +8,7 @@ return {
 
         local servers = {
             ansiblels = {},
-            bashls = require("plugin-config.lsp-settings.bashls"),
+            bashls = {},
             cssls = require("plugin-config.lsp-settings.css"),
             dockerls = {},
             gopls = require("plugin-config.lsp-settings.gopls"),
