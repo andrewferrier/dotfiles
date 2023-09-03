@@ -29,8 +29,6 @@ return {
             window = { suffix = "" },
         })
 
-        require("plugin-config.mini.clue")
-
         require("mini.comment").setup()
 
         -- Will be replaced with https://github.com/neovim/neovim/issues/16339
@@ -50,6 +48,6 @@ return {
 
         require("plugin-config.mini.hipatterns")
     end,
-    -- Uncomment once mini.clue/operators promoted to stable
+    -- Uncomment once mini.operators promoted to stable
     -- version = "*",
 }
