@@ -167,7 +167,6 @@
 *   Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
 *   Replace 'jobstart' with vim.system
 *   Once 0.10 out, consider replacing gruvbox with retrobox
-*   Fix debugprint error in e.g. yaml file because it doesn't have a configuration
 
 ## Presentation Ideas
 
