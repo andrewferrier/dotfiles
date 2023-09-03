@@ -34,6 +34,7 @@ miniclue.setup({
 
         { mode = "n", keys = "cv" },
         { mode = "n", keys = "yo" },
+        { mode = "n", keys = "gyc" },
     },
     clues = {
         miniclue.gen_clues.builtin_completion(),
