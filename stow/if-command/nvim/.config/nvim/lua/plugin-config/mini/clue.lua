@@ -5,8 +5,8 @@ miniclue.setup({
         -- Clues that come from mini.clue
         { mode = "i", keys = "<C-x>" },
 
-        { mode = "n", keys = "g" },
-        { mode = "x", keys = "g" },
+        -- { mode = "n", keys = "g" }, -- Prevents 'gcc' working
+        -- { mode = "x", keys = "g" },
 
         { mode = "n", keys = "'" },
         { mode = "n", keys = "`" },
