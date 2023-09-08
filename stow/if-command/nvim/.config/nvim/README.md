@@ -84,6 +84,7 @@
     Ctrl-W - backspace over word
     DiagnosticQFList - put all diagnostic items in a quickfix buffer
     GitQFList - show all git hunks in a quickfix buffer
+    InspectTree - treesitter inspect
     Mkdir - create directory for current file
     args files/file.* | :argdo %s/pattern/replacement/g | :argdo update - search and replace across files
     cfdo %s/x/y/g | update - search and replace in quickfix list
