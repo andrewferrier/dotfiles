@@ -16,8 +16,8 @@ brew "docx2txt" # for ranger
 brew "duti"
 brew "eget"
 brew "entr"
-brew "exa"
 brew "exiftool" # for ranger's scope.sh
+brew "eza"
 brew "fasd"
 brew "fd"
 brew "fdupes"
