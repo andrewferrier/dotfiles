@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("TermClose", {
     end,
 })
 
-local OPTS = { silent = true }
+local OPTS = { silent = true, unique = true }
 
 -- Set window navigation to work like in other windows
 local map = function(lhs, rhs)

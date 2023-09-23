@@ -9,4 +9,4 @@ vim.keymap.set("n", "o", function()
     else
         return "o"
     end
-end, { buffer = true, expr = true })
+end, { buffer = true, expr = true, unique = true })

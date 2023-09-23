@@ -1,22 +1,22 @@
 vim.keymap.set("n", "gbc", function()
     require("git").run_git_cmd("git commit", "%:p:h")
-end, { desc = "git commit" })
+end, { desc = "git commit", unique = true })
 
 vim.keymap.set("n", "gbs", function()
     require("git").run_git_cmd("tig status", "%:p:h")
-end, { desc = "tig status in filedir" })
+end, { desc = "tig status in filedir", unique = true })
 
 vim.keymap.set("n", "gbS", function()
     require("git").run_git_cmd("tig status", vim.fn.getcwd(0))
-end, { desc = "tig status in lcd" })
+end, { desc = "tig status in lcd", unique = true })
 
 vim.keymap.set("n", "gbt", function()
     require("git").run_git_cmd("tig", "%:p:h")
-end, { desc = "tig history in filedir" })
+end, { desc = "tig history in filedir", unique = true })
 
 vim.keymap.set("n", "gbT", function()
     require("git").run_git_cmd("tig", vim.fn.getcwd(0))
-end, { desc = "tig history in lcd" })
+end, { desc = "tig history in lcd", unique = true })
 
 vim.keymap.set("n", "gbo", function()
     vim.fn.jobstart({ "git", "open" }, {
@@ -24,4 +24,4 @@ vim.keymap.set("n", "gbo", function()
         detach = true,
         on_stderr = require("utils").job_stderr,
     })
-end, { desc = "Open git repo in browser" })
+end, { desc = "Open git repo in browser", unique = true })

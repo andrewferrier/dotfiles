@@ -11,7 +11,7 @@ end
 
 vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
     group = vim.api.nvim_create_augroup("QuickFixCmdPost_openlist", {}),
-    callback = open
+    callback = open,
 })
 
 vim.keymap.set("n", "yoq", function()
@@ -20,6 +20,6 @@ vim.keymap.set("n", "yoq", function()
     else
         open()
     end
-end, { desc = "Toggle quickfix window" })
+end, { desc = "Toggle quickfix window", unique = true })
 
 vim.cmd.packadd("cfilter")

@@ -20,13 +20,23 @@ local configure = function()
         },
     })
 
-    vim.keymap.set("n", "cvh", fzf_lua.help_tags, { desc = "Open helptag" })
-    vim.keymap.set("n", "cvl", fzf_lua.live_grep, { desc = "Live grep" })
+    vim.keymap.set(
+        "n",
+        "cvh",
+        fzf_lua.help_tags,
+        { desc = "Open helptag", unique = true }
+    )
+    vim.keymap.set(
+        "n",
+        "cvl",
+        fzf_lua.live_grep,
+        { desc = "Live grep", unique = true }
+    )
 
     vim.keymap.set("n", "cvm", function()
         -- `man -c` doesn't work on Arch
         fzf_lua.man_pages({ previewer = "man_native" })
-    end, { desc = "Open manpage" })
+    end, { desc = "Open manpage", unique = true })
 
     local cvf_previewer
 
@@ -55,7 +65,7 @@ local configure = function()
                 ["--no-sort"] = "",
             },
         })
-    end, { desc = "Find file" })
+    end, { desc = "Find file", unique = true })
 
     vim.keymap.set("n", "cvg", function()
         fzf_lua.fzf_exec("file-list -d", {
@@ -80,11 +90,11 @@ local configure = function()
                 ["--no-sort"] = "",
             },
         })
-    end, { desc = "Find directory" })
+    end, { desc = "Find directory", unique = true })
 
     vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function()
         require("fzf-lua").complete_path()
-    end, { silent = true, desc = "Fuzzy complete path" })
+    end, { silent = true, desc = "Fuzzy complete path", unique = true })
 end
 
 return {

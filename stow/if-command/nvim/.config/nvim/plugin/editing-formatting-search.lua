@@ -29,19 +29,19 @@ vim.keymap.set(
     "n",
     "cxr",
     ":%s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>",
-    { desc = "Replace word" }
+    { desc = "Replace word", unique = true }
 )
 
 vim.keymap.set(
     "n",
     "[<Space>",
     "<Cmd>call append(line('.') - 1, repeat([''], v:count1))<CR>",
-    { desc = "Put empty line(s) above" }
+    { desc = "Put empty line(s) above", unique = true }
 )
 
 vim.keymap.set(
     "n",
     "]<Space>",
     "<Cmd>call append(line('.'),     repeat([''], v:count1))<CR>",
-    { desc = "Put empty line(s) below" }
+    { desc = "Put empty line(s) below", unique = true }
 )

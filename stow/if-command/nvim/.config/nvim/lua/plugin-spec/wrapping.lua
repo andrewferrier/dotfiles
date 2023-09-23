@@ -19,7 +19,7 @@ return {
         })
 
         vim.keymap.set("n", "yow", function()
-            require('wrapping').toggle_wrap_mode()
-        end, { desc = "Toggle wrap mode" })
+            require("wrapping").toggle_wrap_mode()
+        end, { desc = "Toggle wrap mode", unique = true })
     end,
 }

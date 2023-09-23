@@ -10,7 +10,7 @@ vim.opt.dictionary:append(vim.opt.spellfile:get())
 vim.opt.spelllang = "en_gb"
 vim.opt.spelloptions:append("camel")
 
-vim.keymap.set("n", "zg", "zg]szz")
+vim.keymap.set("n", "zg", "zg]szz", { unique = true })
 
 vim.cmd.iabbrev("Reciept", "Receipt")
 vim.cmd.iabbrev("Reciepts", "Receipts")

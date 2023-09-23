@@ -52,17 +52,16 @@ local function keybindings_hover_keyword(bufnr, server_capabilities, filetype)
         -- ~/.config/nvim/after/ftplugin/terraform.lua
     elseif server_capabilities.hoverProvider then
         if filetype ~= "vim" then
-            vim.keymap.set(
-                "n",
-                "K",
-                vim.lsp.buf.hover,
-                { buffer = bufnr, desc = "Show definition using LSP" }
-            )
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, {
+                buffer = bufnr,
+                desc = "Show definition using LSP",
+                unique = true,
+            })
         end
     else
         vim.keymap.set("n", "K", function()
             vim.notify("Hover not supported by LSP.", vim.log.levels.ERROR)
-        end, { buffer = bufnr, desc = DISABLED_DESC })
+        end, { buffer = bufnr, desc = DISABLED_DESC, unique = true })
     end
 end
 
@@ -72,7 +71,7 @@ local function keybindings_organizeimports(bufnr, lsp_name)
     if lsp_name == "pyright" then
         vim.keymap.set("n", "cxo", function()
             vim.cmd("silent! PyrightOrganizeImports")
-        end, { buffer = bufnr, desc = DESC })
+        end, { buffer = bufnr, desc = DESC, unique = true })
     end
 end
 
@@ -112,7 +111,7 @@ local map = function(keys, action_desc)
             "Don't know how to " .. action_desc .. " this filetype.",
             vim.log.levels.ERROR
         )
-    end, { desc = DISABLED_DESC })
+    end, { desc = DISABLED_DESC, unique = true })
 end
 
 map("cxo", "organize imports for")

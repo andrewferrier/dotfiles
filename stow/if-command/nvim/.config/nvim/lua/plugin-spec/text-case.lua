@@ -7,7 +7,7 @@ return {
         local map_key = function(key, operator_name, desc)
             vim.keymap.set("n", "gyc" .. key, function()
                 require("textcase").operator(operator_name)
-            end, { desc = "Convert to " .. desc })
+            end, { desc = "Convert to " .. desc, unique = true })
         end
 
         -- Based on keys defined in ~/.local/share/nvim/lazy/text-case.nvim/lua/textcase/plugin/presets.lua

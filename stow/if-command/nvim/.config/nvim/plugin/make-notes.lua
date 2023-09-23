@@ -26,7 +26,7 @@ local set = function(lhs, directory, createfile, includetime, immediate)
 
     local rhs = command .. directory .. "<C-R>" .. date .. "<CR>" .. postfix
 
-    vim.keymap.set("n", "<Leader>" .. lhs, rhs, { desc = desc })
+    vim.keymap.set("n", "<Leader>" .. lhs, rhs, { desc = desc, unique = true })
 end
 
 set("n.", "./", true, false, false)
