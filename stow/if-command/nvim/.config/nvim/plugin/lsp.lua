@@ -55,7 +55,6 @@ local function keybindings_hover_keyword(bufnr, server_capabilities, filetype)
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {
                 buffer = bufnr,
                 desc = "Show definition using LSP",
-                unique = true,
             })
         end
     else
