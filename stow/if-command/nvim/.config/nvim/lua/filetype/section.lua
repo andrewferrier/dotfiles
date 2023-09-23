@@ -5,7 +5,6 @@ local create_opts = function(desc)
         buffer = true,
         silent = true,
         desc = desc,
-        unique = true,
     }
 end
 
