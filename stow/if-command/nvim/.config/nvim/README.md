@@ -60,6 +60,7 @@
     Ctrl-K HT - insert <Tab>
     Ctrl-K OK - insert ✓
     Ctrl-K XX - insert ✗
+    Ctrl-K oo - insert •
     Ctrl-O ^ - go to non-whitespace beginning of line
     Ctrl-R = - use expression register
     Ctrl-R Ctrl-R <register> - insert register literally
