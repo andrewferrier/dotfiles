@@ -49,6 +49,5 @@ return {
 
         require("plugin-config.mini.hipatterns")
     end,
-    -- Uncomment once mini.operators promoted to stable
-    -- version = "*",
+    version = "*",
 }
