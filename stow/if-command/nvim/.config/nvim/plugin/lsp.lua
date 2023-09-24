@@ -70,7 +70,7 @@ local function keybindings_organizeimports(bufnr, lsp_name)
     if lsp_name == "pyright" then
         vim.keymap.set("n", "cxo", function()
             vim.cmd("silent! PyrightOrganizeImports")
-        end, { buffer = bufnr, desc = DESC, unique = true })
+        end, { buffer = bufnr, desc = DESC })
     end
 end
 
