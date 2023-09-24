@@ -43,7 +43,7 @@ M.inlay_hints = function(bufnr)
 
     vim.keymap.set("n", "yoi", function()
         vim.lsp.inlay_hint(bufnr, nil)
-    end, { buffer = bufnr, desc = "Toggle inlay hints", unique = true })
+    end, { buffer = bufnr, desc = "Toggle inlay hints" })
 end
 
 M.formatting = function(bufnr)

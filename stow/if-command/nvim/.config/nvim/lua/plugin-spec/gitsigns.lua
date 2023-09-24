@@ -2,49 +2,39 @@ local configure = function()
     local gitsigns = require("gitsigns")
 
     local attach = function(bufnr)
-        vim.keymap.set(
-            "n",
-            "]h",
-            function()
-                vim.schedule(function()
-                    gitsigns.next_hunk()
-                end)
-                return "<Ignore>"
-            end,
-            { expr = true, desc = "Hunk forward", buffer = bufnr, unique = true }
-        )
+        vim.keymap.set("n", "]h", function()
+            vim.schedule(function()
+                gitsigns.next_hunk()
+            end)
+            return "<Ignore>"
+        end, { expr = true, desc = "Hunk forward", buffer = bufnr })
 
-        vim.keymap.set(
-            "n",
-            "[h",
-            function()
-                vim.schedule(function()
-                    gitsigns.prev_hunk()
-                end)
-                return "<Ignore>"
-            end,
-            { expr = true, desc = "Hunk backward", buffer = bufnr, unique = true }
-        )
+        vim.keymap.set("n", "[h", function()
+            vim.schedule(function()
+                gitsigns.prev_hunk()
+            end)
+            return "<Ignore>"
+        end, { expr = true, desc = "Hunk backward", buffer = bufnr })
 
         vim.keymap.set(
             "n",
             "[H",
             "gg]h",
-            { remap = true, desc = "Hunk first", buffer = bufnr, unique = true }
+            { remap = true, desc = "Hunk first", buffer = bufnr }
         )
 
         vim.keymap.set(
             "n",
             "]H",
             "G[h",
-            { remap = true, desc = "Hunk last", buffer = bufnr, unique = true }
+            { remap = true, desc = "Hunk last", buffer = bufnr }
         )
 
         vim.keymap.set(
             { "o", "x" },
             "ih",
             ":<C-U>Gitsigns select_hunk<CR>",
-            { buffer = bufnr, unique = true }
+            { buffer = bufnr }
         )
 
         vim.keymap.set("n", "gbhs", function()
@@ -53,7 +43,7 @@ local configure = function()
             vim.schedule(function()
                 gitsigns.next_hunk()
             end)
-        end, { desc = "Stage hunk", buffer = bufnr, unique = true })
+        end, { desc = "Stage hunk", buffer = bufnr })
 
         vim.keymap.set("v", "gbhs", function()
             local first_line = vim.fn.line("v")
@@ -64,11 +54,11 @@ local configure = function()
             if mode:find("^v") or mode:find("^ctrl-v") then
                 vim.cmd.normal({ args = { "V" }, bang = true })
             end
-        end, { desc = "Stage hunk", buffer = bufnr, unique = true })
+        end, { desc = "Stage hunk", buffer = bufnr })
 
         vim.keymap.set("n", "gbhr", function()
             gitsigns.reset_hunk()
-        end, { desc = "Reset hunk", buffer = bufnr, unique = true })
+        end, { desc = "Reset hunk", buffer = bufnr })
 
         vim.keymap.set("n", "gba", function()
             vim.cmd.update()
@@ -76,7 +66,6 @@ local configure = function()
         end, {
             desc = "Stage/add entire file",
             buffer = bufnr,
-            unique = true,
         })
 
         vim.keymap.set("n", "yo_", function()
@@ -84,7 +73,6 @@ local configure = function()
         end, {
             desc = "Toggle deleted lines",
             buffer = bufnr,
-            unique = true,
         })
     end
 

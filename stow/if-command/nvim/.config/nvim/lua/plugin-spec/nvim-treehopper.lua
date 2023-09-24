@@ -1,5 +1,5 @@
 local enable_treehopper = function()
-    local OPTS = { buffer = true, silent = true, unique = true }
+    local OPTS = { buffer = true, silent = true }
 
     vim.keymap.set("o", "m", ':<C-U>lua require("tsht").nodes()<CR>', OPTS)
     vim.keymap.set("x", "m", ':lua require("tsht").nodes()<CR>', OPTS)
