@@ -88,7 +88,6 @@
     Inspect - check treesitter/highlight items
     InspectTree - treesitter inspect
     Mkdir - create directory for current file
-    PreviewQuery - treesitter query editor
     args files/file.* | :argdo %s/pattern/replacement/g | :argdo update - search and replace across files
     cfdo %s/x/y/g | update - search and replace in quickfix list
     cquit - quit with an exit code
@@ -96,9 +95,13 @@
     g/regex/norm gcc - comment out lines that match regex
     grep <pattern> - search and populate quickfix list (using Rg)
     let @/='text/with/lots/of/slashes' - define search pattern (then use n/N)
-    lua =<expression> - print expression
     w ++p - write and create parent dirs (0.9+ only)
     wn - write and move to next file in args list
+
+### Lua Functions/Expressions
+
+    vim.treesitter.query.edit() - treesitter query editor
+    =<expression> - print expression
 
 #### Based on a Visual Range
 
