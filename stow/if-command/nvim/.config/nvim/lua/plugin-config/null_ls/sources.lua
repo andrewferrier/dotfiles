@@ -69,24 +69,6 @@ M.sources = {
             }
         end,
     }),
-    null_ls.builtins.formatting.stylua.with({
-        extra_args = function(params)
-            return {
-                "--column-width",
-                vim.api.nvim_get_option_value(
-                    "textwidth",
-                    { buf = params.bufnr }
-                ),
-                "--indent-width",
-                vim.api.nvim_get_option_value(
-                    "shiftwidth",
-                    { buf = params.bufnr }
-                ),
-                "--indent-type",
-                "spaces",
-            }
-        end,
-    }),
     null_ls.builtins.formatting.remark,
     null_ls.builtins.formatting.trim_whitespace, -- only works for ff=unix
     null_ls.builtins.formatting.xmllint,
