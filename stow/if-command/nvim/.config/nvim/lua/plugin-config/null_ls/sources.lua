@@ -110,6 +110,7 @@ M.sources = {
             vim.env.XDG_CONFIG_HOME .. "/mdl/.mdl.rb",
         },
     }),
+    null_ls.builtins.diagnostics.ruff,
     null_ls.builtins.diagnostics.sqlfluff,
     null_ls.builtins.diagnostics.terraform_validate,
     null_ls.builtins.diagnostics.trail_space.with({

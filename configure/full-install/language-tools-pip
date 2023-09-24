@@ -15,10 +15,11 @@ if [[ $DISTRIBUTION == 'Darwin' ]]; then
     pipx install black || pipx upgrade black
     pipx install gitlint || pipx upgrade gitlint
     pipx install sqlfluff || pipx upgrade sqlfluff
+    pipx install ruff || pipx upgrade ruff
 else
     PIPX="pipx install --include-deps"
 
-    sudo pacman -S --noconfirm python-black
+    sudo pacman -S --noconfirm python-black ruff
     ${PIPX} gitlint
     ${PIPX} sqlfluff
 fi
