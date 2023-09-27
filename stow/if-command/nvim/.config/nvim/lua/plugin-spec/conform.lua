@@ -7,4 +7,5 @@ return {
             },
         })
     end,
+    version = "*",
 }
