@@ -13,7 +13,7 @@ DISTRIBUTION=$(uname -s)
 
 if [[ $DISTRIBUTION == 'Darwin' ]]; then
     pipx install black || pipx upgrade black
-    pipx install gitlint || pipx upgrade gitlint
+    pipx install gitlint --include-deps || pipx upgrade gitlint
     pipx install sqlfluff || pipx upgrade sqlfluff
     pipx install ruff || pipx upgrade ruff
 else
