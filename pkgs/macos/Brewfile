@@ -46,6 +46,7 @@ brew "moreutils" # isutf8 for Hammerspoon
 brew "ncdu"
 brew "neovim"
 brew "pandoc"
+brew "pipx"
 brew "poppler" # pdftotext for ranger
 brew "pstree"
 brew "pwgen"
