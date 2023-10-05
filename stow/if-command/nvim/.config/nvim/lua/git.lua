@@ -9,7 +9,7 @@ local expand_input_dir = function(dir)
 end
 
 local get_git_root_dir = function(dir)
-    local cmd = "cd " .. dir .. "; git rev-parse --show-toplevel"
+    local cmd = "cd '" .. dir .. "'; git rev-parse --show-toplevel"
     local root = vim.fn.system(cmd)
 
     if vim.v.shell_error == 0 then
