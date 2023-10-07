@@ -59,6 +59,7 @@ end
 
 return {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     config = configure,
     -- Re-enable once on NeoVim 0.10
     -- version = "*",
