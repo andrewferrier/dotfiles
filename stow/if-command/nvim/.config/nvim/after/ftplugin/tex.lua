@@ -1,10 +1,11 @@
 require("filetype.text").setup()
 
+-- FIXME: For some reason this file gets invoked twice; remove unique=true
 vim.keymap.set(
     "n",
     "gO",
     "<Plug>(vimtex-toc-open)",
-    { desc = "Show file outline", unique = true }
+    { desc = "Show file outline"}
 )
 
 vim.cmd.iabbrev("<buffer>", "zTODO", "\\textcolor{red}{TODO\\@:}<Esc>i")
