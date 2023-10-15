@@ -20,8 +20,8 @@ vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
 vim.opt.diffopt:append("vertical")
 
-vim.cmd('iabbrev zDATE <C-R>=strftime("%F")<CR>')
-vim.cmd('iabbrev zDATETIME <C-R>=strftime("%FT%H:%M:%S")<CR>')
+vim.cmd.iabbrev('zDATE', '<C-R>=strftime("%F")<CR>')
+vim.cmd.iabbrev('zDATETIME', '<C-R>=strftime("%FT%H:%M:%S")<CR>')
 
 -- This generic behaviour for rename will be overwritten by treesitter.lua where
 -- supported. Don't use 'cxr' in visual mode as it will block 'c'.
