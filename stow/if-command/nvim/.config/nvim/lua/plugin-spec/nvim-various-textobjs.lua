@@ -24,8 +24,6 @@ return {
         map("ik", 'key("outer")', "'key'/lhs")
         map("av", 'value("inner")', "'value'/rhs inc. terminator")
         map("iv", 'value("outer")', "'value'/rhs")
-        map("aS", 'subword("inner")', "SubWord")
-        map("iS", 'subword("outer")', "SubWord")
         map("id", "diagnostic()", "diagnostic")
     end,
     event = "BufEnter",
