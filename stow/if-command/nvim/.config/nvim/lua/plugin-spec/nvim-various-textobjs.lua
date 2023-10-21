@@ -20,10 +20,10 @@ return {
             'indentation("inner", "inner")',
             "indentation inc. blank lines"
         )
-        map("ak", 'key("inner")', "'key'/lhs inc. assignment")
-        map("ik", 'key("outer")', "'key'/lhs")
-        map("av", 'value("inner")', "'value'/rhs inc. terminator")
-        map("iv", 'value("outer")', "'value'/rhs")
+        map("ik", 'key("inner")', "'key'/lhs")
+        map("ak", 'key("outer")', "'key'/lhs inc. assignment")
+        map("iv", 'value("inner")', "'value'/rhs")
+        map("av", 'value("outer")', "'value'/rhs inc. terminator")
         map("id", "diagnostic()", "diagnostic")
     end,
     event = "BufEnter",
