@@ -1,48 +1,32 @@
 return {
     "chrisgrieser/nvim-various-textobjs",
     config = function()
-        vim.keymap.set(
-            { "o", "x" },
-            "ak",
-            '<cmd>lua require("various-textobjs").key(false)<CR>',
-            { desc = "'key'/lhs including assignment", unique = true }
+        local map = function(lhs, rhs, description)
+            vim.keymap.set(
+                { "o", "x" },
+                lhs,
+                '<cmd>lua require("various-textobjs").' .. rhs .. "<CR>",
+                { desc = description, unique = true }
+            )
+        end
+
+        map(
+            "ii",
+            'indentation("inner", "inner", "noBlanks")',
+            "indentation not inc. blank lines"
         )
-        vim.keymap.set(
-            { "o", "x" },
-            "ik",
-            '<cmd>lua require("various-textobjs").key(true)<CR>',
-            { desc = "'key'/lhs", unique = true }
+        map(
+            "ai",
+            'indentation("inner", "inner")',
+            "indentation inc. blank lines"
         )
-        vim.keymap.set(
-            { "o", "x" },
-            "av",
-            '<cmd>lua require("various-textobjs").value(false)<CR>',
-            { desc = "'value'/rhs including terminator", unique = true }
-        )
-        vim.keymap.set(
-            { "o", "x" },
-            "iv",
-            '<cmd>lua require("various-textobjs").value(true)<CR>',
-            { desc = "'value'/rhs", unique = true }
-        )
-        vim.keymap.set(
-            { "o", "x" },
-            "aS",
-            '<cmd>lua require("various-textobjs").subword(false)<CR>',
-            { desc = "SubWord", unique = true }
-        )
-        vim.keymap.set(
-            { "o", "x" },
-            "iS",
-            '<cmd>lua require("various-textobjs").subword(true)<CR>',
-            { desc = "SubWord", unique = true }
-        )
-        vim.keymap.set(
-            { "o", "x" },
-            "id",
-            '<cmd>lua require("various-textobjs").diagnostic()<CR>',
-            { desc = "diagnostic", unique = true }
-        )
+        map("ak", 'key("inner")', "'key'/lhs inc. assignment")
+        map("ik", 'key("outer")', "'key'/lhs")
+        map("av", 'value("inner")', "'value'/rhs inc. terminator")
+        map("iv", 'value("outer")', "'value'/rhs")
+        map("aS", 'subword("inner")', "SubWord")
+        map("iS", 'subword("outer")', "SubWord")
+        map("id", "diagnostic()", "diagnostic")
     end,
     event = "BufEnter",
 }
