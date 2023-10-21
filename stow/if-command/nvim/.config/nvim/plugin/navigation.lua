@@ -6,30 +6,19 @@ local change_to_root = function()
     end)
 end
 
-vim.keymap.set(
-    "n",
-    "cdf",
-    ":lcd %:p:h<CR>",
-    { silent = true, desc = "cd to directory of file", unique = true }
-)
-vim.keymap.set(
-    "n",
-    "cdh",
-    ":lcd ~<CR>",
-    { silent = true, desc = "cd to " .. vim.env.HOME, unique = true }
-)
-vim.keymap.set(
-    "n",
-    "cdu",
-    ":lcd ..<CR>",
-    { silent = true, desc = "cd to ..", unique = true }
-)
-vim.keymap.set(
-    "n",
-    "cdg",
-    change_to_root,
-    { silent = true, desc = "cd to git root", unique = true }
-)
+local map = function(lhs, rhs, description)
+    vim.keymap.set(
+        "n",
+        'cd' .. lhs,
+        rhs,
+        { silent = true, desc = "cd to " .. description, unique = true }
+    )
+end
+
+map("f", ":lcd %:p:h<CR>", "directory of file")
+map("h", ":lcd ~<CR>", vim.env.HOME)
+map("u", ":lcd ..<CR>", "..")
+map("g", change_to_root, "git root")
 
 vim.keymap.set("n", "gof", function()
     require("open_filedirterm").open_file_manager("%:p")
