@@ -36,6 +36,9 @@ xset b off
 # Speed up keyboard a little
 xset r rate 250 60
 
+# Turn off mute keyboard light
+echo 0 > /sys/class/leds/platform::micmute/brightness
+
 # Disable touchscreen/Trackpoint
 xinput disable "Raydium Corporation Raydium Touch System"
 xinput disable "TPPS/2 Elan TrackPoint"
