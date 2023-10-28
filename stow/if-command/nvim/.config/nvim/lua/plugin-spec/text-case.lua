@@ -13,7 +13,7 @@ return {
         -- Based on keys defined in ~/.local/share/nvim/lazy/text-case.nvim/lua/textcase/plugin/presets.lua
         map_key("n", "to_constant_case", "CONSTANT_CASE")
         map_key("c", "to_camel_case", "camelCase")
-        map_key("s", "to_snake_case", "snake_case")
+        map_key("_", "to_snake_case", "snake_case")
         map_key("d", "to_dash_case", "dash-case")
         map_key("p", "to_pascal_case", "PascalCase")
 
