@@ -78,8 +78,6 @@ local function lsp_callback(event)
         local server_capabilities = client.server_capabilities
         local filetype = vim.bo.filetype
 
-        vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-
         keybindings_formatting_check(bufnr, server_capabilities)
         keybindings_codeaction_check(bufnr, server_capabilities)
         keybindings_rename_check(bufnr, server_capabilities)
