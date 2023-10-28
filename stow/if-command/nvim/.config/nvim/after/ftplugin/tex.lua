@@ -31,7 +31,7 @@ vim.b.minisurround_config = {
         },
         l = {
             output = function()
-                local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                local clipboard = tostring(vim.fn.getreg("+")):gsub("\n", "")
                 return { left = "\\href{" .. clipboard .. "}{", right = "}" }
             end,
         },

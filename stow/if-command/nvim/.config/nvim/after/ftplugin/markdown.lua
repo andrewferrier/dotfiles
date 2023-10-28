@@ -13,7 +13,7 @@ vim.b.minisurround_config = {
     custom_surroundings = {
         l = {
             output = function()
-                local clipboard = vim.fn.getreg("+"):gsub("\n", "")
+                local clipboard = tostring(vim.fn.getreg("+")):gsub("\n", "")
                 return { left = "[", right = "](" .. clipboard .. ")" }
             end,
         },
