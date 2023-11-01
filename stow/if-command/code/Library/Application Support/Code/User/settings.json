@@ -8,7 +8,7 @@
     "editor.lineNumbers": "relative",
     "editor.minimap.enabled": false,
     "editor.occurrencesHighlight": false,
-    "editor.renderFinalNewline": false,
+    "editor.renderFinalNewline": "off",
     "editor.renderLineHighlight": "none",
     "editor.renderWhitespace": "none",
     "editor.scrollBeyondLastColumn": 0,
