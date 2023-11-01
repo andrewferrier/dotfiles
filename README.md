@@ -10,6 +10,10 @@
     ranger      | ~/.config/ranger/rc.conf
     zsh         | ~/.config/zsh/README.md
 
+## Useful commands
+
+    xxd | Hex dump
+
 ## MacOS
 
     caffeinate -i <somecommand> | prevent system from sleeping whilst command is running
