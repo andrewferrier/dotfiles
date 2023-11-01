@@ -56,15 +56,15 @@
     "vim.highlightedyank.enable": true,
     "vim.hlsearch": true,
     "vim.useSystemClipboard": true,
-    "window.autoDetectColorScheme": true,
     "window.nativeFullScreen": false,
     "window.titleBarStyle": "native",
-    "workbench.colorTheme": "Solarized Dark",
+    "workbench.colorTheme": "Solarized Light",
     "workbench.enableExperiments": false,
     "workbench.preferredDarkColorTheme": "Solarized Dark",
     "workbench.preferredLightColorTheme": "Solarized Light",
     "workbench.settings.enableNaturalLanguageSearch": false,
     "vim.showMarksInGutter": true,
     "vim.statusBarColors.insert": "#00ff00",
-    "vim.statusBarColors.visual": "#0000ff"
+    "vim.statusBarColors.visual": "#0000ff",
+    "window.autoDetectColorScheme": true
 }
