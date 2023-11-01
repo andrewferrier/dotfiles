@@ -3,7 +3,11 @@ Cache/
 CachedData/
 CachedExtensionVSIXs/
 CachedExtensions/
+CachedProfilesData/
 Code Cache/
+Cookies
+Cookies-journal
+DawnCache/
 GPUCache/
 Local Storage/
 Network Persistent State
@@ -11,7 +15,11 @@ Preferences
 Service Worker/
 Session Storage/
 TransportSecurity
+User/History/
+User/globalStorage/
+User/workspaceStorage/
 WebStorage/
+code.lock
 databases/
 languagepacks.json
 logs/
