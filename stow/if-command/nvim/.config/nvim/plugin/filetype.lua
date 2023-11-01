@@ -5,6 +5,7 @@ vim.filetype.add({
         jad = "java",
         rasi = "rasi",
         tfstate = "json",
+        wat = "wast", -- This is needed for now as a workaround because NeoVim doesn't natively support .wat files
     },
     filename = {
         [".ansible-lint"] = "yaml",
