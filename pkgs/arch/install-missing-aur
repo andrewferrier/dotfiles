@@ -20,7 +20,6 @@ install-if-missing librewolf-bin
 install-if-missing mpd-notification
 install-if-missing ocrmypdf
 install-if-missing pandoc-bin
-install-if-missing rememberthemilk
 install-if-missing ripmime
 install-if-missing terraform-ls
 install-if-missing terraform-lsp
