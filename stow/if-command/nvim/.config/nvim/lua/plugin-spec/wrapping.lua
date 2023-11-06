@@ -22,4 +22,6 @@ return {
             require("wrapping").toggle_wrap_mode()
         end, { desc = "Toggle wrap mode", unique = true })
     end,
+    -- Set up mapping before mini.basics
+    priority = 49,
 }
