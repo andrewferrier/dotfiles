@@ -47,11 +47,11 @@ rfkill block bluetooth
 rfkill block wwan
 
 export TERMCMD=kitty
-export BROWSER=qutebrowser
+export BROWSER=librewolf
 
 # https://wiki.archlinux.org/title/HiDPI#X_Resources
 
-# Affects qutebrowser, KeepassXC
+# Affects KeepassXC
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
 exec i3

@@ -4,11 +4,11 @@ audio/mpeg=mpv.desktop
 image/jpeg=feh.desktop
 image/png=feh.desktop
 inode/directory=ranger.desktop
-text/html=org.qutebrowser.qutebrowser.desktop
-text/xml=org.qutebrowser.qutebrowser.desktop
-x-scheme-handler/about=org.qutebrowser.qutebrowser.desktop
-x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop
-x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop
-x-scheme-handler/unknown=org.qutebrowser.qutebrowser.desktop
+text/html=librewolf.desktop
+text/xml=librewolf.desktop
+x-scheme-handler/about=librewolf.desktop
+x-scheme-handler/http=librewolf.desktop
+x-scheme-handler/https=librewolf.desktop
+x-scheme-handler/unknown=librewolf.desktop
 
 # vim: filetype=cfg

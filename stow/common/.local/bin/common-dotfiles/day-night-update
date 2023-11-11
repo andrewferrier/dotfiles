@@ -12,7 +12,6 @@ BASE_PATH = Path("~/.cache/day-night").expanduser()
 BASE_PATH.mkdir(parents=True, exist_ok=True)
 
 KITTY_COLOR = BASE_PATH.joinpath("kitty-color.conf")
-STATE_FILE_QUTEBROWSER = BASE_PATH.joinpath("state-qutebrowser")
 STATE_FILE_TERMINAL = BASE_PATH.joinpath("state-terminal")
 
 if "XDG_CONFIG_HOME" in os.environ and os.environ["XDG_CONFIG_HOME"] is not None:
@@ -62,8 +61,6 @@ def get_state_linux():
 try:
     if platform.system() == "Linux":
         state = get_state_linux()
-
-        write_to_file(STATE_FILE_QUTEBROWSER, state + "\n")
 
         if state == "day":
             write_to_file(GTKRC20, 'gtk-theme-name="Adwaita"')

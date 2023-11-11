@@ -6,7 +6,6 @@
     kitty       | ~/.config/kitty/kitty.conf
     mutt        | ~/.mutt/muttrc.common
     neovim      | ~/.config/nvim/README.md
-    qutebrowser | ~/.config/qutebrowser/config.py
     ranger      | ~/.config/ranger/rc.conf
     zsh         | ~/.config/zsh/README.md
 
