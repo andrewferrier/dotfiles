@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# FIXME: Attempt to do a better layout with jq, currently missing color and human dates
+# readonly JQ_CMD=".[] | if .due == null then .due |= \"None\t\" else .due |= strftime(\"%Y-%m-%d\") end | \"\(.id)\t\(.due)\t\(.summary)\""
+
 readonly RELOAD="reload(todo --color always list | cut -d' ' -f3-)"
 
 readonly TODAY="\$(date +%Y-%m-%d)"
