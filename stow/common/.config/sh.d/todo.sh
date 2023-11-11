@@ -17,6 +17,9 @@ if (command -v todo >/dev/null 2>&1); then
     alias todo-edit="todo edit \$(todo --color always list | ${FILTER_BOX} | fzf ${PREVIEW} ${OPTIONS} | cut -d' ' -f1)"
     alias todo-edit-raw="todo edit --raw \$(todo --color always list | ${FILTER_BOX} | fzf ${PREVIEW} ${OPTIONS} | cut -d' ' -f1)"
 
+    alias todo-edit-today="todo --color always list | ${FILTER_BOX} | fzf ${PREVIEW} ${OPTIONS} -m | cut -d' ' -f1 | xargs -n 1 todo edit --due \$(date +%Y-%m-%d)"
+    alias todo-edit-tomorrow="todo --color always list | ${FILTER_BOX} | fzf ${PREVIEW} ${OPTIONS} -m | cut -d' ' -f1 | xargs -n 1 todo edit --due \$(date --date=tomorrow +%Y-%m-%d)"
+
     alias todo-new-today="todo new --due today"
     alias todo-new-tomorrow="todo new --due tomorrow"
 fi
