@@ -18,6 +18,7 @@ install-if-missing eget-bin
 install-if-missing keepmenu
 install-if-missing librewolf-bin
 install-if-missing mpd-notification
+install-if-missing mpdevil
 install-if-missing ocrmypdf
 install-if-missing pandoc-bin
 install-if-missing ripmime
@@ -28,5 +29,4 @@ install-if-missing trickle
 install-if-missing tzupdate
 install-if-missing vale-bin # for neovim null-ls
 install-if-missing verapdf
-install-if-missing vimpc-git
 install-if-missing virtualbox-ext-oracle

@@ -37,10 +37,6 @@
     <down> | zoom out
     <, >   | rotate
 
-## vimpc (mpd client)
-
-    f | Find song playing now
-
 ## journalctl
 
     journalctl --since=yesterday                 | output from beginning of yesterday
