@@ -89,10 +89,6 @@ hs.hotkey.bind(PREFIX_ACTION, "Return", function()
     open_terminal()
 end)
 
-hs.hotkey.bind(PREFIX_ACTION, "M", function()
-    open_terminal(HOMEBREW_BIN .. "/vimpc")
-end)
-
 hs.hotkey.bind(PREFIX_ACTION, "V", function()
     open_bash_terminal(HOMEBREW_BIN .. "/nvim")
 end)
