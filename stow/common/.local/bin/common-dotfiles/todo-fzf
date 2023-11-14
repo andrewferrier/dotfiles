@@ -17,7 +17,7 @@ todo --color always list |
         --preview-window=top,5 \
         --bind "ctrl-r:${RELOAD}" \
         --bind "ctrl-delete:execute(todo delete --yes {1})+${RELOAD}" \
-        --bind "enter:execute(todo done {1})+${RELOAD}" \
+        --bind "ctrl-d:execute(todo done {1})+${RELOAD}" \
         --bind "ctrl-e:execute(todo edit {1})+${RELOAD}" \
         --bind "ctrl-a:execute(todo edit --raw {1})+${RELOAD}" \
         --bind "ctrl-y:execute(todo edit --due ${TODAY} {1})+${RELOAD}" \
