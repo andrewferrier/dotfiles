@@ -39,10 +39,13 @@ local function lsp_document_format()
 end
 
 M.inlay_hints = function(bufnr)
-    vim.lsp.inlay_hint(bufnr, true)
+    vim.lsp.inlay_hint.enable(bufnr, true)
 
     vim.keymap.set("n", "yoi", function()
-        vim.lsp.inlay_hint(bufnr, nil)
+        vim.lsp.inlay_hint.enable(
+            bufnr,
+            not vim.lsp.inlay_hint.is_enabled(bufnr)
+        )
     end, { buffer = bufnr, desc = "Toggle inlay hints" })
 end
 
