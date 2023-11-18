@@ -1,12 +1,10 @@
 return {
     "neovim/nvim-lspconfig",
     config = function()
-        local lspconfig = require("lspconfig")
-
         -- For doing diagnostics:
         -- vim.lsp.set_log_level("info")
 
-        local servers = {
+        for lsp, settings in pairs({
             ansiblels = {},
             bashls = {},
             cssls = require("plugin-config.lsp-settings.css"),
@@ -19,10 +17,8 @@ return {
             tsserver = require("plugin-config.lsp-settings.tsserver"),
             vimls = {},
             yamlls = require("plugin-config.lsp-settings.yaml"),
-        }
-
-        for lsp, settings in pairs(servers) do
-            lspconfig[lsp].setup(settings)
+        }) do
+            require("lspconfig")[lsp].setup(settings)
         end
     end,
     event = "BufEnter",
