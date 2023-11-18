@@ -28,14 +28,8 @@ local function lsp_document_format()
         return
     end
 
-    local conform = require("conform")
-    if vim.tbl_count(conform.list_formatters()) > 0 then
-        conform.format({ timeout_ms = 3000 })
-        vim.notify("Formatted document using conform.")
-    else
-        vim.lsp.buf.format({ timeout_ms = 3000 })
-        vim.notify("Formatted document using LSP.")
-    end
+    vim.lsp.buf.format({ timeout_ms = 3000 })
+    vim.notify("Formatted document using LSP.")
 end
 
 M.inlay_hints = function(bufnr)
