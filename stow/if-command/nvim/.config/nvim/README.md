@@ -168,7 +168,7 @@
 
 ## TODO
 
-*   Play with treesitter to highlight inside alias strings in bash/zsh
+*   Play with treesitter to highlight inside alias strings in bash/zsh; try <https://github.com/Dronakurl/injectme.nvim/tree/main>
 *   Allow for `setup_outline` using treesitter
 *   Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
 *   0.10: Replace 'jobstart' with vim.system
