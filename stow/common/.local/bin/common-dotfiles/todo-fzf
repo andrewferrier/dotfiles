@@ -15,6 +15,7 @@ todo --color always list |
         --ansi \
         --tac \
         --preview-window=top,5 \
+        --header "Ctrl-Reload,Done,Edit,editrAw,todaY,tomorroW,New,<delete>" \
         --bind "ctrl-r:${RELOAD}" \
         --bind "ctrl-delete:execute(todo delete --yes {1})+${RELOAD}" \
         --bind "ctrl-d:execute(todo done {1})+${RELOAD}" \
