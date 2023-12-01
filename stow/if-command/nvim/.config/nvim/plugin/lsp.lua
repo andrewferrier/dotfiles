@@ -41,24 +41,6 @@ local function keybindings_rename_check(bufnr, server_capabilities)
     end
 end
 
-local function keybindings_hover_keyword(bufnr, server_capabilities, filetype)
-    if filetype == "terraform" then
-        -- Don't map "K"; this is handled in
-        -- ~/.config/nvim/after/ftplugin/terraform.lua
-    elseif server_capabilities.hoverProvider then
-        if filetype ~= "vim" then
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-                buffer = bufnr,
-                desc = "Show definition using LSP",
-            })
-        end
-    else
-        vim.keymap.set("n", "K", function()
-            vim.notify("Hover not supported by LSP.", vim.log.levels.ERROR)
-        end, { buffer = bufnr, desc = DISABLED_DESC, unique = true })
-    end
-end
-
 local function keybindings_organizeimports(bufnr, lsp_name)
     local DESC = "Organize imports"
 
@@ -76,12 +58,10 @@ local function lsp_callback(event)
         local bufnr = event.buf
         local lsp_name = client.name
         local server_capabilities = client.server_capabilities
-        local filetype = vim.bo.filetype
 
         keybindings_formatting_check(bufnr, server_capabilities)
         keybindings_codeaction_check(bufnr, server_capabilities)
         keybindings_rename_check(bufnr, server_capabilities)
-        keybindings_hover_keyword(bufnr, server_capabilities, filetype)
         keybindings_organizeimports(bufnr, lsp_name)
 
         vim.api.nvim_create_user_command(
