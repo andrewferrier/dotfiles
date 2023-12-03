@@ -56,4 +56,9 @@ return {
             },
         })
     end,
+    enabled = function()
+        if vim.env.OPENAI_API_KEY then
+            return true
+        end
+    end
 }
