@@ -16,10 +16,6 @@ return {
         "NeoAIInjectContext",
         "NeoAIInjectContextCode",
     },
-    keys = {
-        { "gyhs", desc = "Summarize text", mode = "v" },
-        { "gyhr", desc = "Refactor code", mode = "v" },
-    },
     config = function()
         require("neoai").setup({
             ui = {
