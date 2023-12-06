@@ -85,6 +85,7 @@ cask "keepassxc"
 cask "kitty"
 cask "librewolf", args: { quarantine: false }
 cask "notunes"
+cask "visual-studio-code"
 cask "whatsapp"
 
 # vim: set filetype=ruby:
