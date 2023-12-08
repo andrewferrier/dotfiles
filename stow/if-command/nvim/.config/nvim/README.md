@@ -175,6 +175,7 @@
 *   0.10: Replace 'jobstart' with vim.system
 *   0.10: Consider replacing gruvbox with retrobox
 *   Add a toggle and status bar highlight for copilot
+*   Warn when copilot is not authenticated
 
 ## Presentation Ideas
 
