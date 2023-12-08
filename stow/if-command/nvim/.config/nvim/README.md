@@ -174,7 +174,6 @@
 *   Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
 *   0.10: Replace 'jobstart' with vim.system
 *   0.10: Consider replacing gruvbox with retrobox
-*   Add a toggle and status bar highlight for copilot
 *   Warn when copilot is not authenticated
 
 ## Presentation Ideas
