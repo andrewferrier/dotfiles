@@ -29,12 +29,6 @@ local function keybindings_formatting_check(bufnr, server_capabilities)
     end
 end
 
-local function keybindings_codeaction_check(bufnr, server_capabilities)
-    if server_capabilities.codeActionProvider then
-        require("lsp-keybindings").codeaction(bufnr)
-    end
-end
-
 local function keybindings_rename_check(bufnr, server_capabilities)
     if server_capabilities.renameProvider then
         keybindings_rename(bufnr)
@@ -42,13 +36,17 @@ local function keybindings_rename_check(bufnr, server_capabilities)
 end
 
 local function keybindings_organizeimports(bufnr, lsp_name)
-    local DESC = "Organize imports"
-
-    if lsp_name == "pyright" then
-        vim.keymap.set("n", "cxo", function()
+    vim.keymap.set("n", "cxo", function()
+        if vim.o.filetype == "python" then
             vim.cmd("silent! PyrightOrganizeImports")
-        end, { buffer = bufnr, desc = DESC })
-    end
+        else
+            vim.notify(
+                "Don't know how to organize imports in filetype "
+                    .. vim.o.filetype,
+                vim.log.levels.WARN
+            )
+        end
+    end, { buffer = bufnr, desc = "Organize imports" })
 end
 
 local function lsp_callback(event)
@@ -60,7 +58,7 @@ local function lsp_callback(event)
         local server_capabilities = client.server_capabilities
 
         keybindings_formatting_check(bufnr, server_capabilities)
-        keybindings_codeaction_check(bufnr, server_capabilities)
+        require("lsp-keybindings").codeaction(bufnr)
         keybindings_rename_check(bufnr, server_capabilities)
         keybindings_organizeimports(bufnr, lsp_name)
 
@@ -86,6 +84,4 @@ local map = function(keys, action_desc)
     end, { desc = DISABLED_DESC, unique = true })
 end
 
-map("cxo", "organize imports for")
-map("cxa", "apply code actions for")
 map("gQ", "document format")
