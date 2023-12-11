@@ -53,14 +53,12 @@ M.formatting = function(bufnr)
 end
 
 M.codeaction = function(bufnr)
-    local DESC = "Apply code action"
-
     -- Don't use visual mode here, conflicts with 'c'
     vim.keymap.set(
         "n",
         "cxa",
         require("fzf-lua").lsp_code_actions,
-        { buffer = bufnr, desc = DESC }
+        { buffer = bufnr, desc = "Apply code action" }
     )
 end
 
