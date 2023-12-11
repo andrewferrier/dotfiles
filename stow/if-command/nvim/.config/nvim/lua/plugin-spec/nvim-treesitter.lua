@@ -61,6 +61,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = configure,
+    event = { "BufReadPre", "BufNewFile" },
     -- Re-enable once on NeoVim 0.10
     -- version = "*",
 }
