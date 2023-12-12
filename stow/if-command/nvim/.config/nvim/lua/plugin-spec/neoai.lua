@@ -5,16 +5,16 @@ return {
     },
     cmd = {
         "NeoAI",
-        "NeoAIOpen",
         "NeoAIClose",
-        "NeoAIToggle",
         "NeoAIContext",
-        "NeoAIContextOpen",
         "NeoAIContextClose",
+        "NeoAIContextOpen",
         "NeoAIInject",
         "NeoAIInjectCode",
         "NeoAIInjectContext",
         "NeoAIInjectContextCode",
+        "NeoAIOpen",
+        "NeoAIToggle",
     },
     config = function()
         require("neoai").setup({
