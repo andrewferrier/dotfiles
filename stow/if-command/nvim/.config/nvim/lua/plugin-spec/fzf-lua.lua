@@ -39,20 +39,21 @@ local configure = function()
     end, { desc = "Open manpage", unique = true })
 
     local cvf_previewer
+    local ESCAPE_CHARS = " (){}`'\""
 
     if vim.fn.executable("batcat") == 1 then
         cvf_previewer = function(items)
             return "batcat --style=plain --color=always "
-                .. vim.fn.escape(items[1], " ")
+                .. vim.fn.escape(items[1], ESCAPE_CHARS)
         end
     elseif vim.fn.executable("bat") == 1 then
         cvf_previewer = function(items)
             return "bat --style=plain --color=always "
-                .. vim.fn.escape(items[1], " ")
+                .. vim.fn.escape(items[1], ESCAPE_CHARS)
         end
     else
         cvf_previewer = function(items)
-            return "cat " .. vim.fn.escape(items[1], " ")
+            return "cat " .. vim.fn.escape(items[1], ESCAPE_CHARS)
         end
     end
 
