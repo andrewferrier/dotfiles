@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 function generate-password-human() {
-    WORDS_LENGTH=${1:-4}
-    shuf -n"${WORDS_LENGTH}" /usr/share/dict/words | tr -d "'\n\r" && echo ""
+    CONFORM_TO_TYPICAL_RULES=$(pwgen --capitalize --numerals --symbols 3)
+
+    WORDS_LENGTH=${1:-3}
+    shuf -n"${WORDS_LENGTH}" /usr/share/dict/words | tr -d "'\n\r" && echo "$CONFORM_TO_TYPICAL_RULES"
 }
 
 function generate-password-machine() {
