@@ -34,7 +34,7 @@ local configure = function()
             { "o", "x" },
             "ih",
             ":<C-U>Gitsigns select_hunk<CR>",
-            { buffer = bufnr }
+            { buffer = bufnr, silent = true }
         )
 
         vim.keymap.set("n", "gbhs", function()
