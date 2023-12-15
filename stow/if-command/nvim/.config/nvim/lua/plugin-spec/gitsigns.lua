@@ -6,15 +6,13 @@ local configure = function()
             vim.schedule(function()
                 gitsigns.next_hunk()
             end)
-            return "<Ignore>"
-        end, { expr = true, desc = "Hunk forward", buffer = bufnr })
+        end, { desc = "Hunk forward", buffer = bufnr })
 
         vim.keymap.set("n", "[h", function()
             vim.schedule(function()
                 gitsigns.prev_hunk()
             end)
-            return "<Ignore>"
-        end, { expr = true, desc = "Hunk backward", buffer = bufnr })
+        end, { desc = "Hunk backward", buffer = bufnr })
 
         vim.keymap.set(
             "n",
