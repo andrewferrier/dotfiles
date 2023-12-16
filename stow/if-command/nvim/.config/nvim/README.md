@@ -175,6 +175,7 @@
 *   0.10: Replace 'jobstart' with vim.system
 *   0.10: Consider replacing gruvbox with retrobox
 *   Warn when copilot is not authenticated
+*   Look at switching to main branch for nvim-treesitter for nightly: <https://github.com/nvim-treesitter/nvim-treesitter/issues/4767>
 
 ## Presentation Ideas
 
