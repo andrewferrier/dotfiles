@@ -7,16 +7,12 @@ local configure = function()
             width = 0.9,
             preview = {
                 title = false,
-                winopts = {
-                    number = false,
-                },
                 flip_columns = 200,
             },
         },
-        border = "thicc",
         fzf_opts = {
             ["--layout"] = "default",
-            ["--color"] = "dark,gutter:-1",
+            ["--color"] = "gutter:-1",
         },
     })
 
