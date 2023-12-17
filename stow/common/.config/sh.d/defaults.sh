@@ -6,6 +6,7 @@ alias ip='ip --color=auto'
 alias lzip="lzip --best -m128 -s128MiB"
 alias mkdir="mkdir -v"
 alias mv="mv -v"
+alias rm='rm -Iv'
 alias rsync='rsync --human-readable --progress --partial --verbose --times --links'
 alias watch='watch --color'
 
@@ -20,7 +21,6 @@ else
     alias df='df --print-type --human-readable'
     alias lsblk='lsblk -o NAME,RM,RO,MOUNTPOINT,TYPE,FSTYPE,SIZE,FSUSED,UUID,LABEL,PARTLABEL --paths'
     alias ps='COLUMNS=10000 ps -e -f --forest'
-    alias rm='rm -I'
 fi
 
 # See also ~/.config/fd/ignore
