@@ -56,6 +56,11 @@ return {
     enabled = function()
         if vim.env.OPENAI_API_KEY then
             return true
+        else
+            vim.notify(
+                "$OPENAI_API_KEY not set; neoai.lua not loaded.",
+                vim.log.levels.WARN
+            )
         end
     end,
 }
