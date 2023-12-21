@@ -37,7 +37,6 @@ prompt_pwd() {
 }
 
 prompt_nested() {
-    [ -n "$RANGER_LEVEL" ] && echo -n '(ranger) '
     [ -n "$NCDU_LEVEL" ] && echo -n '(ncdu) '
     [ -n "$VIRTUAL_ENV" ] && echo -n "(venv $(basename $VIRTUAL_ENV)) "
 }
