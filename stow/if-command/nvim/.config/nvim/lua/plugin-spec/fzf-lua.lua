@@ -92,9 +92,12 @@ local configure = function()
         })
     end, { desc = "Find directory", unique = true })
 
-    vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function()
-        require("fzf-lua").complete_path()
-    end, { silent = true, desc = "Fuzzy complete path", unique = true })
+    vim.keymap.set({ "i" }, "<C-x><C-f>", function()
+        require("fzf-lua").complete_file({
+            cmd = "rg --files",
+            winopts = { preview = { hidden = "nohidden" } },
+        })
+    end, { silent = true, desc = "Fuzzy complete file" })
 end
 
 return {
