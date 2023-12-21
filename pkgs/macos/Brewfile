@@ -47,6 +47,7 @@ brew "ncdu"
 brew "neovim"
 brew "pandoc"
 brew "pipx"
+brew "podman-desktop"
 brew "poppler" # pdftotext for ranger
 brew "pstree"
 brew "pwgen"
