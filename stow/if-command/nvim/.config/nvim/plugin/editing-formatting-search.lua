@@ -1,7 +1,4 @@
 vim.opt.clipboard = "unnamed" -- On OSX, unnamed=unnamedplus, on Linux, autocutsel syncs them anyway
-vim.opt.completeopt:append("preview") -- Doesn't reliably close
-vim.opt.completeopt:remove("menuone")
-vim.opt.completeopt:remove("noinsert")
 vim.opt.diffopt:append("linematch:60")
 vim.opt.expandtab = true
 vim.opt.formatoptions:append("l")
@@ -15,13 +12,21 @@ vim.opt.textwidth = 80 -- This is the default for many/most languages: https://e
 vim.opt.virtualedit = "block"
 vim.opt.wildmode = "longest:full"
 
+if vim.fn.has("nvim-0.10.0") == 1 then
+    vim.opt.completeopt:append("popup")
+else
+    vim.opt.completeopt:append("preview") -- Doesn't reliably close
+end
+vim.opt.completeopt:remove("menuone")
+vim.opt.completeopt:remove("noinsert")
+
 -- see https://vimways.org/2018/the-power-of-diff/
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
 vim.opt.diffopt:append("vertical")
 
-vim.cmd.iabbrev('zDATE', '<C-R>=strftime("%F")<CR>')
-vim.cmd.iabbrev('zDATETIME', '<C-R>=strftime("%FT%H:%M:%S")<CR>')
+vim.cmd.iabbrev("zDATE", '<C-R>=strftime("%F")<CR>')
+vim.cmd.iabbrev("zDATETIME", '<C-R>=strftime("%FT%H:%M:%S")<CR>')
 
 -- This generic behaviour for rename will be overwritten by treesitter.lua where
 -- supported. Don't use 'cxr' in visual mode as it will block 'c'.
