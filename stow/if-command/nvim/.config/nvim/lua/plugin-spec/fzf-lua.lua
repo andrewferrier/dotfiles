@@ -9,6 +9,7 @@ local configure = function()
                 title = false,
                 flip_columns = 200,
             },
+            border = { " ", " ", " ", " ", " ", " ", " ", " " },
         },
         fzf_opts = {
             ["--layout"] = "default",
