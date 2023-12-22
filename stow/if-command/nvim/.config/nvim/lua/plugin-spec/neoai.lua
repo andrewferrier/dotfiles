@@ -61,6 +61,7 @@ return {
                 "$OPENAI_API_KEY not set; neoai.lua not loaded.",
                 vim.log.levels.WARN
             )
+            return false
         end
     end,
 }
