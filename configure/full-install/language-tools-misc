@@ -7,7 +7,7 @@ set -o pipefail
 LOCAL_BIN="${HOME}/.local/bin"
 
 if ! gem list --no-verbose mdl | grep mdl > /dev/null; then
-    gem install mdl -v 0.11.0
+    gem install mdl
 fi
 
 if [[ $(uname -s) == Linux* ]]; then
