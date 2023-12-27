@@ -73,6 +73,7 @@
 
     !figlet - Take lines and pass through figlet to create ASCII art
     g Ctrl-A Increment each line in visual selection by one more
+    @q - repeat macro q for each line
 
 ### Command Mode
 
