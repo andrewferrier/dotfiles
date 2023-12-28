@@ -125,7 +125,7 @@
 ### FZF
 
     Ctrl-T - open file in new tab
-    Tab - select file (then <CR> to open in Quickfix)
+    Tab - select file (then Alt-Q to open in Quickfix)
 
 ### Search Pattern
 
