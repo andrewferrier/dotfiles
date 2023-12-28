@@ -84,7 +84,7 @@ local configure = function()
                 ["--preview"] = fzf_lua.shell.preview_action_cmd(
                     function(items)
                         return "exa --level 2 --tree --color=always --group-directories-first "
-                            .. vim.fn.escape(items[1], " ")
+                            .. escape(items)
                     end
                 ),
                 ["--no-sort"] = "",
