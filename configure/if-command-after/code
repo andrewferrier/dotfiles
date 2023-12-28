@@ -1,14 +1,16 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -o errexit
 set -o noglob
 set -o nounset
 
-if command -v codium &> /dev/null; then
+if command -v codium &>/dev/null; then
     CODECMD=codium
 else
     CODECMD=code
+fi
 
+if [[ ${OSTYPE} == darwin* ]]; then
     $CODECMD --install-extension ms-vsliveshare.vsliveshare
 fi
 
