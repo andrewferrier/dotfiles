@@ -54,12 +54,17 @@ end
 
 M.codeaction = function(bufnr)
     -- Don't use visual mode here, conflicts with 'c'
-    vim.keymap.set(
-        "n",
-        "cxa",
-        require("fzf-lua").lsp_code_actions,
-        { buffer = bufnr, desc = "Apply code action" }
-    )
+    vim.keymap.set("n", "cxa", function()
+        require("fzf-lua").lsp_code_actions({
+            winopts = {
+                relative = "cursor",
+                width = 0.6,
+                height = 0.6,
+                row = 1,
+                preview = { vertical = "up:70%" },
+            },
+        })
+    end, { buffer = bufnr, desc = "Apply code action" })
 end
 
 return M
