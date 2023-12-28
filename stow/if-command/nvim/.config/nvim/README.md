@@ -174,7 +174,6 @@
 *   Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
 *   0.10: Replace 'jobstart' with vim.system
 *   0.10: Consider replacing gruvbox with retrobox
-*   Warn when copilot is not authenticated
 *   Look at switching to main branch for nvim-treesitter for nightly: <https://github.com/nvim-treesitter/nvim-treesitter/issues/4767>
 *   Use 'gO' to handle outlines using fzf-lua document symbols
 
