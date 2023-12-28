@@ -1,7 +1,6 @@
 vim.filetype.add({
     extension = {
         equivs = "debcontrol",
-        hurl = "hurl",
         jad = "java",
         rasi = "rasi",
         tfstate = "json",
@@ -44,3 +43,11 @@ vim.filetype.add({
         [".*site.ya?ml"] = "yaml.ansible",
     },
 })
+
+if vim.fn.has("nvim-0.10.0") == 0 then
+    vim.filetype.add({
+        extension = {
+            hurl = "hurl",
+        },
+    })
+end
