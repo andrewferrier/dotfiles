@@ -35,7 +35,7 @@ local function keybindings_rename_check(bufnr, server_capabilities)
     end
 end
 
-local function keybindings_organizeimports(bufnr, lsp_name)
+local function keybindings_organizeimports(bufnr)
     vim.keymap.set("n", "cxo", function()
         if vim.o.filetype == "python" then
             vim.cmd("silent! PyrightOrganizeImports")
@@ -54,13 +54,12 @@ local function lsp_callback(event)
 
     if client ~= nil then
         local bufnr = event.buf
-        local lsp_name = client.name
         local server_capabilities = client.server_capabilities
 
         keybindings_formatting_check(bufnr, server_capabilities)
         require("lsp-keybindings").codeaction(bufnr)
         keybindings_rename_check(bufnr, server_capabilities)
-        keybindings_organizeimports(bufnr, lsp_name)
+        keybindings_organizeimports(bufnr)
 
         vim.api.nvim_create_user_command(
             "LspWhatCapabilities",
