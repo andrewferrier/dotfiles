@@ -200,5 +200,5 @@ cat \
     awk '!seen[$0]++' |
     if "$DIRS"; then sed 's/\/\.$//'; else cat; fi |
     if "$PLAIN"; then cat; else perl -pe "s|(.*)/(.*?)$|\1/${COLOR_BLUE}\2${COLOR_RESET}|g"; fi |
-    if "$SELECT"; then fzf --exact --ansi --height "${FZF_TMUX_HEIGHT:-40%}" --no-sort --tiebreak=end "${MULTISELECT_ARGS}" --preview="$PREVIEW_COMMAND | head -\$LINES" | tee >(xargs -n1 fasd -A); else cat; fi |
+    if "$SELECT"; then fzf --exact --ansi --height "${FZF_TMUX_HEIGHT:-40%}" --no-sort --tiebreak=end ${MULTISELECT_ARGS} --preview="$PREVIEW_COMMAND | head -\$LINES" | tee >(xargs -n1 fasd -A); else cat; fi |
     if "$NULL"; then tr '\n' '\0'; else cat; fi
