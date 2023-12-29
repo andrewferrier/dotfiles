@@ -1,7 +1,5 @@
 -- FIXME: Dynamically calculate whether to support keybindings based on client.supports_method()
 
-local DISABLED_DESC = "DISABLED FOR THIS FILETYPE"
-
 function _G.show_capabilities()
     for _, client in pairs(vim.lsp.buf_get_clients(0)) do
         print(
@@ -21,12 +19,6 @@ local function keybindings_rename(bufnr)
         buffer = bufnr,
         desc = "Rename identifier using LSP",
     })
-end
-
-local function keybindings_formatting_check(bufnr, server_capabilities)
-    if server_capabilities.documentFormattingProvider == true then
-        require("lsp-keybindings").formatting(bufnr)
-    end
 end
 
 local function keybindings_rename_check(bufnr, server_capabilities)
@@ -56,16 +48,10 @@ local function lsp_callback(event)
         local bufnr = event.buf
         local server_capabilities = client.server_capabilities
 
-        keybindings_formatting_check(bufnr, server_capabilities)
+        require("lsp-keybindings").formatting(bufnr)
         require("lsp-keybindings").codeaction(bufnr)
         keybindings_rename_check(bufnr, server_capabilities)
         keybindings_organizeimports(bufnr)
-
-        vim.api.nvim_create_user_command(
-            "LspWhatCapabilities",
-            "Capture call v:lua.show_capabilities()",
-            {}
-        )
     end
 end
 
@@ -74,13 +60,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = lsp_callback,
 })
 
-local map = function(keys, action_desc)
-    vim.keymap.set("n", keys, function()
-        vim.notify(
-            "Don't know how to " .. action_desc .. " this filetype.",
-            vim.log.levels.ERROR
-        )
-    end, { desc = DISABLED_DESC, unique = true })
-end
-
-map("gQ", "document format")
+vim.api.nvim_create_user_command(
+    "LspWhatCapabilities",
+    "Capture call v:lua.show_capabilities()",
+    {}
+)
