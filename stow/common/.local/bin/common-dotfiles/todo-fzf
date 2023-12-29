@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-# FIXME: Attempt to do a better layout with jq, currently missing color and human dates
-# readonly JQ_CMD=".[] | if .due == null then .due |= \"None\t\" else .due |= strftime(\"%Y-%m-%d\") end | \"\(.id)\t\(.due)\t\(.summary)\""
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+readonly SCRIPT_DIR
 
-readonly RELOAD="reload(todo --color always list | cut -d' ' -f3-)"
+readonly RELOAD="reload(todo --porcelain list | ${SCRIPT_DIR}/todo-fzf-formatter)"
 
 readonly TODAY="\$(date +%Y-%m-%d)"
 readonly TOMORROW="\$(date --date=tomorrow +%Y-%m-%d)"
 
 # shellcheck disable=SC2312
-todo --color always list |
-    cut -d' ' -f3- |
+todo --porcelain list |
+    "${SCRIPT_DIR}/todo-fzf-formatter" |
     fzf --preview 'todo show {1}' \
         --ansi \
         --tac \
