@@ -1,7 +1,4 @@
 return {
-    on_attach = function(_, bufnr)
-        require('lsp-keybindings').inlay_hints(bufnr)
-    end,
     settings = {
         javascript = {
             inlayHints = {

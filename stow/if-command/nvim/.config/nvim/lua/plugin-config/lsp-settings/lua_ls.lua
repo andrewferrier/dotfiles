@@ -10,9 +10,6 @@ return {
         "--metapath",
         META_PATH,
     },
-    on_attach = function(_, bufnr)
-        require('lsp-keybindings').inlay_hints(bufnr)
-    end,
     settings = {
         Lua = {
             -- Formatting is disabled because it doesn't reflow nicely; we use
