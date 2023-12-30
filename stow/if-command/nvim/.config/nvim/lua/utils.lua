@@ -33,4 +33,14 @@ M.get_filename_homedir = function()
     return vim.fn.substitute(curfile, "^" .. vim.env.HOME, "~", "")
 end
 
+M.lsp_supports_method = function(method)
+    for _, client in pairs(vim.lsp.buf_get_clients(0)) do
+        if client.supports_method(method) then
+            return true
+        end
+    end
+
+    return false
+end
+
 return M

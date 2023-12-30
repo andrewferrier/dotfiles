@@ -19,20 +19,12 @@ local function warn_unsupported(action_description)
     )
 end
 
-local function supports_method(method)
-    for _, client in pairs(vim.lsp.buf_get_clients(0)) do
-        if client.supports_method(method) then
-            return true
-        end
-    end
-
-    return false
-end
-
 local function lsp_document_format()
     if
         vim.fn.has("nvim-0.10.0") == 0
-        or supports_method(vim.lsp.protocol.Methods.textDocument_formatting)
+        or require("utils").lsp_supports_method(
+            vim.lsp.protocol.Methods.textDocument_formatting
+        )
     then
         vim.lsp.buf.format({ timeout_ms = 3000 })
         vim.notify("Formatted document using LSP.")
@@ -55,7 +47,9 @@ local function keybindings_codeaction(bufnr)
     vim.keymap.set("n", "cxa", function()
         if
             vim.fn.has("nvim-0.10.0") == 0
-            or supports_method(vim.lsp.protocol.Methods.textDocument_codeAction)
+            or require("utils").lsp_supports_method(
+                vim.lsp.protocol.Methods.textDocument_codeAction
+            )
         then
             require("fzf-lua").lsp_code_actions({
                 winopts = {
@@ -70,21 +64,6 @@ local function keybindings_codeaction(bufnr)
             warn_unsupported("apply code actions")
         end
     end, { buffer = bufnr, desc = "Apply code action" })
-end
-
-local function keybindings_rename(bufnr)
-    if
-        vim.fn.has("nvim-0.10.0") == 0
-        or supports_method(vim.lsp.protocol.Methods.textDocument_rename)
-    then
-        vim.keymap.set("n", "cxr", function()
-            return ":LspRename " .. vim.fn.expand("<cword>")
-        end, {
-            expr = true,
-            buffer = bufnr,
-            desc = "Rename identifier using LSP",
-        })
-    end
 end
 
 local function keybindings_organizeimports(bufnr)
@@ -114,7 +93,6 @@ local function lsp_callback(event)
 
         keybindings_formatting(bufnr)
         keybindings_codeaction(bufnr)
-        keybindings_rename(bufnr)
         keybindings_organizeimports(bufnr)
 
         if vim.fn.has("nvim-0.10.0") == 1 then

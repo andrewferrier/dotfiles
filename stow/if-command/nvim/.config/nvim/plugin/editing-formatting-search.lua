@@ -28,15 +28,6 @@ vim.opt.diffopt:append("vertical")
 vim.cmd.iabbrev("zDATE", '<C-R>=strftime("%F")<CR>')
 vim.cmd.iabbrev("zDATETIME", '<C-R>=strftime("%FT%H:%M:%S")<CR>')
 
--- This generic behaviour for rename will be overwritten by treesitter.lua where
--- supported. Don't use 'cxr' in visual mode as it will block 'c'.
-vim.keymap.set(
-    "n",
-    "cxr",
-    ":%s/<C-R><C-W>/<C-R><C-W>/gc<Left><Left><Left>",
-    { desc = "Replace word", unique = true }
-)
-
 vim.keymap.set(
     "n",
     "[<Space>",
