@@ -25,6 +25,7 @@
     ]i, [i - move by indents
     d'a - delete to mark "a"
     dV/xyz/-1 - delete linewise up to but not including line with pattern
+    dm<space> - delete all marks
     g;, g, - jump backwards/forwards through changes
     g={motion} - evaluate
     gJ - Join lines w/o additional space, but include indent
@@ -34,6 +35,7 @@
     gj, gk, g$, g0 - go up and down by screen lines, end and beginning by screen line (useful when wrapped)
     gp, gP - paste, but leave cursor after text
     gt - go to next tab
+    m, - set next available mark
     mA - set an uppercase mark, for jumping across files
     q: - open command mode window
     qA - resume recording into macro A
