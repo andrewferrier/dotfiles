@@ -29,7 +29,6 @@ prompt_cmd_exec_time() {
 
 prompt_preexec() {
     cmd_timestamp=$EPOCHSECONDS
-    shell_integration_preexec
 }
 
 prompt_pwd() {
@@ -39,24 +38,6 @@ prompt_pwd() {
 prompt_nested() {
     [ -n "$NCDU_LEVEL" ] && echo -n '(ncdu) '
     [ -n "$VIRTUAL_ENV" ] && echo -n "(venv $(basename $VIRTUAL_ENV)) "
-}
-
-# See https://sw.kovidgoyal.net/kitty/shell-integration/#notes-for-shell-developers
-# FIXME: uncommenting this causes the RPROMPT to have extra RHS padding
-# shell_integration_ps1_start() {
-#     printf "\033]133;A\007"
-# }
-
-# shell_integration_ps1_end() {
-#     printf "\033]133;B\007"
-# }
-
-shell_integration_ps2() {
-    printf "\033]133;A;k=s\007"
-}
-
-shell_integration_preexec() {
-    printf "\033]133;C\007"
 }
 
 prompt_precmd() {
@@ -78,10 +59,6 @@ prompt_precmd() {
 
     PROMPT="${COLOR_SECONDARY}${prompt_jobs}$(prompt_nested)"
     PROMPT="${PROMPT}%(?.${COLOR_PRIMARY}.%B${COLOR_ERROR})%#${RESET_FORMATTING} "
-    # FIXME: uncommenting this causes the RPROMPT to have extra RHS padding
-    # PROMPT="$(shell_integration_ps1_start)${PROMPT}$(shell_integration_ps1_end)"
-
-    PROMPT2="$(shell_integration_ps2)%_>"
 
     GIT_INCLUDE="${GITSTATUS_PROMPT}"
     [[ ! -z $GIT_INCLUDE ]] && GIT_INCLUDE=" ${GIT_INCLUDE}"
