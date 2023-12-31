@@ -26,7 +26,7 @@ local configure = function()
     vim.keymap.set(
         "n",
         "cvl",
-        fzf_lua.live_grep,
+        fzf_lua.live_grep_native,
         { desc = "Live grep", unique = true }
     )
 
