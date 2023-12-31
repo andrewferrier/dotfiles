@@ -22,11 +22,11 @@ map("g", change_to_root, "git root")
 
 vim.keymap.set("n", "gof", function()
     require("open_filedirterm").open_file_manager("%:p")
-end, { desc = "Open ranger in directory of file", unique = true })
+end, { desc = "Open lf in directory of file", unique = true })
 
 vim.keymap.set("n", "goF", function()
     require("open_filedirterm").open_file_manager(vim.fn.getcwd(0))
-end, { desc = "Open ranger in lcd", unique = true })
+end, { desc = "Open lf in lcd", unique = true })
 
 vim.keymap.set("n", "got", function()
     require("open_filedirterm").open_terminal(vim.o.shell, "%:p:h")

@@ -38,7 +38,7 @@ M.open_file_manager = function(file_or_dir)
     vim.schedule(function()
         vim.cmd.wincmd("n")
         vim.fn.termopen(
-            "ranger --selectfile=" .. vim.fn.shellescape(expanded_ford)
+            "lf " .. vim.fn.shellescape(expanded_ford)
         )
     end)
 end

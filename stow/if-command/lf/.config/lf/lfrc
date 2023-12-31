@@ -1,0 +1,117 @@
+# TODO:
+# * Add confirmation for trashing
+# * Directory previews (trees) using dirpreviews
+# * Add support for icons
+# * Use open-file rather than OS opener (this also means files get added to fasd)
+#
+# Keybindings:
+#
+# w - launches shell
+#
+# Commands:
+#
+# filter - filters files shown
+# glob-select - selects files using glob
+
+# Make shell commands safer
+set shellopts '-eu'
+
+cmd trash %trash $fx
+
+cmd folderize ${{
+    set -f
+
+    FOLDER=$(date +%Y-%m-%dT%H-%M-%S)
+    mkdir $FOLDER
+    mv $fx $FOLDER
+}}
+
+cmd zip ${{
+    set -f
+
+    if [ $(echo "$fx" | wc -l) -gt 1 ]; then
+        # FIXME: Make this more efficient by not using a temp dir
+        FOLDER=$(date +%Y-%m-%dT%H-%M-%S)
+        mkdir $FOLDER
+        cp -r $fx $FOLDER
+        cd $FOLDER
+        zip -r ../$FOLDER.zip .
+        cd ..
+        rm -rf $FOLDER
+    else
+        effective=$(basename $fx)
+        zip -r $effective.zip $effective
+        rm -rf $effective
+    fi
+}}
+
+cmd fasd-file ${{
+    FILE="$(file-list -f -s)"
+    if [ -n "$FILE" ]; then
+        PARENT=$(dirname $FILE)
+        FILENAME=$(basename $FILE)
+        cmd="cd"
+        PARENT="$(printf '%s' "$PARENT" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        lf -remote "send $id $cmd \"$PARENT\""
+        cmd="select"
+        FILENAME="$(printf '%s' "$FILENAME" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        lf -remote "send $id $cmd \"$FILENAME\""
+    fi
+}}
+
+cmd fasd-dir ${{
+    DIR="$(file-list -d -s)"
+    if [ -n "$DIR" ]; then
+        cmd="cd"
+        DIR="$(printf '%s' "$DIR" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        lf -remote "send $id $cmd \"$DIR\""
+    fi
+}}
+
+map <c-f> :fasd-file
+map <c-g> :fasd-dir
+
+map <delete> trash
+map F :folderize
+map N $normfn $fx
+map T $tig
+
+cmd mkdir %IFS=" "; mkdir -- "$*"
+
+cmd take %{{
+    IFS=" "
+    mkdir -p -- "$*"
+    lf -remote "send $id select \"$*\""
+    lf -remote "send $id push l"
+}}
+
+cmd rename_directory ${{
+    nvim $PWD
+}}
+
+set anchorfind false
+set cursorpreviewfmt "\033[7m" # See https://github.com/gokcehan/lf/issues/1258
+set incsearch true
+set infotimefmtnew "2006-01-02 15:04"
+set infotimefmtold "2006-01-02 15:04"
+set period 1
+set previewer ~/.config/lf/scope.sh
+set timefmt "2006-01-02 15:04:05"
+set truncatechar "…"
+
+set info size
+set dircounts
+
+map ga :cd ~/paperwork
+map gd :cd /data
+map ge :cd ~/personal
+map gf :cd ~/dotfiles
+map gg :cd ~/gitco
+map gk :cd ~/Desktop
+map gl :cd ~/Downloads
+map gn :cd ~/notes
+
+# See https://github.com/gokcehan/lf/wiki/Tips#enhancing-the-rename-command
+map I :rename; cmd-home
+map A :rename; cmd-end
+map r :rename; cmd-delete-home

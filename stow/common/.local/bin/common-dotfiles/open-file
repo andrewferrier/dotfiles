@@ -10,10 +10,10 @@ else
 fi
 
 # shellcheck disable=SC2312
-if [[ $(ps -o args= "${PPID}") == *"ranger"* ]]; then
-    CALLED_FROM_RANGER=true
+if [[ $(ps -o args= "${PPID}") == *"lf"* ]]; then
+    CALLED_FROM_LF=true
 else
-    CALLED_FROM_RANGER=false
+    CALLED_FROM_LF=false
 fi
 
 if [[ -n "${DISPLAY:-}" ]] || [[ ${OSTYPE} == darwin* ]]; then
@@ -30,8 +30,8 @@ function open-directory() {
         mutt -f "${FILE}"
     else
         if [[ ${OSTYPE} == darwin* ]]; then
-            if ${INTERACTIVE} && ! ${CALLED_FROM_RANGER}; then
-                ranger "${FILE}"
+            if ${INTERACTIVE} && ! ${CALLED_FROM_LF}; then
+                lf "${FILE}"
             else
                 # -n seems to make this more reliable, otherwise window can open
                 # behind others
@@ -39,7 +39,7 @@ function open-directory() {
             fi
         else
             # shellcheck disable=SC2154
-            ${TERMCMD} ranger "${FILE}" &
+            ${TERMCMD} lf "${FILE}" &
         fi
     fi
 }
@@ -65,8 +65,8 @@ function open-system() {
     if [[ ${OSTYPE} == darwin* ]]; then
         open "${FILE}"
     else
-        # 'nohup' is needed to ensure that when files are opened from ranger
-        # that closing ranger doesn't close the target app.
+        # 'nohup' is needed to ensure that when files are opened from lf
+        # that closing lf doesn't close the target app.
         nohup xdg-open "${FILE}" >/dev/null 2>&1 &
     fi
 }

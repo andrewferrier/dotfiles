@@ -1,7 +1,7 @@
 # zsh cheatsheet
 
 *   `**<tab>` to autocomplete from directory.
-*   `<Ctrl-N>` to run ranger
+*   `<Ctrl-N>` to run file manager (lf)
 *   `<Ctrl-Q>` to stack current command, run another one, then come back to the original.
 *   `<Ctrl-T>` to run tig
 *   `<Ctrl-U>` to erase current line and start again.

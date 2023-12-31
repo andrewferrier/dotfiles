@@ -4,9 +4,9 @@
     bash/sh     | ~/.config/bash.d/README.md
     i3          | ~/.config/i3/config
     kitty       | ~/.config/kitty/kitty.conf
+    lf          | ~/.config/lf/lfrc
     mutt        | ~/.mutt/muttrc.common
     neovim      | ~/.config/nvim/README.md
-    ranger      | ~/.config/ranger/rc.conf
     zsh         | ~/.config/zsh/README.md
 
 ## Useful commands
