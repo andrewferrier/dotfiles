@@ -51,15 +51,7 @@ local function keybindings_codeaction(bufnr)
                 vim.lsp.protocol.Methods.textDocument_codeAction
             )
         then
-            require("fzf-lua").lsp_code_actions({
-                winopts = {
-                    relative = "cursor",
-                    width = 0.6,
-                    height = 0.6,
-                    row = 1,
-                    preview = { vertical = "up:70%" },
-                },
-            })
+            require("fzf-lua").lsp_code_actions()
         else
             warn_unsupported("apply code actions")
         end
