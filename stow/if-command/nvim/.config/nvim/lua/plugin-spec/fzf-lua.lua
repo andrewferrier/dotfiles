@@ -8,6 +8,11 @@ local configure = function()
             preview = {
                 title = false,
                 flip_columns = 200,
+                scrollbar = false,
+                winopts = {
+                    cursorline = false,
+                    number = false,
+                },
             },
             border = { " ", " ", " ", " ", " ", " ", " ", " " },
         },
