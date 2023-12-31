@@ -43,6 +43,14 @@ local configure = function()
             end)
         end, { desc = "Stage hunk", buffer = bufnr })
 
+        vim.keymap.set('n', 'gbhu', function()
+            vim.cmd.update()
+            gitsigns.undo_stage_hunk()
+            vim.schedule(function()
+                gitsigns.next_hunk()
+            end)
+        end, { desc = "Undo stage hunk", buffer = bufnr })
+
         vim.keymap.set("v", "gbhs", function()
             local first_line = vim.fn.line("v")
             local last_line = vim.fn.getpos(".")[2]
@@ -75,6 +83,14 @@ local configure = function()
     end
 
     gitsigns.setup({
+        _signs_staged_enable = true,
+        _signs_staged = {
+            add = { text = "┋ " },
+            change = { text = "┋ " },
+            delete = { text = "﹍" },
+            topdelete = { text = "﹉" },
+            changedelete = { text = "┋ " },
+        },
         signs = { change = { text = "~" }, changedelete = { text = "⋍" } },
         sign_priority = 10,
         on_attach = attach,
