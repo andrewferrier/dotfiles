@@ -3,7 +3,6 @@ local configure = function()
 
     fzf_lua.setup({
         winopts = {
-            height = 0.9,
             width = 0.9,
             preview = {
                 title = false,
@@ -13,12 +12,14 @@ local configure = function()
                     cursorline = false,
                     number = false,
                 },
+                delay = 50,
             },
             border = { " ", " ", " ", " ", " ", " ", " ", " " },
         },
         fzf_opts = {
             ["--layout"] = "default",
             ["--color"] = "gutter:-1",
+            ["--preview-window"] = "border-none",
         },
     })
 
