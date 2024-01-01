@@ -1,5 +1,4 @@
 # TODO:
-# * Directory previews (trees) using dirpreviews
 # * Add support for icons
 # * Use open-file rather than OS opener (this also means files get added to fasd)
 #
