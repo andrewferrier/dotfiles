@@ -4,6 +4,8 @@ CACHE_DIR="${HOME}/.cache/day-night"
 STATE_FILE="${CACHE_DIR}/state-terminal"
 STATE_FILE_KITTY_LAST="${CACHE_DIR}/state-kitty-lastset"
 
+# TODO: Detect the terminal background in the same way NeoVim does
+
 if [[ -z "${SSH_CONNECTION}" ]]; then
     # It seems that occasionally calling 'kitty @ set-colors' is responsible for
     # swallowing keypresses. However, by checking against the 'KITTY_LAST' file,
