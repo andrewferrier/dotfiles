@@ -1,5 +1,4 @@
 # TODO:
-# * Add confirmation for trashing
 # * Directory previews (trees) using dirpreviews
 # * Add support for icons
 # * Use open-file rather than OS opener (this also means files get added to fasd)
@@ -16,7 +15,15 @@
 # Make shell commands safer
 set shellopts '-eu'
 
-cmd trash %trash $fx
+cmd trash ${{
+    set -f
+    files=$(echo $fx | sed 's/\n/,/g')
+    printf "\nTrash $files?"
+    read -r REPLY
+    case "$REPLY" in
+        [yY]) rm -rf -- $fx;;
+    esac
+}}
 
 cmd folderize ${{
     set -f
