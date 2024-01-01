@@ -75,6 +75,12 @@ else
     FD=fd
 fi
 
+if (command -v eza >/dev/null 2>&1); then
+    TREE=eza
+else
+    TREE=exa
+fi
+
 if "$FILES" && "$DIRS"; then
     echo >&2 "Cannot select -f and -d at the same time."
     exit 1
@@ -101,7 +107,7 @@ else
 fi
 
 if "$DIRS"; then
-    PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | xargs -I% exa --level 2 --tree --color=always --group-directories-first %"
+    PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | xargs -I% $TREE --level 2 --tree --color=always --group-directories-first %"
     FD_TYPE='d'
     FASD_PARAMS="-dRl"
 else
