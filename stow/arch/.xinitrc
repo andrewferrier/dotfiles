@@ -48,6 +48,7 @@ rfkill block wwan
 
 export TERMCMD=kitty
 export BROWSER=librewolf
+export OPENER=$HOME/.local/bin/common-dotfiles/open-file
 
 # https://wiki.archlinux.org/title/HiDPI#X_Resources
 
