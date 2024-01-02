@@ -17,7 +17,18 @@ cmd trash ${{
     printf "\nTrash $files ?"
     read -n1 -r REPLY
     case "$REPLY" in
-        [yY]) trash -rf -- $fx;;
+        [yY]) trash -v -- $fx;;
+    esac
+}}
+
+cmd delete ${{
+    set -f
+
+    files=$(echo $fx | sed 's/\n/,/g')
+    printf "\nDelete $files ?"
+    read -n1 -r REPLY
+    case "$REPLY" in
+        [yY]) rm -rfv -- $fx;;
     esac
 }}
 
