@@ -7,12 +7,15 @@ return {
         if vim.fn.isdirectory(DATA_SKELETON) == 1 then
             require("esqueleto").setup({
                 directories = { CONFIG_SKELETON, DATA_SKELETON },
-                patterns = vim.list_extend(CONFIG_SKELETON, DATA_SKELETON),
+                patterns = vim.list_extend(
+                    vim.fn.readdir(CONFIG_SKELETON),
+                    vim.fn.readdir(DATA_SKELETON)
+                ),
             })
         else
             require("esqueleto").setup({
                 directories = { CONFIG_SKELETON },
-                patterns = { CONFIG_SKELETON },
+                patterns = { vim.fn.readdir(CONFIG_SKELETON) },
             })
         end
     end,
