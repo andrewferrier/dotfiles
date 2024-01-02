@@ -58,12 +58,10 @@ cmd fasd-file ${{
     if [ -n "$FILE" ]; then
         PARENT=$(dirname $FILE)
         FILENAME=$(basename $FILE)
-        cmd="cd"
         PARENT="$(printf '%s' "$PARENT" | sed 's/\\/\\\\/g;s/"/\\"/g')"
-        lf -remote "send $id $cmd \"$PARENT\""
-        cmd="select"
+        lf -remote "send $id cd \"$PARENT\""
         FILENAME="$(printf '%s' "$FILENAME" | sed 's/\\/\\\\/g;s/"/\\"/g')"
-        lf -remote "send $id $cmd \"$FILENAME\""
+        lf -remote "send $id select \"$FILENAME\""
     fi
 }}
 
@@ -72,9 +70,8 @@ cmd fasd-dir ${{
 
     DIR="$(file-list -d -s)"
     if [ -n "$DIR" ]; then
-        cmd="cd"
         DIR="$(printf '%s' "$DIR" | sed 's/\\/\\\\/g;s/"/\\"/g')"
-        lf -remote "send $id $cmd \"$DIR\""
+        lf -remote "send $id cd \"$DIR\""
     fi
 }}
 
