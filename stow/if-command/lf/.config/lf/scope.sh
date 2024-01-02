@@ -104,7 +104,11 @@ handle_extension() {
 handle_mime() {
     local mimetype="${1}"
     case "${mimetype}" in
-    image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
+    image/*)
+        # Exiting with 1 disables preview cache, forcing cleaning
+        kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${FILE_PATH}" < /dev/null > /dev/tty && exit 1
+        exit 1;;
+    video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
         exiftool -g \
             '--Balance*' \
             '--Blue*' \
