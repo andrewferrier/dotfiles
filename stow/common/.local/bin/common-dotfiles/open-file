@@ -9,18 +9,19 @@ else
     INTERACTIVE=false
 fi
 
-# shellcheck disable=SC2312
-if [[ $(ps -o args= "${PPID}") == *"lf"* ]]; then
-    CALLED_FROM_LF=true
-else
-    CALLED_FROM_LF=false
-fi
-
 if [[ -n "${DISPLAY:-}" ]] || [[ ${OSTYPE} == darwin* ]]; then
     GRAPHICAL=true
 else
     GRAPHICAL=false
 fi
+
+in_lf() {
+    set +o nounset
+    [[ -z "${LF_LEVEL}" ]]
+    result=$?
+    set -o nounset
+    return "$result"
+}
 
 function open-directory() {
     if [[ -d "${FILE}/cur" && -d "${FILE}/new" && -d "${FILE}/tmp" ]] && ${INTERACTIVE}; then
@@ -30,12 +31,11 @@ function open-directory() {
         mutt -f "${FILE}"
     else
         if [[ ${OSTYPE} == darwin* ]]; then
-            if ${INTERACTIVE} && ! ${CALLED_FROM_LF}; then
+            # shellcheck disable=SC2310
+            if ${INTERACTIVE} && in_lf; then
                 lf "${FILE}"
             else
-                # -n seems to make this more reliable, otherwise window can open
-                # behind others
-                open -n "${FILE}"
+                open "${FILE}"
             fi
         else
             # shellcheck disable=SC2154
