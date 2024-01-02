@@ -15,7 +15,7 @@ return {
         else
             require("esqueleto").setup({
                 directories = { CONFIG_SKELETON },
-                patterns = { vim.fn.readdir(CONFIG_SKELETON) },
+                patterns = vim.fn.readdir(CONFIG_SKELETON)
             })
         end
     end,
