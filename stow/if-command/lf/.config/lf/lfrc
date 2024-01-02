@@ -14,8 +14,8 @@ cmd trash ${{
     set -f
 
     files=$(echo $fx | sed 's/\n/,/g')
-    printf "\nTrash $files?"
-    read -r REPLY
+    printf "\nTrash $files ?"
+    read -n1 -r REPLY
     case "$REPLY" in
         [yY]) rm -rf -- $fx;;
     esac
