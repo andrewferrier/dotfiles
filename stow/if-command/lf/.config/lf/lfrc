@@ -100,8 +100,16 @@ cmd rename_directory ${{
     nvim $PWD
 }}
 
+cmd set_lf_vars ${{
+    if [ $(lf --version) -ge 29 ]; then
+        # See https://github.com/gokcehan/lf/issues/1258
+        lf -remote "send $id set cursorpreviewfmt \"\\033[7m\""
+    fi
+}}
+
+:set_lf_vars
+
 set anchorfind false
-set cursorpreviewfmt "\033[7m" # See https://github.com/gokcehan/lf/issues/1258
 set incsearch true
 set infotimefmtnew "2006-01-02 15:04"
 set infotimefmtold "2006-01-02 15:04"
