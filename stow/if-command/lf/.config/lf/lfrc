@@ -92,7 +92,10 @@ map N $normfn $fx
 map T $tig
 map o :open-directory
 
-cmd mkdir %IFS=" "; mkdir -- "$*"
+cmd mkdir %{{
+    IFS=" "
+    mkdir -- "$*"
+}}
 
 cmd take %{{
     IFS=" "
