@@ -105,21 +105,6 @@ hs.hotkey.bind(PREFIX_ACTION, "O", function()
     open_bash_terminal(HOME .. "/bookmarks/bin/bookmark-select-and-open")
 end)
 
-hs.hotkey.bind(PREFIX_ACTION, "U", function()
-    hs.osascript.applescript([[tell application "System Events"
-    tell process "Webex Meetings"
-    set muteMeItem to a reference to menu item "Mute Me" of menu "Participant" of menu bar 1
-    if muteMeItem's enabled is false then
-        click menu item "Unmute Me" of menu "Participant" of menu bar 1
-        display notification "Unmuted" with title "WebEx"
-    else
-        click menu item "Mute Me" of menu "Participant" of menu bar 1
-        display notification "Muted" with title "WebEx"
-    end if
-    end tell
-end tell]])
-end)
-
 hs.hotkey.bind(PREFIX_ACTION, "'", function()
     -- Pseudo-"paste" for webforms that don't allow passwords
     hs.eventtap.keyStrokes(hs.pasteboard.getContents())
@@ -133,12 +118,10 @@ hs.hotkey.bind(PREFIX_ACTION, ".", function()
     hs.eventtap.keyStrokes("andrew.ferrier@gmail.com")
 end)
 
-launch_or_find("A", "/System/Applications/Mail.app")
 launch_or_find("C", "/System/Applications/Calendar.app")
 launch_or_find("K", "/Applications/KeePassXC.app/")
-launch_or_find("L", "/Applications/Slack.app")
 
-launch("B", "/Applications/Firefox.app")
+launch("B", "/Applications/LibreWolf.app")
 
 web_search("S", "DuckDuckGo Search:", "https://duckduckgo.com/?q=")
 
