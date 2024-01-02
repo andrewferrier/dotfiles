@@ -14,11 +14,7 @@ cmd trash ${{
     set -f
 
     files=$(echo $fx | sed 's/\n/,/g')
-    printf "\nTrash $files ?"
-    read -n1 -r REPLY
-    case "$REPLY" in
-        [yY]) trash -v -- $fx;;
-    esac
+    trash -v -- $fx
 }}
 
 cmd delete ${{
