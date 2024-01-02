@@ -15,6 +15,7 @@ set shellopts '-eu'
 
 cmd trash ${{
     set -f
+
     files=$(echo $fx | sed 's/\n/,/g')
     printf "\nTrash $files?"
     read -r REPLY
@@ -51,6 +52,8 @@ cmd zip ${{
 }}
 
 cmd fasd-file ${{
+    set -f
+
     FILE="$(file-list -f -s)"
     if [ -n "$FILE" ]; then
         PARENT=$(dirname $FILE)
@@ -65,6 +68,8 @@ cmd fasd-file ${{
 }}
 
 cmd fasd-dir ${{
+    set -f
+
     DIR="$(file-list -d -s)"
     if [ -n "$DIR" ]; then
         cmd="cd"
