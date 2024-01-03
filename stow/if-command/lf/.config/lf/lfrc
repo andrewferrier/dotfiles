@@ -87,6 +87,11 @@ cmd mkdir %{{
     mkdir -- "$*"
 }}
 
+cmd touch %{{
+    IFS=" "
+    touch -- "$*"
+}}
+
 cmd take %{{
     IFS=" "
     mkdir -p -- "$*"
