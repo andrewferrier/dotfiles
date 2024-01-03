@@ -13,8 +13,7 @@ set shellopts '-eu'
 cmd trash ${{
     set -f
 
-    files=$(echo $fx | sed 's/\n/,/g')
-    trash -v -- $fx
+    IFS="$(printf '\n\t')"; trash -v -- $fx
 }}
 
 cmd delete ${{
@@ -24,7 +23,7 @@ cmd delete ${{
     printf "\nDelete $files ?"
     read -n1 -r REPLY
     case "$REPLY" in
-        [yY]) rm -rfv -- $fx;;
+        [yY]) IFS="$(printf '\n\t')"; rm -rfv -- $fx;;
     esac
 }}
 
@@ -33,7 +32,7 @@ cmd folderize ${{
 
     FOLDER=$(date +%Y-%m-%dT%H-%M-%S)
     mkdir $FOLDER
-    mv $fx $FOLDER
+    IFS="$(printf '\n\t')"; mv $fx $FOLDER
 }}
 
 cmd zip ${{
@@ -43,7 +42,7 @@ cmd zip ${{
         # FIXME: Make this more efficient by not using a temp dir
         FOLDER=$(date +%Y-%m-%dT%H-%M-%S)
         mkdir $FOLDER
-        cp -r $fx $FOLDER
+        IFS="$(printf '\n\t')"; cp -r $fx $FOLDER
         cd $FOLDER
         zip -r ../$FOLDER.zip .
         cd ..
