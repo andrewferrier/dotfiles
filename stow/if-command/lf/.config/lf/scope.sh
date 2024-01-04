@@ -80,15 +80,19 @@ handle_extension() {
 }
 
 handle_mime() {
-    local mimetype="${1}"
-    case "${mimetype}" in
+    MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
+
+    case "${MIMETYPE}" in
+    application/vnd.sqlite3)
+        sqlite3 "${FILE_PATH}" ".schema" && exit 0
+        ;;
     image/*)
         # Exiting with 1 disables preview cache, forcing cleaning
         kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${FILE_PATH}" < /dev/null > /dev/tty && exit 1;;
     *) ;;
     esac
 
-    case "${mimetype}" in
+    case "${MIMETYPE}" in
     image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
         exiftool -g \
             '--Balance*' \
@@ -134,6 +138,5 @@ handle_fallback() {
 handle_extension_full
 handle_extension
 handle_textual
-MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
-handle_mime "${MIMETYPE}"
+handle_mime
 handle_fallback
