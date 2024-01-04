@@ -19,7 +19,7 @@ cmd normfn ${{
 cmd trash ${{
     set -f
 
-    IFS="$(printf '\n\t')"; trash -v -- $fx
+    IFS="$(printf '\n\t')"; trash $fx
 }}
 
 cmd delete ${{
@@ -145,7 +145,7 @@ set dircounts
 map <c-f> :fasd-file
 map <c-g> :fasd-dir
 
-map <delete> trash
+map <delete> :trash
 map F :folderize
 map N :normfn
 map T $tig
