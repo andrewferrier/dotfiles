@@ -28,7 +28,6 @@ brew "git"
 brew "grep" # for file-list
 brew "gzip"
 brew "hexedit"
-brew "highlight"
 brew "httpie"
 brew "hyperfine"
 brew "iftop"

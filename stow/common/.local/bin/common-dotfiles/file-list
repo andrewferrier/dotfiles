@@ -106,12 +106,18 @@ else
     EXCLUDE_PATTERN="$ALL_EXCLUDE_PATTERN"
 fi
 
+if (command -v batcat >/dev/null 2>&1); then
+    BAT="batcat"
+else
+    BAT="bat"
+fi
+
 if "$DIRS"; then
     PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | xargs -I% $TREE --level 2 --tree --color=always --group-directories-first %"
     FD_TYPE='d'
     FASD_PARAMS="-dRl"
 else
-    PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | tr '\n' '\0' | xargs -0 head -200 | highlight --force --out-format=truecolor --syntax-by-name={}"
+    PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | tr '\n' '\0' | xargs -0 $BAT --color=always"
     FD_TYPE='f'
     FASD_PARAMS="-fRl"
 fi
