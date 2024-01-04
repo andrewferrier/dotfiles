@@ -45,7 +45,7 @@ brew "mas"
 brew "moreutils" # isutf8 for Hammerspoon
 brew "ncdu"
 brew "neovim"
-brew "pandoc"
+brew "pandoc" # for scope.sh
 brew "pipx"
 brew "podman-desktop"
 brew "poppler" # pdftotext for scope.sh
