@@ -17,49 +17,27 @@ FILE_EXTENSION="${FILE_PATH##*.}"
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
 FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_PATH#*.}" | tr '[:upper:]' '[:lower:]')
 
-HIGHLIGHT=("highlight" "--out-format=ansi")
-
-handle_fullname() {
-    case $(basename "${FILE_PATH}") in
-    "Dockerfile")
-        "${HIGHLIGHT[@]}" --syntax=Dockerfile "${FILE_PATH}" && exit 0
-        ;;
-    "Makefile")
-        "${HIGHLIGHT[@]}" --syntax=Makefile "${FILE_PATH}" && exit 0
-        ;;
-    *) ;;
-    esac
-}
+if (command -v batcat >/dev/null 2>&1); then
+    BAT=("batcat" "--color=always")
+else
+    BAT=("bat" "--color=always")
+fi
 
 handle_extension_full() {
     case "${FILE_EXTENSION_FULL_LOWER}" in
     "md" | "mkd" | "mkd.txt")
-        "${HIGHLIGHT[@]}" --syntax=markdown "${FILE_PATH}" && exit 0
+        "${BAT[@]}" --language markdown "${FILE_PATH}" && exit 0
         ;;
     "htm" | "html" | "xhtml")
         w3m -dump "${FILE_PATH}" && exit 0
-        ;;
-    "tf")
-        head -"${HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" --syntax=terraform 2>/dev/null && exit 0
-        ;;
-    "tfstate")
-        head -"${HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" --syntax=json 2>/dev/null && exit 0
-        ;;
-    "webloc")
-        "${HIGHLIGHT[@]}" --syntax=xml "${FILE_PATH}" && exit 0
         ;;
     *) ;;
     esac
 }
 
-handle_highlight() {
+handle_textual() {
     if isutf8 "${FILE_PATH}" >/dev/null; then
-        # Only highlight the relevant lines to speed up highlighting, make this more
-        # robust on MacOS.
-        if "${HIGHLIGHT[@]}" --syntax-supported --syntax-by-name="${FILE_PATH}" >/dev/null 2>/dev/null; then
-            head -"${HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" --syntax-by-name="${FILE_PATH}" 2>/dev/null && exit 0
-        fi
-        head -"${HEIGHT}" "${FILE_PATH}" | "${HIGHLIGHT[@]}" 2>/dev/null && exit 0
+        "${BAT[@]}" "${FILE_PATH}" && exit 0
         head -"${HEIGHT}" "${FILE_PATH}" && exit 0
     fi
 }
@@ -153,10 +131,9 @@ handle_fallback() {
     exit 1
 }
 
-MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
-handle_fullname
 handle_extension_full
 handle_extension
-handle_highlight
+handle_textual
+MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
 handle_mime "${MIMETYPE}"
 handle_fallback
