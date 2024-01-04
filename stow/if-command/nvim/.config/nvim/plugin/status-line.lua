@@ -64,6 +64,8 @@ function _G.Statusline_FeaturesEnabled()
 end
 
 function _G.Statusline_DiagnosticStatus()
+    -- TODO: In NeoVim 0.10 refactor to use vim.diagnostic.count(), calling it only once
+
     if not vim.diagnostic.is_disabled() then
         local diagnostics_counts = {}
 
