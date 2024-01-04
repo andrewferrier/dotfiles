@@ -74,10 +74,6 @@ handle_extension() {
         exiftool "${FILE_PATH}" && exit 0
         exit 1
         ;;
-    docx)
-        docx2txt.pl "${FILE_PATH}" - | fmt -s -w "${WIDTH}" && exit 0
-        exit 1
-        ;;
 
     mp3)
         id3v2 -l "${FILE_PATH}" && exit 0
@@ -100,6 +96,11 @@ handle_mime() {
         # Exiting with 1 disables preview cache, forcing cleaning
         kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${FILE_PATH}" </dev/null >/dev/tty && exit 1
         ;;
+
+    application/msword | application/vnd.openxmlformats-officedocument.wordprocessingml.document)
+        pandoc -i "${FILE_PATH}" --to=markdown && exit 0
+        ;;
+
     *) ;;
     esac
 
