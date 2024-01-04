@@ -25,12 +25,15 @@ fi
 
 handle_extension_full() {
     case "${FILE_EXTENSION_FULL_LOWER}" in
+
     "md" | "mkd" | "mkd.txt")
         "${BAT[@]}" --language markdown "${FILE_PATH}" && exit 0
         ;;
+
     "htm" | "html" | "xhtml")
         w3m -dump "${FILE_PATH}" && exit 0
         ;;
+
     *) ;;
     esac
 }
@@ -44,18 +47,20 @@ handle_textual() {
 
 handle_extension() {
     case "${FILE_EXTENSION_LOWER}" in
-    ## Archive
+
     a | ace | alz | arc | arj | bz | bz2 | cab | cpio | deb | gz | jar | lha | lz | lzh | lzma | lzo | \
         rpm | rz | t7z | tar | tbz | tbz2 | tgz | tlz | txz | tZ | tzo | war | xpi | xz | Z | zip)
         atool --list -- "${FILE_PATH}" && exit 0
         bsdtar --list --file "${FILE_PATH}" && exit 0
         exit 1
         ;;
+
     rar)
         ## Avoid password prompt by providing empty password
         unrar lt -p- -- "${FILE_PATH}" && exit 0
         exit 1
         ;;
+
     7z)
         ## Avoid password prompt by providing empty password
         7z l -p -- "${FILE_PATH}" && exit 0
@@ -64,10 +69,8 @@ handle_extension() {
 
     pdf)
         ## Preview as text conversion
-        pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - |
-            fmt -w "${WIDTH}" && exit 0
-        mutool draw -F txt -i -- "${FILE_PATH}" 1-10 |
-            fmt -w "${WIDTH}" && exit 0
+        pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | fmt -w "${WIDTH}" && exit 0
+        mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | fmt -w "${WIDTH}" && exit 0
         exiftool "${FILE_PATH}" && exit 0
         exit 1
         ;;
@@ -79,6 +82,7 @@ handle_extension() {
     mp3)
         id3v2 -l "${FILE_PATH}" && exit 0
         ;;
+
     *) ;;
     esac
 }
@@ -87,9 +91,11 @@ handle_mime() {
     MIMETYPE="$(file --dereference --brief --mime-type -- "${FILE_PATH}")"
 
     case "${MIMETYPE}" in
+
     application/vnd.sqlite3)
         sqlite3 "${FILE_PATH}" ".schema" && exit 0
         ;;
+
     image/*)
         # Exiting with 1 disables preview cache, forcing cleaning
         kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${FILE_PATH}" </dev/null >/dev/tty && exit 1
@@ -98,6 +104,7 @@ handle_mime() {
     esac
 
     case "${MIMETYPE}" in
+
     image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
         exiftool -g \
             '--Balance*' \
@@ -132,6 +139,7 @@ handle_mime() {
             "${FILE_PATH}" && exit 0
         exit 1
         ;;
+
     *) ;;
     esac
 }
