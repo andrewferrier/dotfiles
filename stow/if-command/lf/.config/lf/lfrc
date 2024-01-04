@@ -39,7 +39,8 @@ cmd zip ${{
     set -f
 
     if [ $(echo "$fx" | wc -l) -gt 1 ]; then
-        # FIXME: Make this more efficient by not using a temp dir
+        # FIXME: Make this more efficient by not using a temp dir; this is
+        # tricker than it looks because we want relative paths
         FOLDER=$(date +%Y-%m-%dT%H-%M-%S)
         mkdir $FOLDER
         IFS="$(printf '\n\t')"; cp -r $fx $FOLDER
