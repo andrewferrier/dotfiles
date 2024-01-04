@@ -10,7 +10,7 @@ if ! gem list --no-verbose mdl | grep mdl > /dev/null; then
     gem install mdl
 fi
 
-if [[ $(uname -s) == Linux* ]]; then
+if [[ $(uname -s || true) == Linux* ]]; then
     eget --to "${LOCAL_BIN}" LuaLS/lua-language-server --download-only --asset=^musl
     rm -rf "${LOCAL_BIN}"/lua-language-server-*/
     cd "${LOCAL_BIN}"
