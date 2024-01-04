@@ -27,7 +27,7 @@ handle_extension_full() {
     case "${FILE_EXTENSION_FULL_LOWER}" in
 
     "md" | "mkd" | "mkd.txt")
-        "${BAT[@]}" --language markdown "${FILE_PATH}" && exit 0
+        "${BAT[@]}" --line-range=:"${HEIGHT}" --language markdown "${FILE_PATH}" && exit 0
         ;;
 
     *) ;;
@@ -36,7 +36,7 @@ handle_extension_full() {
 
 handle_textual() {
     if isutf8 "${FILE_PATH}" >/dev/null; then
-        "${BAT[@]}" --line-range ":${HEIGHT}" "${FILE_PATH}" && exit 0
+        "${BAT[@]}" --line-range=:"${HEIGHT}" "${FILE_PATH}" && exit 0
         head -"${HEIGHT}" "${FILE_PATH}" && exit 0
     fi
 }
