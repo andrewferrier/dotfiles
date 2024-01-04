@@ -10,8 +10,8 @@ IFS=$'\n'
 FILE_PATH="${1}"
 WIDTH="${2:-80}"
 HEIGHT="${3:-30}"
-HORIZ_POS="${4}"
-VERT_POS="${5}"
+HORIZ_POS="${4:-1}"
+VERT_POS="${5:-1}"
 
 FILE_EXTENSION="${FILE_PATH##*.}"
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
