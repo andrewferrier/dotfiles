@@ -40,7 +40,7 @@ handle_extension_full() {
 
 handle_textual() {
     if isutf8 "${FILE_PATH}" >/dev/null; then
-        "${BAT[@]}" "${FILE_PATH}" && exit 0
+        "${BAT[@]}" --line-range ":${HEIGHT}" "${FILE_PATH}" && exit 0
         head -"${HEIGHT}" "${FILE_PATH}" && exit 0
     fi
 }
