@@ -30,10 +30,6 @@ handle_extension_full() {
         "${BAT[@]}" --language markdown "${FILE_PATH}" && exit 0
         ;;
 
-    "htm" | "html" | "xhtml")
-        w3m -dump "${FILE_PATH}" && exit 0
-        ;;
-
     *) ;;
     esac
 }
