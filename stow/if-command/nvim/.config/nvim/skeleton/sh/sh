@@ -62,6 +62,11 @@
 #
 # ****** ECHO TO STDERR
 # echo >&2 "xxx"
+#
+# ****** CHECK IF COMMAND EXISTS
+# if type the_command_to_check &>/dev/null; then
+#     # Do stuff
+# fi
 
 set -o errexit
 set -o noglob
