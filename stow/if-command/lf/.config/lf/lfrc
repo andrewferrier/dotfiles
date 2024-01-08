@@ -54,6 +54,7 @@ cmd delete ${{
 cmd folderize ${{
     set -f
 
+    # TODO: Use push command to make this a default dir name
     FOLDER=$(date +%Y-%m-%dT%H-%M-%S)
     mkdir $FOLDER
     IFS="$(printf '\n\t')"; mv $fx $FOLDER
