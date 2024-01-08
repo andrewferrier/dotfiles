@@ -1,12 +1,13 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Not installed in ~/.config/systemd/user
 
+# shellcheck disable=SC2154
 TARGET_DIR="${XDG_CONFIG_HOME}/systemd/user/default.target.wants"
 
 mkdir -p "$TARGET_DIR"
 
-if [ ! -h "${TARGET_DIR}" ]; then
+if [[ ! -h "${TARGET_DIR}" ]]; then
     systemctl enable --user --now mpd
     systemctl enable --user --now mpd-notification
 else

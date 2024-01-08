@@ -2,6 +2,7 @@
 
 BASEDIR=${HOME}/.config/systemd/user
 
+# shellcheck disable=SC2154
 DEFAULT_DIR="${XDG_CONFIG_HOME}/systemd/user/default.target.wants"
 TIMERS_DIR="${XDG_CONFIG_HOME}/systemd/user/timers.target.wants"
 
