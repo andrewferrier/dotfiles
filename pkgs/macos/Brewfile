@@ -77,7 +77,6 @@ brew "yarn" # for yaml-language-server
 brew "yq"
 brew "yt-dlp"
 brew "zsh-lovers"
-cask "platypus"
 
 tap "homebrew/cask-fonts"
 tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
@@ -90,6 +89,7 @@ cask "keepassxc"
 cask "kitty"
 cask "librewolf", args: { quarantine: false }
 cask "notunes"
+cask "platypus"
 cask "visual-studio-code"
 cask "whatsapp"
 
