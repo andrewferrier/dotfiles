@@ -8,6 +8,7 @@ brew "bash" # for improved performance
 brew "bat"
 brew "bitwarden-cli"
 brew "blueutil" # for Hammerspoon
+brew "borgbackup"
 brew "coreutils"
 brew "curl"
 brew "defaultbrowser"
@@ -74,6 +75,7 @@ brew "wget"
 brew "yamllint"
 brew "yarn" # for yaml-language-server
 brew "yq"
+brew "yt-dlp"
 brew "zsh-lovers"
 cask "platypus"
 
