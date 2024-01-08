@@ -71,10 +71,6 @@ handle_extension() {
         exit 1
         ;;
 
-    mp3)
-        id3v2 -l "${FILE_PATH}" && exit 0
-        ;;
-
     *) ;;
     esac
 }
@@ -107,20 +103,25 @@ handle_mime() {
             '--Balance*' \
             '--Blue*' \
             '--Compatible*' \
+            '--Copyright*' \
             '--Create*' \
             '--Current*' \
             '--Directory' \
+            '--Emphasis*' \
             '--Exif*' \
             '--ExifTool*' \
             '--Graphics*' \
             '--Green*' \
             '--Handler*' \
+            '--Intensity*' \
+            '--MS*' \
             '--Matrix*' \
             '--Media*' \
             '--Minor*' \
             '--Modify*' \
             '--Movie*' \
             '--Op*' \
+            '--Original*' \
             '--Poster*' \
             '--Preferred*' \
             '--Preview*' \
