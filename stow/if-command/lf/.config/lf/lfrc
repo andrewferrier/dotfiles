@@ -23,7 +23,7 @@ cmd on-redraw %{{
 }}
 
 cmd on-cd &{{
-    printf "\033]0; lf [${PWD/#$HOME/~}]\007" > /dev/tty
+    printf "\033]0; lf [${PWD/#$HOME/\~}]\007" > /dev/tty
 }}
 
 on-cd
