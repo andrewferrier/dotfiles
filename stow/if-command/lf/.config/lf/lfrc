@@ -22,6 +22,12 @@ cmd on-redraw %{{
     fi
 }}
 
+cmd on-cd &{{
+    printf "\033]0; lf [${PWD/#$HOME/~}]\007" > /dev/tty
+}}
+
+on-cd
+
 cmd normfn ${{
     set -f
 
