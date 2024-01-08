@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if type tput > /dev/null 2> /dev/null; then
+if type tput &>/dev/null; then
     BOLD=$(tput bold)
     RESET=$(tput sgr0)
     BLINK=$(tput blink)

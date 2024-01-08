@@ -71,7 +71,7 @@ prompt_precmd() {
 
     unset cmd_timestamp # reset value since `preexec` isn't always triggered
 
-    if type day-night-terminal-setup >/dev/null; then
+    if type day-night-terminal-setup &>/dev/null; then
         . day-night-terminal-setup
     fi
 }

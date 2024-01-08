@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-if type platypus >/dev/null 2>/dev/null; then
+if type platypus &>/dev/null; then
     sudo ln -s -fh /opt/homebrew/Cellar/platypus/5.3/share/platypus/ /usr/local/share/platypus
 fi
