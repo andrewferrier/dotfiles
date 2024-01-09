@@ -33,7 +33,7 @@ for entry in data:
             elif now_date == due_date:
                 datecolor = "green"
 
-            human_date = humanize.naturalday(due_date)
+            human_date = humanize.naturalday(due_date, format="%Y-%m-%d")
         else:
             if now_time > due_time:
                 datecolor = "red"
@@ -53,6 +53,6 @@ for entry in data:
 
     print(
         colored(f'{entry["id"]:5} ', "light_grey", force_color=True)
-        + colored(f"{human_date:9}", datecolor, force_color=True)
+        + colored(f"{human_date:11}", datecolor, force_color=True)
         + f' {entry["summary"]}'
     )
