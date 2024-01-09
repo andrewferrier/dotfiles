@@ -1,5 +1,6 @@
 # Keybindings:
 #
+# <enter> - type a command, such as 'touch'
 # [, ] - goto prev/next directory in jumplist
 # w - launches shell
 #
