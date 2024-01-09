@@ -132,7 +132,7 @@ cmd set_lf_vars ${{
     fi
 }}
 
-:set_lf_vars
+set_lf_vars
 
 cmd set_os_mappings ${{
     if [ $(uname) = Linux ]; then
@@ -142,7 +142,7 @@ cmd set_os_mappings ${{
     fi
 }}
 
-:set_os_mappings
+set_os_mappings
 
 set anchorfind false
 set incsearch true
@@ -161,7 +161,7 @@ map <c-f> :fasd-file
 map <c-g> :fasd-dir
 
 map <delete> :trash
-map <enter> shell
+map <enter> :shell
 map F :folderize_prep
 map N :normfn
 map T $tig
