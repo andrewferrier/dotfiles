@@ -82,12 +82,6 @@ if (! command -v smbclient >/dev/null 2>&1); then
     alias smbclient='docker run --rm -ti docker.io/kfaughnan/smbclient'
 fi
 
-function mkdir-mail {
-    readonly MAILDIR=$1
-    mkdir -p "${MAILDIR}/cur" "${MAILDIR}/new" "${MAILDIR}/tmp"
-    touch "${MAILDIR}/cur/.gitkeep" "${MAILDIR}/new/.gitkeep" "${MAILDIR}/tmp/.gitkeep"
-}
-
 function take() {
     # shellcheck disable=SC2164
     mkdir -p "$@" && cd "${@:$#}"

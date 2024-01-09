@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+if [[ $# -eq 0 ]]; then
+    echo >&2 "Maildir must be supplied."
+fi
+
+readonly MAILDIR=$1
+
+mkdir -p \
+    "${MAILDIR}/cur" \
+    "${MAILDIR}/new" \
+    "${MAILDIR}/tmp"
+
+touch \
+    "${MAILDIR}/cur/.gitkeep" \
+    "${MAILDIR}/new/.gitkeep" \
+    "${MAILDIR}/tmp/.gitkeep"
