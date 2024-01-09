@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+export PAGER=less
 export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgrep/rc.conf
 export FZF_DEFAULT_OPTS_INITIAL='--exact'
 
