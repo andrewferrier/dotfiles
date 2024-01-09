@@ -121,7 +121,7 @@ cmd rename_directory ${{
 }}
 
 cmd set_lf_vars ${{
-    if [ $(lf --version) -ge 29 ]; then
+    if [ $(lf --version | cut -f1 -d'.') -ge 29 ]; then
         # See https://github.com/gokcehan/lf/issues/1258
         lf -remote "send $id set cursorpreviewfmt \"\\033[7m\""
     fi
