@@ -52,11 +52,15 @@ cmd delete ${{
     esac
 }}
 
+cmd folderize_prep ${{
+    FOLDER=$(date +%Y-%m-%dT%H-%M-%S-)
+    lf -remote "send $id push :folderize<space>$FOLDER"
+}}
+
 cmd folderize ${{
     set -o noglob
 
-    # TODO: Use push command to make this a default dir name
-    FOLDER=$(date +%Y-%m-%dT%H-%M-%S)
+    FOLDER=$1
     mkdir $FOLDER
     IFS="$(printf '\n\t')"; mv $fx $FOLDER
 }}
@@ -157,7 +161,7 @@ map <c-g> :fasd-dir
 
 map <delete> :trash
 map <enter> shell
-map F :folderize
+map F :folderize_prep
 map N :normfn
 map T $tig
 map o :open-directory
