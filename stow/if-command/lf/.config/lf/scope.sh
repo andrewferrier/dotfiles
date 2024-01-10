@@ -13,14 +13,27 @@ HEIGHT="${3:-30}"
 HORIZ_POS="${4:-1}"
 VERT_POS="${5:-1}"
 
+DEFAULT_IMAGE_WIDTH=1024
+
+IMAGE_CACHE_PATH="${XDG_CACHE_HOME:-$HOME/.cache}/lf/preview"
+mkdir -p "$IMAGE_CACHE_PATH"
+
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_PATH##*.}" | tr '[:upper:]' '[:lower:]')"
 FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_PATH#*.}" | tr '[:upper:]' '[:lower:]')
+
+if [[ ${OSTYPE} == darwin* ]]; then
+    DRAWIO=/Applications/draw.io.app/Contents/MacOS/draw.io
+fi
 
 if (command -v batcat >/dev/null 2>&1); then
     BAT=("batcat" "--color=always")
 else
     BAT=("bat" "--color=always")
 fi
+
+uid() {
+    stat -- "$(readlink -f "$1" || true)" | sha256sum | cut -d' ' -f1
+}
 
 display_image() {
     # Exiting with 1 disables preview cache, forcing cleaning
@@ -73,6 +86,12 @@ handle_extension() {
         mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | fmt -w "${WIDTH}" && exit 0
         exiftool "${FILE_PATH}" && exit 0
         exit 1
+        ;;
+
+    drawio)
+        THUMBNAIL="$IMAGE_CACHE_PATH/$(uid "$FILE_PATH").png"
+        [[ ! -f $THUMBNAIL ]] && ${DRAWIO} -x "${FILE_PATH}" -o "${THUMBNAIL}" --format png --width "${DEFAULT_IMAGE_WIDTH%x*}"
+        [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
         ;;
 
     *) ;;
