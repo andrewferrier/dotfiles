@@ -13,8 +13,7 @@ HEIGHT="${3:-30}"
 HORIZ_POS="${4:-1}"
 VERT_POS="${5:-1}"
 
-FILE_EXTENSION="${FILE_PATH##*.}"
-FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lower:]')"
+FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_PATH##*.}" | tr '[:upper:]' '[:lower:]')"
 FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_PATH#*.}" | tr '[:upper:]' '[:lower:]')
 
 if (command -v batcat >/dev/null 2>&1); then
