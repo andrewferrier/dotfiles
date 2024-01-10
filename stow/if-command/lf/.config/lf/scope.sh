@@ -22,6 +22,11 @@ else
     BAT=("bat" "--color=always")
 fi
 
+display_image() {
+    # Exiting with 1 disables preview cache, forcing cleaning
+    kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${1}" </dev/null >/dev/tty && exit 1
+}
+
 handle_extension_full() {
     case "${FILE_EXTENSION_FULL_LOWER}" in
 
@@ -84,8 +89,7 @@ handle_mime() {
         ;;
 
     image/*)
-        # Exiting with 1 disables preview cache, forcing cleaning
-        kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${FILE_PATH}" </dev/null >/dev/tty && exit 1
+        display_image "${FILE_PATH}"
         ;;
 
     application/msword | application/vnd.openxmlformats-officedocument.wordprocessingml.document)
