@@ -111,7 +111,7 @@ cmd fasd-dir ${{
 }}
 
 cmd open-directory ${{
-    $OPENER $PWD
+    $OPENER "$PWD"
 }}
 
 cmd take %{{
