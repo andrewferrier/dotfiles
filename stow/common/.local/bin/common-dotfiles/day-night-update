@@ -16,11 +16,15 @@ STATE_FILE_TERMINAL = BASE_PATH.joinpath("state-terminal")
 
 if "XDG_CONFIG_HOME" in os.environ and os.environ["XDG_CONFIG_HOME"] is not None:
     GTKRC20_DIR = Path(os.environ["XDG_CONFIG_HOME"] + "/gtk-2.0").expanduser()
+    GTKRC30_DIR = Path(os.environ["XDG_CONFIG_HOME"] + "/gtk-3.0").expanduser()
 else:
     GTKRC20_DIR = Path("~/.config/gtk-2.0").expanduser()
+    GTKRC30_DIR = Path("~/.config/gtk-3.0").expanduser()
 
 GTKRC20_DIR.mkdir(parents=True, exist_ok=True)
+GTKRC30_DIR.mkdir(parents=True, exist_ok=True)
 GTKRC20 = GTKRC20_DIR.joinpath("gtkrc2")
+GTKRC30 = GTKRC30_DIR.joinpath("settings.ini")
 
 
 def write_to_file(filename, contents):
@@ -64,8 +68,10 @@ try:
 
         if state == "day":
             write_to_file(GTKRC20, 'gtk-theme-name="Adwaita"')
+            write_to_file(GTKRC30, "[Settings]\ngtk-theme-name = Adwaita")
         else:
             write_to_file(GTKRC20, 'gtk-theme-name="Adwaita-dark"')
+            write_to_file(GTKRC30, "[Settings]\ngtk-theme-name = Adwaita-dark")
     else:
         state = get_state_macos()
 
