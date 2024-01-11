@@ -35,6 +35,8 @@ uid() {
     stat -- "$(readlink -f "$1" || true)" | sha256sum | cut -d' ' -f1
 }
 
+THUMBNAIL="$IMAGE_CACHE_PATH/$(uid "$FILE_PATH").png"
+
 display_image() {
     # Exiting with 1 disables preview cache, forcing cleaning
     kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${1}" </dev/null >/dev/tty && exit 1
@@ -81,6 +83,10 @@ handle_extension() {
         ;;
 
     pdf)
+        ## Preview as image
+        [[ ! -f $THUMBNAIL ]] && gs -o "${THUMBNAIL}" -sDEVICE=png16m -dLastPage=1 "${FILE_PATH}" > /dev/null
+        [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
+
         ## Preview as text conversion
         pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | fmt -w "${WIDTH}" && exit 0
         mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | fmt -w "${WIDTH}" && exit 0
@@ -89,7 +95,6 @@ handle_extension() {
         ;;
 
     drawio)
-        THUMBNAIL="$IMAGE_CACHE_PATH/$(uid "$FILE_PATH").png"
         [[ ! -f $THUMBNAIL ]] && ${DRAWIO} -x "${FILE_PATH}" -o "${THUMBNAIL}" --format png --width "${DEFAULT_IMAGE_WIDTH%x*}"
         [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
         ;;
@@ -109,6 +114,11 @@ handle_mime() {
 
     image/*)
         display_image "${FILE_PATH}"
+        ;;
+
+    video/*)
+        [[ ! -f $THUMBNAIL ]] && ffmpeg -y -i "${FILE_PATH}" -ss 00:00:05.00 -frames:v 1 "${THUMBNAIL}"
+        [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
         ;;
 
     application/msword | application/vnd.openxmlformats-officedocument.wordprocessingml.document)
