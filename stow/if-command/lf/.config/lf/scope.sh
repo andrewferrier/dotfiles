@@ -15,7 +15,7 @@ VERT_POS="${5:-1}"
 
 DEFAULT_IMAGE_WIDTH=1024
 
-IMAGE_CACHE_PATH="${XDG_CACHE_HOME:-$HOME/.cache}/lf/preview"
+IMAGE_CACHE_PATH="/tmp/lf/preview"
 mkdir -p "$IMAGE_CACHE_PATH"
 
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_PATH##*.}" | tr '[:upper:]' '[:lower:]')"
