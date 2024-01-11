@@ -117,7 +117,7 @@ handle_mime() {
         ;;
 
     video/*)
-        [[ ! -f $THUMBNAIL ]] && ffmpeg -y -i "${FILE_PATH}" -ss 00:00:05.00 -frames:v 1 "${THUMBNAIL}"
+        [[ ! -f $THUMBNAIL ]] && ffmpegthumbnailer -i "${FILE_PATH}" -o "${THUMBNAIL}" -s 0 -m
         [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
         ;;
 
