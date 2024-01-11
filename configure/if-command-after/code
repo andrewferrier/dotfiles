@@ -4,16 +4,10 @@ set -o errexit
 set -o noglob
 set -o nounset
 
-if command -v codium &>/dev/null; then
-    CODECMD=codium
-else
-    CODECMD=code
-fi
-
 if [[ ${OSTYPE} == darwin* ]]; then
-    $CODECMD --install-extension ms-vsliveshare.vsliveshare
+    code --install-extension ms-vsliveshare.vsliveshare
 fi
 
-$CODECMD --install-extension hashicorp.terraform
-$CODECMD --install-extension ms-python.python
-$CODECMD --install-extension vscodevim.vim
+code --install-extension hashicorp.terraform
+code --install-extension ms-python.python
+code --install-extension vscodevim.vim
