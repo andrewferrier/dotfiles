@@ -14,12 +14,13 @@ BASE_PATH.mkdir(parents=True, exist_ok=True)
 KITTY_COLOR = BASE_PATH.joinpath("kitty-color.conf")
 STATE_FILE_TERMINAL = BASE_PATH.joinpath("state-terminal")
 
-if "XDG_CONFIG_HOME" in os.environ and os.environ["XDG_CONFIG_HOME"] is not None:
-    GTKRC20_DIR = Path(os.environ["XDG_CONFIG_HOME"] + "/gtk-2.0").expanduser()
-    GTKRC30_DIR = Path(os.environ["XDG_CONFIG_HOME"] + "/gtk-3.0").expanduser()
+if ("XDG_CONFIG_HOME" in os.environ and os.environ["XDG_CONFIG_HOME"] is not None):
+    CONFIG_HOME = os.environ["XDG_CONFIG_HOME"]
 else:
-    GTKRC20_DIR = Path("~/.config/gtk-2.0").expanduser()
-    GTKRC30_DIR = Path("~/.config/gtk-3.0").expanduser()
+    CONFIG_HOME = "~/.config"
+
+GTKRC20_DIR = Path(CONFIG_HOME + "/gtk-2.0").expanduser()
+GTKRC30_DIR = Path(CONFIG_HOME + "/gtk-3.0").expanduser()
 
 GTKRC20_DIR.mkdir(parents=True, exist_ok=True)
 GTKRC30_DIR.mkdir(parents=True, exist_ok=True)
