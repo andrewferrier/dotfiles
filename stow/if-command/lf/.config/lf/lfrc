@@ -184,3 +184,6 @@ map . :read; cmd-history-prev; cmd-enter
 map I :rename; cmd-home
 map A :rename; cmd-end
 map r :rename; cmd-delete-home
+
+# Remove unused mappings
+map i
