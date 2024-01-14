@@ -177,6 +177,9 @@ map gk :cd ~/Desktop
 map gl :cd ~/Downloads
 map gn :cd ~/notes
 
+# Repeat previous command
+map . :read; cmd-history-prev; cmd-enter
+
 # See https://github.com/gokcehan/lf/wiki/Tips#enhancing-the-rename-command
 map I :rename; cmd-home
 map A :rename; cmd-end
