@@ -179,6 +179,7 @@
 *   0.10: Consider replacing gruvbox with retrobox
 *   Look at switching to main branch for nvim-treesitter for nightly: <https://github.com/nvim-treesitter/nvim-treesitter/issues/4767>
 *   Use 'gO' to handle outlines using fzf-lua document symbols
+*   Look at https://github.com/zbirenbaum/copilot.lua
 
 ## Presentation Ideas
 
