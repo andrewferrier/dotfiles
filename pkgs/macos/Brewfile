@@ -90,6 +90,7 @@ cask "kitty"
 cask "librewolf", args: { quarantine: false }
 cask "notunes"
 cask "platypus"
+cask "poe"
 cask "visual-studio-code"
 cask "whatsapp"
 
