@@ -6,12 +6,13 @@ STATE_FILE_KITTY_LAST="${CACHE_DIR}/state-kitty-lastset"
 # shellcheck disable=SC2154
 KITTY_TRANSIENT="${XDG_CONFIG_HOME}/kitty/transient_env.conf"
 
-is_background_light() {
+# TODO: Use check_background_color, detect terminal background
+check_background_color() {
     oldstty=$(stty -g)
     stty raw -echo min 0 time 0
 
     printf "\033]11;?\033\\"
-    sleep 0.02
+    sleep 0.01
     read -r answer
     result=${answer#*;}
     stty "$oldstty"
@@ -23,9 +24,9 @@ is_background_light() {
     LUMINANCE=$(echo "0.299 * $R + 0.587 * $G + 0.114 * $B" | bc)
 
     if [[ $LUMINANCE -gt 128 ]]; then
-        true
+        echo "Light background"
     else
-        false
+        echo "Dark background"
     fi
 }
 
@@ -49,15 +50,15 @@ if [[ -z "${SSH_CONNECTION}" ]]; then
 
         command cp "${STATE_FILE}" "${STATE_FILE_KITTY_LAST}"
     fi
-fi
 
-if is_background_light; then
-    # Built myself based on Gruvbox Dark below
-    # shellcheck disable=SC2154
-    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#1d2021,bg:#f9f5d7,hl:#fb4934,fg+:#3c3836,bg+:#ebdbb2,hl+:#fb4934 --color info:#b8bb26,prompt:#b8bb26,spinner:#83a598,pointer:#fabd2f,marker:#665c54,header:#fe8019"
-    export BAT_THEME="gruvbox-light"
-else
-    # See https://github.com/junegunn/fzf/wiki/Color-schemes#gruvbox-dark
-    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#f9f5d7,bg:#1d2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
-    export BAT_THEME="gruvbox-dark"
+    if grep -Fxq "day" "${STATE_FILE}"; then
+        # Built myself based on Gruvbox Dark below
+        # shellcheck disable=SC2154
+        export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#1d2021,bg:#f9f5d7,hl:#fb4934,fg+:#3c3836,bg+:#ebdbb2,hl+:#fb4934 --color info:#b8bb26,prompt:#b8bb26,spinner:#83a598,pointer:#fabd2f,marker:#665c54,header:#fe8019"
+        export BAT_THEME="gruvbox-light"
+    else
+        # See https://github.com/junegunn/fzf/wiki/Color-schemes#gruvbox-dark
+        export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#f9f5d7,bg:#1d2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
+        export BAT_THEME="gruvbox-dark"
+    fi
 fi
