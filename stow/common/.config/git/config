@@ -6,7 +6,7 @@
 	email = 107015+andrewferrier@users.noreply.github.com
 
 [core]
-	pager = less -FX
+	pager = delta
 
 [init]
 	defaultBranch = main
@@ -50,6 +50,7 @@
 
 [interactive]
 	singlekey = true
+	diffFilter = delta --color-only
 
 [include]
 	path = ~/gitco/github/git-utilities/gitaliases
@@ -70,6 +71,14 @@
 	required = false
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+
+[delta]
+	line-numbers = true
+	hyperlinks = true
+	navigate = true
+	hunk-header-style = omit
+	file-decoration-style =
+	map-styles = bold purple => syntax magenta, bold cyan => syntax blue
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
