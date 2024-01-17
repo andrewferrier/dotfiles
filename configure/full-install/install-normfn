@@ -3,11 +3,8 @@
 set -o errexit
 set -o nounset
 
-if uname | grep -iv linux > /dev/null; then
-    OSDISTRIBUTION='macos'
-else
-    OSDISTRIBUTION=$(cat /etc/*-release | grep ^ID | sed -e 's/^.*=//')
-fi
+GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && git rev-parse --show-toplevel)"
+source "${GIT_ROOT_DIR}/common.sh"
 
 if ! command -v "normfn" >/dev/null 2>&1; then
     TEMPDIR=$(mktemp -d)

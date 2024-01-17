@@ -4,20 +4,21 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-DISTRIBUTION=$(uname -s)
+GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && git rev-parse --show-toplevel)"
+source "${GIT_ROOT_DIR}/common.sh"
 
-if [[ -f /etc/debian_version ]]; then
-    # All other packages installed via package manager
-    pipx install ruff || pipx upgrade ruff
-elif [[ $DISTRIBUTION == 'Darwin' ]]; then
-    pipx install black || pipx upgrade black
-    pipx install gitlint --include-deps || pipx upgrade gitlint
-    pipx install sqlfluff || pipx upgrade sqlfluff
-    pipx install ruff || pipx upgrade ruff
-else
+if [[ ${OSDISTRIBUTION} == "arch" ]]; then
     PIPX="pipx install --include-deps"
 
     sudo pacman -S --noconfirm python-black ruff
     ${PIPX} gitlint
     ${PIPX} sqlfluff
+elif [[ ${OSDISTRIBUTION} == "macos" ]]; then
+    pipx install black || pipx upgrade black
+    pipx install gitlint --include-deps || pipx upgrade gitlint
+    pipx install sqlfluff || pipx upgrade sqlfluff
+    pipx install ruff || pipx upgrade ruff
+else
+    # All other packages installed via package manager
+    pipx install ruff || pipx upgrade ruff
 fi
