@@ -26,6 +26,7 @@ brew "figlet"
 brew "findutils"
 brew "fzf"
 brew "git"
+brew "git-delta"
 brew "grep" # for file-list
 brew "gzip"
 brew "hexedit"
