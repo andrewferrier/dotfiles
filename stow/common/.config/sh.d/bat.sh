@@ -3,7 +3,7 @@
 if (command -v batcat >/dev/null 2>&1); then
     alias bat=batcat
     alias cat=batcat
-    alias less='bat --paging always'
+    alias less='batcat --paging always'
 
     export MANPAGER="sh -c 'col --no-backspaces --spaces | batcat --style plain --language man --paging auto'"
     export MANROFFOPT="-c"
