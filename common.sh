@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-# shellcheck disable=SC2312
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
 if uname | grep -iv linux > /dev/null; then
     OSDISTRIBUTION='macos'
 else

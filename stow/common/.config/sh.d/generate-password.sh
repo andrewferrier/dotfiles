@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
 function generate-password-human() {
     CONFORM_TO_TYPICAL_RULES=$(pwgen --capitalize --numerals --symbols 3)
 

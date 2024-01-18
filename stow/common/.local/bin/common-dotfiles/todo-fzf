@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 readonly SCRIPT_DIR
 
@@ -8,7 +13,6 @@ readonly RELOAD="reload(todo --porcelain list | ${SCRIPT_DIR}/todo-fzf-formatter
 readonly TODAY="\$(date +%Y-%m-%d)"
 readonly TOMORROW="\$(date --date=tomorrow +%Y-%m-%d)"
 
-# shellcheck disable=SC2312
 todo --porcelain list |
     "${SCRIPT_DIR}/todo-fzf-formatter" |
     fzf --preview 'todo show {1}' \
