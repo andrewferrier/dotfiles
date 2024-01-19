@@ -84,7 +84,7 @@ handle_extension() {
 
     pdf)
         ## Preview as image
-        [[ ! -f $THUMBNAIL ]] && gs -o "${THUMBNAIL}" -sDEVICE=png16m -dLastPage=1 "${FILE_PATH}" > /dev/null
+        [[ ! -f $THUMBNAIL ]] && gs -o "${THUMBNAIL}" -sDEVICE=png16m -r200 -dLastPage=1 "${FILE_PATH}" > /dev/null
         [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
 
         ## Preview as text conversion
