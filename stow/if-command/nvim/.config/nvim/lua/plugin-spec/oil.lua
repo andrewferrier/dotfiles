@@ -6,7 +6,7 @@ return {
             view_options = { show_hidden = true },
             keymaps = {
                 ["<C-s>"] = "actions.select_split",
-                ["<C-v>"] = "actions.select_vsplit",
+                -- Don't use Ctrl-V as it breaks block select
             },
         }
 
