@@ -136,15 +136,16 @@ cmd set_lf_vars ${{
 
 set_lf_vars
 
-cmd set_os_mappings ${{
+cmd yank &{{
     if [ $(uname) = Linux ]; then
-        lf -remote "send $id map Y \$printf \"%s\" \"\$fx\" | xclip -selection clipboard"
+        printf "%s" "$fx" | xclip -selection clipboard
     else
-        lf -remote "send $id map Y \$printf \"%s\" \"\$fx\" | pbcopy"
+        printf "%s" "$fx" | pbcopy
     fi
-}}
 
-set_os_mappings
+    files=$(echo $fx | sed 's/\n/,/g')
+    lf -remote "send $id echomsg 'Paths yanked: $files'"
+}}
 
 set anchorfind false
 set incsearch true
@@ -167,6 +168,7 @@ map <enter> :shell
 map F :folderize_prep
 map N :normfn
 map T $tig
+map Y :yank
 map o :open-directory
 
 map ga :cd ~/paperwork
