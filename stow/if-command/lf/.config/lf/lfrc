@@ -15,7 +15,7 @@ set shellopts '-eu'
 
 # See https://github.com/gokcehan/lf/wiki/Tips#dynamically-set-number-of-columns
 # - will only work on lf 32+
-cmd on-redraw %{{
+cmd on-redraw &{{
     if [ $lf_width -le 80 ]; then
         lf -remote "send $id set ratios 1:2"
     elif [ $lf_width -le 160 ]; then
@@ -32,10 +32,10 @@ cmd on-cd &{{
 
 on-cd
 
-cmd normfn ${{
+cmd normfn &{{
     set -o noglob
 
-    IFS="$(printf '\n\t')"; normfn -v $fx
+    IFS="$(printf '\n\t')"; normfn $fx
 }}
 
 cmd trash ${{
@@ -112,7 +112,7 @@ cmd fasd-dir ${{
     fi
 }}
 
-cmd open-directory ${{
+cmd open-directory &{{
     $OPENER "$PWD"
 }}
 
