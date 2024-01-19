@@ -1,6 +1,7 @@
 # Keybindings:
 #
 # <enter> - type a command, such as 'touch'
+# R - bulk rename directory
 # [, ] - goto prev/next directory in jumplist
 # w - launches shell
 #
@@ -184,6 +185,7 @@ map . :read; cmd-history-prev; cmd-enter
 map I :rename; cmd-home
 map A :rename; cmd-end
 map r :rename; cmd-delete-home
+map R :rename_directory
 
 # Remove unused mappings
 map i
