@@ -30,3 +30,9 @@ div.player-ads {
 div.ytd-in-feed-ad-layout-renderer {
     display: none;
 }
+
+/* bbc.co.uk/news */
+div#nations-notification-box-top,
+div#nations-notification-login-promo {
+    display: none;
+}
