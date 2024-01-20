@@ -1,3 +1,6 @@
 --italic-text=always
 --paging=never
 --style=plain
+
+--map-syntax=*.mkd:Markdown
+--map-syntax=*.mkd.txt:Markdown

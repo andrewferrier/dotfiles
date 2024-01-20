@@ -19,7 +19,6 @@ IMAGE_CACHE_PATH="/tmp/lf/preview"
 mkdir -p "$IMAGE_CACHE_PATH"
 
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_PATH##*.}" | tr '[:upper:]' '[:lower:]')"
-FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_PATH#*.}" | tr '[:upper:]' '[:lower:]')
 
 if [[ ${OSTYPE} == darwin* ]]; then
     DRAWIO=/Applications/draw.io.app/Contents/MacOS/draw.io
@@ -40,17 +39,6 @@ THUMBNAIL="$IMAGE_CACHE_PATH/$(uid "$FILE_PATH").png"
 display_image() {
     # Exiting with 1 disables preview cache, forcing cleaning
     kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${1}" </dev/null >/dev/tty && exit 1
-}
-
-handle_extension_full() {
-    case "${FILE_EXTENSION_FULL_LOWER}" in
-
-    "md" | "mkd" | "mkd.txt")
-        "${BAT[@]}" --line-range=:"${HEIGHT}" --language markdown "${FILE_PATH}" && exit 0
-        ;;
-
-    *) ;;
-    esac
 }
 
 handle_textual() {
@@ -179,7 +167,6 @@ handle_fallback() {
     exit 1
 }
 
-handle_extension_full
 handle_extension
 handle_textual
 handle_mime
