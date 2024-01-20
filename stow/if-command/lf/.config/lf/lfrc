@@ -91,7 +91,7 @@ cmd zip ${{
 cmd fasd-file ${{
     set -o noglob
 
-    FILE="$(file-list -f -s)"
+    FILE="$(FZF_TMUX_HEIGHT=100 file-list -f -s)"
     if [ -n "$FILE" ]; then
         PARENT=$(dirname $FILE)
         FILENAME=$(basename $FILE)
@@ -105,7 +105,7 @@ cmd fasd-file ${{
 cmd fasd-dir ${{
     set -o noglob
 
-    DIR="$(file-list -d -s)"
+    DIR="$(FZF_TMUX_HEIGHT=100 file-list -d -s)"
     if [ -n "$DIR" ]; then
         DIR="$(printf '%s' "$DIR" | sed 's/\\/\\\\/g;s/"/\\"/g')"
         lf -remote "send $id cd \"$DIR\""
