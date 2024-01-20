@@ -19,6 +19,7 @@ DEFAULT_SEARCH_DIRS=("$HOME/dotfiles"
     "$HOME/Downloads"
     "$HOME/Desktop")
 
+# shellcheck disable=SC2206
 SEARCH_DIRS+=(${DEFAULT_SEARCH_DIRS[@]})
 
 FILES=false
@@ -154,9 +155,8 @@ function wrapper_fd() {
         fi
     done
 
-    # Don't use fd's "--max-results" flag, it's not supported on older
-    # versions. Exclude directories which tend to have a lot of files
-    # but are not that interesting.
+    # Exclude directories which tend to have a lot of files but are not that
+    # interesting.
     "$FD" \
         --absolute-path \
         --hidden \
@@ -194,9 +194,8 @@ COLOR_RESET=$(tput sgr0)
 
 readonly COLOR_BLUE COLOR_RESET
 
-# shellcheck disable=SC2016
 # shellcheck disable=SC2068
-# shellcheck disable=SC2154
+# shellcheck disable=SC2312
 cat \
     <(wrapper_fasd) \
     <(wrapper_mdfind) \
