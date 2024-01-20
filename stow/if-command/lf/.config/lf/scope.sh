@@ -19,6 +19,7 @@ IMAGE_CACHE_PATH="/tmp/lf/preview"
 mkdir -p "$IMAGE_CACHE_PATH"
 
 FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_PATH##*.}" | tr '[:upper:]' '[:lower:]')"
+FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_PATH#*.}" | tr '[:upper:]' '[:lower:]')
 
 if [[ ${OSTYPE} == darwin* ]]; then
     DRAWIO=/Applications/draw.io.app/Contents/MacOS/draw.io
@@ -41,31 +42,28 @@ display_image() {
     kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${1}" </dev/null >/dev/tty && exit 1
 }
 
-handle_extension() {
-    case "${FILE_EXTENSION_LOWER}" in
+handle_extension_full() {
+    case "${FILE_EXTENSION_FULL_LOWER}" in
 
-    a | ace | alz | arc | arj | bz | bz2 | cab | cpio | deb | gz | jar | lha | lz | lzh | lzma | lzo | \
-        rpm | rz | t7z | tar | tbz | tbz2 | tgz | tlz | txz | tZ | tzo | war | xpi | xz | Z | zip)
+    7z | Z | a | ace | alz | arc | arj | bz | bz2 | cab | cpio | deb | gz | \
+        jar | lha | lrz | lz | lzh | lzma | lzo | rar | rpm | rz | t7z | tZ | \
+        tar | tar.7z | tar.Z | tar.bz | tar.bz2 | tar.gz | tar.lz | tar.lzo | \
+        tar.xz | tbz | tbz2 | tgz | tlz | txz | tzo | war | xz | zip)
         atool --list -- "${FILE_PATH}" && exit 0
         bsdtar --list --file "${FILE_PATH}" && exit 0
         exit 1
         ;;
 
-    rar)
-        ## Avoid password prompt by providing empty password
-        unrar lt -p- -- "${FILE_PATH}" && exit 0
-        exit 1
-        ;;
+    *) ;;
+    esac
+}
 
-    7z)
-        ## Avoid password prompt by providing empty password
-        7z l -p -- "${FILE_PATH}" && exit 0
-        exit 1
-        ;;
+handle_extension() {
+    case "${FILE_EXTENSION_LOWER}" in
 
     pdf)
         ## Preview as image
-        [[ ! -f $THUMBNAIL ]] && gs -o "${THUMBNAIL}" -sDEVICE=png16m -r200 -dLastPage=1 "${FILE_PATH}" > /dev/null
+        [[ ! -f $THUMBNAIL ]] && gs -o "${THUMBNAIL}" -sDEVICE=png16m -r200 -dLastPage=1 "${FILE_PATH}" >/dev/null
         [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
 
         ## Preview as text conversion
@@ -167,6 +165,7 @@ handle_fallback() {
     exit 1
 }
 
+handle_extension_full
 handle_extension
 handle_textual
 handle_mime
