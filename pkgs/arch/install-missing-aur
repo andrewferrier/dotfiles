@@ -28,4 +28,3 @@ install-if-missing trickle
 install-if-missing tzupdate
 install-if-missing vale-bin # for neovim null-ls
 install-if-missing verapdf
-install-if-missing virtualbox-ext-oracle
