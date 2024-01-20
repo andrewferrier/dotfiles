@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2312
 if [[ $(uname -s) == Linux* ]]; then
     FIND_CMD="find"
     BASE_DIR="${HOME}/.librewolf/"
@@ -8,8 +9,9 @@ else
     BASE_DIR="${HOME}/Library/Application Support/librewolf/Profiles"
 fi
 
-PROFILE_DIR=$(${FIND_CMD} "${BASE_DIR}" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.default-(release|default|esr)')
+PROFILE_DIRS=$(${FIND_CMD} "${BASE_DIR}" -maxdepth 1 -type d -regextype egrep -regex '.*[a-zA-Z0-9]+.default')
 
-mkdir -p "${PROFILE_DIR}/chrome"
-
-ln -sf "${HOME}/.librewolf/userContent.css" "${PROFILE_DIR}/chrome/userContent.css"
+while IFS= read -r PROFILE_DIR; do
+    mkdir -p "${PROFILE_DIR}/chrome"
+    ln -sf "${HOME}/.librewolf/userContent.css" "${PROFILE_DIR}/chrome/userContent.css"
+done <<<"$PROFILE_DIRS"
