@@ -41,13 +41,6 @@ display_image() {
     kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${1}" </dev/null >/dev/tty && exit 1
 }
 
-handle_textual() {
-    if isutf8 "${FILE_PATH}" >/dev/null; then
-        "${BAT[@]}" --line-range=:"${HEIGHT}" "${FILE_PATH}" && exit 0
-        head -"${HEIGHT}" "${FILE_PATH}" && exit 0
-    fi
-}
-
 handle_extension() {
     case "${FILE_EXTENSION_LOWER}" in
 
@@ -89,6 +82,13 @@ handle_extension() {
 
     *) ;;
     esac
+}
+
+handle_textual() {
+    if isutf8 "${FILE_PATH}" >/dev/null; then
+        "${BAT[@]}" --line-range=:"${HEIGHT}" "${FILE_PATH}" && exit 0
+        head -"${HEIGHT}" "${FILE_PATH}" && exit 0
+    fi
 }
 
 handle_mime() {
