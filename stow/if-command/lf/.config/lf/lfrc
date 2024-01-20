@@ -127,15 +127,6 @@ cmd rename_directory ${{
     nvim $PWD
 }}
 
-cmd set_lf_vars ${{
-    if [ $(lf --version | cut -f1 -d'.') -ge 29 ]; then
-        # See https://github.com/gokcehan/lf/issues/1258
-        lf -remote "send $id set cursorpreviewfmt \"\\033[7m\""
-    fi
-}}
-
-set_lf_vars
-
 cmd yank &{{
     if [ $(uname) = Linux ]; then
         printf "%s" "$fx" | xclip -selection clipboard
@@ -179,16 +170,6 @@ map gk :cd ~/Desktop
 map gl :cd ~/Downloads
 map gn :cd ~/notes
 
-cmd set_data_key ${{
-    if [ -d /mnt/data ]; then
-        lf -remote "send $id map gd :cd /mnt/data"
-    else
-        lf -remote "send $id map gd :cd /data"
-    fi
-}}
-
-set_data_key
-
 # Repeat previous command
 map . :read; cmd-history-prev; cmd-enter
 
@@ -200,3 +181,18 @@ map R :rename_directory
 
 # Remove unused mappings
 map i
+
+cmd startup ${{
+    if [ -d /mnt/data ]; then
+        lf -remote "send $id map gd :cd /mnt/data"
+    else
+        lf -remote "send $id map gd :cd /data"
+    fi
+
+    if [ $(lf --version | cut -f1 -d'.') -ge 29 ]; then
+        # See https://github.com/gokcehan/lf/issues/1258
+        lf -remote "send $id set cursorpreviewfmt \"\\033[7m\""
+    fi
+}}
+
+startup
