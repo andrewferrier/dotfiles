@@ -43,7 +43,7 @@ local configure = function()
             end)
         end, { desc = "Stage hunk", buffer = bufnr })
 
-        vim.keymap.set('n', 'gbhu', function()
+        vim.keymap.set("n", "gbhu", function()
             vim.cmd.update()
             gitsigns.undo_stage_hunk()
             vim.schedule(function()
