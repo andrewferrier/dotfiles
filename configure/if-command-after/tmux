@@ -15,7 +15,8 @@ fi
 
 # This is necessary if not running from within tmux.
 export TMUX_PLUGIN_MANAGER_PATH=${TMUX_PLUGIN_MANAGER_PATH:-${HOME}/.tmux/plugins}
+BIN=${TMUX_PLUGIN_MANAGER_PATH}/tpm/bin
 
-"${HOME}"/.tmux/plugins/tpm/bin/install_plugins
-"${HOME}"/.tmux/plugins/tpm/bin/update_plugins all
-"${HOME}"/.tmux/plugins/tpm/bin/clean_plugins
+${BIN}/install_plugins
+${BIN}/update_plugins all
+${BIN}/clean_plugins
