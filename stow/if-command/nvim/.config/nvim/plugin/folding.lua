@@ -2,7 +2,8 @@ vim.opt.foldlevel = 99
 vim.opt.foldmethod = "indent"
 
 if vim.fn.has("nvim-0.10.0") == 1 then
-    vim.opt.foldtext = "v:lua.vim.treesitter.foldtext()"
+    vim.opt.foldtext = ""
+    vim.opt.fillchars = "fold: "
 end
 
 local set_fold_method = function()
