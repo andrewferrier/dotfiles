@@ -18,6 +18,8 @@ todo --porcelain list |
     fzf --preview 'todo show {1}' \
         --ansi \
         --tac \
+        --no-sort \
+        --tiebreak=index \
         --preview-window=top,5 \
         --header "Ctrl-Reload,Done,Edit,editrAw,todaY,tomorroW,New,<delete>" \
         --bind "ctrl-r:${RELOAD}" \
