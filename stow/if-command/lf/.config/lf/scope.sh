@@ -52,6 +52,9 @@ handle_extension_full() {
         atool --list -- "${FILE_PATH}" && exit 0
         bsdtar --list --file "${FILE_PATH}" && exit 0
         exit 1
+
+    md | mkd | mkd.txt)
+        "${BAT[@]}" --line-range=:"${HEIGHT}" --language markdown "${FILE_PATH}" && exit 0
         ;;
 
     *) ;;
