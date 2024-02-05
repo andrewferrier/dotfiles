@@ -11,6 +11,7 @@ elif (command -v bat >/dev/null 2>&1); then
     alias cat=bat
     alias less='bat --paging always'
 
-    export MANPAGER="sh -c 'col --no-backspaces --spaces | bat --style plain --language man --paging auto'"
+    # Don't use long options for col; not supported on MacOS
+    export MANPAGER="sh -c 'col -b | bat --style plain --language man --paging auto'"
     export MANROFFOPT="-c"
 fi
