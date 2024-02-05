@@ -7,7 +7,7 @@ local SHIFT_PREFIX_ACTION = { "ctrl", "cmd", "alt", "shift" }
 local PREFIX_ACTION = { "ctrl", "cmd", "alt" }
 
 local HOME = os.getenv("HOME")
-local HOMEBREW_BIN = '/opt/homebrew/bin'
+local HOMEBREW_BIN = "/opt/homebrew/bin"
 
 require("run-on-resume").init()
 require("window-management").init(PREFIX_ACTION, SHIFT_PREFIX_ACTION)
