@@ -72,7 +72,7 @@ local configure = function()
             fzf_opts = {
                 ["--preview"] = fzf_lua.shell.preview_action_cmd(
                     function(items)
-                        return "exa --level 2 --tree --color=always --group-directories-first "
+                        return "eza --level 2 --tree --color=always --group-directories-first "
                             .. escape(items)
                     end
                 ),
