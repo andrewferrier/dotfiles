@@ -14,11 +14,6 @@ require("window-management").init(PREFIX_ACTION, SHIFT_PREFIX_ACTION)
 
 hs.dockicon.hide()
 
-for _, v in ipairs(hs.audiodevice.allOutputDevices()) do
-    v:setOutputMuted(true)
-    v:setOutputVolume(0)
-end
-
 local function check_bluetooth_result(rc, stdout, stderr)
     if rc ~= 0 then
         log.e(
