@@ -27,7 +27,7 @@ cmd on-redraw &{{
 
 cmd on-cd &{{
     fasd -A $PWD
-    printf "\033]0; lf [${PWD/#$HOME/\~}]\007" > /dev/tty
+    printf "\033]0; lf [${PWD/#$HOME/~}]\007" > /dev/tty
 }}
 
 on-cd
