@@ -14,26 +14,7 @@ require("window-management").init(PREFIX_ACTION, SHIFT_PREFIX_ACTION)
 
 hs.dockicon.hide()
 
-local function check_bluetooth_result(rc, stdout, stderr)
-    if rc ~= 0 then
-        log.e(
-            string.format(
-                "Unexpected result executing `blueutil`: rc=%d stderr=%s stdout=%s",
-                rc,
-                stderr,
-                stdout
-            )
-        )
-    end
-end
 
-local t = hs.task.new(
-    HOMEBREW_BIN .. "/blueutil",
-    check_bluetooth_result,
-    { "--power", "on" }
-)
-
-t:start()
 
 -- Action keys
 
