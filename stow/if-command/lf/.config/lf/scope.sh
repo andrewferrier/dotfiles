@@ -155,6 +155,7 @@ handle_mime() {
             '--Source*' \
             '--Time*' \
             '--Track*' \
+            '--Zip*' \
             '--Warning*' \
             '--White*' \
             '--X*' \
