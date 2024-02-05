@@ -78,6 +78,10 @@ handle_extension() {
         [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
         ;;
 
+    svg)
+        display_image "${FILE_PATH}"
+        ;;
+
     *) ;;
     esac
 }
