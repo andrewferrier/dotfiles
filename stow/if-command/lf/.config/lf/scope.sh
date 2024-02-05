@@ -123,7 +123,7 @@ handle_mime() {
 
     case "${MIMETYPE}" in
 
-    image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument/*)
+    image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument*)
         exiftool -g \
             '--Balance*' \
             '--Blue*' \
