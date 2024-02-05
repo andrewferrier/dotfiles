@@ -9,12 +9,20 @@ local PREFIX_ACTION = { "ctrl", "cmd", "alt" }
 local HOME = os.getenv("HOME")
 local HOMEBREW_BIN = "/opt/homebrew/bin"
 
-require("run-on-resume").init()
 require("window-management").init(PREFIX_ACTION, SHIFT_PREFIX_ACTION)
 
 hs.dockicon.hide()
 
+local function caffeinate_watcher(event)
+    if event == hs.caffeinate.watcher.screensDidWake then
+        log.i("Awoken")
+        log.i("Running day-night-update")
+        hs.execute(HOME .. "/.local/bin/common-dotfiles/day-night-update")
+        log.i("day-night-update complete")
+    end
+end
 
+hs.caffeinate.watcher.new(caffeinate_watcher):start()
 
 -- Action keys
 
