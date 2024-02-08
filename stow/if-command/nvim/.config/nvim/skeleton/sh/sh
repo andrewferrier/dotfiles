@@ -63,6 +63,9 @@
 # ****** ECHO TO STDERR
 # echo >&2 "xxx"
 #
+# ****** PIPE ALL STREAMS TO /dev/null
+# mycommand &> /dev/null
+#
 # ****** CHECK IF COMMAND EXISTS
 # if type the_command_to_check &>/dev/null; then
 #     # Do stuff
@@ -77,8 +80,8 @@ shopt -s inherit_errexit
 
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && git rev-parse --show-toplevel)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && git rev-parse --show-toplevel)"
 SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_DIR
 readonly SCRIPT_NAME

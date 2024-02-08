@@ -19,9 +19,9 @@ function watch_func() {
 
     DOCKER_FORMAT="table {{.Image}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Status}}"
 
-    if (command -v podman >/dev/null 2>&1); then
+    if (command -v podman &>/dev/null); then
         podman ps --format "${DOCKER_FORMAT}"
-    elif (command -v docker >/dev/null 2>&1); then
+    elif (command -v docker &>/dev/null); then
         docker ps --format "${DOCKER_FORMAT}"
     fi
 }

@@ -25,7 +25,7 @@ if [[ ${OSTYPE} == darwin* ]]; then
     DRAWIO=/Applications/draw.io.app/Contents/MacOS/draw.io
 fi
 
-if (command -v batcat >/dev/null 2>&1); then
+if (command -v batcat &>/dev/null); then
     BAT=("batcat" "--color=always")
 else
     BAT=("bat" "--color=always")

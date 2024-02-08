@@ -5,7 +5,7 @@ set -o noglob
 set -o nounset
 set -o pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 readonly SCRIPT_DIR
 
 readonly RELOAD="reload(todo --porcelain list | ${SCRIPT_DIR}/todo-fzf-formatter)"

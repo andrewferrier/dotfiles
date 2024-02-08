@@ -70,7 +70,7 @@ shift $((OPTIND - 1))
 
 [[ ":${PATH}:" != *":/usr/local/bin:"* ]] && PATH="/usr/local/bin:$PATH"
 
-if (command -v fdfind >/dev/null 2>&1); then
+if (command -v fdfind &>/dev/null); then
     FD=fdfind
 else
     FD=fd
@@ -101,7 +101,7 @@ else
     EXCLUDE_PATTERN="$ALL_EXCLUDE_PATTERN"
 fi
 
-if (command -v batcat >/dev/null 2>&1); then
+if (command -v batcat &>/dev/null); then
     BAT="batcat"
 else
     BAT="bat"

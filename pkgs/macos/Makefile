@@ -16,6 +16,6 @@ brew_cleanup: brew_install
 	brew cleanup
 
 brew_install:
-	if ! command -v brew >/dev/null 2>/dev/null; then \
+	if ! command -v brew &>/dev/null; then \
 	    /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 	fi

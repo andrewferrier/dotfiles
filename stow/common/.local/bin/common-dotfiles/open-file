@@ -54,7 +54,7 @@ function open-text() {
         fi
     else
         if ${GRAPHICAL}; then
-            ${TERMCMD} "${VISUAL}" "${FILE}" >/dev/null 2>&1 &
+            ${TERMCMD} "${VISUAL}" "${FILE}" &>/dev/null &
         else
             ${VISUAL} "${FILE}"
         fi
@@ -67,7 +67,7 @@ function open-system() {
     else
         # 'nohup' is needed to ensure that when files are opened from lf
         # that closing lf doesn't close the target app.
-        nohup xdg-open "${FILE}" >/dev/null 2>&1 &
+        nohup xdg-open "${FILE}" &>/dev/null &
     fi
 }
 
