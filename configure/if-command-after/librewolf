@@ -13,5 +13,5 @@ PROFILE_DIRS=$(${FIND_CMD} "${BASE_DIR}" -maxdepth 1 -type d -regextype egrep -r
 
 while IFS= read -r PROFILE_DIR; do
     mkdir -p "${PROFILE_DIR}/chrome"
-    ln -sf "${HOME}/.librewolf/userContent.css" "${PROFILE_DIR}/chrome/userContent.css"
+    ln -f "${HOME}/.librewolf/userContent.css" "${PROFILE_DIR}/chrome/userContent.css"
 done <<<"$PROFILE_DIRS"

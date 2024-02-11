@@ -1,3 +1,9 @@
+/*
+ * Troubleshooting:
+ *
+ * 1. userContent.css needs to not be a symlink
+ */
+
 /* ALL */
 textarea {
     min-width: 50ex !important;
