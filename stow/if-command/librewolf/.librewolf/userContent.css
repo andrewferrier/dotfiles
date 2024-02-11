@@ -2,6 +2,7 @@
  * Troubleshooting:
  *
  * 1. userContent.css needs to not be a symlink
+ * 2. If styles aren't working, use !important
  */
 
 /* ALL */
@@ -12,33 +13,33 @@ textarea {
 
 /* reddit.com */
 div.promotedlink {
-    display: none;
+    display: none !important;
 }
 
 div[slot="cookie-banner-text"] {
-    display: none;
+    display: none !important;
 }
 
 /* tfl.gov.uk */
 div.top-banner-advert {
-    display: none;
+    display: none !important;
 }
 
 div#cb-cookieoverlay {
-    display: none;
+    display: none !important;
 }
 
 /* youtube.com */
 div.player-ads {
-    display: none;
+    display: none !important;
 }
 
 div.ytd-in-feed-ad-layout-renderer {
-    display: none;
+    display: none !important;
 }
 
 /* bbc.co.uk/news */
 div#nations-notification-box-top,
 div#nations-notification-login-promo {
-    display: none;
+    display: none !important;
 }
