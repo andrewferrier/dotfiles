@@ -20,6 +20,7 @@ vim.filetype.add({
         [".*%.gitignore.*"] = "gitignore",
         [".*%.properties.*"] = "jproperties",
         [".*/%.kaf/config"] = "yaml",
+        [".*/i3/config%.d/.*"] = "i3config",
         [".*Dockerfile.*"] = "dockerfile",
         [".*Jenkinsfile.*"] = "groovy",
         [".*emails/cur/.*"] = "mail",
