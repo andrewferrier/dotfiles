@@ -7,5 +7,5 @@ Subject: $2
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain; charset=UTF-8
 
-$(systemctl --user status --lines 500 --full "$2")
+$(systemctl --user status --lines 500 --full "$2" || true)
 ERRMAIL
