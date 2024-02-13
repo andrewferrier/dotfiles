@@ -183,6 +183,8 @@ map R :rename_directory
 map i
 
 cmd startup ${{
+    sleep 0.1
+
     if [ -d /mnt/data ]; then
         lf -remote "send $id map gd :cd /mnt/data"
     else
