@@ -90,6 +90,7 @@ cask "karabiner-elements"
 cask "keepassxc"
 cask "kitty"
 cask "librewolf", args: { quarantine: false }
+cask "nikitabobko/tap/aerospace", args: { quarantine: false }
 cask "notunes"
 cask "platypus"
 cask "poe"
