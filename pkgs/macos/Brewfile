@@ -50,6 +50,7 @@ brew "mas"
 brew "moreutils" # isutf8 for Hammerspoon
 brew "ncdu"
 brew "neovim"
+brew "ollama"
 brew "pandoc" # for scope.sh
 brew "pipx"
 brew "podman-desktop"
