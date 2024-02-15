@@ -1,3 +1,6 @@
+tap "homebrew/cask-fonts"
+tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
+
 brew "alerter"
 brew "ansible-language-server"
 brew "ansible-lint"
@@ -78,9 +81,6 @@ brew "yarn" # for yaml-language-server
 brew "yq"
 brew "yt-dlp"
 brew "zsh-lovers"
-
-tap "homebrew/cask-fonts"
-tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
 
 cask "drawio"
 cask "font-consolas-for-powerline" # for kitty
