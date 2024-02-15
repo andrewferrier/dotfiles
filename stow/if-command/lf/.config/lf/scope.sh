@@ -170,7 +170,7 @@ handle_mime() {
 }
 
 handle_fallback() {
-    file --dereference --uncompress --brief -- "${FILE_PATH}" | fmt -w "${WIDTH}" && exit 0
+    file --dereference --uncompress --no-sandbox --brief -- "${FILE_PATH}" | fmt -w "${WIDTH}" && exit 0
     exit 1
 }
 
