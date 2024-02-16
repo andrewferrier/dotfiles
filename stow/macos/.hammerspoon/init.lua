@@ -9,6 +9,8 @@ local PREFIX_ACTION = { "ctrl", "cmd", "alt" }
 local HOME = os.getenv("HOME")
 local HOMEBREW_BIN = "/opt/homebrew/bin"
 
+require("window-management").init(PREFIX_ACTION, SHIFT_PREFIX_ACTION)
+
 hs.dockicon.hide()
 
 local function caffeinate_watcher(event)
@@ -66,6 +68,14 @@ end
 local function open_bash_terminal(command)
     open_terminal("bash --login -c '" .. command .. "'")
 end
+
+hs.hotkey.bind(PREFIX_ACTION, "Return", function()
+    open_terminal()
+end)
+
+hs.hotkey.bind(PREFIX_ACTION, "V", function()
+    open_bash_terminal(HOMEBREW_BIN .. "/nvim")
+end)
 
 hs.hotkey.bind(PREFIX_ACTION, "F", function()
     open_terminal(HOME .. "/.local/bin/common/file-list-find-and-open -f")
