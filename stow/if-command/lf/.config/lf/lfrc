@@ -31,18 +31,6 @@ cmd on-cd &{{
 
 on-cd
 
-cmd normfn &{{
-    set -o noglob
-
-    IFS="$(printf '\n\t')"; normfn $fx
-}}
-
-cmd trash ${{
-    set -o noglob
-
-    IFS="$(printf '\n\t')"; trash $fx
-}}
-
 cmd delete ${{
     set -o noglob
 
@@ -111,19 +99,11 @@ cmd fasd-dir ${{
     fi
 }}
 
-cmd open-external ${{
-    $OPENER "$fx"
-}}
-
 cmd take %{{
     IFS=" "
     mkdir -p -- "$*"
     lf -remote "send $id select \"$*\""
     lf -remote "send $id push l"
-}}
-
-cmd rename_directory ${{
-    nvim $PWD
 }}
 
 cmd yank &{{
@@ -153,12 +133,12 @@ set dircounts
 map <c-f> :fasd-file
 map <c-g> :fasd-dir
 
-map <delete> :trash
+map <delete> $IFS="$(printf '\n\t')"; trash $fx
 map F :folderize_prep
-map N :normfn
+map N $IFS="$(printf '\n\t')"; normfn $fx
 map T $tig
 map Y :yank
-map o :open-external
+map o $OPENER "$fx"
 
 map ga :cd ~/paperwork
 map ge :cd ~/personal
@@ -175,7 +155,7 @@ map . :read; cmd-history-prev; cmd-enter
 map I :rename; cmd-home
 map A :rename; cmd-end
 map r :rename; cmd-delete-home
-map R :rename_directory
+map R $nvim $PWD
 
 # Remove unused mappings
 map i
