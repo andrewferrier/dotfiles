@@ -20,6 +20,10 @@ div[slot="cookie-banner-text"] {
     display: none !important;
 }
 
+div#credential_picker_container {
+    display: none !important;
+}
+
 /* tfl.gov.uk */
 div.top-banner-advert {
     display: none !important;
@@ -41,5 +45,17 @@ div.ytd-in-feed-ad-layout-renderer {
 /* bbc.co.uk/news */
 div#nations-notification-box-top,
 div#nations-notification-login-promo {
+    display: none !important;
+}
+
+/* gov.uk */
+
+div.govuk-cookie-banner {
+    display: none !important;
+}
+
+/* economist.com */
+
+div[class^='adComponent'] {
     display: none !important;
 }
