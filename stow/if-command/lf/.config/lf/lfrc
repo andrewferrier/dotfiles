@@ -45,12 +45,12 @@ cmd delete ${{
     esac
 }}
 
-cmd folderize_prep ${{
+cmd folderize_prep %{{
     FOLDER=$(date +%Y-%m-%dT%H-%M-%S-)
     lf -remote "send $id push :folderize<space>$FOLDER"
 }}
 
-cmd folderize ${{
+cmd folderize %{{
     set -o noglob
 
     FOLDER=$1
