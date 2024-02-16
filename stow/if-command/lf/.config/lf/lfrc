@@ -4,6 +4,7 @@
 #
 # R - bulk rename directory
 # [, ] - goto prev/next directory in jumplist
+# a - make directory
 # w - launches shell
 #
 # Commands:
@@ -140,6 +141,7 @@ map F :folderize_prep
 map N $IFS="$(printf '\n\t')"; normfn $fx
 map T $tig
 map Y :yank
+map a :push %mkdir<space>
 map o $OPENER "$fx"
 
 map ga :cd ~/paperwork
