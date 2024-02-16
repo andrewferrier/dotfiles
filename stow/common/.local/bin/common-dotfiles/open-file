@@ -27,7 +27,7 @@ function open-directory() {
     if [[ -d "${FILE}/cur" && -d "${FILE}/new" && -d "${FILE}/tmp" ]] && ${INTERACTIVE}; then
         # This is a maildir directory
         # shellcheck disable=SC1091,1090
-        source "${HOME}/.config/bash/mutt.bashrc"
+        source "${HOME}/.config/sh-local.d/mutt.sh"
         mutt -f "${FILE}"
     else
         if [[ ${OSTYPE} == darwin* ]]; then
