@@ -112,8 +112,8 @@ cmd fasd-dir ${{
     fi
 }}
 
-cmd open-directory &{{
-    $OPENER "$PWD"
+cmd open-external ${{
+    $OPENER "$fx"
 }}
 
 cmd take %{{
@@ -160,7 +160,7 @@ map F :folderize_prep
 map N :normfn
 map T $tig
 map Y :yank
-map o :open-directory
+map o :open-external
 
 map ga :cd ~/paperwork
 map ge :cd ~/personal
