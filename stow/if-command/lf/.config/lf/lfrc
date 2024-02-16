@@ -1,6 +1,5 @@
 # Keybindings:
 #
-# <enter> - type a command, such as 'touch'
 # R - bulk rename directory
 # [, ] - goto prev/next directory in jumplist
 # w - launches shell
@@ -155,7 +154,6 @@ map <c-f> :fasd-file
 map <c-g> :fasd-dir
 
 map <delete> :trash
-map <enter> :shell
 map F :folderize_prep
 map N :normfn
 map T $tig
