@@ -55,9 +55,6 @@
 [interactive]
 	singlekey = true
 
-[include]
-	path = ~/gitco/github/git-utilities/gitaliases
-
 [web]
 	browser = open
 
