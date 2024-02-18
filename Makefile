@@ -15,6 +15,12 @@ else
 	OSDISTRIBUTION := $(shell cat /etc/*-release | grep ^ID | sed -e 's/^.*=//')
 endif
 
+ifeq ($(origin FULLINSTALL),undefined)
+	INSTALL_TYPE := simple-install
+else
+	INSTALL_TYPE := full-install
+endif
+
 # TOP-LEVEL
 
 all: pkgs quick
@@ -32,23 +38,12 @@ pre-stow:
 	run-directory $(PRE_STOW)/common
 	run-directory $(PRE_STOW)/$(OS)
 
-stow-basic: pre-stow
+stow: pre-stow
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OSDISTRIBUTION)
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(INSTALL_TYPE)
 	stow-if-command $(STOW)/if-command
-
-ifeq ($(origin FULLINSTALL),undefined)
-
-stow: stow-basic
-	stow --verbose --dir=$(STOW) --target=$(HOME) --stow simple-install
-
-else
-
-stow: stow-basic
-	stow --verbose --dir=$(STOW) --target=$(HOME) --stow full-install
-
-endif
 
 # CONFIGURE
 
@@ -56,15 +51,5 @@ configure: configure-fullinstall
 	run-directory $(CONFIGURE)/all
 	run-directory $(CONFIGURE)/if-os/$(OS)
 	run-directory $(CONFIGURE)/if-osdistribution/$(OSDISTRIBUTION)
+	run-directory $(CONFIGURE)/$(INSTALL_TYPE)
 	run-if-command $(CONFIGURE)/if-command-after
-
-ifeq ($(origin FULLINSTALL),undefined)
-
-configure-fullinstall:
-
-else
-
-configure-fullinstall:
-	run-directory $(CONFIGURE)/full-install
-
-endif
