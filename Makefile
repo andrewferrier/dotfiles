@@ -32,11 +32,23 @@ pre-stow:
 	run-directory $(PRE_STOW)/common
 	run-directory $(PRE_STOW)/$(OS)
 
-stow: pre-stow
+stow-basic: pre-stow
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OSDISTRIBUTION)
 	stow-if-command $(STOW)/if-command
+
+ifeq ($(origin FULLINSTALL),undefined)
+
+stow: stow-basic
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow simple-install
+
+else
+
+stow: stow-basic
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow full-install
+
+endif
 
 # CONFIGURE
 
