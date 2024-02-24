@@ -28,12 +28,6 @@
 [fetch]
 	prune = true
 
-[branch]
-	autoSetupRebase = always
-
-[pull]
-	rebase = true
-
 [merge]
 	tool = nvim
 
