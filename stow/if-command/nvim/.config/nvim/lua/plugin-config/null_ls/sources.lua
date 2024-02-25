@@ -15,7 +15,6 @@ M.sources = {
             }
         end,
     }),
-    null_ls.builtins.formatting.jq,
     null_ls.builtins.formatting.latexindent.with({
         extra_args = function(params)
             local COLUMNS = "modifyLineBreaks:textWrapOptions:columns:"

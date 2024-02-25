@@ -12,6 +12,7 @@ fi
 
 NPM_PACKAGES=("bash-language-server"
     "dockerfile-language-server-nodejs"
+    "json-language-server"
     "prettier"
     "prettier-plugin-toml"
     "prettier-plugin-xml"

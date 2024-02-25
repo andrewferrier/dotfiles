@@ -10,6 +10,7 @@ return {
             cssls = require("plugin-config.lsp-settings.css"),
             dockerls = {},
             gopls = require("plugin-config.lsp-settings.gopls"),
+            jsonls = {},
             lua_ls = require("plugin-config.lsp-settings.lua_ls"),
             pyright = {},
             ruff_lsp = {},
