@@ -5,16 +5,6 @@ local null_ls = require("null-ls")
 M.sources = {
     -- Formatters
 
-    null_ls.builtins.formatting.black.with({
-        extra_args = function(params)
-            return {
-                "--line-length=" .. vim.api.nvim_get_option_value(
-                    "textwidth",
-                    { buf = params.bufnr }
-                ),
-            }
-        end,
-    }),
     null_ls.builtins.formatting.latexindent.with({
         extra_args = function(params)
             local COLUMNS = "modifyLineBreaks:textWrapOptions:columns:"
