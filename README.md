@@ -48,6 +48,7 @@
 
     getent hosts <hostname> | look up DNS name
     pdfunite                | combine PDFs on comand line
+    hardlink                | combine duplicate files using hardlinks
 
 ## Audio file manipulation
 
