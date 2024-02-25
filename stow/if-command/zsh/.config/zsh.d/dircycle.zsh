@@ -28,17 +28,22 @@ _dircycle_insert_cycled_left() {
     _dircycle_update_cycled +1 || true
 }
 
-zle -N _dircycle_insert_cycled_left
-
 _dircycle_insert_cycled_right() {
     _dircycle_update_cycled -0 || true
 }
 
+_dircycle_up () {
+    cd ..
+    _dircycle-redraw-prompt
+}
+
+zle -N _dircycle_insert_cycled_left
 zle -N _dircycle_insert_cycled_right
+zle -N _dircycle_up
 
 # Key bindings - use 'cat -v' to discover them (and bindkey to view and remove
 # potential conflicts)
 
-bindkey '^[[1;3D' _dircycle_insert_cycled_left  # Alt-left
-bindkey '^[[1;3C' _dircycle_insert_cycled_right # Alt-right
-bindkey -s '^[[1;3A' '^Ucd ..^M' # alt+up
+bindkey '^[[1;3D' _dircycle_insert_cycled_left  # Alt-Left
+bindkey '^[[1;3C' _dircycle_insert_cycled_right # Alt-Right
+bindkey '^[[1;3A' _dircycle_up # Alt+Up
