@@ -81,9 +81,6 @@ M.sources = {
 
     -- Diagnostics
 
-    null_ls.builtins.diagnostics.chktex.with({
-        filetypes = { "tex", "latex" },
-    }),
     null_ls.builtins.diagnostics.gitlint.with({
         extra_args = {
             "--ignore",

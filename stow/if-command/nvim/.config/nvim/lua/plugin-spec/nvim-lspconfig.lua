@@ -16,6 +16,7 @@ return {
             pyright = {},
             ruff_lsp = {},
             terraformls = require("plugin-config.lsp-settings.terraformls"),
+            texlab = require("plugin-config.lsp-settings.texlab"),
             tflint = require("plugin-config.lsp-settings.tflint"),
             tsserver = require("plugin-config.lsp-settings.tsserver"),
             vimls = {},
