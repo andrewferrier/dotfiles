@@ -7,28 +7,28 @@ STATE_FILE_KITTY_LAST="${CACHE_DIR}/state-kitty-lastset"
 KITTY_TRANSIENT="${XDG_CONFIG_HOME}/kitty/transient_env.conf"
 
 # TODO: Use check_background_color, detect terminal background
-check_background_color() {
-    oldstty=$(stty -g)
-    stty raw -echo min 0 time 0
-
-    printf "\033]11;?\033\\"
-    sleep 0.01
-    read -r answer
-    result=${answer#*;}
-    stty "$oldstty"
-    CLEAN_RESULT=$(echo "$result" | tr -dc '[:print:]')
-    R=$(printf "%d" "0x${CLEAN_RESULT:4:2}")
-    G=$(printf "%d" "0x${CLEAN_RESULT:9:2}")
-    B=$(printf "%d" "0x${CLEAN_RESULT:14:2}")
-
-    LUMINANCE=$(echo "0.299 * $R + 0.587 * $G + 0.114 * $B" | bc)
-
-    if [[ $LUMINANCE -gt 128 ]]; then
-        echo "Light background"
-    else
-        echo "Dark background"
-    fi
-}
+# check_background_color() {
+#     oldstty=$(stty -g)
+#     stty raw -echo min 0 time 0
+#
+#     printf "\033]11;?\033\\"
+#     sleep 0.01
+#     read -r answer
+#     result=${answer#*;}
+#     stty "$oldstty"
+#     CLEAN_RESULT=$(echo "$result" | tr -dc '[:print:]')
+#     R=$(printf "%d" "0x${CLEAN_RESULT:4:2}")
+#     G=$(printf "%d" "0x${CLEAN_RESULT:9:2}")
+#     B=$(printf "%d" "0x${CLEAN_RESULT:14:2}")
+#
+#     LUMINANCE=$(echo "0.299 * $R + 0.587 * $G + 0.114 * $B" | bc)
+#
+#     if [[ $LUMINANCE -gt 128 ]]; then
+#         echo "Light background"
+#     else
+#         echo "Dark background"
+#     fi
+# }
 
 if [[ -z "${SSH_CONNECTION}" ]]; then
     # It seems that occasionally calling 'kitty @ set-colors' is responsible for
@@ -61,4 +61,7 @@ if [[ -z "${SSH_CONNECTION}" ]]; then
         export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#f9f5d7,bg:#1d2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
         export BAT_THEME="gruvbox-dark"
     fi
+else
+    # FIXME: This is temporary to make man pages visible
+    export BAT_THEME="gruvbox-dark"
 fi
