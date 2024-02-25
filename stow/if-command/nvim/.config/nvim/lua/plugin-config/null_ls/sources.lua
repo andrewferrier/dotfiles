@@ -88,7 +88,6 @@ M.sources = {
         end,
     }),
     null_ls.builtins.formatting.remark,
-    null_ls.builtins.formatting.trim_whitespace, -- only works for ff=unix
 
     -- Diagnostics
 
