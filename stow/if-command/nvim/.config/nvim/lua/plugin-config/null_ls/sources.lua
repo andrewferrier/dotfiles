@@ -31,7 +31,7 @@ M.sources = {
         filetypes = { "tex", "latex" },
     }),
     null_ls.builtins.formatting.prettier.with({
-        filetypes = { "css", "html", "less", "scss", "toml", "yaml"},
+        filetypes = { "html", "toml", "yaml"},
         extra_args = function(params)
             return {
                 "--print-width",
