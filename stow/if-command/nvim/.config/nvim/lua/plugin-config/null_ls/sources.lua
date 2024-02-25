@@ -41,7 +41,7 @@ M.sources = {
         filetypes = { "tex", "latex" },
     }),
     null_ls.builtins.formatting.prettier.with({
-        filetypes = { "css", "html", "less", "scss", "toml", "yaml", "xml" },
+        filetypes = { "css", "html", "less", "scss", "toml", "yaml"},
         extra_args = function(params)
             return {
                 "--print-width",
@@ -89,7 +89,6 @@ M.sources = {
     }),
     null_ls.builtins.formatting.remark,
     null_ls.builtins.formatting.trim_whitespace, -- only works for ff=unix
-    null_ls.builtins.formatting.xmllint,
 
     -- Diagnostics
 

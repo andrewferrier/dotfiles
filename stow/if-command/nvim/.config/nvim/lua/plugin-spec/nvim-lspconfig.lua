@@ -11,6 +11,7 @@ return {
             dockerls = {},
             gopls = require("plugin-config.lsp-settings.gopls"),
             jsonls = {},
+            lemminx = {},
             lua_ls = require("plugin-config.lsp-settings.lua_ls"),
             pyright = {},
             ruff_lsp = {},

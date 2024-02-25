@@ -17,6 +17,7 @@ install-if-missing dragon-drop
 install-if-missing eget-bin
 install-if-missing i3wsr
 install-if-missing keepmenu
+install-if-missing lemminx
 install-if-missing librewolf-bin
 install-if-missing mpd-notification
 install-if-missing mpdevil

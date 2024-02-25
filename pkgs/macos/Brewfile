@@ -39,6 +39,7 @@ brew "iftop"
 brew "isync"
 brew "jq"
 brew "latexindent" # for NeoVim
+brew "lemminx"
 brew "lf"
 brew "libqalculate" # includes CLI
 brew "lua-language-server"
