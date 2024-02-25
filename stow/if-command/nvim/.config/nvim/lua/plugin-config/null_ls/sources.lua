@@ -5,31 +5,6 @@ local null_ls = require("null-ls")
 M.sources = {
     -- Formatters
 
-    null_ls.builtins.formatting.latexindent.with({
-        extra_args = function(params)
-            local COLUMNS = "modifyLineBreaks:textWrapOptions:columns:"
-                .. vim.api.nvim_get_option_value(
-                    "textwidth",
-                    { buf = params.bufnr }
-                )
-            local INDENT = "defaultIndent:'"
-                .. string.rep(
-                    " ",
-                    vim.api.nvim_get_option_value(
-                        "shiftwidth",
-                        { buf = params.bufnr }
-                    )
-                )
-                .. "'"
-
-            return {
-                "-m",
-                "--cruft=/tmp",
-                "--yaml=" .. COLUMNS .. "," .. INDENT,
-            }
-        end,
-        filetypes = { "tex", "latex" },
-    }),
     null_ls.builtins.formatting.prettier.with({
         filetypes = { "html", "toml", "yaml"},
         extra_args = function(params)
