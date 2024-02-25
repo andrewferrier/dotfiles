@@ -30,6 +30,19 @@ KITTY_TRANSIENT="${XDG_CONFIG_HOME}/kitty/transient_env.conf"
 #     fi
 # }
 
+set_day_vars() {
+    # Built myself based on Gruvbox Dark below
+    # shellcheck disable=SC2154
+    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#1d2021,bg:#f9f5d7,hl:#fb4934,fg+:#3c3836,bg+:#ebdbb2,hl+:#fb4934 --color info:#b8bb26,prompt:#b8bb26,spinner:#83a598,pointer:#fabd2f,marker:#665c54,header:#fe8019"
+    export BAT_THEME="gruvbox-light"
+}
+
+set_night_vars() {
+    # See https://github.com/junegunn/fzf/wiki/Color-schemes#gruvbox-dark
+    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#f9f5d7,bg:#1d2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
+    export BAT_THEME="gruvbox-dark"
+}
+
 if [[ -z "${SSH_CONNECTION}" ]]; then
     # It seems that occasionally calling 'kitty @ set-colors' is responsible for
     # swallowing keypresses. However, by checking against the 'KITTY_LAST' file,
@@ -52,16 +65,18 @@ if [[ -z "${SSH_CONNECTION}" ]]; then
     fi
 
     if grep -Fxq "day" "${STATE_FILE}"; then
-        # Built myself based on Gruvbox Dark below
-        # shellcheck disable=SC2154
-        export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#1d2021,bg:#f9f5d7,hl:#fb4934,fg+:#3c3836,bg+:#ebdbb2,hl+:#fb4934 --color info:#b8bb26,prompt:#b8bb26,spinner:#83a598,pointer:#fabd2f,marker:#665c54,header:#fe8019"
-        export BAT_THEME="gruvbox-light"
+        set_day_vars
     else
-        # See https://github.com/junegunn/fzf/wiki/Color-schemes#gruvbox-dark
-        export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#f9f5d7,bg:#1d2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
-        export BAT_THEME="gruvbox-dark"
+        set_night_vars
     fi
 else
-    # FIXME: This is temporary to make man pages visible
-    export BAT_THEME="gruvbox-dark"
+    if [[ -z "$TMUX" ]] && type "kitten" >/dev/null; then
+        FOREGROUND=$(kitten @ get-colors | grep '^foreground ' | awk '{print $2}')
+
+        if [[ $FOREGROUND == "#3c3836" ]]; then
+            set_day_vars
+        else
+            set_night_vars
+        fi
+    fi
 fi
