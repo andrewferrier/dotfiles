@@ -30,6 +30,7 @@
 
 [merge]
 	tool = nvim
+	conflictStyle = zdiff3
 
 [mergetool "nvim"]
 	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
