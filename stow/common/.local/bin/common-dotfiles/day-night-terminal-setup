@@ -43,6 +43,14 @@ set_night_vars() {
     export BAT_THEME="gruvbox-dark"
 }
 
+set_from_state_file() {
+    if grep -Fxq "day" "${STATE_FILE}"; then
+        set_day_vars
+    else
+        set_night_vars
+    fi
+}
+
 if [[ -z "${SSH_CONNECTION}" ]]; then
     # It seems that occasionally calling 'kitty @ set-colors' is responsible for
     # swallowing keypresses. However, by checking against the 'KITTY_LAST' file,
@@ -64,11 +72,7 @@ if [[ -z "${SSH_CONNECTION}" ]]; then
         command cp "${STATE_FILE}" "${STATE_FILE_KITTY_LAST}"
     fi
 
-    if grep -Fxq "day" "${STATE_FILE}"; then
-        set_day_vars
-    else
-        set_night_vars
-    fi
+    set_from_state_file
 else
     if [[ -z "$TMUX" ]] && type "kitten" >/dev/null; then
         FOREGROUND=$(kitten @ get-colors | grep '^foreground ' | awk '{print $2}')
@@ -78,5 +82,7 @@ else
         else
             set_night_vars
         fi
+    else
+        set_from_state_file
     fi
 fi
