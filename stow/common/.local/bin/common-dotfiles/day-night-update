@@ -82,14 +82,14 @@ try:
             "include "
             + str(Path("~/.config/kitty/colors-light.conf").expanduser())
             + "\n",
-        ),
+        )
     else:
         write_to_file(
             KITTY_COLOR,
             "include "
             + str(Path("~/.config/kitty/colors-dark.conf").expanduser())
             + "\n",
-        ),
+        )
 
     write_to_file(STATE_FILE_TERMINAL, state + "\n")
 
