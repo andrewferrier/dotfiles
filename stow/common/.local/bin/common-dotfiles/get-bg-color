@@ -9,10 +9,11 @@ stty raw -echo min 0
 col=11
 echo -en "\033]${col};?\033\\" >/dev/tty
 result=
+# shellcheck disable=SC1003
 if IFS=';' read -r -d '\' color ; then
-    result=$(echo $color | sed 's/^.*\;//;s/[^rgb:0-9a-f/]//g')
+    result=$(echo "$color" | sed 's/^.*\;//;s/[^rgb:0-9a-f/]//g')
     success=true
 fi
-stty $oldstty
-echo $result
+stty "$oldstty"
+echo "$result"
 $success
