@@ -6,16 +6,19 @@ STATE_FILE_KITTY_LAST="${CACHE_DIR}/state-kitty-lastset"
 # shellcheck disable=SC2154
 KITTY_TRANSIENT="${XDG_CONFIG_HOME}/kitty/transient_env.conf"
 
+readonly LIGHT_COLORS="--color fg:#1d2021,bg:#f9f5d7,hl:#fb4934,fg+:#3c3836,bg+:#ebdbb2,hl+:#fb4934 --color info:#b8bb26,prompt:#b8bb26,spinner:#83a598,pointer:#fabd2f,marker:#665c54,header:#fe8019"
+readonly DARK_COLORS="--color fg:#f9f5d7,bg:#1d2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
+
 set_day_vars() {
     # Built myself based on Gruvbox Dark below
     # shellcheck disable=SC2154
-    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#1d2021,bg:#f9f5d7,hl:#fb4934,fg+:#3c3836,bg+:#ebdbb2,hl+:#fb4934 --color info:#b8bb26,prompt:#b8bb26,spinner:#83a598,pointer:#fabd2f,marker:#665c54,header:#fe8019"
+    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL $LIGHT_COLORS"
     export BAT_THEME="gruvbox-light"
 }
 
 set_night_vars() {
     # See https://github.com/junegunn/fzf/wiki/Color-schemes#gruvbox-dark
-    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL --color fg:#f9f5d7,bg:#1d2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54"
+    export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS_INITIAL $DARK_COLORS"
     export BAT_THEME="gruvbox-dark"
 }
 
@@ -36,12 +39,12 @@ if [[ -z "${SSH_CONNECTION}" ]]; then
             kitty @ set-colors --all --configured ~/.config/kitty/colors-light.conf
 
             # shellcheck disable=SC2154
-            echo "env FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS_INITIAL --color fg:#1d2021,bg:#f9f5d7,hl:#fb4934,fg+:#3c3836,bg+:#ebdbb2,hl+:#fb4934 --color info:#b8bb26,prompt:#b8bb26,spinner:#83a598,pointer:#fabd2f,marker:#665c54,header:#fe8019" >!"$KITTY_TRANSIENT"
+            echo "env FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS_INITIAL $LIGHT_COLORS" >!"$KITTY_TRANSIENT"
             echo "env BAT_THEME=gruvbox-light" >>"$KITTY_TRANSIENT"
         else
             kitty @ set-colors --all --configured ~/.config/kitty/colors-dark.conf
 
-            echo "env FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS_INITIAL --color fg:#f9f5d7,bg:#1d2021,hl:#fabd2f,fg+:#ebdbb2,bg+:#3c3836,hl+:#fabd2f --color info:#83a598,prompt:#bdae93,spinner:#fabd2f,pointer:#83a598,marker:#fe8019,header:#665c54" >!"$KITTY_TRANSIENT"
+            echo "env FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS_INITIAL $DARK_COLORS" >!"$KITTY_TRANSIENT"
             echo "env BAT_THEME=gruvbox-dark" >>"$KITTY_TRANSIENT"
         fi
 
