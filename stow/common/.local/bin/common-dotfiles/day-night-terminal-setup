@@ -6,30 +6,6 @@ STATE_FILE_KITTY_LAST="${CACHE_DIR}/state-kitty-lastset"
 # shellcheck disable=SC2154
 KITTY_TRANSIENT="${XDG_CONFIG_HOME}/kitty/transient_env.conf"
 
-# TODO: Use check_background_color, detect terminal background
-# check_background_color() {
-#     oldstty=$(stty -g)
-#     stty raw -echo min 0 time 0
-#
-#     printf "\033]11;?\033\\"
-#     sleep 0.01
-#     read -r answer
-#     result=${answer#*;}
-#     stty "$oldstty"
-#     CLEAN_RESULT=$(echo "$result" | tr -dc '[:print:]')
-#     R=$(printf "%d" "0x${CLEAN_RESULT:4:2}")
-#     G=$(printf "%d" "0x${CLEAN_RESULT:9:2}")
-#     B=$(printf "%d" "0x${CLEAN_RESULT:14:2}")
-#
-#     LUMINANCE=$(echo "0.299 * $R + 0.587 * $G + 0.114 * $B" | bc)
-#
-#     if [[ $LUMINANCE -gt 128 ]]; then
-#         echo "Light background"
-#     else
-#         echo "Dark background"
-#     fi
-# }
-
 set_day_vars() {
     # Built myself based on Gruvbox Dark below
     # shellcheck disable=SC2154
@@ -74,10 +50,9 @@ if [[ -z "${SSH_CONNECTION}" ]]; then
 
     set_from_state_file
 else
-    if [[ -z "$TMUX" ]] && type "kitten" >/dev/null; then
-        FOREGROUND=$(kitten @ get-colors | grep '^foreground ' | awk '{print $2}')
-
-        if [[ $FOREGROUND == "#3c3836" ]]; then
+    if [[ -z "$TMUX" ]]; then
+        BG_COLOR=$(get-bg-color)
+        if [[ $BG_COLOR == "rgb:f9f9/f5f5/d7d7" ]]; then
             set_day_vars
         else
             set_night_vars

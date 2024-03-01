@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# See https://superuser.com/a/406172
+
+success=false
+exec < /dev/tty
+oldstty=$(stty -g)
+stty raw -echo min 0
+col=11
+echo -en "\033]${col};?\033\\" >/dev/tty
+result=
+if IFS=';' read -r -d '\' color ; then
+    result=$(echo $color | sed 's/^.*\;//;s/[^rgb:0-9a-f/]//g')
+    success=true
+fi
+stty $oldstty
+echo $result
+$success
