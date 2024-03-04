@@ -14,6 +14,14 @@ now_date = datetime.date.today()
 
 for entry in data:
     datecolor = "white"
+    entrycolor = "light_grey"
+
+    if entry["priority"] > 0 and entry["priority"] < 4:
+        entrycolor = "red"
+    elif entry["priority"] >= 4 and entry["priority"] < 7:
+        entrycolor = "yellow"
+    elif entry["priority"] >= 7 and entry["priority"] <= 9:
+        entrycolor = "blue"
 
     if entry["due"] is None:
         human_date = ""
@@ -54,5 +62,5 @@ for entry in data:
     print(
         colored(f'{entry["id"]:5} ', "light_grey", force_color=True)
         + colored(f"{human_date:11}", datecolor, force_color=True)
-        + f' {entry["summary"]}'
+        + colored(f' {entry["summary"]}', entrycolor, force_color=True)
     )
