@@ -12,6 +12,16 @@ data = json.load(sys.stdin)
 now_time = datetime.datetime.now()
 now_date = datetime.date.today()
 
+
+def key_func(due_date):
+    if due_date["due"] is None:
+        return 9999999999999
+    else:
+        return due_date["due"]
+
+
+data = sorted(data, key=key_func, reverse=True)
+
 for entry in data:
     datecolor = "white"
     entrycolor = "light_grey"
