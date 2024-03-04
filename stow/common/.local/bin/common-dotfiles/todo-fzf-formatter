@@ -39,11 +39,7 @@ for entry in data:
         due_time = datetime.datetime.fromtimestamp(entry["due"])
         due_date = datetime.date.fromtimestamp(entry["due"])
 
-        if (
-            due_time.hour == 0
-            and due_time.minute == 0
-            and due_time.second == 0
-        ):
+        if due_time.hour == 0 and due_time.minute == 0 and due_time.second == 0:
             # This is a time-agnostic timestamp
 
             if now_date > due_date:
