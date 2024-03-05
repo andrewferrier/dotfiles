@@ -23,10 +23,6 @@ M.job_stderr = function(_, stderr_line, _)
     end
 end
 
-M.is_large_file = function(bufnr)
-    return vim.api.nvim_buf_line_count(bufnr or 0) > 10000
-end
-
 M.get_filename_homedir = function()
     local curfile = vim.fn.expand("%")
     ---@cast curfile string

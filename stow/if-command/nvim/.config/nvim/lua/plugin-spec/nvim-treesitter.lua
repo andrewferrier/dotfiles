@@ -5,12 +5,7 @@ local configure = function()
         -- Ignore parsers I've had issues with and don't need
         ignore_install = { "julia", "smali" },
 
-        highlight = {
-            enable = true,
-            disable = function()
-                return require("utils").is_large_file()
-            end,
-        },
+        highlight = { enable = true },
         refactor = { smart_rename = { enable = true } },
         indent = { enable = true },
         endwise = { enable = true },
