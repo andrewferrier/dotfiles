@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
+#
+# This stops Apple Music from auto-opening when e.g. Bluetooth headphones
+# reconnect: https://github.com/tombonez/noTunes
 
 open -gj /Applications/noTunes.app
 osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/noTunes.app", hidden:false}'
