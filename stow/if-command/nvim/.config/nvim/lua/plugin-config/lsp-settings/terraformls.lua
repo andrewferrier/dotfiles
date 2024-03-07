@@ -2,6 +2,6 @@ return {
     cmd = {
         "terraform-ls",
         "serve",
-        "-log-file=" .. vim.fn.stdpath("state") .. "/terraform-ls.log",
+        "-log-file=" .. vim.fn.stdpath("log") .. "/terraform-ls.log",
     },
 }
