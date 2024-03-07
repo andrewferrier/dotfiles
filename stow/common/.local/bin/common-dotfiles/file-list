@@ -108,7 +108,7 @@ else
 fi
 
 if "$DIRS"; then
-    PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | xargs -I% eza --level 2 --tree --color=always --group-directories-first %"
+    PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | xargs -I% eza --level 2 --tree --color=always --group-directories-first --no-quotes %"
     FD_TYPE='d'
     FASD_PARAMS="-dRl"
 else
