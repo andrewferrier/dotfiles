@@ -1,4 +1,4 @@
-.PHONY: pkgs stow pre-stow
+.PHONY: pkgs stow pre-stow configure
 
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
@@ -47,7 +47,7 @@ stow: pre-stow
 
 # CONFIGURE
 
-configure: configure-fullinstall
+configure:
 	run-directory $(CONFIGURE)/all
 	run-directory $(CONFIGURE)/if-os/$(OS)
 	run-directory $(CONFIGURE)/if-osdistribution/$(OSDISTRIBUTION)
