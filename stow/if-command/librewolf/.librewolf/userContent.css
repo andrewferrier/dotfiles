@@ -12,6 +12,14 @@ textarea {
 }
 
 /* reddit.com */
+shreddit-ad-post {
+    display: none !important;
+}
+
+shreddit-comments-page-ad {
+    display: none !important;
+}
+
 div.promotedlink {
     display: none !important;
 }
