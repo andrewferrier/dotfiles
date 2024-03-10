@@ -145,7 +145,7 @@ map N $IFS="$(printf '\n\t')"; normfn $fx
 map T $tig
 map Y :yank
 map a :push %mkdir<space>
-map o $OPENER "$fx"
+map o &$OPENER "$fx"
 
 map ga :cd ~/paperwork
 map ge :cd ~/personal
