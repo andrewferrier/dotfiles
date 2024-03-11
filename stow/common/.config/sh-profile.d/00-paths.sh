@@ -19,8 +19,6 @@ mkdir -pv \
     "${XDG_RUNTIME_DIR}" \
     "${XDG_STATE_HOME}"
 
-GITCO=${HOME}/gitco
-
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export DVDCSS_CACHE="${XDG_DATA_HOME}/dvdcss"
@@ -79,8 +77,6 @@ pupdate_append_globxxx "${HOME}/.local/bin/*/*/bin"
 pupdate_append_singlex "${HOME}/bookmarks/bin"
 pupdate_append_singlex /snap/bin
 pupdate_append_globxxx "${HOME}/Library/Python/*/bin" # from pip install --user
-pupdate_append_singlex "${GITCO}/github/misc-scripts"
-pupdate_append_singlex "${GITCO}/github/git-utilities"
 pupdate_append_globxxx "/usr/local/texlive/*/bin/x86_64-darwin"
 pupdate_append_singlex /usr/share/nodejs/yarn/bin # yarnpkg → yarn
 pupdate_append_singlex "${GOPATH}/bin"
