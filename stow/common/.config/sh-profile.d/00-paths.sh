@@ -75,31 +75,28 @@ pupdate_append_globxxx "${HOME}/.local/bin/*/*"
 pupdate_append_globxxx "${HOME}/.local/bin/*/*/bin"
 pupdate_append_singlex "${HOME}/bookmarks/bin"
 pupdate_append_globxxx "${HOME}/Library/Python/*/bin" # from pip install --user
-pupdate_append_singlex /usr/share/nodejs/yarn/bin # yarnpkg → yarn
 pupdate_append_singlex "${GOPATH}/bin"
 pupdate_append_singlex "${GEM_HOME}/bin"
 pupdate_append_globxxx "${GEM_HOME}/ruby/*/bin"
 pupdate_append_singlex "${HOME}/.luarocks/bin" # luarocks/lua
 pupdate_append_singlex "${HOME}/.cargo/bin"
 
-# node
-nupdate_append_singlex "/usr/lib/nodejs"
-nupdate_append_singlex "/usr/share/nodejs"
-
-nupdate_append_singlex "/usr/local/lib/node"
-nupdate_append_singlex "/usr/local/lib/node_modules"
-
 if command -v npm >/dev/null 2>&1; then
-    pupdate_prepend_single "${NPM_PACKAGES}/bin"
-    pupdate_append_singlex /usr/local/share/npm/bin
     nupdate_append_singlex "${NPM_PACKAGES}/lib/node_modules"
+    nupdate_append_singlex /usr/lib/nodejs
+    nupdate_append_singlex /usr/local/lib/node
+    nupdate_append_singlex /usr/local/lib/node_modules
+    nupdate_append_singlex /usr/share/nodejs
+    pupdate_append_singlex /usr/local/share/npm/bin
+    pupdate_prepend_single "${NPM_PACKAGES}/bin"
 fi
 
 if command -v yarn >/dev/null 2>&1 || command -v yarnpkg >/dev/null 2>&1; then
     YARN_GLOBAL_DIR="${XDG_DATA_HOME}/yarn/global"
-    pupdate_prepend_single "${YARN_GLOBAL_DIR}/bin"
-    pupdate_append_globxxx "${YARN_GLOBAL_DIR}/node_modules/*/bin"
     nupdate_append_singlex "${YARN_GLOBAL_DIR}/node_modules"
+    pupdate_append_globxxx "${YARN_GLOBAL_DIR}/node_modules/*/bin"
+    pupdate_append_singlex /usr/share/nodejs/yarn/bin # yarnpkg → yarn
+    pupdate_prepend_single "${YARN_GLOBAL_DIR}/bin"
 fi
 
 export NODE_PATH
