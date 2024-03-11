@@ -71,7 +71,7 @@ pupdate_prepend_single /opt/homebrew/opt/openssl/bin
 pupdate_prepend_single "${HOME}/.deno/bin"
 pupdate_append_singlex "${HOME}/.local/bin"
 pupdate_append_globxxx "${HOME}/.local/bin/*"
-pupdate_append_globxxx "${HOME}/.local/bin/*/*"
+pupdate_append_globxxx "${HOME}/.local/bin/*/bin"
 pupdate_append_globxxx "${HOME}/.local/bin/*/*/bin"
 pupdate_append_singlex "${HOME}/bookmarks/bin"
 pupdate_append_globxxx "${HOME}/Library/Python/*/bin" # from pip install --user
