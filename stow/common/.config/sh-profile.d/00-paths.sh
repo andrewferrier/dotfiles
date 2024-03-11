@@ -65,7 +65,6 @@ pupdate_append_globxxx() {
 pupdate_prepend_single /usr/local/bin
 pupdate_prepend_single /usr/local/sbin
 pupdate_prepend_single /usr/local/opt/ruby/bin # for brew-installed ruby
-pupdate_prepend_single /opt/nvim-linux64/bin
 pupdate_prepend_single /opt/homebrew/bin
 pupdate_prepend_single /opt/homebrew/sbin
 pupdate_prepend_single /opt/homebrew/opt/openssl/bin
@@ -75,17 +74,13 @@ pupdate_append_globxxx "${HOME}/.local/bin/*"
 pupdate_append_globxxx "${HOME}/.local/bin/*/*"
 pupdate_append_globxxx "${HOME}/.local/bin/*/*/bin"
 pupdate_append_singlex "${HOME}/bookmarks/bin"
-pupdate_append_singlex /snap/bin
 pupdate_append_globxxx "${HOME}/Library/Python/*/bin" # from pip install --user
-pupdate_append_globxxx "/usr/local/texlive/*/bin/x86_64-darwin"
 pupdate_append_singlex /usr/share/nodejs/yarn/bin # yarnpkg → yarn
 pupdate_append_singlex "${GOPATH}/bin"
 pupdate_append_singlex "${GEM_HOME}/bin"
 pupdate_append_globxxx "${GEM_HOME}/ruby/*/bin"
-pupdate_append_singlex /usr/local/share/dotnet
 pupdate_append_singlex "${HOME}/.luarocks/bin" # luarocks/lua
 pupdate_append_singlex "${HOME}/.cargo/bin"
-pupdate_append_singlex /usr/share/git/git-jump
 
 # node
 nupdate_append_singlex "/usr/lib/nodejs"
