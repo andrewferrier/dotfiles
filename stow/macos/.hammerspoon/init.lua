@@ -83,7 +83,10 @@ hs.hotkey.bind(PREFIX_ACTION, "'", function()
 end)
 
 launch_or_find("C", "/System/Applications/Calendar.app")
+launch_or_find("E", "/Applications/Microsoft Teams (work or school).app")
 launch_or_find("K", "/Applications/KeePassXC.app/")
+launch_or_find("R", "/System/Applications/Reminders.app")
+launch_or_find("T", "/Applications/Microsoft To Do.app")
 
 launch("B", "/Applications/LibreWolf.app")
 
