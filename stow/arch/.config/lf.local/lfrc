@@ -1,0 +1,2 @@
+map gd :cd /mnt/data
+set cursorpreviewfmt "\033[7m"

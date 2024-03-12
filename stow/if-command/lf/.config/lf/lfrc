@@ -167,17 +167,4 @@ map R $nvim "$PWD"
 # Remove unused mappings
 map i
 
-cmd startup ${{
-    if [ -d /mnt/data ]; then
-        lf -remote "send $id map gd :cd /mnt/data"
-    else
-        lf -remote "send $id map gd :cd /data"
-    fi
-
-    if [ $(lf --version | cut -f1 -d'.') -ge 29 ]; then
-        # See https://github.com/gokcehan/lf/issues/1258
-        lf -remote "send $id set cursorpreviewfmt \"\\033[7m\""
-    fi
-}}
-
-startup
+source ~/.config/lf.local/lfrc
