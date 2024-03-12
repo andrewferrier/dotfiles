@@ -18,9 +18,10 @@ DEFAULT_IMAGE_WIDTH=1024
 IMAGE_CACHE_PATH="/tmp/lf/preview"
 mkdir -p "$IMAGE_CACHE_PATH"
 
-FILENAME=$(basename -- "${FILE_PATH}")
-FILE_EXTENSION_LOWER="$(printf "%s" "${FILENAME##*.}" | tr '[:upper:]' '[:lower:]')"
-FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILENAME#*.}" | tr '[:upper:]' '[:lower:]')
+FILE_BASENAME=$(basename -- "${FILE_PATH}")
+FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_BASENAME##*.}" | tr '[:upper:]' '[:lower:]')"
+FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_BASENAME#*.}" | tr '[:upper:]' '[:lower:]')
+FILE_PATHONLY=${FILE_PATH%/*}
 
 if [[ ${OSTYPE} == darwin* ]]; then
     DRAWIO=/Applications/draw.io.app/Contents/MacOS/draw.io
@@ -30,6 +31,12 @@ if (command -v batcat &>/dev/null); then
     BAT=("batcat" "--color=always")
 else
     BAT=("bat" "--color=always")
+fi
+
+if (command -v grealpath &>/dev/null); then
+    REALPATH=grealpath
+else
+    REALPATH=realpath
 fi
 
 uid() {
@@ -170,6 +177,20 @@ handle_mime() {
     esac
 }
 
+handle_filetype() {
+    FILETYPE="$(file --dereference --brief -- "${FILE_PATH}")"
+
+    case "${FILETYPE}" in
+
+    "MacOS Alias file")
+        # shellcheck disable=SC2312
+        $REALPATH -s --relative-to="$FILE_PATHONLY" "$(getTrueName "${FILE_PATH}")" && exit 0
+        ;;
+
+    *) ;;
+    esac
+}
+
 handle_fallback() {
     file --dereference --uncompress --no-sandbox --brief -- "${FILE_PATH}" | fmt -w "${WIDTH}" && exit 0
     exit 1
@@ -179,4 +200,5 @@ handle_extension_full
 handle_extension
 handle_textual
 handle_mime
+handle_filetype
 handle_fallback
