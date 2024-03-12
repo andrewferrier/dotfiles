@@ -77,14 +77,6 @@ hs.hotkey.bind(PREFIX_ACTION, "V", function()
     open_bash_terminal(HOMEBREW_BIN .. "/nvim")
 end)
 
-hs.hotkey.bind(PREFIX_ACTION, "F", function()
-    open_terminal(HOME .. "/.local/bin/common/file-list-find-and-open -f")
-end)
-
-hs.hotkey.bind(PREFIX_ACTION, "G", function()
-    open_terminal(HOME .. "/.local/bin/common/file-list-find-and-open -d")
-end)
-
 hs.hotkey.bind(PREFIX_ACTION, "O", function()
     open_bash_terminal(HOME .. "/bookmarks/bin/bookmark-select-and-open")
 end)
