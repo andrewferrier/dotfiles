@@ -128,10 +128,11 @@ set incsearch true
 set infotimefmtnew "2006-01-02 15:04"
 set infotimefmtold "2006-01-02 15:04"
 set period 1
-set previewer ~/.config/lf/scope.sh
-set cleaner ~/.config/lf/cleaner.sh
 set timefmt "2006-01-02 15:04:05"
 set truncatechar "…"
+
+set cleaner ~/.config/lf/cleaner.sh
+set previewer ~/.config/lf/scope.sh
 
 set info size
 set dircounts
