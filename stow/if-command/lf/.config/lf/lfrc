@@ -167,4 +167,4 @@ map R $nvim "$PWD"
 # Remove unused mappings
 map i
 
-source ~/.config/lf.local/lfrc
+source ~/.config/lf-local/lfrc
