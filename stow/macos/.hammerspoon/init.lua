@@ -77,10 +77,6 @@ hs.hotkey.bind(PREFIX_ACTION, "V", function()
     open_bash_terminal(HOMEBREW_BIN .. "/nvim")
 end)
 
-hs.hotkey.bind(PREFIX_ACTION, "O", function()
-    open_bash_terminal(HOME .. "/bookmarks/bin/bookmark-select-and-open")
-end)
-
 hs.hotkey.bind(PREFIX_ACTION, "'", function()
     -- Pseudo-"paste" for webforms that don't allow passwords
     hs.eventtap.keyStrokes(hs.pasteboard.getContents())
