@@ -18,8 +18,9 @@ DEFAULT_IMAGE_WIDTH=1024
 IMAGE_CACHE_PATH="/tmp/lf/preview"
 mkdir -p "$IMAGE_CACHE_PATH"
 
-FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_PATH##*.}" | tr '[:upper:]' '[:lower:]')"
-FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILE_PATH#*.}" | tr '[:upper:]' '[:lower:]')
+FILENAME=$(basename -- "${FILE_PATH}")
+FILE_EXTENSION_LOWER="$(printf "%s" "${FILENAME##*.}" | tr '[:upper:]' '[:lower:]')"
+FILE_EXTENSION_FULL_LOWER=$(printf "%s" "${FILENAME#*.}" | tr '[:upper:]' '[:lower:]')
 
 if [[ ${OSTYPE} == darwin* ]]; then
     DRAWIO=/Applications/draw.io.app/Contents/MacOS/draw.io
