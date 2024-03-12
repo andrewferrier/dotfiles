@@ -94,14 +94,6 @@ hs.hotkey.bind(PREFIX_ACTION, "'", function()
     hs.eventtap.keyStrokes(hs.pasteboard.getContents())
 end)
 
-hs.hotkey.bind(PREFIX_ACTION, ",", function()
-    hs.eventtap.keyStrokes("andrew@andrewferrier.com")
-end)
-
-hs.hotkey.bind(PREFIX_ACTION, ".", function()
-    hs.eventtap.keyStrokes("andrew.ferrier@gmail.com")
-end)
-
 launch_or_find("C", "/System/Applications/Calendar.app")
 launch_or_find("K", "/Applications/KeePassXC.app/")
 
