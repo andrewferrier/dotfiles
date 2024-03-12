@@ -17,8 +17,6 @@ vim.filetype.add({
     },
     pattern = {
         ["%.secrets.*"] = "sh",
-        [".*%.gitignore.*"] = "gitignore",
-        [".*%.properties.*"] = "jproperties",
         [".*/%.config/git%-local/.*"] = "gitconfig",
         [".*/%.i3/config%.d/.*"] = "i3config",
         [".*/%.kaf/config"] = "yaml",
