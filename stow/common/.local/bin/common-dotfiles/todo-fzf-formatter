@@ -65,8 +65,10 @@ for entry in data:
         ):
             human_date = due_date.strftime("%A")
 
+    EM_SPACE = " "
+
     print(
-        colored(f'{entry["id"]:5} ', "light_grey", force_color=True)
-        + colored(f"{human_date:11}", datecolor, force_color=True)
-        + colored(f' {entry["summary"]}', entrycolor, force_color=True)
+        f'{entry["id"]:5}{EM_SPACE}'
+        + colored(f"{human_date:11}{EM_SPACE}", datecolor, force_color=True)
+        + colored(f'{entry["summary"]}', entrycolor, force_color=True)
     )

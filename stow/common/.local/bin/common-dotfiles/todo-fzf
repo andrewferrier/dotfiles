@@ -13,9 +13,14 @@ readonly RELOAD="reload(todo --porcelain list | ${SCRIPT_DIR}/todo-fzf-formatter
 readonly TODAY="\$(date +%Y-%m-%d)"
 readonly TOMORROW="\$(date --date=tomorrow +%Y-%m-%d)"
 
+EM_SPACE=' '
+readonly EM_SPACE
+
 todo --porcelain list |
     "${SCRIPT_DIR}/todo-fzf-formatter" |
     fzf --preview 'todo show {1}' \
+        --delimiter $EM_SPACE \
+        --with-nth 2,3 \
         --ansi \
         --tac \
         --no-sort \
