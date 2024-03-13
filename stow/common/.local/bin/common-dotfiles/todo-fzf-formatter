@@ -23,8 +23,8 @@ def key_func(due_date):
 data = sorted(data, key=key_func, reverse=True)
 
 for entry in data:
-    datecolor = "white"
-    entrycolor = "light_grey"
+    datecolor = "light_grey"
+    entrycolor = "white"
 
     if entry["priority"] > 0 and entry["priority"] < 4:
         entrycolor = "red"
