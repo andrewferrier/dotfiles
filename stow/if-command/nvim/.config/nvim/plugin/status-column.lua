@@ -7,13 +7,17 @@ _G.custom_statuscol = function()
             )[1].signs[1]
 
             if signs ~= nil then
-                return "%s "
-            end
-
-            if vim.o.relativenumber == true then
-                return "%=%r "
+                if vim.o.relativenumber == true then
+                    return "%s%=%r "
+                else
+                    return "%s%=%l "
+                end
             else
-                return "%=%l "
+                if vim.o.relativenumber == true then
+                    return "%=%r "
+                else
+                    return "%=%l "
+                end
             end
         else
             -- This is needed because it appears that NeoVim <0.10 doesn't include extmarks in sign_getplaced properly
