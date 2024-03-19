@@ -14,10 +14,14 @@ if [[ ${OSDISTRIBUTION} == "arch" ]]; then
     ${PIPX} gitlint
     ${PIPX} sqlfluff
 elif [[ ${OSDISTRIBUTION} == "macos" ]]; then
-    pipx install gitlint --include-deps || pipx upgrade gitlint
-    pipx install sqlfluff || pipx upgrade sqlfluff
-    pipx install ruff-lsp || pipx upgrade ruff-lsp
+    PIPX="pipx"
+
+    ${PIPX} install gitlint --include-deps || ${PIPX} upgrade gitlint
+    ${PIPX} install sqlfluff || ${PIPX} upgrade sqlfluff
+    ${PIPX} install ruff-lsp || ${PIPX} upgrade ruff-lsp
 else
     # All other packages installed via package manager
-    pipx install ruff-lsp || pipx upgrade ruff-lsp
+    ${PIPX} install ruff-lsp || ${PIPX} upgrade ruff-lsp
 fi
+
+${PIPX} install basedpyright || ${PIPX} upgrade basedpyright

@@ -6,6 +6,7 @@ return {
 
         for lsp, settings in pairs({
             ansiblels = {},
+            basedpyright = {},
             bashls = {},
             cssls = require("plugin-config.lsp-settings.css"),
             dockerls = {},
@@ -13,7 +14,6 @@ return {
             jsonls = {},
             lemminx = {},
             lua_ls = require("plugin-config.lsp-settings.lua_ls"),
-            pyright = {},
             ruff_lsp = {},
             terraformls = require("plugin-config.lsp-settings.terraformls"),
             texlab = require("plugin-config.lsp-settings.texlab"),
