@@ -18,6 +18,11 @@
     caffeinate -i <somecommand> | prevent system from sleeping whilst command is running
     Ctrl-1/2/3                  | switch desktop
     Cmd-Shift-.                 | toggle hidden file display in Finder
+    Option-Delete               | delete previous word
+
+## Linux
+
+    Ctrl-Backspace              | delete previous word
 
 ## Firefox
 
