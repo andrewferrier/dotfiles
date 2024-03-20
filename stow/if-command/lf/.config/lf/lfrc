@@ -50,7 +50,7 @@ cmd delete ${{
 
 cmd folderize_prep %{{
     FOLDER=$(date +%Y-%m-%dT%H-%M-%S-)
-    lf -remote "send $id push :folderize<space>$FOLDER"
+    lf -remote "send $id push :folderize<space>\"$FOLDER\"<left>"
 }}
 
 cmd folderize %{{
@@ -145,7 +145,7 @@ map F :folderize_prep
 map N $IFS="$(printf '\n\t')"; normfn $fx
 map T $tig
 map Y :yank
-map a :push %mkdir<space>
+map a :push %mkdir<space>""<left>
 map o &$OPENER "$fx"
 
 map ga :cd ~/paperwork
