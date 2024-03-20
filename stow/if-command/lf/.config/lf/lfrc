@@ -145,7 +145,7 @@ map F :folderize_prep
 map N $IFS="$(printf '\n\t')"; normfn $fx
 map T $tig
 map Y :yank
-map a :push %mkdir<space>""<left>
+map K :push %mkdir<space>""<left>
 map o &$OPENER "$fx"
 
 map ga :cd ~/paperwork
@@ -160,12 +160,11 @@ map gn :cd ~/notes
 map . :read; cmd-history-prev; cmd-enter
 
 # See https://github.com/gokcehan/lf/wiki/Tips#enhancing-the-rename-command
-map I :rename; cmd-home
 map A :rename; cmd-end
-map r :rename; cmd-delete-home
+map I :rename; cmd-home
 map R $nvim "$PWD"
-
-# Remove unused mappings
-map i
+map a :rename; cmd-end
+map i :rename; cmd-home
+map r :rename; cmd-delete-home
 
 source ~/.config/lf-local/lfrc
