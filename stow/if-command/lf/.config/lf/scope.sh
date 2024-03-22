@@ -123,7 +123,7 @@ handle_mime() {
         [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
         ;;
 
-    application/msword | application/vnd.openxmlformats-officedocument.wordprocessingml.document)
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document)
         pandoc -i "${FILE_PATH}" --to=markdown && exit 0
         ;;
 
