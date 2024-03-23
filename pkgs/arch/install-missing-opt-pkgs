@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+install-if-missing() {
+    PACKAGE_NAME=$1
+
+    if ! pacman -Qi "${PACKAGE_NAME}" >/dev/null; then
+        echo "Package ${PACKAGE_NAME} missing, installing..."
+        pacaur -S --noconfirm --noedit "${PACKAGE_NAME}"
+    fi
+}
+
+expac "%o\n" -Q ajf-core | tr -s ' ' '\n' | while read -r LINE; do
+    install-if-missing "$LINE"
+done
