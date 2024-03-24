@@ -123,7 +123,6 @@
     ii/ai - same or lower indent level/same or lower indent including blank lines
     ik/ak - key (LHS of expression)
     iv/av - value (RHS of expression)
-    m - select area based on Treesitter
 
 ### FZF
 
