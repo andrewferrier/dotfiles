@@ -9,8 +9,9 @@
 #
 # Commands:
 #
-# filter - filters files shown
-# glob-select - selects files using glob
+# !true - show output from previous command (e.g. for debugging)
+# :filter - filters files shown
+# :glob-select - selects files using glob
 
 # Make shell commands safer
 set shellopts '-eu'
