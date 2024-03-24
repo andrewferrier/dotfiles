@@ -3,5 +3,5 @@
 all:
 	./bootstrap-pacaur
 	./upgrade-all-aur
-	./install-missing-aur
+	./install-missing-opt-pkgs
 	./install-eget-tools
