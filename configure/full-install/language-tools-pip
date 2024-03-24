@@ -13,15 +13,16 @@ if [[ ${OSDISTRIBUTION} == "arch" ]]; then
     sudo pacman -S --noconfirm ruff-lsp
     ${PIPX} gitlint
     ${PIPX} sqlfluff
+    ${PIPX} basedpyright
 elif [[ ${OSDISTRIBUTION} == "macos" ]]; then
     PIPX="pipx"
 
     ${PIPX} install gitlint --include-deps || ${PIPX} upgrade gitlint
     ${PIPX} install sqlfluff || ${PIPX} upgrade sqlfluff
     ${PIPX} install ruff-lsp || ${PIPX} upgrade ruff-lsp
+    ${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
 else
     # All other packages installed via package manager
     ${PIPX} install ruff-lsp || ${PIPX} upgrade ruff-lsp
+    ${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
 fi
-
-${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
