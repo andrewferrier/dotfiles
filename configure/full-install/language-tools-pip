@@ -22,6 +22,8 @@ elif [[ ${OSDISTRIBUTION} == "macos" ]]; then
     ${PIPX} install ruff-lsp || ${PIPX} upgrade ruff-lsp
     ${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
 else
+    PIPX="pipx"
+
     # All other packages installed via package manager
     ${PIPX} install ruff-lsp || ${PIPX} upgrade ruff-lsp
     ${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
