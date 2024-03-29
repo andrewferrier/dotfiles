@@ -55,7 +55,7 @@ for entry in data:
             if now_time < due_time and now_date == due_date:
                 human_date = humanize.naturaldelta(due_time - now_time)
             else:
-                human_date = humanize.naturalday(due_date)
+                human_date = humanize.naturalday(due_date, format="%Y-%m-%d")
 
         dt = due_date - now_date
         if (
