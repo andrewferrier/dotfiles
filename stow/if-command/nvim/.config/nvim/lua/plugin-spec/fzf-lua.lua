@@ -90,7 +90,7 @@ local configure = function()
 end
 
 return {
-    "ibhagwan/fzf-lua",
+    "https://gitlab.com/ibhagwan/fzf-lua",
     config = configure,
     keys = { "cv" },
 }
