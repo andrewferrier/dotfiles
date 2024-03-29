@@ -178,7 +178,6 @@
 *   Look at switching to main branch for nvim-treesitter for nightly: <https://github.com/nvim-treesitter/nvim-treesitter/issues/4767>
 *   Look at <https://github.com/zbirenbaum/copilot.lua>
 *   Look at using 'winfixbuf': <https://github.com/neovim/neovim/issues/12517>
-*   Put vim.schedule_wrap around nvim_create_user_command
 
 ## Presentation Ideas
 
