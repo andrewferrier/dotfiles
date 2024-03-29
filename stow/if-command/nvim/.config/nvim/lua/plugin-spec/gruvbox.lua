@@ -16,16 +16,6 @@ return {
         local overrides = {
             NormalFloat = { link = "Normal" },
             TermCursorNC = { bg = "#00DD00" },
-
-            -- See https://github.com/ellisonleao/gruvbox.nvim/issues/230#issuecomment-1493883602
-            GruvboxAquaSign = { bg = "" },
-            GruvboxBlueSign = { bg = "" },
-            GruvboxGreenSign = { bg = "" },
-            GruvboxOrangeSign = { bg = "" },
-            GruvboxPurpleSign = { bg = "" },
-            GruvboxRedSign = { bg = "" },
-            GruvboxYellowSign = { bg = "" },
-
             ["@lsp.mod.readonly"] = { bold = true },
         }
 
