@@ -30,7 +30,9 @@ return {
             window = { suffix = "" },
         })
 
-        require("mini.comment").setup()
+        if vim.fn.has("nvim-0.10.0") == 0 then
+            require("mini.comment").setup()
+        end
 
         -- Will be replaced with https://github.com/neovim/neovim/issues/16339
         require("mini.misc").setup_restore_cursor()
