@@ -4,7 +4,8 @@ if [[ $TTY == "/dev/tty1" ]]; then
         IFS= read -k -t 1.5; RETVAL=$?
         if [ $RETVAL -ne 0 ]; then
             echo "Starting X..."
-            exec startx
+            # Repeat rate using 'xset r' and xorg.conf doesn't seem reliable
+            exec startx -- -ardelay 250 -arinterval 15
         fi
     fi
 fi
