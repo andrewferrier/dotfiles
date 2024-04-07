@@ -7,8 +7,6 @@ vim.cmd.iabbrev(
     '<span style="color:red">TODO:</span><Esc>F<i'
 )
 
-local surround = require("mini.surround")
-
 vim.b.minisurround_config = {
     custom_surroundings = {
         l = {
@@ -19,7 +17,7 @@ vim.b.minisurround_config = {
         },
         L = {
             output = function()
-                local link_name = surround.user_input("Enter the link name: ")
+                local link_name = require("mini.surround").user_input("Enter the link name: ")
                 return {
                     left = "[" .. link_name .. "](",
                     right = ")",
