@@ -3,6 +3,4 @@ vim.bo.commentstring = "# %s"
 
 require("filetype.section").setup("^data\\|resource", "^}$")
 
-require("treesitter-terraform-doc").setup({})
-
 vim.keymap.set("n", "K", vim.cmd.OpenDoc, { buffer = 0 })
