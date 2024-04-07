@@ -23,7 +23,7 @@ xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
 redshift -v | logger -t "${USER}-redshift" &
 unclutter --ignore-scrolling --jitter 10 --fork
 dunst &
-variety 2>&1 | logger -t "${USER}-variety" &
+variety -v | logger -t "${USER}-variety" &
 
 # Automatically synchronize PRIMARY and CLIPBOARD
 autocutsel -fork &
