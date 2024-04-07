@@ -1,1 +1,1 @@
-../tf/outputs.tf
+../terraform/outputs.tf

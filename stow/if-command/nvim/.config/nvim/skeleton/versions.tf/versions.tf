@@ -1,1 +1,1 @@
-../tf/versions.tf
+../terraform/versions.tf
