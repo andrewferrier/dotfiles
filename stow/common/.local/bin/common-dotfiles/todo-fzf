@@ -26,6 +26,7 @@ todo --porcelain list |
         --no-sort \
         --tiebreak=index \
         --preview-window=top,5 \
+        --info=inline-right \
         --header "Ctrl-Reload,Done,Edit,editrAw,todaY,tomorroW,New,<delete>" \
         --bind "ctrl-r:${RELOAD}" \
         --bind "ctrl-delete:execute-silent(todo delete --yes {1})+${RELOAD}" \
