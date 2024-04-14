@@ -9,11 +9,18 @@ configuration {
 }
 
 element-icon {
-  size: 1.8ch;
+  size: 1em;
+  padding: 0em 0.3em 0em 0em;
+  background-color: inherit;
+}
+
+element-text {
+  background-color: inherit;
+  text-color:       inherit;
 }
 
 * {
-  font: "mono 14";
+  font:                        "DejaVu Sans Mono 14";
   background-color:            #080808;
   text-color:                  #d3d7cf;
   selbg:                       #215d9c;
@@ -26,10 +33,10 @@ element-icon {
   selected-normal-background:  @selbg;
   normal-background:           @background-color;
 
-  selected-urgent-foreground:  @background-color;
-  urgent-foreground:           @text-color;
-  selected-urgent-background:  @urgbg;
-  urgent-background:           @background-color;
+  // selected-urgent-foreground:  @background-color;
+  // urgent-foreground:           @text-color;
+  // selected-urgent-background:  @urgbg;
+  // urgent-background:           @background-color;
 
   selected-active-foreground:  @winbg;
   active-foreground:           @text-color;
@@ -48,7 +55,7 @@ window {
   location:    west;
   anchor:      west;
   height:      100%;
-  width:       50%;
+  width:       40%;
   orientation: horizontal;
   children:    [mainbox];
 }
@@ -71,7 +78,7 @@ inputbar {
 }
 
 listview {
-  spacing: 0.0em;
+  spacing: 0.2em;
   dynamic: false;
   cycle:   true;
 }
@@ -103,7 +110,7 @@ element normal.active {
 element selected.normal {
   background-color: @selected-normal-background;
   text-color:       @selected-normal-foreground;
-  border-color:	    @active-background;
+  border-color:     @active-background;
 }
 
 element selected.urgent {
