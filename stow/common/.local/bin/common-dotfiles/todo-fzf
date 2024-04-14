@@ -18,14 +18,14 @@ readonly EM_SPACE
 
 todo --porcelain list |
     "${SCRIPT_DIR}/todo-fzf-formatter" |
-    fzf --preview 'todo show {1}' \
+    fzf --preview 'todo show {1} | cut -d" " -f 5-' \
         --delimiter $EM_SPACE \
         --with-nth 2,3 \
         --ansi \
         --tac \
         --no-sort \
         --tiebreak=index \
-        --preview-window=top,5 \
+        --preview-window=top,border-bottom,5 \
         --info=inline-right \
         --header "Ctrl-reLoad,Done,editrAw,todaY,tomorroW,New,<delete>" \
         --bind "ctrl-l:${RELOAD}" \
