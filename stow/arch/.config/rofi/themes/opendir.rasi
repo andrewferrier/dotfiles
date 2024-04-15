@@ -1,15 +1,5 @@
-@import "DarkBlue"
+@import "common-popup"
 
 * {
-    text-color:       #ffffff;
-    background-color: #0f4771;
-}
-
-window {
-    height: 70%;
-    width: 90%;
-}
-
-entry {
-    blink: false;
+  background-color: #0f4771;
 }

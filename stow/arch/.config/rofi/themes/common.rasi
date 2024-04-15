@@ -1,0 +1,7 @@
+* {
+  font: "DejaVu Sans Mono 12";
+}
+
+entry {
+  blink: false;
+}

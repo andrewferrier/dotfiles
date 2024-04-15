@@ -1,0 +1,11 @@
+@import "DarkBlue"
+@import "common"
+
+* {
+  text-color: #ffffff;
+}
+
+window {
+  height: 70%;
+  width: 90%;
+}

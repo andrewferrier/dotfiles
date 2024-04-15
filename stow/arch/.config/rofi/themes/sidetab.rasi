@@ -1,4 +1,5 @@
 // Based on https://github.com/davatorium/rofi-themes/blob/master/User%20Themes/sidetab.rasi
+@import "common"
 
 configuration {
   display-drun:    "Run";
@@ -20,7 +21,6 @@ element-text {
 }
 
 * {
-  font:                        "DejaVu Sans Mono 14";
   background-color:            #080808;
   text-color:                  #d3d7cf;
   selbg:                       #215d9c;
@@ -89,7 +89,6 @@ entry {
   expand:         false;
   text-color:     @normal-foreground;
   vertical-align: 1;
-  blink:          false;
 }
 
 element normal.normal {
