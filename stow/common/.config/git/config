@@ -93,5 +93,6 @@
 	oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
 	open = git-open
 	pullall = !git pull --rebase && git submodule foreach 'git pull --rebase'
+	reflog-tree = log --graph --reflog
 	remove-gitignored = !git rm -r --cached . && git add .
 	search-historicallines = !git rev-list --all | xargs git grep
