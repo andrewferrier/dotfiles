@@ -71,8 +71,8 @@ end
 local function keybindings_inlayhints(bufnr)
     vim.keymap.set("n", "yoi", function()
         vim.lsp.inlay_hint.enable(
-            bufnr,
-            not vim.lsp.inlay_hint.is_enabled(bufnr)
+            not vim.lsp.inlay_hint.is_enabled(bufnr),
+            { bufnr = bufnr }
         )
     end, { buffer = bufnr, desc = "Toggle inlay hints" })
 end
@@ -88,7 +88,7 @@ local function lsp_callback(event)
         keybindings_organizeimports(bufnr)
 
         if vim.fn.has("nvim-0.10.0") == 1 then
-            vim.lsp.inlay_hint.enable(bufnr, true)
+            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
             keybindings_inlayhints(bufnr)
         end
     end
