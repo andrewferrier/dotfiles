@@ -40,7 +40,7 @@ src_mailbox = Maildir(args.src_mailbox_path)
 counter = 0
 
 for key, message in src_mailbox.iteritems():
-    date_str = message.get("Date")
+    date_str: str | None = message.get("Date")
     if date_str:
         date = utils.parsedate_to_datetime(date_str)
 

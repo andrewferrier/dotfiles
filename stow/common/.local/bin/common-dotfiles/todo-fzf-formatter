@@ -6,21 +6,30 @@ import humanize
 import datetime
 
 from termcolor import colored
+from typing import TypedDict
 
-data = json.load(sys.stdin)
+
+class Entry(TypedDict):
+    due: int | None
+    id: str
+    priority: int
+    summary: str
+
+
+data: list[Entry] = json.load(sys.stdin)
 
 now_time = datetime.datetime.now()
 now_date = datetime.date.today()
 
 
-def key_func(due_date):
+def due_date_key_func(due_date: Entry) -> int:
     if due_date["due"] is None:
         return 9999999999999
     else:
         return due_date["due"]
 
 
-data = sorted(data, key=key_func, reverse=True)
+data = sorted(data, key=due_date_key_func, reverse=True)
 
 for entry in data:
     datecolor = "light_grey"

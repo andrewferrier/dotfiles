@@ -14,7 +14,7 @@ BASE_PATH.mkdir(parents=True, exist_ok=True)
 KITTY_COLOR = BASE_PATH.joinpath("kitty-color.conf")
 STATE_FILE_TERMINAL = BASE_PATH.joinpath("state-terminal")
 
-if ("XDG_CONFIG_HOME" in os.environ and os.environ["XDG_CONFIG_HOME"] is not None):
+if "XDG_CONFIG_HOME" in os.environ:
     CONFIG_HOME = os.environ["XDG_CONFIG_HOME"]
 else:
     CONFIG_HOME = "~/.config"
@@ -28,7 +28,7 @@ GTKRC20 = GTKRC20_DIR.joinpath("gtkrc2")
 GTKRC30 = GTKRC30_DIR.joinpath("settings.ini")
 
 
-def write_to_file(filename, contents):
+def write_to_file(filename: Path, contents: str):
     with open(filename, "w") as output_file:
         output_file.write(contents)
 
