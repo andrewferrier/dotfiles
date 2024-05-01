@@ -13,6 +13,8 @@ readonly RELOAD="reload(todo --porcelain list | ${SCRIPT_DIR}/todo-fzf-formatter
 readonly TODAY="\$(date +%Y-%m-%d)"
 readonly TOMORROW="\$(date --date=tomorrow +%Y-%m-%d)"
 readonly SEVENDAYSLATER="\$(date --date=+7days +%Y-%m-%d)"
+readonly SATURDAY="\$(date --date='next Saturday' +%Y-%m-%d)"
+readonly MONDAY="\$(date --date='next Monday' +%Y-%m-%d)"
 
 EM_SPACE=' '
 readonly EM_SPACE
@@ -28,7 +30,7 @@ todo --porcelain list |
         --tiebreak=index \
         --preview-window=top,border-bottom,5 \
         --info=inline-right \
-        --header "Ctrl-reLoad,Done,editrAw,todaY,tomorroW,seVendayslater,New,<delete>" \
+        --header "Ctrl-reLoad,Done,editrAw,todaY,tomorroW,seVendayslater,Saturday,mOnday,New,<delete>" \
         --bind "ctrl-l:${RELOAD}" \
         --bind "ctrl-delete:execute-silent(todo delete --yes {1})+${RELOAD}" \
         --bind "ctrl-d:execute-silent(todo done {1})+${RELOAD}" \
@@ -37,4 +39,6 @@ todo --porcelain list |
         --bind "ctrl-y:execute-silent(todo edit --due ${TODAY} {1})+${RELOAD}" \
         --bind "ctrl-w:execute-silent(todo edit --due ${TOMORROW} {1})+${RELOAD}" \
         --bind "ctrl-v:execute-silent(todo edit --due ${SEVENDAYSLATER} {1})+${RELOAD}" \
+        --bind "ctrl-s:execute-silent(todo edit --due ${SATURDAY} {1})+${RELOAD}" \
+        --bind "ctrl-o:execute-silent(todo edit --due ${MONDAY} {1})+${RELOAD}" \
         --bind "ctrl-n:execute(todo new --interactive)+${RELOAD}"
