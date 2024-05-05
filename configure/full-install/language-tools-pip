@@ -11,9 +11,9 @@ if [[ ${OSDISTRIBUTION} == "arch" ]]; then
     PIPX="pipx install --include-deps"
 
     sudo pacman -S --noconfirm ruff-lsp
+    pacaur -S --noconfirm basedpyright-git
     ${PIPX} gitlint
     ${PIPX} sqlfluff
-    ${PIPX} basedpyright
 elif [[ ${OSDISTRIBUTION} == "macos" ]]; then
     PIPX="pipx"
 
