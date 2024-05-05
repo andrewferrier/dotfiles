@@ -10,11 +10,13 @@ readonly SCRIPT_DIR
 
 readonly RELOAD="reload(todo --porcelain list | ${SCRIPT_DIR}/todo-fzf-formatter)"
 
-readonly TODAY="\$(date +%Y-%m-%d)"
-readonly TOMORROW="\$(date --date=tomorrow +%Y-%m-%d)"
-readonly SEVENDAYSLATER="\$(date --date=+7days +%Y-%m-%d)"
-readonly SATURDAY="\$(date --date='next Saturday' +%Y-%m-%d)"
-readonly MONDAY="\$(date --date='next Monday' +%Y-%m-%d)"
+readonly DATE_FORMAT="+%Y-%m-%d"
+
+readonly TODAY="\$(date $DATE_FORMAT)"
+readonly TOMORROW="\$(date --date=tomorrow $DATE_FORMAT)"
+readonly SEVENDAYSLATER="\$(date --date=+7days $DATE_FORMAT)"
+readonly SATURDAY="\$(date --date='next Saturday' $DATE_FORMAT)"
+readonly MONDAY="\$(date --date='next Monday' $DATE_FORMAT)"
 
 EM_SPACE=' '
 readonly EM_SPACE
