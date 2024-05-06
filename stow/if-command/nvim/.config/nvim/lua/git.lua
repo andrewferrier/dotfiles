@@ -8,6 +8,7 @@ local expand_input_dir = function(dir)
     end
 end
 
+-- TODO: refactor using vim.fs.root in nvim 0.10+
 local get_git_root_dir = function(dir)
     local cmd = "cd '" .. dir .. "'; git rev-parse --show-toplevel"
     local root = vim.fn.system(cmd)
