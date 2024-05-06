@@ -20,6 +20,12 @@ set shellopts '-eu'
 # Required to make things like `read -n` work
 set shell bash
 
+# Try to see if this fixes a bug which occurs sometimes where image remains
+# after quit
+cmd on-quit &{{
+    $HOME/.config/lf/cleaner.sh
+}}
+
 # See https://github.com/gokcehan/lf/wiki/Tips#dynamically-set-number-of-columns
 # - will only work on lf 32+
 cmd on-redraw &{{
