@@ -1,0 +1,18 @@
+output DP1
+off
+output HDMI1
+off
+output VIRTUAL1
+off
+output eDP1
+off
+output DP2
+crtc 1
+mode 3840x2160
+pos 0x0
+rate 60.00
+x-prop-audio auto
+x-prop-broadcast_rgb Automatic
+x-prop-colorspace Default
+x-prop-max_bpc 12
+x-prop-non_desktop 0
