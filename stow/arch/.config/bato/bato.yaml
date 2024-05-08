@@ -3,12 +3,12 @@ tick_rate: 1
 critical_level: 5
 low_level: 30
 critical:
-  summary: Critical battery!
+  summary: 🪫 Critical battery!
 low:
-  summary: Battery low
+  summary:   Battery low
+full:
+  summary:   Battery full
 charging:
-  summary: Battery
-  body: Charging
+  summary: 🔋 Charging
 discharging:
-  summary: Battery
-  body: Discharging
+  summary:   Discharging
