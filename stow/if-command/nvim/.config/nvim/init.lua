@@ -60,22 +60,5 @@ require("lazy").setup("plugin-spec", {
     },
     ui = {
         border = "single",
-        icons = {
-            cmd = "(cmd)",
-            config = "(cfg)",
-            event = "(evnt)",
-            ft = "(ft)",
-            init = "(init)",
-            import = "(imprt) ",
-            keys = "(kys)",
-            lazy = "(lzy) ",
-            loaded = "(ldd)",
-            not_loaded = "(nt ldd)",
-            plugin = "(plgn)",
-            runtime = "(rntm)",
-            source = "(src)",
-            start = "",
-            task = "(task)",
-        },
     },
 })
