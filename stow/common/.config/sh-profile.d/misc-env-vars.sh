@@ -8,7 +8,7 @@ FZF_VERSION=$(fzf --version | cut -d'.' -f2)
 
 export FZF_DEFAULT_OPTS_INITIAL='--exact'
 if ((FZF_VERSION >= 42)); then
-    export FZF_DEFAULT_OPTS_INITIAL="$FZF_DEFAULT_OPTS_INITIAL --info=inline-right"
+    export FZF_DEFAULT_OPTS_INITIAL="$FZF_DEFAULT_OPTS_INITIAL --info=inline-right --no-separator"
 fi
 
 # This sets a default for when ~/.local/bin/common/day-night-terminal-setup is
