@@ -132,6 +132,7 @@ cmd yank &{{
 }}
 
 set anchorfind false
+set icons
 set incsearch true
 set infotimefmtnew "2006-01-02 15:04"
 set infotimefmtold "2006-01-02 15:04"
