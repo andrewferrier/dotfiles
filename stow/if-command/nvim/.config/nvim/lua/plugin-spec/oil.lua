@@ -24,4 +24,5 @@ return {
         )
     end,
     version = "*",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
 }
