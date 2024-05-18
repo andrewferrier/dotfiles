@@ -1,3 +1,4 @@
+---@return string
 local diagnostic_format = function(diagnostic)
     local message = diagnostic.message
 

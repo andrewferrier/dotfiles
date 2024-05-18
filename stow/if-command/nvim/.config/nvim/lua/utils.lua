@@ -1,5 +1,6 @@
 local M = {}
 
+---@return string
 M.visual_selection_range = function()
     -- See https://github.com/neovim/neovim/pull/13896#issuecomment-1621702052
     local s_start = vim.fn.getpos("'<")
@@ -16,6 +17,7 @@ M.visual_selection_range = function()
     return table.concat(lines, "\n")
 end
 
+---@return nil
 M.job_stderr = function(_, stderr_line, _)
     stderr_line = stderr_line[1]
     if #stderr_line > 0 then
@@ -23,12 +25,14 @@ M.job_stderr = function(_, stderr_line, _)
     end
 end
 
+---@return string
 M.get_filename_homedir = function()
     local curfile = vim.fn.expand("%")
     ---@cast curfile string
     return vim.fn.substitute(curfile, "^" .. vim.env.HOME, "~", "")
 end
 
+---@return boolean
 M.lsp_supports_method = function(method)
     for _, client in pairs(vim.lsp.buf_get_clients(0)) do
         if client.supports_method(method) then

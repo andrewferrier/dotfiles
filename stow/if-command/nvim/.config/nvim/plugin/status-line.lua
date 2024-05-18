@@ -6,6 +6,7 @@ local MAX_SPELL_ERRORS = 20
 local LEFT_BRACE = "‹"
 local RIGHT_BRACE = "›"
 
+---@return integer
 local function get_spelling_count()
     local view = vim.fn.winsaveview()
     local oldwrapscan = vim.o.wrapscan
@@ -46,6 +47,7 @@ local function diagnostic_enabled()
     end
 end
 
+---@return string
 function _G.Statusline_FeaturesEnabled()
     local return_string = ""
 
@@ -72,6 +74,7 @@ function _G.Statusline_FeaturesEnabled()
     return return_string
 end
 
+---@return string
 function _G.Statusline_DiagnosticStatus()
     -- TODO: In NeoVim 0.10 refactor to use vim.diagnostic.count(), calling it only once
 
@@ -105,6 +108,7 @@ function _G.Statusline_DiagnosticStatus()
     return ""
 end
 
+---@return string
 function _G.Statusline_Copilot()
     if vim.b.copilot_enabled then
         return ",℅P"
@@ -113,6 +117,7 @@ function _G.Statusline_Copilot()
     end
 end
 
+---@return string
 function _G.Statusline_GitSigns()
     if vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" then
         return LEFT_BRACE .. vim.b.gitsigns_status .. RIGHT_BRACE .. " "
@@ -121,6 +126,7 @@ function _G.Statusline_GitSigns()
     end
 end
 
+---@return string
 function _G.Statusline_Indent()
     if vim.bo.buftype == "terminal" then
         return ""
@@ -143,6 +149,7 @@ function _G.Statusline_Indent()
     return returnstring
 end
 
+---@return string
 function _G.Statusline_Filename()
     return vim.fn.pathshorten(
         require("utils").get_filename_homedir(),
@@ -150,6 +157,7 @@ function _G.Statusline_Filename()
     )
 end
 
+---@return string
 function _G.Statusline_Getcwd()
     if
         vim.bo.filetype ~= "help"
@@ -167,6 +175,7 @@ function _G.Statusline_Getcwd()
     end
 end
 
+---@return string
 function _G.Statusline_Wrappingmode()
     local currentmode = require("wrapping").get_current_mode()
 
@@ -184,6 +193,7 @@ vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
     end,
 })
 
+---@return string
 function _G.Statusline_SpellingErrorCount()
     if vim.wo.spell == true then
         if vim.b.spelling_warning == nil then
@@ -207,6 +217,7 @@ function _G.Statusline_SpellingErrorCount()
 end
 
 if vim.fn.has("nvim-0.10.0") == 1 then
+    ---@return string
     function _G.Statusline_LSPProgress()
         local status = vim.trim(vim.lsp.status())
 
@@ -217,6 +228,7 @@ if vim.fn.has("nvim-0.10.0") == 1 then
         end
     end
 else
+    ---@return string
     function _G.Statusline_LSPProgress()
         local messages = vim.lsp.util.get_progress_messages()
 

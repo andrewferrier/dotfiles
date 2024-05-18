@@ -1,5 +1,8 @@
 local M = {}
 
+---@param fileordir string
+---@param force_dir boolean
+---@param opening_oil boolean
 ---@return string
 local select_fileordir = function(fileordir, force_dir, opening_oil)
     local fileordir_t
@@ -25,6 +28,9 @@ local select_fileordir = function(fileordir, force_dir, opening_oil)
     end
 end
 
+---@param command string
+---@param dir string
+---@return nil
 M.open_terminal = function(command, dir)
     local expanded_dir = select_fileordir(dir, true, false)
     vim.schedule(function()
@@ -33,6 +39,8 @@ M.open_terminal = function(command, dir)
     end)
 end
 
+---@param file_or_dir string
+---@return nil
 M.open_file_manager = function(file_or_dir)
     local expanded_ford = select_fileordir(file_or_dir, false, false)
     vim.schedule(function()
@@ -43,6 +51,8 @@ M.open_file_manager = function(file_or_dir)
     end)
 end
 
+---@param dir string
+---@return nil
 M.open_split_oil = function(dir)
     local expanded_dir = select_fileordir(dir, true, true)
     vim.schedule(function()
