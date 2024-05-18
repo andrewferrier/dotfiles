@@ -25,7 +25,7 @@ unclutter --ignore-scrolling --jitter 10 --fork
 dunst &
 variety -v | logger -t "${USER}-variety" &
 bato &
-autorandr --change
+dex --autostart --environment i3
 
 # Automatically synchronize PRIMARY and CLIPBOARD
 autocutsel -fork &
