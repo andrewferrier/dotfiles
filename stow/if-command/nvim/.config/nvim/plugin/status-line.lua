@@ -37,6 +37,15 @@ local function get_spelling_count()
     return spell_count
 end
 
+---@return boolean
+local function diagnostic_enabled()
+    if vim.diagnostic.is_enabled then
+        return vim.diagnostic.is_enabled()
+    else
+        return not vim.diagnostic.is_disabled()
+    end
+end
+
 function _G.Statusline_FeaturesEnabled()
     local return_string = ""
 
@@ -45,7 +54,7 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",_̸"
         end
 
-        if vim.diagnostic.is_disabled() then
+        if not diagnostic_enabled() then
             return_string = return_string .. ",¬D"
         end
 
@@ -66,7 +75,7 @@ end
 function _G.Statusline_DiagnosticStatus()
     -- TODO: In NeoVim 0.10 refactor to use vim.diagnostic.count(), calling it only once
 
-    if not vim.diagnostic.is_disabled() then
+    if diagnostic_enabled() then
         local diagnostics_counts = {}
 
         for prefix, severity in pairs({
