@@ -1,30 +1,21 @@
 _G.custom_statuscol = function()
     if vim.v.virtnum == 0 then
-        if vim.fn.has("nvim-0.10.0") == 1 then
-            local signs = vim.fn.sign_getplaced(
-                vim.fn.bufname(),
-                { group = "*", lnum = tostring(vim.v.lnum) }
-            )[1].signs[1]
+        local signs = vim.fn.sign_getplaced(
+            vim.fn.bufname(),
+            { group = "*", lnum = tostring(vim.v.lnum) }
+        )[1].signs[1]
 
-            if signs ~= nil then
-                if vim.o.relativenumber == true then
-                    return "%s%=%r "
-                else
-                    return "%s%=%l "
-                end
-            else
-                if vim.o.relativenumber == true then
-                    return "%=%r "
-                else
-                    return "%=%l "
-                end
-            end
-        else
-            -- This is needed because it appears that NeoVim <0.10 doesn't include extmarks in sign_getplaced properly
+        if signs ~= nil then
             if vim.o.relativenumber == true then
                 return "%s%=%r "
             else
                 return "%s%=%l "
+            end
+        else
+            if vim.o.relativenumber == true then
+                return "%=%r "
+            else
+                return "%=%l "
             end
         end
     else

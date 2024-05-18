@@ -38,15 +38,6 @@ local function get_spelling_count()
     return spell_count
 end
 
----@return boolean
-local function diagnostic_enabled()
-    if vim.diagnostic.is_enabled then
-        return vim.diagnostic.is_enabled()
-    else
-        return not vim.diagnostic.is_disabled()
-    end
-end
-
 ---@return string
 function _G.Statusline_FeaturesEnabled()
     local return_string = ""
@@ -56,7 +47,7 @@ function _G.Statusline_FeaturesEnabled()
             return_string = return_string .. ",_̸"
         end
 
-        if not diagnostic_enabled() then
+        if not vim.diagnostic.is_enabled() then
             return_string = return_string .. ",¬D"
         end
 
@@ -78,7 +69,7 @@ end
 function _G.Statusline_DiagnosticStatus()
     -- TODO: In NeoVim 0.10 refactor to use vim.diagnostic.count(), calling it only once
 
-    if diagnostic_enabled() then
+    if vim.diagnostic.is_enabled() then
         local diagnostics_counts = {}
 
         for prefix, severity in pairs({
@@ -216,45 +207,13 @@ function _G.Statusline_SpellingErrorCount()
     return vim.b.spelling_warning
 end
 
-if vim.fn.has("nvim-0.10.0") == 1 then
-    ---@return string
-    function _G.Statusline_LSPProgress()
-        local status = vim.trim(vim.lsp.status())
+---@return string
+function _G.Statusline_LSPProgress()
+    local status = vim.trim(vim.lsp.status())
 
-        if status ~= "" then
-            return LEFT_BRACE .. status .. RIGHT_BRACE .. " "
-        else
-            return ""
-        end
-    end
-else
-    ---@return string
-    function _G.Statusline_LSPProgress()
-        local messages = vim.lsp.util.get_progress_messages()
-
-        if vim.tbl_count(messages) > 0 then
-            local message1 = messages[1]
-
-            local name = message1.name
-            local message = message1.title or message1.message or nil
-            local percentage = message1.percentage or 100
-            local progress = message1.progress or true
-
-            if
-                name ~= "null-ls"
-                and message ~= nil
-                and (percentage < 100 or progress)
-            then
-                return LEFT_BRACE
-                    .. name
-                    .. " "
-                    .. message
-                    .. (message1.percentage and (" " .. message1.percentage .. "%") or "")
-                    .. RIGHT_BRACE
-                    .. " "
-            end
-        end
-
+    if status ~= "" then
+        return LEFT_BRACE .. status .. RIGHT_BRACE .. " "
+    else
         return ""
     end
 end
@@ -313,14 +272,7 @@ local callback = function()
     vim.cmd.redrawstatus()
 end
 
-if vim.fn.has("nvim-0.10.0") == 1 then
-    vim.api.nvim_create_autocmd("LspProgress", {
-        pattern = "*",
-        callback = callback,
-    })
-else
-    vim.api.nvim_create_autocmd("User", {
-        pattern = "LspProgressUpdate",
-        callback = callback,
-    })
-end
+vim.api.nvim_create_autocmd("LspProgress", {
+    pattern = "*",
+    callback = callback,
+})

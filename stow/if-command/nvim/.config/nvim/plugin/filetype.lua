@@ -46,11 +46,3 @@ vim.filetype.add({
         [".*site.ya?ml"] = "yaml.ansible",
     },
 })
-
-if vim.fn.has("nvim-0.10.0") == 0 then
-    vim.filetype.add({
-        extension = {
-            hurl = "hurl",
-        },
-    })
-end

@@ -21,8 +21,7 @@ end
 
 local function lsp_document_format()
     if
-        vim.fn.has("nvim-0.10.0") == 0
-        or require("utils").lsp_supports_method(
+        require("utils").lsp_supports_method(
             vim.lsp.protocol.Methods.textDocument_formatting
         )
     then
@@ -46,8 +45,7 @@ local function keybindings_codeaction(bufnr)
     -- Don't use visual mode here, conflicts with 'c'
     vim.keymap.set("n", "cxa", function()
         if
-            vim.fn.has("nvim-0.10.0") == 0
-            or require("utils").lsp_supports_method(
+            require("utils").lsp_supports_method(
                 vim.lsp.protocol.Methods.textDocument_codeAction
             )
         then
@@ -86,11 +84,8 @@ local function lsp_callback(event)
         keybindings_formatting(bufnr)
         keybindings_codeaction(bufnr)
         keybindings_organizeimports(bufnr)
-
-        if vim.fn.has("nvim-0.10.0") == 1 then
-            vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-            keybindings_inlayhints(bufnr)
-        end
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        keybindings_inlayhints(bufnr)
     end
 end
 

@@ -12,11 +12,7 @@ vim.opt.textwidth = 80 -- This is the default for many/most languages: https://e
 vim.opt.virtualedit = "block"
 vim.opt.wildmode = "longest:full"
 
-if vim.fn.has("nvim-0.10.0") == 1 then
-    vim.opt.completeopt:append("popup")
-else
-    vim.opt.completeopt:append("preview") -- Doesn't reliably close
-end
+vim.opt.completeopt:append("popup")
 vim.opt.completeopt:remove("menuone")
 vim.opt.completeopt:remove("noinsert")
 

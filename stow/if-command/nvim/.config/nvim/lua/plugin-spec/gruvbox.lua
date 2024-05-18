@@ -19,11 +19,6 @@ return {
             ["@lsp.mod.readonly"] = { bold = true },
         }
 
-        if vim.fn.has("nvim-0.10.0") == 0 then
-            -- This is a workaround; see ~/.config/nvim/plugin/status-column.lua
-            overrides["SignColumn"] = { link = "Normal" }
-        end
-
         require("gruvbox").setup({
             contrast = "hard",
             dim_inactive = true,

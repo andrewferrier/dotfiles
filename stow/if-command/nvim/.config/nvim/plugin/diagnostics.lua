@@ -40,17 +40,14 @@ local virtual_text = {
         min = vim.diagnostic.severity.WARN,
         max = vim.diagnostic.severity.ERROR,
     },
-}
-
-if vim.fn.has("nvim-0.10.0") == 1 then
-    virtual_text.prefix = function(diagnostic)
+    prefix = function(diagnostic)
         for _, sign in ipairs(SIGNS) do
             if diagnostic.severity == sign.level then
                 return sign.symbol
             end
         end
-    end
-end
+    end,
+}
 
 vim.diagnostic.config({
     float = {
@@ -64,15 +61,7 @@ vim.diagnostic.config({
 
 for _, sign in ipairs(SIGNS) do
     local hl = "DiagnosticSign" .. sign.hlname
-    local symbol
-
-    if vim.fn.has("nvim-0.10.0") == 1 then
-        symbol = "▧"
-    else
-        symbol = sign.symbol
-    end
-
-    vim.fn.sign_define(hl, { text = symbol, texthl = hl, numhl = hl })
+    vim.fn.sign_define(hl, { text = "▧", texthl = hl, numhl = hl })
 end
 
 vim.api.nvim_create_user_command(

@@ -4,15 +4,7 @@ vim.g.loaded_ruby_provider = 0
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-local fs_stat
-if vim.fn.has("nvim-0.10.0") == 1 then
-    fs_stat = vim.uv.fs_stat
-else
-    -- Deprecated in 0.10+
-    fs_stat = vim.loop.fs_stat
-end
-
-if not fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     vim.notify("Installing lazy...")
 
     local result = vim.fn.system({
