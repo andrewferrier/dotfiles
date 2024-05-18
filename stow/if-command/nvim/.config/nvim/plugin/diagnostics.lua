@@ -27,26 +27,10 @@ local diagnostic_format = function(diagnostic)
 end
 
 local SIGNS = {
-    { hlname = "Error", symbol = "✘", level = vim.diagnostic.severity.ERROR },
-    { hlname = "Warn", symbol = "⌇", level = vim.diagnostic.severity.WARN },
-    { hlname = "Hint", symbol = "ɦ", level = vim.diagnostic.severity.HINT },
-    { hlname = "Info", symbol = "ℹ", level = vim.diagnostic.severity.INFO },
-}
-
-local virtual_text = {
-    source = false,
-    format = diagnostic_format,
-    severity = {
-        min = vim.diagnostic.severity.WARN,
-        max = vim.diagnostic.severity.ERROR,
-    },
-    prefix = function(diagnostic)
-        for _, sign in ipairs(SIGNS) do
-            if diagnostic.severity == sign.level then
-                return sign.symbol
-            end
-        end
-    end,
+    [vim.diagnostic.severity.ERROR] = { symbol = "✘" },
+    [vim.diagnostic.severity.WARN] = { symbol = "⌇" },
+    [vim.diagnostic.severity.HINT] = { symbol = "ɦ" },
+    [vim.diagnostic.severity.INFO] = { symbol = "ℹ" },
 }
 
 vim.diagnostic.config({
@@ -56,13 +40,32 @@ vim.diagnostic.config({
         suffix = "",
         width = math.floor(vim.fn.winwidth(0) / 2),
     },
-    virtual_text = virtual_text,
+    virtual_text = {
+        source = false,
+        format = diagnostic_format,
+        severity = {
+            min = vim.diagnostic.severity.WARN,
+            max = vim.diagnostic.severity.ERROR,
+        },
+        prefix = function(diagnostic)
+            return SIGNS[diagnostic.severity]["symbol"]
+        end,
+    },
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "▧",
+            [vim.diagnostic.severity.WARN] = "▧",
+            [vim.diagnostic.severity.HINT] = "▧",
+            [vim.diagnostic.severity.INFO] = "▧",
+        },
+        numhl = {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+            [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+        },
+    },
 })
-
-for _, sign in ipairs(SIGNS) do
-    local hl = "DiagnosticSign" .. sign.hlname
-    vim.fn.sign_define(hl, { text = "▧", texthl = hl, numhl = hl })
-end
 
 vim.api.nvim_create_user_command(
     "DiagnosticQFList",
@@ -72,6 +75,6 @@ vim.api.nvim_create_user_command(
 
 require("editorconfig").properties.diagnostics = function(_, val, _)
     if val == "false" then
-        vim.diagnostic.disable(0)
+        vim.diagnostic.enable(false, { bufnr = 0 })
     end
 end
