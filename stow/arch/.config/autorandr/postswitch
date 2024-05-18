@@ -13,7 +13,7 @@ log "Reloading variety..."
 variety --next || true
 variety --prev || true
 
-if xrandr | grep " connected " | awk '{ print$1 }' | grep eDP1 > /dev/null; then
+if xrandr --listactivemonitors | grep eDP1 > /dev/null; then
     log "Changing screen blanking timeout for laptop..."
     xset s 60 60
 else
