@@ -31,6 +31,10 @@ dex --autostart --environment i3
 autocutsel -fork &
 autocutsel -selection PRIMARY -fork &
 
+# Set audio volume to 0
+start-pulseaudio-x11
+"${HOME}/.local/bin/linux/pa-set-sink-volume" 0
+
 # Turn off console beep
 xset b off
 
