@@ -41,7 +41,6 @@ vim.diagnostic.config({
         width = math.floor(vim.fn.winwidth(0) / 2),
     },
     virtual_text = {
-        source = false,
         format = diagnostic_format,
         severity = {
             min = vim.diagnostic.severity.WARN,
