@@ -27,7 +27,7 @@ autocutsel -selection PRIMARY -fork &
 
 # Set audio volume to 0
 start-pulseaudio-x11
-"${HOME}/.local/bin/linux/pa-set-sink-volume" 0
+pactl set-sink-volume @DEFAULT_SINK@ 0
 
 # Turn off console beep
 xset b off
