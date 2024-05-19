@@ -28,9 +28,9 @@ end
 
 local SIGNS = {
     [vim.diagnostic.severity.ERROR] = { symbol = "✘" },
-    [vim.diagnostic.severity.WARN] = { symbol = "⌇" },
+    [vim.diagnostic.severity.WARN] = { symbol = "" },
     [vim.diagnostic.severity.HINT] = { symbol = "ɦ" },
-    [vim.diagnostic.severity.INFO] = { symbol = "ℹ" },
+    [vim.diagnostic.severity.INFO] = { symbol = "󰋽" },
 }
 
 vim.diagnostic.config({
