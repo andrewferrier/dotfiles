@@ -3,4 +3,4 @@ function _G.Titlestring_Filename()
 end
 
 vim.o.title = true
-vim.o.titlestring = "nvim [%{v:lua.Titlestring_Filename()}%( %M%)]"
+vim.o.titlestring = " [%{v:lua.Titlestring_Filename()}%( %M%)]"

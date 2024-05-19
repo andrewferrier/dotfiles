@@ -1,5 +1,5 @@
 vim.b.previous_titlestring = vim.o.titlestring
-vim.o.titlestring = "nvim [fzf]"
+vim.o.titlestring = " [fzf]"
 
 vim.api.nvim_create_autocmd("BufLeave", {
     group = vim.api.nvim_create_augroup("BufLeave_FZFLeave", {}),
