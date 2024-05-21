@@ -1,3 +1,9 @@
+---@param lhs string
+---@param directory string
+---@param createfile boolean
+---@param includetime boolean
+---@param immediate boolean
+---@return nil
 local set = function(lhs, directory, createfile, includetime, immediate)
     local command, postfix, date, desc
 

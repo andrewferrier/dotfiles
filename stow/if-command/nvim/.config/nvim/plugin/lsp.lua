@@ -9,6 +9,7 @@ function _G.show_capabilities()
     end
 end
 
+---@param action_description string
 local function warn_unsupported(action_description)
     vim.notify(
         "Don't know how to "
@@ -32,6 +33,7 @@ local function lsp_document_format()
     end
 end
 
+---@param bufnr integer
 local function keybindings_formatting(bufnr)
     vim.keymap.set(
         "n",
@@ -41,6 +43,7 @@ local function keybindings_formatting(bufnr)
     )
 end
 
+---@param bufnr integer
 local function keybindings_codeaction(bufnr)
     -- Don't use visual mode here, conflicts with 'c'
     vim.keymap.set("n", "cxa", function()
@@ -56,6 +59,7 @@ local function keybindings_codeaction(bufnr)
     end, { buffer = bufnr, desc = "Apply code action" })
 end
 
+---@param bufnr integer
 local function keybindings_organizeimports(bufnr)
     vim.keymap.set("n", "cxo", function()
         if vim.o.filetype == "python" then
@@ -66,6 +70,7 @@ local function keybindings_organizeimports(bufnr)
     end, { buffer = bufnr, desc = "Organize imports" })
 end
 
+---@param bufnr integer
 local function keybindings_inlayhints(bufnr)
     vim.keymap.set("n", "yoi", function()
         vim.lsp.inlay_hint.enable(

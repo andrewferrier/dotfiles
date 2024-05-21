@@ -15,6 +15,8 @@ vim.api.nvim_create_autocmd("TermClose", {
 })
 
 -- Set window navigation to work like in other windows
+---@param lhs string
+---@param rhs string
 local map = function(lhs, rhs)
     vim.keymap.set(
         "t",

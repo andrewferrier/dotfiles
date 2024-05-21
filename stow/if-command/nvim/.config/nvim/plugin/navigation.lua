@@ -6,6 +6,9 @@ local change_to_root = function()
     end)
 end
 
+---@param lhs string
+---@param rhs string|function
+---@param description string
 local map = function(lhs, rhs, description)
     vim.keymap.set(
         "n",
