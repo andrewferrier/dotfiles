@@ -1,27 +1,20 @@
 vim.opt.path:remove("/usr/include")
 
-local change_to_root = function()
-    require("git").if_in_git(function(dir)
-        vim.cmd.lcd(dir)
-    end)
-end
+vim.api.nvim_create_autocmd({ "BufNew", "BufRead" }, {
+    callback = function(ctx)
+        local root = vim.fs.root(ctx.buf, { ".git", "Makefile" })
+        if root then
+            vim.cmd.lcd(root)
+        end
+    end,
+})
 
----@param lhs string
----@param rhs string|function
----@param description string
-local map = function(lhs, rhs, description)
-    vim.keymap.set(
-        "n",
-        'cd' .. lhs,
-        rhs,
-        { silent = true, desc = "cd to " .. description, unique = true }
-    )
-end
-
-map("f", ":lcd %:p:h<CR>", "directory of file")
-map("h", ":lcd ~<CR>", vim.env.HOME)
-map("u", ":lcd ..<CR>", "..")
-map("g", change_to_root, "git root")
+vim.keymap.set(
+    "n",
+    "cdf",
+    ":lcd %:p:h<CR>",
+    { silent = true, desc = "cd to directory of file", unique = true }
+)
 
 vim.keymap.set("n", "gof", function()
     require("open_filedirterm").open_file_manager("%:p")
