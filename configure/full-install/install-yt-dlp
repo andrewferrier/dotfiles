@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+YT_DLP_INSTALL_LOCATION="$HOME/.local/bin/yt-dlp"
+
+if [[ ! -f $YT_DLP_INSTALL_LOCATION ]]; then
+    curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o "$HOME/.local/bin/yt-dlp"
+    chmod a+rx "$HOME/.local/bin/yt-dlp"
+fi
+
+yt-dlp --update-to nightly
