@@ -10,7 +10,7 @@ M.make_readonly = function()
     require("filetype.status_column").remove_signs()
     require("gitsigns").detach()
 
-    vim.diagnostic.disable(0)
+    vim.diagnostic.enable(false, { bufnr = 0 })
 
     if vim.b.text_based_filetype then
         require("wrapping").soft_wrap_mode()
