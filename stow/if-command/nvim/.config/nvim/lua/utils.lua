@@ -43,4 +43,13 @@ M.lsp_supports_method = function(method)
     return false
 end
 
+---@return string
+M.get_neovim_symbol = function()
+    if vim.uv.os_uname().sysname == "Darwin" then
+        return "nvim"
+    else
+        return ""
+    end
+end
+
 return M
