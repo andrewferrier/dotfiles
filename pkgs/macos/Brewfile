@@ -86,6 +86,7 @@ brew "zsh-lovers"
 
 cask "drawio"
 cask "font-consolas-for-powerline" # for kitty
+cask "font-symbols-only-nerd-font"
 cask "hammerspoon"
 cask "karabiner-elements"
 cask "keepassxc"
