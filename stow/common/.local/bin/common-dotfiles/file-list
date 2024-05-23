@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# TODO: See if it is possible to have multithreaded inputs to final pipe
 
 set -o errexit
 set -o nounset
