@@ -76,7 +76,7 @@ local function lsp_callback(event)
         keybindings_inlayhints(bufnr)
 
         vim.keymap.set(
-            "n",
+            { "n", "x" },
             "gra",
             require("fzf-lua").lsp_code_actions,
             { buffer = bufnr, desc = "Apply code action" }
