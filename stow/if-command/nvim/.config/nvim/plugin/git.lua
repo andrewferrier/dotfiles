@@ -1,21 +1,34 @@
+---@param command string
+---@param dir string
+---@return nil
+local run_git_cmd = function(command, dir)
+    local expanded_dir = vim.fn.expand(dir, true)
+
+    if vim.fs.root(expanded_dir, ".git") then
+        require("open_filedirterm").open_terminal(command, expanded_dir)
+    else
+        vim.notify("Not in git directory", vim.log.levels.WARN)
+    end
+end
+
 vim.keymap.set("n", "gbc", function()
-    require("git").run_git_cmd("git commit", "%:p:h")
+    run_git_cmd("git commit", "%:p:h")
 end, { desc = "git commit", unique = true })
 
 vim.keymap.set("n", "gbs", function()
-    require("git").run_git_cmd("tig status", "%:p:h")
+    run_git_cmd("tig status", "%:p:h")
 end, { desc = "tig status in filedir", unique = true })
 
 vim.keymap.set("n", "gbS", function()
-    require("git").run_git_cmd("tig status", vim.fn.getcwd(0))
+    run_git_cmd("tig status", vim.fn.getcwd(0))
 end, { desc = "tig status in lcd", unique = true })
 
 vim.keymap.set("n", "gbt", function()
-    require("git").run_git_cmd("tig", "%:p:h")
+    run_git_cmd("tig", "%:p:h")
 end, { desc = "tig history in filedir", unique = true })
 
 vim.keymap.set("n", "gbT", function()
-    require("git").run_git_cmd("tig", vim.fn.getcwd(0))
+    run_git_cmd("tig", vim.fn.getcwd(0))
 end, { desc = "tig history in lcd", unique = true })
 
 vim.keymap.set("n", "gbo", function()
