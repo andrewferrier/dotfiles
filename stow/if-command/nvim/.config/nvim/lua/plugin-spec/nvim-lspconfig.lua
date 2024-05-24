@@ -14,7 +14,7 @@ return {
             jsonls = {},
             lemminx = {},
             lua_ls = require("plugin-config.lsp-settings.lua_ls"),
-            ruff_lsp = {},
+            ruff = {},
             terraformls = require("plugin-config.lsp-settings.terraformls"),
             texlab = require("plugin-config.lsp-settings.texlab"),
             tflint = require("plugin-config.lsp-settings.tflint"),

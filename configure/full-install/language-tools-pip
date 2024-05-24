@@ -10,7 +10,6 @@ source "${GIT_ROOT_DIR}/common.sh"
 if [[ ${OSDISTRIBUTION} == "arch" ]]; then
     PIPX="pipx install --include-deps"
 
-    sudo pacman -S --noconfirm ruff-lsp
     pacaur -S --noconfirm basedpyright-git
     ${PIPX} gitlint
     ${PIPX} sqlfluff
@@ -19,12 +18,12 @@ elif [[ ${OSDISTRIBUTION} == "macos" ]]; then
 
     ${PIPX} install gitlint --include-deps || ${PIPX} upgrade gitlint
     ${PIPX} install sqlfluff || ${PIPX} upgrade sqlfluff
-    ${PIPX} install ruff-lsp || ${PIPX} upgrade ruff-lsp
+    ${PIPX} install ruff || ${PIPX} upgrade ruff
     ${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
 else
     PIPX="pipx"
 
     # All other packages installed via package manager
-    ${PIPX} install ruff-lsp || ${PIPX} upgrade ruff-lsp
+    ${PIPX} install ruff || ${PIPX} upgrade ruff
     ${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
 fi
