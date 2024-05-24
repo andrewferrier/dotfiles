@@ -44,24 +44,8 @@ local function keybindings_formatting(bufnr)
 end
 
 ---@param bufnr integer
-local function keybindings_codeaction(bufnr)
-    -- Don't use visual mode here, conflicts with 'c'
-    vim.keymap.set("n", "cxa", function()
-        if
-            require("utils").lsp_supports_method(
-                vim.lsp.protocol.Methods.textDocument_codeAction
-            )
-        then
-            require("fzf-lua").lsp_code_actions()
-        else
-            warn_unsupported("apply code actions")
-        end
-    end, { buffer = bufnr, desc = "Apply code action" })
-end
-
----@param bufnr integer
 local function keybindings_organizeimports(bufnr)
-    vim.keymap.set("n", "cxo", function()
+    vim.keymap.set("n", "gro", function()
         if vim.o.filetype == "python" then
             vim.cmd("silent! PyrightOrganizeImports")
         else
@@ -87,10 +71,16 @@ local function lsp_callback(event)
         local bufnr = event.buf
 
         keybindings_formatting(bufnr)
-        keybindings_codeaction(bufnr)
         keybindings_organizeimports(bufnr)
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         keybindings_inlayhints(bufnr)
+
+        vim.keymap.set(
+            "n",
+            "gra",
+            require("fzf-lua").lsp_code_actions,
+            { buffer = bufnr, desc = "Apply code action" }
+        )
     end
 end
 

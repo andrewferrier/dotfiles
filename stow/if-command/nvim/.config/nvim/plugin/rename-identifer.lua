@@ -1,7 +1,6 @@
 local TREESITTER_RENAME_INEFFECTIVE = { "markdown", "latex" }
 
--- Don't use 'cxr' in visual mode as it will block 'c'
-vim.keymap.set("n", "cxr", function()
+vim.keymap.set("n", "grn", function()
     if
         require("utils").lsp_supports_method(
             vim.lsp.protocol.Methods.textDocument_rename
