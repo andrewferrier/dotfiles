@@ -47,5 +47,6 @@ return {
 
         require("plugin-config.mini.hipatterns")
     end,
-    version = "*",
+    -- FIXME: Use HEAD so that it doesn't show deprecation warnings on NeoVim 0.11+
+    -- version = "*",
 }
