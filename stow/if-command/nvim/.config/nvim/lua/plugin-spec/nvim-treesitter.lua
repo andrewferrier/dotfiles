@@ -8,7 +8,14 @@ return {
         require("nvim-treesitter.configs").setup({
             -- Don't use ensure_installed; slows down startup
             highlight = { enable = true },
-            refactor = { smart_rename = { enable = true } },
+            refactor = {
+                smart_rename = {
+                    enable = true,
+                    keymaps = {
+                        smart_rename = false,
+                    },
+                },
+            },
             indent = { enable = true },
             endwise = { enable = true },
         })
