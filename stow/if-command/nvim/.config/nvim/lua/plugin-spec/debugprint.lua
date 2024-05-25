@@ -1,5 +1,13 @@
 return {
     url = "git@github.com:andrewferrier/debugprint.nvim",
     opts = {},
-    -- Don't use 'keys'; won't work if visual mode is used first
+    keys = {
+        { "g?", mode = "n" },
+        { "g?", mode = "x" },
+    },
+    cmd = {
+        "ToggleCommentDebugPrints",
+        "DeleteDebugPrints",
+    },
+    lazy = true,
 }
