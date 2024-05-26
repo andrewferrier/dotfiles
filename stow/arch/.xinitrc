@@ -50,4 +50,14 @@ export OPENER=$HOME/.local/bin/common-dotfiles/open-file
 # Affects KeepassXC
 export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
+# This is adapted from the default /etc/X11/xinit/xinitrc, which this file
+# overrides
+if [[ -d /etc/X11/xinit/xinitrc.d ]]; then
+    for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
+        # shellcheck disable=SC1090
+        [[ -x "$f" ]] && . "$f"
+    done
+    unset f
+fi
+
 exec i3
