@@ -16,7 +16,6 @@ xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
 
 redshift -v | logger -t "${USER}-redshift" &
 unclutter --ignore-scrolling --jitter 10 --fork
-dunst &
 variety -v | logger -t "${USER}-variety" &
 bato &
 dex --autostart --environment i3
