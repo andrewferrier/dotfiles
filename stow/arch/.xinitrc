@@ -32,7 +32,7 @@ pactl set-sink-volume @DEFAULT_SINK@ 0
 xset b off
 
 # Turn off mute keyboard light
-echo 0 > /sys/class/leds/platform::micmute/brightness
+echo 0 >/sys/class/leds/platform::micmute/brightness
 
 # Disable touchscreen/Trackpoint
 xinput disable "Raydium Corporation Raydium Touch System"
