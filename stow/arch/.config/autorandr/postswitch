@@ -10,8 +10,9 @@ log() {
 }
 
 log "Reloading variety..."
-variety --next || true
-variety --prev || true
+# Seems like sometimes these hang, hence timeout
+timeout 10 variety --next || true
+timeout 10 variety --prev || true
 
 if xrandr --listactivemonitors | grep eDP1 > /dev/null; then
     log "Changing screen blanking timeout for laptop..."
