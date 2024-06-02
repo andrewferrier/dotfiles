@@ -5,18 +5,6 @@ from pathlib import Path
 import platform
 import subprocess
 import sys
-import traceback
-
-BASE_PATH = Path("~/.cache/day-night").expanduser()
-
-BASE_PATH.mkdir(parents=True, exist_ok=True)
-
-KITTY_COLOR = BASE_PATH.joinpath("kitty-color.conf")
-STATE_FILE_TERMINAL = BASE_PATH.joinpath("state-terminal")
-
-def write_to_file(filename: Path, contents: str):
-    with open(filename, "w") as output_file:
-        output_file.write(contents)
 
 
 def get_state_macos():
@@ -43,38 +31,25 @@ def get_state_macos():
             raise Exception("Could not run defaults read")
 
 
-def get_state_linux():
-    time_of_day = sys.argv[1]
-    assert time_of_day == "day" or time_of_day == "night"
-    return time_of_day
-
-
-try:
-    if platform.system() == "Linux":
-        state = get_state_linux()
-    else:
-        state = get_state_macos()
-
-    if state == "day":
-        write_to_file(
-            KITTY_COLOR,
-            "include "
-            + str(Path("~/.config/kitty/colors-light.conf").expanduser())
-            + "\n",
-        )
-    else:
-        write_to_file(
-            KITTY_COLOR,
-            "include "
-            + str(Path("~/.config/kitty/colors-dark.conf").expanduser())
-            + "\n",
-        )
-
-    write_to_file(STATE_FILE_TERMINAL, state + "\n")
-
-except Exception:
-    write_to_file(
-        STATE_FILE_TERMINAL,
-        "night-default-failure\n\n" + traceback.format_exc() + "\n",
-    )
+if platform.system() == "Linux":
+    print("No longer supports Linux.")
     sys.exit(1)
+
+state = get_state_macos()
+
+if state == "day":
+    scripts_dir = Path.home() / ".local" / "share" / "light-mode.d"
+else:
+    scripts_dir = Path.home() / ".local" / "share" / "dark-mode.d"
+
+sh_files = list(scripts_dir.glob("*.sh"))
+
+for sh_file in sh_files:
+    try:
+        sys.stdout.write(f"Running script {sh_file}...")
+        result = subprocess.run([sh_file], shell=True, check=True, capture_output=True)
+    except subprocess.CalledProcessError as e:
+        sys.stderr.write(
+            f"Warning: Script {sh_file} failed with return code {e.returncode}\n"
+        )
+        sys.stderr.write(f"Error message: {e.stderr.decode()}\n")
