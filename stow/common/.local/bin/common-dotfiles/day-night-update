@@ -14,20 +14,6 @@ BASE_PATH.mkdir(parents=True, exist_ok=True)
 KITTY_COLOR = BASE_PATH.joinpath("kitty-color.conf")
 STATE_FILE_TERMINAL = BASE_PATH.joinpath("state-terminal")
 
-if "XDG_CONFIG_HOME" in os.environ:
-    CONFIG_HOME = os.environ["XDG_CONFIG_HOME"]
-else:
-    CONFIG_HOME = "~/.config"
-
-GTKRC20_DIR = Path(CONFIG_HOME + "/gtk-2.0").expanduser()
-GTKRC30_DIR = Path(CONFIG_HOME + "/gtk-3.0").expanduser()
-
-GTKRC20_DIR.mkdir(parents=True, exist_ok=True)
-GTKRC30_DIR.mkdir(parents=True, exist_ok=True)
-GTKRC20 = GTKRC20_DIR.joinpath("gtkrc2")
-GTKRC30 = GTKRC30_DIR.joinpath("settings.ini")
-
-
 def write_to_file(filename: Path, contents: str):
     with open(filename, "w") as output_file:
         output_file.write(contents)
@@ -66,13 +52,6 @@ def get_state_linux():
 try:
     if platform.system() == "Linux":
         state = get_state_linux()
-
-        if state == "day":
-            write_to_file(GTKRC20, 'gtk-theme-name="Adwaita"')
-            write_to_file(GTKRC30, "[Settings]\ngtk-theme-name = Adwaita")
-        else:
-            write_to_file(GTKRC20, 'gtk-theme-name="Adwaita-dark"')
-            write_to_file(GTKRC30, "[Settings]\ngtk-theme-name = Adwaita-dark")
     else:
         state = get_state_macos()
 

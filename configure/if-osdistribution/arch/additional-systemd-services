@@ -8,6 +8,7 @@ TARGET_DIR="${XDG_CONFIG_HOME}/systemd/user/default.target.wants"
 mkdir -p "$TARGET_DIR"
 
 if [[ ! -h "${TARGET_DIR}" ]]; then
+    systemctl enable --user --now darkman
     systemctl enable --user --now mpd
     systemctl enable --user --now mpd-notification
 else
