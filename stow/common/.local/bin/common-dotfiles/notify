@@ -33,25 +33,7 @@ def main():
     command_args = []
 
     if platform == "darwin":
-        command_args = ["alerter", "-message", args.body, "-title", args.title]
-        if args.allow_timeout == False:
-            command_args.append('-timeout')
-            command_args.append(str(TIMEOUT_NONE))
-        elif args.severity == 1:
-            command_args.append('-timeout')
-            command_args.append(str(TIMEOUT_SEVERITY_HIGH))
-        elif args.severity == 2:
-            command_args.append('-timeout')
-            command_args.append(str(TIMEOUT_SEVERITY_MEDIUM))
-        elif args.severity == 3:
-            command_args.append('-timeout')
-            command_args.append(str(TIMEOUT_SEVERITY_LOW))
-
-        if args.icon:
-            iconUrl = pathlib.Path(os.path.abspath(args.icon)).as_uri()
-            command_args.append("-appIcon")
-            command_args.append(iconUrl)
-
+        command_args = ["osascript", "-e", 'display notification "' + args.body + '" with title "'+ args.title + '"']
 
     elif platform == "linux":
         command_args = ["notify-send"]

@@ -1,7 +1,6 @@
 tap "homebrew/cask-fonts"
 tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
 
-brew "alerter"
 brew "ansible-language-server"
 brew "ansible-lint"
 brew "aria2"
