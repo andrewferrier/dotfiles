@@ -21,6 +21,14 @@ else
 	INSTALL_TYPE := full-install
 endif
 
+ifeq ($(OSDISTRIBUTION), arch)
+	DESKTOP_SERVER := desktop
+else ifeq ($(OSDISTRIBUTION), macos)
+	DESKTOP_SERVER := desktop
+else
+	DESKTOP_SERVER := server
+endif
+
 # TOP-LEVEL
 
 all: pkgs quick
@@ -43,6 +51,7 @@ stow: pre-stow
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OSDISTRIBUTION)
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(INSTALL_TYPE)
+	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(DESKTOP_SERVER)
 	stow-if-command $(STOW)/if-command
 
 # CONFIGURE
