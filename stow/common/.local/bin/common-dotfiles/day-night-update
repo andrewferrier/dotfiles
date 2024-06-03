@@ -46,7 +46,7 @@ sh_files = list(scripts_dir.glob("*.sh"))
 
 for sh_file in sh_files:
     try:
-        sys.stdout.write(f"Running script {sh_file}...")
+        sys.stdout.write(f"Running script {sh_file}...\n")
         result = subprocess.run([sh_file], shell=True, check=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         sys.stderr.write(
