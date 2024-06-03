@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-notify --severity 3 "switching to light mode"
+${HOME}/.local/bin/common-dotfiles/notify --severity 3 "switching to light mode"
