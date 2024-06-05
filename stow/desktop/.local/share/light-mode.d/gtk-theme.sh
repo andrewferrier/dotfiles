@@ -8,4 +8,4 @@ set -o pipefail
 shopt -s inherit_errexit
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
-"${SCRIPT_DIR}/../dark-mode.d/gtk-theme.sh" Adwaita
+"${SCRIPT_DIR}/../dark-mode.d/gtk-theme.sh" Adwaita "0"
