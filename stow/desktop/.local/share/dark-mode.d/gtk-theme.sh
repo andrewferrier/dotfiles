@@ -7,8 +7,10 @@ set -o pipefail
 
 shopt -s inherit_errexit
 
+THEME_NAME=${1:-Adwaita-dark}
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
-    echo 'Adwaita-dark' >"$HOME/.config/gtk-2.0/gtkrc2"
-    printf "[Settings]\nAdwaita-dark\n" >"$HOME/.config/gtk-3.0/settings.ini"
+    gsettings set org.gnome.desktop.interface gtk-theme ${THEME_NAME}
+    echo "${THEME_NAME}" >"$HOME/.config/gtk-2.0/gtkrc2"
+    printf "[Settings]\n${THEME_NAME}\n" >"$HOME/.config/gtk-3.0/settings.ini"
 fi

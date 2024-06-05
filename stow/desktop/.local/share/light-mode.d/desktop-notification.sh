@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-${HOME}/.local/bin/common-dotfiles/notify --severity 3 "switching to light mode"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+"${SCRIPT_DIR}/../dark-mode.d/desktop-notification.sh" light

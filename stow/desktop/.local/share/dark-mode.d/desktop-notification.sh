@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-${HOME}/.local/bin/common-dotfiles/notify --severity 3 "switching to dark mode"
+MODE_NAME=${1:-dark}
+"${HOME}/.local/bin/common-dotfiles/notify" --severity 3 "switching to ${MODE_NAME} mode"
