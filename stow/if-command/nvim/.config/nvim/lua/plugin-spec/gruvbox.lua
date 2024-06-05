@@ -1,7 +1,7 @@
 return {
     "ellisonleao/gruvbox.nvim",
     config = function()
-        local STATEFILE = vim.fn.expand("~/.cache/day-night/state-terminal")
+        local STATEFILE = vim.fn.expand("~/.cache/day-night/state")
 
         ---@cast STATEFILE string
         if
