@@ -7,4 +7,4 @@ set -o pipefail
 
 shopt -s inherit_errexit
 
-echo 'day' > "$HOME/.cache/day-night/state-terminal"
+echo 'day' > "$HOME/.cache/day-night/state"

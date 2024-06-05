@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CACHE_DIR="${HOME}/.cache/day-night"
-STATE_FILE="${CACHE_DIR}/state-terminal"
+STATE_FILE="${CACHE_DIR}/state"
 STATE_FILE_KITTY_LAST="${CACHE_DIR}/state-kitty-lastset"
 # shellcheck disable=SC2154
 KITTY_TRANSIENT="${XDG_CONFIG_HOME}/kitty/transient_env.conf"
