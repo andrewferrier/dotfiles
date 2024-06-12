@@ -2,7 +2,6 @@
 
 CACHE_DIR="${HOME}/.cache/day-night"
 STATE_FILE="${CACHE_DIR}/state"
-STATE_FILE_KITTY_LAST="${CACHE_DIR}/state-kitty-lastset"
 
 set_day_vars() {
     # Built myself based on Gruvbox Dark below
@@ -26,23 +25,11 @@ set_from_state_file() {
 }
 
 if [[ -z "${SSH_CONNECTION}" ]]; then
-    # It seems that occasionally calling 'kitty @ set-colors' is responsible for
-    # swallowing keypresses. However, by checking against the 'KITTY_LAST' file,
-    # the need/frequency to do that is minimized.
-    if [[ ! -f "${STATE_FILE_KITTY_LAST}" ]] || ! cmp --silent "${STATE_FILE}" "${STATE_FILE_KITTY_LAST}"; then
-        if grep -Fxq "day" "${STATE_FILE}"; then
-            kitty @ set-colors --all --configured ~/.config/kitty/colors-light.conf
-        else
-            kitty @ set-colors --all --configured ~/.config/kitty/colors-dark.conf
-        fi
-
-        command cp "${STATE_FILE}" "${STATE_FILE_KITTY_LAST}"
-    fi
-
     set_from_state_file
 else
     if [[ -z "$TMUX" ]]; then
         BG_COLOR=$(get-bg-color)
+
         if [[ $BG_COLOR == "rgb:f9f9/f5f5/d7d7" ]]; then
             set_day_vars
         else
