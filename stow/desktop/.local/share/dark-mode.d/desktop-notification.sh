@@ -8,4 +8,4 @@ set -o pipefail
 shopt -s inherit_errexit
 
 MODE_NAME=${1:-dark}
-"${HOME}/.local/bin/common-dotfiles/notify" --severity 3 "switching to ${MODE_NAME} mode"
+"${HOME}/.local/bin/common-dotfiles/notify" --severity 3 "Switching to ${MODE_NAME} mode."
