@@ -15,6 +15,7 @@ alias wgetmirror='wget --execute robots=off --mirror --page-requisites --adjust-
 if [[ ${OSTYPE} == darwin* ]]; then
     alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
 else
+    alias journalctl-fzf='SYSTEMD_COLORS=true journalctl -f --lines all --output=short-iso | fzf --tail=1000000 --tac --no-sort --ansi'
     alias listening='sudo ss --listening --tcp --udp --numeric --process'
     alias monitor-wifi='watch "nmcli --colors yes device wifi list"'
     alias sparseness="find . -type f -printf '%S\t%p\n' | column -t -s $'\t' | sort -n -r"
