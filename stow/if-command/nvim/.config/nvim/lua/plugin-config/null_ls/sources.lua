@@ -72,16 +72,6 @@ M.sources = {
     }),
     null_ls.builtins.diagnostics.sqlfluff,
     null_ls.builtins.diagnostics.terraform_validate,
-    null_ls.builtins.diagnostics.trail_space.with({
-        -- for 'mail' it's just annoying
-        -- for 'markdown' it's more accurate than mdl
-        disabled_filetypes = {
-            "dirbuf",
-            "gitcommit",
-            "lua",
-            "mail",
-        },
-    }),
     null_ls.builtins.diagnostics.vale,
     null_ls.builtins.diagnostics.yamllint,
     null_ls.builtins.diagnostics.zsh,
