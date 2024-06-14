@@ -19,4 +19,10 @@ env FZF_DEFAULT_OPTS=${FZF_COLORS}
 env BAT_THEME=gruvbox-${MODE}
 EOF
 
-kitty +kitten themes --reload-in=all --config-file-name=themes.conf "colors-${MODE}"
+# If kitty-themes are already downloaded, don't look again, because this can
+# fail, e.g. on resume when the internet connection isn't up yet.
+if [[ -f ~/.cache/kitty/kitty-themes.zip ]]; then
+    kitty +kitten themes --reload-in=all --cache-age=-1 --config-file-name=themes.conf "colors-${MODE}"
+else
+    kitty +kitten themes --reload-in=all --config-file-name=themes.conf "colors-${MODE}"
+fi
