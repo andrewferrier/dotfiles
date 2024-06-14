@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Python Docs
+Exec=xdg-open /usr/share/doc/python/html/index.html
+StartupNotify=true
+Categories=Programming;

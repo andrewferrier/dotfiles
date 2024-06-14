@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
 
-mkdir -p "${HOME}/.config/systemd/user"
+mkdir -p \
+    "${HOME}/.config/systemd/user" \
+    "${HOME}/.local/share/applications"
