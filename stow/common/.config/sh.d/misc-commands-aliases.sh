@@ -3,7 +3,6 @@
 alias docker-cleanup="docker container prune -f ; docker image prune -f ; docker volume prune -f ; docker network prune -f"
 alias docker-rmi-interactive="docker images | sed -E 's%([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+).*%\\1:\\2 \\3%g' | tail -n +2 | sort -r | fzf -d' ' -m --with-nth=1 | cut -d' ' -f2 | xargs -t docker image rm"
 alias external-ip="curl -4 ifconfig.co"
-alias icat='kitty +kitten icat'
 alias reenable-printer='lpq | head -1 | cut -d" " -f1 | xargs lpadmin -E -p'
 alias rm-broken-links='find . -xtype l | fzf -m | xargs rm'
 alias socks-ssh-setup='ssh -f -N -D 1080 '
