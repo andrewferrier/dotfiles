@@ -14,7 +14,6 @@ return {
         end
 
         local overrides = {
-            NormalFloat = { link = "Normal" },
             TermCursorNC = { bg = "#00DD00" },
             ["@lsp.mod.readonly"] = { bold = true },
         }
