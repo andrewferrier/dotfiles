@@ -14,4 +14,6 @@ x-scheme-handler/unknown=librewolf.desktop
 # Required to fix conflict with Calibre
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
 
+# Use file --mime-type - to find a file's type
+#
 # vim: filetype=cfg
