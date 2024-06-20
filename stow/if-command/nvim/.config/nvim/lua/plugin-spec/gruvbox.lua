@@ -14,6 +14,7 @@ return {
         end
 
         local overrides = {
+            SignColumn = { link = "LineNr" },
             TermCursorNC = { bg = "#00DD00" },
             ["@lsp.mod.readonly"] = { bold = true },
         }
