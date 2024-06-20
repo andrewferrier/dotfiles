@@ -11,4 +11,7 @@ x-scheme-handler/http=librewolf.desktop
 x-scheme-handler/https=librewolf.desktop
 x-scheme-handler/unknown=librewolf.desktop
 
+# Required to fix conflict with Calibre
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
+
 # vim: filetype=cfg
