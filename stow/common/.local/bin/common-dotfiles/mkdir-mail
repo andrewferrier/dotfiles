@@ -5,11 +5,7 @@ set -o noglob
 set -o nounset
 set -o pipefail
 
-if [[ $# -eq 0 ]]; then
-    echo >&2 "Maildir must be supplied."
-fi
-
-readonly MAILDIR=$1
+MAILDIR="${1:-$PWD}/emails"
 
 mkdir -p \
     "${MAILDIR}/cur" \
