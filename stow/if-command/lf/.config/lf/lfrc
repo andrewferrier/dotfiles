@@ -13,6 +13,9 @@
 # !true - show output from previous command (e.g. for debugging)
 # :filter - filters files shown
 # :glob-select - selects files using glob
+#
+# TODO:
+# * Use 'set watch true' in lf 33+: https://github.com/gokcehan/lf/pull/1667
 
 # Make shell commands safer
 set shellopts '-eu'
