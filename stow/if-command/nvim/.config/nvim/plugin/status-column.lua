@@ -1,12 +1,3 @@
----@param linenum integer
----@return boolean
-local signs_on_line = function(linenum)
-    return vim.fn.sign_getplaced(
-        vim.fn.bufname(),
-        { group = "*", lnum = tostring(linenum) }
-    )[1].signs[1] ~= nil
-end
-
 if vim.fn.has("nvim-0.11.0") == 1 then
     ---@return string
     _G.custom_statuscol = function()
@@ -27,6 +18,15 @@ if vim.fn.has("nvim-0.11.0") == 1 then
 
     vim.opt.number = false
 else
+    ---@param linenum integer
+    ---@return boolean
+    local signs_on_line = function(linenum)
+        return vim.fn.sign_getplaced(
+            vim.fn.bufname(),
+            { group = "*", lnum = tostring(linenum) }
+        )[1].signs[1] ~= nil
+    end
+
     ---@return string
     _G.custom_statuscol = function()
         if vim.v.virtnum ~= 0 then
