@@ -76,6 +76,7 @@ local configure = function()
 
         vim.keymap.set("n", "yo_", function()
             gitsigns.toggle_deleted()
+            vim.cmd.redrawstatus()
         end, {
             desc = "Toggle deleted lines",
             buffer = bufnr,
