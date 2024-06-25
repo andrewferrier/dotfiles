@@ -265,11 +265,12 @@ local delayed_redraw = function()
 end
 
 local callback = function()
-    if redraw_timer == nil then
-        redraw_timer = vim.fn.timer_start(1000, delayed_redraw)
+    if redraw_timer ~= nil then
+        vim.fn.timer_stop(redraw_timer)
     end
 
     vim.cmd.redrawstatus()
+    redraw_timer = vim.fn.timer_start(750, delayed_redraw)
 end
 
 vim.api.nvim_create_autocmd("LspProgress", {
