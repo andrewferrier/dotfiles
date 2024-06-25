@@ -6,17 +6,11 @@ if vim.fn.has("nvim-0.11.0") == 1 then
         end
 
         if vim.o.number == false then
-            if vim.o.relativenumber == true then
-                return "%s%l "
-            else
-                return "%s" .. vim.v.lnum .. " "
-            end
-        else
-            return "%s"
+            vim.o.relativenumber = false
         end
-    end
 
-    vim.opt.number = false
+        return "%s%l "
+    end
 else
     ---@param linenum integer
     ---@return boolean
@@ -47,10 +41,9 @@ else
             return line .. "%=%l "
         end
     end
-
-    vim.opt.number = true
 end
 
+vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 3
 vim.opt.signcolumn = "yes:1"
