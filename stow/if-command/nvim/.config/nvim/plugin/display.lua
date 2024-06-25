@@ -11,5 +11,10 @@ vim.opt.splitbelow = true
 vim.opt.splitkeep = "screen"
 vim.opt.splitright = true
 
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.numberwidth = 3
+vim.opt.signcolumn = "yes:1"
+
 vim.opt.list = true
 vim.opt.listchars = "tab:>⋅,trail:·,extends:▷,precedes:◁,nbsp:␣"
