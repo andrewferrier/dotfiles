@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+FILES=false
+DIRS=false
+
+while getopts "fd" o; do
+    case "${o}" in
+    f) FILES=true ;;
+    d) DIRS=true ;;
+    *) exit 1 ;;
+    esac
+done
+shift $((OPTIND - 1))
+
+if "${FILES}" && "${DIRS}"; then
+    echo >&2 "Cannot select -f and -d at the same time."
+    exit 1
+fi
+
+if ! "${FILES}" && ! "${DIRS}"; then
+    echo >&2 "Must select either -f or -d."
+    exit 2
+fi
+
+if "${FILES}"; then
+    FILESFLAG="-f"
+    THEME="openfile"
+    ROFI_PROMPT="[Enter] = open/edit file"
+else
+    FILESFLAG="-d"
+    THEME="opendir"
+    ROFI_PROMPT="[Enter] = open directory, Ctrl-[T]ig"
+fi
+
+ROFI_OUTPUT=$("${HOME}/.local/bin/common-dotfiles/file-list" "$FILESFLAG" -p | rofi -kb-custom-1 "Ctrl+t" -no-sort -theme "$THEME" -dmenu -i -p "${ROFI_PROMPT}") && ROFI_EXIT_CODE=$? || ROFI_EXIT_CODE=$?
+
+if [[ $ROFI_EXIT_CODE == 10 ]]; then
+    # shellcheck disable=SC2154
+    $TERMCMD --title "tig [$ROFI_OUTPUT]" sh -c "cd $ROFI_OUTPUT && tig"
+else
+    open-file -I "$ROFI_OUTPUT"
+fi

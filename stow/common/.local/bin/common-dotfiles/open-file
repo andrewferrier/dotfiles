@@ -9,6 +9,19 @@ else
     INTERACTIVE=false
 fi
 
+while getopts "I" o; do
+    case "${o}" in
+    I)
+        INTERACTIVE=false
+        ;;
+    *)
+        echo "Invalid option"
+        exit 1
+        ;;
+    esac
+done
+shift $((OPTIND - 1))
+
 if [[ -n "${DISPLAY:-}" ]] || [[ ${OSTYPE} == darwin* ]]; then
     GRAPHICAL=true
 else
@@ -24,11 +37,16 @@ in_lf() {
 }
 
 function open-directory() {
-    if [[ -d "${FILE}/cur" && -d "${FILE}/new" && -d "${FILE}/tmp" ]] && ${INTERACTIVE}; then
+    if [[ -d "${FILE}/cur" && -d "${FILE}/new" && -d "${FILE}/tmp" ]]; then
         # This is a maildir directory
-        # shellcheck disable=SC1091,1090
-        source "${HOME}/.config/sh-local.d/mutt.sh"
-        mutt -f "${FILE}"
+        if ${INTERACTIVE}; then
+            # shellcheck disable=SC1091,1090
+            source "${HOME}/.config/sh-local.d/mutt.sh"
+            mutt -f "${FILE}"
+        else
+            # shellcheck disable=SC2154
+            ${TERMCMD} --title "mutt [${FILE}]" bash -c "source '${HOME}/.config/sh-local.d/mutt.sh'; mutt -f '${FILE}'"
+        fi
     else
         if [[ ${OSTYPE} == darwin* ]]; then
             # shellcheck disable=SC2310
