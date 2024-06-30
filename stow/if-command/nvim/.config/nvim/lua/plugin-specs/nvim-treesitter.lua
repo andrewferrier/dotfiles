@@ -21,5 +21,5 @@ return {
         })
     end,
     event = { "BufReadPre", "BufNewFile" },
-    version = "*",
+    -- Don't use stable version, it always seems to cause issues
 }
