@@ -45,7 +45,7 @@ return {
             mappings = { find = "", find_left = "", highlight = "" },
         })
 
-        require("plugin-config.mini.hipatterns")
+        require("plugin-specs.mini.hipatterns")
     end,
     version = "*",
 }
