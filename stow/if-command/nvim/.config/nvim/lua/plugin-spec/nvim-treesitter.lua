@@ -6,7 +6,7 @@ return {
     end,
     config = function()
         require("nvim-treesitter.configs").setup({
-            -- Don't use ensure_installed; slows down startup
+            sync_install = true,
             highlight = { enable = true },
             refactor = {
                 smart_rename = {
