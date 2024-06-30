@@ -50,7 +50,4 @@ require("lazy").setup("plugin-spec", {
     change_detection = {
         enabled = false,
     },
-    ui = {
-        border = "single",
-    },
 })
