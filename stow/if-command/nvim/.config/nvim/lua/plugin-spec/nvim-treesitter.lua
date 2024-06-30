@@ -21,6 +21,5 @@ return {
         })
     end,
     event = { "BufReadPre", "BufNewFile" },
-    -- Re-enable once on NeoVim 0.10
-    -- version = "*",
+    version = "*",
 }
