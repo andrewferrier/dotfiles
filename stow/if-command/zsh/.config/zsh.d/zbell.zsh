@@ -56,7 +56,9 @@ zbell_end() {
 	done
 
 	if (( ! $has_ignored_cmd )) && (( ran_long )); then
-		print -n "\a"
+		if [ "$(xdotool getwindowfocus)" -ne "$WINDOWID" ]; then
+			print -n "\a"
+		fi
 	fi
 }
 
