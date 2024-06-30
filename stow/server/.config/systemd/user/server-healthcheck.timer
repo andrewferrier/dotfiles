@@ -1,0 +1,10 @@
+[Timer]
+OnUnitActiveSec=10m
+Persistent=true
+Unit=server-healthcheck.service
+
+[Install]
+WantedBy=timers.target
+
+[Unit]
+Requires=server-healthcheck.service
