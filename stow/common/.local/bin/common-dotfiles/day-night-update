@@ -6,6 +6,22 @@ import platform
 import subprocess
 import sys
 
+BASE_PATH = Path("~/.cache/day-night").expanduser()
+BASE_PATH.mkdir(parents=True, exist_ok=True)
+STATE_FILE = BASE_PATH.joinpath("state")
+
+
+def read_state_file():
+    try:
+        with open(STATE_FILE, 'r') as file:
+            return file.readline().strip()
+    except FileNotFoundError:
+        print(f"{STATE_FILE} was not found.")
+        return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
 
 def get_state_macos():
     if "DARKMODE" in os.environ:
@@ -36,20 +52,24 @@ if platform.system() == "Linux":
     sys.exit(1)
 
 state = get_state_macos()
+current_state = read_state_file()
 
-if state == "day":
-    scripts_dir = Path.home() / ".local" / "share" / "light-mode.d"
+if state != current_state:
+    if state == "day":
+        scripts_dir = Path.home() / ".local" / "share" / "light-mode.d"
+    else:
+        scripts_dir = Path.home() / ".local" / "share" / "dark-mode.d"
+
+    sh_files = list(scripts_dir.glob("*.sh"))
+
+    for sh_file in sh_files:
+        try:
+            sys.stdout.write(f"Running script {sh_file}...\n")
+            result = subprocess.run([sh_file], shell=True, check=True, capture_output=True)
+        except subprocess.CalledProcessError as e:
+            sys.stderr.write(
+                f"Warning: Script {sh_file} failed with return code {e.returncode}\n"
+            )
+            sys.stderr.write(f"Error message: {e.stderr.decode()}\n")
 else:
-    scripts_dir = Path.home() / ".local" / "share" / "dark-mode.d"
-
-sh_files = list(scripts_dir.glob("*.sh"))
-
-for sh_file in sh_files:
-    try:
-        sys.stdout.write(f"Running script {sh_file}...\n")
-        result = subprocess.run([sh_file], shell=True, check=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        sys.stderr.write(
-            f"Warning: Script {sh_file} failed with return code {e.returncode}\n"
-        )
-        sys.stderr.write(f"Error message: {e.stderr.decode()}\n")
+    sys.stderr.write(f"Current state is already {current_state}; wanted to switch to {state}.\n")
