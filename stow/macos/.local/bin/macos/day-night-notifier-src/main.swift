@@ -1,8 +1,6 @@
-#!/usr/bin/env swift
-
 // See https://github.com/bouk/dark-mode-notify
 
-// Run as ./notify.swift <program to run when dark mode changes>
+// Run as ./day-night-notifier <program to run when dark mode changes>
 // The program will have the DARKMODE env flag set to 1 or 0
 
 import Cocoa
@@ -31,6 +29,13 @@ DistributedNotificationCenter.default.addObserver(
     object: nil,
     queue: nil) { (notification) in
         shell(args)
+}
+
+NSWorkspace.shared.notificationCenter.addObserver(
+    forName: NSWorkspace.didWakeNotification,
+    object: nil,
+    queue: nil) { (notification) in
+    shell(args)
 }
 
 NSApplication.shared.run()

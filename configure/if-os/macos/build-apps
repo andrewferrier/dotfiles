@@ -5,4 +5,7 @@ set -o noglob
 set -o nounset
 set -o pipefail
 
-echo 'night' > "$HOME/.cache/day-night/state"
+shopt -s inherit_errexit
+
+cd "${HOME}/.local/bin/macos"
+make

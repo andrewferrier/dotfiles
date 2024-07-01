@@ -5,8 +5,6 @@ set -o noglob
 set -o nounset
 set -o pipefail
 
-shopt -s inherit_errexit
-
 source "${HOME}/.config/sh-profile.d/misc-env-vars.sh"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"

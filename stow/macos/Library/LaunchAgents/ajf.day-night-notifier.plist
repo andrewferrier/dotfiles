@@ -10,10 +10,9 @@
     <true/>
     <key>ProgramArguments</key>
     <array>
-        <string>/bin/sh</string>
+        <string>/bin/bash</string>
         <string>-c</string>
-        <string>$HOME/.local/bin/macos/day-night-notifier</string>
-        <string>$HOME/.local/bin/common-dotfiles/day-night-update</string>
+        <string>cd $HOME ; .local/bin/macos/day-night-notifier .local/bin/common-dotfiles/day-night-update</string>
     </array>
     <key>StandardErrorPath</key>
     <string>/tmp/day-night-notifier.err</string>

@@ -5,8 +5,6 @@ set -o noglob
 set -o nounset
 set -o pipefail
 
-shopt -s inherit_errexit
-
 THEME_NAME=${1:-Adwaita-dark}
 DARK_INT=${2:-1}
 
