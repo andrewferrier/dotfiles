@@ -24,6 +24,5 @@ return {
             { desc = "Open parent directory", unique = true }
         )
     end,
-    version = "*",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    version = "*"
 }

@@ -92,6 +92,5 @@ end
 return {
     "ibhagwan/fzf-lua",
     config = configure,
-    keys = { "cv" },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = { "cv" }
 }

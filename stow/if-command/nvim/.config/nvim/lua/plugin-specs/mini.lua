@@ -47,5 +47,12 @@ return {
 
         require("plugin-specs.mini.hipatterns")
     end,
-    version = "*",
+    init = function()
+        package.preload["nvim-web-devicons"] = function()
+            require("mini.icons").mock_nvim_web_devicons()
+            return package.loaded["nvim-web-devicons"]
+        end
+    end,
+    -- FIXME: Re-enable when 0.14 comes out
+    -- version = "*",
 }
