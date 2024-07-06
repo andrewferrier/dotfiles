@@ -27,7 +27,6 @@ vim.filetype.add({
         [".*emails/cur/.*"] = "mail",
         [".*emails/new/.*"] = "mail",
         [".*emails/tmp/.*"] = "mail",
-        [".*envrc.*"] = "sh",
         [".*mkd%.txt"] = "markdown",
         [".*my%-ublock.*"] = "json",
         ["muttrc%..*"] = "muttrc",
@@ -46,3 +45,11 @@ vim.filetype.add({
         [".*site.ya?ml"] = "yaml.ansible",
     },
 })
+
+if vim.fn.has("nvim-0.11") == 0 then
+    vim.filetype.add({
+        pattern = {
+            [".*envrc.*"] = "sh",
+        },
+    })
+end
