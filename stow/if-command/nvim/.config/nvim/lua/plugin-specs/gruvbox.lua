@@ -33,7 +33,7 @@ return {
         local overrides = {
             DiagnosticUnnecessary = { link = "Whitespace" },
             SignColumn = { link = "LineNr" },
-            TermCursorNC = { bg = "#00DD00" },
+            TermCursorNC = { link = "DiffChange" },
             ["@lsp.mod.readonly"] = { bold = true },
         }
 
