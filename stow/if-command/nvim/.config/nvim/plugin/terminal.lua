@@ -3,7 +3,9 @@ local id = vim.api.nvim_create_augroup("neovim_terminal", {})
 vim.api.nvim_create_autocmd("TermOpen", {
     group = id,
     callback = function()
-        require("filetype.status_column").remove_all()
+        vim.opt_local.signcolumn = 'no'
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
     end,
 })
 

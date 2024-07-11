@@ -6,8 +6,8 @@ M.make_readonly = function()
     vim.opt_local.conceallevel = 2
     vim.opt_local.list = false
     vim.opt_local.spell = false
+    vim.opt_local.signcolumn = "no"
 
-    require("filetype.status_column").remove_signs()
     require("gitsigns").detach()
 
     vim.diagnostic.enable(false, { bufnr = 0 })
