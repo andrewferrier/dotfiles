@@ -1,1 +1,3 @@
-return { "LunarVim/bigfile.nvim" }
+return {
+    "LunarVim/bigfile.nvim",
+}
