@@ -100,3 +100,9 @@ if command -v yarn >/dev/null 2>&1 || command -v yarnpkg >/dev/null 2>&1; then
 fi
 
 export NODE_PATH
+
+if command -v lua5.1 &>/dev/null; then
+    LUAROCKS_PATH=$(luarocks path --no-bin --lua-version 5.1)
+    # shellcheck disable=SC2086
+    eval $LUAROCKS_PATH
+fi
