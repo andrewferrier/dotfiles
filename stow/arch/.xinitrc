@@ -19,6 +19,7 @@ unclutter --ignore-scrolling --jitter 10 --fork
 variety -v | logger -t "${USER}-variety" &
 bato &
 dex --autostart --environment i3
+xfsettingsd &
 
 # Automatically synchronize PRIMARY and CLIPBOARD
 autocutsel -fork &
