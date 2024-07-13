@@ -88,5 +88,5 @@ end
 return {
     "ibhagwan/fzf-lua",
     config = configure,
-    keys = { "cv" }
+    keys = { "cv" },
 }
