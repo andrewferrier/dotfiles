@@ -5,26 +5,21 @@ local M = {}
 ---@param opening_oil boolean
 ---@return string
 local select_fileordir = function(fileordir, force_dir, opening_oil)
-    local fileordir_t
+    ---@type string
+    local fileordir_t = vim.env.HOME
 
     if vim.bo.filetype == "oil" and not opening_oil then
-        fileordir_t = require("oil").get_current_dir()
-            .. "/"
-            .. require("oil").get_cursor_entry()["name"]
+        local current_dir = require("oil").get_current_dir()
+        local current_file = require("oil").get_cursor_entry()["name"]
+        fileordir_t = current_dir .. "/" .. current_file
     elseif vim.bo.buftype == "" then
         fileordir_t = vim.fn.expand(fileordir, true)
-    else
-        fileordir_t = vim.env.HOME
     end
-
-    ---@cast fileordir_t string
 
     if vim.fn.isdirectory(fileordir_t) == 1 or not force_dir then
         return fileordir_t
     else
-        local dirname = vim.fs.dirname(fileordir_t)
-        ---@cast dirname string
-        return dirname
+        return vim.fs.dirname(fileordir_t)
     end
 end
 
@@ -45,9 +40,7 @@ M.open_file_manager = function(file_or_dir)
     local expanded_ford = select_fileordir(file_or_dir, false, false)
     vim.schedule(function()
         vim.cmd.wincmd("n")
-        vim.fn.termopen(
-            "lf " .. vim.fn.shellescape(expanded_ford)
-        )
+        vim.fn.termopen("lf " .. vim.fn.shellescape(expanded_ford))
     end)
 end
 
