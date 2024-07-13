@@ -41,10 +41,6 @@ local configure = function()
         fzf_lua.man_pages({ previewer = "man_native" })
     end, { desc = "Open manpage", unique = true })
 
-    local escape = function(items)
-        return vim.fn.escape(items[1], " (){}`'\"")
-    end
-
     vim.keymap.set("n", "cvf", function()
         fzf_lua.fzf_exec("file-list -t -r", {
             actions = require("fzf-lua.config").globals.actions.files,
@@ -73,7 +69,7 @@ local configure = function()
                 ["--preview"] = fzf_lua.shell.raw_preview_action_cmd(
                     function(items)
                         return "eza --level 2 --tree --color=always --group-directories-first --no-quotes "
-                            .. escape(items)
+                            .. vim.fn.shellescape(items)
                     end
                 ),
                 ["--no-sort"] = "",
