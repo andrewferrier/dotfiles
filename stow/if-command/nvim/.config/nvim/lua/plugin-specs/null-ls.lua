@@ -25,17 +25,6 @@ return {
                 end,
             }),
             null_ls.builtins.formatting.sqlfluff,
-            null_ls.builtins.formatting.shfmt.with({
-                extra_args = function(params)
-                    return {
-                        "-i",
-                        vim.api.nvim_get_option_value(
-                            "shiftwidth",
-                            { buf = params.bufnr }
-                        ),
-                    }
-                end,
-            }),
             null_ls.builtins.formatting.stylua.with({
                 extra_args = function(params)
                     return {
