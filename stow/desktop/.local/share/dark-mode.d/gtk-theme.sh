@@ -5,8 +5,8 @@ set -o noglob
 set -o nounset
 set -o pipefail
 
-THEME_NAME=${1:-Adwaita-dark}
-DARK_INT=${2:-1}
+THEME_NAME=${THEME_NAME:-"Adwaita-dark"}
+DARK_INT=${DARK_INT:-1}
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     mkdir -p \

@@ -5,4 +5,6 @@ set -o noglob
 set -o nounset
 set -o pipefail
 
-echo 'night' > "$HOME/.cache/day-night/state"
+STATE="${STATE:-night}"
+
+echo "$STATE" > "$HOME/.cache/day-night/state"

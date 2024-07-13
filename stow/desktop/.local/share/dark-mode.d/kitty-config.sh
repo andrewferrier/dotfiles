@@ -5,16 +5,17 @@ set -o noglob
 set -o nounset
 set -o pipefail
 
+# shellcheck disable=SC1091
 source "${HOME}/.config/sh-profile.d/misc-env-vars.sh"
 
-MODE=${1:-dark}
-FZF_COLORS=${2:-$FZF_DEFAULT_OPTS_DARK_COLORS}
+MODE_NAME=${MODE_NAME:-"dark"}
+FZF_COLORS=${FZF_COLORS:-$FZF_DEFAULT_OPTS_DARK_COLORS}
 
 KITTY_TRANSIENT="${HOME}/.config/kitty/transient.conf"
 
 cat <<EOF >"$KITTY_TRANSIENT"
 env FZF_DEFAULT_OPTS=${FZF_COLORS}
-env BAT_THEME=gruvbox-${MODE}
+env BAT_THEME=gruvbox-${MODE_NAME}
 EOF
 
 if [[ ${OSTYPE} == darwin* ]]; then
@@ -32,7 +33,7 @@ fi
 # If kitty-themes are already downloaded, don't look again, because this can
 # fail, e.g. on resume when the internet connection isn't up yet.
 if [[ -f $CACHE_DIR/kitty/kitty-themes.zip ]]; then
-    $KITTY +kitten themes --reload-in=all --cache-age=-1 --config-file-name=themes.conf "colors-${MODE}"
+    $KITTY +kitten themes --reload-in=all --cache-age=-1 --config-file-name=themes.conf "colors-${MODE_NAME}"
 else
-    $KITTY +kitten themes --reload-in=all --config-file-name=themes.conf "colors-${MODE}"
+    $KITTY +kitten themes --reload-in=all --config-file-name=themes.conf "colors-${MODE_NAME}"
 fi
