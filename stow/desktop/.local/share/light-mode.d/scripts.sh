@@ -16,5 +16,5 @@ for file in "${HOME}"/.local/share/dark-mode.d/*.sh; do
         MODE_NAME="light" \
         STATE="day" \
         THEME_NAME="Adwaita" \
-        source "${file}"
+        "${file}"
 done
