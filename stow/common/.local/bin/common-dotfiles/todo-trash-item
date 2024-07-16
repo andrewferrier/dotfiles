@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
+
+TODO_ID=${1:?Must provide todoman ID}
+
+FILENAME=$(sqlite3 -list -noheader "${XDG_CACHE_HOME}/todoman/cache.sqlite3" "select file_path from todos where id='${TODO_ID}'" 2>/dev/null)
+trash "${FILENAME}"

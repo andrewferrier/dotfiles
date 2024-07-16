@@ -34,7 +34,7 @@ todo --porcelain list |
         --info=inline-right \
         --header "Ctrl-reLoad,Done,editrAw,todaY,tomorroW,seVendayslater,Saturday,mOnday,New,<delete>" \
         --bind "ctrl-l:${RELOAD}" \
-        --bind "ctrl-delete:execute-silent(todo delete --yes {1})+${RELOAD}" \
+        --bind "ctrl-delete:execute-silent(todo-trash-item {1})+${RELOAD}" \
         --bind "ctrl-d:execute-silent(todo done {1})+${RELOAD}" \
         --bind "enter:execute(todo edit {1})+${RELOAD}" \
         --bind "ctrl-a:execute(todo edit --raw {1})+${RELOAD}" \
