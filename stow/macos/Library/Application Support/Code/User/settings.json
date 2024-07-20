@@ -7,7 +7,7 @@
     "editor.guides.indentation": false,
     "editor.lineNumbers": "relative",
     "editor.minimap.enabled": false,
-    "editor.occurrencesHighlight": false,
+    "editor.occurrencesHighlight": "off",
     "editor.renderFinalNewline": "off",
     "editor.renderLineHighlight": "none",
     "editor.renderWhitespace": "none",
