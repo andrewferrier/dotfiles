@@ -44,7 +44,7 @@ function _G.Statusline_FeaturesEnabled()
 
     if vim.bo.filetype ~= "oil" and vim.bo.buftype ~= "terminal" then
         if require("gitsigns.config").config.show_deleted then
-            return_string = return_string .. ",_̸"
+            return_string = return_string .. ",󱙝"
         end
 
         if not vim.diagnostic.is_enabled() then
