@@ -1,0 +1,7 @@
+# We don't check in displays.xml because it includes dynamic content; see
+# ../../../../../../../configure/if-osdistribution/arch/fix-xfce4-settings
+displays.xml
+
+xfce4-settings-editor.xml
+xfwm4.xml
+xsettings.xml
