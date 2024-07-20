@@ -67,36 +67,16 @@ end
 
 ---@return string
 function _G.Statusline_DiagnosticStatus()
-    -- TODO: In NeoVim 0.10 refactor to use vim.diagnostic.count(), calling it only once
+    local content = require("mini.statusline").section_diagnostics({
+        icon = "",
+        signs = { ERROR = "✘", WARN = "", INFO = "󰋽", HINT = "ɦ" },
+    }):gsub("%s+", "")
 
-    if vim.diagnostic.is_enabled() then
-        local diagnostics_counts = {}
-
-        for prefix, severity in pairs({
-            e = vim.diagnostic.severity.ERROR,
-            w = vim.diagnostic.severity.WARN,
-            i = vim.diagnostic.severity.INFO,
-            h = vim.diagnostic.severity.HINT,
-        }) do
-            local count = #vim.diagnostic.get(0, { severity = severity })
-
-            if count > 0 then
-                table.insert(diagnostics_counts, prefix .. count)
-            end
-        end
-
-        if #diagnostics_counts > 0 then
-            return LEFT_BRACE
-                .. "D "
-                .. table.concat(diagnostics_counts, ",")
-                .. RIGHT_BRACE
-                .. " "
-        else
-            return ""
-        end
+    if content:len() > 0 then
+        return LEFT_BRACE .. content .. RIGHT_BRACE .. " "
+    else
+        return ""
     end
-
-    return ""
 end
 
 ---@return string
