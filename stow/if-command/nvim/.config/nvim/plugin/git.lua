@@ -32,9 +32,9 @@ vim.keymap.set("n", "gbT", function()
 end, { desc = "tig history in lcd", unique = true })
 
 vim.keymap.set("n", "gbo", function()
-    vim.fn.jobstart({ "git", "open" }, {
-        cwd = vim.fn.expand("%:p:h"),
-        detach = true,
-        on_stderr = require("utils").job_stderr,
-    })
+    vim.system(
+        { "git", "open" },
+        { cwd = vim.fn.expand("%:p:h"), detach = true },
+        require("utils").system_on_exit
+    )
 end, { desc = "Open git repo in browser", unique = true })

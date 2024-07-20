@@ -17,12 +17,13 @@ M.visual_selection_range = function()
     return table.concat(lines, "\n")
 end
 
----@return nil
-M.job_stderr = function(_, stderr_line, _)
-    stderr_line = stderr_line[1]
-    if #stderr_line > 0 then
-        vim.notify(stderr_line, vim.log.levels.ERROR)
-    end
+---@param out vim.SystemCompleted
+M.system_on_exit = function(out)
+    vim.schedule(function()
+        if out.code ~= 0 then
+            vim.notify(out.stderr, vim.log.levels.ERROR)
+        end
+    end)
 end
 
 ---@return string
