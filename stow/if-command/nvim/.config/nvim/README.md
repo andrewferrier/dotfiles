@@ -179,7 +179,6 @@
 *   0.10: Replace 'jobstart' with vim.system
 *   Look at switching to main branch for nvim-treesitter for nightly: <https://github.com/nvim-treesitter/nvim-treesitter/issues/4767>
 *   Look at <https://github.com/zbirenbaum/copilot.lua>
-*   Make remark consistent with mdl for bulleted lists
 
 ## Presentation Ideas
 
