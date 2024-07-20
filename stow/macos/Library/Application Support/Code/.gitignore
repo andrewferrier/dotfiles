@@ -1,4 +1,4 @@
-Backups/
+Backups
 Cache/
 CachedData/
 CachedExtensionVSIXs/
@@ -16,7 +16,9 @@ Network Persistent State
 Preferences
 Service Worker/
 Session Storage/
+Shared Dictionary/
 TransportSecurity
+Trust Tokens*
 User/History/
 User/globalStorage/
 User/workspaceStorage/
