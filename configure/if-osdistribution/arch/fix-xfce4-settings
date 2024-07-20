@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+# This is required because otherwise the XFCE4 display settings dialogue pops up
+# whenever external monitors have changed. See https://forums.debian.net/viewtopic.php?p=797453#p797453
+xfconf-query -c displays -p /Notify -s 0
