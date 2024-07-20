@@ -72,9 +72,3 @@ vim.api.nvim_create_user_command(
     vim.diagnostic.setqflist,
     {}
 )
-
-require("editorconfig").properties.diagnostics = function(_, val, _)
-    if val == "false" then
-        vim.diagnostic.enable(false, { bufnr = 0 })
-    end
-end
