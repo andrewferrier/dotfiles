@@ -100,15 +100,6 @@ function _G.Statusline_DiagnosticStatus()
 end
 
 ---@return string
-function _G.Statusline_Copilot()
-    if vim.b.copilot_enabled then
-        return ",℅P"
-    else
-        return ""
-    end
-end
-
----@return string
 function _G.Statusline_GitSigns()
     if vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" then
         return LEFT_BRACE .. vim.b.gitsigns_status .. RIGHT_BRACE .. " "
@@ -246,7 +237,6 @@ statusline = statusline .. SEPARATOR
 statusline = statusline .. "%{v:lua.Statusline_Indent()}"
 statusline = statusline .. "%{&fileformat!=#'unix'?',ff='.&fileformat:''}"
 statusline = statusline .. "%{v:lua.Statusline_Wrappingmode()}"
-statusline = statusline .. "%{v:lua.Statusline_Copilot()}"
 statusline = statusline .. "%{&spell?',S':''}"
 statusline = statusline .. "%{v:lua.Statusline_FeaturesEnabled()}"
 statusline = statusline .. "%M"
