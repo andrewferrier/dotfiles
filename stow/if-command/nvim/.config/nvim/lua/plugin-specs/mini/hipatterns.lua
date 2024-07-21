@@ -1,5 +1,7 @@
 local hipatterns = require("mini.hipatterns")
 
+---@param pattern string
+---@return function
 local if_textfile = function(pattern)
     return function()
         if

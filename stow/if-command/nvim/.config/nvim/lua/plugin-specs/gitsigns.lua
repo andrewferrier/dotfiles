@@ -1,6 +1,7 @@
 local configure = function()
     local gitsigns = require("gitsigns")
 
+    ---@param bufnr integer
     local attach = function(bufnr)
         vim.keymap.set("n", "]h", function()
             vim.schedule(function()
