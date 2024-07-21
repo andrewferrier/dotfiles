@@ -21,6 +21,10 @@ local configure = function()
             ["--color"] = "gutter:-1",
             ["--preview-window"] = "border-none",
         },
+        grep = {
+            rg_opts = "--hidden "
+                .. require("fzf-lua.defaults").defaults.grep.rg_opts,
+        },
     })
 
     vim.keymap.set(
