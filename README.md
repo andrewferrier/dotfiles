@@ -49,6 +49,11 @@
     journalctl CONTAINER_NAME="docker_container" | output from docker container
     journalctl --user -u xyz.service             | output from specific user service
 
+## tmux commands
+
+    select-pane -d | disable input for pane
+    select-pane -e | enable input for pane
+
 ## Linux
 
     getent hosts <hostname> | look up DNS name
