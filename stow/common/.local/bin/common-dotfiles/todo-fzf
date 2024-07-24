@@ -23,7 +23,7 @@ readonly EM_SPACE
 
 todo --porcelain list |
     "${SCRIPT_DIR}/todo-fzf-formatter" |
-    fzf --preview 'todo show {1} | cut -d" " -f 5-' \
+    fzf --preview "todo --porcelain show {1} | jq -r '.summary,.description'" \
         --delimiter $EM_SPACE \
         --with-nth 2,3 \
         --ansi \
