@@ -19,7 +19,7 @@ vim.filetype.add({
         ["%.secrets.*"] = "sh",
         [".*/%.config/git%-local/.*"] = "gitconfig",
         [".*/%.config/lf%-local/.*"] = "conf",
-        [".*/%.i3/config%.d/.*"] = "i3config",
+        [".*/%.config/i3/.*"] = "i3config",
         [".*/%.kaf/config"] = "yaml",
         [".*/i3/config%.d/.*"] = "i3config",
         [".*Dockerfile.*"] = "dockerfile",
