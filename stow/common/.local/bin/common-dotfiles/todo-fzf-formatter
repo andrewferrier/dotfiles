@@ -51,20 +51,19 @@ for entry in data:
         if due_time.hour == 0 and due_time.minute == 0 and due_time.second == 0:
             # This is a time-agnostic timestamp
 
+            human_date = humanize.naturalday(due_date, format="%Y-%m-%d")
+
             if now_date > due_date:
                 datecolor = "red"
             elif now_date == due_date:
                 datecolor = "green"
-
-            human_date = humanize.naturalday(due_date, format="%Y-%m-%d")
         else:
+            human_date = humanize.naturalday(due_date, format="%Y-%m-%d") + " " +  due_time.strftime("%H:%M")
+
             if now_time > due_time:
                 datecolor = "red"
-
-            if now_time < due_time and now_date == due_date:
-                human_date = humanize.naturaldelta(due_time - now_time)
-            else:
-                human_date = humanize.naturalday(due_date, format="%Y-%m-%d")
+            elif now_date != due_date:
+                human_date = humanize.naturalday(due_date)
 
         dt = due_date - now_date
         if (
@@ -78,6 +77,6 @@ for entry in data:
 
     print(
         f'{entry["id"]:5}{EM_SPACE}'
-        + colored(f"{human_date:11}{EM_SPACE}", datecolor, force_color=True)
+        + colored(f"{human_date:12}{EM_SPACE}", datecolor, force_color=True)
         + colored(f'{entry["summary"]}', entrycolor, force_color=True)
     )
