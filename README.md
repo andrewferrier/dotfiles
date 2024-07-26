@@ -1,13 +1,14 @@
 # Dotfiles - Master Cheatsheet
 
-    awk         | <https://github.com/learnbyexample/Command-line-text-processing/blob/master/gnu_awk.md>
-    bash/sh     | ~/.config/bash.d/README.md
-    i3          | ~/.config/i3/config
-    kitty       | ~/.config/kitty/kitty.conf
-    lf          | ~/.config/lf/lfrc
-    mutt        | ~/.mutt/muttrc.common
-    neovim      | ~/.config/nvim/README.md
-    zsh         | ~/.config/zsh/README.md
+    awk     | <https://github.com/learnbyexample/Command-line-text-processing/blob/master/gnu_awk.md>
+    bash/sh | ~/.config/bash.d/README.md
+    i3      | ~/.config/i3/config
+    kitty   | ~/.config/kitty/kitty.conf
+    lf      | ~/.config/lf/lfrc
+    mutt    | ~/.mutt/muttrc.common
+    neovim  | ~/.config/nvim/README.md
+    tmux    | ~/.tmux.conf
+    zsh     | ~/.config/zsh/README.md
 
 ## Useful commands
 
@@ -48,11 +49,6 @@
     journalctl --since=-1week                    | output from 1 week ago
     journalctl CONTAINER_NAME="docker_container" | output from docker container
     journalctl --user -u xyz.service             | output from specific user service
-
-## tmux commands
-
-    select-pane -d | disable input for pane
-    select-pane -e | enable input for pane
 
 ## Linux
 
