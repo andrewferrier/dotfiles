@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-eget --upgrade-only --to "${HOME}/.local/bin/" NTBBloodbath/nvenv

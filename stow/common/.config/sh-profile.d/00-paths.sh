@@ -73,6 +73,7 @@ pupdate_append_singlex "${HOME}/.local/bin"
 pupdate_append_globxxx "${HOME}/.local/bin/*"
 pupdate_append_globxxx "${HOME}/.local/bin/*/bin"
 pupdate_append_globxxx "${HOME}/.local/bin/*/*/bin"
+pupdate_append_singlex "${XDG_DATA_HOME}/bob/nvim-bin"
 pupdate_append_singlex "${HOME}/bookmarks/bin"
 pupdate_append_globxxx "${HOME}/Library/Python/*/bin" # from pip install --user
 pupdate_append_singlex "${GOPATH}/bin"
