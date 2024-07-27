@@ -19,5 +19,5 @@ for file in "${XDG_DATA_HOME}"/dark-mode.d/*.sh; do
         MODE_NAME="light" \
         STATE="day" \
         THEME_NAME="Adwaita" \
-        "${file}"
+        "${file}" || true
 done
