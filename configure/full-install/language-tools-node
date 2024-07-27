@@ -4,12 +4,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-if command -v yarnpkg &>/dev/null; then
-    YARN=yarn
-else
-    YARN=yarnpkg
-fi
-
 NPM_PACKAGES=("bash-language-server"
     "dockerfile-language-server-nodejs"
     "json-language-server"
@@ -23,10 +17,8 @@ NPM_PACKAGES=("bash-language-server"
     "typescript-language-server"
     "vim-language-server"
     # css, html, json
-    "vscode-langservers-extracted")
+    "vscode-langservers-extracted"
+    "yaml-language-server")
 
 npm install -g --production ${NPM_PACKAGES[*]}
 npm update -g --production ${NPM_PACKAGES[*]}
-
-# Does not support npm
-${YARN} global add yaml-language-server

@@ -79,7 +79,6 @@ brew "w3m"
 brew "watch"
 brew "wget"
 brew "yamllint"
-brew "yarn" # for yaml-language-server
 brew "yq"
 brew "zsh-lovers"
 

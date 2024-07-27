@@ -99,14 +99,6 @@ if command -v npm >/dev/null 2>&1; then
     pupdate_prepend_single "${NPM_PACKAGES}/bin"
 fi
 
-if command -v yarn >/dev/null 2>&1 || command -v yarnpkg >/dev/null 2>&1; then
-    YARN_GLOBAL_DIR="${XDG_DATA_HOME}/yarn/global"
-    nupdate_append_singlex "${YARN_GLOBAL_DIR}/node_modules"
-    pupdate_append_globxxx "${YARN_GLOBAL_DIR}/node_modules/*/bin"
-    pupdate_append_singlex /usr/share/nodejs/yarn/bin # yarnpkg → yarn
-    pupdate_prepend_single "${YARN_GLOBAL_DIR}/bin"
-fi
-
 export NODE_PATH
 
 if command -v lua5.1 &>/dev/null; then
