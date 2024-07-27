@@ -8,7 +8,9 @@ set -o pipefail
 # https://stackoverflow.com/a/36480692/27641.
 setxkbmap gb
 
-[[ -f ~/.Xresources ]] && xrdb -merge -I"${HOME}" ~/.Xresources
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
+XRESOURCES_FILE=$XDG_CONFIG_HOME/X11/.Xresources
+[[ -f $XRESOURCES_FILE ]] && xrdb -merge -I"${HOME}" $XRESOURCES_FILE
 
 xset s 60 60
 xscreensaver -no-splash &
