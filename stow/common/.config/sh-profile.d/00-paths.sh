@@ -35,6 +35,7 @@ export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export NPM_PACKAGES="${XDG_DATA_HOME}/npm" # Defined in ~/.npmrc
 export SQLITE_HISTORY="${XDG_CACHE_HOME}/sqlite_history"
+export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
 
 mkdir -pv \
     "${GEM_HOME}" \
