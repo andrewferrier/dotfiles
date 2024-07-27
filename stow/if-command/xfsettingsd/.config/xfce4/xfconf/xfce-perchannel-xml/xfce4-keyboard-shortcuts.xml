@@ -32,34 +32,7 @@
       <property name="&lt;Alt&gt;&lt;Super&gt;s" type="empty"/>
     </property>
     <property name="custom" type="empty">
-      <property name="&lt;Alt&gt;F2" type="empty">
-        <property name="startup-notify" type="empty"/>
-      </property>
-      <property name="&lt;Alt&gt;Print" type="empty"/>
-      <property name="&lt;Super&gt;r" type="empty">
-        <property name="startup-notify" type="empty"/>
-      </property>
-      <property name="XF86WWW" type="empty"/>
-      <property name="XF86Mail" type="empty"/>
-      <property name="&lt;Alt&gt;F3" type="empty">
-        <property name="startup-notify" type="empty"/>
-      </property>
-      <property name="Print" type="empty"/>
-      <property name="&lt;Primary&gt;Escape" type="empty"/>
-      <property name="&lt;Shift&gt;Print" type="empty"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="empty"/>
-      <property name="&lt;Alt&gt;&lt;Super&gt;s" type="empty"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="empty"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;f" type="empty"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;l" type="empty"/>
-      <property name="&lt;Alt&gt;F1" type="empty"/>
-      <property name="&lt;Super&gt;p" type="empty"/>
-      <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="empty"/>
-      <property name="&lt;Super&gt;e" type="empty"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;Escape" type="empty"/>
-      <property name="HomePage" type="empty"/>
-      <property name="XF86Display" type="empty"/>
-      <property name="override" type="empty"/>
+      <property name="override" type="bool" value="true"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -127,6 +100,6 @@
     </property>
   </property>
   <property name="providers" type="array">
-    <value type="empty"/>
+    <value type="string" value="commands"/>
   </property>
 </channel>
