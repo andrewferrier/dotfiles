@@ -19,6 +19,7 @@ mkdir -pv \
     "${XDG_RUNTIME_DIR}" \
     "${XDG_STATE_HOME}"
 
+export ANSIBLE_HOME="${XDG_DATA_HOME}/ansible"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export DVDCSS_CACHE="${XDG_DATA_HOME}/dvdcss"
@@ -26,6 +27,7 @@ export GEM_HOME="${XDG_DATA_HOME}/gem"
 export GEM_SPEC_CACHE="${XDG_CACHE_HOME}/gem"
 export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 export GOPATH="${XDG_DATA_HOME}/go"
+export GRADLE_USER_HOME="${XDG_DATA_HOME}/gradle"
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc2"
 export GTK_RC_FILES="${XDG_CONFIG_HOME}/gtk-1.0/gtkrc"
 export INPUTRC="${XDG_CONFIG_HOME}/readline/inputrc"
@@ -34,7 +36,10 @@ export MINIKUBE_HOME="${XDG_DATA_HOME}/minikube"
 export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export NPM_PACKAGES="${XDG_DATA_HOME}/npm" # Defined in ~/.npmrc
+export RANDFILE="${XDG_STATE_HOME}/.rnd"
 export SQLITE_HISTORY="${XDG_CACHE_HOME}/sqlite_history"
+export TEXMFVAR="${XDG_CACHE_HOME}/texlive/texmf-var"
+export W3M_DIR="${XDG_DATA_HOME}/w3m"
 export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
 
 mkdir -pv \
