@@ -3,10 +3,12 @@
 set -o errexit
 set -o nounset
 
-if [[ ! -d ${HOME}/.tmux/plugins/tpm ]]; then
-    git clone --quiet --depth 1 https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm"
+export TMUX_PLUGIN_MANAGER_PATH=${TMUX_PLUGIN_MANAGER_PATH:-${XDG_DATA_HOME}/.tmux/plugins}
+
+if [[ ! -d ${TMUX_PLUGIN_MANAGER_PATH}/tpm ]]; then
+    git clone --quiet --depth 1 https://github.com/tmux-plugins/tpm "${TMUX_PLUGIN_MANAGER_PATH}/tpm"
 else
-    (cd "${HOME}/.tmux/plugins/tpm" &&
+    (cd "${TMUX_PLUGIN_MANAGER_PATH}/tpm" &&
         git checkout master &&
         git fetch --all &&
         git reset --hard origin/master &&
@@ -14,9 +16,8 @@ else
 fi
 
 # This is necessary if not running from within tmux.
-export TMUX_PLUGIN_MANAGER_PATH=${TMUX_PLUGIN_MANAGER_PATH:-${HOME}/.tmux/plugins}
 BIN=${TMUX_PLUGIN_MANAGER_PATH}/tpm/bin
 
-${BIN}/install_plugins
-${BIN}/update_plugins all
-${BIN}/clean_plugins
+"${BIN}/install_plugins"
+"${BIN}/update_plugins" all
+"${BIN}/clean_plugins"
