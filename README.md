@@ -10,10 +10,6 @@
     tmux    | ~/.tmux.conf
     zsh     | ~/.config/zsh/README.md
 
-## Useful commands
-
-    xxd | Hex dump
-
 ## MacOS
 
     caffeinate -i <somecommand> | prevent system from sleeping whilst command is running
@@ -52,9 +48,12 @@
 
 ## Linux
 
-    getent hosts <hostname> | look up DNS name
-    pdfunite                | combine PDFs on comand line
-    hardlink                | combine duplicate files using hardlinks
+    blkdiscard --secure -v -f /dev/device | Securely erase SSD
+    getent hosts <hostname>               | look up DNS name
+    hardlink                              | combine duplicate files using hardlinks
+    inxi -F                               | Summarize hardware for selling
+    pdfunite                              | combine PDFs on comand line
+    xxd                                   | Hex dump
 
 ## Audio file manipulation
 
