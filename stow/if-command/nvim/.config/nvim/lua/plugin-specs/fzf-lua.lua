@@ -3,7 +3,6 @@ local configure = function()
 
     fzf_lua.setup({
         winopts = {
-            width = 0.9,
             preview = {
                 title = false,
                 flip_columns = 200,
@@ -14,7 +13,6 @@ local configure = function()
                 },
                 delay = 50,
             },
-            border = { " ", " ", " ", " ", " ", " ", " ", " " },
         },
         fzf_opts = {
             ["--layout"] = "default",
