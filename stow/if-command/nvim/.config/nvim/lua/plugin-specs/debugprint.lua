@@ -9,4 +9,5 @@ return {
         "ToggleCommentDebugPrints",
         "DeleteDebugPrints",
     },
+    version = "*",
 }
