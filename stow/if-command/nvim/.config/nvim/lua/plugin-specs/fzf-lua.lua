@@ -51,13 +51,23 @@ local configure = function()
     end
 
     vim.keymap.set("n", "cvf", function()
-        fzf_lua.fzf_exec("file-list -t -r", {
+        require("fzf-lua.devicons").load({ plugin = "mini" })
+
+        -- FIXME: Not quite clear why the 4000 limit is needed, but NeoVim
+        -- crashes otherwise
+        fzf_lua.fzf_exec("file-list -t -r -p | head -4000", {
             actions = require("fzf-lua.config").globals.actions.files,
             fzf_opts = {
                 ["--exact"] = "",
                 ["--no-sort"] = "",
             },
             previewer = "builtin",
+            fn_transform = function(filename)
+                return require("fzf-lua").make_entry.file(
+                    filename,
+                    { file_icons = true, color_icons = true }
+                )
+            end,
         })
     end, { desc = "Find file", unique = true })
 
