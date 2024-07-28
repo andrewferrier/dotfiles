@@ -51,7 +51,7 @@
     blkdiscard --secure -v -f /dev/device | Securely erase SSD
     getent hosts <hostname>               | look up DNS name
     hardlink                              | combine duplicate files using hardlinks
-    inxi -F                               | Summarize hardware for selling
+    lshw -short -sanitize                 | Summarize hardware for selling
     pdfunite                              | combine PDFs on comand line
     xxd                                   | Hex dump
 
