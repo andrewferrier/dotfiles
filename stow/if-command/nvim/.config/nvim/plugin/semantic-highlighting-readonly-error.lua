@@ -15,7 +15,7 @@ local function show_unconst_caps(args)
         token.end_col,
         {}
     )[1]
-    if text ~= string.upper(text) or text == "JSON" then
+    if text ~= string.upper(text) or text == "JSON" or text == "_" then
         return
     end
 
