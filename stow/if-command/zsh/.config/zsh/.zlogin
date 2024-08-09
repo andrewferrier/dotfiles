@@ -5,6 +5,7 @@ if [[ $TTY == "/dev/tty1" ]]; then
         if [ $RETVAL -ne 0 ]; then
             echo "Starting X..."
             # Repeat rate using 'xset r' and xorg.conf doesn't seem reliable
+            # This needs to match the values in ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
             exec startx -- -ardelay 250 -arinterval 15
         fi
     fi
