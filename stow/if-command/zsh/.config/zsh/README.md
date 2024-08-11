@@ -11,7 +11,7 @@
 *   `<Ctrl-W>` to backspace by word.
 *   `<Ctrl-X> <Ctrl-E>` to edit command line in editor.
 *   `NQDIR=/tmp/somedir nq` to add items to queue.
-*   `cat filename | entr sh -c "filename"` to watch and re-run
+*   `echo filename | entr sh -c "filename"` to watch and re-run
 *   `entr` to re-run commands when list of files changes.
 *   `findmnt --real` to show mounted devices
 *   `git-jump` to open vim with all changes in quickfix list.
