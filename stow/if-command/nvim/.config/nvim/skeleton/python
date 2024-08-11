@@ -4,6 +4,8 @@ import argparse
 import logging
 import sys
 
+# Logging
+# {{{
 logger = logging.getLogger("my-script")
 logger.propagate = False
 logger.setLevel(logging.WARN)
@@ -14,11 +16,15 @@ syserr_handler.setFormatter(
     logging.Formatter("my-script: %(levelname)s: %(message)s")
 )
 logger.addHandler(syserr_handler)
+# }}}
 
+# Argument Parsing
+# {{{
 parser = argparse.ArgumentParser()
 parser.add_argument("--argument_one", default="value")
 parser.add_argument("--argument_two", required=True)
 args = parser.parse_args()
+# }}}
 
 
 def main():

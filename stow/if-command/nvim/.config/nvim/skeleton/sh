@@ -1,15 +1,25 @@
 #!/usr/bin/env bash
-#
-# Snippets:
-#
-# ****** HOW TO CREATE A TEMPORARY FILE IN A CROSS-PLATFORM WAY
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+# Creating a temporary file, cross-platform
+# {{{
 # TEMPFILE=$(mktemp "${TMPDIR:-/tmp}/XXXXXXX")
+# }}}
 #
-# ****** HOW TO CHECK IF SCRIPT IS RUNNING INTERACTIVELY
+# Check if script is running interactively
+# {{{
 # if [ -t 1 ]; then
 # ....
+# }}}
 #
-# ****** GETTING OPTIONS
+# Option Parsing
+# {{{
 # usage() {
 #     echo "Usage: $0 [-x] [-s <45|90>] [-p <string>]" 1>&2
 #     exit 1
@@ -41,8 +51,10 @@
 #
 # [[ "${s:-}" ]] || usage
 # [[ "${p:-}" ]] || usage
+# }}}
 #
-# ****** LOGGING FUNCTIONS
+# Logging
+# {{{
 # log() {
 #     echo "$(date "+%Y-%m-%dT%H:%M:%S %Z" || true) ${SCRIPT_NAME}: $*" >>"/tmp/${SCRIPT_NAME}.log"
 #
@@ -59,42 +71,54 @@
 #
 # # Send stdout and stderr to log function ONLY
 # exec 2> >(logpipe)
+# }}}
 #
-# ****** ECHO TO STDERR
+# Echo to stderr
+# {{{
 # echo >&2 "xxx"
+# }}}
 #
-# ****** PIPE ALL STREAMS TO /dev/null
+# Pipe all to /dev/null
+# {{{
 # mycommand &> /dev/null
+# }}}
 #
-# ****** CHECK IF COMMAND EXISTS
+# Check if command exists
+# {{{
 # if type the_command_to_check &>/dev/null; then
 #     # Do stuff
 # fi
+# }}}
 
-set -o errexit
-set -o noglob
-set -o nounset
-set -o pipefail
-
-shopt -s inherit_errexit
-
+# Set XDG directories
+# {{{
 XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}"
 XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-${HOME}/.cache/xdg-runtime}" # This will probably only need to be set on MacOS
 XDG_STATE_HOME="${XDG_STATE_HOME:-${HOME}/.local/state}"
+# }}}
 
+# Display commands as run if TRACE=1
+# {{{
 if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
+# }}}
 
+# Get script and git dirs
+# {{{
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && git rev-parse --show-toplevel)"
 SCRIPT_NAME=$(basename "$0")
 readonly SCRIPT_DIR
 readonly SCRIPT_NAME
 readonly GIT_ROOT_DIR
+# }}}
 
+# Trap exit
+# {{{
 trap cleanup INT TERM ERR EXIT
 
 cleanup() {
     exit
 }
+# }}}

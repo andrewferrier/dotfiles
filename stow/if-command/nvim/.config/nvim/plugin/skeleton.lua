@@ -34,7 +34,12 @@ local function check_for_skeleton()
     if skeleton ~= nil then
         vim.cmd.read(skeleton)
         vim.cmd.normal({ args = { "kddG" }, bang = true })
-        vim.cmd.normal({ args = { "zM" }})
+        vim.cmd.normal({ args = { "zM" } })
+        vim.api.nvim_set_option_value(
+            "foldmethod",
+            "marker",
+            { scope = "local" }
+        )
         vim.notify("Added skeleton " .. skeleton)
     end
 end
