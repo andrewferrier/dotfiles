@@ -34,6 +34,7 @@ local function check_for_skeleton()
     if skeleton ~= nil then
         vim.cmd.read(skeleton)
         vim.cmd.normal({ args = { "kddG" }, bang = true })
+        vim.cmd.normal({ args = { "zM" }})
         vim.notify("Added skeleton " .. skeleton)
     end
 end
