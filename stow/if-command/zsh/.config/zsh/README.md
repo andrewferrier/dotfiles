@@ -1,5 +1,7 @@
 # zsh cheatsheet
 
+(Insert mode)
+
 *   `**<tab>` to autocomplete from directory.
 *   `<Ctrl-N>` to run file manager (lf)
 *   `<Ctrl-Q>` to stack current command, run another one, then come back to the original.
