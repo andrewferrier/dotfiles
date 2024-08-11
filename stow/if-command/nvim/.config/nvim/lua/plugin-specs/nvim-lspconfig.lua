@@ -25,5 +25,6 @@ return {
             require("lspconfig")[lsp].setup(settings)
         end
     end,
-    event = "BufEnter",
+    -- Don't configure any events here otherwise this doesn't attach when files
+    -- are opened directly from the command line
 }
