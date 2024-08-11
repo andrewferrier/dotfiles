@@ -14,8 +14,6 @@
 *   `echo filename | entr sh -c "filename"` to watch and re-run
 *   `entr` to re-run commands when list of files changes.
 *   `findmnt --real` to show mounted devices
-*   `git-jump` to open vim with all changes in quickfix list.
-*   `kill <tab>` to kill processes using fzf.
 *   `man-fzf` to search through man pages.
 *   `uniqall` to get non-consecutive unique lines from a stream.
 *   `vipe` to edit as part of a pipe.
