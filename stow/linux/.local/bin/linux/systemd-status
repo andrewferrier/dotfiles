@@ -27,7 +27,7 @@ CACHE_DIR = Path.home() / ".cache" / "systemd-status"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def read_state_file(state_file):
+def read_state_file(state_file: str):
     f = open(state_file, "r")
     failure_count = int(f.read())
     f.close()
@@ -35,13 +35,13 @@ def read_state_file(state_file):
     return failure_count
 
 
-def write_state_file(state_file, failure_count):
+def write_state_file(state_file: str, failure_count: int):
     f = open(state_file, "w")
     f.write(str(failure_count))
     f.close()
 
 
-def notification(message):
+def notification(message: str):
     p = run(
         [
             "notify-send",
@@ -56,7 +56,7 @@ def notification(message):
 
 
 def main():
-    state_file = CACHE_DIR / (args.unit_name + ".state")
+    state_file: str = CACHE_DIR / (args.unit_name + ".state")
 
     if not args.success:
         log.warning(args.unit_name + " failed")
@@ -76,7 +76,7 @@ def main():
     )
 
     if failure_count > args.notify_threshold:
-        message = (
+        message: str = (
             args.unit_name
             + " over failure count threshold of "
             + str(args.notify_threshold)
