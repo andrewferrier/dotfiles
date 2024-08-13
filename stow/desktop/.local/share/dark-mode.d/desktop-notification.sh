@@ -7,4 +7,10 @@ set -o pipefail
 
 MODE_NAME=${MODE_NAME:-"dark"}
 
-"${HOME}/.local/bin/common-dotfiles/notify" --severity 3 "Switching to ${MODE_NAME} mode."
+MESSAGE="Switching to ${MODE_NAME} mode."
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    notify-send --urgency low "${MESSAGE}"
+else
+    osascript -e "display notification \"${MESSAGE}\" with title \"Mode switcher\""
+fi
