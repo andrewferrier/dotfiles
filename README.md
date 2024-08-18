@@ -7,7 +7,7 @@
     lf      | ~/.config/lf/lfrc
     mutt    | ~/.mutt/muttrc.common
     neovim  | ~/.config/nvim/README.md
-    tmux    | ~/.tmux.conf
+    tmux    | ~/.config/tmux/tmux.conf
     zsh     | ~/.config/zsh/README.md
 
 ## MacOS
