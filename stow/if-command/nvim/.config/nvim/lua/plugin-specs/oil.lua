@@ -24,5 +24,6 @@ return {
             { desc = "Open parent directory", unique = true }
         )
     end,
+    dependencies = { "echasnovski/mini.nvim" }, -- for mini.icons
     version = "*"
 }
