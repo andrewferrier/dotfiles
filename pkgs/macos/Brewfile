@@ -55,6 +55,7 @@ brew "pandoc" # for scope.sh
 brew "pipx"
 brew "podman-desktop"
 brew "poppler" # pdftotext for scope.sh
+brew "pre-commit"
 brew "pstree"
 brew "pwgen"
 brew "python3"

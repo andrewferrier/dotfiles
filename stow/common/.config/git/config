@@ -13,6 +13,7 @@
 
 [init]
 	defaultBranch = main
+	templateDir = ~/.config/git/template
 
 [diff]
 	renames = copies
