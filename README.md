@@ -48,8 +48,8 @@
 
 ## Linux
 
-    blkdiscard --secure -v -f /dev/device | Securely erase SSD
     badblocks -b 8192 -wsv /dev/device    | test device for bad blocks
+    blkdiscard --secure -v -f /dev/device | Securely erase SSD
     getent hosts <hostname>               | look up DNS name
     hardlink                              | combine duplicate files using hardlinks
     lshw -short -sanitize                 | Summarize hardware for selling
