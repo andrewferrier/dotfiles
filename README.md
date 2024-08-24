@@ -53,6 +53,7 @@
     getent hosts <hostname>               | look up DNS name
     hardlink                              | combine duplicate files using hardlinks
     lshw -short -sanitize                 | Summarize hardware for selling
+    parted mkpart primary ext4 0% 100%    | create a single partition
     pdfunite                              | combine PDFs on comand line
     xxd                                   | Hex dump
 
