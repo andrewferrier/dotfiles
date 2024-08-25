@@ -12,16 +12,14 @@ XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 XRESOURCES_FILE=$XDG_CONFIG_HOME/X11/.Xresources
 [[ -f $XRESOURCES_FILE ]] && xrdb -merge -I"${HOME}" $XRESOURCES_FILE
 
-xset s 60 60
-xscreensaver -no-splash &
-xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
-
 redshift -v | logger -t "${USER}-redshift" &
 unclutter --ignore-scrolling --jitter 10 --fork
 variety -v | logger -t "${USER}-variety" &
 bato &
 dex --autostart --environment i3
 xfsettingsd &
+xfce4-power-manager &
+xfce4-screensaver &
 
 # Automatically synchronize PRIMARY and CLIPBOARD
 autocutsel -fork &
