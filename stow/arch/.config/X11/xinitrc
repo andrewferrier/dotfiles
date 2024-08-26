@@ -10,7 +10,7 @@ setxkbmap gb
 
 XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 XRESOURCES_FILE=$XDG_CONFIG_HOME/X11/.Xresources
-[[ -f $XRESOURCES_FILE ]] && xrdb -merge -I"${HOME}" $XRESOURCES_FILE
+[[ -f $XRESOURCES_FILE ]] && xrdb -merge -I"${HOME}" "$XRESOURCES_FILE"
 
 redshift -v | logger -t "${USER}-redshift" &
 unclutter --ignore-scrolling --jitter 10 --fork
