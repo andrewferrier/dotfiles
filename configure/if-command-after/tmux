@@ -3,7 +3,7 @@
 set -o errexit
 set -o nounset
 
-export TMUX_PLUGIN_MANAGER_PATH=${TMUX_PLUGIN_MANAGER_PATH:-${XDG_DATA_HOME}/.tmux/plugins}
+export TMUX_PLUGIN_MANAGER_PATH=${TMUX_PLUGIN_MANAGER_PATH:-${XDG_DATA_HOME}/tmux/plugins}
 
 if [[ ! -d ${TMUX_PLUGIN_MANAGER_PATH}/tpm ]]; then
     git clone --quiet --depth 1 https://github.com/tmux-plugins/tpm "${TMUX_PLUGIN_MANAGER_PATH}/tpm"
