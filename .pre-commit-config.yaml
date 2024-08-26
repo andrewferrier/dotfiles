@@ -11,3 +11,7 @@ repos:
       rev: v0.19.1
       hooks:
           - id: gitlint
+    - repo: https://github.com/asottile/pyupgrade
+      rev: v3.17.0
+      hooks:
+          - id: pyupgrade

@@ -28,7 +28,7 @@ CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def read_state_file(state_file: str):
-    f = open(state_file, "r")
+    f = open(state_file)
     failure_count = int(f.read())
     f.close()
 

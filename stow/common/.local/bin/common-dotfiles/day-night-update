@@ -13,7 +13,7 @@ STATE_FILE = BASE_PATH.joinpath("state")
 
 def read_state_file():
     try:
-        with open(STATE_FILE, 'r') as file:
+        with open(STATE_FILE) as file:
             return file.readline().strip()
     except FileNotFoundError:
         print(f"{STATE_FILE} was not found.")
