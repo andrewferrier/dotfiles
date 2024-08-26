@@ -43,7 +43,7 @@ pkgs:
 # STOW
 
 pre-stow:
-	-find . | grep DS_Store | xargs rm
+	find . | grep DS_Store | ifne xargs rm
 	run-directory $(PRE_STOW)/common
 	run-directory $(PRE_STOW)/$(OS)
 
