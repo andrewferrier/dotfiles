@@ -59,6 +59,11 @@ cmd delete ${{
     esac
 }}
 
+cmd mkdir_dated_prep %{{
+    FOLDER=$(date +%Y-%m-%d-)
+    lf -remote "send $id push %mkdir<space>\"$FOLDER\"<left>"
+}}
+
 cmd folderize_prep %{{
     FOLDER=$(date +%Y-%m-%dT%H-%M-%S-)
     lf -remote "send $id push :folderize<space>\"$FOLDER\"<left>"
@@ -158,7 +163,8 @@ map F :folderize_prep
 map N $IFS="$(printf '\n\t')"; normfn $fx
 map T $tig
 map Y :yank
-map K :push %mkdir<space>""<left>
+map Kp :push %mkdir<space>""<left>
+map Kd :mkdir_dated_prep
 map o &$OPENER "$fx"
 
 map ga :cd ~/paperwork
