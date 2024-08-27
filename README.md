@@ -48,15 +48,16 @@
 
 ## Linux
 
-    badblocks -b 8192 -wsv /dev/device    | test device for bad blocks
-    blkdiscard --secure -v -f /dev/device | Securely erase SSD
-    getent hosts <hostname>               | look up DNS name
-    hardlink                              | combine duplicate files using hardlinks
-    inotifywait -m -r ~/directory         | watch a directory for changes
-    lshw -short -sanitize                 | Summarize hardware for selling
-    parted mkpart primary ext4 0% 100%    | create a single partition
-    pdfunite                              | combine PDFs on comand line
-    xxd                                   | Hex dump
+    badblocks -b 8192 -wsv /dev/device           | test device for bad blocks
+    blkdiscard --secure -v -f /dev/device        | Securely erase SSD
+    getent hosts <hostname>                      | look up DNS name
+    hardlink                                     | combine duplicate files using hardlinks
+    inotifywait -m -r ~/directory                | watch a directory for changes
+    sdparm --clear=STANDBY --save -S /dev/device | disable SCSI drive from going to sleep
+    lshw -short -sanitize                        | Summarize hardware for selling
+    parted mkpart primary ext4 0% 100%           | create a single partition
+    pdfunite                                     | combine PDFs on comand line
+    xxd                                          | Hex dump
 
 ## Audio file manipulation
 
