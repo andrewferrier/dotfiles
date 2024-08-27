@@ -65,7 +65,7 @@ cmd mkdir_dated_prep %{{
 }}
 
 cmd folderize_prep %{{
-    FOLDER=$(date +%Y-%m-%dT%H-%M-%S-)
+    FOLDER=$(date +%Y-%m-%d-)
     lf -remote "send $id push :folderize<space>\"$FOLDER\"<left>"
 }}
 
