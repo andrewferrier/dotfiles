@@ -21,3 +21,7 @@ repos:
           - id: shellcheck-system
             types_or: [bash, sh]
             exclude: ^stow/common/.config/git/template/hooks/pre-commit
+    - repo: https://github.com/gitleaks/gitleaks
+      rev: v8.18.4
+      hooks:
+          - id: gitleaks
