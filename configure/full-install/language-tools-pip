@@ -5,15 +5,16 @@ set -o nounset
 set -o pipefail
 
 GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && git rev-parse --show-toplevel)"
+# shellcheck disable=SC1091
 source "${GIT_ROOT_DIR}/common.sh"
 
-if [[ ${OSDISTRIBUTION} == "arch" ]]; then
+if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
     PIPX="pipx install --include-deps"
 
     pacaur -S --noconfirm basedpyright-git
     ${PIPX} gitlint
     ${PIPX} sqlfluff
-elif [[ ${OSDISTRIBUTION} == "macos" ]]; then
+elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
     PIPX="pipx"
 
     ${PIPX} install gitlint --include-deps || ${PIPX} upgrade gitlint

@@ -24,7 +24,8 @@ for ITEM in "$@"; do
         ITEM_NAME=$(basename "${ITEM}")
 
         if [[ -e "${TRASH_DIR}/${ITEM_NAME}" ]]; then
-            mv -f "${ITEM}" "${TRASH_DIR}/${ITEM_NAME} $(date "+%H-%M-%S")"
+            TIME=$(date "+%H-%M-%S")
+            mv -f "${ITEM}" "${TRASH_DIR}/${ITEM_NAME} ${TIME}"
         else
             mv -f "${ITEM}" "${TRASH_DIR}/"
         fi

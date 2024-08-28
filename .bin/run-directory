@@ -13,6 +13,6 @@ for file_or_dir in "${ROOT_DIR}"/*; do
     if [[ -f $file_or_dir ]]; then
         printf "${GREY}Running %s...${NORMAL}\n" "${file_or_dir}"
         ${file_or_dir}
-        printf "${GREY}${file_or_dir} complete.${NORMAL}\n\n"
+        printf "%b${file_or_dir} complete.%b\n\n" "${GREY}" "${NORMAL}"
     fi
 done

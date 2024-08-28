@@ -4,6 +4,7 @@ set -o errexit
 set -o nounset
 
 GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && git rev-parse --show-toplevel)"
+# shellcheck disable=SC1091
 source "${GIT_ROOT_DIR}/common.sh"
 
 if ! command -v "normfn" >/dev/null 2>&1; then

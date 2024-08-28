@@ -15,3 +15,9 @@ repos:
       rev: v3.17.0
       hooks:
           - id: pyupgrade
+    - repo: https://github.com/Jarmos-san/shellcheck-precommit
+      rev: v0.1.0
+      hooks:
+          - id: shellcheck-system
+            types_or: [bash, sh]
+            exclude: ^stow/common/.config/git/template/hooks/pre-commit

@@ -21,7 +21,7 @@ for directory in "${ROOT_DIR}"/*; do
             if [[ -f "${AFTER_SCRIPT}" ]]; then
                 printf "${GREY}Running %s...${NORMAL}\n" "${AFTER_SCRIPT}"
                 ${AFTER_SCRIPT}
-                printf "${GREY}${AFTER_SCRIPT} complete.${NORMAL}\n\n"
+                printf "%b${AFTER_SCRIPT} complete.%b\n\n" "${GREY}" "${NORMAL}"
             fi
         fi
     fi
