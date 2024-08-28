@@ -8,10 +8,10 @@ set -o pipefail
 
 DEBFOSTER_OUTPUT="$(mktemp)"
 
-debfoster --show-orphans | tail +2 | sed 's/\s\+/\n/g' | sed '/^[[:space:]]*$/d' >"${DEBFOSTER_OUTPUT}"
+sudo debfoster --show-orphans | tail +2 | sed 's/\s\+/\n/g' | sed '/^[[:space:]]*$/d' >"${DEBFOSTER_OUTPUT}"
 
 while read -r PKG; do
-    if (($(apt-cache rdepends "${PKG}" 2>/dev/null | wc -l) <= 2)); then
+    if (($(apt-cache rdepends --installed "${PKG}" 2>/dev/null | wc -l) <= 2)); then
         echo "${PKG}"
     fi
 done < <(cat "${DEBFOSTER_OUTPUT}")
