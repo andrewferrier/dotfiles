@@ -30,3 +30,8 @@ repos:
       hooks:
           - id: stylua-system
             exclude: ^stow/macos/.hammerspoon/hs/.*
+    - repo: https://github.com/astral-sh/ruff-pre-commit
+      rev: v0.6.3
+      hooks:
+          - id: ruff
+          - id: ruff-format

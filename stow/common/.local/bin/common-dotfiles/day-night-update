@@ -76,4 +76,6 @@ if state != current_state:
             )
             sys.stderr.write(f"Error message: {e.stderr.decode()}\n")
 else:
-    sys.stderr.write(f"Current state is already {current_state}; wanted to switch to {state}.\n")
+    sys.stderr.write(
+        f"Current state is already {current_state}; wanted to switch to {state}.\n"
+    )

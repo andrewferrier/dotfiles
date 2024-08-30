@@ -58,7 +58,11 @@ for entry in data:
             elif now_date == due_date:
                 datecolor = "green"
         else:
-            human_date = humanize.naturalday(due_date, format="%Y-%m-%d") + " " +  due_time.strftime("%H:%M")
+            human_date = (
+                humanize.naturalday(due_date, format="%Y-%m-%d")
+                + " "
+                + due_time.strftime("%H:%M")
+            )
 
             if now_time > due_time:
                 datecolor = "red"

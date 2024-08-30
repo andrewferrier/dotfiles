@@ -23,9 +23,7 @@ def is_spam(message, subject):
             logging.error("Could not connect to spamd")
             sys.exit(1)
         else:
-            logging.warning(
-                f"Message with subject {subject} could not be processed"
-            )
+            logging.warning(f"Message with subject {subject} could not be processed")
 
     if proc.returncode != 0 and args.verbose:
         print(f"Spam detected with subject {subject}, score {stdout}")

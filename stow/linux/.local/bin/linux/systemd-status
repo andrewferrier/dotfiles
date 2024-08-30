@@ -71,9 +71,7 @@ def main():
 
     write_state_file(state_file, failure_count)
 
-    log.info(
-        args.unit_name + " failure count updated to " + str(failure_count)
-    )
+    log.info(args.unit_name + " failure count updated to " + str(failure_count))
 
     if failure_count > args.notify_threshold:
         message: str = (

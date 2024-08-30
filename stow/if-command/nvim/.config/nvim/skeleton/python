@@ -12,9 +12,7 @@ logger.setLevel(logging.WARN)
 
 syserr_handler = logging.StreamHandler(stream=sys.stderr)
 syserr_handler.setLevel(logging.WARN)
-syserr_handler.setFormatter(
-    logging.Formatter("my-script: %(levelname)s: %(message)s")
-)
+syserr_handler.setFormatter(logging.Formatter("my-script: %(levelname)s: %(message)s"))
 logger.addHandler(syserr_handler)
 # }}}
 
