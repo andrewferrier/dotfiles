@@ -15,12 +15,8 @@ if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
     ${PIPX} gitlint
     ${PIPX} sqlfluff
 elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
-    PIPX="pipx"
-
-    ${PIPX} install gitlint --include-deps || ${PIPX} upgrade gitlint
-    ${PIPX} install sqlfluff || ${PIPX} upgrade sqlfluff
-    ${PIPX} install ruff || ${PIPX} upgrade ruff
-    ${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
+    # All packages install via Homebrew
+    exit
 else
     PIPX="pipx"
 
