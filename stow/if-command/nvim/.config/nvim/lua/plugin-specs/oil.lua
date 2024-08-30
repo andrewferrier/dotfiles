@@ -9,6 +9,12 @@ return {
                 ["<C-s>"] = "actions.select_split",
                 -- Don't use Ctrl-V as it breaks block select
             },
+            columns = {
+                "icon",
+                { "permissions", highlight = "OilInfo" },
+                { "size", highlight = "OilInfo" },
+                { "mtime", format = "%Y-%m-%d %H:%M", highlight = "OilInfo" },
+            },
         }
 
         if not vim.fn.executable("trash-put") then

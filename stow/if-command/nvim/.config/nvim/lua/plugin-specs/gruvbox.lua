@@ -34,6 +34,7 @@ return {
             DiagnosticUnnecessary = { link = "Whitespace" },
             SignColumn = { link = "LineNr" },
             TermCursorNC = { link = "DiffChange" },
+            OilInfo = { link = "NonText" },
             ["@lsp.mod.readonly"] = { bold = true },
         }
 
