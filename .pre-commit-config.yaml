@@ -11,6 +11,9 @@ repos:
           - id: check-added-large-files
           - id: check-executables-have-shebangs
           - id: check-symlinks
+          - id: check-json
+          - id: check-toml
+          - id: check-xml
           - id: check-yaml
     - repo: https://github.com/jorisroovers/gitlint
       rev: v0.19.1
