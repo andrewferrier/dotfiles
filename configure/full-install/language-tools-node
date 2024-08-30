@@ -4,12 +4,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-NPM_PACKAGES=("bash-language-server"
+NPM_PACKAGES=(
+    "@prettier/plugin-xml"
+    "bash-language-server"
     "dockerfile-language-server-nodejs"
     "json-language-server"
     "prettier"
     "prettier-plugin-toml"
-    "prettier-plugin-xml"
     "remark-cli"
     "remark-frontmatter"
     "remark-gfm"
@@ -18,7 +19,8 @@ NPM_PACKAGES=("bash-language-server"
     "vim-language-server"
     # css, html, json
     "vscode-langservers-extracted"
-    "yaml-language-server")
+    "yaml-language-server"
+)
 
 # shellcheck disable=SC2048,SC2086
 npm install -g --production ${NPM_PACKAGES[*]}
