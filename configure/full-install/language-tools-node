@@ -23,6 +23,6 @@ NPM_PACKAGES=(
 )
 
 # shellcheck disable=SC2048,SC2086
-npm install -g --production ${NPM_PACKAGES[*]}
+npm install -g --omit=dev ${NPM_PACKAGES[*]}
 # shellcheck disable=SC2048,SC2086
-npm update -g --production ${NPM_PACKAGES[*]}
+npm update -g --omit=dev ${NPM_PACKAGES[*]}
