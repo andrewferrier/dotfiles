@@ -6,12 +6,14 @@ import platform
 import subprocess
 import sys
 
+from typing import Literal
+
 BASE_PATH = Path("~/.cache/day-night").expanduser()
 BASE_PATH.mkdir(parents=True, exist_ok=True)
 STATE_FILE = BASE_PATH.joinpath("state")
 
 
-def read_state_file():
+def read_state_file() -> str | None:
     try:
         with open(STATE_FILE) as file:
             return file.readline().strip()
@@ -23,7 +25,7 @@ def read_state_file():
         return None
 
 
-def get_state_macos():
+def get_state_macos() -> Literal['day', 'night']:
     if "DARKMODE" in os.environ:
         # DARKMODE comes from day-night-notifier
         if int(os.environ["DARKMODE"]) == 1:
@@ -51,21 +53,23 @@ if platform.system() == "Linux":
     print("No longer supports Linux.")
     sys.exit(1)
 
-state = get_state_macos()
-current_state = read_state_file()
+state: Literal['day', 'night'] = get_state_macos()
+current_state: str | None = read_state_file()
 
 if state != current_state:
+    scripts_dir: Path
+
     if state == "day":
         scripts_dir = Path.home() / ".local" / "share" / "light-mode.d"
     else:
         scripts_dir = Path.home() / ".local" / "share" / "dark-mode.d"
 
-    sh_files = list(scripts_dir.glob("*.sh"))
+    sh_files: list[Path] = list(scripts_dir.glob("*.sh"))
 
     for sh_file in sh_files:
         try:
             sys.stdout.write(f"Running script {sh_file}...\n")
-            result = subprocess.run([sh_file], shell=True, check=True, capture_output=True)
+            result: subprocess.CompletedProcess[bytes] = subprocess.run([sh_file], shell=True, check=True, capture_output=True)
         except subprocess.CalledProcessError as e:
             sys.stderr.write(
                 f"Warning: Script {sh_file} failed with return code {e.returncode}\n"
