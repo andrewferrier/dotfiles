@@ -16,13 +16,19 @@ local function find_skeleton()
     local skeleton = get_skeleton_match(vim.fn.expand("%:t"))
 
     if skeleton == nil then
-        skeleton = get_skeleton_match(vim.fn.expand("%:e"))
+        local extension = vim.fn.expand("%:e")
+
+        if extension ~= nil and extension ~= "" then
+            skeleton = get_skeleton_match(extension)
+        end
     end
 
-    local filetype = vim.o.filetype
+    if skeleton == nil then
+        local filetype = vim.o.filetype
 
-    if skeleton == nil and filetype ~= "" then
-        skeleton = get_skeleton_match(filetype)
+        if filetype ~= nil and filetype ~= "" then
+            skeleton = get_skeleton_match(filetype)
+        end
     end
 
     return skeleton
