@@ -5,7 +5,7 @@ vim.keymap.set(
     "n",
     "gO",
     "<Plug>(vimtex-toc-open)",
-    { desc = "Show file outline"}
+    { desc = "Show file outline" }
 )
 
 vim.cmd.iabbrev("<buffer>", "zTODO", "\\textcolor{red}{TODO\\@:}<Esc>i")

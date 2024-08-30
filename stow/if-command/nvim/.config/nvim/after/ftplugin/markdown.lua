@@ -17,7 +17,8 @@ vim.b.minisurround_config = {
         },
         L = {
             output = function()
-                local link_name = require("mini.surround").user_input("Enter the link name: ")
+                local link_name =
+                    require("mini.surround").user_input("Enter the link name: ")
                 return {
                     left = "[" .. link_name .. "](",
                     right = ")",

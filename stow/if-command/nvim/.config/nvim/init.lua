@@ -17,7 +17,7 @@ if not vim.uv.fs_stat(lazypath) then
     })
 
     if vim.v.shell_error ~= 0 then
-        print('ERROR: ' .. result)
+        print("ERROR: " .. result)
     end
 end
 

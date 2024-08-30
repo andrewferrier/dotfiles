@@ -25,3 +25,8 @@ repos:
       rev: v8.18.4
       hooks:
           - id: gitleaks
+    - repo: https://github.com/JohnnyMorganz/StyLua
+      rev: v0.20.0
+      hooks:
+          - id: stylua-system
+            exclude: ^stow/macos/.hammerspoon/hs/.*

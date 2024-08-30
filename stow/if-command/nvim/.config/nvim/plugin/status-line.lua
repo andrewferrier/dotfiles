@@ -67,10 +67,12 @@ end
 
 ---@return string
 function _G.Statusline_DiagnosticStatus()
-    local content = require("mini.statusline").section_diagnostics({
-        icon = "",
-        signs = { ERROR = "✘", WARN = "", INFO = "󰋽", HINT = "ɦ" },
-    }):gsub("%s+", "")
+    local content = require("mini.statusline")
+        .section_diagnostics({
+            icon = "",
+            signs = { ERROR = "✘", WARN = "", INFO = "󰋽", HINT = "ɦ" },
+        })
+        :gsub("%s+", "")
 
     if content:len() > 0 then
         return LEFT_BRACE .. content .. RIGHT_BRACE .. " "

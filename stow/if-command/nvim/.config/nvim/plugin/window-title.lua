@@ -3,4 +3,5 @@ function _G.Titlestring_Filename()
 end
 
 vim.o.title = true
-vim.o.titlestring = require('utils').get_neovim_symbol() .. " [%{v:lua.Titlestring_Filename()}%( %M%)]"
+vim.o.titlestring = require("utils").get_neovim_symbol()
+    .. " [%{v:lua.Titlestring_Filename()}%( %M%)]"

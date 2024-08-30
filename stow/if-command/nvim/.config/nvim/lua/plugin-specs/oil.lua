@@ -30,5 +30,5 @@ return {
         )
     end,
     dependencies = { "echasnovski/mini.nvim" }, -- for mini.icons
-    version = "*"
+    version = "*",
 }
