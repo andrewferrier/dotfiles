@@ -80,6 +80,10 @@ if (command -v gmake >/dev/null 2>&1); then
     alias make='gmake'
 fi
 
+if (command -v viddy >/dev/null 2>&1); then
+    alias watch='viddy'
+fi
+
 if (! command -v smbclient >/dev/null 2>&1); then
     alias smbclient='docker run --rm -ti docker.io/kfaughnan/smbclient'
 fi
