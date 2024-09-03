@@ -165,6 +165,7 @@
 *   [Why do we use `opt_local` and not vim.wo](https://github.com/neovim/neovim/issues/20271)
 *   [bufdo/argdo/windo](https://jovica.org/posts/vim-edit-multiple-files/)
 *   [lua reference manual](https://www.lua.org/manual/5.1/manual.html)
+*   [my-neovim-pluginlist](https://yutkat.github.io/my-neovim-pluginlist/)
 *   `help ex-cmd-index` — list ex commands - e.g., after g/pat/
 
 ## Principles
