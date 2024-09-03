@@ -25,7 +25,7 @@ def read_state_file() -> str | None:
         return None
 
 
-def get_state_macos() -> Literal['day', 'night']:
+def get_state_macos() -> Literal["day", "night"]:
     if "DARKMODE" in os.environ:
         # DARKMODE comes from day-night-notifier
         if int(os.environ["DARKMODE"]) == 1:
@@ -53,7 +53,7 @@ if platform.system() == "Linux":
     print("No longer supports Linux.")
     sys.exit(1)
 
-state: Literal['day', 'night'] = get_state_macos()
+state: Literal["day", "night"] = get_state_macos()
 current_state: str | None = read_state_file()
 
 if state != current_state:
@@ -69,7 +69,9 @@ if state != current_state:
     for sh_file in sh_files:
         try:
             sys.stdout.write(f"Running script {sh_file}...\n")
-            result: subprocess.CompletedProcess[bytes] = subprocess.run([sh_file], shell=True, check=True, capture_output=True)
+            result: subprocess.CompletedProcess[bytes] = subprocess.run(
+                [sh_file], shell=True, check=True, capture_output=True
+            )
         except subprocess.CalledProcessError as e:
             sys.stderr.write(
                 f"Warning: Script {sh_file} failed with return code {e.returncode}\n"
