@@ -160,11 +160,12 @@ map <c-g> :fasd-dir
 
 map <delete> $IFS="$(printf '\n\t')"; trash $fx
 map F :folderize_prep
+map Kd :mkdir_dated_prep
+map Ke %mkdir-mail
+map Kp :push %mkdir<space>""<left>
 map N $IFS="$(printf '\n\t')"; normfn $fx
 map T $tig
 map Y :yank
-map Kp :push %mkdir<space>""<left>
-map Kd :mkdir_dated_prep
 map o &$OPENER "$fx"
 
 map ga :cd ~/paperwork
