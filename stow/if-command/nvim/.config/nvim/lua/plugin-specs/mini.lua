@@ -4,7 +4,6 @@ return {
         require("mini.ai").setup()
 
         require("mini.align").setup({
-            silent = true,
             mappings = {
                 start = "gl",
             },
