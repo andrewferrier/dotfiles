@@ -172,10 +172,10 @@ function wrapper_mdfind() {
     if [[ ${OSTYPE} == darwin* ]]; then
         if "$DIRS"; then
             # shellcheck disable=SC2016
-            mdfind -onlyin / 'kMDItemLastUsedDate >= $time.today(-90) && kMDItemContentType == public.folder'
+            timeout 2 mdfind -onlyin / 'kMDItemLastUsedDate >= $time.today(-90) && kMDItemContentType == public.folder'
         else
             # shellcheck disable=SC2016
-            mdfind -onlyin / 'kMDItemLastUsedDate >= $time.today(-90) && ! kMDItemContentType == public.folder'
+            timeout 2 mdfind -onlyin / 'kMDItemLastUsedDate >= $time.today(-90) && ! kMDItemContentType == public.folder'
         fi
     fi
 }
