@@ -25,7 +25,7 @@ return {
         vim.keymap.set(
             "n",
             "-",
-            "<CMD>Oil<CR>",
+            require("oil").open,
             { desc = "Open parent directory", unique = true }
         )
     end,
