@@ -181,7 +181,6 @@
 *   Play with treesitter to highlight inside alias strings in bash/zsh; try <https://github.com/Dronakurl/injectme.nvim/tree/main>
 *   Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
 *   Look at switching to main branch for nvim-treesitter for nightly: <https://github.com/nvim-treesitter/nvim-treesitter/issues/4767>
-*   support oil trash on macOS
 *   Experiment with snippets
 
 ## Presentation Ideas

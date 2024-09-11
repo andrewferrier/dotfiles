@@ -16,8 +16,8 @@ return {
             },
         }
 
-        if not vim.fn.executable("trash-put") then
-            opts.delete_to_trash = false
+        if require("oil.fs").is_mac or vim.fn.executable("trash-put") then
+            opts.delete_to_trash = true
         end
 
         require("oil").setup(opts)
