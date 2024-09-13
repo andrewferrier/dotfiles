@@ -63,7 +63,11 @@ local configure = function()
         fzf_lua.fzf_exec("file-list -d", {
             actions = {
                 ["default"] = function(selected, opts)
-                    require("fzf-lua.actions").vimcmd("lcd", selected, opts)
+                    require("fzf-lua.actions").vimcmd_entry(
+                        "lcd",
+                        selected,
+                        opts
+                    )
                 end,
                 ["ctrl-s"] = function(selected, _)
                     require("open_filedirterm").open_file_manager(selected[1])
