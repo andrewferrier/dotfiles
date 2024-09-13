@@ -18,7 +18,7 @@ return {
             terraformls = require("plugin-specs.nvim-lspconfig.terraformls"),
             texlab = require("plugin-specs.nvim-lspconfig.texlab"),
             tflint = require("plugin-specs.nvim-lspconfig.tflint"),
-            tsserver = require("plugin-specs.nvim-lspconfig.tsserver"),
+            ts_ls = require("plugin-specs.nvim-lspconfig.ts_ls"),
             vimls = {},
             yamlls = require("plugin-specs.nvim-lspconfig.yaml"),
         }) do
