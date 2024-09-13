@@ -8,7 +8,7 @@ return {
             -- Formatters
 
             null_ls.builtins.formatting.prettier.with({
-                filetypes = { "html", "toml", "yaml" },
+                filetypes = { "html", "yaml" },
                 extra_args = function(params)
                     return {
                         "--print-width",

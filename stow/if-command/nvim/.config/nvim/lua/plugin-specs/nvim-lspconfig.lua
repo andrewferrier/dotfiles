@@ -15,6 +15,7 @@ return {
             lemminx = {},
             lua_ls = require("plugin-specs.nvim-lspconfig.lua_ls"),
             ruff = {},
+            taplo = {}, -- toml
             terraformls = require("plugin-specs.nvim-lspconfig.terraformls"),
             texlab = require("plugin-specs.nvim-lspconfig.texlab"),
             tflint = require("plugin-specs.nvim-lspconfig.tflint"),
