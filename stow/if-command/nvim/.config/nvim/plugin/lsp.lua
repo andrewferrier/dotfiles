@@ -1,5 +1,5 @@
 function _G.show_capabilities()
-    for _, client in pairs(vim.lsp.buf_get_clients(0)) do
+    for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
         print(
             vim.inspect(client.name)
                 .. "\n\n"

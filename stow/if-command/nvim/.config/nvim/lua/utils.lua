@@ -36,7 +36,7 @@ end
 ---@param method string
 ---@return boolean
 M.lsp_supports_method = function(method)
-    for _, client in pairs(vim.lsp.buf_get_clients(0)) do
+    for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
         if client.supports_method(method) then
             return true
         end
