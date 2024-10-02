@@ -52,6 +52,5 @@ return {
             return package.loaded["nvim-web-devicons"]
         end
     end,
-    -- FIXME: Re-enable when 0.14 comes out
-    -- version = "*",
+    version = "*",
 }
