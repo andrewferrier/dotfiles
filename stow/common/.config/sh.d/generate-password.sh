@@ -17,5 +17,5 @@ function generate-password-machine() {
 
 function generate-password-machine-typeable() {
     LENGTH=${1:-32}
-    pwgen --secure --capitalize --numerals "${LENGTH}" 1
+    pwgen --secure --capitalize --numerals --ambiguous "${LENGTH}" 1
 }
