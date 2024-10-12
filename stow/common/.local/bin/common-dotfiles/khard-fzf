@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+readonly RELOAD="reload(khard ls --parsable)"
+
+khard ls --parsable |
+    fzf --preview 'khard show {1}' \
+        --delimiter '\t' \
+        --with-nth 2 \
+        --tac \
+        --header "Ctrl-reLoad,New,<enter>,<delete>" \
+        --bind "ctrl-l:${RELOAD}" \
+        --bind "ctrl-delete:execute-silent(khard remove --force {1})+${RELOAD}" \
+        --bind "enter:execute(khard edit {1})+${RELOAD}" \
+        --bind "ctrl-n:execute(khard new)+${RELOAD}"
