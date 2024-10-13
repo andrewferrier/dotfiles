@@ -11,7 +11,7 @@ source "${GIT_ROOT_DIR}/common.sh"
 if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
     PIPX="pipx install --include-deps"
 
-    pacaur -S --noconfirm basedpyright-git
+    pacaur -S --noconfirm basedpyright
     ${PIPX} gitlint
     ${PIPX} sqlfluff
 elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
