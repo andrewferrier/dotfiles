@@ -7,6 +7,4 @@ set -o pipefail
 
 shopt -s inherit_errexit
 
-gsettings set de.wagnermartin.Plattenalbum show-audio-format false
-gsettings set de.wagnermartin.Plattenalbum sort-albums-by-year true
 gsettings set de.wagnermartin.Plattenalbum stop-on-quit false
