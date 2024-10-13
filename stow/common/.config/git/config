@@ -1,22 +1,17 @@
-[include]
-	path = ~/.config/git-local/config
-
 [clone]
 	rejectShallow = true
 
 [color "diff"]
 	old = red strike
 
-[user]
-	name = Andrew Ferrier
-	email = 107015+andrewferrier@users.noreply.github.com
+[commit]
+	verbose = true
 
 [core]
 	fsmonitor = true
 
-[init]
-	defaultBranch = main
-	templateDir = ~/.config/git/template
+[credential]
+	helper = cache --timeout=7200
 
 [diff]
 	renames = copies
@@ -25,54 +20,56 @@
 	algorithm = minimal
 	colorMoved = default
 
-[rerere]
-	enabled = true
-	autoUpdate = true
-
 [fetch]
 	prune = true
-
-[merge]
-	tool = nvim
-	conflictStyle = zdiff3
-
-[mergetool "nvim"]
-	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
-	trustExitCode = true
-
-[mergetool]
-	keepBackup = false
-	prompt = false
-
-[rebase]
-	autoSquash = true
-	autoStash = true
-
-[status]
-	short = true
-
-[interactive]
-	singlekey = true
-
-[web]
-	browser = open
-
-[credential]
-	helper = cache --timeout=7200
-
-[commit]
-	verbose = true
-
-[github]
-	user = andrewferrier
 
 [filter "lfs"]
 	required = false
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+[github]
+	user = andrewferrier
+
+[include]
+	path = ~/.config/git-local/config
+
+[init]
+	defaultBranch = main
+	templateDir = ~/.config/git/template
+
+[interactive]
+	singlekey = true
+
+[merge]
+	tool = nvim
+	conflictStyle = zdiff3
+
+[mergetool]
+	keepBackup = false
+	prompt = false
+
+[mergetool "nvim"]
+	cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
+	trustExitCode = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[status]
+	short = true
+
+[user]
+	name = Andrew Ferrier
+	email = 107015+andrewferrier@users.noreply.github.com
+
+[web]
+	browser = open
 
 # * findpull - Find all the git repos which are direct children of the current
 #   directory, and run pull on each. Based on
