@@ -1,6 +1,9 @@
 [include]
 	path = ~/.config/git-local/config
 
+[clone]
+	rejectShallow = true
+
 [color "diff"]
 	old = red strike
 
