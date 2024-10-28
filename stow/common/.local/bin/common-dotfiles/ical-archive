@@ -1,7 +1,10 @@
 #!/usr/bin/env python
+#
+# pyright: reportAny=false
 
-from datetime import datetime, timedelta
-from icalendar import Calendar
+from datetime import date, datetime, timedelta
+from icalendar import Calendar  # pyright: ignore[reportMissingTypeStubs]
+from typing import Any, cast
 import argparse
 import logging
 import os
@@ -15,53 +18,100 @@ logger.setLevel(logging.WARN)
 
 syserr_handler = logging.StreamHandler(stream=sys.stderr)
 syserr_handler.setLevel(logging.WARN)
-syserr_handler.setFormatter(logging.Formatter("my-script: %(levelname)s: %(message)s"))
+syserr_handler.setFormatter(
+    logging.Formatter("ical-archive: %(levelname)s: %(message)s")
+)
 logger.addHandler(syserr_handler)
 
 
-def process_ics_file(file_path: str, target_dir: str, dry_run: bool):
-    found_item = False
+def normalize_date(dt: date) -> datetime:
+    if not isinstance(dt, datetime):
+        dt = datetime.combine(dt, datetime.min.time(), pytz.UTC)
 
-    with open(file_path, "rb") as f:
-        cal = Calendar.from_ical(f.read())
+    if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
+        dt = dt.replace(tzinfo=pytz.UTC)
+
+    assert isinstance(dt, datetime)
+
+    return dt
+
+
+def check_date_old(date_found: date, days_old: int) -> bool:
+    return date_found < datetime.now(pytz.UTC) - timedelta(days=days_old)
+
+
+def item_eligible_for_archiving(
+    file_path: str, component: Any, days_old: int
+) -> tuple[bool, datetime | None]:
+    if component.name == "VTODO":
+        if component.get("STATUS") == "COMPLETED":
+            completed_date: datetime = normalize_date(component.get("COMPLETED").dt)
+            return (check_date_old(completed_date, days_old), completed_date)
+
+        return (False, None)
+    else:
+        dt: datetime
+
+        if component.get("RRULE") is not None:
+            return (False, None)
+
+        if component.get("DTEND") is not None:
+            dt = normalize_date(component.get("DTEND").dt)
+        else:
+            logger.warning(
+                f"No DTEND property for component in {file_path}, using DTSTART instead."
+            )
+            dt = normalize_date(component.get("DTSTART").dt)
+
+        if dt:
+            if check_date_old(dt, days_old):
+                return (True, dt)
+
+        return (False, None)
+
+
+def multiple_event_todos(cal: Any) -> bool:
+    count: int = 0
 
     for component in cal.walk():
-        if component.name == "VTODO":
-            if found_item:
-                logger.warn(f"Found multiple VTODO items in {file_path}, skipping..")
-                return
-            else:
-                found_item = True
+        if component.name == "VEVENT":
+            count += 1
+        elif component.name == "VTODO":
+            count += 1
 
-            if component.get("STATUS") == "COMPLETED":
-                completed_date: datetime = component.get("COMPLETED")
-                if completed_date:
-                    completed_date: datetime = completed_date.dt
-                    if isinstance(completed_date, datetime):
-                        if completed_date.tzinfo is None:
-                            completed_date = pytz.UTC.localize(completed_date)
+    return count > 1
 
-                        if completed_date < datetime.now(pytz.UTC) - timedelta(
-                            days=365
-                        ):
-                            if dry_run:
-                                logger.info(
-                                    f"[DRY RUN] Would move: {file_path}, completed_date = {completed_date}, summary = {component.get('SUMMARY')}"
-                                )
-                            else:
-                                target_path = os.path.join(
-                                    target_dir, os.path.basename(file_path)
-                                )
-                                shutil.move(file_path, target_path)
-                                logger.info(f"Moved: {file_path} -> {target_path}")
+
+def process_ics_file(file_path: str, target_dir: str, dry_run: bool, days_old: int):
+    with open(file_path, "rb") as f:
+        cal: Any = Calendar.from_ical(f.read())  # pyright: ignore[reportUnknownMemberType]
+
+    if multiple_event_todos(cal):
+        logger.warning(f"Found multiple VTODO/VEVENT items in {file_path}, skipping..")
+        return
+
+    for component in cal.walk():
+        if component.name == "VTODO" or component.name == "VEVENT":
+            (is_old, dt) = item_eligible_for_archiving(file_path, component, days_old)
+
+            if is_old:
+                if dry_run:
+                    logger.info(
+                        f"[DRY RUN] Would move: {file_path}, completed/end date = {dt}, summary = {component.get('SUMMARY')}"
+                    )
+                else:
+                    target_path = os.path.join(target_dir, os.path.basename(file_path))
+                    shutil.move(file_path, target_path)
+                    logger.info(f"Moved: {file_path} -> {target_path}")
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("source_dir")
-    parser.add_argument("target_dir")
+    parser.add_argument("source_dir", type=str)
+    parser.add_argument("target_dir", type=str)
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("-v", "--verbose", action="store_true")
+    parser.add_argument("--days-old", type=int, default=365)
 
     args = parser.parse_args()
 
@@ -73,10 +123,10 @@ def main():
         logger.error(f"{args.target_dir} doesn't exist.")
         sys.exit(1)
 
-    for filename in os.listdir(args.source_dir):
+    for filename in os.listdir(cast(str, args.source_dir)):
         if filename.endswith(".ics"):
-            file_path = os.path.join(args.source_dir, filename)
-            process_ics_file(file_path, args.target_dir, args.dry_run)
+            file_path: str = os.path.join(args.source_dir, filename)
+            process_ics_file(file_path, args.target_dir, args.dry_run, args.days_old)
 
 
 if __name__ == "__main__":
