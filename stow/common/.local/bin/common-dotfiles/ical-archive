@@ -20,11 +20,19 @@ logger.addHandler(syserr_handler)
 
 
 def process_ics_file(file_path: str, target_dir: str, dry_run: bool):
+    found_item = False
+
     with open(file_path, "rb") as f:
         cal = Calendar.from_ical(f.read())
 
     for component in cal.walk():
         if component.name == "VTODO":
+            if found_item:
+                logger.warn(f"Found multiple VTODO items in {file_path}, skipping..")
+                return
+            else:
+                found_item = True
+
             if component.get("STATUS") == "COMPLETED":
                 completed_date: datetime = component.get("COMPLETED")
                 if completed_date:
