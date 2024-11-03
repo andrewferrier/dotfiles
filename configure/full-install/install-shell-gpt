@@ -4,4 +4,14 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-pipx install shell-gpt || pipx upgrade shell-gpt
+pipx_install_or_upgrade() {
+    local PACKAGE=$1
+
+    if pipx list | grep -q "$PACKAGE"; then
+        pipx upgrade "$PACKAGE"
+    else
+        pipx install "$PACKAGE"
+    fi
+}
+
+pipx_install_or_upgrade shell-gpt
