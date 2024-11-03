@@ -8,19 +8,29 @@ GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && git rev-parse
 # shellcheck disable=SC1091
 source "${GIT_ROOT_DIR}/common.sh"
 
-if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
-    PIPX="pipx install --include-deps"
+pipx_install_or_upgrade() {
+    local PACKAGE=$1
+    shift
+    local ARGS=("$@")
 
+    if pipx list | grep -q "$PACKAGE"; then
+        # shellcheck disable=SC2048,SC2086
+        pipx upgrade "$PACKAGE" ${ARGS[*]}
+    else
+        # shellcheck disable=SC2048,SC2086
+        pipx install "$PACKAGE" ${ARGS[*]}
+    fi
+}
+
+if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
     pacaur -S --noconfirm basedpyright
-    ${PIPX} gitlint
-    ${PIPX} sqlfluff
+    pipx_install_or_upgrade gitlint --include-deps
+    pipx_install_or_upgrade sqlfluff --include-deps
 elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
     # All packages install via Homebrew
     exit
 else
-    PIPX="pipx"
-
     # All other packages installed via package manager
-    ${PIPX} install ruff || ${PIPX} upgrade ruff
-    ${PIPX} install basedpyright || ${PIPX} upgrade basedpyright
+    pipx_install_or_upgrade ruff
+    pipx_install_or_upgrade basedpyright
 fi
