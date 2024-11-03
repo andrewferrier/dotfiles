@@ -13,9 +13,6 @@
 # !true - show output from previous command (e.g. for debugging)
 # :filter - filters files shown
 # :glob-select - selects files using glob
-#
-# TODO:
-# * Use 'set watch true' in lf 33+: https://github.com/gokcehan/lf/pull/1667
 
 # Make shell commands safer
 set shellopts '-eu'
@@ -144,7 +141,6 @@ set icons
 set incsearch true
 set infotimefmtnew "2006-01-02 15:04"
 set infotimefmtold "2006-01-02 15:04"
-set period 1
 set scrolloff 5
 set timefmt "2006-01-02 15:04:05"
 set truncatechar "…"

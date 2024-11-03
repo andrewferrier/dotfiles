@@ -1,1 +1,2 @@
 map gd :cd /data
+set period 1 # Can be replaced with 'watch' in r33
