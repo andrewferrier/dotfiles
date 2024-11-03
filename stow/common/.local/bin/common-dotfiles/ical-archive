@@ -3,7 +3,7 @@
 # pyright: reportAny=false
 
 from datetime import date, datetime, timedelta
-from icalendar import Calendar  # pyright: ignore[reportMissingTypeStubs]
+from icalendar import Calendar
 from typing import Any, cast
 import argparse
 import logging
@@ -84,7 +84,7 @@ def multiple_event_todos(cal: Any) -> bool:
 
 def process_ics_file(file_path: str, target_dir: str, dry_run: bool, days_old: int):
     with open(file_path, "rb") as f:
-        cal: Any = Calendar.from_ical(f.read())  # pyright: ignore[reportUnknownMemberType]
+        cal: Any = Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
 
     if multiple_event_todos(cal):
         logger.warning(f"Found multiple VTODO/VEVENT items in {file_path}, skipping..")
