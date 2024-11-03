@@ -43,3 +43,7 @@ repos:
       hooks:
           - id: ruff
           - id: ruff-format
+    - repo: https://github.com/Calinou/pre-commit-luacheck
+      rev: v1.0.0
+      hooks:
+          - id: luacheck

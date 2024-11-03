@@ -1,3 +1,4 @@
+-- luacheck: ignore
 -- REMOVE IF ADDED TO CORE APPLICATION
     repeat
         -- add proper user dylib path if it doesn't already exist

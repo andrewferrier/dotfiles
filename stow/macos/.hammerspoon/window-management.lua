@@ -1,4 +1,5 @@
 -- Based on https://github.com/wincent/wincent/blob/master/aspects/dotfiles/files/.hammerspoon/init.lua
+-- luacheck: ignore
 local module = {}
 
 -- From https://github.com/asmagill/hs._asm.spaces

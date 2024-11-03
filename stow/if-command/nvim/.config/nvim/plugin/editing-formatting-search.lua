@@ -8,7 +8,7 @@ vim.opt.nrformats:append("unsigned")
 vim.opt.shiftround = true
 vim.opt.shiftwidth = 4
 vim.opt.smartcase = true
-vim.opt.textwidth = 80 -- This is the default for many/most languages: https://en.wikipedia.org/wiki/Characters_per_line#In_programming
+vim.opt.textwidth = 80 -- Default for most languages: https://en.wikipedia.org/wiki/Characters_per_line#In_programming
 vim.opt.virtualedit = "block"
 vim.opt.wildmode = "longest:full"
 
