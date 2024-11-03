@@ -2,10 +2,8 @@ vim.filetype.add({
     extension = {
         equivs = "debcontrol",
         jad = "java",
-        rasi = "rasi",
         tf = "terraform", -- I never use 'tinyfugue': https://www.reddit.com/r/neovim/comments/18xg9na/comment/kg54fy7/
         tfstate = "json",
-        wat = "wast", -- This is needed for now as a workaround because NeoVim doesn't natively support .wat files
     },
     filename = {
         [".ansible-lint"] = "yaml",
