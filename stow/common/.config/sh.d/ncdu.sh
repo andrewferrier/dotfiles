@@ -17,7 +17,7 @@ if (command -v ncdu >/dev/null 2>&1); then
     NCDU_VERSION=$(ncdu --version | cut -d' ' -f2)
 
     if verlte 2.5 "$NCDU_VERSION"; then
-        CORES=$(python -c 'import multiprocessing as mp; print(mp.cpu_count())')
+        CORES=$(python3 -c 'import multiprocessing as mp; print(mp.cpu_count())')
         # shellcheck disable=SC2139
         alias ncdu="ncdu --threads ${CORES}"
     fi
