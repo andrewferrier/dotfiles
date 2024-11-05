@@ -4,6 +4,7 @@ return {
     keys = {
         { "g?", mode = "n" },
         { "g?", mode = "x" },
+        { "<C-G>", mode = "i" },
     },
     cmd = {
         "ToggleCommentDebugPrints",
