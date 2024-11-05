@@ -1,3 +1,3 @@
 vim.opt_local.cursorcolumn = true
 
-require("filetype.section").setup("^\\S")
+require("filetype.section").setup_navigation("^\\S")

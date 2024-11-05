@@ -1,1 +1,1 @@
-require("filetype.section").setup("^\\S")
+require("filetype.section").setup_navigation("^\\S")

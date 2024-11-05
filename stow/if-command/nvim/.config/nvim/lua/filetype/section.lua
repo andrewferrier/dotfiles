@@ -20,7 +20,7 @@ end
 
 ---@param pattern_start string
 ---@param pattern_end? string
-local setup_navigation = function(pattern_start, pattern_end)
+M.setup_navigation = function(pattern_start, pattern_end)
     vim.keymap.set("n", "]]", function()
         vim.cmd.mark("'")
         vim.fn.search(pattern_start, "W")
@@ -70,7 +70,7 @@ end
 ---@param pattern_end? string
 M.setup = function(pattern_start, pattern_end)
     setup_outline(pattern_start)
-    setup_navigation(pattern_start, pattern_end)
+    M.setup_navigation(pattern_start, pattern_end)
 end
 
 return M

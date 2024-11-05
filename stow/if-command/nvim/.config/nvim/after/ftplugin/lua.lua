@@ -7,4 +7,7 @@ vim.opt_local.suffixesadd:prepend("init.lua")
 -- See https://www.reddit.com/r/neovim/comments/v3yv2x/comment/ib19q5j/
 vim.bo.includeexpr = 'substitute(v:fname, "\\\\.", "/", "g")'
 
-require("filetype.section").setup("^\\w\\(nd$\\)\\@!", "^\\(}\\|end\\)")
+require("filetype.section").setup_navigation(
+    "^\\w\\(nd$\\)\\@!",
+    "^\\(}\\|end\\)"
+)
