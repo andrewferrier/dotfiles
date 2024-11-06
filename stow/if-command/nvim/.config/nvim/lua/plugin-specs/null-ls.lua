@@ -72,11 +72,8 @@ return {
             -- debug = true,
             sources = sources,
             should_attach = function(bufnr)
-                local status_ok, bigfile_detected =
-                    pcall(vim.api.nvim_buf_get_var, bufnr, "bigfile_detected")
-
-                if status_ok then
-                    return bigfile_detected <= 0
+                if vim.bo[bufnr].filetype == "bigfile" then
+                    return false
                 else
                     return true
                 end
