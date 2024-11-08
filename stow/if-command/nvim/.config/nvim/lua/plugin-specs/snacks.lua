@@ -2,10 +2,8 @@ return {
     "folke/snacks.nvim",
     lazy = false,
     opts = {
-        styles = { notification = { wo = { winblend = 0 } } },
-
         bigfile = { enabled = true },
-        notifier = { enabled = true, style = "minimal" },
+        notifier = { enabled = false },
         quickfile = { enabled = false },
         statuscolumn = { enabled = false },
         words = { enabled = false },
