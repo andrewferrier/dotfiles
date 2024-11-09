@@ -34,18 +34,25 @@ local function find_skeleton()
     return skeleton
 end
 
-local function check_for_skeleton()
+---@param from_scratch boolean
+---@return nil
+local function check_and_insert_skeleton(from_scratch)
     local skeleton = find_skeleton()
 
     if skeleton ~= nil then
         vim.cmd.read(skeleton)
-        vim.cmd.normal({ args = { "kddG" }, bang = true })
-        vim.cmd.normal({ args = { "zM" } })
+        vim.cmd.normal({ args = { "kdd" }, bang = true })
+
+        if from_scratch then
+            vim.cmd.normal({ args = { "G" }, bang = true })
+        end
+
         vim.api.nvim_set_option_value(
             "foldmethod",
             "marker",
             { scope = "local" }
         )
+        vim.cmd.normal({ args = { "zM" } })
         vim.notify("Added skeleton " .. skeleton)
     end
 end
@@ -53,5 +60,11 @@ end
 vim.api.nvim_create_autocmd("BufNewFile", {
     group = vim.api.nvim_create_augroup("skeleton", {}),
     pattern = "*",
-    callback = check_for_skeleton,
+    callback = function()
+        check_and_insert_skeleton(true)
+    end,
 })
+
+vim.api.nvim_create_user_command("SkeletonRead", function()
+    check_and_insert_skeleton(false)
+end, {})
