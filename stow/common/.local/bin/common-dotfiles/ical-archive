@@ -88,7 +88,7 @@ def process_ics_file(file_path: str, target_dir: str, dry_run: bool, days_old: i
         cal: Any = Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
 
     if multiple_event_todos(cal):
-        logger.warning(f"Found multiple VTODO/VEVENT items in {file_path}, skipping..")
+        logger.warning(f"Multiple VTODO/VEVENT items in {file_path}, skipping..")
         return
 
     for component in cal.walk():
