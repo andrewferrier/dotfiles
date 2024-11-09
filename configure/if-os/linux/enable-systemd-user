@@ -17,6 +17,8 @@ if [[ -h $TIMERS_DIR ]]; then
     exit 1
 fi
 
+systemctl --user daemon-reload
+
 if [[ -d "${BASEDIR}" ]]; then
     for UNIT in "${BASEDIR}"/*.service; do
         UNIT_NOEXT="${UNIT%.*}"
