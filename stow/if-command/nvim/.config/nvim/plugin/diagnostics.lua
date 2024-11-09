@@ -1,4 +1,19 @@
 ---@param diagnostic vim.Diagnostic
+---@return string?
+local diagnostic_source = function(diagnostic)
+    if diagnostic.source then
+        return diagnostic.source
+    else
+        local namespace = diagnostic.namespace
+
+        if namespace then
+            local namespaces = vim.diagnostic.get_namespaces()
+            return namespaces[namespace].name
+        end
+    end
+end
+
+---@param diagnostic vim.Diagnostic
 ---@return string
 local diagnostic_format = function(diagnostic)
     local message = diagnostic.message
@@ -7,18 +22,7 @@ local diagnostic_format = function(diagnostic)
         message = message .. "\n[" .. diagnostic.code .. "]"
     end
 
-    local source
-
-    if diagnostic.source then
-        source = diagnostic.source
-    else
-        local namespace = diagnostic.namespace
-
-        if namespace then
-            local namespaces = vim.diagnostic.get_namespaces()
-            source = namespaces[namespace].name
-        end
-    end
+    local source = diagnostic_source(diagnostic)
 
     if source then
         message = message .. "\n(" .. source .. ")"
