@@ -4,6 +4,7 @@ import argparse
 import logging
 from pathlib import Path
 from subprocess import run
+from shutil import which
 
 from systemd.journal import JournalHandler
 
@@ -42,17 +43,20 @@ def write_state_file(state_file: str, failure_count: int):
 
 
 def notification(message: str):
-    p = run(
-        [
-            "notify-send",
-            "systemd-status",
-            "--urgency=critical",
-            message,
-        ]
-    )
+    if which("notify-send"):
+        p = run(
+            [
+                "notify-send",
+                "systemd-status",
+                "--urgency=critical",
+                message,
+            ]
+        )
 
-    if p.returncode != 0:
-        raise Exception(f"Invalid result: {p.returncode} ")
+        if p.returncode != 0:
+            raise Exception(f"Invalid result: {p.returncode} ")
+    else:
+        log.warning('Could not send message "' + message + '" via notify-send.')
 
 
 def main():
