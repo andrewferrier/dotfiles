@@ -53,6 +53,7 @@ def item_eligible_for_archiving(
         dt: datetime
 
         if component.get("RRULE") is not None:
+            logger.warning(f"RRULE present for component in {file_path}, skipping...")
             return (False, None)
 
         if component.get("DTEND") is not None:
