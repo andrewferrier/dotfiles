@@ -1,8 +1,10 @@
 return {
     url = "git@github.com:andrewferrier/wrapping.nvim",
     config = function()
+        ---@diagnostic disable-next-line: missing-fields
         require("wrapping").setup({
             create_keymaps = false,
+            ---@diagnostic disable-next-line: missing-fields
             softener = { mail = true },
             notify_on_switch = false,
         })

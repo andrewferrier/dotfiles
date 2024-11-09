@@ -13,12 +13,14 @@ end
 
 local event = vim.uv.new_fs_event()
 
+---@diagnostic disable-next-line: need-check-nil
 event:start(STATEFILE, {
     watch_entry = true,
     stat = true,
 }, function(err, _, _)
     if err then
         vim.notify(err, vim.log.levels.ERROR)
+        ---@diagnostic disable-next-line: need-check-nil
         event:stop()
     end
 
@@ -42,6 +44,7 @@ return {
             contrast = "hard",
             dim_inactive = true,
             overrides = overrides,
+            ---@diagnostic disable-next-line: missing-fields
             italic = {
                 strings = false,
                 operators = false,
