@@ -20,12 +20,7 @@ return {
                 globals = { "IMAP", "Set", "hs", "options", "pipe_to", "vim" },
             },
             workspace = {
-                library = vim.tbl_extend(
-                    "keep",
-                    { META_PATH },
-                    vim.api.nvim_get_runtime_file("", true)
-                ),
-
+                library = { vim.env.VIMRUNTIME },
                 checkThirdParty = false,
             },
             hint = { arrayIndex = "Disable", enable = true },
