@@ -1,6 +1,5 @@
 return {
     "saghen/blink.cmp",
-    lazy = false,
     version = "*",
     opts = {
         accept = { auto_brackets = { enabled = true } },
