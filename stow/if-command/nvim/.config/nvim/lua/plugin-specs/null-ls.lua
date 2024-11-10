@@ -71,13 +71,6 @@ return {
         null_ls.setup({
             -- debug = true,
             sources = sources,
-            should_attach = function(bufnr)
-                if vim.bo[bufnr].filetype == "bigfile" then
-                    return false
-                else
-                    return true
-                end
-            end,
         })
     end,
     event = "BufEnter",
