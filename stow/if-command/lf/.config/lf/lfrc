@@ -165,9 +165,9 @@ map Y :yank
 map o &$OPENER "$fx"
 
 map ga :cd ~/paperwork
+map gc :cd ~/config
 map ge :cd ~/personal
 map gf :cd ~/dotfiles
-map gg :cd ~/gitco
 map gk :cd ~/Desktop
 map gl :cd ~/Downloads
 map gn :cd ~/notes
