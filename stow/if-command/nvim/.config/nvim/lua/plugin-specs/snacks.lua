@@ -1,5 +1,6 @@
 return {
     "folke/snacks.nvim",
+    version = "*",
     lazy = false,
     opts = {
         bigfile = { enabled = true },
