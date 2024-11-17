@@ -29,18 +29,12 @@ else
 	DESKTOP_SERVER := server
 endif
 
-# TOP-LEVEL
-
 all: pkgs quick
 
 quick: stow configure
 
-# PKGS
-
 pkgs:
 	(cd $(MKFILE_PATH)/pkgs/$(OSDISTRIBUTION) && $(MAKE))
-
-# STOW
 
 pre-stow:
 	find . | grep DS_Store | ifne xargs rm
@@ -54,8 +48,6 @@ stow: pre-stow
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(INSTALL_TYPE)
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(DESKTOP_SERVER)
 	stow-if-command $(STOW)/if-command
-
-# CONFIGURE
 
 configure:
 	run-directory $(CONFIGURE)/all
