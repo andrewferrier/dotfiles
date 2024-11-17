@@ -1,5 +1,7 @@
 local M = {}
 
+---@param desc string
+---@return table
 local create_opts = function(desc)
     return {
         buffer = true,
