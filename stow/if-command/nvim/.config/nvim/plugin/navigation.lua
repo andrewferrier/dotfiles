@@ -1,5 +1,3 @@
-vim.opt.path:remove("/usr/include")
-
 vim.api.nvim_create_autocmd({ "BufNew", "BufRead" }, {
     callback = function(ctx)
         local root = vim.fs.root(ctx.buf, { ".git", "Makefile" })
