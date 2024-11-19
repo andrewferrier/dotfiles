@@ -17,4 +17,4 @@ vim.opt.numberwidth = 3
 vim.opt.signcolumn = "yes:1"
 
 vim.opt.list = true
-vim.opt.listchars = "tab:>⋅,trail:·,extends:▷,precedes:◁,nbsp:␣"
+vim.opt.listchars = "tab:>⋅,trail:·,extends:…,precedes:…,nbsp:␣"
