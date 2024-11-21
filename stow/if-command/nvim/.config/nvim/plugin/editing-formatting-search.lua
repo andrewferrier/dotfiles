@@ -12,6 +12,14 @@ vim.opt.textwidth = 80 -- Default for most languages: https://en.wikipedia.org/w
 vim.opt.virtualedit = "block"
 vim.opt.wildmode = "longest:full"
 
+vim.opt.completeopt:append("popup")
+vim.opt.completeopt:remove("menuone")
+vim.opt.completeopt:remove("noinsert")
+
+if vim.fn.has("nvim-0.11.0") == 1 then
+    vim.opt.completeopt:append("fuzzy")
+end
+
 -- see https://vimways.org/2018/the-power-of-diff/
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
