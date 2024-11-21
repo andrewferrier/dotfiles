@@ -1,4 +1,11 @@
 return {
     "NMAC427/guess-indent.nvim",
-    opts = {},
+    opts = {
+        filetype_exclude = {
+            "go",
+            "netrw",
+            "tutor",
+            "terraform",
+        },
+    },
 }
