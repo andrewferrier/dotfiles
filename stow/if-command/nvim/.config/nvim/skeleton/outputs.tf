@@ -1,3 +1,3 @@
 output "name" {
-    value = x.y
+  value = x.y
 }
