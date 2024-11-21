@@ -1,6 +1,5 @@
 require("filetype.text").setup()
 
--- FIXME: For some reason this file gets invoked twice; remove unique=true
 vim.keymap.set(
     "n",
     "gO",
