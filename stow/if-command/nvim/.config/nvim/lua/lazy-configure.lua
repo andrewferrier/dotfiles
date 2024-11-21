@@ -42,11 +42,6 @@ require("lazy").setup("plugin-specs", {
                 "tohtml",
                 "tutor",
                 "zipPlugin",
-
-                -- These lines are needed to avoid opening directories from command line in
-                -- netrw: https://github.com/elihunter173/dirbuf.nvim#notes
-                "netrw",
-                "netrwPlugin",
             },
             paths = { vim.fn.stdpath("data") .. "/skeleton" },
         },
