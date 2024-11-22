@@ -39,7 +39,6 @@ local configure = function()
     )
 
     vim.keymap.set("n", "cvm", function()
-        -- FIXME: `man -c` doesn't work on Arch
         fzf_lua.man_pages({ previewer = "man_native" })
     end, { desc = "Open manpage", unique = true })
 
