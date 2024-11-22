@@ -92,4 +92,5 @@ return {
     "ibhagwan/fzf-lua",
     config = configure,
     keys = { "cv" },
+    version = "*",
 }
