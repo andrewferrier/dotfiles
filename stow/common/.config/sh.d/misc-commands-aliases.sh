@@ -56,7 +56,7 @@ else
             FILESYSTEM=$(sudo blkid -o value -s TYPE "${DEVICE}")
 
             if [[ $FILESYSTEM == ext* ]]; then
-                sudo mount -v -o users,gid=users "$DEVICE" "$MOUNTPOINT"
+                sudo mount -v "$DEVICE" "$MOUNTPOINT"
             elif [[ $FILESYSTEM == iso9660 ]]; then
                 sudo mount -v "$DEVICE" "$MOUNTPOINT"
             else
