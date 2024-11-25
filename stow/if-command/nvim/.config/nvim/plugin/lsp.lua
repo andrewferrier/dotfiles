@@ -85,29 +85,6 @@ local function warn_unsupported(action_description)
     )
 end
 
-local function lsp_document_format()
-    if
-        require("utils").lsp_supports_method(
-            vim.lsp.protocol.Methods.textDocument_formatting
-        )
-    then
-        vim.lsp.buf.format({ timeout_ms = 3000 })
-        vim.notify("Formatted document using LSP.")
-    else
-        warn_unsupported("format document")
-    end
-end
-
----@param bufnr integer
-local function keybindings_formatting(bufnr)
-    vim.keymap.set(
-        "n",
-        "gQ",
-        lsp_document_format,
-        { buffer = bufnr, desc = "Format buffer" }
-    )
-end
-
 ---@param bufnr integer
 local function keybindings_organizeimports(bufnr)
     vim.keymap.set("n", "gro", function()
@@ -135,7 +112,6 @@ local function lsp_callback(event)
     if client ~= nil then
         local bufnr = event.buf
 
-        keybindings_formatting(bufnr)
         keybindings_organizeimports(bufnr)
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         keybindings_inlayhints(bufnr)
