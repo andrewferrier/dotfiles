@@ -3,8 +3,8 @@ return {
     opts = {
         keymaps = {
             insert = {
-                plain = nil,
-                variable = nil,
+                plain = false,
+                variable = false,
             },
         },
     },
