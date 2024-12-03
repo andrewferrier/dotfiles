@@ -15,7 +15,9 @@ vim.keymap.set("n", "grn", function()
         )
     then
         vim.schedule(function()
-            require("nvim-treesitter-refactor.smart_rename").smart_rename(0)
+            require("nvim-treesitter-refactor.smart_rename").smart_rename(
+                vim.fn.bufnr()
+            )
         end)
         return "<Nop>"
     else
