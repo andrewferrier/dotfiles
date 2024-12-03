@@ -1,4 +1,4 @@
 return {
     "nvim-treesitter/nvim-treesitter-refactor",
-    event = "BufEnter",
+    lazy = true,
 }
