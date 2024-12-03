@@ -151,7 +151,6 @@ function _G.Statusline_Wrappingmode()
 end
 
 vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
-    group = vim.api.nvim_create_augroup("ResetSpellingCount", {}),
     callback = function()
         vim.b.spelling_warning = nil
     end,

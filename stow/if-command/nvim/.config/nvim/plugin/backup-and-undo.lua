@@ -6,7 +6,6 @@ vim.opt.backupdir:remove(".")
 vim.opt.backupcopy = "yes"
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("BufWritePre_SetBackupFilename", {}),
     pattern = "*",
     callback = function()
         -- Meaningful backup name, ex: filename@2015-04-05T14:59:00

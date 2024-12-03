@@ -14,6 +14,5 @@ local set_fold_method = function()
 end
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    group = vim.api.nvim_create_augroup("set_fold_method", {}),
     callback = set_fold_method,
 })

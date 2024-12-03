@@ -58,7 +58,6 @@ local function check_and_insert_skeleton(from_scratch)
 end
 
 vim.api.nvim_create_autocmd("BufNewFile", {
-    group = vim.api.nvim_create_augroup("skeleton", {}),
     pattern = "*",
     callback = function()
         check_and_insert_skeleton(true)

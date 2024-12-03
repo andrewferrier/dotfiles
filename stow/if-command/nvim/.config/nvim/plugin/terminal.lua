@@ -1,7 +1,4 @@
-local id = vim.api.nvim_create_augroup("neovim_terminal", {})
-
 vim.api.nvim_create_autocmd("TermOpen", {
-    group = id,
     callback = function()
         vim.opt_local.signcolumn = "no"
         vim.opt_local.number = false
@@ -10,7 +7,6 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 vim.api.nvim_create_autocmd("TermClose", {
-    group = id,
     callback = function()
         vim.api.nvim_input("<CR>")
     end,
