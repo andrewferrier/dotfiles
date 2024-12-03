@@ -74,4 +74,5 @@ return {
             desc = "Format buffer",
         },
     },
+    version = "*",
 }
