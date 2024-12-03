@@ -3,7 +3,6 @@ return {
     opts = {
         filetype_exclude = {
             "go",
-            "netrw",
             "tutor",
             "terraform",
         },
