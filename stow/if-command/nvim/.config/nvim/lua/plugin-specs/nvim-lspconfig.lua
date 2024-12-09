@@ -26,6 +26,18 @@ return {
             require("lspconfig")[lsp].setup(settings)
         end
     end,
+    dependencies = {
+        {
+            "folke/lazydev.nvim",
+            ft = "lua",
+            opts = {
+                library = {
+                    { path = "luvit-meta/library", words = { "vim%.uv" } },
+                },
+            },
+            dependencies = { "Bilal2453/luvit-meta", lazy = true },
+        },
+    },
     -- Don't configure any events here otherwise this doesn't attach when files
     -- are opened directly from the command line
 }
