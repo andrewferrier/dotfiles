@@ -32,6 +32,10 @@ hipatterns.setup({
             pattern = if_textfile("%f[%w]()TODO()%f[%W]"),
             group = "MiniHipatternsTodo",
         },
+        debugprint = {
+            pattern = "DEBUGPRINT",
+            group = "MiniHipatternsNote",
+        },
         hex_color = hipatterns.gen_highlighter.hex_color(),
     },
 })
