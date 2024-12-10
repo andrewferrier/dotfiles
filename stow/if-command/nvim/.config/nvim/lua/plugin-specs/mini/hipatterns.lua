@@ -26,11 +26,11 @@ hipatterns.setup({
     highlighters = {
         fixme = {
             pattern = if_textfile("%f[%w]()FIXME()%f[%W]"),
-            group = "@text.danger.comment",
+            group = "MiniHipatternsFixme",
         },
         todo = {
             pattern = if_textfile("%f[%w]()TODO()%f[%W]"),
-            group = "@text.todo.comment",
+            group = "MiniHipatternsTodo",
         },
         hex_color = hipatterns.gen_highlighter.hex_color(),
     },
