@@ -21,7 +21,7 @@ local opts = {
         html = { "prettier" },
         yaml = { "prettier" },
         sql = { "sqlfluff" },
-        md = { "remark" },
+        markdown = { "mdformat" },
     },
     default_format_opts = {
         lsp_format = "fallback",

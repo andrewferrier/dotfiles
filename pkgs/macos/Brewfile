@@ -49,6 +49,7 @@ brew "lua@5.3" # for lua-lsp
 brew "luarocks"
 brew "lzip"
 brew "make" # GNU make with Mac OS is ancient
+brew "markdownlint-cli"
 brew "mas"
 brew "moreutils" # isutf8 for Hammerspoon
 brew "ncdu"

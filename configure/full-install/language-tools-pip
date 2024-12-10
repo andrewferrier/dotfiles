@@ -22,6 +22,9 @@ pipx_install_or_upgrade() {
     fi
 }
 
+pipx_install_or_upgrade mdformat
+pipx inject mdformat mdformat-gfm mdformat-frontmatter mdformat-footnote
+
 if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
     pacaur -S --noconfirm basedpyright
     pipx_install_or_upgrade gitlint --include-deps
