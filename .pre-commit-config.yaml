@@ -6,7 +6,7 @@ repos:
           - id: check-hooks-apply
           - id: check-useless-excludes
     - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v4.6.0
+      rev: v5.0.0
       hooks:
           - id: check-added-large-files
           - id: check-executables-have-shebangs
@@ -20,7 +20,7 @@ repos:
       hooks:
           - id: gitlint
     - repo: https://github.com/asottile/pyupgrade
-      rev: v3.17.0
+      rev: v3.19.0
       hooks:
           - id: pyupgrade
     - repo: https://github.com/Jarmos-san/shellcheck-precommit
@@ -30,16 +30,16 @@ repos:
             types_or: [bash, sh]
             exclude: ^stow/common/.config/git/template/hooks/pre-commit
     - repo: https://github.com/gitleaks/gitleaks
-      rev: v8.18.4
+      rev: v8.21.2
       hooks:
           - id: gitleaks
     - repo: https://github.com/JohnnyMorganz/StyLua
-      rev: v2.0.1
+      rev: v2.0.2
       hooks:
           - id: stylua-system
             exclude: ^stow/macos/.hammerspoon/hs/.*
     - repo: https://github.com/astral-sh/ruff-pre-commit
-      rev: v0.6.3
+      rev: v0.8.2
       hooks:
           - id: ruff
           - id: ruff-format
