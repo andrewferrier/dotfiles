@@ -1,6 +1,6 @@
 return {
     "stevearc/oil.nvim",
-    config = function()
+    opts = function()
         local opts = {
             skip_confirm_for_simple_edits = true,
             watch_for_changes = true,
@@ -20,15 +20,18 @@ return {
             opts.delete_to_trash = true
         end
 
-        require("oil").setup(opts)
-
-        vim.keymap.set(
-            "n",
-            "-",
-            require("oil").open,
-            { desc = "Open parent directory", unique = true }
-        )
+        return opts
     end,
+    keys = {
+        {
+            "-",
+            function()
+                require("oil").open()
+            end,
+            desc = "Open parent directory",
+            unique = true,
+        },
+    },
     dependencies = { "echasnovski/mini.nvim" }, -- for mini.icons
     version = "*",
 }
