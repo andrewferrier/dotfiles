@@ -33,7 +33,7 @@ hipatterns.setup({
             group = "MiniHipatternsTodo",
         },
         debugprint = {
-            pattern = "DEBUGPRINT",
+            pattern = ".*DEBUGPRINT.*",
             group = "MiniHipatternsNote",
         },
         hex_color = hipatterns.gen_highlighter.hex_color(),
