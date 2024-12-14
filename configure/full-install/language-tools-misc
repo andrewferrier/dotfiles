@@ -11,6 +11,7 @@ if [[ $(uname -s || true) == Linux* ]]; then
     rm -rf "${LOCAL_BIN}"/lua-language-server-*/
     cd "${LOCAL_BIN}"
     aunpack --quiet lua-language-server*.tar.gz && rm lua-language-server*.tar.gz
+    mv lua-language-server-*/ lua-language-server
 fi
 
 eget --to "${LOCAL_BIN}" hadolint/hadolint --upgrade-only
