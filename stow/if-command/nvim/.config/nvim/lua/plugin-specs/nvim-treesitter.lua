@@ -21,6 +21,9 @@ return {
             endwise = { enable = true },
         })
     end,
-    event = { "BufReadPre", "BufNewFile" },
+
+    -- Don't use lazy initialization as TSInstall command is needed for build()
+    -- function
+    --
     -- Don't use stable version, it always seems to cause issues
 }
