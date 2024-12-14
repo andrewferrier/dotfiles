@@ -29,21 +29,19 @@ end)
 
 return {
     "ellisonleao/gruvbox.nvim",
+    init = update_background,
     config = function()
-        update_background()
-
-        local overrides = {
-            DiagnosticUnnecessary = { link = "Whitespace" },
-            SignColumn = { link = "LineNr" },
-            TermCursorNC = { link = "DiffChange" },
-            OilInfo = { link = "NonText" },
-            ["@lsp.mod.readonly"] = { bold = true },
-        }
-
         require("gruvbox").setup({
             contrast = "hard",
             dim_inactive = true,
-            overrides = overrides,
+            transparent_mode = false,
+            overrides = {
+                DiagnosticUnnecessary = { link = "Whitespace" },
+                SignColumn = { link = "LineNr" },
+                TermCursorNC = { link = "DiffChange" },
+                OilInfo = { link = "NonText" },
+                ["@lsp.mod.readonly"] = { bold = true },
+            },
             ---@diagnostic disable-next-line: missing-fields
             italic = {
                 strings = false,
