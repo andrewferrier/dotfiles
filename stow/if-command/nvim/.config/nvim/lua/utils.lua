@@ -19,13 +19,11 @@ end
 ---@param method string
 ---@return boolean
 M.lsp_supports_method = function(method)
-    for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
-        if client.supports_method(method) then
-            return true
-        end
-    end
+    local clients = vim.tbl_filter(function(client)
+        return client.supports_method(method)
+    end, vim.lsp.get_clients({ bufnr = 0 }))
 
-    return false
+    return #clients > 0
 end
 
 ---@return string
