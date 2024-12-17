@@ -32,6 +32,7 @@ return {
             unique = true,
         },
     },
+    lazy = false, -- open directories from command line
     dependencies = { "echasnovski/mini.nvim" }, -- for mini.icons
     version = "*",
 }
