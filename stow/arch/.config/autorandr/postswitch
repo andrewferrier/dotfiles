@@ -13,3 +13,11 @@ log "Reloading variety..."
 # Seems like sometimes these hang, hence timeout
 timeout 10 variety --next || true
 timeout 10 variety --prev || true
+
+if xrandr --listactivemonitors | grep eDP1 > /dev/null; then
+    log "Changing screen blanking timeout for laptop..."
+    xset s 60 60
+else
+    log "Changing screen blanking timeout for external..."
+    xset s 3600 3600
+fi
