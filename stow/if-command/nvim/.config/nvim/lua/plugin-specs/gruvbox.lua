@@ -27,6 +27,17 @@ event:start(STATEFILE, {
     vim.schedule(update_background)
 end)
 
+local overrides = {
+    DiagnosticUnnecessary = { link = "Whitespace" },
+    SignColumn = { link = "LineNr" },
+    OilInfo = { link = "NonText" },
+    ["@lsp.mod.readonly"] = { bold = true },
+}
+
+if vim.fn.has("nvim-0.11.0") == 0 then
+    overrides.TermCursorNC = { link = "DiffChange" }
+end
+
 return {
     "ellisonleao/gruvbox.nvim",
     init = update_background,
@@ -35,13 +46,7 @@ return {
             contrast = "hard",
             dim_inactive = true,
             transparent_mode = false,
-            overrides = {
-                DiagnosticUnnecessary = { link = "Whitespace" },
-                SignColumn = { link = "LineNr" },
-                TermCursorNC = { link = "DiffChange" },
-                OilInfo = { link = "NonText" },
-                ["@lsp.mod.readonly"] = { bold = true },
-            },
+            overrides = overrides,
             ---@diagnostic disable-next-line: missing-fields
             italic = {
                 strings = false,
