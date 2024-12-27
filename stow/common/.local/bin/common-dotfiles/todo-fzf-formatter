@@ -7,6 +7,7 @@ import datetime
 
 from termcolor import colored
 from typing import TypedDict
+from operator import itemgetter
 
 
 class Entry(TypedDict):
@@ -29,6 +30,7 @@ def due_date_key_func(due_date: Entry) -> int:
         return due_date["due"]
 
 
+data = sorted(data, key=itemgetter("summary"))
 data = sorted(data, key=due_date_key_func, reverse=True)
 
 for entry in data:
