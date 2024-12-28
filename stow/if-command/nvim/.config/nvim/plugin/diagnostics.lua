@@ -32,10 +32,10 @@ local diagnostic_format = function(diagnostic)
 end
 
 local SIGNS = {
-    [vim.diagnostic.severity.ERROR] = { symbol = "✘" },
-    [vim.diagnostic.severity.WARN] = { symbol = "" },
-    [vim.diagnostic.severity.HINT] = { symbol = "ɦ" },
-    [vim.diagnostic.severity.INFO] = { symbol = "󰋽" },
+    [vim.diagnostic.severity.ERROR] = "✘",
+    [vim.diagnostic.severity.WARN] = "",
+    [vim.diagnostic.severity.HINT] = "ɦ",
+    [vim.diagnostic.severity.INFO] = "󰋽",
 }
 
 vim.diagnostic.config({
@@ -52,7 +52,7 @@ vim.diagnostic.config({
             max = vim.diagnostic.severity.ERROR,
         },
         prefix = function(diagnostic)
-            return SIGNS[diagnostic.severity]["symbol"]
+            return SIGNS[diagnostic.severity]
         end,
     },
     signs = {
