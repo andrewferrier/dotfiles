@@ -31,8 +31,8 @@ end)
 local overrides = {
     DebugPrintLine = { link = "ErrorMsg" },
     DiagnosticUnnecessary = { link = "Whitespace" },
-    SignColumn = { link = "LineNr" },
     OilInfo = { link = "NonText" },
+    SignColumn = { link = "LineNr" },
     ["@lsp.mod.readonly"] = { bold = true },
 }
 
