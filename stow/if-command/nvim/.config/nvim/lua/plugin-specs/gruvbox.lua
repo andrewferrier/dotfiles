@@ -29,6 +29,7 @@ event:start(STATEFILE, {
 end)
 
 local overrides = {
+    DebugPrintLine = { link = "ErrorMsg" },
     DiagnosticUnnecessary = { link = "Whitespace" },
     SignColumn = { link = "LineNr" },
     OilInfo = { link = "NonText" },

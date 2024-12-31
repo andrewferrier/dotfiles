@@ -8,12 +8,5 @@ return {
             },
         },
     },
-    keys = {
-        { "g?", mode = "n" },
-        { "g?", mode = "x" },
-    },
-    cmd = {
-        "ToggleCommentDebugPrints",
-        "DeleteDebugPrints",
-    },
+    lazy = false,
 }
