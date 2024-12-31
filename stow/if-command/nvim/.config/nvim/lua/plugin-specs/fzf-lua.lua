@@ -85,6 +85,10 @@ local configure = function()
     vim.keymap.set({ "i" }, "<C-x><C-f>", function()
         require("fzf-lua").complete_file()
     end, { silent = true, desc = "Fuzzy complete path" })
+
+    vim.keymap.set({ "i" }, "<C-r>", function()
+        require("fzf-lua").registers()
+    end, { silent = true, desc = "Select from registers" })
 end
 
 return {
