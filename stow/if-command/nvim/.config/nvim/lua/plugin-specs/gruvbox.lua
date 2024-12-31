@@ -11,6 +11,7 @@ local update_background = function()
     end
 end
 
+---@diagnostic disable-next-line: undefined-field
 local event = vim.uv.new_fs_event()
 
 ---@diagnostic disable-next-line: need-check-nil
