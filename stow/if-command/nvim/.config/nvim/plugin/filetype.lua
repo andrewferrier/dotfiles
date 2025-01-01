@@ -12,6 +12,10 @@ vim.filetype.add({
         [".sqlfluff"] = "cfg",
         ["control_template"] = "debcontrol",
         ["shellcheckrc"] = "conf",
+
+        -- Doesn't have to be JSON, but I try to standardize on it.
+        -- See https://github.com/igorshubovych/markdownlint-cli?tab=readme-ov-file#configuration
+        [".markdownlintrc"] = "jsonc",
     },
     pattern = {
         ["%.secrets.*"] = "sh",
