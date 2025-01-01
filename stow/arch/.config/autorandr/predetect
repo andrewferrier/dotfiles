@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+SCRIPT_NAME=$(basename "$0")
+
+log() {
+    echo "$*" | systemd-cat --identifier="${SCRIPT_NAME}"
+}
+
+LID_STATE=$(awk '{print $2}' < /proc/acpi/button/lid/LID/state)
+
+if [[ "$LID_STATE" = "closed" ]]; then
+    log "Lid state is closed, making sure that eDP1 is off..."
+    xrandr --output eDP1 --off
+fi
+
