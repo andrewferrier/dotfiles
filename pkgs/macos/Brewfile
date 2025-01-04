@@ -84,7 +84,6 @@ brew "trash"
 brew "w3m"
 brew "watch"
 brew "wget"
-brew "yamllint"
 brew "yq"
 brew "zsh-lovers"
 

@@ -17,7 +17,6 @@ return {
                 null_ls.builtins.diagnostics.markdownlint,
                 null_ls.builtins.diagnostics.sqlfluff,
                 null_ls.builtins.diagnostics.terraform_validate,
-                null_ls.builtins.diagnostics.yamllint,
                 null_ls.builtins.diagnostics.zsh,
             },
         }
