@@ -66,7 +66,7 @@ lshw -short -sanitize                        | Summarize hardware for selling
 pdfunite                                     | combine PDFs on comand line
 xxd                                          | Hex dump
 
-badblocks -b 8192 -wsv /dev/device           | test device for bad blocks
+badblocks -b 8192 -wsv /dev/device           | test device for bad blocks (DESTRUCTIVE!)
 blkdiscard --secure -v -f /dev/device        | Securely erase SSD
 parted mkpart primary ext4 0% 100%           | create a single partition
 sdparm --clear=STANDBY --save -S /dev/device | disable SCSI drive from going to sleep
