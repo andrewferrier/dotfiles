@@ -11,6 +11,7 @@ return {
             cssls = require("plugin-specs.nvim-lspconfig.css"),
             dockerls = {},
             gopls = require("plugin-specs.nvim-lspconfig.gopls"),
+            harper_ls = require("plugin-specs.nvim-lspconfig.harper"),
             jsonls = {},
             lemminx = {},
             lua_ls = require("plugin-specs.nvim-lspconfig.lua_ls"),
