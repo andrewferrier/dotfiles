@@ -34,7 +34,6 @@ brew "git-delta"
 brew "gitlint"
 brew "grep" # for file-list
 brew "gzip"
-brew "harper"
 brew "hexedit"
 brew "httpie"
 brew "hyperfine"
