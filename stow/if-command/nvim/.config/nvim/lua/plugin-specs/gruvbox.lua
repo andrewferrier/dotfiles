@@ -28,34 +28,37 @@ event:start(STATEFILE, {
     vim.schedule(update_background)
 end)
 
-local overrides = {
-    DebugPrintLine = { link = "ErrorMsg" },
-    DiagnosticUnnecessary = { link = "Whitespace" },
-    OilInfo = { link = "NonText" },
-    SignColumn = { link = "LineNr" },
-    ["@lsp.mod.readonly"] = { bold = true },
-}
+local opts_func = function()
+    local opts = {
+        contrast = "hard",
+        dim_inactive = true,
+        transparent_mode = false,
+        overrides = {
+            DebugPrintLine = { link = "ErrorMsg" },
+            DiagnosticUnnecessary = { link = "Whitespace" },
+            OilInfo = { link = "NonText" },
+            SignColumn = { link = "LineNr" },
+            ["@lsp.mod.readonly"] = { bold = true },
+        },
+        italic = {
+            strings = false,
+            operators = false,
+        },
+    }
 
-if vim.fn.has("nvim-0.11.0") == 0 then
-    overrides.TermCursorNC = { link = "DiffChange" }
+    if vim.fn.has("nvim-0.11.0") == 0 then
+        opts.overrides.TermCursorNC = { link = "DiffChange" }
+    end
+
+    return opts
 end
 
 return {
     "ellisonleao/gruvbox.nvim",
     init = update_background,
-    config = function()
-        require("gruvbox").setup({
-            contrast = "hard",
-            dim_inactive = true,
-            transparent_mode = false,
-            overrides = overrides,
-            ---@diagnostic disable-next-line: missing-fields
-            italic = {
-                strings = false,
-                operators = false,
-            },
-        })
-
+    opts = opts_func,
+    config = function(_, opts)
+        require("gruvbox").setup(opts)
         vim.cmd.colorscheme("gruvbox")
     end,
 }
