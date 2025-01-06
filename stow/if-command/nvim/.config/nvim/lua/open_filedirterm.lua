@@ -24,13 +24,30 @@ local select_fileordir = function(fileordir, force_dir, opening_oil)
 end
 
 ---@param command string
+---@param cwd string?
+local open_terminal = function(command, cwd)
+    local opts = { term = true }
+
+    if cwd then
+        opts.cwd = cwd
+    end
+
+    vim.cmd.wincmd("n")
+
+    if vim.fn.has("nvim-0.11.0") == 1 then
+        vim.fn.jobstart(command, opts)
+    else
+        vim.fn.termopen(command, opts)
+    end
+end
+
+---@param command string
 ---@param dir string
 ---@return nil
 M.open_terminal = function(command, dir)
     local expanded_dir = select_fileordir(dir, true, false)
     vim.schedule(function()
-        vim.cmd.wincmd("n")
-        vim.fn.termopen(command, { cwd = expanded_dir })
+        open_terminal(command, expanded_dir)
     end)
 end
 
@@ -39,8 +56,7 @@ end
 M.open_file_manager = function(file_or_dir)
     local expanded_ford = select_fileordir(file_or_dir, false, false)
     vim.schedule(function()
-        vim.cmd.wincmd("n")
-        vim.fn.termopen("lf " .. vim.fn.shellescape(expanded_ford))
+        open_terminal("lf " .. vim.fn.shellescape(expanded_ford))
     end)
 end
 
