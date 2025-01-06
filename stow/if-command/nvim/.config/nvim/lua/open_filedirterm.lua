@@ -23,40 +23,54 @@ local select_fileordir = function(fileordir, force_dir, opening_oil)
     end
 end
 
+---@class OpenTerminalOpts
+---@field cwd string?
+---@field external boolean?
+---@field term true?
+
 ---@param command string
----@param cwd string?
-local open_terminal = function(command, cwd)
-    local opts = { term = true }
+---@param opts OpenTerminalOpts
+local open_terminal = function(command, opts)
+    if opts.external then
+        local cwd = ""
 
-    if cwd then
-        opts.cwd = cwd
-    end
+        if opts.cwd then
+            cwd = "--working-directory " .. opts.cwd .. " "
+        end
 
-    vim.cmd.wincmd("n")
-
-    if vim.fn.has("nvim-0.11.0") == 1 then
-        vim.fn.jobstart(command, opts)
+        vim.fn.jobstart(
+            vim.env.TERMCMD .. " " .. cwd .. command,
+            { detach = true }
+        )
     else
-        vim.fn.termopen(command, opts)
+        vim.cmd.wincmd("n")
+        opts.term = true
+
+        if vim.fn.has("nvim-0.11.0") == 1 then
+            vim.fn.jobstart(command, opts)
+        else
+            vim.fn.termopen(command, opts)
+        end
     end
 end
 
 ---@param command string
----@param dir string
+---@param opts OpenTerminalOpts
 ---@return nil
-M.open_terminal = function(command, dir)
-    local expanded_dir = select_fileordir(dir, true, false)
+M.open_terminal = function(command, opts)
+    opts.cwd = select_fileordir(opts.cwd, true, false)
     vim.schedule(function()
-        open_terminal(command, expanded_dir)
+        open_terminal(command, opts)
     end)
 end
 
 ---@param file_or_dir string
+---@param opts OpenTerminalOpts
 ---@return nil
-M.open_file_manager = function(file_or_dir)
+M.open_file_manager = function(file_or_dir, opts)
     local expanded_ford = select_fileordir(file_or_dir, false, false)
     vim.schedule(function()
-        open_terminal("lf " .. vim.fn.shellescape(expanded_ford))
+        open_terminal("lf " .. vim.fn.shellescape(expanded_ford), opts)
     end)
 end
 
