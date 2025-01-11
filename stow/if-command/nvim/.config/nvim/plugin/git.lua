@@ -5,7 +5,10 @@ local run_git_cmd = function(command, dir)
     local expanded_dir = vim.fn.expand(dir, true)
 
     if vim.fs.root(expanded_dir, ".git") then
-        require("open_filedirterm").open_terminal(command, expanded_dir)
+        require("open_filedirterm").open_terminal(
+            command,
+            { cwd = expanded_dir }
+        )
     else
         vim.notify("Not in git directory", vim.log.levels.WARN)
     end
