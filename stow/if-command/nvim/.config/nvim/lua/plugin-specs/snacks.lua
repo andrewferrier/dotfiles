@@ -14,4 +14,5 @@ return {
             desc = "Rename File",
         },
     },
+    priority = 1000, -- Recommended by README
 }
