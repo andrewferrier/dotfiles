@@ -64,7 +64,10 @@ local configure = function()
                     )
                 end,
                 ["ctrl-s"] = function(selected, _)
-                    require("open_filedirterm").open_file_manager(selected[1])
+                    require("open_filedirterm").open_file_manager(
+                        selected[1],
+                        {}
+                    )
                 end,
                 ["ctrl-d"] = function(selected, _)
                     require("open_filedirterm").open_split_oil(selected[1])
