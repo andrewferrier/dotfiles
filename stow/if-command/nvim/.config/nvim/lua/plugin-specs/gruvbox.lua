@@ -42,7 +42,6 @@ local opts_func = function()
         },
         italic = {
             strings = false,
-            operators = false,
         },
     }
 
