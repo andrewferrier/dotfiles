@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+import logging
 import platform
 import subprocess
 import sys
@@ -12,16 +13,27 @@ BASE_PATH = Path("~/.cache/day-night").expanduser()
 BASE_PATH.mkdir(parents=True, exist_ok=True)
 STATE_FILE = BASE_PATH.joinpath("state")
 
+logger = logging.getLogger("day-night-update")
+logger.propagate = False
+logger.setLevel(logging.WARN)
+
+syserr_handler = logging.StreamHandler(stream=sys.stderr)
+syserr_handler.setLevel(logging.WARN)
+syserr_handler.setFormatter(
+    logging.Formatter("%(asctime)s: %(name)s: %(levelname)s: %(message)s")
+)
+logger.addHandler(syserr_handler)
+
 
 def read_state_file():
     try:
         with open(STATE_FILE) as file:
             return file.readline().strip()
     except FileNotFoundError:
-        print(f"{STATE_FILE} was not found.")
+        logger.error(f"{STATE_FILE} was not found.")
         return None
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logger.error(f"An error occurred: {e}")
         return None
 
 
@@ -50,7 +62,7 @@ def get_state_macos() -> Literal["day", "night"]:
 
 
 if platform.system() == "Linux":
-    print("No longer supports Linux.")
+    logger.error("No longer supports Linux.")
     sys.exit(1)
 
 state: Literal["day", "night"] = get_state_macos()
@@ -68,16 +80,16 @@ if state != current_state:
 
     for sh_file in sh_files:
         try:
-            sys.stdout.write(f"Running script {sh_file}...\n")
+            logger.info(f"Running script {sh_file}...")
             result: subprocess.CompletedProcess[bytes] = subprocess.run(
                 [sh_file], shell=True, check=True, capture_output=True
             )
         except subprocess.CalledProcessError as e:
-            sys.stderr.write(
-                f"Warning: Script {sh_file} failed with return code {e.returncode}\n"
+            logger.error(
+                f"Warning: Script {sh_file} failed with return code {e.returncode}"
             )
-            sys.stderr.write(f"Error message: {e.stderr.decode()}\n")
+            logger.error(f"Error message: {e.stderr.decode()}")
 else:
-    sys.stderr.write(
-        f"Current state is already {current_state}; wanted to switch to {state}.\n"
+    logger.warning(
+        f"Current state is already {current_state}; wanted to switch to {state}."
     )
