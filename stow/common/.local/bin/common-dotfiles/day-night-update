@@ -13,7 +13,7 @@ BASE_PATH.mkdir(parents=True, exist_ok=True)
 STATE_FILE = BASE_PATH.joinpath("state")
 
 
-def read_state_file() -> str | None:
+def read_state_file():
     try:
         with open(STATE_FILE) as file:
             return file.readline().strip()
@@ -54,7 +54,7 @@ if platform.system() == "Linux":
     sys.exit(1)
 
 state: Literal["day", "night"] = get_state_macos()
-current_state: str | None = read_state_file()
+current_state = read_state_file()
 
 if state != current_state:
     scripts_dir: Path
