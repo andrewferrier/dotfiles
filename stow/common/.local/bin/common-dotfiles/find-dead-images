@@ -15,10 +15,7 @@ from tqdm.contrib.concurrent import thread_map
 
 logger = logging.getLogger("find-dead-images")
 logger.propagate = False
-logger.setLevel(logging.DEBUG)
-
 syserr_handler = logging.StreamHandler(stream=sys.stderr)
-syserr_handler.setLevel(logging.DEBUG)
 logger.addHandler(syserr_handler)
 
 parser = argparse.ArgumentParser()
