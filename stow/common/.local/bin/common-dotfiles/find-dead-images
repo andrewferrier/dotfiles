@@ -28,20 +28,24 @@ THRESHOLD = 0.03
 
 
 def check_image(filename: Path):
-    cmd = subprocess.run(
-        [
-            "convert",
-            str(filename),
-            "-colorspace",
-            "Gray",
-            "-format",
-            '"%[fx:mean]"',
-            "info:",
-        ],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
+    try:
+        cmd = subprocess.run(
+            [
+                "convert",
+                str(filename),
+                "-colorspace",
+                "Gray",
+                "-format",
+                '"%[fx:mean]"',
+                "info:",
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except subprocess.CalledProcessError:
+        return False
+
     mean_brightness = float(cmd.stdout.replace('"', "").strip())
 
     if mean_brightness < THRESHOLD or (1 - mean_brightness) < THRESHOLD:
