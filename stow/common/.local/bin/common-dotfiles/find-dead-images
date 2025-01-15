@@ -9,6 +9,8 @@ from pathlib import Path
 import subprocess
 import sys
 
+from tqdm import tqdm
+
 logger = logging.getLogger("find-dead-images")
 logger.propagate = False
 logger.setLevel(logging.DEBUG)
@@ -43,7 +45,7 @@ def check_image(filename: Path):
     mean_brightness = float(cmd.stdout.replace('"', "").strip())
 
     if mean_brightness < THRESHOLD or (1 - mean_brightness) < THRESHOLD:
-        print(str(filename) + ", value: " + str(mean_brightness))
+        tqdm.write(str(filename) + ", value: " + str(mean_brightness))
         return True
     else:
         return False
@@ -73,10 +75,7 @@ def main():
 
     logger.info("Found " + str(len(paths)) + " images.")
 
-    for idx, path in enumerate(paths):
-        if idx % 10 == 0:
-            logger.debug("Inspecting file " + str(idx) + "/" + str(len(paths)))
-
+    for path in tqdm(paths, total=len(paths)):
         check_image(path)
 
     logger.info("DONE.")
