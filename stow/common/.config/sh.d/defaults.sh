@@ -7,8 +7,14 @@ alias lzip="lzip --best -m128 -s128MiB"
 alias mkdir="mkdir -v"
 alias mv="mv -v"
 alias rm='rm -Iv'
-alias rsync='rsync --human-readable --progress --partial --verbose --times --links'
 alias watch='watch --color'
+
+RSYNC_OPTIONS='--human-readable --progress --partial --verbose --times --links'
+
+# shellcheck disable=SC2139
+alias rsync="rsync ${RSYNC_OPTIONS}"
+# shellcheck disable=SC2139
+alias rsync-progress-job="rsync ${RSYNC_OPTIONS} --info=progress2 --info=name0"
 
 if [[ ${OSTYPE} == darwin* ]]; then
     alias cp='cp -v'
