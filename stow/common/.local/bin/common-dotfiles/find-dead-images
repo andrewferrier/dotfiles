@@ -4,12 +4,14 @@
 
 import argparse
 import logging
+import multiprocessing
 import os
 from pathlib import Path
 import subprocess
 import sys
 
 from tqdm import tqdm
+from tqdm.contrib.concurrent import thread_map
 
 logger = logging.getLogger("find-dead-images")
 logger.propagate = False
@@ -79,8 +81,7 @@ def main():
 
     logger.info("Found " + str(len(paths)) + " images.")
 
-    for path in tqdm(paths, total=len(paths)):
-        check_image(path)
+    thread_map(check_image, paths, max_workers=multiprocessing.cpu_count())
 
     logger.info("DONE.")
 
