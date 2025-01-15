@@ -67,6 +67,7 @@ brew "ripgrep"
 brew "ripgrep-all"
 brew "rsync"
 brew "ruff" # for neovim LSP
+brew "selene"
 brew "shellcheck" # to support bash-language-server
 brew "shellharden"
 brew "shfmt"
