@@ -1,0 +1,71 @@
+#!/usr/bin/python
+
+import os
+import argparse
+from Levenshtein import ratio
+
+
+def strip_extension(filename: str) -> str:
+    return os.path.splitext(filename)[0]
+
+
+def find_similar_filenames(
+    directory: str,
+    threshold: float,
+) -> list[tuple[str, str, float]]:
+    all_files: list[str] = []
+
+    for root, _, files in os.walk(directory):
+        for file in files:
+            all_files.append(os.path.join(root, file))
+
+    similar_files: list[tuple[str, str, float]] = []
+
+    for i in range(len(all_files)):
+        for j in range(i + 1, len(all_files)):
+            file1 = os.path.basename(all_files[i])
+            file2 = os.path.basename(all_files[j])
+
+            if strip_extension(file1) == strip_extension(file2):
+                continue
+
+            similarity: float = ratio(file1, file2)
+
+            if similarity >= threshold:
+                similar_files.append((all_files[i], all_files[j], similarity))
+
+    return similar_files
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Find similar filenames in a directory tree."
+    )
+    parser.add_argument(
+        "directory", type=str, help="The root directory to search for files."
+    )
+    parser.add_argument(
+        "--threshold",
+        type=float,
+        default=0.8,
+        help="The similarity threshold (0.0 to 1.0). Default is 0.8.",
+    )
+
+    args = parser.parse_args()
+
+    if not os.path.isdir(args.directory):
+        print(f"Error: The specified directory '{args.directory}' does not exist.")
+        return
+
+    similar_files = find_similar_filenames(args.directory, args.threshold)
+
+    if similar_files:
+        print("Similar filenames found:")
+        for file1, file2, similarity in similar_files:
+            print(f"{file1} <--> {file2} (Similarity: {similarity:.2f})")
+    else:
+        print("No similar filenames found.")
+
+
+if __name__ == "__main__":
+    main()
