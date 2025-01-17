@@ -2,6 +2,7 @@
 
 import os
 import argparse
+from pathlib import Path
 from Levenshtein import ratio
 
 
@@ -10,21 +11,15 @@ def strip_extension(filename: str) -> str:
 
 
 def find_similar_filenames(
-    directory: str,
+    files: list[Path],
     threshold: float,
-) -> list[tuple[str, str, float]]:
-    all_files: list[str] = []
+) -> list[tuple[Path, Path, float]]:
+    similar_files: list[tuple[Path, Path, float]] = []
 
-    for root, _, files in os.walk(directory):
-        for file in files:
-            all_files.append(os.path.join(root, file))
-
-    similar_files: list[tuple[str, str, float]] = []
-
-    for i in range(len(all_files)):
-        for j in range(i + 1, len(all_files)):
-            file1 = os.path.basename(all_files[i])
-            file2 = os.path.basename(all_files[j])
+    for i in range(len(files)):
+        for j in range(i + 1, len(files)):
+            file1 = os.path.basename(files[i])
+            file2 = os.path.basename(files[j])
 
             if strip_extension(file1) == strip_extension(file2):
                 continue
@@ -32,7 +27,7 @@ def find_similar_filenames(
             similarity: float = ratio(file1, file2)
 
             if similarity >= threshold:
-                similar_files.append((all_files[i], all_files[j], similarity))
+                similar_files.append((files[i], files[j], similarity))
 
     return similar_files
 
@@ -42,7 +37,7 @@ def main() -> None:
         description="Find similar filenames in a directory tree."
     )
     parser.add_argument(
-        "directory", type=str, help="The root directory to search for files."
+        "directory", type=str, nargs="+", help="The root directory to search for files."
     )
     parser.add_argument(
         "--threshold",
@@ -53,11 +48,20 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    if not os.path.isdir(args.directory):
-        print(f"Error: The specified directory '{args.directory}' does not exist.")
-        return
+    all_files: list[Path] = []
 
-    similar_files = find_similar_filenames(args.directory, args.threshold)
+    directory: str
+
+    for directory in args.directory:
+        if not os.path.isdir(directory):
+            print(f"Error: The specified directory '{directory}' does not exist.")
+            continue
+
+        for root, _, files in os.walk(directory):
+            for file in files:
+                all_files.append(Path(root) / file)
+
+    similar_files = find_similar_filenames(all_files, args.threshold)
 
     if similar_files:
         print("Similar filenames found:")
