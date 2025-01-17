@@ -26,7 +26,7 @@ args = parser.parse_args()
 THRESHOLD = 0.03
 
 
-def check_image(filename: Path):
+def get_mean_brightness_normalized(filename: Path):
     try:
         cmd = subprocess.run(
             [
@@ -47,11 +47,16 @@ def check_image(filename: Path):
 
     mean_brightness = float(cmd.stdout.replace('"', "").strip())
 
-    if mean_brightness < THRESHOLD or (1 - mean_brightness) < THRESHOLD:
-        tqdm.write(str(filename) + ", value: " + str(mean_brightness))
-        return True
+    if mean_brightness > 0.5:
+        return 1 - mean_brightness
     else:
-        return False
+        return mean_brightness
+
+
+def check_image(filename: Path):
+    mean_brightness = get_mean_brightness_normalized(filename)
+
+    tqdm.write("{:.2f}".format(mean_brightness) + "\t" + str(filename))
 
 
 def is_image(filename: Path):
