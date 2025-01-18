@@ -7,6 +7,9 @@ return {
                 variable = false,
             },
         },
+        filetypes = {
+            lf = require("debugprint.filetypes").bash,
+        },
     },
     lazy = false,
 }
