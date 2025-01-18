@@ -69,9 +69,8 @@ cmd folderize_prep %{{
 cmd folderize %{{
     set -o noglob
 
-    FOLDER=$1
-    mkdir $FOLDER
-    IFS="$(printf '\n\t')"; mv $fx $FOLDER
+    mkdir -- "$*"
+    IFS="$(printf '\n\t')"; mv $fx "$*"
 }}
 
 cmd zip ${{
