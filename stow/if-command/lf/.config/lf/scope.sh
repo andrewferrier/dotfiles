@@ -111,7 +111,7 @@ handle_mime() {
     case "${MIMETYPE}" in
 
     application/vnd.sqlite3)
-        sqlite3 "${FILE_PATH}" ".schema" && exit 0
+        sqlite3 "${FILE_PATH}" ".schema" | "${BAT[@]}" --language sql && exit 0
         ;;
 
     image/*)
