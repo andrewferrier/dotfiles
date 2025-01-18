@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+HISTORY_FILE=$HOME/.config/geeqie/history
+
+if [[ -f $HISTORY_FILE ]]; then
+    mv "$HISTORY_FILE" /tmp
+fi
+
+if [[ ! -L $HISTORY_FILE ]]; then
+    ln -s /dev/null "$HISTORY_FILE"
+fi
