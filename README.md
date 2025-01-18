@@ -1,7 +1,5 @@
 # Dotfiles - Master Cheatsheet
 
-![Test status](https://github.com/andrewferrier/dotfiles/actions/workflows/tests.yaml/badge.svg)
-
 ```text
 awk     | <https://github.com/learnbyexample/Command-line-text-processing/blob/master/gnu_awk.md>
 bash/sh | ~/.config/bash.d/README.md
