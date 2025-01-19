@@ -21,8 +21,7 @@ M.inspect_client = function()
             table.insert(lines, "")
         end
 
-        table.insert(lines, "Client: " .. client.name)
-        table.insert(lines, "ID: " .. client.id)
+        table.insert(lines, "Client: " .. client.name .. ", ID: " .. client.id)
         table.insert(lines, "")
 
         table.insert(lines, "Configuration:")
