@@ -46,14 +46,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = lsp_callback,
 })
 
-vim.api.nvim_create_user_command(
-    "LspWhatCapabilities",
-    "Capture call v:lua.require('lsp').show_capabilities()",
-    {}
-)
-
-vim.api.nvim_create_user_command(
-    "LspInspectClient",
-    "call v:lua.require('lsp').inspect_lsp_client()",
-    {}
-)
+vim.api.nvim_create_user_command("LspInspectClient", function()
+    require("lsp").inspect_client()
+end, {})
