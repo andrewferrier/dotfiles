@@ -19,7 +19,7 @@ local opts = {
     formatters_by_ft = {
         lua = { "stylua" },
         html = { "prettier" },
-        yaml = { "prettier" },
+        yaml = { "prettier", "yamlfix" },
         sql = { "sqlfluff" },
         markdown = { "mdformat" },
     },
