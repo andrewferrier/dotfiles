@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },

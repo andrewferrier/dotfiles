@@ -52,6 +52,7 @@ local opts_func = function()
     return opts
 end
 
+-- selene: allow(mixed_table)
 return {
     "ellisonleao/gruvbox.nvim",
     init = update_background,

@@ -94,6 +94,7 @@ local configure = function()
     end, { silent = true, desc = "Select from registers" })
 end
 
+-- selene: allow(mixed_table)
 return {
     "ibhagwan/fzf-lua",
     config = configure,

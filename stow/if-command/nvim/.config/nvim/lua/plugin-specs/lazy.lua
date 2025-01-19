@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 return {
     "folke/lazy.nvim",
     -- See https://github.com/folke/lazy.nvim/issues/418

@@ -5,6 +5,7 @@ return {
         softener = { mail = true },
         notify_on_switch = false,
     },
+    -- selene: allow(mixed_table)
     keys = {
         {
             "yow",

@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 return {
     "nvimtools/none-ls.nvim",
     dependencies = { { "nvim-lua/plenary.nvim", version = "*" } },

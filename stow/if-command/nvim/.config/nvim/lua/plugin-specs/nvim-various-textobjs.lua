@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 local map = function(lhs, rhs, description)
     return {
         lhs,
@@ -8,6 +9,7 @@ local map = function(lhs, rhs, description)
     }
 end
 
+-- selene: allow(mixed_table)
 return {
     "chrisgrieser/nvim-various-textobjs",
     opts = {

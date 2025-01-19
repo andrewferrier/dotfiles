@@ -1,3 +1,5 @@
+local M = {}
+
 local WIN_WIDTH_FILENAME_FRACTION = 0.07
 local WIN_WIDTH_DIR_FRACTION = 0.03
 
@@ -39,7 +41,7 @@ local function get_spelling_count()
 end
 
 ---@return string
-function _G.Statusline_FeaturesEnabled()
+M.featuresenabled = function()
     local return_string = ""
 
     if vim.bo.filetype ~= "oil" and vim.bo.buftype ~= "terminal" then
@@ -66,7 +68,7 @@ function _G.Statusline_FeaturesEnabled()
 end
 
 ---@return string
-function _G.Statusline_DiagnosticStatus()
+M.diagnosticstatus = function()
     local content = require("mini.statusline")
         .section_diagnostics({
             icon = "",
@@ -82,7 +84,7 @@ function _G.Statusline_DiagnosticStatus()
 end
 
 ---@return string
-function _G.Statusline_GitSigns()
+M.gitsigns = function()
     if vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" then
         return LEFT_BRACE .. vim.b.gitsigns_status .. RIGHT_BRACE .. " "
     else
@@ -91,7 +93,7 @@ function _G.Statusline_GitSigns()
 end
 
 ---@return string
-function _G.Statusline_Indent()
+M.indent = function()
     if vim.bo.buftype == "terminal" then
         return ""
     end
@@ -114,7 +116,7 @@ function _G.Statusline_Indent()
 end
 
 ---@return string
-function _G.Statusline_Filename()
+M.filename = function()
     return vim.fn.pathshorten(
         require("utils").get_filename_homedir(),
         math.floor(vim.fn.winwidth(0) * WIN_WIDTH_FILENAME_FRACTION)
@@ -122,7 +124,7 @@ function _G.Statusline_Filename()
 end
 
 ---@return string
-function _G.Statusline_Getcwd()
+M.getcwd = function()
     if
         vim.bo.filetype ~= "help"
         and vim.bo.filetype ~= "man"
@@ -140,7 +142,7 @@ function _G.Statusline_Getcwd()
 end
 
 ---@return string
-function _G.Statusline_Wrappingmode()
+M.wrappingmode = function()
     local currentmode = require("wrapping").get_current_mode()
 
     if currentmode ~= nil then
@@ -157,7 +159,7 @@ vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
 })
 
 ---@return string
-function _G.Statusline_SpellingErrorCount()
+M.spellingerrorcount = function()
     if vim.wo.spell == true then
         if vim.b.spelling_warning == nil then
             local spelling_count = get_spelling_count()
@@ -180,7 +182,7 @@ function _G.Statusline_SpellingErrorCount()
 end
 
 ---@return string
-function _G.Statusline_LSPProgress()
+M.lspprogress = function()
     local status = vim.trim(vim.lsp.status())
 
     if status ~= "" then
@@ -190,61 +192,4 @@ function _G.Statusline_LSPProgress()
     end
 end
 
-local RESET_HIGHLIGHTING = "%*"
-local TRUNCATOR_POSITION = "%<"
-local ALIGN_RHS = "%="
-local SEPARATOR = "│ "
-
--- LHS - Filename & Filetype
-local statusline = " %{v:lua.Statusline_Filename()}"
-statusline = statusline .. " %y"
-
--- LHS - Cwd
-statusline = statusline .. " " .. SEPARATOR
-statusline = statusline .. TRUNCATOR_POSITION
-statusline = statusline .. "%{v:lua.Statusline_Getcwd()}"
-statusline = statusline .. RESET_HIGHLIGHTING
-
-statusline = statusline .. ALIGN_RHS
-
--- RHS - Warnings
-statusline = statusline .. "%{v:lua.Statusline_LSPProgress()}"
-statusline = statusline .. "%{v:lua.Statusline_DiagnosticStatus()}"
-statusline = statusline .. "%{v:lua.Statusline_SpellingErrorCount()}"
-statusline = statusline .. "%{v:lua.Statusline_GitSigns()}"
-statusline = statusline .. SEPARATOR
-
--- RHS - File and feature info
-statusline = statusline .. "%{v:lua.Statusline_Indent()}"
-statusline = statusline .. "%{&fileformat!=#'unix'?',ff='.&fileformat:''}"
-statusline = statusline .. "%{v:lua.Statusline_Wrappingmode()}"
-statusline = statusline .. "%{&spell?',S':''}"
-statusline = statusline .. "%{v:lua.Statusline_FeaturesEnabled()}"
-statusline = statusline .. "%M"
-statusline = statusline .. " " .. SEPARATOR
-
--- RHS - Location
-statusline = statusline .. "%l/%L,%c "
-
-vim.o.statusline = statusline
-
-local redraw_timer
-
-local delayed_redraw = function()
-    vim.cmd.redrawstatus()
-    redraw_timer = nil
-end
-
-local callback = function()
-    if redraw_timer ~= nil then
-        vim.fn.timer_stop(redraw_timer)
-    end
-
-    vim.cmd.redrawstatus()
-    redraw_timer = vim.fn.timer_start(750, delayed_redraw)
-end
-
-vim.api.nvim_create_autocmd("LspProgress", {
-    pattern = "*",
-    callback = callback,
-})
+return M

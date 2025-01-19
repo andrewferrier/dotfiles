@@ -92,6 +92,7 @@ vim.api.nvim_create_user_command("GitQFList", function()
     end
 end, {})
 
+-- selene: allow(mixed_table)
 return {
     "lewis6991/gitsigns.nvim",
     opts = {

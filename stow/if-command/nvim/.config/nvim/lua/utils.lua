@@ -16,6 +16,11 @@ M.get_filename_homedir = function()
     return vim.fn.substitute(curfile, "^" .. vim.env.HOME, "~", "")
 end
 
+---@return string
+M.get_filename_homedir_shortened = function()
+    return vim.fn.pathshorten(M.get_filename_homedir())
+end
+
 ---@param method string
 ---@return boolean
 M.lsp_supports_method = function(method)

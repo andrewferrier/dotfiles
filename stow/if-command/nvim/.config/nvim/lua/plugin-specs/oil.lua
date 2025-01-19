@@ -1,3 +1,4 @@
+-- selene: allow(mixed_table)
 return {
     "stevearc/oil.nvim",
     opts = function()

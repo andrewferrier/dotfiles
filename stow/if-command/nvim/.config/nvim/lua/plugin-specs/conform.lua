@@ -64,6 +64,7 @@ local opts = {
     },
 }
 
+-- selene: allow(mixed_table)
 return {
     "stevearc/conform.nvim",
     opts = opts,
