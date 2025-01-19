@@ -1,5 +1,15 @@
 local M = {}
 
+---@param method string
+---@return boolean
+M.supports_method = function(method)
+    local clients = vim.tbl_filter(function(client)
+        return client.supports_method(method)
+    end, vim.lsp.get_clients({ bufnr = 0 }))
+
+    return #clients > 0
+end
+
 M.inspect_client = function()
     -- Based on https://www.reddit.com/r/neovim/comments/1gf7kyn/lsp_configuration_debugging/
     local lines = {}

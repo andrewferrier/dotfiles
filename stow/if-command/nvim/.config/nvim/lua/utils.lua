@@ -21,16 +21,6 @@ M.get_filename_homedir_shortened = function()
     return vim.fn.pathshorten(M.get_filename_homedir())
 end
 
----@param method string
----@return boolean
-M.lsp_supports_method = function(method)
-    local clients = vim.tbl_filter(function(client)
-        return client.supports_method(method)
-    end, vim.lsp.get_clients({ bufnr = 0 }))
-
-    return #clients > 0
-end
-
 ---@return string
 M.get_neovim_symbol = function()
     if vim.uv.os_uname().sysname == "Darwin" then

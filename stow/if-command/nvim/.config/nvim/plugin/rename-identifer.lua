@@ -2,7 +2,7 @@ local TREESITTER_RENAME_INEFFECTIVE = { "markdown", "latex" }
 
 vim.keymap.set("n", "grn", function()
     if
-        require("utils").lsp_supports_method(
+        require("lsp").supports_method(
             vim.lsp.protocol.Methods.textDocument_rename
         )
     then
