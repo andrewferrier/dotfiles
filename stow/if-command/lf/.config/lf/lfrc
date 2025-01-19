@@ -140,6 +140,7 @@ set icons
 set incsearch true
 set infotimefmtnew "2006-01-02 15:04"
 set infotimefmtold "2006-01-02 15:04"
+set mouse true
 set scrolloff 5
 set timefmt "2006-01-02 15:04:05"
 set truncatechar "…"
