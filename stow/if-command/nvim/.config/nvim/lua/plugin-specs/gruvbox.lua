@@ -12,20 +12,13 @@ local update_background = function()
 end
 
 ---@diagnostic disable-next-line: undefined-field
-local event = vim.uv.new_fs_event()
-
----@diagnostic disable-next-line: need-check-nil
-event:start(STATEFILE, {
+vim.uv.new_fs_event():start(STATEFILE, {
     watch_entry = true,
     stat = true,
 }, function(err, _, _)
-    if err then
-        vim.notify(err, vim.log.levels.ERROR)
-        ---@diagnostic disable-next-line: need-check-nil
-        event:stop()
+    if not err then
+        vim.schedule(update_background)
     end
-
-    vim.schedule(update_background)
 end)
 
 local opts_func = function()
