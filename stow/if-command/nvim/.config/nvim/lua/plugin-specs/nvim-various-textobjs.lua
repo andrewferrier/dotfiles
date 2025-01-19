@@ -10,16 +10,18 @@ end
 
 return {
     "chrisgrieser/nvim-various-textobjs",
+    opts = {
+        textobjs = {
+            indentation = {
+                blanksAreDelimiter = false,
+            },
+        },
+    },
     keys = {
         map(
             "ii",
-            'indentation("inner", "inner", "noBlanks")',
-            "indentation not inc. blank lines"
-        ),
-        map(
-            "ai",
             'indentation("inner", "inner")',
-            "indentation inc. blank lines"
+            "indentation not inc. blank lines"
         ),
         map("ik", 'key("inner")', "'key'/lhs"),
         map("ak", 'key("outer")', "'key'/lhs inc. assignment"),
