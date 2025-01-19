@@ -48,11 +48,7 @@ end
 ---@param lines string[]
 M.show_in_split_window = function(lines)
     local buf = vim.api.nvim_create_buf(false, true)
-
-    vim.api.nvim_open_win(buf, true, {
-        split = "below",
-    })
-
+    vim.api.nvim_open_win(buf, true, { split = "below" })
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 
     vim.bo[buf].modifiable = false
