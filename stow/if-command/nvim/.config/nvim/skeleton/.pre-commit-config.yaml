@@ -51,6 +51,10 @@ repos:
       rev: v2.0.1
       hooks:
           - id: stylua-system
+    - repo: https://github.com/Calinou/pre-commit-luacheck
+      rev: v1.0.0
+      hooks:
+          - id: luacheck
     - repo: https://github.com/igorshubovych/markdownlint-cli
       rev: v0.43.0
       hooks:
