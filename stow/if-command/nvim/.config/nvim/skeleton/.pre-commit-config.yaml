@@ -8,7 +8,7 @@ repos:
           - id: check-hooks-apply
           - id: check-useless-excludes
     - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v4.6.0
+      rev: v5.0.0
       hooks:
           - id: check-added-large-files
           - id: check-executables-have-shebangs
@@ -19,11 +19,11 @@ repos:
           - id: check-xml
           - id: check-yaml
     - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-      rev: 3.0.3
+      rev: 3.1.2
       hooks:
           - id: editorconfig-checker
     - repo: https://github.com/gitleaks/gitleaks
-      rev: v8.18.4
+      rev: v8.23.1
       hooks:
           - id: gitleaks
     - repo: https://github.com/jorisroovers/gitlint
@@ -34,11 +34,11 @@ repos:
     # Language-specific
 
     - repo: https://github.com/asottile/pyupgrade
-      rev: v3.17.0
+      rev: v3.19.1
       hooks:
           - id: pyupgrade
     - repo: https://github.com/astral-sh/ruff-pre-commit
-      rev: v0.6.3
+      rev: v0.9.2
       hooks:
           - id: ruff
           - id: ruff-format
@@ -48,7 +48,7 @@ repos:
           - id: shellcheck-system
             types_or: [bash, sh]
     - repo: https://github.com/JohnnyMorganz/StyLua
-      rev: v2.0.1
+      rev: v2.0.2
       hooks:
           - id: stylua-system
     - repo: https://github.com/Calinou/pre-commit-luacheck

@@ -82,7 +82,7 @@ for entry in data:
     EM_SPACE = " "
 
     print(
-        f'{entry["id"]:5}{EM_SPACE}'
+        f"{entry['id']:5}{EM_SPACE}"
         + colored(f"{human_date:12}{EM_SPACE}", datecolor, force_color=True)
-        + colored(f'{entry["summary"]}', entrycolor, force_color=True)
+        + colored(f"{entry['summary']}", entrycolor, force_color=True)
     )

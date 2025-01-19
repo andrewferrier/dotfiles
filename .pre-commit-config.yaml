@@ -1,6 +1,8 @@
 # See https://pre-commit.com for more information
 ---
 repos:
+    # General
+
     - repo: meta
       hooks:
           - id: check-hooks-apply
@@ -16,7 +18,7 @@ repos:
           - id: check-xml
           - id: check-yaml
     - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-      rev: 3.0.3
+      rev: 3.1.2
       hooks:
           - id: editorconfig-checker
             exclude: |
@@ -24,34 +26,37 @@ repos:
                     stow/arch/.xscreensaver|
                     stow/if-command/nvim/.config/nvim/skeleton/.*
                 )$
+    - repo: https://github.com/gitleaks/gitleaks
+      rev: v8.23.1
+      hooks:
+          - id: gitleaks
     - repo: https://github.com/jorisroovers/gitlint
       rev: v0.19.1
       hooks:
           - id: gitlint
+
+    # Language-specific
+
     - repo: https://github.com/asottile/pyupgrade
-      rev: v3.17.0
+      rev: v3.19.1
       hooks:
           - id: pyupgrade
+    - repo: https://github.com/astral-sh/ruff-pre-commit
+      rev: v0.9.2
+      hooks:
+          - id: ruff
+          - id: ruff-format
     - repo: https://github.com/Jarmos-san/shellcheck-precommit
       rev: v0.2.0
       hooks:
           - id: shellcheck-system
             types_or: [bash, sh]
             exclude: ^stow/common/.config/git/template/hooks/pre-commit
-    - repo: https://github.com/gitleaks/gitleaks
-      rev: v8.18.4
-      hooks:
-          - id: gitleaks
     - repo: https://github.com/JohnnyMorganz/StyLua
-      rev: v2.0.1
+      rev: v2.0.2
       hooks:
           - id: stylua-system
             exclude: ^stow/macos/.hammerspoon/hs/.*
-    - repo: https://github.com/astral-sh/ruff-pre-commit
-      rev: v0.6.3
-      hooks:
-          - id: ruff
-          - id: ruff-format
     - repo: https://github.com/Calinou/pre-commit-luacheck
       rev: v1.0.0
       hooks:
