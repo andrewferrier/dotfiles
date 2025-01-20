@@ -40,8 +40,7 @@ local function check_and_insert_skeleton(from_scratch)
     local skeleton = find_skeleton()
 
     if skeleton ~= nil then
-        vim.cmd.read(skeleton)
-        vim.cmd.normal({ args = { "kdd" }, bang = true })
+        vim.api.nvim_buf_set_lines(0, 0, -1, true, vim.fn.readfile(skeleton))
 
         if from_scratch then
             vim.cmd.normal({ args = { "G" }, bang = true })
@@ -52,7 +51,9 @@ local function check_and_insert_skeleton(from_scratch)
             "marker",
             { scope = "local" }
         )
-        vim.cmd.normal({ args = { "zM" } })
+
+        vim.api.nvim_set_option_value("foldlevel", 0, { scope = "local" })
+
         vim.notify("Added skeleton " .. skeleton)
     end
 end
