@@ -17,6 +17,7 @@ end
 
 local opts = {
     formatters_by_ft = {
+        d2 = { "d2" },
         html = { "prettier" },
         lua = { "stylua" },
         markdown = { "mdformat" },
