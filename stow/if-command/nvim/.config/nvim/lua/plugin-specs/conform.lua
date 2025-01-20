@@ -17,11 +17,11 @@ end
 
 local opts = {
     formatters_by_ft = {
-        lua = { "stylua" },
         html = { "prettier" },
-        yaml = { "prettier", "yamlfix" },
-        sql = { "sqlfluff" },
+        lua = { "stylua" },
         markdown = { "mdformat" },
+        sql = { "sqlfluff" },
+        yaml = { "prettier", "yamlfix" },
     },
     default_format_opts = {
         lsp_format = "fallback",
