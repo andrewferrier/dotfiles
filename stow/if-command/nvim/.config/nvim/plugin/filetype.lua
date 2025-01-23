@@ -7,8 +7,6 @@ vim.filetype.add({
     },
     filename = {
         [".ansible-lint"] = "yaml",
-        [".dockerignore"] = "gitignore",
-        [".gitlint"] = "cfg",
         [".sqlfluff"] = "cfg",
         ["control_template"] = "debcontrol",
         ["shellcheckrc"] = "conf",
@@ -50,6 +48,10 @@ vim.filetype.add({
 
 if vim.fn.has("nvim-0.11") == 0 then
     vim.filetype.add({
+        filename = {
+            [".dockerignore"] = "gitignore",
+            [".gitlint"] = "dosini",
+        },
         pattern = {
             [".*envrc.*"] = "sh",
         },
