@@ -29,14 +29,20 @@ if [[ -z "${SSH_CONNECTION}" ]]; then
     set_from_state_file
 else
     if [[ -z "$TMUX" ]]; then
-        BG_COLOR=$(get-bg-color)
+        if command -v kitten >/dev/null 2>&1; then
+            # shellcheck disable=SC2312
+            BG_COLOR=$(kitten query-terminal background | cut -d'#' -f2)
 
-        if [[ $BG_COLOR == "rgb:f9f9/f5f5/d7d7" ]]; then
-            set_day_vars
-            echo 'day' >! "${STATE_FILE}"
+            if [[ $BG_COLOR == "f9f5d7" ]]; then
+                set_day_vars
+                echo 'day' >! "${STATE_FILE}"
+            else
+                set_night_vars
+                echo 'night'  >! "${STATE_FILE}"
+            fi
         else
-            set_night_vars
-            echo 'night' >! "${STATE_FILE}"
+            echo >&2 "Cannot use kitten query-terminal."
+            exit 1
         fi
     else
         set_from_state_file
