@@ -62,6 +62,10 @@ function open-directory() {
     fi
 }
 
+function open-calendar() {
+    ${TERMCMD} khal import "${FILE}"
+}
+
 function open-text() {
     if [[ ${OSTYPE} == darwin* ]]; then
         if ${INTERACTIVE}; then
@@ -132,6 +136,8 @@ for FILE in "$@"; do
             elif is-archive "${FILE_EXTENSION_LOWER}" && command -v aunpack &>/dev/null; then
                 DIR=$(dirname "${FILE}")
                 (cd "${DIR}" && aunpack "${FILE}")
+            elif [[ ${MIME_TYPE} == 'text/calendar' ]]; then
+                open-calendar "${FILE}"
             elif (isutf8 -q "${FILE}" || [[ ${MIME_TYPE} == "text/plain" ]]) && (! text-treat-as-binary "${FILE_EXTENSION_LOWER}"); then
                 open-text "${FILE}"
             else
