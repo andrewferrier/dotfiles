@@ -3,7 +3,7 @@
 import os
 import argparse
 from pathlib import Path
-from Levenshtein import ratio
+from Levenshtein import ratio  # pyright: ignore[reportUnknownVariableType]
 
 
 def strip_extension(filename: str) -> str:
@@ -24,7 +24,7 @@ def find_similar_filenames(
             if strip_extension(file1) == strip_extension(file2):
                 continue
 
-            similarity: float = ratio(file1, file2)
+            similarity: float = float(ratio(file1, file2))  # pyright: ignore[reportUnknownArgumentType]
 
             if similarity >= threshold:
                 similar_files.append((files[i], files[j], similarity))
@@ -48,11 +48,12 @@ def main() -> None:
 
     args = parser.parse_args()
 
+    args_threshold: float = args.threshold  # pyright: ignore[reportAny]
+    args_directory: str = args.directory  # pyright: ignore[reportAny]
+
     all_files: list[Path] = []
 
-    directory: str
-
-    for directory in args.directory:
+    for directory in args_directory:
         if not os.path.isdir(directory):
             print(f"Error: The specified directory '{directory}' does not exist.")
             continue
@@ -61,7 +62,7 @@ def main() -> None:
             for file in files:
                 all_files.append(Path(root) / file)
 
-    similar_files = find_similar_filenames(all_files, args.threshold)
+    similar_files = find_similar_filenames(all_files, args_threshold)
 
     if similar_files:
         print("Similar filenames found:")
