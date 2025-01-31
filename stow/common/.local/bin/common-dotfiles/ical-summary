@@ -14,19 +14,9 @@ def parse_arguments():
     parser = argparse.ArgumentParser(
         description="Process .ical VTODO files and email completed tasks."
     )
-    parser.add_argument(
-        "directory",
-        type=str,
-    )
-    parser.add_argument(
-        "email",
-        type=str,
-    )
-    parser.add_argument(
-        "--number-of-days",
-        type=int,
-        default=7,
-    )
+    parser.add_argument("directory", type=str)
+    parser.add_argument("email", type=str)
+    parser.add_argument("--number-of-days", type=int, default=7)
     return parser.parse_args()
 
 
