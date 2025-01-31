@@ -88,7 +88,7 @@ if state != current_state:
             logger.error(
                 f"Warning: Script {sh_file} failed with return code {e.returncode}"
             )
-            logger.error(f"Error message: {e.stderr.decode()}")
+            logger.error(f"Error message: {e.stderr.decode()}")  # pyright: ignore[reportAny]
 else:
     logger.warning(
         f"Current state is already {current_state}; wanted to switch to {state}."
