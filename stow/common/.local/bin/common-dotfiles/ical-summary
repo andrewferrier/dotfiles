@@ -19,7 +19,7 @@ def parse_arguments():
         type=str,
     )
     parser.add_argument(
-        "email-address",
+        "email",
         type=str,
     )
     parser.add_argument(
