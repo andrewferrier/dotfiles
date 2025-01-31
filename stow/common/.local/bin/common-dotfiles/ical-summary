@@ -1,0 +1,115 @@
+#!/usr/bin/env python
+
+import argparse
+import datetime
+import os
+import subprocess
+
+from dateutil.parser import parse
+import icalendar
+import pytz
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(
+        description="Process .ical VTODO files and email completed tasks."
+    )
+    parser.add_argument(
+        "directory",
+        type=str,
+    )
+    parser.add_argument(
+        "email-address",
+        type=str,
+    )
+    parser.add_argument(
+        "--number-of-days",
+        type=int,
+        default=7,
+    )
+    return parser.parse_args()
+
+
+def get_completed_tasks(
+    directory: str, number_of_days: int
+) -> list[tuple[datetime.datetime, str]]:
+    completed_tasks: list[tuple[datetime.datetime, str]] = []
+    cutoff_date = datetime.datetime.now(pytz.utc) - datetime.timedelta(
+        days=number_of_days
+    )
+
+    for filename in os.listdir(directory):
+        if filename.endswith(".ics"):
+            filepath = os.path.join(directory, filename)
+            with open(filepath, "rb") as f:
+                calendar = icalendar.Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
+                for component in calendar.walk():
+                    if component.name == "VTODO":
+                        completed = component.get("COMPLETED")  # pyright: ignore[reportAny]
+                        if completed is not None:
+                            completed_date: str = completed.dt  # pyright: ignore[reportAny]
+                            summary: str = component.get("SUMMARY")
+
+                            if completed_date and summary:
+                                completed_datetime = parse(str(completed_date))
+
+                                if completed_datetime >= cutoff_date:
+                                    completed_tasks.append(
+                                        (completed_datetime, summary)
+                                    )
+
+    return completed_tasks
+
+
+def format_tasks_as_markdown(title: str, formatted_tasks: list[str]) -> str:
+    markdown_list = [f"# {title}\n"]
+    markdown_list.extend([f"- {task}" for task in formatted_tasks])
+    return "\n".join(markdown_list)
+
+
+def send_email(email_address: str, subject: str, content: str):
+    try:
+        process = subprocess.Popen(
+            ["mail", "-s", subject, email_address],
+            stdin=subprocess.PIPE,
+        )
+        _, stderr = process.communicate(input=content.encode())
+        if process.returncode != 0:
+            raise subprocess.SubprocessError(
+                f"Mail command failed with return code {process.returncode}. Error: {stderr.decode().strip()}"
+            )
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+
+
+def format_relative_date(dt: datetime.datetime) -> str:
+    cutoff_7daysago = datetime.datetime.now(pytz.utc) - datetime.timedelta(days=7)
+
+    if dt >= cutoff_7daysago:
+        return dt.strftime("%A")
+    else:
+        return dt.date().isoformat()
+
+
+def format_task(task: tuple[datetime.datetime, str]) -> str:
+    return f"{format_relative_date(task[0])}\t{task[1]}"
+
+
+def main():
+    args = parse_arguments()
+    directory: str = args.directory  # pyright: ignore[reportAny]
+    number_of_days: int = args.number_of_days  # pyright: ignore[reportAny]
+    email: str = args.email  # pyright: ignore[reportAny]
+
+    completed_tasks = get_completed_tasks(directory, number_of_days)
+    completed_tasks.sort(key=lambda tup: tup[0])
+    display_tasks: list[str] = list(map(format_task, completed_tasks))
+
+    subject = f"Completed Tasks Summary for {datetime.date.today().isoformat()}"
+    markdown_content = format_tasks_as_markdown(subject, display_tasks)
+
+    send_email(email, subject, markdown_content)
+
+
+if __name__ == "__main__":
+    main()
