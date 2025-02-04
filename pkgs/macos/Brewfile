@@ -1,7 +1,6 @@
 tap "homebrew/cask-fonts"
 tap "buo/cask-upgrade" # provides 'brew cu' cask upgrade command
 
-brew "MonitorControl"
 brew "ansible-language-server"
 brew "ansible-lint"
 brew "aria2"
@@ -41,7 +40,6 @@ brew "iftop"
 brew "isync"
 brew "jq"
 brew "latexindent" # for NeoVim
-brew "lemminx"
 brew "lf"
 brew "libqalculate" # includes CLI
 brew "lua-language-server"
@@ -57,7 +55,6 @@ brew "neovim"
 brew "ollama"
 brew "pandoc" # for scope.sh
 brew "pipx"
-brew "podman-desktop"
 brew "poppler" # pdftotext for scope.sh
 brew "pre-commit"
 brew "pstree"
@@ -88,6 +85,7 @@ brew "wget"
 brew "yq"
 brew "zsh-lovers"
 
+cask "MonitorControl"
 cask "drawio"
 cask "font-consolas-for-powerline" # for kitty
 cask "hammerspoon"
@@ -97,6 +95,7 @@ cask "kitty"
 cask "librewolf", args: { quarantine: false }
 cask "notunes"
 cask "platypus"
+cask "podman-desktop"
 cask "poe"
 cask "visual-studio-code"
 cask "whatsapp"
