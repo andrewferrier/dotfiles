@@ -1,5 +1,4 @@
 vim.opt.clipboard = "unnamed" -- On OSX, unnamed=unnamedplus, on Linux, autocutsel syncs them anyway
-vim.opt.diffopt:append("linematch:60")
 vim.opt.expandtab = true
 vim.opt.formatoptions:append("l")
 vim.opt.ignorecase = true
@@ -18,6 +17,8 @@ vim.opt.completeopt:remove("noinsert")
 
 if vim.fn.has("nvim-0.11.0") == 1 then
     vim.opt.completeopt:append("fuzzy")
+else
+    vim.opt.diffopt:append("linematch:40")
 end
 
 -- see https://vimways.org/2018/the-power-of-diff/
