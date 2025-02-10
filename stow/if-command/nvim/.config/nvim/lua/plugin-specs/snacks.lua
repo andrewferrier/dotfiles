@@ -3,11 +3,12 @@ return {
     "folke/snacks.nvim",
     version = "*",
     lazy = false,
-    config = function()
+    opts = {
+        bigfile = { enabled = true },
+    },
+    config = function(_, opts)
         -- See https://github.com/folke/snacks.nvim/issues/1022
-        require("snacks").setup({
-            bigfile = { enabled = true },
-        })
+        require("snacks").setup(opts)
 
         local bigfile_callback = function(regular_filetype)
             return function(path, buf)
