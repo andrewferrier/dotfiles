@@ -2,31 +2,19 @@
 local attach = function(bufnr)
     local gitsigns = require("gitsigns")
 
-    vim.keymap.set("n", "]h", function()
-        vim.schedule(function()
-            gitsigns.next_hunk()
-        end)
-    end, { desc = "Hunk forward", buffer = bufnr })
+    local git_nav_hunk = function(lhs, direction)
+        vim.keymap.set("n", lhs, function()
+            gitsigns.nav_hunk(string.lower(direction), { target = "all" })
+        end, {
+            desc = direction .. " hunk",
+            buffer = bufnr,
+        })
+    end
 
-    vim.keymap.set("n", "[h", function()
-        vim.schedule(function()
-            gitsigns.prev_hunk()
-        end)
-    end, { desc = "Hunk backward", buffer = bufnr })
-
-    vim.keymap.set(
-        "n",
-        "[H",
-        "gg]h",
-        { remap = true, desc = "Hunk first", buffer = bufnr }
-    )
-
-    vim.keymap.set(
-        "n",
-        "]H",
-        "G[h",
-        { remap = true, desc = "Hunk last", buffer = bufnr }
-    )
+    git_nav_hunk("]h", "Next")
+    git_nav_hunk("[h", "Prev")
+    git_nav_hunk("[H", "First")
+    git_nav_hunk("]H", "Last")
 
     vim.keymap.set(
         { "o", "x" },
@@ -37,19 +25,11 @@ local attach = function(bufnr)
 
     vim.keymap.set("n", "gbhs", function()
         vim.cmd.update()
-        gitsigns.stage_hunk()
         vim.schedule(function()
-            gitsigns.next_hunk()
+            gitsigns.stage_hunk()
+            gitsigns.nav_hunk("next", { target = "all" })
         end)
-    end, { desc = "Stage hunk", buffer = bufnr })
-
-    vim.keymap.set("n", "gbhu", function()
-        vim.cmd.update()
-        gitsigns.undo_stage_hunk()
-        vim.schedule(function()
-            gitsigns.next_hunk()
-        end)
-    end, { desc = "Undo stage hunk", buffer = bufnr })
+    end, { desc = "Stage/unstage hunk", buffer = bufnr })
 
     vim.keymap.set("v", "gbhs", function()
         local first_line = vim.fn.line("v")
@@ -60,7 +40,7 @@ local attach = function(bufnr)
         if mode:find("^v") or mode:find("^ctrl-v") then
             vim.cmd.normal({ args = { "V" }, bang = true })
         end
-    end, { desc = "Stage hunk", buffer = bufnr })
+    end, { desc = "Stage/unstage hunk", buffer = bufnr })
 
     vim.keymap.set("n", "gbhr", function()
         gitsigns.reset_hunk()
@@ -71,14 +51,6 @@ local attach = function(bufnr)
         gitsigns.stage_buffer()
     end, {
         desc = "Stage/add entire file",
-        buffer = bufnr,
-    })
-
-    vim.keymap.set("n", "yo_", function()
-        gitsigns.toggle_deleted()
-        vim.cmd.redrawstatus()
-    end, {
-        desc = "Toggle deleted lines",
         buffer = bufnr,
     })
 end
@@ -96,8 +68,7 @@ end, {})
 return {
     "lewis6991/gitsigns.nvim",
     opts = {
-        _signs_staged_enable = true,
-        _signs_staged = {
+        signs_staged = {
             add = { text = "┋ " },
             change = { text = "┋ " },
             delete = { text = "﹍" },

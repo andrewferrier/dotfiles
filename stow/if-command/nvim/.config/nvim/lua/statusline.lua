@@ -45,10 +45,6 @@ M.featuresenabled = function()
     local return_string = ""
 
     if vim.bo.filetype ~= "oil" and vim.bo.buftype ~= "terminal" then
-        if require("gitsigns.config").config.show_deleted then
-            return_string = return_string .. ",󱙝"
-        end
-
         if not vim.diagnostic.is_enabled() then
             return_string = return_string .. ",¬D"
         end
