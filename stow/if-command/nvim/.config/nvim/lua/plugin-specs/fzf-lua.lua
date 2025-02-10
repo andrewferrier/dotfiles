@@ -20,7 +20,7 @@ local configure = function()
             ["--preview-window"] = "border-none",
         },
         grep = {
-            rg_opts = "--hidden "
+            rg_opts = "--hidden --glob=!.git/ "
                 .. require("fzf-lua.defaults").defaults.grep.rg_opts,
         },
     })
