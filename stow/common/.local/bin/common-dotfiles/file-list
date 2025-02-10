@@ -213,6 +213,7 @@ cat \
             --height "${FZF_TMUX_HEIGHT:-40%}" \
             --no-sort \
             --tiebreak=end \
+            --scheme=path \
             ${MULTISELECT_ARGS} \
             --preview="$PREVIEW_COMMAND" |
             tee >(xargs -n1 fasd -A)
