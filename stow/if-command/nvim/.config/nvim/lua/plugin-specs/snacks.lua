@@ -9,20 +9,24 @@ return {
             bigfile = { enabled = true },
         })
 
-        local bigfile_callback = {
-            function(path, buf)
-                return vim.bo[buf]
-                        and vim.bo[buf].filetype ~= "bigfile"
-                        and path
-                        and vim.fn.getfsize(path) > 1.5 * 1024 * 1024
-                        and "bigfile"
-                    or nil
-            end,
-        }
+        local bigfile_callback = function(regular_filetype)
+            return function(path, buf)
+                if
+                    vim.bo[buf]
+                    and vim.bo[buf].filetype ~= "bigfile"
+                    and path
+                    and vim.fn.getfsize(path) > 1.5 * 1024 * 1024
+                then
+                    return "bigfile"
+                else
+                    return regular_filetype
+                end
+            end
+        end
 
         vim.filetype.add({
             filename = {
-                COMMIT_EDITMSG = bigfile_callback,
+                COMMIT_EDITMSG = bigfile_callback("gitcommit"),
             },
         })
     end,
