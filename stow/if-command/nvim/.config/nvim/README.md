@@ -28,6 +28,7 @@ d'a - delete to mark "a"
 dV/xyz/-1 - delete linewise up to but not including line with pattern
 dm<space> - delete all marks
 g;, g, - jump backwards/forwards through changes
+g<C-R> - select register using fzf
 g={motion} - evaluate
 gJ - Join lines w/o additional space, but include indent
 gM - move cursor to half-way along line

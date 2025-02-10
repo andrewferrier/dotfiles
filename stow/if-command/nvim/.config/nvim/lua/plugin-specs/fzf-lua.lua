@@ -89,9 +89,13 @@ local configure = function()
         require("fzf-lua").complete_file()
     end, { silent = true, desc = "Fuzzy complete path" })
 
+    vim.keymap.set({ "n" }, "g<C-r>", function()
+        require("fzf-lua").registers()
+    end, { silent = true, desc = "Paste from register using fzf" })
+
     vim.keymap.set({ "i" }, "<C-r>", function()
         require("fzf-lua").registers()
-    end, { silent = true, desc = "Select from registers" })
+    end, { silent = true, desc = "Paste from register using fzf" })
 end
 
 -- selene: allow(mixed_table)
