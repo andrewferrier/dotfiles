@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && git rev-parse --show-toplevel)"
+# shellcheck disable=SC1091
+source "${GIT_ROOT_DIR}/common.sh"
+
+uv tool install --upgrade \
+    --with mdformat-gfm \
+    --with mdformat-frontmatter \
+    --with mdformat-footnote \
+    mdformat
+
+uv tool install --upgrade yamlfix
+
+if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
+    # pacaur -S --noconfirm basedpyright
+    uv tool install --upgrade gitlint-core
+    uv tool install --upgrade sqlfluff
+elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
+    # All packages install via Homebrew
+    exit
+else
+    # All other packages installed via package manager
+    uv tool install --upgrade ruff
+    uv tool install --upgrade basedpyright
+fi
