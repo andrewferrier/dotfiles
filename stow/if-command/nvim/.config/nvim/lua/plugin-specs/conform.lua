@@ -76,5 +76,6 @@ return {
             desc = "Format buffer",
         },
     },
+    cmd = { "ConformInfo" },
     version = "*",
 }
