@@ -99,6 +99,7 @@ local configure = function()
 end
 
 -- selene: allow(mixed_table)
+---@type LazyPluginSpec
 return {
     "ibhagwan/fzf-lua",
     config = configure,

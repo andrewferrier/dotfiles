@@ -65,6 +65,7 @@ vim.api.nvim_create_user_command("GitQFList", function()
 end, {})
 
 -- selene: allow(mixed_table)
+---@type LazyPluginSpec
 return {
     "lewis6991/gitsigns.nvim",
     opts = {

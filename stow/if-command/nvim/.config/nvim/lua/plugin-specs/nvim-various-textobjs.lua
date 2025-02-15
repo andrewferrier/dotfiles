@@ -10,6 +10,7 @@ local map = function(lhs, rhs, description)
 end
 
 -- selene: allow(mixed_table)
+---@type LazyPluginSpec
 return {
     "chrisgrieser/nvim-various-textobjs",
     opts = {

@@ -1,3 +1,4 @@
+---@type LazyPluginSpec
 -- selene: allow(mixed_table)
 return {
     "nvimtools/none-ls.nvim",

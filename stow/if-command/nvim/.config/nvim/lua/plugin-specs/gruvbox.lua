@@ -46,6 +46,7 @@ local opts_func = function()
 end
 
 -- selene: allow(mixed_table)
+---@type LazyPluginSpec
 return {
     "ellisonleao/gruvbox.nvim",
     init = update_background,

@@ -19,10 +19,6 @@ return {
             diagnostics = {
                 globals = { "IMAP", "Set", "hs", "options", "pipe_to", "vim" },
             },
-            workspace = {
-                library = { vim.env.VIMRUNTIME },
-                checkThirdParty = false,
-            },
             hint = { arrayIndex = "Disable", enable = true },
         },
     },

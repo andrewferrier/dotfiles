@@ -1,4 +1,5 @@
 -- selene: allow(mixed_table)
+---@type LazyPluginSpec
 return {
     "NMAC427/guess-indent.nvim",
     opts = {

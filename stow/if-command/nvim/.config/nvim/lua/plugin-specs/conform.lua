@@ -65,6 +65,7 @@ local opts = {
     },
 }
 
+---@type LazyPluginSpec
 -- selene: allow(mixed_table)
 return {
     "stevearc/conform.nvim",

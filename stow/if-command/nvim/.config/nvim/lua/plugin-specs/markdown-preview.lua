@@ -1,4 +1,5 @@
 -- selene: allow(mixed_table)
+---@type LazyPluginSpec
 return {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },

@@ -1,3 +1,4 @@
+---@type LazyPluginSpec
 return {
     -- selene: allow(mixed_table)
     "okuuva/auto-save.nvim",

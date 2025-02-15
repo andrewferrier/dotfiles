@@ -1,4 +1,5 @@
 -- selene: allow(mixed_table)
+---@type LazyPluginSpec
 return {
     "git@github.com:andrewferrier/debugprint.nvim",
     opts = {

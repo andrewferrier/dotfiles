@@ -1,3 +1,4 @@
+---@type LazyPluginSpec
 return {
     url = "git@github.com:andrewferrier/wrapping.nvim",
     opts = {
