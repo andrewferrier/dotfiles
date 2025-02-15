@@ -3,6 +3,7 @@
 return {
     "stevearc/oil.nvim",
     opts = function()
+        ---@type oil.SetupOpts
         local opts = {
             skip_confirm_for_simple_edits = true,
             watch_for_changes = true,

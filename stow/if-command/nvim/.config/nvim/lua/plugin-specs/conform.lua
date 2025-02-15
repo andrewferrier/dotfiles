@@ -15,6 +15,7 @@ local format_key = function()
     end)
 end
 
+---@type conform.setupOpts
 local opts = {
     formatters_by_ft = {
         d2 = { "d2" },

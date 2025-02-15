@@ -2,6 +2,7 @@
 ---@type LazyPluginSpec
 return {
     "git@github.com:andrewferrier/debugprint.nvim",
+    ---@type DebugprintGlobalOptions
     opts = {
         keymaps = {
             insert = {

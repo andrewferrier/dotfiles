@@ -4,6 +4,7 @@ return {
     "folke/snacks.nvim",
     version = "*",
     lazy = false,
+    ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
     },
