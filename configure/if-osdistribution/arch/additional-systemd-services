@@ -14,3 +14,6 @@ if [[ ! -h "${TARGET_DIR}" ]]; then
 else
     echo >&2 "${TARGET_DIR} cannot be a symlink."
 fi
+
+sudo systemctl enable --now autorandr.service
+sudo systemctl enable --now autorandr-lid-listener.service
