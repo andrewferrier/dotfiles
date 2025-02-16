@@ -13,6 +13,7 @@ return {
 
         require("mini.basics").setup({
             silent = true,
+            autocommands = { basic = false },
             options = { basic = false },
             mappings = { basic = false, option_toggle_prefix = "yo" },
         })

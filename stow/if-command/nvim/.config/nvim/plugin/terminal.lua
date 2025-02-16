@@ -8,6 +8,12 @@ if vim.fn.has("nvim-0.11.0") == 0 then
     })
 end
 
+vim.api.nvim_create_autocmd("TermOpen", {
+    callback = function()
+        vim.cmd.startinsert()
+    end,
+})
+
 vim.api.nvim_create_autocmd("TermClose", {
     callback = function()
         vim.api.nvim_input("<CR>")
