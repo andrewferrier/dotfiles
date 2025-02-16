@@ -11,7 +11,6 @@ local update_background = function()
     end
 end
 
----@diagnostic disable-next-line: undefined-field
 vim.uv.new_fs_event():start(STATEFILE, {
     watch_entry = true,
     stat = true,
