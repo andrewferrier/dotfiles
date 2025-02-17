@@ -8,7 +8,7 @@ LOCAL_BIN="${HOME}/.local/bin"
 TEMPDIR=${TMPDIR:-/tmp}
 TEMPFILE=$(mktemp "${TEMPDIR}/XXXXXXX")
 
-if [[ ! -x /usr/bin/eget ]]; then
+if [[ (! -x /usr/bin/eget) && (! -x /opt/homebrew/bin/eget) ]]; then
     curl --silent --location https://zyedidia.github.io/eget.sh >"${TEMPFILE}"
     echo "0e64b8a3c13f531da005096cc364ac77835bda54276fedef6c62f3dbdc1ee919 ${TEMPFILE}" | sha256sum --check --status
     chmod +x "${TEMPFILE}"
