@@ -22,9 +22,3 @@ if ! command -v "normfn" >/dev/null 2>&1; then
         (cd "${TEMPDIR}" && make builddeb && sudo dpkg -i normfn*.deb)
     fi
 fi
-
-if [[ ${OSDISTRIBUTION} == "macos" ]]; then
-    if ! pip3 show coloredlogs >/dev/null; then
-        pip3 install coloredlogs
-    fi
-fi
