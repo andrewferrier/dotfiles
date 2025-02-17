@@ -104,5 +104,6 @@ return {
     "ibhagwan/fzf-lua",
     config = configure,
     keys = { "cv" },
+    cmd = { "FzfLua" },
     version = "*",
 }
