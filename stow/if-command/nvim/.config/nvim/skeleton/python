@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
 
+# uv-based shebang
+# {{{
+#!/usr/bin/env -S uv run --script
+# vim: set ft=python:
+#
+# /// script
+# dependencies = [
+#     "abc",
+#     "xyz"
+# ]
+# ///
+# }}}
+
 import argparse
 import logging
 import sys
