@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+docker container ls \
+    --format 'table {{.Names}}\t{{.Image}}\t{{.ID}}\t{{.Status}}\t{{.Ports}}' |
+    fzf \
+        --header-lines=1 \
+        --header-first \
+        --delimiter='\t'
