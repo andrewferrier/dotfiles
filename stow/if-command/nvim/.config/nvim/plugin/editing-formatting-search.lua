@@ -29,6 +29,9 @@ vim.opt.diffopt:append("vertical")
 vim.cmd.iabbrev("zDATE", '<C-R>=strftime("%F")<CR>')
 vim.cmd.iabbrev("zDATETIME", '<C-R>=strftime("%FT%H:%M:%S")<CR>')
 
+-- Search only inside visual selection
+vim.keymap.set("x", "/", "<Esc>/\\%V")
+
 if vim.fn.has("nvim-0.11.0") == 0 then
     -- These are included in nightly: https://github.com/neovim/neovim/pull/30984
     vim.keymap.set(
