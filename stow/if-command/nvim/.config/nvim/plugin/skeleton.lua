@@ -38,9 +38,20 @@ end
 ---@return nil
 local function check_and_insert_skeleton(from_scratch)
     local skeleton = find_skeleton()
+    local end_line = 0
 
     if skeleton ~= nil then
-        vim.api.nvim_buf_set_lines(0, 0, -1, true, vim.fn.readfile(skeleton))
+        if from_scratch then
+            end_line = -1
+        end
+
+        vim.api.nvim_buf_set_lines(
+            0,
+            0,
+            end_line,
+            true,
+            vim.fn.readfile(skeleton)
+        )
 
         if from_scratch then
             vim.cmd.normal({ args = { "G" }, bang = true })
