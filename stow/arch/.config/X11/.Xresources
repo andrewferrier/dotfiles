@@ -1,5 +1,4 @@
-# See https://wiki.archlinux.org/title/HiDPI#X_Resources
-
+! See https://wiki.archlinux.org/title/HiDPI#X_Resources
 Xft.dpi: 168
 
 ! These might also be useful depending on your monitor and personal preference:
