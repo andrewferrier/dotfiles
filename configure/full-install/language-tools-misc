@@ -12,6 +12,10 @@ if [[ $(uname -s || true) == Linux* ]]; then
     cd "${LOCAL_BIN}"
     aunpack --quiet lua-language-server*.tar.gz && rm lua-language-server*.tar.gz
     mv lua-language-server-*/ lua-language-server
+else
+    # MacOS
+    eget --to "${LOCAL_BIN}" redhat-developer/vscode-xml --asset=lemminx --asset=aarch
+    mv "${LOCAL_BIN}"/lemminx* "${LOCAL_BIN}"/lemminx
 fi
 
 eget --to "${LOCAL_BIN}" hadolint/hadolint --upgrade-only
