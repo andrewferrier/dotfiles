@@ -76,7 +76,11 @@ pupdate_prepend_single /usr/local/opt/ruby/bin # for brew-installed ruby
 pupdate_prepend_single /opt/homebrew/bin
 pupdate_prepend_single /opt/homebrew/sbin
 pupdate_prepend_single /opt/homebrew/opt/openssl/bin
+
+BREW_PREFIX_PYTHON=$(brew --prefix python)
+pupdate_prepend_single "${BREW_PREFIX_PYTHON}/libexec/bin"
 pupdate_prepend_single "${HOME}/.deno/bin"
+
 pupdate_append_singlex "${HOME}/.local/bin"
 pupdate_append_globxxx "${HOME}/.local/bin/*"
 pupdate_append_globxxx "${HOME}/.local/bin/*/bin"
