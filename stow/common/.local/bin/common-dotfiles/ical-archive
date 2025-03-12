@@ -3,8 +3,8 @@
 # pyright: reportAny=false
 
 from datetime import date, datetime, timedelta
-from icalendar import Calendar
-from typing import Any, cast
+from icalendar import Calendar, Component
+from typing import cast
 import argparse
 import logging
 import os
@@ -41,7 +41,7 @@ def check_date_old(date_found: date, days_old: int) -> bool:
 
 
 def item_eligible_for_archiving(
-    file_path: str, component: Any, days_old: int
+    file_path: str, component: Component, days_old: int
 ) -> tuple[bool, datetime | None]:
     if component.name == "VTODO":
         if component.get("STATUS") == "COMPLETED":
@@ -71,7 +71,7 @@ def item_eligible_for_archiving(
         return (False, None)
 
 
-def multiple_event_todos(cal: Any) -> bool:
+def multiple_event_todos(cal: Component) -> bool:
     count: int = 0
 
     for component in cal.walk():
@@ -85,7 +85,7 @@ def multiple_event_todos(cal: Any) -> bool:
 
 def process_ics_file(file_path: str, target_dir: str, dry_run: bool, days_old: int):
     with open(file_path, "rb") as f:
-        cal: Any = Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
+        cal: Component = Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
 
     if multiple_event_todos(cal):
         logger.warning(f"Multiple VTODO/VEVENT items in {file_path}, skipping..")

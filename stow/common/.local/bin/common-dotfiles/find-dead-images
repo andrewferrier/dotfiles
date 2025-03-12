@@ -77,8 +77,9 @@ def walk_dir(dir: str) -> list[Path]:
 
 def main():
     paths: list[Path] = []
+    sourcedirs: list[str] = args.sourcedirs  # pyright: ignore[reportAny]
 
-    for dir in args.sourcedirs:
+    for dir in sourcedirs:
         paths.extend(walk_dir(dir))
 
     logger.info("Found " + str(len(paths)) + " images.")
