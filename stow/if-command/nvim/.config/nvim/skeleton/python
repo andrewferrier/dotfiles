@@ -21,10 +21,10 @@ import sys
 # {{{
 logger = logging.getLogger("my-script")
 logger.propagate = False
-logger.setLevel(logging.WARN)
+logger.setLevel(logging.WARNING)
 
 syserr_handler = logging.StreamHandler(stream=sys.stderr)
-syserr_handler.setLevel(logging.WARN)
+syserr_handler.setLevel(logging.WARNING)
 syserr_handler.setFormatter(logging.Formatter("my-script: %(levelname)s: %(message)s"))
 logger.addHandler(syserr_handler)
 # }}}
@@ -38,7 +38,7 @@ args = parser.parse_args()
 # }}}
 
 
-def main():
+def main() -> None:
     # Code goes here
     pass
 
