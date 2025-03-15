@@ -26,7 +26,7 @@ args = parser.parse_args()
 THRESHOLD = 0.03
 
 
-def get_mean_brightness_normalized(filename: Path):
+def get_mean_brightness_normalized(filename: Path) -> float:
     try:
         cmd = subprocess.run(
             [
@@ -53,36 +53,36 @@ def get_mean_brightness_normalized(filename: Path):
         return mean_brightness
 
 
-def check_image(filename: Path):
+def check_image(filename: Path) -> None:
     mean_brightness = get_mean_brightness_normalized(filename)
 
-    tqdm.write("{:.2f}".format(mean_brightness) + "\t" + str(filename))
+    tqdm.write("{:.2f}".format(mean_brightness) + "\t" + str(filename))  # noqa: UP032
 
 
-def is_image(filename: Path):
+def is_image(filename: Path) -> bool:
     return filename.suffix.lower() in [".png", ".jpg", ".jpeg", ".gif"]
 
 
-def walk_dir(dir: str) -> list[Path]:
+def walk_dir(directory: str) -> list[Path]:
     paths: list[Path] = []
 
-    for dirpath, _, filenames in os.walk(dir):
+    for dirpath, _, filenames in os.walk(directory):
         for filename in filenames:
             path = Path(dirpath) / Path(filename)
-            if not os.path.islink(path) and is_image(path):
+            if not Path.is_symlink(path) and is_image(path):
                 paths.append(path)
 
     return paths
 
 
-def main():
+def main() -> None:
     paths: list[Path] = []
     sourcedirs: list[str] = args.sourcedirs  # pyright: ignore[reportAny]
 
-    for dir in sourcedirs:
-        paths.extend(walk_dir(dir))
+    for directory in sourcedirs:
+        paths.extend(walk_dir(directory))
 
-    logger.info("Found " + str(len(paths)) + " images.")
+    logger.info(f"Found {len(paths)} images.")
 
     thread_map(check_image, paths, max_workers=multiprocessing.cpu_count())
 

@@ -1,3 +1,25 @@
 [tool.basedpyright]
 reportConstantRedefinition = false # See https://github.com/microsoft/pyright/issues/5265
 reportUnusedCallResult = false
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "COM",
+    "D",
+    "EM",
+    "FA",
+    "FIX",
+    "G003",
+    "G004",
+    "I",
+    "ISC003",
+    "PLR2004",
+    "RET505",
+    "S602",
+    "S603",
+    "S607",
+    "TD",
+    "TRY002",
+    "TRY003",
+]

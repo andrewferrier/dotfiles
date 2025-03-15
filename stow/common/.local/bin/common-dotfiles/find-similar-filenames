@@ -1,13 +1,23 @@
 #!/usr/bin/python
 
-import os
 import argparse
+import logging
+import os
 from pathlib import Path
+import sys
+
 from Levenshtein import ratio  # pyright: ignore[reportUnknownVariableType]
 
+logger = logging.getLogger("find-similar-filenames")
+logger.propagate = False
+logger.setLevel(logging.WARNING)
 
-def strip_extension(filename: str) -> str:
-    return os.path.splitext(filename)[0]
+syserr_handler = logging.StreamHandler(stream=sys.stderr)
+syserr_handler.setLevel(logging.WARNING)
+syserr_handler.setFormatter(
+    logging.Formatter("find-similar-filenames: %(levelname)s: %(message)s")
+)
+logger.addHandler(syserr_handler)
 
 
 def find_similar_filenames(
@@ -18,13 +28,10 @@ def find_similar_filenames(
 
     for i in range(len(files)):
         for j in range(i + 1, len(files)):
-            file1 = os.path.basename(files[i])
-            file2 = os.path.basename(files[j])
-
-            if strip_extension(file1) == strip_extension(file2):
+            if files[i].stem == files[j].stem:
                 continue
 
-            similarity: float = float(ratio(file1, file2))  # pyright: ignore[reportUnknownArgumentType]
+            similarity = float(ratio(files[i].name, files[j].name))  # pyright: ignore[reportUnknownArgumentType]
 
             if similarity >= threshold:
                 similar_files.append((files[i], files[j], similarity))
@@ -49,27 +56,28 @@ def main() -> None:
     args = parser.parse_args()
 
     args_threshold: float = args.threshold  # pyright: ignore[reportAny]
-    args_directory: str = args.directory  # pyright: ignore[reportAny]
+    args_directory: list[str] = args.directory  # pyright: ignore[reportAny]
 
     all_files: list[Path] = []
 
     for directory in args_directory:
-        if not os.path.isdir(directory):
-            print(f"Error: The specified directory '{directory}' does not exist.")
+        if not Path.is_dir(Path(directory)):
+            logger.error(
+                f"Error: The specified directory '{directory}' does not exist."
+            )
             continue
 
         for root, _, files in os.walk(directory):
-            for file in files:
-                all_files.append(Path(root) / file)
+            all_files = [Path(root) / file for file in files]
 
     similar_files = find_similar_filenames(all_files, args_threshold)
 
     if similar_files:
-        print("Similar filenames found:")
+        logger.info("Similar filenames found:")
         for file1, file2, similarity in similar_files:
-            print(f"{file1} <--> {file2} (Similarity: {similarity:.2f})")
+            logger.info(f"{file1} <--> {file2} (Similarity: {similarity:.2f})")
     else:
-        print("No similar filenames found.")
+        logger.info("No similar filenames found.")
 
 
 if __name__ == "__main__":

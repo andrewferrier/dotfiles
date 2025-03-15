@@ -15,25 +15,25 @@ STATE_FILE = BASE_PATH.joinpath("state")
 
 logger = logging.getLogger("day-night-update")
 logger.propagate = False
-logger.setLevel(logging.WARN)
+logger.setLevel(logging.WARNING)
 
 syserr_handler = logging.StreamHandler(stream=sys.stderr)
-syserr_handler.setLevel(logging.WARN)
+syserr_handler.setLevel(logging.WARNING)
 syserr_handler.setFormatter(
     logging.Formatter("%(asctime)s: %(name)s: %(levelname)s: %(message)s")
 )
 logger.addHandler(syserr_handler)
 
 
-def read_state_file():
+def read_state_file() -> str | None:
     try:
-        with open(STATE_FILE) as file:
+        with Path.open(STATE_FILE) as file:
             return file.readline().strip()
     except FileNotFoundError:
-        logger.error(f"{STATE_FILE} was not found.")
+        logger.exception(f"{STATE_FILE} was not found.")
         return None
-    except Exception as e:
-        logger.error(f"An error occurred: {e}")
+    except Exception:
+        logger.exception("An error occurred")
         return None
 
 
@@ -51,6 +51,7 @@ def get_state_macos() -> Literal["day", "night"]:
             ["defaults", "read", "-g", "AppleInterfaceStyle"],
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
+            check=True,
         )
 
         if output.returncode > 0:
@@ -84,11 +85,11 @@ if state != current_state:
             result: subprocess.CompletedProcess[bytes] = subprocess.run(
                 [sh_file], shell=True, check=True, capture_output=True
             )
-        except subprocess.CalledProcessError as e:
-            logger.error(
+        except subprocess.CalledProcessError as e:  # noqa: PERF203
+            logger.exception(
                 f"Warning: Script {sh_file} failed with return code {e.returncode}"
             )
-            logger.error(f"Error message: {e.stderr.decode()}")  # pyright: ignore[reportAny]
+            logger.exception(f"Error message: {e.stderr.decode()}")  # pyright: ignore[reportAny]
 else:
     logger.warning(
         f"Current state is already {current_state}; wanted to switch to {state}."
