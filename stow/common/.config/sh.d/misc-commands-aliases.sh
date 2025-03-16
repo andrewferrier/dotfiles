@@ -42,30 +42,6 @@ if [[ ${OSTYPE} == darwin* ]]; then
         mdls -name kMDItemContentTypeTree "${f}"
         rm "${f}"
     }
-else
-    function mount-external {
-        DEVICE_BASE=$1
-        DEVICE=/dev/$DEVICE_BASE
-
-        if [[ -b ${DEVICE} ]]; then
-            MOUNTPOINT=/mnt/$DEVICE_BASE
-
-            sudo mkdir -p "$MOUNTPOINT"
-            sudo chmod a+rwX "$MOUNTPOINT"
-
-            FILESYSTEM=$(sudo blkid -o value -s TYPE "${DEVICE}")
-
-            if [[ $FILESYSTEM == ext* || $FILESYSTEM == iso9660 ]]; then
-                sudo mount -v "$DEVICE" "$MOUNTPOINT"
-            elif [[ $FILESYSTEM == hfsplus ]]; then
-                sudo mount -v -o uid=$UID "$DEVICE" "$MOUNTPOINT"
-            else
-                sudo mount -v -o users,gid=users,fmask=113,dmask=002 "$DEVICE" "$MOUNTPOINT"
-            fi
-        else
-            echo >&2 "${DEVICE} does not exist."
-        fi
-    }
 fi
 
 if (command -v fallocate >/dev/null 2>&1); then

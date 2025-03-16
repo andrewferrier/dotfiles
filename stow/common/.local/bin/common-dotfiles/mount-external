@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+if [[ ${OSTYPE} == darwin* ]]; then
+    echo >&2 "Not supported on MacOS."
+    exit 1
+fi
+
+DEVICE=$1
+
+if [[ ! -b ${DEVICE} ]]; then
+    DEVICE=/dev/$DEVICE
+fi
+
+if [[ ! -b ${DEVICE} ]]; then
+    echo >&2 "Couldn't find device ${DEVICE}."
+fi
+
+MOUNTPOINT=/mnt/$DEVICE
+
+sudo mkdir -p "$MOUNTPOINT"
+sudo chmod a+rwX "$MOUNTPOINT"
+
+FILESYSTEM=$(sudo blkid -o value -s TYPE "${DEVICE}")
+
+if [[ $FILESYSTEM == ext* || $FILESYSTEM == iso9660 ]]; then
+    sudo mount -v "$DEVICE" "$MOUNTPOINT"
+elif [[ $FILESYSTEM == hfsplus ]]; then
+    sudo mount -v -o uid=$UID "$DEVICE" "$MOUNTPOINT"
+else
+    sudo mount -v -o users,gid=users,fmask=113,dmask=002 "$DEVICE" "$MOUNTPOINT"
+fi
