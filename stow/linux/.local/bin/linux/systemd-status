@@ -6,14 +6,14 @@ from pathlib import Path
 from subprocess import run
 from shutil import which
 
-from systemd.journal import JournalHandler
+from systemd.journal import JournalHandler  # pyright: ignore[reportMissingTypeStubs]
 
 log = logging.getLogger("systemd-status")
 log.addHandler(JournalHandler())
 log.setLevel(logging.WARNING)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--unit-name", required=True)
+parser.add_argument("--unit-name", type=str, required=True)
 parser.add_argument("--notify-threshold", type=int, default=5)
 success_or_failure = parser.add_mutually_exclusive_group()
 success_or_failure.add_argument(
@@ -24,25 +24,25 @@ success_or_failure.add_argument(
 )
 args = parser.parse_args()
 
+unit_name: str = args.unit_name  # pyright: ignore[reportAny]
+notify_threshold: int = args.notify_threshold  # pyright: ignore[reportAny]
+success: bool = args.success  # pyright: ignore[reportAny]
+
 CACHE_DIR = Path.home() / ".cache" / "systemd-status"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def read_state_file(state_file: str):
-    f = open(state_file)
-    failure_count = int(f.read())
-    f.close()
-
-    return failure_count
+def read_state_file(state_file: Path) -> int:
+    with Path(state_file).open() as f:
+        return int(f.read())
 
 
-def write_state_file(state_file: str, failure_count: int):
-    f = open(state_file, "w")
-    f.write(str(failure_count))
-    f.close()
+def write_state_file(state_file: Path, failure_count: int) -> None:
+    with Path(state_file).open("w") as f:
+        f.write(str(failure_count))
 
 
-def notification(message: str):
+def notification(message: str) -> None:
     if which("notify-send"):
         p = run(
             [
@@ -50,7 +50,8 @@ def notification(message: str):
                 "systemd-status",
                 "--urgency=critical",
                 message,
-            ]
+            ],
+            check=True,
         )
 
         if p.returncode != 0:
@@ -59,29 +60,27 @@ def notification(message: str):
         log.warning('Could not send message "' + message + '" via notify-send.')
 
 
-def main():
-    state_file: str = CACHE_DIR / (args.unit_name + ".state")
+def main() -> None:
+    state_file: Path = CACHE_DIR / Path(unit_name + ".state")
 
-    if not args.success:
-        log.warning(args.unit_name + " failed")
+    if not success:
+        log.warning(unit_name + " failed")
         if Path(state_file).is_file():
             failure_count = read_state_file(state_file)
             failure_count = failure_count + 1
         else:
             failure_count = 1
     else:
-        log.debug(args.unit_name + " passed.")
+        log.debug(unit_name + " passed.")
         failure_count = 0
 
     write_state_file(state_file, failure_count)
 
-    log.info(args.unit_name + " failure count updated to " + str(failure_count))
+    log.info(unit_name + " failure count updated to " + str(failure_count))
 
-    if failure_count > args.notify_threshold:
+    if failure_count > notify_threshold:
         message: str = (
-            args.unit_name
-            + " over failure count threshold of "
-            + str(args.notify_threshold)
+            unit_name + " over failure count threshold of " + str(notify_threshold)
         )
         log.error(message)
         notification(message)
