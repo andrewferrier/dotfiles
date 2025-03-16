@@ -11,10 +11,10 @@ import pytz
 
 logger = logging.getLogger("maildir-archive")
 logger.propagate = False
-logger.setLevel(logging.WARN)
+logger.setLevel(logging.WARNING)
 
 syserr_handler = logging.StreamHandler(stream=sys.stderr)
-syserr_handler.setLevel(logging.WARN)
+syserr_handler.setLevel(logging.WARNING)
 syserr_handler.setFormatter(
     logging.Formatter("maildir-archive: %(levelname)s: %(message)s")
 )
