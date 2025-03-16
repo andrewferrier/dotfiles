@@ -2,15 +2,16 @@
 #
 # pyright: reportAny=false
 
-from datetime import date, datetime, timedelta
-from icalendar import Calendar, Component
-from typing import cast
 import argparse
+from datetime import date, datetime, timedelta
 import logging
 import os
-import pytz
 import shutil
 import sys
+from typing import cast
+
+from icalendar.cal import Calendar, Component
+import pytz
 
 logger = logging.getLogger("ical-archive")
 logger.propagate = False
@@ -74,10 +75,10 @@ def item_eligible_for_archiving(
 def multiple_event_todos(cal: Component) -> bool:
     count: int = 0
 
-    for component in cal.walk():
-        if component.name == "VEVENT":
+    for component in cal.walk():  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
+        if component.name == "VEVENT":  # pyright: ignore[reportUnknownMemberType]
             count += 1
-        elif component.name == "VTODO":
+        elif component.name == "VTODO":  # pyright: ignore[reportUnknownMemberType]
             count += 1
 
     return count > 1
@@ -91,14 +92,14 @@ def process_ics_file(file_path: str, target_dir: str, dry_run: bool, days_old: i
         logger.warning(f"Multiple VTODO/VEVENT items in {file_path}, skipping..")
         return
 
-    for component in cal.walk():
-        if component.name == "VTODO" or component.name == "VEVENT":
-            (is_old, dt) = item_eligible_for_archiving(file_path, component, days_old)
+    for component in cal.walk():  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
+        if component.name == "VTODO" or component.name == "VEVENT":  # pyright: ignore[reportUnknownMemberType]
+            (is_old, dt) = item_eligible_for_archiving(file_path, component, days_old)  # pyright: ignore[reportUnknownArgumentType]
 
             if is_old:
                 if dry_run:
                     logger.info(
-                        f"[DRY RUN] Would move: {file_path}, completed/end date = {dt}, summary = {component.get('SUMMARY')}"
+                        f"[DRY RUN] Would move: {file_path}, completed/end date = {dt}, summary = {component.get('SUMMARY')}"  # pyright: ignore[reportUnknownMemberType]
                     )
                 else:
                     target_path = os.path.join(target_dir, os.path.basename(file_path))
