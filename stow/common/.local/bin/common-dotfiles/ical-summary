@@ -11,7 +11,7 @@ import sys
 from zoneinfo import ZoneInfo
 
 from dateutil.parser import parse
-import icalendar
+from icalendar.cal import Calendar, Component
 import pytz
 
 logger = logging.getLogger("ical-summary")
@@ -48,20 +48,20 @@ def get_completed_tasks(
         if filename.endswith(".ics"):
             filepath = directory / filename
             with filepath.open("rb") as f:
-                calendar = icalendar.Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
-                for component in calendar.walk():
-                    if component.name == "VTODO":
-                        completed = component.get("COMPLETED")  # pyright: ignore[reportAny]
+                calendar: Component = Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
+                for component in calendar.walk():  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
+                    if component.name == "VTODO":  # pyright: ignore[reportUnknownMemberType]
+                        completed = component.get("COMPLETED")  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
                         if completed is not None:
-                            completed_date: str = completed.dt  # pyright: ignore[reportAny]
-                            summary: str = component.get("SUMMARY")
+                            completed_date: str = completed.dt  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
+                            summary: str = component.get("SUMMARY")  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
 
                             if completed_date and summary:
-                                completed_datetime = parse(str(completed_date))
+                                completed_datetime = parse(completed_date)  # pyright: ignore[reportUnknownArgumentType]
 
                                 if completed_datetime >= cutoff_date:
                                     completed_tasks.append(
-                                        (completed_datetime, summary)
+                                        (completed_datetime, summary)  # pyright: ignore[reportUnknownArgumentType]
                                     )
 
     return completed_tasks
