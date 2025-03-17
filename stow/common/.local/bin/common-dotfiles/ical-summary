@@ -1,16 +1,32 @@
 #!/usr/bin/env python
 
 import argparse
+from argparse import Namespace
 import datetime
+import logging
 import os
+from pathlib import Path
 import subprocess
+import sys
+from zoneinfo import ZoneInfo
 
 from dateutil.parser import parse
 import icalendar
 import pytz
 
+logger = logging.getLogger("ical-summary")
+logger.propagate = False
+logger.setLevel(logging.WARNING)
 
-def parse_arguments():
+syserr_handler = logging.StreamHandler(stream=sys.stderr)
+syserr_handler.setLevel(logging.WARNING)
+syserr_handler.setFormatter(
+    logging.Formatter("ical-summary: %(levelname)s: %(message)s")
+)
+logger.addHandler(syserr_handler)
+
+
+def parse_arguments() -> Namespace:
     parser = argparse.ArgumentParser(
         description="Process .ical VTODO files and email completed tasks."
     )
@@ -21,7 +37,7 @@ def parse_arguments():
 
 
 def get_completed_tasks(
-    directory: str, number_of_days: int
+    directory: Path, number_of_days: int
 ) -> list[tuple[datetime.datetime, str]]:
     completed_tasks: list[tuple[datetime.datetime, str]] = []
     cutoff_date = datetime.datetime.now(pytz.utc) - datetime.timedelta(
@@ -30,8 +46,8 @@ def get_completed_tasks(
 
     for filename in os.listdir(directory):
         if filename.endswith(".ics"):
-            filepath = os.path.join(directory, filename)
-            with open(filepath, "rb") as f:
+            filepath = directory / filename
+            with filepath.open("rb") as f:
                 calendar = icalendar.Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
                 for component in calendar.walk():
                     if component.name == "VTODO":
@@ -57,19 +73,12 @@ def format_tasks_as_markdown(title: str, formatted_tasks: list[str]) -> str:
     return "\n".join(markdown_list)
 
 
-def send_email(email_address: str, subject: str, content: str):
-    try:
-        process = subprocess.Popen(
-            ["mail", "-s", subject, email_address],
-            stdin=subprocess.PIPE,
-        )
-        _, stderr = process.communicate(input=content.encode())
-        if process.returncode != 0:
-            raise subprocess.SubprocessError(
-                f"Mail command failed with return code {process.returncode}. Error: {stderr.decode().strip()}"
-            )
-    except Exception as e:
-        print(f"Failed to send email: {e}")
+def send_email(email_address: str, subject: str, content: str) -> None:
+    subprocess.run(
+        ["mail", "-s", subject, email_address],
+        input=content,
+        check=True,
+    )
 
 
 def format_relative_date(dt: datetime.datetime) -> str:
@@ -85,17 +94,20 @@ def format_task(task: tuple[datetime.datetime, str]) -> str:
     return f"{format_relative_date(task[0])}\t{task[1]}"
 
 
-def main():
+def main() -> None:
     args = parse_arguments()
     directory: str = args.directory  # pyright: ignore[reportAny]
     number_of_days: int = args.number_of_days  # pyright: ignore[reportAny]
     email: str = args.email  # pyright: ignore[reportAny]
 
-    completed_tasks = get_completed_tasks(directory, number_of_days)
+    completed_tasks = get_completed_tasks(Path(directory), number_of_days)
     completed_tasks.sort(key=lambda tup: tup[0])
     display_tasks: list[str] = list(map(format_task, completed_tasks))
 
-    subject = f"Completed Tasks Summary for {datetime.date.today().isoformat()}"
+    subject = (
+        "Completed Tasks Summary for "
+        + datetime.datetime.now(tz=ZoneInfo("Europe/London")).date().isoformat()
+    )
     markdown_content = format_tasks_as_markdown(subject, display_tasks)
 
     send_email(email, subject, markdown_content)
