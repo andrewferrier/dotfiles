@@ -1,19 +1,4 @@
 ---@param bufnr integer
-local function keybindings_organizeimports(bufnr)
-    vim.keymap.set("n", "gro", function()
-        if vim.o.filetype == "python" then
-            vim.cmd("silent! PyrightOrganizeImports")
-        else
-            vim.notify(
-                "Don't know how to organize imports in filetype "
-                    .. vim.o.filetype,
-                vim.log.levels.WARN
-            )
-        end
-    end, { buffer = bufnr, desc = "Organize imports" })
-end
-
----@param bufnr integer
 local function keybindings_inlayhints(bufnr)
     vim.keymap.set("n", "yoi", function()
         vim.lsp.inlay_hint.enable(
@@ -29,7 +14,6 @@ local function lsp_callback(event)
     if client ~= nil then
         local bufnr = event.buf
 
-        keybindings_organizeimports(bufnr)
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         keybindings_inlayhints(bufnr)
 

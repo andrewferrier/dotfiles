@@ -22,11 +22,12 @@ local opts = {
         html = { "prettier" },
         lua = { "stylua" },
         markdown = { "mdformat" },
+        python = { "ruff_organize_imports" },
         sql = { "sqlfluff" },
         yaml = { "prettier", "yamlfix" },
     },
     default_format_opts = {
-        lsp_format = "fallback",
+        lsp_format = "first",
     },
     formatters = {
         prettier = {
