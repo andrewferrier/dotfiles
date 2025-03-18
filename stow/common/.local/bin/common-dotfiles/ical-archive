@@ -97,12 +97,12 @@ def process_ics_file(file_path: str, target_dir: str, dry_run: bool, days_old: i
             (is_old, dt) = item_eligible_for_archiving(file_path, component, days_old)  # pyright: ignore[reportUnknownArgumentType]
 
             if is_old:
+                target_path = os.path.join(target_dir, os.path.basename(file_path))
                 if dry_run:
                     logger.info(
-                        f"[DRY RUN] Would move: {file_path}, completed/end date = {dt}, summary = {component.get('SUMMARY')}"  # pyright: ignore[reportUnknownMemberType]
+                        f"[DRY RUN] Would move: {file_path} to {target_path}, completed/end date = {dt}, summary = {component.get('SUMMARY')}"  # pyright: ignore[reportUnknownMemberType]
                     )
                 else:
-                    target_path = os.path.join(target_dir, os.path.basename(file_path))
                     shutil.move(file_path, target_path)
                     logger.info(f"Moved: {file_path} -> {target_path}")
 
