@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 import sys
 
-from Levenshtein import ratio  # pyright: ignore[reportUnknownVariableType,reportMissingImports]
+from Levenshtein import ratio  # pyright: ignore[reportUnknownVariableType]
 
 logger = logging.getLogger("find-similar-filenames")
 logger.propagate = False
