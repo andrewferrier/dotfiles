@@ -11,13 +11,13 @@ vim.opt.textwidth = 80 -- Default for most languages: https://en.wikipedia.org/w
 vim.opt.virtualedit = "block"
 vim.opt.wildmode = "longest:full"
 
-vim.opt.completeopt:append("popup")
 vim.opt.completeopt:remove("menuone")
 vim.opt.completeopt:remove("noinsert")
 
 if vim.fn.has("nvim-0.11.0") == 1 then
     vim.opt.completeopt:append("fuzzy")
 else
+    vim.opt.completeopt:append("popup")
     vim.opt.diffopt:append("linematch:40")
 end
 
