@@ -1,15 +1,18 @@
 vim.opt.fillchars = "fold: "
 vim.opt.foldlevel = 99
-vim.opt.foldmethod = "indent"
 vim.opt.foldtext = ""
 
 local set_fold_method = function()
-    if
-        vim.wo.foldmethod == "indent"
-        and require("nvim-treesitter.parsers").has_parser()
-    then
-        vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-        vim.opt_local.foldmethod = "expr"
+    if vim.wo.foldmethod == "manual" then
+        if require("nvim-treesitter.parsers").has_parser() then
+            if vim.wo.foldexpr == "0" then
+                vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+            end
+
+            vim.opt_local.foldmethod = "expr"
+        else
+            vim.opt_local.foldmethod = "indent"
+        end
     end
 end
 
