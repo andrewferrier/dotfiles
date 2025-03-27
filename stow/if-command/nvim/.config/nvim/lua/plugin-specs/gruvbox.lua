@@ -20,8 +20,12 @@ vim.uv.new_fs_event():start(STATEFILE, {
     end
 end)
 
-local opts_func = function()
-    local opts = {
+-- selene: allow(mixed_table)
+---@type LazyPluginSpec
+return {
+    "ellisonleao/gruvbox.nvim",
+    init = update_background,
+    opts = {
         contrast = "hard",
         dim_inactive = true,
         transparent_mode = false,
@@ -35,21 +39,7 @@ local opts_func = function()
         italic = {
             strings = false,
         },
-    }
-
-    if vim.fn.has("nvim-0.11.0") == 0 then
-        opts.overrides.TermCursorNC = { link = "DiffChange" }
-    end
-
-    return opts
-end
-
--- selene: allow(mixed_table)
----@type LazyPluginSpec
-return {
-    "ellisonleao/gruvbox.nvim",
-    init = update_background,
-    opts = opts_func,
+    },
     config = function(_, opts)
         require("gruvbox").setup(opts)
         vim.cmd.colorscheme("gruvbox")

@@ -19,6 +19,4 @@ vim.opt.signcolumn = "yes:1"
 vim.opt.list = true
 vim.opt.listchars = "tab:>⋅,trail:·,extends:…,precedes:…,nbsp:␣"
 
-if vim.fn.has("nvim-0.11.0") == 1 then
-    vim.opt.messagesopt = "hit-enter,history:10000"
-end
+vim.opt.messagesopt = "hit-enter,history:10000"

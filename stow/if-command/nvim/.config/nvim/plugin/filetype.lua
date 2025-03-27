@@ -45,15 +45,3 @@ vim.filetype.add({
         [".*site.ya?ml"] = "yaml.ansible",
     },
 })
-
-if vim.fn.has("nvim-0.11") == 0 then
-    vim.filetype.add({
-        filename = {
-            [".dockerignore"] = "gitignore",
-            [".gitlint"] = "dosini",
-        },
-        pattern = {
-            [".*envrc.*"] = "sh",
-        },
-    })
-end

@@ -1,7 +1,3 @@
-if vim.fn.has("nvim-0.11.0") == 0 then
-    require("filetype.section").setup("^#")
-end
-
 require("filetype.text").setup()
 
 vim.cmd.iabbrev(

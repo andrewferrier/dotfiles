@@ -1,13 +1,3 @@
-if vim.fn.has("nvim-0.11.0") == 0 then
-    vim.api.nvim_create_autocmd("TermOpen", {
-        callback = function()
-            vim.opt_local.signcolumn = "no"
-            vim.opt_local.number = false
-            vim.opt_local.relativenumber = false
-        end,
-    })
-end
-
 vim.api.nvim_create_autocmd("TermOpen", {
     callback = function()
         vim.cmd.startinsert()

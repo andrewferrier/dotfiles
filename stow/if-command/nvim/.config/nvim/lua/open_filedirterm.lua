@@ -45,12 +45,7 @@ local open_terminal = function(command, opts)
     else
         vim.cmd.wincmd("n")
         opts.term = true
-
-        if vim.fn.has("nvim-0.11.0") == 1 then
-            vim.fn.jobstart(command, opts)
-        else
-            vim.fn.termopen(command, opts)
-        end
+        vim.fn.jobstart(command, opts)
     end
 end
 
