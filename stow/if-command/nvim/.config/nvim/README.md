@@ -152,8 +152,11 @@ iv/av - value (RHS of expression)
 ### FZF
 
 ```text
+Alt-A select all files
+Alt-Q - open selected files in Quickfix
+Ctrl-S - open file in split
 Ctrl-T - open file in new tab
-Tab - select file (then Alt-Q to open in Quickfix)
+Tab - select file
 ```
 
 ### Search Pattern
