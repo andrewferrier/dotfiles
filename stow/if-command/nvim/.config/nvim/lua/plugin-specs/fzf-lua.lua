@@ -66,6 +66,11 @@ local configure = function()
                 ["ctrl-d"] = function(selected, _)
                     require("open_filedirterm").open_split_oil(selected[1])
                 end,
+                ["ctrl-l"] = function(selected, _)
+                    if selected and #selected > 0 then
+                        fzf_lua.live_grep({ cwd = selected[1] })
+                    end
+                end,
             },
             fzf_opts = {
                 ["--preview"] = fzf_lua.shell.raw_preview_action_cmd(
