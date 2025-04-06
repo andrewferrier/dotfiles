@@ -6,22 +6,28 @@ return {
     opts = function()
         local null_ls = require("null-ls")
 
+        local sources = {
+            null_ls.builtins.diagnostics.gitlint.with({
+                extra_args = {
+                    "--ignore",
+                    "B6",
+                },
+            }),
+            null_ls.builtins.diagnostics.hadolint,
+            null_ls.builtins.diagnostics.markdownlint,
+            null_ls.builtins.diagnostics.sqlfluff,
+            null_ls.builtins.diagnostics.terraform_validate,
+            null_ls.builtins.diagnostics.zsh,
+        }
+
+        if vim.fn.executable("selene") == 1 then
+            -- selene is only installed on Arch
+            table.insert(sources, null_ls.builtins.diagnostics.selene)
+        end
+
         return {
             -- debug = true,
-            sources = {
-                null_ls.builtins.diagnostics.gitlint.with({
-                    extra_args = {
-                        "--ignore",
-                        "B6",
-                    },
-                }),
-                null_ls.builtins.diagnostics.hadolint,
-                null_ls.builtins.diagnostics.markdownlint,
-                null_ls.builtins.diagnostics.selene,
-                null_ls.builtins.diagnostics.sqlfluff,
-                null_ls.builtins.diagnostics.terraform_validate,
-                null_ls.builtins.diagnostics.zsh,
-            },
+            sources = sources,
         }
     end,
     event = "BufEnter",
