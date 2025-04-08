@@ -31,7 +31,7 @@ end
 ---@param command string
 ---@param opts OpenTerminalOpts
 local open_terminal = function(command, opts)
-    if opts.external then
+    if opts.external and vim.env.TERMCMD ~= nil then
         local cwd = ""
 
         if opts.cwd then
