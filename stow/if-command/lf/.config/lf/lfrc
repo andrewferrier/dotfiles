@@ -136,6 +136,7 @@ cmd yank &{{
 }}
 
 set anchorfind false
+set cursorpreviewfmt "\033[7m"
 set icons
 set incsearch true
 set infotimefmtnew "2006-01-02 15:04"
@@ -144,6 +145,7 @@ set mouse true
 set scrolloff 5
 set timefmt "2006-01-02 15:04:05"
 set truncatechar "…"
+set watch
 
 set cleaner ~/.config/lf/cleaner.sh
 set previewer ~/.config/lf/scope.sh
