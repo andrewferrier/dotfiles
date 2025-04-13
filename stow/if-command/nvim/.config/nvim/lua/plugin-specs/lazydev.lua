@@ -6,6 +6,7 @@ return {
     ---@type lazydev.Config
     opts = {
         library = {
+            "blink.cmp",
             "conform.nvim",
             "debugprint.nvim",
             "lazy.nvim",
