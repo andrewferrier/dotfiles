@@ -27,6 +27,7 @@ local parsedcss_settings = vim.deepcopy(css_settings)
 parsedcss_settings.lint.importStatement = "warning"
 parsedcss_settings.lint.float = "warning"
 
+---@type vim.lsp.Config
 return {
     settings = {
         css = css_settings,

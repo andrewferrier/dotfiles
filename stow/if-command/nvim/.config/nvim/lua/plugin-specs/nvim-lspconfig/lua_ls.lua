@@ -2,6 +2,7 @@
 local LOG_PATH = vim.fn.stdpath("log") .. "/lua-language-server/"
 local META_PATH = vim.fn.stdpath("cache") .. "/lua-language-server/meta/"
 
+---@type vim.lsp.Config
 return {
     cmd = {
         "lua-language-server",
