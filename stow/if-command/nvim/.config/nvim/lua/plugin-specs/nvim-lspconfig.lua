@@ -25,7 +25,8 @@ return {
             vimls = {},
             yamlls = require("plugin-specs.nvim-lspconfig.yaml"),
         }) do
-            require("lspconfig")[lsp].setup(settings)
+            vim.lsp.config(lsp, settings)
+            vim.lsp.enable(lsp)
         end
     end,
     -- Don't configure any events here otherwise this doesn't attach when files
