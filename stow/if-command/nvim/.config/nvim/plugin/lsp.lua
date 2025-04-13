@@ -8,10 +8,8 @@ local function keybindings_inlayhints(bufnr)
     end, { buffer = bufnr, desc = "Toggle inlay hints" })
 end
 
-local function lsp_callback(event)
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-    if client ~= nil then
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(event)
         local bufnr = event.buf
 
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -23,11 +21,7 @@ local function lsp_callback(event)
             require("fzf-lua").lsp_code_actions,
             { buffer = bufnr, desc = "Apply code action" }
         )
-    end
-end
-
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = lsp_callback,
+    end,
 })
 
 vim.api.nvim_create_user_command("LspInspectClient", function()
