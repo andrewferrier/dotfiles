@@ -27,7 +27,8 @@ end
 
 vim.opt.runtimepath:prepend(lazypath)
 
-require("lazy").setup("plugin-specs", {
+---@type LazyConfig
+local lazy_config = {
     lockfile = vim.fn.stdpath("state") .. "/lazy-lock.json",
     install = {
         colorscheme = { "gruvbox" },
@@ -49,4 +50,6 @@ require("lazy").setup("plugin-specs", {
     change_detection = {
         enabled = false,
     },
-})
+}
+
+require("lazy").setup("plugin-specs", lazy_config)
