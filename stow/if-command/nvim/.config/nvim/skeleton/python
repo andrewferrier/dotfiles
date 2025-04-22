@@ -4,6 +4,7 @@
 # {{{
 #!/usr/bin/env -S uv run --script
 # vim: set ft=python:
+# ruff: noqa: ERA001,EXE003
 #
 # /// script
 # dependencies = [
