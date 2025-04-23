@@ -74,6 +74,10 @@ shred -vz /dev/device
 
 btrfs duperemove --hashfile=/tmp/x.hash -r -d /target | de-duplicate
 btrfs scrub /target                                   | check checksums
+
+speaker-test -c 2 -t wav                              | test speaker
+Cheese                                                | webcam test
+PulseAudio mixer                                      | mic test
 ```
 
 ## Audio file manipulation
