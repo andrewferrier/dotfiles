@@ -1,13 +1,14 @@
 #!/usr/bin/env python
+# ruff: noqa: T201
 
-import sys
-import json
-import humanize
 import datetime
-
-from termcolor import colored
-from typing import TypedDict
+import json
+import sys
 from operator import itemgetter
+from typing import TypedDict
+
+import humanize
+from termcolor import colored
 
 
 class Entry(TypedDict):
@@ -19,8 +20,8 @@ class Entry(TypedDict):
 
 data: list[Entry] = json.load(sys.stdin)
 
-now_time = datetime.datetime.now()
-now_date = datetime.date.today()
+now_time = datetime.datetime.now(tz=datetime.UTC)
+now_date = now_time.date()
 
 
 def due_date_key_func(due_date: Entry) -> int:
@@ -47,8 +48,8 @@ for entry in data:
     if entry["due"] is None:
         human_date = ""
     else:
-        due_time = datetime.datetime.fromtimestamp(entry["due"])
-        due_date = datetime.date.fromtimestamp(entry["due"])
+        due_time = datetime.datetime.fromtimestamp(entry["due"], tz=datetime.UTC)
+        due_date = due_time.date()
 
         if due_time.hour == 0 and due_time.minute == 0 and due_time.second == 0:
             # This is a time-agnostic timestamp
@@ -79,7 +80,7 @@ for entry in data:
         ):
             human_date = due_date.strftime("%A")
 
-    EM_SPACE = " "
+    EM_SPACE = " "  # noqa: RUF001
 
     print(
         f"{entry['id']:5}{EM_SPACE}"
