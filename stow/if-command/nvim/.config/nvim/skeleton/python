@@ -21,11 +21,7 @@ import sys
 # Logging
 # {{{
 logger = logging.getLogger("my-script")
-logger.propagate = False
-logger.setLevel(logging.WARNING)
-
 syserr_handler = logging.StreamHandler(stream=sys.stderr)
-syserr_handler.setLevel(logging.WARNING)
 syserr_handler.setFormatter(logging.Formatter("%(name)s: %(levelname)s: %(message)s"))
 logger.addHandler(syserr_handler)
 # }}}
