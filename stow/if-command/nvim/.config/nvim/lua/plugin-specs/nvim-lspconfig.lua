@@ -6,26 +6,25 @@ return {
         -- For doing diagnostics:
         -- vim.lsp.set_log_level("info")
 
-        for lsp, settings in pairs({
-            ansiblels = {},
-            basedpyright = {},
-            bashls = {},
-            cssls = require("plugin-specs.nvim-lspconfig.css"),
-            dockerls = {},
-            gopls = require("plugin-specs.nvim-lspconfig.gopls"),
-            jsonls = {},
-            lemminx = {},
-            lua_ls = require("plugin-specs.nvim-lspconfig.lua_ls"),
-            ruff = {},
-            taplo = {}, -- toml
-            terraformls = require("plugin-specs.nvim-lspconfig.terraformls"),
-            texlab = require("plugin-specs.nvim-lspconfig.texlab"),
-            tflint = require("plugin-specs.nvim-lspconfig.tflint"),
-            ts_ls = require("plugin-specs.nvim-lspconfig.ts_ls"),
-            vimls = {},
-            yamlls = require("plugin-specs.nvim-lspconfig.yaml"),
+        for _, lsp in ipairs({
+            "ansiblels",
+            "basedpyright",
+            "bashls",
+            "cssls",
+            "dockerls",
+            "gopls",
+            "jsonls",
+            "lemminx",
+            "lua_ls",
+            "ruff",
+            "taplo",
+            "terraformls",
+            "texlab",
+            "tflint",
+            "ts_ls",
+            "vimls",
+            "yamlls",
         }) do
-            vim.lsp.config(lsp, settings)
             vim.lsp.enable(lsp)
         end
     end,
