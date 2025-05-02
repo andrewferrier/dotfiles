@@ -49,6 +49,7 @@ for entry in data:
     else:
         due_time = datetime.datetime.fromtimestamp(entry["due"])
         due_date = datetime.date.fromtimestamp(entry["due"])
+        date_difference = due_date - now_date
 
         if due_time.hour == 0 and due_time.minute == 0 and due_time.second == 0:
             # This is a time-agnostic timestamp
@@ -68,14 +69,13 @@ for entry in data:
 
             if now_time > due_time:
                 datecolor = "red"
-            elif now_date != due_date:
+            elif date_difference > datetime.timedelta(days=2):
                 human_date = humanize.naturalday(due_date)
 
-        dt = due_date - now_date
         if (
             due_date > now_date
-            and dt < datetime.timedelta(days=7)
-            and dt > datetime.timedelta(days=1)
+            and date_difference < datetime.timedelta(days=7)
+            and date_difference > datetime.timedelta(days=1)
         ):
             human_date = due_date.strftime("%A")
 
@@ -83,6 +83,6 @@ for entry in data:
 
     print(
         f"{entry['id']:5}{EM_SPACE}"
-        + colored(f"{human_date:12}{EM_SPACE}", datecolor, force_color=True)
+        + colored(f"{human_date:14}{EM_SPACE}", datecolor, force_color=True)
         + colored(f"{entry['summary']}", entrycolor, force_color=True)
     )
