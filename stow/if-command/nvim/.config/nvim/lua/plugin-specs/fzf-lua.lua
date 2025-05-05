@@ -32,6 +32,13 @@ local configure = function()
         { desc = "Open helptag", unique = true }
     )
 
+    vim.keymap.set(
+        "n",
+        "cvl",
+        fzf_lua.live_grep,
+        { desc = "Live grep", unique = true }
+    )
+
     vim.keymap.set("n", "cvm", function()
         fzf_lua.man_pages({ previewer = "man_native" })
     end, { desc = "Open manpage", unique = true })
