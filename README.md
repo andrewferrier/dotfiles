@@ -45,6 +45,12 @@ s | zoom to page width
 <, >   | rotate
 ```
 
+## mpv
+
+```text
+Del | toggle bottom status bar
+```
+
 ## journalctl
 
 ```text
