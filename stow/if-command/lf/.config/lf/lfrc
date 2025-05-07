@@ -61,7 +61,7 @@ cmd mkdir_dated_prep %{{
     lf -remote "send $id push %mkdir<space>\"$FOLDER\"<left>"
 }}
 
-cmd folderize_prep %{{
+cmd folderize_dated_prep %{{
     FOLDER=$(date +%Y-%m-%d-)
     lf -remote "send $id push :folderize<space>\"$FOLDER\"<left>"
 }}
@@ -156,8 +156,10 @@ set dircounts
 map <c-f> :fasd-file
 map <c-g> :fasd-dir
 
+map F
 map <delete> $IFS="$(printf '\n\t')"; trash $fx
-map F :folderize_prep
+map Fd :folderize_dated_prep
+map Fp :push :folderize<space>""<left>
 map Kd :mkdir_dated_prep
 map Ke %mkdir-mail
 map Kp :push %mkdir<space>""<left>
