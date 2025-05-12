@@ -14,4 +14,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.opt.undofile = true
-vim.opt.shada = "'100,s10,/1000,:1000,h"
