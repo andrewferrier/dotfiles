@@ -76,7 +76,12 @@ return {
             topdelete = { text = "﹉" },
             changedelete = { text = "┋ " },
         },
-        signs = { change = { text = "~" }, changedelete = { text = "⋍" } },
+        signs = {
+            change = { show_count = true, text = "~" },
+            delete = { show_count = true },
+            topdelete = { show_count = true },
+            changedelete = { show_count = true, text = "⋍" },
+        },
         sign_priority = 10,
         on_attach = attach,
     },
