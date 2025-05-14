@@ -2,6 +2,11 @@
 ---@type LazyPluginSpec
 return {
     "chentoast/marks.nvim",
-    opts = {},
+    opts = {
+        mappings = {
+            next = "]m",
+            prev = "[m",
+        },
+    },
     event = "BufEnter",
 }
