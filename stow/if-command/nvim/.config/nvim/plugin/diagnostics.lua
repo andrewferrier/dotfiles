@@ -33,9 +33,9 @@ end
 
 local SIGNS = {
     [vim.diagnostic.severity.ERROR] = "✘",
-    [vim.diagnostic.severity.WARN] = "",
+    [vim.diagnostic.severity.WARN] = "ω",
     [vim.diagnostic.severity.HINT] = "ɦ",
-    [vim.diagnostic.severity.INFO] = "󰋽",
+    [vim.diagnostic.severity.INFO] = "ℹ",
 }
 
 vim.diagnostic.config({
