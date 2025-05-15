@@ -84,7 +84,6 @@ return {
         },
         sign_priority = 10,
         on_attach = attach,
-        word_diff = true,
     },
     event = "BufEnter",
     version = "*",
