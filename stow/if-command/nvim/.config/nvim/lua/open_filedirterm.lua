@@ -10,8 +10,12 @@ local select_fileordir = function(fileordir, force_dir, opening_oil)
 
     if vim.bo.filetype == "oil" and not opening_oil then
         local current_dir = require("oil").get_current_dir()
-        local current_file = require("oil").get_cursor_entry()["name"]
-        fileordir_t = current_dir .. "/" .. current_file
+        local cursor_entry = require("oil").get_cursor_entry()
+
+        if cursor_entry ~= nil then
+            local current_file = cursor_entry["name"]
+            fileordir_t = current_dir .. "/" .. current_file
+        end
     elseif vim.bo.buftype == "" then
         fileordir_t = vim.fn.expand(fileordir, true)
     end
