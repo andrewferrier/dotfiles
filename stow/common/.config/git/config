@@ -91,7 +91,7 @@
 [alias]
 	findpull = !sh -c 'find . -maxdepth 2 -name .git -type d | sort | rev | cut -c 6- | rev | xargs -t -I {} git -C {} pull --rebase'
 	ignore = "!gi() { curl -L -s https://www.gitignore.io/api/$@ ;}; gi"
-	oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -
+	oldest-ancestor = "!zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -1' -"
 	open = git-open
 	pullall = !git pull --rebase && git submodule foreach 'git pull --rebase'
 	reflog-tree = log --graph --reflog
