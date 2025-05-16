@@ -25,4 +25,4 @@ set main-view-date-format = "%F %R"
 color cursor black white
 color title-focus black white
 
-# vim: set filetype=conf
+# vim:filetype=conf
