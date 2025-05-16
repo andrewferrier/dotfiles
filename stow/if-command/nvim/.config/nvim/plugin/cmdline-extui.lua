@@ -9,4 +9,6 @@ if vim.fn.has("nvim-0.12.0") == 1 then
             },
         },
     })
+else
+    vim.opt.showmode = false
 end

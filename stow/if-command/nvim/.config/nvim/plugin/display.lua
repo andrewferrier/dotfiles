@@ -4,7 +4,6 @@ vim.opt.display:append("uhex")
 vim.opt.equalalways = false
 vim.opt.hidden = false
 vim.opt.scrolloff = 5
-vim.opt.showmode = false
 vim.opt.sidescrolloff = 15
 vim.opt.smoothscroll = true
 vim.opt.splitbelow = true
