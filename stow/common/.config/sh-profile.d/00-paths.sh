@@ -77,8 +77,11 @@ pupdate_prepend_single /opt/homebrew/bin
 pupdate_prepend_single /opt/homebrew/sbin
 pupdate_prepend_single /opt/homebrew/opt/openssl/bin
 
-BREW_PREFIX_PYTHON=$(brew --prefix python)
-pupdate_prepend_single "${BREW_PREFIX_PYTHON}/libexec/bin"
+if command -v brew >/dev/null 2>&1; then
+    BREW_PREFIX_PYTHON=$(brew --prefix python)
+    pupdate_prepend_single "${BREW_PREFIX_PYTHON}/libexec/bin"
+fi
+
 pupdate_prepend_single "${HOME}/.deno/bin"
 
 pupdate_append_singlex "${HOME}/.local/bin"
