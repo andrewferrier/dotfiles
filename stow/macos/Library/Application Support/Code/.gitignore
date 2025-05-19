@@ -9,6 +9,8 @@ Cookies
 Cookies-journal
 Crashpad/
 DawnCache/
+DawnGraphiteCache/
+DawnWebGPUCache/
 Dictionaries/
 GPUCache/
 Local Storage/
@@ -17,6 +19,7 @@ Preferences
 Service Worker/
 Session Storage/
 Shared Dictionary/
+SharedStorage
 TransportSecurity
 Trust Tokens*
 User/History/
