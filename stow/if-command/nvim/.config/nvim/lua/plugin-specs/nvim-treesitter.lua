@@ -4,8 +4,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     build = function()
-        vim.cmd("TSInstall all")
-        vim.cmd("TSUpdate")
+        require("nvim-treesitter").install("stable")
+        require("nvim-treesitter").update("stable")
     end,
     opts = {
         sync_install = true,
