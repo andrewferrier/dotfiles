@@ -4,7 +4,9 @@ vim.opt.foldtext = ""
 
 local set_fold_method = function()
     if vim.wo.foldmethod == "manual" then
-        if require("nvim-treesitter.parsers").has_parser() then
+        local has_parser = pcall(vim.treesitter.get_parser)
+
+        if has_parser then
             if vim.wo.foldexpr == "0" then
                 vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
             end

@@ -1,6 +1,8 @@
 local TREESITTER_RENAME_INEFFECTIVE = { "markdown", "latex" }
 
 vim.keymap.set("n", "grn", function()
+    local has_parser = pcall(vim.treesitter.get_parser)
+
     if
         require("lsp").supports_method(
             vim.lsp.protocol.Methods.textDocument_rename
@@ -8,7 +10,7 @@ vim.keymap.set("n", "grn", function()
     then
         return ":LspRename " .. vim.fn.expand("<cword>")
     elseif
-        require("nvim-treesitter.parsers").has_parser()
+        has_parser
         and not vim.tbl_contains(
             TREESITTER_RENAME_INEFFECTIVE,
             vim.opt.filetype:get()

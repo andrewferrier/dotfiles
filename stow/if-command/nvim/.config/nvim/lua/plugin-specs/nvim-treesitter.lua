@@ -2,7 +2,7 @@
 ---@type LazyPluginSpec
 return {
     "nvim-treesitter/nvim-treesitter",
-    main = "nvim-treesitter.configs",
+    branch = "main",
     build = function()
         vim.cmd("TSInstall all")
         vim.cmd("TSUpdate")
