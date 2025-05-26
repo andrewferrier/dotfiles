@@ -4,8 +4,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     build = function()
-        require("nvim-treesitter").install("stable")
-        require("nvim-treesitter").update("stable")
+        require("nvim-treesitter").install("unstable")
+        require("nvim-treesitter").update("unstable")
     end,
     opts = {
         sync_install = true,
