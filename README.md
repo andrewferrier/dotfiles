@@ -63,27 +63,27 @@ journalctl --user -u xyz.service             | output from specific user service
 ## Linux
 
 ```text
-Ctrl-Backspace                                        | delete previous word
+Ctrl-Backspace                                  | delete previous word
 
-getent hosts <hostname>                               | look up DNS name
-hardlink                                              | combine duplicate files using hardlinks
-inotifywait -m -r ~/directory                         | watch a directory for changes
-lshw -short -sanitize                                 | Summarize hardware for selling
-pdfunite                                              | combine PDFs on comand line
-xxd                                                   | Hex dump
+getent hosts <hostname>                         | look up DNS name
+hardlink                                        | combine duplicate files using hardlinks
+inotifywait -m -r ~/directory                   | watch a directory for changes
+lshw -short -sanitize                           | Summarize hardware for selling
+pdfunite                                        | combine PDFs on comand line
+xxd                                             | Hex dump
 
-badblocks -b 8192 -wsv /dev/device                    | test device for bad blocks (DESTRUCTIVE!)
-blkdiscard --secure -v -f /dev/device                 | Securely erase SSD
-parted mkpart primary ext4 0% 100%                    | create a single partition
-sdparm --clear=STANDBY --save -S /dev/device          | disable SCSI drive from going to sleep
-shred -vz /dev/device
+badblocks -b 8192 -wsv /dev/device              | test device for bad blocks (DESTRUCTIVE!)
+blkdiscard --secure -v -f /dev/device           | Securely erase SSD
+parted mkpart primary ext4 0% 100%              | create a single partition
+sdparm --clear=STANDBY --save -S /dev/device    | disable SCSI drive from going to sleep
+shred -vz /dev/device                           | Securely erase hard drive
 
-btrfs duperemove --hashfile=/tmp/x.hash -r -d /target | de-duplicate
-btrfs scrub /target                                   | check checksums
+duperemove --hashfile=/tmp/x.hash -r -d /target | de-duplicate
+btrfs scrub /target                             | check checksums
 
-speaker-test -c 2 -t wav                              | test speaker
-Cheese                                                | webcam test
-PulseAudio mixer                                      | mic test
+speaker-test -c 2 -t wav                        | test speaker
+Cheese                                          | webcam test
+PulseAudio mixer                                | mic test
 ```
 
 ## Audio file manipulation
