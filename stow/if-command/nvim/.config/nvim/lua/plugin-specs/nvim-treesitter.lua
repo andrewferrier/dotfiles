@@ -19,7 +19,6 @@ return {
             },
         },
         indent = { enable = true },
-        endwise = { enable = true },
     },
 
     -- Don't use lazy initialization as TSInstall command is needed for build()
