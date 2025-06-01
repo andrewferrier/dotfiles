@@ -69,6 +69,7 @@ getent hosts <hostname>                         | look up DNS name
 hardlink                                        | combine duplicate files using hardlinks
 inotifywait -m -r ~/directory                   | watch a directory for changes
 lshw -short -sanitize                           | Summarize hardware for selling
+lynis                                           | Security audit
 pdfunite                                        | combine PDFs on comand line
 xxd                                             | Hex dump
 
