@@ -1,12 +1,13 @@
 #!/usr/bin/env python
+#
+# ruff: noqa: S603
 
-import os
-from pathlib import Path
 import logging
+import os
 import platform
 import subprocess
 import sys
-
+from pathlib import Path
 from typing import Literal
 
 BASE_PATH = Path("~/.cache/day-night").expanduser()
@@ -59,7 +60,7 @@ def get_state_macos() -> Literal["day", "night"]:
         elif output.stdout == b"Dark\n":
             return "night"
         else:
-            raise Exception("Could not run defaults read")
+            raise RuntimeError("Could not run defaults read")
 
 
 if platform.system() == "Linux":
@@ -83,7 +84,7 @@ if state != current_state:
         try:
             logger.info(f"Running script {sh_file}...")
             result: subprocess.CompletedProcess[bytes] = subprocess.run(
-                [sh_file], shell=True, check=True, capture_output=True
+                [sh_file], check=True, capture_output=True
             )
         except subprocess.CalledProcessError as e:  # noqa: PERF203
             logger.exception(
