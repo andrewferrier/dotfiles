@@ -5,10 +5,12 @@ if vim.fn.has("nvim-0.12.0") == 1 then
         msg = {
             pos = "box",
             box = {
-                timeout = 3000,
+                timeout = 2000,
             },
         },
     })
+
+    vim.keymap.set("n", "gom", ":messages<CR>", { silent = true })
 else
     vim.opt.showmode = false
 end
