@@ -4,11 +4,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     build = function()
-        require("nvim-treesitter").install("unstable")
-        require("nvim-treesitter").update("unstable")
+        vim.cmd.TSInstall("all")
+        vim.cmd.TSUpdate()
     end,
     opts = {
-        sync_install = true,
         highlight = { enable = true },
         refactor = {
             smart_rename = {
