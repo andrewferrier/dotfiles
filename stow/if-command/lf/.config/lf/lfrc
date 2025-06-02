@@ -156,8 +156,8 @@ set dircounts
 map <c-f> :fasd-file
 map <c-g> :fasd-dir
 
-map F
 map <delete> $IFS="$(printf '\n\t')"; trash $fx
+map F
 map Fd :folderize_dated_prep
 map Fp :push :folderize<space>""<left>
 map Kd :mkdir_dated_prep
