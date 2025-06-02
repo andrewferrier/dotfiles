@@ -157,6 +157,7 @@ map <c-f> :fasd-file
 map <c-g> :fasd-dir
 
 map <delete> $IFS="$(printf '\n\t')"; trash $fx
+map E $$EDITOR .
 map F
 map Fd :folderize_dated_prep
 map Fp :push :folderize<space>""<left>
