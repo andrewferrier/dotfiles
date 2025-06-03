@@ -5,7 +5,7 @@ bind main B !>git rebase -i %(commit)
 bind main H !git push
 bind main U !git pull
 
-bind status F !lf %(file)
+bind status F @lf %(file)
 bind status O @open-file %(file)
 bind status T @?trash %(file)
 
