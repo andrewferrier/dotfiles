@@ -71,8 +71,16 @@ inotifywait -m -r ~/directory                   | watch a directory for changes
 lshw -short -sanitize                           | Summarize hardware for selling
 lynis                                           | Security audit
 pdfunite                                        | combine PDFs on comand line
+systemctl reset-failed                          | Remove stray systemctl units/timers
 xxd                                             | Hex dump
+speaker-test -c 2 -t wav                        | test speaker
+Cheese                                          | webcam test
+PulseAudio mixer                                | mic test
+```
 
+### Linux - Disks and Filesystems
+
+```text
 badblocks -b 8192 -wsv /dev/device              | test device for bad blocks (DESTRUCTIVE!)
 blkdiscard --secure -v -f /dev/device           | Securely erase SSD
 parted mkpart primary ext4 0% 100%              | create a single partition
@@ -81,10 +89,6 @@ shred -vz /dev/device                           | Securely erase hard drive
 
 duperemove --hashfile=/tmp/x.hash -r -d /target | de-duplicate
 btrfs scrub /target                             | check checksums
-
-speaker-test -c 2 -t wav                        | test speaker
-Cheese                                          | webcam test
-PulseAudio mixer                                | mic test
 ```
 
 ## Audio file manipulation
