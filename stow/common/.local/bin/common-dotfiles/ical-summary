@@ -1,28 +1,21 @@
 #!/usr/bin/env python
 
 import argparse
-from argparse import Namespace
 import datetime
 import logging
-import os
-from pathlib import Path
 import subprocess
 import sys
+from argparse import Namespace
+from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import pytz
 from dateutil.parser import parse
 from icalendar.cal import Calendar, Component
-import pytz
 
 logger = logging.getLogger("ical-summary")
-logger.propagate = False
-logger.setLevel(logging.WARNING)
-
 syserr_handler = logging.StreamHandler(stream=sys.stderr)
-syserr_handler.setLevel(logging.WARNING)
-syserr_handler.setFormatter(
-    logging.Formatter("ical-summary: %(levelname)s: %(message)s")
-)
+syserr_handler.setFormatter(logging.Formatter("%(name)s: %(levelname)s: %(message)s"))
 logger.addHandler(syserr_handler)
 
 
@@ -44,24 +37,24 @@ def get_completed_tasks(
         days=number_of_days
     )
 
-    for filename in os.listdir(directory):
-        if filename.endswith(".ics"):
+    for filename in directory.iterdir():
+        if filename.suffix == ".ics":
             filepath = directory / filename
             with filepath.open("rb") as f:
                 calendar: Component = Calendar.from_ical(f.read())  # pyright: ignore[reportArgumentType]
-                for component in calendar.walk():  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
-                    if component.name == "VTODO":  # pyright: ignore[reportUnknownMemberType]
-                        completed = component.get("COMPLETED")  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
+                for component in calendar.walk():
+                    if component.name == "VTODO":
+                        completed = component.get("COMPLETED")  # pyright: ignore[reportAny]
                         if completed is not None:
-                            completed_date: str = completed.dt  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
-                            summary: str = component.get("SUMMARY")  # pyright: ignore[reportUnknownMemberType, reportUnknownVariableType]
+                            completed_date: str = completed.dt  # pyright: ignore[reportAny]
+                            summary: str = component.get("SUMMARY")  # pyright: ignore[reportAny]
 
                             if completed_date and summary:
-                                completed_datetime = parse(completed_date)  # pyright: ignore[reportUnknownArgumentType]
+                                completed_datetime = parse(completed_date)
 
                                 if completed_datetime >= cutoff_date:
                                     completed_tasks.append(
-                                        (completed_datetime, summary)  # pyright: ignore[reportUnknownArgumentType]
+                                        (completed_datetime, summary)
                                     )
 
     return completed_tasks
@@ -74,8 +67,8 @@ def format_tasks_as_markdown(title: str, formatted_tasks: list[str]) -> str:
 
 
 def send_email(email_address: str, subject: str, content: str) -> None:
-    subprocess.run(
-        ["mail", "-s", subject, email_address],
+    subprocess.run(  # noqa: S603
+        ["/usr/bin/mail", "-s", subject, email_address],
         input=content,
         check=True,
     )
