@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-#
-# pyright: reportAny=false
 
 import argparse
 import logging
@@ -119,10 +117,13 @@ def main() -> None:
 
     args = parser.parse_args()
 
-    sourcedir = Path(args.source_dir)
-    targetdir = Path(args.target_dir)
+    sourcedir = Path(args.source_dir)  # pyright: ignore[reportAny]
+    targetdir = Path(args.target_dir)  # pyright: ignore[reportAny]
+    verbose: bool = args.verbose  # pyright: ignore[reportAny]
+    dry_run: bool = args.dry_run  # pyright: ignore[reportAny]
+    days_old: int = args.days_old  # pyright: ignore[reportAny]
 
-    if args.verbose:
+    if verbose:
         logger.setLevel(logging.INFO)
         syserr_handler.setLevel(logging.INFO)
 
@@ -133,7 +134,7 @@ def main() -> None:
     for filename in sourcedir.iterdir():
         if filename.suffix == ".ics":
             file_path: Path = sourcedir / filename
-            process_ics_file(file_path, args.target_dir, args.dry_run, args.days_old)
+            process_ics_file(file_path, targetdir, dry_run, days_old)
 
 
 if __name__ == "__main__":
