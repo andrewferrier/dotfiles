@@ -52,7 +52,7 @@ local callback = function()
     redraw_timer = vim.fn.timer_start(750, delayed_redraw)
 end
 
-vim.api.nvim_create_autocmd("LspProgress", {
+vim.api.nvim_create_autocmd({ "DiagnosticChanged", "LspProgress" }, {
     pattern = "*",
     callback = callback,
 })
