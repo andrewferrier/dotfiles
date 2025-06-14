@@ -12,6 +12,7 @@ return {
             "lazy.nvim",
             "lazydev.nvim",
             "oil.nvim",
+            "quicker.nvim",
             "snacks.nvim",
             { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         },
