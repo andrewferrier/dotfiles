@@ -14,7 +14,7 @@ return {
             ["<C-K>"] = { "fallback" },
         },
         sources = {
-            default = { "lsp", "path", "buffer" },
+            default = { "buffer", "lsp", "path" },
         },
         fuzzy = {
             max_typos = 0,
