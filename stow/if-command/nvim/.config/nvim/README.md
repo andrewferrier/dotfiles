@@ -211,6 +211,7 @@ Replacer (command) - enter modifiable mode
 - Play with treesitter to highlight inside alias strings in bash/zsh; try <https://github.com/Dronakurl/injectme.nvim/tree/main> or see nvim/.config/nvim/after/queries/json/injections.scm
 - Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
 - Experiment with snippets
+- Use searchcount() in statusline for NeoVim 0.12+
 
 ## Presentation Ideas
 
