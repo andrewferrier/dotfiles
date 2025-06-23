@@ -8,7 +8,7 @@ if vim.fn.has("nvim-0.12.0") == 1 then
         },
     })
 
-    vim.keymap.set("n", "gom", ":messages<CR>", { silent = true })
+    vim.keymap.set("n", "g<", ":messages<CR>", { silent = true })
 else
     vim.opt.showmode = false
 end
