@@ -15,6 +15,7 @@ uv tool install --upgrade \
     mdformat
 
 uv tool install --upgrade yamlfix
+uv tool install --upgrade git+https://github.com/EbodShojaei/bake
 
 if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
     # pacaur -S --noconfirm basedpyright

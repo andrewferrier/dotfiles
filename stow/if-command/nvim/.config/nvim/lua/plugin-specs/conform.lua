@@ -21,6 +21,7 @@ local opts = {
         d2 = { "d2" },
         html = { "prettier" },
         lua = { "stylua" },
+        make = { "bake" },
         markdown = { "mdformat" },
         python = { "ruff_organize_imports" },
         sql = { "sqlfluff" },
@@ -30,6 +31,11 @@ local opts = {
         lsp_format = "first",
     },
     formatters = {
+        bake = {
+            command = "bake",
+            args = { "format", "$FILENAME" },
+            stdin = false,
+        },
         prettier = {
             prepend_args = function(_, context)
                 return {
