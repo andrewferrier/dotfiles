@@ -6,6 +6,7 @@ bash/sh | ~/.config/bash.d/README.md
 i3      | ~/.config/i3/config
 kitty   | ~/.config/kitty/kitty.conf
 lf      | ~/.config/lf/lfrc
+make    | <https://makefiletutorial.com>
 mutt    | ~/.mutt/muttrc.common
 neovim  | ~/.config/nvim/README.md
 tmux    | ~/.config/tmux/tmux.conf
