@@ -53,6 +53,9 @@ return {
             mappings = { find = "", find_left = "", highlight = "" },
         })
 
+        -- I never use 's' by itself, so disabling as this is just annoying
+        vim.keymap.set({ "n", "x" }, "s", "<Nop>")
+
         require("plugin-specs.mini.hipatterns")
     end,
     init = function()
