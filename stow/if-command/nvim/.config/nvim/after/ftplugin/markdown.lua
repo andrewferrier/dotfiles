@@ -8,6 +8,14 @@ vim.cmd.iabbrev(
 
 vim.b.minisurround_config = {
     custom_surroundings = {
+        B = {
+            input = { "%*%*().-()%*%*" },
+            output = { left = "**", right = "**" },
+        },
+        ["~"] = {
+            input = { "%~%~().-()%~%~" },
+            output = { left = "~~", right = "~~" },
+        },
         l = {
             output = function()
                 local clipboard = tostring(vim.fn.getreg("+")):gsub("\n", "")
