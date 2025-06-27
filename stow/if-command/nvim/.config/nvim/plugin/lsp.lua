@@ -15,13 +15,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         keybindings_inlayhints(bufnr)
 
-        vim.keymap.set(
-            { "n", "x" },
-            "gra",
-            require("fzf-lua").lsp_code_actions,
-            { buffer = bufnr, desc = "Apply code action" }
-        )
-
         if vim.fn.has("nvim-0.12.0") == 1 then
             local client = vim.lsp.get_client_by_id(event.data.client_id)
 
