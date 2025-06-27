@@ -1,3 +1,5 @@
+.PHONY: pkgs
+
 pkgs:
 	apk info git || apk add git
 	apk info mandoc || apk add mandoc

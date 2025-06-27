@@ -1,4 +1,4 @@
-.PHONY: pkgs stow pre-stow configure
+.PHONY: all configure pkgs pre-stow quick stow
 
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
@@ -8,25 +8,25 @@ STOW := $(MKFILE_PATH)/stow
 PRE_STOW := $(MKFILE_PATH)/pre-stow
 
 ifeq ($(shell uname | grep -i linux),)
-	OS := macos
-	OSDISTRIBUTION := macos
+  OS := macos
+  OSDISTRIBUTION := macos
 else
-	OS := linux
-	OSDISTRIBUTION := $(shell cat /etc/*-release | grep ^ID | sed -e 's/^.*=//')
+  OS := linux
+  OSDISTRIBUTION := $(shell cat /etc/*-release | grep ^ID | sed -e 's/^.*=//')
 endif
 
 ifeq ($(origin FULLINSTALL),undefined)
-	INSTALL_TYPE := simple-install
+  INSTALL_TYPE := simple-install
 else
-	INSTALL_TYPE := full-install
+  INSTALL_TYPE := full-install
 endif
 
 ifeq ($(OSDISTRIBUTION), arch)
-	DESKTOP_SERVER := desktop
+  DESKTOP_SERVER := desktop
 else ifeq ($(OSDISTRIBUTION), macos)
-	DESKTOP_SERVER := desktop
+  DESKTOP_SERVER := desktop
 else
-	DESKTOP_SERVER := server
+  DESKTOP_SERVER := server
 endif
 
 all: pkgs quick

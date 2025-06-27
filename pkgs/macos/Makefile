@@ -1,5 +1,7 @@
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
+.PHONY: all brew_cleanup brew_file brew_install
+
 all: brew_file
 
 brew_file: brew_install brew_cleanup
@@ -17,5 +19,5 @@ brew_cleanup: brew_install
 
 brew_install:
 	if ! command -v brew &>/dev/null; then \
-	    /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
 	fi
