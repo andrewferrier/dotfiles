@@ -9,15 +9,17 @@ return {
         "nvim-treesitter/nvim-treesitter",
         {
             "nvim-telescope/telescope.nvim",
-            opts = {
-                defaults = {
-                    mappings = {
-                        i = {
-                            ["<esc>"] = require("telescope.actions").close,
+            opts = function()
+                return {
+                    defaults = {
+                        mappings = {
+                            i = {
+                                ["<esc>"] = require("telescope.actions").close,
+                            },
                         },
                     },
-                },
-            },
+                }
+            end,
             lazy = true,
         },
     },
