@@ -18,7 +18,9 @@ uv tool install --upgrade yamlfix
 uv tool install --upgrade git+https://github.com/EbodShojaei/bake
 
 if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
-    # pacaur -S --noconfirm basedpyright
+    # basedpyright should be install via Arch package mechanism to enable it to
+    # find all system Python packages
+
     uv tool install --upgrade gitlint-core
     uv tool install --upgrade sqlfluff
 elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
