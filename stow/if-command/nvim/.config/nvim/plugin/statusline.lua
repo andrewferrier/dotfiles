@@ -20,6 +20,7 @@ statusline = statusline .. "%{v:lua.require('statusline').lspprogress()}"
 statusline = statusline .. "%{v:lua.require('statusline').diagnosticstatus()}"
 statusline = statusline .. "%{v:lua.require('statusline').spellingerrorcount()}"
 statusline = statusline .. "%{v:lua.require('statusline').gitsigns()}"
+statusline = statusline .. "%{v:lua.require('statusline').searchcount()}"
 statusline = statusline .. SEPARATOR
 
 -- RHS - File and feature info

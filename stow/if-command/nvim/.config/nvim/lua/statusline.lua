@@ -206,4 +206,31 @@ M.lspprogress = function()
     end
 end
 
+M.searchcount = function()
+    local response
+
+    if vim.v.hlsearch == 0 then
+        return ""
+    end
+
+    -- `searchcount()` can return errors because it is evaluated very often in
+    -- statusline. For example, when typing `/` followed by `\(`, it gives E54.
+    local ok, s_count = pcall(vim.fn.searchcount, { recompute = true })
+    if not ok or s_count.current == nil or s_count.total == 0 then
+        return ""
+    end
+
+    if s_count.incomplete == 1 then
+        return "[?/?] "
+    end
+
+    local too_many = ">" .. s_count.maxcount
+    local current = s_count.current > s_count.maxcount and too_many
+        or s_count.current
+    local total = s_count.total > s_count.maxcount and too_many or s_count.total
+    response = current .. "/" .. total
+
+    return "[" .. response .. "] "
+end
+
 return M
