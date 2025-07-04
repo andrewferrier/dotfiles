@@ -15,6 +15,14 @@ return {
         sources = {
             default = { "lsp", "path", "buffer" },
         },
+        fuzzy = {
+            max_typos = 0,
+            sorts = {
+                "exact",
+                "score",
+                "sort_text",
+            },
+        },
         completion = {
             accept = {
                 auto_brackets = {
