@@ -15,5 +15,12 @@ return {
         sources = {
             default = { "lsp", "path", "buffer" },
         },
+        completion = {
+            accept = {
+                auto_brackets = {
+                    enabled = false,
+                },
+            },
+        },
     },
 }
