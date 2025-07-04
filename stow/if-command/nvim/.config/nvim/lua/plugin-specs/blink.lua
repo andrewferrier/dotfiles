@@ -25,5 +25,9 @@ return {
         signature = {
             enabled = true,
         },
+        cmdline = {
+            -- Because of https://github.com/Saghen/blink.cmp/issues/1878#issuecomment-3017120394
+            enabled = false,
+        },
     },
 }
