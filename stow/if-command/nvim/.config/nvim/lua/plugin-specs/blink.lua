@@ -6,9 +6,11 @@ return {
     ---@type blink.cmp.Config
     opts = {
         keymap = {
-            preset = "super-tab",
+            preset = "default",
+            ["<Tab>"] = { "select_and_accept", "fallback" },
             ["<C-N>"] = { "select_and_accept", "fallback" },
             ["<C-P>"] = {},
+            ["<C-Y>"] = { "fallback" },
         },
         sources = {
             default = { "lsp", "path", "buffer" },
