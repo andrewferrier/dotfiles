@@ -20,7 +20,11 @@ statusline = statusline .. "%{v:lua.require('statusline').lspprogress()}"
 statusline = statusline .. "%{v:lua.require('statusline').diagnosticstatus()}"
 statusline = statusline .. "%{v:lua.require('statusline').spellingerrorcount()}"
 statusline = statusline .. "%{v:lua.require('statusline').gitsigns()}"
-statusline = statusline .. "%{v:lua.require('statusline').searchcount()}"
+
+if vim.fn.has("nvim-0.12.0") == 1 then
+    statusline = statusline .. "%{v:lua.require('statusline').searchcount()}"
+end
+
 statusline = statusline .. SEPARATOR
 
 -- RHS - File and feature info
