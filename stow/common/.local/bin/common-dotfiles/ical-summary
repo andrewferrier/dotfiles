@@ -71,6 +71,7 @@ def send_email(email_address: str, subject: str, content: str) -> None:
         ["/usr/bin/mail", "-s", subject, email_address],
         input=content,
         check=True,
+        text=True,
     )
 
 
