@@ -10,6 +10,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import pytz
+import requests
 from icalendar.cal import Calendar, Component
 
 logger = logging.getLogger("ical-summary")
@@ -24,6 +25,7 @@ def parse_arguments() -> Namespace:
     )
     parser.add_argument("directory", type=str)
     parser.add_argument("email", type=str)
+    parser.add_argument("healthcheck_url", type=str)
     parser.add_argument("--number-of-days", type=int, default=7)
     return parser.parse_args()
 
@@ -90,6 +92,7 @@ def main() -> None:
     directory: str = args.directory  # pyright: ignore[reportAny]
     number_of_days: int = args.number_of_days  # pyright: ignore[reportAny]
     email: str = args.email  # pyright: ignore[reportAny]
+    healthcheck_url: str = args.healthcheck_url  # pyright: ignore[reportAny]
 
     completed_tasks = get_completed_tasks(Path(directory), number_of_days)
     completed_tasks.sort(key=lambda tup: tup[0])
@@ -102,6 +105,12 @@ def main() -> None:
     markdown_content = format_tasks_as_markdown(subject, display_tasks)
 
     send_email(email, subject, markdown_content)
+    ping_healthchecks(healthcheck_url)
+
+
+def ping_healthchecks(url: str) -> None:
+    response = requests.get(url, timeout=10)
+    response.raise_for_status()
 
 
 if __name__ == "__main__":
