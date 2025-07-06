@@ -10,7 +10,6 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import pytz
-from dateutil.parser import parse
 from icalendar.cal import Calendar, Component
 
 logger = logging.getLogger("ical-summary")
@@ -46,16 +45,15 @@ def get_completed_tasks(
                     if component.name == "VTODO":
                         completed = component.get("COMPLETED")  # pyright: ignore[reportAny]
                         if completed is not None:
-                            completed_date: str = completed.dt  # pyright: ignore[reportAny]
+                            completed_date: datetime.datetime = completed.dt  # pyright: ignore[reportAny]
                             summary: str = component.get("SUMMARY")  # pyright: ignore[reportAny]
 
-                            if completed_date and summary:
-                                completed_datetime = parse(completed_date)
-
-                                if completed_datetime >= cutoff_date:
-                                    completed_tasks.append(
-                                        (completed_datetime, summary)
-                                    )
+                            if (
+                                completed_date
+                                and summary
+                                and completed_date >= cutoff_date
+                            ):
+                                completed_tasks.append((completed_date, summary))
 
     return completed_tasks
 
