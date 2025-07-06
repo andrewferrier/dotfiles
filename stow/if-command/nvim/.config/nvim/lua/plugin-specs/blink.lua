@@ -11,6 +11,7 @@ return {
             ["<C-N>"] = { "select_and_accept", "fallback" },
             ["<C-P>"] = {},
             ["<C-Y>"] = { "fallback" },
+            ["<C-K>"] = { "fallback" },
         },
         sources = {
             default = { "lsp", "path", "buffer" },
