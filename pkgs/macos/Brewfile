@@ -66,7 +66,7 @@ brew "ruff" # for neovim LSP
 brew "selene"
 brew "shellcheck" # to support bash-language-server
 brew "shellharden"
-brew "shfmt"
+brew "shfmt" # to support bash-language-server
 brew "smudge/smudge/nightlight"
 brew "sqlfluff"
 brew "stow"
