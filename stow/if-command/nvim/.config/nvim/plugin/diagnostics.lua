@@ -35,6 +35,7 @@ local SIGNS = {
 }
 
 vim.diagnostic.config({
+    severity_sort = true,
     float = {
         format = diagnostic_format,
         header = "",
