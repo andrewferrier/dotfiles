@@ -17,7 +17,9 @@ return {
             default = { "buffer", "lsp", "path" },
         },
         fuzzy = {
-            max_typos = 0,
+            max_typos = function()
+                return 0
+            end,
             sorts = {
                 "exact",
                 "score",
