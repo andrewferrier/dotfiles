@@ -25,6 +25,8 @@ local configure = function()
         },
     })
 
+    fzf_lua.register_ui_select()
+
     vim.keymap.set(
         "n",
         "cvh",
