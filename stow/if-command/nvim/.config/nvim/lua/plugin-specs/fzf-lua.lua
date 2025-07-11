@@ -104,6 +104,10 @@ local configure = function()
     vim.keymap.set({ "i" }, "<C-r>", function()
         fzf_lua.registers()
     end, { silent = true, desc = "Paste from register using fzf" })
+
+    vim.keymap.set("n", "gO", function()
+        fzf_lua.lsp_document_symbols()
+    end)
 end
 
 -- selene: allow(mixed_table)
