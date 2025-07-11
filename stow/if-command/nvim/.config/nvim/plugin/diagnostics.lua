@@ -18,10 +18,6 @@ end
 local diagnostic_format = function(diagnostic)
     local message = diagnostic.message
 
-    if diagnostic.code and not string.find(message, diagnostic.code) then
-        message = message .. "\n[" .. diagnostic.code .. "]"
-    end
-
     local source = diagnostic_source(diagnostic)
 
     if source then
@@ -41,7 +37,7 @@ local SIGNS = {
 vim.diagnostic.config({
     float = {
         format = diagnostic_format,
-        suffix = "",
+        header = "",
         width = math.floor(vim.fn.winwidth(0) / 2),
     },
     virtual_text = {
