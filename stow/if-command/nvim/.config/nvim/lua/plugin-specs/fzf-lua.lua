@@ -94,15 +94,15 @@ local configure = function()
     end, { desc = "Find directory", unique = true })
 
     vim.keymap.set({ "i" }, "<C-x><C-f>", function()
-        require("fzf-lua").complete_file()
+        fzf_lua.complete_file()
     end, { silent = true, desc = "Fuzzy complete path" })
 
     vim.keymap.set({ "n" }, "g<C-r>", function()
-        require("fzf-lua").registers()
+        fzf_lua.registers()
     end, { silent = true, desc = "Paste from register using fzf" })
 
     vim.keymap.set({ "i" }, "<C-r>", function()
-        require("fzf-lua").registers()
+        fzf_lua.registers()
     end, { silent = true, desc = "Paste from register using fzf" })
 end
 
