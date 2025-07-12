@@ -112,10 +112,12 @@ if "$DIRS"; then
     PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | xargs -I% eza --level 2 --tree --color=always --group-directories-first --no-quotes %"
     FD_TYPE='d'
     FASD_PARAMS="-dRl"
+    MEMY_PARAMS="-d"
 else
     PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | tr '\n' '\0' | xargs -0 $BAT --highlight-line :\$LINES --color=always"
     FD_TYPE='f'
     FASD_PARAMS="-fRl"
+    MEMY_PARAMS="-f"
 fi
 
 if "$RECENT_ONLY"; then
@@ -129,6 +131,11 @@ else
 fi
 
 function wrapper_fasd() {
+    if command -v memy >/dev/null 2>&1; then
+        memy $MEMY_PARAMS | tac
+        exit
+    fi
+
     if [[ -f "${XDG_CACHE_HOME}/fasd" ]]; then
         FASD_LOCATION="${XDG_CACHE_HOME}/fasd"
     else

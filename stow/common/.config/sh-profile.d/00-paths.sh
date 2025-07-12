@@ -97,6 +97,7 @@ pupdate_append_globxxx "${GEM_HOME}/ruby/*/bin"
 pupdate_append_singlex "${HOME}/.luarocks/bin" # luarocks/lua
 pupdate_append_singlex "${HOME}/.cargo/bin"
 pupdate_append_singlex "${HOME}/.local/share/cargo/bin"
+pupdate_append_singlex "${HOME}/memy/target/debug"
 
 if command -v npm >/dev/null 2>&1; then
     nupdate_append_singlex "${NPM_PACKAGES}/lib/node_modules"

@@ -127,6 +127,10 @@ for FILE in "$@"; do
 
             fasd -A "${FILE}" &
 
+            if command -v memy >/dev/null 2>&1; then
+                memy --note "${FILE}" &
+            fi
+
             MIME_TYPE=$(file --brief --mime-type "${FILE}")
             readonly MIME_TYPE
 
