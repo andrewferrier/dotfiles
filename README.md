@@ -49,7 +49,7 @@ s | zoom to page width
 ## mpv
 
 ```text
-Del | toggle bottom status bar
+? | Show keys
 ```
 
 ## journalctl
