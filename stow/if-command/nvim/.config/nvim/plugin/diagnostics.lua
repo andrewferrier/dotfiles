@@ -39,7 +39,6 @@ vim.diagnostic.config({
     float = {
         format = diagnostic_format,
         header = "",
-        width = math.floor(vim.fn.winwidth(0) / 2),
     },
     virtual_text = {
         format = diagnostic_format,
