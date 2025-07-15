@@ -4,7 +4,10 @@ local M = {}
 M.system_on_exit = function(out)
     vim.schedule(function()
         if out.code ~= 0 then
-            vim.notify(out.stderr, vim.log.levels.ERROR)
+            vim.notify(
+                "From external command: " .. out.stderr,
+                vim.log.levels.ERROR
+            )
         end
     end)
 end
