@@ -125,10 +125,10 @@ for FILE in "$@"; do
         if [[ -e ${FILE} ]]; then
             FILE_EXTENSION_LOWER="$(printf "%s" "${FILE##*.}" | tr '[:upper:]' '[:lower:]')"
 
-            fasd -A "${FILE}" &
-
             if command -v memy >/dev/null 2>&1; then
                 memy note "${FILE}" &
+            else
+                fasd -A "${FILE}" &
             fi
 
             MIME_TYPE=$(file --brief --mime-type "${FILE}")
