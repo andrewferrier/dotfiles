@@ -132,7 +132,7 @@ fi
 
 function wrapper_fasd() {
     if command -v memy >/dev/null 2>&1; then
-        memy $MEMY_PARAMS | tac
+        memy list $MEMY_PARAMS | tac
         exit
     fi
 

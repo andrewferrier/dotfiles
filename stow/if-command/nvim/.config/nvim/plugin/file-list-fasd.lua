@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufWritePost" }, {
         )
 
         vim.system(
-            { "/home/ferriera/memy/target/debug/memy", "--note", file },
+            { "/home/ferriera/memy/target/debug/memy", "note", file },
             { detach = true },
             require("utils").system_on_exit
         )

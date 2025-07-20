@@ -42,7 +42,7 @@ cmd on-cd &{{
     fasd -A $PWD
 
     if command -v memy >/dev/null 2>&1; then
-        memy --note ${PWD} &
+        memy note ${PWD} &
     fi
 
     printf "\033]0; lf [${PWD/#$HOME/~}]\007" > /dev/tty
