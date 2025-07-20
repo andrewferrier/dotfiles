@@ -37,7 +37,6 @@ xset b off
 # Turn off mute keyboard light
 echo 0 >/sys/class/leds/platform::micmute/brightness
 
-rfkill block bluetooth
 rfkill block wwan
 
 export TERMCMD=kitty
