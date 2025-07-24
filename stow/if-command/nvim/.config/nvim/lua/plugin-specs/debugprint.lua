@@ -13,6 +13,7 @@ return {
         filetypes = {
             lf = require("debugprint.filetypes").bash,
         },
+        picker = "fzf-lua",
     },
     lazy = false,
 }
