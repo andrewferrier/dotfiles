@@ -2,18 +2,20 @@
 ---@type LazyPluginSpec
 return {
     "git@github.com:andrewferrier/debugprint.nvim",
-    ---@type debugprint.GlobalOptions
-    opts = {
-        keymaps = {
-            insert = {
-                plain = false,
-                variable = false,
+    opts = function()
+        ---@type debugprint.GlobalOptions
+        return {
+            keymaps = {
+                insert = {
+                    plain = false,
+                    variable = false,
+                },
             },
-        },
-        filetypes = {
-            lf = require("debugprint.filetypes").bash,
-        },
-        picker = "fzf-lua",
-    },
+            filetypes = {
+                lf = require("debugprint.filetypes").bash,
+            },
+            picker = "fzf-lua",
+        }
+    end,
     lazy = false,
 }
