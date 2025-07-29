@@ -16,7 +16,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
         keybindings_inlayhints(bufnr)
     end,
 })
-
-vim.api.nvim_create_user_command("LspInspectClient", function()
-    require("lsp").inspect_client()
-end, {})
