@@ -14,17 +14,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         keybindings_inlayhints(bufnr)
-
-        if vim.fn.has("nvim-0.12.0") == 1 then
-            local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-            if
-                client ~= nil
-                and client:supports_method("textDocument/documentColor")
-            then
-                vim.lsp.document_color.enable(true, bufnr)
-            end
-        end
     end,
 })
 
