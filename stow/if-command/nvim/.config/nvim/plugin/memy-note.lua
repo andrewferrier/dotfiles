@@ -7,13 +7,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre", "BufWritePost" }, {
         end
 
         vim.system(
-            { "fasd", "-A", file },
-            { detach = true },
-            require("utils").system_on_exit
-        )
-
-        vim.system(
-            { "/home/ferriera/memy/target/debug/memy", "note", file },
+            { "memy", "note", file },
             { detach = true },
             require("utils").system_on_exit
         )
