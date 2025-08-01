@@ -27,13 +27,6 @@ local diagnostic_format = function(diagnostic)
     return message
 end
 
-local SIGNS = {
-    [vim.diagnostic.severity.ERROR] = "✘",
-    [vim.diagnostic.severity.WARN] = "ω",
-    [vim.diagnostic.severity.HINT] = "ɦ",
-    [vim.diagnostic.severity.INFO] = "ℹ",
-}
-
 vim.diagnostic.config({
     severity_sort = true,
     float = {
@@ -45,23 +38,6 @@ vim.diagnostic.config({
         severity = {
             min = vim.diagnostic.severity.WARN,
             max = vim.diagnostic.severity.ERROR,
-        },
-        prefix = function(diagnostic)
-            return SIGNS[diagnostic.severity]
-        end,
-    },
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = "▧",
-            [vim.diagnostic.severity.WARN] = "▧",
-            [vim.diagnostic.severity.HINT] = "▧",
-            [vim.diagnostic.severity.INFO] = "▧",
-        },
-        numhl = {
-            [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
-            [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
-            [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
-            [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
         },
     },
 })
