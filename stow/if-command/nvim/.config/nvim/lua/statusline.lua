@@ -68,29 +68,39 @@ M.diagnosticstatus = function()
     -- TODO: In NeoVim 0.10 refactor to use vim.diagnostic.count(), calling it only once
 
     if vim.diagnostic.is_enabled() then
-        local diagnostics_counts = {}
+        if vim.fn.has("nvim-0.12.0") == 1 then
+            local diagnostic_status = vim.diagnostic.status()
 
-        for prefix, severity in pairs({
-            e = vim.diagnostic.severity.ERROR,
-            w = vim.diagnostic.severity.WARN,
-            i = vim.diagnostic.severity.INFO,
-            h = vim.diagnostic.severity.HINT,
-        }) do
-            local count = #vim.diagnostic.get(0, { severity = severity })
-
-            if count > 0 then
-                table.insert(diagnostics_counts, prefix .. count)
+            if diagnostic_status == "" then
+                return ""
+            else
+                return LEFT_BRACE .. diagnostic_status .. RIGHT_BRACE .. " "
             end
-        end
-
-        if #diagnostics_counts > 0 then
-            return LEFT_BRACE
-                .. "D "
-                .. table.concat(diagnostics_counts, ",")
-                .. RIGHT_BRACE
-                .. " "
         else
-            return ""
+            local diagnostics_counts = {}
+
+            for prefix, severity in pairs({
+                e = vim.diagnostic.severity.ERROR,
+                w = vim.diagnostic.severity.WARN,
+                i = vim.diagnostic.severity.INFO,
+                h = vim.diagnostic.severity.HINT,
+            }) do
+                local count = #vim.diagnostic.get(0, { severity = severity })
+
+                if count > 0 then
+                    table.insert(diagnostics_counts, prefix .. count)
+                end
+            end
+
+            if #diagnostics_counts > 0 then
+                return LEFT_BRACE
+                    .. "D "
+                    .. table.concat(diagnostics_counts, ",")
+                    .. RIGHT_BRACE
+                    .. " "
+            else
+                return ""
+            end
         end
     end
 
