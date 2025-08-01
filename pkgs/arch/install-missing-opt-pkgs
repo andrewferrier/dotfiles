@@ -8,7 +8,7 @@ install-if-missing() {
 
     if ! pacman -Qi "${PACKAGE_NAME}" >/dev/null; then
         echo "Package ${PACKAGE_NAME} missing, installing..."
-        pacaur -S --noconfirm --noedit "${PACKAGE_NAME}"
+        pacaur -S "${PACKAGE_NAME}"
     fi
 }
 

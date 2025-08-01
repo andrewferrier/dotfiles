@@ -7,6 +7,4 @@ if (command -v pacman >/dev/null 2>&1); then
     alias pacman-mark-implicit="pacman -Qe | cut -f1 -d' ' | fzf -m --layout=reverse --preview 'pacman -Qil {}' | xargs sudo pacman -D --asdeps"
     alias pacman-view-all-packages="pacman -Ss | sed '2~2d' | cut -f1 -d' ' | fzf --preview 'pacman -Si {}' --layout=reverse"
     alias pacman-view-installed-packages="pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'"
-
-    alias pacaur='pacaur --noedit'
 fi
