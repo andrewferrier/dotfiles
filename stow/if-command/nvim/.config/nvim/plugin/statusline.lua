@@ -44,7 +44,7 @@ vim.o.statusline = statusline
 local redraw_timer
 
 local delayed_redraw = function()
-    vim.cmd.redrawstatus()
+    vim.schedule(vim.cmd.redrawstatus)
     redraw_timer = nil
 end
 
@@ -53,7 +53,7 @@ local callback = function()
         vim.fn.timer_stop(redraw_timer)
     end
 
-    vim.cmd.redrawstatus()
+    vim.schedule(vim.cmd.redrawstatus)
     redraw_timer = vim.fn.timer_start(750, delayed_redraw)
 end
 
