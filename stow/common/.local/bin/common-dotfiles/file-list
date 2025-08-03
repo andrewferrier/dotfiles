@@ -130,22 +130,8 @@ else
     GREP=(grep)
 fi
 
-function wrapper_fasd() {
-    if command -v memy >/dev/null 2>&1; then
-        memy list $MEMY_PARAMS | tac
-        exit
-    fi
-
-    if [[ -f "${XDG_CACHE_HOME}/fasd" ]]; then
-        FASD_LOCATION="${XDG_CACHE_HOME}/fasd"
-    else
-        FASD_LOCATION="${HOME}/.fasd"
-    fi
-
-    FASD_FILTERED_DATA=$(mktemp /tmp/file-list.XXXXXX)
-    grep -v "/mnt" "${FASD_LOCATION}" >"$FASD_FILTERED_DATA"
-    _FASD_DATA=$FASD_FILTERED_DATA fasd "$FASD_PARAMS"
-    rm "$FASD_FILTERED_DATA"
+function wrapper_memy() {
+    memy list $MEMY_PARAMS | tac
 }
 
 function wrapper_fd() {
@@ -205,7 +191,7 @@ readonly COLOR_BLUE COLOR_RESET
 # shellcheck disable=SC2068
 # shellcheck disable=SC2312
 cat \
-    <(wrapper_fasd) \
+    <(wrapper_memy) \
     <(wrapper_mdfind) \
     <(wrapper_fd ${SEARCH_DIRS[@]}) |
     "${GREP[@]}" -E -v -i --binary-files=text "$EXCLUDE_PATTERN" |
@@ -223,6 +209,6 @@ cat \
             --scheme=path \
             ${MULTISELECT_ARGS} \
             --preview="$PREVIEW_COMMAND" |
-            tee >(xargs -n1 fasd -A)
+            tee >(xargs -n1 memy note)
     else cat; fi |
     if "$NULL"; then tr '\n' '\0'; else cat; fi
