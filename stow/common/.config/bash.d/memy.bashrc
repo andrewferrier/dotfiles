@@ -1,0 +1,1 @@
+source <(memy hook bash)
