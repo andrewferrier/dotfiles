@@ -98,7 +98,7 @@ cmd zip ${{
     fi
 }}
 
-cmd fasd-file ${{
+cmd file-list-file ${{
     set -o noglob
 
     FILE="$(FZF_TMUX_HEIGHT=100 file-list -f -s)"
@@ -112,7 +112,7 @@ cmd fasd-file ${{
     fi
 }}
 
-cmd fasd-dir ${{
+cmd file-list-dir ${{
     set -o noglob
 
     DIR="$(FZF_TMUX_HEIGHT=100 file-list -d -s)"
@@ -158,8 +158,8 @@ set previewer ~/.config/lf/scope.sh
 set info size
 set dircounts
 
-map <c-f> :fasd-file
-map <c-g> :fasd-dir
+map <c-f> :file-list-file
+map <c-g> :file-list-dir
 
 map <delete> $IFS="$(printf '\n\t')"; trash $fx
 map E $$EDITOR .
