@@ -7,7 +7,7 @@ export FZF_DEFAULT_OPTS_INITIAL='--exact'
 
 if command -v fzf >/dev/null 2>/dev/null; then
     # shellcheck disable=SC2312
-    FZF_VERSION=$(fzf --version | cut -d'.' -f2)
+    FZF_VERSION=$(fzf --version | cut -d'.' -f2 | cut -d' ' -f1)
     if ((FZF_VERSION >= 42)); then
         export FZF_DEFAULT_OPTS_INITIAL="$FZF_DEFAULT_OPTS_INITIAL --info=inline-right --no-separator"
     fi
