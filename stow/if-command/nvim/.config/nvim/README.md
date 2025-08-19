@@ -179,6 +179,12 @@ Tab - select file
 Replacer (command) - enter modifiable mode
 ```
 
+### Neotree
+
+```text
+H - toggle hidden files
+```
+
 ## Links
 
 - [Advanced Search and Replace](https://gosukiwi.github.io/vim/2022/04/19/vim-advanced-search-and-replace.html)
