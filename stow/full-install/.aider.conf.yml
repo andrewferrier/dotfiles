@@ -1,3 +1,5 @@
-model: gemini/gemini-2.5-flash
+# model: gemini/gemini-2.5-flash
+# model: openrouter/deepseek/deepseek-r1:free
+model: openrouter/deepseek/deepseek-chat-v3-0324:free
 auto-commits: false
 attribute-author: false
