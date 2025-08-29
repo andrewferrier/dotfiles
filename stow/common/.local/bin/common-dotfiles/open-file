@@ -94,7 +94,7 @@ function open-system() {
 }
 
 function text-treat-as-binary() {
-    LIST="drawio html svg webloc"
+    LIST="drawio html pdf svg webloc"
 
     if [[ ${LIST} =~ (^|[[:space:]])$1($|[[:space:]]) ]]; then
         true
