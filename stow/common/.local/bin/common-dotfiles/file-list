@@ -209,6 +209,6 @@ cat \
             --scheme=path \
             ${MULTISELECT_ARGS} \
             --preview="$PREVIEW_COMMAND" |
-            tee >(xargs -n1 memy note)
+            tee >(xargs -n1 --no-run-if-empty memy note)
     else cat; fi |
     if "$NULL"; then tr '\n' '\0'; else cat; fi
