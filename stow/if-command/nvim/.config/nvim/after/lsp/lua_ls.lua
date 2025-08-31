@@ -18,7 +18,16 @@ return {
             format = { enable = false },
             runtime = { version = "LuaJIT" },
             diagnostics = {
-                globals = { "IMAP", "Set", "hs", "options", "pipe_to", "vim" },
+                -- These are a combination of Hammerspoon and imapfilter globals
+                globals = {
+                    "IMAP",
+                    "Set",
+                    "hs",
+                    "options",
+                    "pipe_to",
+                    "vim",
+                    "sleep",
+                },
             },
             hint = { arrayIndex = "Disable", enable = true },
         },
