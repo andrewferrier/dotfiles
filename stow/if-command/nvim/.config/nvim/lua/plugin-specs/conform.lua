@@ -25,7 +25,6 @@ local opts = {
         markdown = { "mdformat" },
         python = { "ruff_organize_imports" },
         sql = { "sqlfluff" },
-        yaml = { "yamlfix" },
     },
     default_format_opts = {
         lsp_format = "first",

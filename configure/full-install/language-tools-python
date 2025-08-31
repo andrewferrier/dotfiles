@@ -14,7 +14,6 @@ uv tool install --upgrade \
     --with mdformat-footnote \
     mdformat
 
-uv tool install --upgrade yamlfix
 uv tool install --upgrade git+https://github.com/EbodShojaei/bake
 
 uv tool install --managed-python aider-chat@latest
