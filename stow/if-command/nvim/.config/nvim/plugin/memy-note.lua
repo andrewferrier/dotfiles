@@ -6,5 +6,5 @@ if vim.fn.isdirectory(memy_dir) == 1 then
     dofile(hooks_file)
 else
     local output = vim.fn.system("memy hook neovim.lua")
-    vim.fn.luaeval(output)
+    assert(loadstring(output))()
 end
