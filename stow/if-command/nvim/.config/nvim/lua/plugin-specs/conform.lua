@@ -31,9 +31,8 @@ local opts = {
     },
     formatters = {
         bake = {
-            command = "bake",
-            args = { "format", "$FILENAME" },
-            stdin = false,
+            -- This is now the preferred name, see https://pypi.org/project/mbake/
+            command = "mbake",
         },
         prettier = {
             prepend_args = function(_, context)
