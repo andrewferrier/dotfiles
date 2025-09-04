@@ -12,6 +12,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
         local bufnr = event.buf
 
+        if vim.fn.has("nvim-0.12.0") == 1 then
+            vim.lsp.on_type_formatting.enable()
+        end
+
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         keybindings_inlayhints(bufnr)
     end,
