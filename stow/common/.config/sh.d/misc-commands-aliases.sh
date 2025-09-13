@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+alias combine-into-pdf='convert -density 300 -quality 100'
 alias docker-cleanup="docker container prune -f ; docker image prune -f ; docker volume prune -f ; docker network prune -f"
 alias docker-rmi-interactive="docker images | sed -E 's%([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+).*%\\1:\\2 \\3%g' | tail -n +2 | sort -r | fzf -d' ' -m --with-nth=1 | cut -d' ' -f2 | xargs -t docker image rm"
 alias external-ip="curl -4 ifconfig.co"
