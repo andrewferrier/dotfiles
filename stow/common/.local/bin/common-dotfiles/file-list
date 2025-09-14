@@ -56,7 +56,7 @@ while getopts "rsmfdtp0" o; do
         PLAIN=true
         ;;
     r)
-        # Only look at recency, ignore frequency, with fasd.
+        # Only look at recency, ignore frequency
         RECENT_ONLY=true
         ;;
     0)
@@ -111,17 +111,15 @@ fi
 if "$DIRS"; then
     PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | xargs -I% eza --level 2 --tree --color=always --group-directories-first --no-quotes %"
     FD_TYPE='d'
-    FASD_PARAMS="-dRl"
-    MEMY_PARAMS="-d"
+    MEMY_PARAMS=(list --directories-only)
 else
     PREVIEW_COMMAND="echo {} | sed -e 's^~^$HOME^' | tr '\n' '\0' | xargs -0 $BAT --highlight-line :\$LINES --color=always"
     FD_TYPE='f'
-    FASD_PARAMS="-fRl"
-    MEMY_PARAMS="-f"
+    MEMY_PARAMS=(list --files-only)
 fi
 
 if "$RECENT_ONLY"; then
-    FASD_PARAMS="${FASD_PARAMS}t"
+    MEMY_PARAMS=(--config recency_bias=1 "${MEMY_PARAMS[@]}")
 fi
 
 if command -v ggrep &>/dev/null; then
@@ -131,7 +129,7 @@ else
 fi
 
 function wrapper_memy() {
-    memy list $MEMY_PARAMS | tac
+    memy "${MEMY_PARAMS[@]}" | tac
 }
 
 function wrapper_fd() {

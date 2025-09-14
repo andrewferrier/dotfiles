@@ -22,7 +22,6 @@ brew "eget"
 brew "entr"
 brew "exiftool" # for scope.sh
 brew "eza"
-brew "fasd"
 brew "fd"
 brew "fdupes"
 brew "figlet"
