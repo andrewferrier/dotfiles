@@ -23,6 +23,9 @@ else
     alias listening='sudo ss --listening --tcp --udp --numeric --process'
     alias monitor-wifi='watch "nmcli --colors yes device wifi list"'
     alias sparseness="find . -type f -printf '%S\t%p\n' | column -t -s $'\t' | sort -n -r"
+
+    alias log-follow='journalctl -n10000 -f --pager-end -all'
+    alias log-today='journalctl --since "00:00:00" --pager-end -all -nall -ball'
 fi
 
 if [[ -n $VISUAL ]]; then
