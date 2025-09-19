@@ -7,7 +7,6 @@ alias external-ip="curl -4 ifconfig.co"
 alias find-case-insensitive-clashes="find . | tr '[:upper:]' '[:lower:]' | LC_ALL=C sort | LC_ALL=C uniq -d"
 alias lpr-onesided='lpr -o sides=one-sided'
 alias lpr-twosided='lpr -o sides=two-sided-long-edge'
-alias smbclient='docker run --rm -it --network host dperson/samba smbclient'
 alias reenable-printer='lpq | head -1 | cut -d" " -f1 | xargs lpadmin -E -p'
 alias rm-broken-links='find . -xtype l | fzf -m | xargs rm'
 alias socks-ssh-setup='ssh -f -N -D 1080 '
