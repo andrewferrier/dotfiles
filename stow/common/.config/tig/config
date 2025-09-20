@@ -22,7 +22,4 @@ set main-view = line-number:no id:yes date:custom author:abbreviated commit-titl
 set main-view-date-local = true
 set main-view-date-format = "%F %R"
 
-color cursor black white
-color title-focus black white
-
 # vim:filetype=conf
