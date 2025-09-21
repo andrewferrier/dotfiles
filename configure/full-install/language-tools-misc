@@ -19,3 +19,4 @@ else
 fi
 
 eget --to "${LOCAL_BIN}" hadolint/hadolint --upgrade-only
+eget --to "${LOCAL_BIN}" opentofu/tofu-ls --upgrade-only

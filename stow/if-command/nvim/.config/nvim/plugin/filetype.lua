@@ -2,7 +2,7 @@ vim.filetype.add({
     extension = {
         equivs = "debcontrol",
         jad = "java",
-        tf = "terraform", -- I never use 'tinyfugue': https://www.reddit.com/r/neovim/comments/18xg9na/comment/kg54fy7/
+        tf = "opentofu",
         tfstate = "json",
     },
     filename = {
