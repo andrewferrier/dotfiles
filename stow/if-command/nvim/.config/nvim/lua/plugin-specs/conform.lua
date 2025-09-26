@@ -1,5 +1,13 @@
 local format_key = function()
-    require("conform").format({}, function(err, did_edit)
+    local opts = {}
+
+    if vim.o.filetype == "tex" then
+        -- Can't find a way to disable this in texlab configuration - texlab
+        -- causes latexindex to time out
+        opts = { lsp_format = "never", timeout_ms = 5000 }
+    end
+
+    require("conform").format(opts, function(err, did_edit)
         if not err then
             if did_edit then
                 vim.notify("Formatted document using conform.")
@@ -20,6 +28,7 @@ local opts = {
     formatters_by_ft = {
         d2 = { "d2" },
         html = { "prettier" },
+        tex = { "latexindent" },
         lua = { "stylua" },
         make = { "bake" },
         markdown = { "mdformat" },
