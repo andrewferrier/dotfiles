@@ -100,6 +100,7 @@ Ctrl-R Ctrl-w/a - insert the word/WORD under cursor
 Ctrl-W - backspace over word
 DiagnosticQFList - put all diagnostic items in a quickfix buffer
 EditQuery - edit treesitter query
+Undotree - show undotree
 GitQFList - show all git hunks in a quickfix buffer
 Inspect - check treesitter/highlight items
 InspectTree - treesitter inspect
