@@ -5,7 +5,6 @@ alias gzip='gzip --rsyncable'
 alias ip='ip --color=auto'
 alias lzip="lzip --best -m128 -s128MiB"
 alias mkdir="mkdir -v"
-alias mv="mv -v"
 alias rm='rm -Iv'
 alias watch='watch --color'
 
@@ -16,9 +15,18 @@ alias rsync="rsync ${RSYNC_OPTIONS}"
 # shellcheck disable=SC2139
 alias rsync-progress-job="rsync ${RSYNC_OPTIONS} --info=progress2 --info=name0"
 
-if [[ ${OSTYPE} == darwin* ]]; then
+if (command -v uu-cp >/dev/null 2>&1); then
+    # Rust coreutils are installed - Arch
+    alias cp='uu-cp -v --sparse=always --reflink=auto --progress'
+    alias mv='uu-mv -v --progress'
+elif (command -v coreutils >/dev/null 2>&1); then
+    # Rust coreutils are installed - Debian
+    alias cp='coreutils cp -v --sparse=always --reflink=auto --progress'
+    alias mv='coreutils mv -v --progress'
+elif [[ ${OSTYPE} == darwin* ]]; then
     alias cp='cp -v'
     alias df='df -Ph'
+    alias mv="mv -v"
     alias ps='pstree -g 3'
     alias sshfs='sshfs -o noapplexattr,noappledouble'
     alias sudo="sudo -p '[sudo] %p'\\''s password: '"
@@ -26,6 +34,7 @@ else
     alias cp='cp -v --sparse=always --reflink=auto'
     alias df='df --print-type --human-readable'
     alias lsblk='lsblk --discard -o NAME,RM,RO,MOUNTPOINT,TYPE,FSTYPE,SIZE,FSUSED,UUID,LABEL,PARTLABEL,DISC-GRAN,DISC-MAX --paths'
+    alias mv="mv -v"
     alias ps='COLUMNS=10000 ps -e -f --forest'
 fi
 
