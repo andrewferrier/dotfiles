@@ -1,9 +1,8 @@
-local home = vim.fn.expand("~")
-local memy_dir = home .. "/memy"
-local hooks_file = memy_dir .. "/hooks/neovim.lua"
+local MEMY_DIR = vim.fn.expand("~/memy")
+local HOOKS_FILE = MEMY_DIR .. "/hooks/neovim.lua"
 
-if vim.fn.isdirectory(memy_dir) == 1 then
-    dofile(hooks_file)
+if vim.fn.isdirectory(MEMY_DIR) == 1 then
+    dofile(HOOKS_FILE)
 else
     local output = vim.fn.system("memy hook neovim.lua")
     assert(loadstring(output))()
