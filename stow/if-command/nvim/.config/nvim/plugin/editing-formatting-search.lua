@@ -21,3 +21,7 @@ vim.cmd.iabbrev("zDATETIME", '<C-R>=strftime("%FT%H:%M:%S")<CR>')
 
 -- Search only inside visual selection
 vim.keymap.set("x", "/", "<Esc>/\\%V")
+
+if vim.fn.has("nvim-0.12.0") == 1 then
+    vim.cmd.packadd("nvim.difftool")
+end
