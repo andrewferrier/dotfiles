@@ -1,6 +1,12 @@
-# Based on
-# https://github.com/github/gitignore/blob/master/Global/OSX.gitignore, with
-# some dangerous ones removed.
+# Based on https://github.com/github/gitignore/blob/main/Global/Linux.gitignore
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+nohup.out
+
+# Based on https://github.com/github/gitignore/blob/main/Global/OSX.gitignore
 
 _Store
 .AppleDouble
