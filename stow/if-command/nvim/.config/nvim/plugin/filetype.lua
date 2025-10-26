@@ -1,5 +1,6 @@
 vim.filetype.add({
     extension = {
+        bashrc = "bash",
         equivs = "debcontrol",
         jad = "java",
         tf = "opentofu",
