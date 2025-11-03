@@ -14,7 +14,6 @@ readonly DATE_FORMAT="+%Y-%m-%d"
 
 readonly TODAY="\$(date $DATE_FORMAT)"
 readonly TOMORROW="\$(date --date=tomorrow $DATE_FORMAT)"
-readonly SEVENDAYSLATER="\$(date --date=+7days $DATE_FORMAT)"
 readonly SATURDAY="\$(date --date='next Saturday' $DATE_FORMAT)"
 readonly SUNDAY="\$(date --date='next Sunday' $DATE_FORMAT)"
 readonly MONDAY="\$(date --date='next Monday' $DATE_FORMAT)"
@@ -33,7 +32,7 @@ todo --porcelain list |
         --tiebreak=index \
         --preview-window=top,border-bottom,5 \
         --info=inline-right \
-        --header "Ctrl-reLoad,Done,editrAw,todaY,tomorroW,seVendayslater,Saturday,sUnday,mOnday,New,<enter>,<delete>" \
+        --header "Ctrl-reLoad,Done,editrAw,todaY,tomorroW,Saturday,sUnday,mOnday,<enter>,<delete>" \
         --bind "ctrl-l:${RELOAD}" \
         --bind "ctrl-delete:execute-silent(todo-trash-item {1})+${RELOAD}" \
         --bind "ctrl-d:execute-silent(todo done {1})+${RELOAD}" \
@@ -41,8 +40,6 @@ todo --porcelain list |
         --bind "ctrl-a:execute(todo edit --raw {1})+${RELOAD}" \
         --bind "ctrl-y:execute-silent(todo edit --due ${TODAY} {1})+${RELOAD}" \
         --bind "ctrl-w:execute-silent(todo edit --due ${TOMORROW} {1})+${RELOAD}" \
-        --bind "ctrl-v:execute-silent(todo edit --due ${SEVENDAYSLATER} {1})+${RELOAD}" \
         --bind "ctrl-s:execute-silent(todo edit --due ${SATURDAY} {1})+${RELOAD}" \
         --bind "ctrl-u:execute-silent(todo edit --due ${SUNDAY} {1})+${RELOAD}" \
-        --bind "ctrl-o:execute-silent(todo edit --due ${MONDAY} {1})+${RELOAD}" \
-        --bind "ctrl-n:execute(todo new --interactive)+${RELOAD}"
+        --bind "ctrl-o:execute-silent(todo edit --due ${MONDAY} {1})+${RELOAD}"
