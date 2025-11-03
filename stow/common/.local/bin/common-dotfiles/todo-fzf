@@ -11,8 +11,12 @@ readonly SCRIPT_DIR
 readonly RELOAD="reload(todo --porcelain list | ${SCRIPT_DIR}/todo-fzf-formatter)"
 
 readonly DATE_FORMAT="+%Y-%m-%d"
+readonly DATE_FORMAT_AFTERNOON="'+%Y-%m-%d-15:00'"
+readonly DATE_FORMAT_EVENING="'+%Y-%m-%d-19:00'"
 
 readonly TODAY="\$(date $DATE_FORMAT)"
+readonly TODAY_AFTERNOON="\$(date $DATE_FORMAT_AFTERNOON)"
+readonly TODAY_EVENING="\$(date $DATE_FORMAT_EVENING)"
 readonly TOMORROW="\$(date --date=tomorrow $DATE_FORMAT)"
 readonly SATURDAY="\$(date --date='next Saturday' $DATE_FORMAT)"
 readonly SUNDAY="\$(date --date='next Sunday' $DATE_FORMAT)"
@@ -32,7 +36,7 @@ todo --porcelain list |
         --tiebreak=index \
         --preview-window=top,border-bottom,5 \
         --info=inline-right \
-        --header "Ctrl-reLoad,Done,editrAw,todaY,tomorroW,Saturday,sUnday,mOnday,<enter>,<delete>" \
+        --header "Ctrl-reLoad,Done,editrAw,todaY,tomorroW,Saturday,sUnday,mOnday,aFternoon,Evening,<enter (edit)>,<delete>" \
         --bind "ctrl-l:${RELOAD}" \
         --bind "ctrl-delete:execute-silent(todo-trash-item {1})+${RELOAD}" \
         --bind "ctrl-d:execute-silent(todo done {1})+${RELOAD}" \
@@ -42,4 +46,6 @@ todo --porcelain list |
         --bind "ctrl-w:execute-silent(todo edit --due ${TOMORROW} {1})+${RELOAD}" \
         --bind "ctrl-s:execute-silent(todo edit --due ${SATURDAY} {1})+${RELOAD}" \
         --bind "ctrl-u:execute-silent(todo edit --due ${SUNDAY} {1})+${RELOAD}" \
-        --bind "ctrl-o:execute-silent(todo edit --due ${MONDAY} {1})+${RELOAD}"
+        --bind "ctrl-o:execute-silent(todo edit --due ${MONDAY} {1})+${RELOAD}" \
+        --bind "ctrl-f:execute-silent(todo edit --due ${TODAY_AFTERNOON} {1})+${RELOAD}" \
+        --bind "ctrl-e:execute-silent(todo edit --due ${TODAY_EVENING} {1})+${RELOAD}"
