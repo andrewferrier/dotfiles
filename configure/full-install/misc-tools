@@ -2,7 +2,7 @@
 
 LOCAL_BIN=${HOME}/.local/bin
 
-uv tool install --upgrade gita
+uv tool install --with packaging --upgrade gita
 
 curl --silent --location https://github.com/Narasimha1997/fake-sms/blob/main/bin/fake-sms?raw=true >"${LOCAL_BIN}/fake-sms"
 curl --silent --location https://git.io/tmpmail >"${LOCAL_BIN}/tmpmail"
