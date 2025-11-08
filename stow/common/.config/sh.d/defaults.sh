@@ -25,16 +25,20 @@ elif (command -v coreutils >/dev/null 2>&1); then
     alias mv='coreutils mv -v --progress'
 elif [[ ${OSTYPE} == darwin* ]]; then
     alias cp='cp -v'
+    alias mv='mv -v'
+else
+    alias cp='cp -v --sparse=always --reflink=auto'
+    alias mv='mv -v'
+fi
+
+if [[ ${OSTYPE} == darwin* ]]; then
     alias df='df -Ph'
-    alias mv="mv -v"
     alias ps='pstree -g 3'
     alias sshfs='sshfs -o noapplexattr,noappledouble'
     alias sudo="sudo -p '[sudo] %p'\\''s password: '"
 else
-    alias cp='cp -v --sparse=always --reflink=auto'
     alias df='df --print-type --human-readable'
     alias lsblk='lsblk --discard -o NAME,RM,RO,MOUNTPOINT,TYPE,FSTYPE,SIZE,FSUSED,UUID,LABEL,PARTLABEL,DISC-GRAN,DISC-MAX --paths'
-    alias mv="mv -v"
     alias ps='COLUMNS=10000 ps -e -f --forest'
 fi
 
