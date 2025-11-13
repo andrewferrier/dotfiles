@@ -1,7 +1,11 @@
 if [[ -f ~/memy/hooks/zsh ]]; then
     source ~/memy/hooks/zsh
 else
-    source <(memy hook zsh)
+    if command -v memy >/dev/null 2>/dev/null; then
+        source <(memy hook zsh)
+    fi
 fi
 
-source <(memy completions zsh)
+if command -v memy >/dev/null 2>/dev/null; then
+    source <(memy completions zsh)
+fi
