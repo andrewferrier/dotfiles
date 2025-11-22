@@ -1,5 +1,6 @@
 firefox-mpris/
 *.default*/
+*.clean*/
 installs.ini
 profiles.ini
 Profile Groups/
