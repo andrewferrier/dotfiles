@@ -207,6 +207,12 @@ cat \
             --scheme=path \
             ${MULTISELECT_ARGS} \
             --preview="$PREVIEW_COMMAND" |
-            tee >(xargs -n1 --no-run-if-empty memy note)
+            tee >(
+                while IFS= read -r file; do
+                    memy note \
+                        --config denied_files_warn_on_note=false \
+                        "$file"
+                done
+            )
     else cat; fi |
     if "$NULL"; then tr '\n' '\0'; else cat; fi
