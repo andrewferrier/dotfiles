@@ -8,6 +8,11 @@ local MAX_SPELL_ERRORS = 20
 local LEFT_BRACE = "‹"
 local RIGHT_BRACE = "›"
 
+local RESET_HIGHLIGHTING = "%*"
+local TRUNCATOR_POSITION = "%<"
+local ALIGN_RHS = "%="
+local SEPARATOR = "│ "
+
 ---@return integer
 local function get_spelling_count()
     local view = vim.fn.winsaveview()
@@ -65,42 +70,30 @@ end
 
 ---@return string
 M.diagnosticstatus = function()
-    -- TODO: In NeoVim 0.10 refactor to use vim.diagnostic.count(), calling it only once
-
     if vim.diagnostic.is_enabled() then
-        if vim.fn.has("nvim-0.12.0") == 1 then
-            local diagnostic_status = vim.diagnostic.status()
+        local diagnostics_counts = {}
 
-            if diagnostic_status == "" then
-                return ""
-            else
-                return LEFT_BRACE .. diagnostic_status .. RIGHT_BRACE .. " "
+        for prefix, severity in pairs({
+            e = vim.diagnostic.severity.ERROR,
+            w = vim.diagnostic.severity.WARN,
+            i = vim.diagnostic.severity.INFO,
+            h = vim.diagnostic.severity.HINT,
+        }) do
+            local count = #vim.diagnostic.get(0, { severity = severity })
+
+            if count > 0 then
+                table.insert(diagnostics_counts, prefix .. count)
             end
+        end
+
+        if #diagnostics_counts > 0 then
+            return LEFT_BRACE
+                .. "D "
+                .. table.concat(diagnostics_counts, ",")
+                .. RIGHT_BRACE
+                .. " "
         else
-            local diagnostics_counts = {}
-
-            for prefix, severity in pairs({
-                e = vim.diagnostic.severity.ERROR,
-                w = vim.diagnostic.severity.WARN,
-                i = vim.diagnostic.severity.INFO,
-                h = vim.diagnostic.severity.HINT,
-            }) do
-                local count = #vim.diagnostic.get(0, { severity = severity })
-
-                if count > 0 then
-                    table.insert(diagnostics_counts, prefix .. count)
-                end
-            end
-
-            if #diagnostics_counts > 0 then
-                return LEFT_BRACE
-                    .. "D "
-                    .. table.concat(diagnostics_counts, ",")
-                    .. RIGHT_BRACE
-                    .. " "
-            else
-                return ""
-            end
+            return ""
         end
     end
 
@@ -241,6 +234,52 @@ M.searchcount = function()
     response = current .. "/" .. total
 
     return "[" .. response .. "] "
+end
+
+function M.render()
+    -- LHS - Filename & Filetype
+    local sl = " %{v:lua.require('statusline').filename()}"
+    sl = sl .. " %y"
+
+    -- LHS - Cwd
+    sl = sl .. " " .. SEPARATOR
+    sl = sl .. TRUNCATOR_POSITION
+    sl = sl .. "%{v:lua.require('statusline').getcwd()}"
+    sl = sl .. RESET_HIGHLIGHTING
+
+    sl = sl .. ALIGN_RHS
+
+    -- RHS - Warnings
+    sl = sl .. "%{v:lua.require('statusline').lspprogress()}"
+
+    if vim.fn.has("nvim-0.12.0") == 1 then
+        sl = sl .. vim.diagnostic.status() .. " "
+    else
+        sl = sl .. "%{v:lua.require('statusline').diagnosticstatus()}"
+    end
+
+    sl = sl .. "%{v:lua.require('statusline').spellingerrorcount()}"
+    sl = sl .. "%{v:lua.require('statusline').gitsigns()}"
+
+    if vim.fn.has("nvim-0.12.0") == 1 then
+        sl = sl .. "%{v:lua.require('statusline').searchcount()}"
+    end
+
+    sl = sl .. SEPARATOR
+
+    -- RHS - File and feature info
+    sl = sl .. "%{v:lua.require('statusline').indent()}"
+    sl = sl .. "%{&fileformat!=#'unix'?',ff='.&fileformat:''}"
+    sl = sl .. "%{v:lua.require('statusline').wrappingmode()}"
+    sl = sl .. "%{&spell?',S':''}"
+    sl = sl .. "%{v:lua.require('statusline').featuresenabled()}"
+    sl = sl .. "%M"
+    sl = sl .. " " .. SEPARATOR
+
+    -- RHS - Location
+    sl = sl .. "%l/%L,%c "
+
+    return sl
 end
 
 return M
