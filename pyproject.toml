@@ -1,7 +1,3 @@
-[tool.basedpyright]
-reportConstantRedefinition = false # See https://github.com/microsoft/pyright/issues/5265
-reportUnusedCallResult = false
-
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [

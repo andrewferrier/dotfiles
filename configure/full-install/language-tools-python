@@ -19,9 +19,6 @@ uv tool install --upgrade git+https://github.com/EbodShojaei/bake
 uv tool install --managed-python aider-chat@latest
 
 if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
-    # basedpyright should be install via Arch package mechanism to enable it to
-    # find all system Python packages
-
     uv tool install --upgrade gitlint-core
     uv tool install --upgrade sqlfluff
 elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
@@ -30,5 +27,6 @@ elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
 else
     # All other packages installed via package manager
     uv tool install --upgrade ruff
-    uv tool install --upgrade basedpyright
 fi
+
+uv tool install --upgrade ty@latest

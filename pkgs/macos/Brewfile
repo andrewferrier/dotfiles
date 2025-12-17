@@ -6,7 +6,6 @@ brew "ansible-lint"
 brew "aria2"
 brew "atool"
 brew "automake"
-brew "basedpyright"
 brew "bash" # for improved performance
 brew "bat"
 brew "bitwarden-cli"

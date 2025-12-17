@@ -8,7 +8,6 @@ return {
 
         for _, lsp in ipairs({
             "ansiblels",
-            "basedpyright",
             "bashls",
             "cssls",
             "dockerls",
@@ -19,9 +18,10 @@ return {
             "ruff",
             "rust_analyzer",
             "taplo",
-            "tofu_ls",
             "texlab",
+            "tofu_ls",
             "ts_ls",
+            "ty",
             "vimls",
             "yamlls",
         }) do
