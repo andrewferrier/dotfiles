@@ -27,6 +27,5 @@ elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
 else
     # All other packages installed via package manager
     uv tool install --upgrade ruff
+    uv tool install --upgrade ty@latest
 fi
-
-uv tool install --upgrade ty@latest
