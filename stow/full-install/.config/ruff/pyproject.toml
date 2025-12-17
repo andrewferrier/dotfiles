@@ -1,0 +1,6 @@
+# This file is just a default; it will be ignored if there's a project-specific
+# pyproject.toml
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D100", "D101", "D103"]
