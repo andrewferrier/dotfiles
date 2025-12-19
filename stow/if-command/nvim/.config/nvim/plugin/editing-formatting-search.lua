@@ -9,7 +9,6 @@ vim.opt.shiftwidth = 4
 vim.opt.smartcase = true
 vim.opt.textwidth = 80 -- Default for most languages: https://en.wikipedia.org/wiki/Characters_per_line#In_programming
 vim.opt.virtualedit = "block"
-vim.opt.wildmode = "longest:full"
 
 -- see https://vimways.org/2018/the-power-of-diff/
 vim.opt.diffopt:append("algorithm:patience")
