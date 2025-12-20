@@ -17,7 +17,7 @@ logger.setLevel(logging.WARNING)
 
 def is_spam(message: bytes, subject: str) -> bool:
     proc = subprocess.Popen(
-        ["spamc", "--check"], stdin=subprocess.PIPE, stdout=subprocess.PIPE
+        ["/usr/bin/spamc", "--check"], stdin=subprocess.PIPE, stdout=subprocess.PIPE
     )
     stdout, _ = proc.communicate(input=message)
 
