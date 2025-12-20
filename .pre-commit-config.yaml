@@ -8,7 +8,7 @@ repos:
           - id: check-hooks-apply
           - id: check-useless-excludes
     - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v4.6.0
+      rev: v5.0.0
       hooks:
           - id: check-added-large-files
           - id: check-executables-have-shebangs
@@ -42,9 +42,9 @@ repos:
       hooks:
           - id: pyupgrade
     - repo: https://github.com/astral-sh/ruff-pre-commit
-      rev: v0.9.2
+      rev: v0.14.10
       hooks:
-          - id: ruff
+          - id: ruff-check
           - id: ruff-format
     - repo: https://github.com/Jarmos-san/shellcheck-precommit
       rev: v0.2.0
