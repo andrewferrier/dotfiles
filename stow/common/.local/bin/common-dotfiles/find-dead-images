@@ -6,9 +6,9 @@ import argparse
 import logging
 import multiprocessing
 import os
-from pathlib import Path
 import subprocess
 import sys
+from pathlib import Path
 
 from tqdm import tqdm
 from tqdm.contrib.concurrent import thread_map
@@ -28,7 +28,7 @@ THRESHOLD = 0.03
 
 def get_mean_brightness_normalized(filename: Path) -> float:
     try:
-        cmd = subprocess.run(
+        cmd = subprocess.run(  # noqa: S603
             [
                 "convert",
                 str(filename),
@@ -47,7 +47,7 @@ def get_mean_brightness_normalized(filename: Path) -> float:
 
     mean_brightness = float(cmd.stdout.replace('"', "").strip())
 
-    if mean_brightness > 0.5:
+    if mean_brightness > 0.5:  # noqa: PLR2004
         return 1 - mean_brightness
     else:
         return mean_brightness

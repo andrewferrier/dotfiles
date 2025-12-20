@@ -1,18 +1,21 @@
 #!/usr/bin/env python
+#
+# ruff: noqa: T201
 
 import argparse
-import mailbox
-import sys
-import subprocess
 import logging
+import mailbox
+import subprocess
+import sys
+
 from tqdm import tqdm
 
 logger = logging.getLogger("maildir-spamfilter")
 logger.propagate = False
-logger.setLevel(logging.WARN)
+logger.setLevel(logging.WARNING)
 
 
-def is_spam(message, subject):
+def is_spam(message: bytes, subject: str) -> bool:
     proc = subprocess.Popen(
         ["spamc", "--check"], stdin=subprocess.PIPE, stdout=subprocess.PIPE
     )
@@ -20,10 +23,10 @@ def is_spam(message, subject):
 
     if stdout.strip() == b"0/0":
         if spam_count == 0 and non_spam_count == 0:
-            logging.error("Could not connect to spamd")
+            logger.error("Could not connect to spamd")
             sys.exit(1)
         else:
-            logging.warning(f"Message with subject {subject} could not be processed")
+            logger.warning(f"Message with subject {subject} could not be processed")
 
     if proc.returncode != 0 and args.verbose:
         print(f"Spam detected with subject {subject}, score {stdout}")
