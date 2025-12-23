@@ -3,8 +3,8 @@
 import argparse
 import logging
 from pathlib import Path
-from subprocess import run
 from shutil import which
+from subprocess import run
 
 from systemd.journal import JournalHandler  # pyright: ignore[reportMissingTypeStubs]
 
@@ -44,9 +44,9 @@ def write_state_file(state_file: Path, failure_count: int) -> None:
 
 def notification(message: str) -> None:
     if which("notify-send"):
-        p = run(
+        p = run(  # noqa: S603
             [
-                "notify-send",
+                "/usr/bin/notify-send",
                 "systemd-status",
                 "--urgency=critical",
                 message,
@@ -55,7 +55,7 @@ def notification(message: str) -> None:
         )
 
         if p.returncode != 0:
-            raise Exception(f"Invalid result: {p.returncode} ")
+            raise Exception(f"Invalid result: {p.returncode} ")  # noqa: TRY002
     else:
         log.warning('Could not send message "' + message + '" via notify-send.')
 
