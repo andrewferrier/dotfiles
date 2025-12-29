@@ -1,0 +1,166 @@
+#!/usr/bin/env -S uv run --project ${HOME}/.local/bin/common-dotfiles --script
+# vim: set ft=python:
+
+import argparse
+import logging
+import sys
+from typing import Any
+
+import requests
+
+logger = logging.getLogger("linkding-clean")
+logger.propagate = False
+logger.setLevel(logging.INFO)  # Changed default level to INFO
+
+syserr_handler = logging.StreamHandler(stream=sys.stderr)
+syserr_handler.setLevel(logging.INFO)  # Changed default level to INFO
+syserr_handler.setFormatter(logging.Formatter("%(levelname)s: %(message)s"))
+logger.addHandler(syserr_handler)
+
+
+class LinkdingAPIClient:
+    def __init__(self, base_url: str, token: str) -> None:
+        if not base_url.endswith("/"):
+            base_url += "/"
+        self.base_url = base_url
+        self.session = requests.Session()
+        self.session.headers.update({"Authorization": f"Token {token}"})
+        logger.debug(f"LinkdingAPIClient initialized with base_url: {self.base_url}")
+
+    def get_unarchived_bookmarks(self) -> Any:  # noqa: ANN401
+        url = f"{self.base_url}/bookmarks/?limit=100000"
+        logger.debug(f"Fetching results from: {url}")
+        response = self.session.get(url)
+        response.raise_for_status()  # Raise an exception for HTTP errors (4xx or 5xx)
+        data = response.json()
+        return data["results"]
+
+    def archive_bookmark(self, bookmark_id: int) -> None:
+        url = f"{self.base_url}bookmarks/{bookmark_id}/archive/"
+        logger.info(f"Archiving bookmark ID: {bookmark_id}")
+        response = self.session.post(url)
+        response.raise_for_status()
+        logger.debug(f"Successfully archived bookmark ID: {bookmark_id}")
+
+    def delete_bookmark(self, bookmark_id: int) -> None:
+        url = f"{self.base_url}bookmarks/{bookmark_id}/"
+        logger.info(f"Deleting bookmark ID: {bookmark_id}")
+        response = self.session.delete(url)
+        response.raise_for_status()
+        logger.debug(f"Successfully deleted bookmark ID: {bookmark_id}")
+
+
+def process_bookmark(
+    client: LinkdingAPIClient,
+    bookmark: dict,
+    dry_run: bool,  # noqa: FBT001
+    delete_bookmark: bool,  # noqa: FBT001
+) -> None:
+    bookmark_id: int = bookmark["id"]
+    url: str = bookmark["url"]
+
+    archive = False
+
+    logger.debug(f"Processing bookmark ID: {bookmark_id}, URL: {url}")
+
+    try:
+        # Use requests.get directly without the client's session for external URL checks
+        # to avoid sharing authentication headers or other unnecessary overhead.
+        r = requests.get(url, timeout=20)
+
+        if r.status_code == 404:  # noqa: PLR2004
+            logger.warning(
+                f"URL {url} (ID: {bookmark_id}) returned 404, marking for archive.",
+            )
+            archive = True
+
+    except requests.exceptions.ConnectionError:
+        logger.error(  # noqa: TRY400
+            f"Connection error for {url} (ID: {bookmark_id}), marking for archive.",
+        )
+        archive = True
+    except requests.exceptions.ReadTimeout:
+        logger.error(  # noqa: TRY400
+            f"Read timeout for {url} (ID: {bookmark_id}), marking for archive.",
+        )
+    except requests.exceptions.TooManyRedirects:
+        logger.error(  # noqa: TRY400
+            f"Too many redirects for {url} (ID: {bookmark_id}), marking for archive.",
+        )
+    except requests.exceptions.RequestException:
+        logger.error(  # noqa: TRY400
+            f"Unexpected request error for {url} (ID: {bookmark_id}), "
+            "marking for archive.",
+        )
+
+    if archive:
+        action_verb = "delete" if delete_bookmark else "archive"
+        if dry_run:
+            logger.info(
+                f"Dry run: Would {action_verb} bookmark ID: {bookmark_id}, URL: {url}",
+            )
+        else:
+            try:
+                if delete_bookmark:
+                    client.delete_bookmark(bookmark_id)
+                else:
+                    client.archive_bookmark(bookmark_id)
+            except requests.exceptions.RequestException:
+                logger.exception(
+                    f"Failed to {action_verb} bookmark ID: {bookmark_id}, URL: {url}",
+                )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Clean Linkding bookmarks by archiving or deleting invalid ones.",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Do not archive or delete bookmarks, just show what would be done.",
+    )
+    parser.add_argument(
+        "--delete",
+        action="store_true",
+        help="Delete bookmarks instead of archiving them.",
+    )
+    parser.add_argument(
+        "--base-url",
+        required=True,
+        help="Linkding API base URL (e.g., https://linkding.example.com/api/).",
+    )
+    parser.add_argument(
+        "--token",
+        required=True,
+        help="Linkding API token. Defaults to LINKDING_API_TOKEN environment variable.",
+    )
+    parser.add_argument(
+        "--verbose",
+        "-v",
+        action="store_true",
+        help="Enable verbose output (DEBUG level).",
+    )
+    args = parser.parse_args()
+
+    if args.verbose:
+        logger.setLevel(logging.DEBUG)
+        for handler in logger.handlers:
+            handler.setLevel(logging.DEBUG)
+
+    client = LinkdingAPIClient(args.base_url, args.token)
+
+    logger.info("Starting Linkding bookmark cleaning process...")
+    try:
+        for bookmark in client.get_unarchived_bookmarks():
+            process_bookmark(client, bookmark, args.dry_run, args.delete)
+
+    except requests.exceptions.RequestException as e:
+        logger.critical(f"Failed to fetch bookmarks from Linkding API: {e}")
+        sys.exit(1)
+
+    logger.info("Linkding bookmark cleaning process finished.")
+
+
+if __name__ == "__main__":
+    main()
