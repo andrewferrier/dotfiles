@@ -31,7 +31,7 @@ class LinkdingAPIClient:
         logger.debug(f"LinkdingAPIClient initialized with base_url: {self.base_url}")
 
     def get_unarchived_bookmarks(self) -> Any:  # noqa: ANN401
-        url = f"{self.base_url}/bookmarks/?limit=100000"
+        url = f"{self.base_url}bookmarks/?limit=100000"
         logger.debug(f"Fetching results from: {url}")
         response = self.session.get(url)
         response.raise_for_status()  # Raise an exception for HTTP errors (4xx or 5xx)
