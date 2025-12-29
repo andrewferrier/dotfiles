@@ -79,6 +79,14 @@ def _clean_bookmark_title(
 ) -> None:
     bookmark_id: int = bookmark["id"]
     original_title: str = bookmark.get("title", "")
+
+    if original_title.startswith("http://"):
+        logger.debug(
+            f"Skipping title cleaning for bookmark ID: {bookmark_id} "
+            f"as it starts with 'http://'."
+        )
+        return
+
     cleaned_title = html.unescape(original_title)
 
     if cleaned_title != original_title:
