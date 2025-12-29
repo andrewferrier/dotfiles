@@ -9,6 +9,7 @@ import sys
 from typing import Any
 
 import requests
+from tqdm import tqdm
 
 logger = logging.getLogger("linkding-clean")
 logger.propagate = False
@@ -253,7 +254,8 @@ def main() -> None:
 
     logger.info("Starting Linkding bookmark cleaning process...")
     try:
-        for bookmark in client.get_unarchived_bookmarks():
+        bookmarks = client.get_unarchived_bookmarks()
+        for bookmark in tqdm(bookmarks, desc="Processing bookmarks", unit="bookmark"):
             process_bookmark(client, bookmark, args.dry_run, args.delete)
 
     except requests.exceptions.RequestException as e:
