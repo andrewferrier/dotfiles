@@ -4,6 +4,7 @@
 import argparse
 import html
 import logging
+import re
 import sys
 from typing import Any
 
@@ -50,13 +51,24 @@ class LinkdingAPIClient:
         response.raise_for_status()
         logger.debug(f"Successfully deleted bookmark ID: {bookmark_id}")
 
-    def update_bookmark(self, bookmark_id: int, title: str) -> None:
-        url = f"{self.base_url}bookmarks/{bookmark_id}/"
-        payload = {"title": title}
-        logger.info(f"Updating title for bookmark ID: {bookmark_id}")
-        response = self.session.patch(url, json=payload)
+    def update_bookmark(
+        self, bookmark_id: int, title: str | None = None, url: str | None = None
+    ) -> None:
+        url_path = f"{self.base_url}bookmarks/{bookmark_id}/"
+        payload = {}
+        if title is not None:
+            payload["title"] = title
+        if url is not None:
+            payload["url"] = url
+
+        if not payload:
+            logger.debug(f"No update data provided for bookmark ID: {bookmark_id}")
+            return
+
+        logger.info(f"Updating bookmark ID: {bookmark_id} with payload: {payload}")
+        response = self.session.patch(url_path, json=payload)
         response.raise_for_status()
-        logger.debug(f"Successfully updated title for bookmark ID: {bookmark_id}")
+        logger.debug(f"Successfully updated bookmark ID: {bookmark_id}")
 
 
 def _clean_bookmark_title(
@@ -76,7 +88,7 @@ def _clean_bookmark_title(
             )
         else:
             try:
-                client.update_bookmark(bookmark_id, cleaned_title)
+                client.update_bookmark(bookmark_id, title=cleaned_title)
             except requests.exceptions.RequestException:
                 logger.exception(
                     f"Failed to update title for bookmark ID: {bookmark_id}"
@@ -141,6 +153,48 @@ def _check_bookmark_validity(
                 )
 
 
+EVALUATE_REDIRECT_REGEXES = re.compile(r"^https://getpocket\.com:443/explore/item/")
+
+
+def _resolve_redirects(
+    client: LinkdingAPIClient,
+    bookmark: dict,
+    dry_run: bool,  # noqa: FBT001
+) -> None:
+    bookmark_id: int = bookmark["id"]
+    original_url: str = bookmark["url"]
+
+    if EVALUATE_REDIRECT_REGEXES.match(original_url):
+        logger.debug(f"URL matches redirect pattern: {original_url}")
+        try:
+            r = requests.get(original_url, timeout=20, allow_redirects=True)
+            r.raise_for_status()
+
+            final_url = r.url
+
+            if final_url != original_url:
+                if dry_run:
+                    logger.info(
+                        f"Dry run: Would update URL for bookmark ID: {bookmark_id} "
+                        f"from '{original_url}' to '{final_url}'",
+                    )
+                else:
+                    try:
+                        client.update_bookmark(bookmark_id, url=final_url)
+                    except requests.exceptions.RequestException:
+                        logger.exception(
+                            f"Failed to update URL for bookmark ID: {bookmark_id}"
+                        )
+            else:
+                logger.debug(f"URL {original_url} did not redirect.")
+
+        except requests.exceptions.RequestException:
+            logger.exception(
+                f"Failed to resolve redirects for URL: {original_url} "
+                f"(ID: {bookmark_id})"
+            )
+
+
 def process_bookmark(
     client: LinkdingAPIClient,
     bookmark: dict,
@@ -151,11 +205,10 @@ def process_bookmark(
     url: str = bookmark["url"]
     title: str = bookmark.get("title", "")
 
-    logger.debug(
-        f"Processing bookmark ID: {bookmark_id}, URL: {url}, title: {title}"
-    )
+    logger.debug(f"Processing bookmark ID: {bookmark_id}, URL: {url}, title: {title}")
 
     _clean_bookmark_title(client, bookmark, dry_run)
+    _resolve_redirects(client, bookmark, dry_run)
     _check_bookmark_validity(client, bookmark, delete_bookmark, dry_run)
 
 
