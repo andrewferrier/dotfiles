@@ -2,6 +2,7 @@
 # vim: set ft=python:
 
 import argparse
+import html
 import logging
 import sys
 from typing import Any
@@ -49,19 +50,48 @@ class LinkdingAPIClient:
         response.raise_for_status()
         logger.debug(f"Successfully deleted bookmark ID: {bookmark_id}")
 
+    def update_bookmark(self, bookmark_id: int, title: str) -> None:
+        url = f"{self.base_url}bookmarks/{bookmark_id}/"
+        payload = {"title": title}
+        logger.info(f"Updating title for bookmark ID: {bookmark_id}")
+        response = self.session.patch(url, json=payload)
+        response.raise_for_status()
+        logger.debug(f"Successfully updated title for bookmark ID: {bookmark_id}")
 
-def process_bookmark(
+
+def _clean_bookmark_title(
     client: LinkdingAPIClient,
     bookmark: dict,
     dry_run: bool,  # noqa: FBT001
+) -> None:
+    bookmark_id: int = bookmark["id"]
+    original_title: str = bookmark.get("title", "")
+    cleaned_title = html.unescape(original_title)
+
+    if cleaned_title != original_title:
+        if dry_run:
+            logger.info(
+                f"Dry run: Would update title for bookmark ID: {bookmark_id} "
+                f"from '{original_title}' to '{cleaned_title}'",
+            )
+        else:
+            try:
+                client.update_bookmark(bookmark_id, cleaned_title)
+            except requests.exceptions.RequestException:
+                logger.exception(
+                    f"Failed to update title for bookmark ID: {bookmark_id}"
+                )
+
+
+def _check_bookmark_validity(
+    client: LinkdingAPIClient,
+    bookmark: dict,
     delete_bookmark: bool,  # noqa: FBT001
+    dry_run: bool,  # noqa: FBT001
 ) -> None:
     bookmark_id: int = bookmark["id"]
     url: str = bookmark["url"]
-
-    archive = False
-
-    logger.debug(f"Processing bookmark ID: {bookmark_id}, URL: {url}")
+    invalid = False
 
     try:
         # Use requests.get directly without the client's session for external URL checks
@@ -72,13 +102,13 @@ def process_bookmark(
             logger.warning(
                 f"URL {url} (ID: {bookmark_id}) returned 404, marking for archive.",
             )
-            archive = True
+            invalid = True
 
     except requests.exceptions.ConnectionError:
         logger.error(  # noqa: TRY400
             f"Connection error for {url} (ID: {bookmark_id}), marking for archive.",
         )
-        archive = True
+        invalid = True
     except requests.exceptions.ReadTimeout:
         logger.error(  # noqa: TRY400
             f"Read timeout for {url} (ID: {bookmark_id}), marking for archive.",
@@ -93,7 +123,7 @@ def process_bookmark(
             "marking for archive.",
         )
 
-    if archive:
+    if invalid:
         action_verb = "delete" if delete_bookmark else "archive"
         if dry_run:
             logger.info(
@@ -109,6 +139,24 @@ def process_bookmark(
                 logger.exception(
                     f"Failed to {action_verb} bookmark ID: {bookmark_id}, URL: {url}",
                 )
+
+
+def process_bookmark(
+    client: LinkdingAPIClient,
+    bookmark: dict,
+    dry_run: bool,  # noqa: FBT001
+    delete_bookmark: bool,  # noqa: FBT001
+) -> None:
+    bookmark_id: int = bookmark["id"]
+    url: str = bookmark["url"]
+    title: str = bookmark.get("title", "")
+
+    logger.debug(
+        f"Processing bookmark ID: {bookmark_id}, URL: {url}, title: {title}"
+    )
+
+    _clean_bookmark_title(client, bookmark, dry_run)
+    _check_bookmark_validity(client, bookmark, delete_bookmark, dry_run)
 
 
 def main() -> None:
