@@ -97,6 +97,10 @@ def _clean_bookmark_title(
             )
         else:
             try:
+                logger.info(
+                    f"Updating title for bookmark ID: {bookmark_id} "
+                    f"from '{original_title}' to '{cleaned_title}'",
+                )
                 client.update_bookmark(bookmark_id, title=cleaned_title)
             except requests.exceptions.RequestException:
                 logger.exception(
@@ -114,6 +118,8 @@ def _check_bookmark_validity(
     url: str = bookmark["url"]
     invalid = False
 
+    action_verb = "delete" if delete_bookmark else "archive"
+
     try:
         # Use requests.get directly without the client's session for external URL checks
         # to avoid sharing authentication headers or other unnecessary overhead.
@@ -121,31 +127,31 @@ def _check_bookmark_validity(
 
         if r.status_code == 404:  # noqa: PLR2004
             logger.warning(
-                f"URL {url} (ID: {bookmark_id}) returned 404, marking for archive.",
+                f"URL {url} (ID: {bookmark_id}) returned 404, "
+                f"marking for {action_verb}.",
             )
             invalid = True
 
     except requests.exceptions.ConnectionError:
         logger.error(  # noqa: TRY400
-            f"Connection error for {url} (ID: {bookmark_id}), marking for archive.",
+            f"Connection error for {url} (ID: {bookmark_id}), "
+            f"marking for {action_verb}.",
         )
         invalid = True
     except requests.exceptions.ReadTimeout:
         logger.error(  # noqa: TRY400
-            f"Read timeout for {url} (ID: {bookmark_id}), marking for archive.",
+            f"Read timeout for {url} (ID: {bookmark_id}), skipping.",
         )
     except requests.exceptions.TooManyRedirects:
         logger.error(  # noqa: TRY400
-            f"Too many redirects for {url} (ID: {bookmark_id}), marking for archive.",
+            f"Too many redirects for {url} (ID: {bookmark_id}), skipping.",
         )
     except requests.exceptions.RequestException:
         logger.error(  # noqa: TRY400
-            f"Unexpected request error for {url} (ID: {bookmark_id}), "
-            "marking for archive.",
+            f"Unexpected request error for {url} (ID: {bookmark_id}), skipping.",
         )
 
     if invalid:
-        action_verb = "delete" if delete_bookmark else "archive"
         if dry_run:
             logger.info(
                 f"Dry run: Would {action_verb} bookmark ID: {bookmark_id}, URL: {url}",
@@ -189,6 +195,10 @@ def _resolve_redirects(
                     )
                 else:
                     try:
+                        logger.info(
+                            f"Updating URL for bookmark ID: {bookmark_id} "
+                            f"from '{original_url}' to '{final_url}'",
+                        )
                         client.update_bookmark(bookmark_id, url=final_url)
                     except requests.exceptions.RequestException:
                         logger.exception(
