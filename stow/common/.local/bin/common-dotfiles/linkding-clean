@@ -6,6 +6,7 @@ import html
 import logging
 import re
 import sys
+import urllib.parse
 from typing import Any
 
 import requests
@@ -71,6 +72,15 @@ class LinkdingAPIClient:
         response.raise_for_status()
         logger.debug(f"Successfully updated bookmark ID: {bookmark_id}")
 
+    def get_remote_metadata(self, url: str) -> dict[str, Any] | None:
+        escaped_url = urllib.parse.quote_plus(url)
+        check_url = f"http://192.168.1.10:8084/api/bookmarks/check/?url={escaped_url}"
+        logger.debug(f"Checking remote metadata for URL: {url} using {check_url}")
+        response = self.session.get(check_url, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        return data.get("metadata")
+
 
 def _clean_bookmark_title(
     client: LinkdingAPIClient,
@@ -79,12 +89,37 @@ def _clean_bookmark_title(
 ) -> None:
     bookmark_id: int = bookmark["id"]
     original_title: str = bookmark.get("title", "")
+    bookmark_url: str = bookmark["url"]
 
-    if original_title.startswith("http://"):
-        logger.debug(
-            f"Skipping title cleaning for bookmark ID: {bookmark_id} "
-            f"as it starts with 'http://'."
-        )
+    compare_len = min(len(original_title), len(bookmark_url), 20)
+
+    title_prefix_for_comparison = original_title[:compare_len]
+    url_prefix_for_comparison = bookmark_url[:compare_len]
+
+    if (not original_title) or title_prefix_for_comparison == url_prefix_for_comparison:
+        try:
+            metadata = client.get_remote_metadata(bookmark_url)
+            fetched_title = metadata.get("title") if metadata else None
+
+            if fetched_title and fetched_title != original_title:
+                if dry_run:
+                    logger.info(
+                        f"Dry run: Would update title for bookmark ID: {bookmark_id} "
+                        f"from '{original_title}' to '{fetched_title}' "
+                        "(from remote metadata)."
+                    )
+                else:
+                    logger.info(
+                        f"Updating title for bookmark ID: {bookmark_id} "
+                        f"from '{original_title}' to '{fetched_title}' "
+                        "(from remote metadata)."
+                    )
+                    client.update_bookmark(bookmark_id, title=fetched_title)
+        except requests.exceptions.RequestException:
+            logger.exception(
+                f"Failed to fetch metadata from remote for bookmark ID: {bookmark_id}, "
+                f"URL: {bookmark_url}"
+            )
         return
 
     cleaned_title = html.unescape(original_title)
