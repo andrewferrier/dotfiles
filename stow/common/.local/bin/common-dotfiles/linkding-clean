@@ -108,12 +108,12 @@ def _clean_bookmark_title(
                 )
 
 
-def _check_bookmark_validity(
+def _is_bookmark_valid(
     client: LinkdingAPIClient,
     bookmark: dict,
     delete_bookmark: bool,  # noqa: FBT001
     dry_run: bool,  # noqa: FBT001
-) -> None:
+) -> bool:
     bookmark_id: int = bookmark["id"]
     url: str = bookmark["url"]
     invalid = False
@@ -167,11 +167,15 @@ def _check_bookmark_validity(
                     f"Failed to {action_verb} bookmark ID: {bookmark_id}, URL: {url}",
                 )
 
+        return False
+
+    return True
+
 
 EVALUATE_REDIRECT_REGEXES = re.compile(r"^https://getpocket\.com:443/explore/item/")
 
 
-def _resolve_redirects(
+def _resolve_redirected_url(
     client: LinkdingAPIClient,
     bookmark: dict,
     dry_run: bool,  # noqa: FBT001
@@ -226,9 +230,9 @@ def process_bookmark(
 
     logger.debug(f"Processing bookmark ID: {bookmark_id}, URL: {url}, title: {title}")
 
-    _clean_bookmark_title(client, bookmark, dry_run)
-    _resolve_redirects(client, bookmark, dry_run)
-    _check_bookmark_validity(client, bookmark, delete_bookmark, dry_run)
+    if _is_bookmark_valid(client, bookmark, delete_bookmark, dry_run):
+        _clean_bookmark_title(client, bookmark, dry_run)
+        _resolve_redirected_url(client, bookmark, dry_run)
 
 
 def main() -> None:
