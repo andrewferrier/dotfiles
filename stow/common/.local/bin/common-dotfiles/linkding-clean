@@ -316,7 +316,9 @@ def main() -> None:
     logger.info("Starting Linkding bookmark cleaning process...")
     try:
         bookmarks = client.get_unarchived_bookmarks()
-        for bookmark in tqdm(bookmarks, desc="Processing bookmarks", unit="bookmark"):
+        for bookmark in tqdm(
+            bookmarks, desc="Processing bookmarks", unit="bookmark", smoothing=0
+        ):
             process_bookmark(client, bookmark, args.dry_run, args.delete)
 
     except requests.exceptions.RequestException as e:
