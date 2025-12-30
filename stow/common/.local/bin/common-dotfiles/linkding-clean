@@ -76,10 +76,16 @@ class LinkdingAPIClient:
         escaped_url = urllib.parse.quote_plus(url)
         check_url = f"http://192.168.1.10:8084/api/bookmarks/check/?url={escaped_url}"
         logger.debug(f"Checking remote metadata for URL: {url} using {check_url}")
-        response = self.session.get(check_url, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        return data.get("metadata")
+        try:
+            response = self.session.get(check_url, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+            return data.get("metadata")
+        except requests.exceptions.ReadTimeout:
+            logger.warning(
+                f"Read timeout when fetching remote metadata for URL: {url}. Skipping."
+            )
+            return None
 
 
 def _clean_bookmark_title(
@@ -116,7 +122,7 @@ def _clean_bookmark_title(
                     )
                     client.update_bookmark(bookmark_id, title=fetched_title)
         except requests.exceptions.RequestException:
-            logger.exception(
+            logger.error(  # noqa: TRY400
                 f"Failed to fetch metadata from remote for bookmark ID: {bookmark_id}, "
                 f"URL: {bookmark_url}"
             )
@@ -138,9 +144,7 @@ def _clean_bookmark_title(
                 )
                 client.update_bookmark(bookmark_id, title=cleaned_title)
             except requests.exceptions.RequestException:
-                logger.exception(
-                    f"Failed to update title for bookmark ID: {bookmark_id}"
-                )
+                logger.error(f"Failed to update title for bookmark ID: {bookmark_id}")  # noqa: TRY400
 
 
 def _is_bookmark_valid(
@@ -198,7 +202,7 @@ def _is_bookmark_valid(
                 else:
                     client.archive_bookmark(bookmark_id)
             except requests.exceptions.RequestException:
-                logger.exception(
+                logger.error(  # noqa: TRY400
                     f"Failed to {action_verb} bookmark ID: {bookmark_id}, URL: {url}",
                 )
 
@@ -240,14 +244,14 @@ def _resolve_redirected_url(
                         )
                         client.update_bookmark(bookmark_id, url=final_url)
                     except requests.exceptions.RequestException:
-                        logger.exception(
+                        logger.error(  # noqa: TRY400
                             f"Failed to update URL for bookmark ID: {bookmark_id}"
                         )
             else:
                 logger.debug(f"URL {original_url} did not redirect.")
 
         except requests.exceptions.RequestException:
-            logger.exception(
+            logger.error(  # noqa: TRY400
                 f"Failed to resolve redirects for URL: {original_url} "
                 f"(ID: {bookmark_id})"
             )
