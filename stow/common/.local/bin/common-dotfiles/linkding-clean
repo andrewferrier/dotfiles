@@ -1,16 +1,23 @@
 #!/usr/bin/env -S uv run --project ${HOME}/.local/bin/common-dotfiles --script
 # vim: set ft=python:
 import argparse
+import functools
+import hashlib
 import html
+import json
 import logging
+import os
+import pathlib
 import re
 import sys
 import urllib.parse
+from collections.abc import Callable
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 from typing import Any, Literal
 
 import requests
-from playwright.sync_api import Browser, Page, sync_playwright
+from playwright.sync_api import Browser, sync_playwright
 from tqdm import tqdm
 
 
@@ -28,6 +35,62 @@ syserr_handler = logging.StreamHandler(stream=sys.stderr)
 syserr_handler.setLevel(logging.INFO)  # Changed default level to INFO
 syserr_handler.setFormatter(logging.Formatter("%(levelname)s: %(message)s"))
 logger.addHandler(syserr_handler)
+
+
+XDG_CACHE_HOME = pathlib.Path(os.getenv("XDG_CACHE_HOME", "~/.cache")).expanduser()
+LINKDING_CLEAN_CACHE_DIR = XDG_CACHE_HOME / "linkding-clean"
+LINKDING_CLEAN_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def disk_cache(
+    expire_time_hours: int = 72,
+) -> Callable[..., Callable[..., ValidationResult]]:
+    def decorator(
+        func: Callable[..., ValidationResult],
+    ) -> Callable[..., ValidationResult]:
+        @functools.wraps(func)
+        def wrapper(self, url: str, *args: Any, **kwargs: Any) -> ValidationResult:  # noqa: ANN001, ANN401
+            cache_key = hashlib.sha256(url.encode("utf-8")).hexdigest()
+            cache_file = LINKDING_CLEAN_CACHE_DIR / f"{cache_key}.json"
+
+            if cache_file.exists():
+                try:
+                    with cache_file.open("r") as f:
+                        cache_data = json.load(f)
+
+                    cached_timestamp = datetime.fromisoformat(cache_data["timestamp"])
+
+                    if datetime.now() - cached_timestamp < timedelta(
+                        hours=expire_time_hours
+                    ):
+                        logger.debug(f"Cache hit for URL: {url} (ID: {cache_key})")
+                        return ValidationResult(**cache_data["result"])
+                    else:
+                        logger.debug(f"Cache expired for URL: {url} (ID: {cache_key}).")
+                        cache_file.unlink(missing_ok=True)
+                except (json.JSONDecodeError, KeyError, ValueError) as e:
+                    logger.warning(
+                        f"Error reading cache for {url} (ID: {cache_key}): {e}."
+                    )
+                    cache_file.unlink(missing_ok=True)
+
+            result = func(self, url, *args, **kwargs)
+
+            with cache_file.open("w") as f:
+                json.dump(
+                    {
+                        "timestamp": datetime.now().isoformat(),
+                        "result": result.__dict__,  # Serialize dataclass to dict
+                        "url": url,
+                    },
+                    f,
+                )
+
+            return result
+
+        return wrapper
+
+    return decorator
 
 
 class LinkdingAPIClient:
@@ -210,6 +273,7 @@ class PageChecker:
         self._browser = self._playwright.chromium.launch(headless=True)
         logger.debug("Playwright browser initialized.")
 
+    @disk_cache()
     def check_page_load(self, url: str, timeout: int = 30000) -> ValidationResult:
         self._check_count += 1
         if self._check_count >= 100:  # noqa: PLR2004
@@ -245,9 +309,9 @@ class PageChecker:
 
         except Exception as e:
             if "Download is starting" in str(e):
-                return ValidationResult(is_valid=True, reason=f"Download: {str(e)}")
+                return ValidationResult(is_valid=True, reason=f"Download: {e!s}")
             else:
-                return ValidationResult(is_valid=False, reason=f"Exception: {str(e)}")
+                return ValidationResult(is_valid=False, reason=f"Exception: {e!s}")
         finally:
             page.close()
 
