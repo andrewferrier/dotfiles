@@ -199,7 +199,16 @@ class PageChecker:
         self.browser: Browser = self.playwright.chromium.launch(headless=True)
 
     def check_page_load(self, url: str, timeout: int = 30000) -> ValidationResult:
-        page: Page = self.browser.new_page()
+        context = self.browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/115.0.0.0 Safari/537.36",
+            extra_http_headers={
+                "Accept-Language": "en-US,en;q=0.9",
+                "Referer": "https://google.com",
+            },
+        )
+        page = context.new_page()
         try:
             response = page.goto(url, wait_until="load", timeout=timeout)
 
