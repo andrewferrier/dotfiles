@@ -1,16 +1,23 @@
 #!/usr/bin/env -S uv run --project ${HOME}/.local/bin/common-dotfiles --script
 # vim: set ft=python:
-
 import argparse
 import html
 import logging
 import re
 import sys
 import urllib.parse
-from typing import Any
+from dataclasses import dataclass
+from typing import Any, Literal
 
 import requests
 from tqdm import tqdm
+
+
+@dataclass
+class ValidationResult:
+    is_valid: bool
+    reason: str
+
 
 logger = logging.getLogger("linkding-clean")
 logger.propagate = False
@@ -31,24 +38,31 @@ class LinkdingAPIClient:
         self.session.headers.update({"Authorization": f"Token {token}"})
         logger.debug(f"LinkdingAPIClient initialized with base_url: {self.base_url}")
 
-    def get_unarchived_bookmarks(self) -> Any:  # noqa: ANN401
-        url = f"{self.base_url}bookmarks/?limit=100000"
-        logger.debug(f"Fetching results from: {url}")
+    def get_bookmarks(self, archived: bool = False) -> Any:  # noqa: ANN401, FBT001, FBT002
+        endpoint = "archived/" if archived else ""
+        url = f"{self.base_url}bookmarks/{endpoint}?limit=100000"
+        logger.debug(
+            f"Fetching {'archived' if archived else 'unarchived'} bookmarks from: {url}"
+        )
         response = self.session.get(url)
-        response.raise_for_status()  # Raise an exception for HTTP errors (4xx or 5xx)
+        response.raise_for_status()
         data = response.json()
         return data["results"]
 
     def archive_bookmark(self, bookmark_id: int) -> None:
         url = f"{self.base_url}bookmarks/{bookmark_id}/archive/"
-        logger.info(f"Archiving bookmark ID: {bookmark_id}")
         response = self.session.post(url)
         response.raise_for_status()
         logger.debug(f"Successfully archived bookmark ID: {bookmark_id}")
 
+    def unarchive_bookmark(self, bookmark_id: int) -> None:
+        url = f"{self.base_url}bookmarks/{bookmark_id}/unarchive/"
+        response = self.session.post(url)
+        response.raise_for_status()
+        logger.debug(f"Successfully unarchived bookmark ID: {bookmark_id}")
+
     def delete_bookmark(self, bookmark_id: int) -> None:
         url = f"{self.base_url}bookmarks/{bookmark_id}/"
-        logger.info(f"Deleting bookmark ID: {bookmark_id}")
         response = self.session.delete(url)
         response.raise_for_status()
         logger.debug(f"Successfully deleted bookmark ID: {bookmark_id}")
@@ -110,7 +124,7 @@ def _clean_bookmark_title(
             if fetched_title and fetched_title != original_title:
                 if dry_run:
                     logger.info(
-                        f"Dry run: Would update title for bookmark ID: {bookmark_id} "
+                        f"DRY RUN: Would update title for bookmark ID: {bookmark_id} "
                         f"from '{original_title}' to '{fetched_title}' "
                         "(from remote metadata)."
                     )
@@ -133,7 +147,7 @@ def _clean_bookmark_title(
     if cleaned_title != original_title:
         if dry_run:
             logger.info(
-                f"Dry run: Would update title for bookmark ID: {bookmark_id} "
+                f"DRY RUN: Would update title for bookmark ID: {bookmark_id} "
                 f"from '{original_title}' to '{cleaned_title}'",
             )
         else:
@@ -147,68 +161,75 @@ def _clean_bookmark_title(
                 logger.error(f"Failed to update title for bookmark ID: {bookmark_id}")  # noqa: TRY400
 
 
-def _is_bookmark_valid(
+def _perform_bookmark_action(
     client: LinkdingAPIClient,
-    bookmark: dict,
-    delete_bookmark: bool,  # noqa: FBT001
+    bookmark_id: int,
+    url: str,
+    action_type: Literal["archive", "delete", "unarchive"],
     dry_run: bool,  # noqa: FBT001
-) -> bool:
-    bookmark_id: int = bookmark["id"]
-    url: str = bookmark["url"]
-    invalid = False
+    validation_reason: str,
+) -> None:
+    if dry_run:
+        logger.info(
+            f"DRY RUN: Would {action_type} bookmark ID: {bookmark_id}, URL: {url} "
+            f"because {validation_reason}",
+        )
+    else:
+        try:
+            logger.info(
+                f"ACTION: {action_type} bookmark ID: {bookmark_id}, URL: {url} "
+                f" because {validation_reason}",
+            )
+            if action_type == "delete":
+                client.delete_bookmark(bookmark_id)
+            elif action_type == "archive":
+                client.archive_bookmark(bookmark_id)
+            elif action_type == "unarchive":
+                client.unarchive_bookmark(bookmark_id)
+        except requests.exceptions.RequestException:
+            logger.error(  # noqa: TRY400
+                f"Failed to {action_type} bookmark ID: {bookmark_id}, URL: {url}",
+            )
 
-    action_verb = "delete" if delete_bookmark else "archive"
+
+def _is_bookmark_valid(
+    bookmark: dict, allow_redirects: bool = False
+) -> ValidationResult:
+    url: str = bookmark["url"]
+    is_valid = True
+    reason = "Valid"
 
     try:
-        # Use requests.get directly without the client's session for external URL checks
-        # to avoid sharing authentication headers or other unnecessary overhead.
-        r = requests.get(url, timeout=20)
-
-        if r.status_code == 404:  # noqa: PLR2004
-            logger.warning(
-                f"URL {url} (ID: {bookmark_id}) returned 404, "
-                f"marking for {action_verb}.",
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chromium/133.0.5008.159 "
+                "Chrome/133.0.5008.159 Safari/537.36"
             )
-            invalid = True
+        }
 
-    except requests.exceptions.ConnectionError:
-        logger.error(  # noqa: TRY400
-            f"Connection error for {url} (ID: {bookmark_id}), "
-            f"marking for {action_verb}.",
+        r = requests.get(
+            url, headers=headers, allow_redirects=allow_redirects, timeout=20
         )
-        invalid = True
-    except requests.exceptions.ReadTimeout:
-        logger.error(  # noqa: TRY400
-            f"Read timeout for {url} (ID: {bookmark_id}), skipping.",
-        )
-    except requests.exceptions.TooManyRedirects:
-        logger.error(  # noqa: TRY400
-            f"Too many redirects for {url} (ID: {bookmark_id}), skipping.",
-        )
-    except requests.exceptions.RequestException:
-        logger.error(  # noqa: TRY400
-            f"Unexpected request error for {url} (ID: {bookmark_id}), skipping.",
-        )
+        status_code = r.status_code
 
-    if invalid:
-        if dry_run:
-            logger.info(
-                f"Dry run: Would {action_verb} bookmark ID: {bookmark_id}, URL: {url}",
+        if status_code is None:
+            is_valid = False
+            reason = "no status code"
+        elif status_code >= 300 and (not allow_redirects):  # noqa: PLR2004
+            is_valid = False
+            reason = (
+                f"HTTP status code {status_code}: redirect without allow_redirects."
             )
-        else:
-            try:
-                if delete_bookmark:
-                    client.delete_bookmark(bookmark_id)
-                else:
-                    client.archive_bookmark(bookmark_id)
-            except requests.exceptions.RequestException:
-                logger.error(  # noqa: TRY400
-                    f"Failed to {action_verb} bookmark ID: {bookmark_id}, URL: {url}",
-                )
+        elif status_code >= 400:  # noqa: PLR2004
+            is_valid = False
+            reason = f"HTTP status code {status_code}."
 
-        return False
+    except requests.exceptions.RequestException as e:
+        is_valid = False
+        reason = f"RequestException: {e}"
 
-    return True
+    return ValidationResult(is_valid=is_valid, reason=reason)
 
 
 EVALUATE_REDIRECT_REGEXES = re.compile(r"^https://getpocket\.com:443/explore/item/")
@@ -233,7 +254,7 @@ def _resolve_redirected_url(
             if final_url != original_url:
                 if dry_run:
                     logger.info(
-                        f"Dry run: Would update URL for bookmark ID: {bookmark_id} "
+                        f"DRY RUN: Would update URL for bookmark ID: {bookmark_id} "
                         f"from '{original_url}' to '{final_url}'",
                     )
                 else:
@@ -257,7 +278,32 @@ def _resolve_redirected_url(
             )
 
 
-def process_bookmark(
+def _process_archived_bookmark(
+    client: LinkdingAPIClient,
+    bookmark: dict,
+    dry_run: bool,  # noqa: FBT001
+) -> None:
+    bookmark_id: int = bookmark["id"]
+    url: str = bookmark["url"]
+    title: str = bookmark.get("title", "")
+
+    logger.debug(
+        f"Processing archived bookmark ID: {bookmark_id}, URL: {url}, title: {title}"
+    )
+
+    validation_result = _is_bookmark_valid(bookmark)
+    if validation_result.is_valid:
+        _perform_bookmark_action(
+            client, bookmark_id, url, "unarchive", dry_run, validation_result.reason
+        )
+    else:
+        logger.debug(
+            f"Archived bookmark ID: {bookmark_id} (URL: {url}) is still invalid. "
+            f"Reason: {validation_result.reason}"
+        )
+
+
+def _process_unarchived_bookmark(
     client: LinkdingAPIClient,
     bookmark: dict,
     dry_run: bool,  # noqa: FBT001
@@ -269,9 +315,16 @@ def process_bookmark(
 
     logger.debug(f"Processing bookmark ID: {bookmark_id}, URL: {url}, title: {title}")
 
-    if _is_bookmark_valid(client, bookmark, delete_bookmark, dry_run):
+    action_verb = "delete" if delete_bookmark else "archive"
+
+    validation_result = _is_bookmark_valid(bookmark, allow_redirects=True)
+    if validation_result.is_valid:
         _clean_bookmark_title(client, bookmark, dry_run)
         _resolve_redirected_url(client, bookmark, dry_run)
+    else:
+        _perform_bookmark_action(
+            client, bookmark_id, url, action_verb, dry_run, validation_result.reason
+        )
 
 
 def main() -> None:
@@ -315,14 +368,26 @@ def main() -> None:
 
     logger.info("Starting Linkding bookmark cleaning process...")
     try:
-        bookmarks = client.get_unarchived_bookmarks()
+        unarchived_bookmarks = client.get_bookmarks(archived=False)
         for bookmark in tqdm(
-            bookmarks, desc="Processing bookmarks", unit="bookmark", smoothing=0
+            unarchived_bookmarks,
+            desc="Processing unarchived bookmarks",
+            unit="bookmark",
+            smoothing=0,
         ):
-            process_bookmark(client, bookmark, args.dry_run, args.delete)
+            _process_unarchived_bookmark(client, bookmark, args.dry_run, args.delete)
+
+        archived_bookmarks = client.get_bookmarks(archived=True)
+        for bookmark in tqdm(
+            archived_bookmarks,
+            desc="Processing archived bookmarks",
+            unit="bookmark",
+            smoothing=0,
+        ):
+            _process_archived_bookmark(client, bookmark, args.dry_run)
 
     except requests.exceptions.RequestException as e:
-        logger.critical(f"Failed to fetch bookmarks from Linkding API: {e}")
+        logger.critical(f"Failed to interact with Linkding API: {e}")
         sys.exit(1)
 
     logger.info("Linkding bookmark cleaning process finished.")
