@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from typing import Any, Literal
 
 import requests
+from playwright.sync_api import Browser, Page, sync_playwright
 from tqdm import tqdm
 
 
@@ -192,44 +193,40 @@ def _perform_bookmark_action(
             )
 
 
-def _is_bookmark_valid(
-    bookmark: dict, allow_redirects: bool = False
-) -> ValidationResult:
-    url: str = bookmark["url"]
-    is_valid = True
-    reason = "Valid"
+class PageChecker:
+    def __init__(self) -> None:
+        self.playwright = sync_playwright().start()
+        self.browser: Browser = self.playwright.chromium.launch(headless=True)
 
-    try:
-        headers = {
-            "User-Agent": (
-                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chromium/133.0.5008.159 "
-                "Chrome/133.0.5008.159 Safari/537.36"
-            )
-        }
+    def check_page_load(self, url: str, timeout: int = 30000) -> ValidationResult:
+        page: Page = self.browser.new_page()
+        try:
+            response = page.goto(url, wait_until="load", timeout=timeout)
 
-        r = requests.get(
-            url, headers=headers, allow_redirects=allow_redirects, timeout=20
-        )
-        status_code = r.status_code
+            if response is None:
+                return ValidationResult(
+                    is_valid=False, reason="No response received (network error?)"
+                )
 
-        if status_code is None:
-            is_valid = False
-            reason = "no status code"
-        elif status_code >= 300 and (not allow_redirects):  # noqa: PLR2004
-            is_valid = False
-            reason = (
-                f"HTTP status code {status_code}: redirect without allow_redirects."
-            )
-        elif status_code >= 400:  # noqa: PLR2004
-            is_valid = False
-            reason = f"HTTP status code {status_code}."
+            status = response.status
+            if 200 <= status < 300:
+                return ValidationResult(is_valid=True, reason="OK")
+            else:
+                return ValidationResult(
+                    is_valid=False, reason=f"HTTP status code {status}."
+                )
 
-    except requests.exceptions.RequestException as e:
-        is_valid = False
-        reason = f"RequestException: {e}"
+        except Exception as e:
+            if "Download is starting" in str(e):
+                return ValidationResult(is_valid=True, reason=f"Download: {str(e)}")
+            else:
+                return ValidationResult(is_valid=False, reason=f"Exception: {str(e)}")
+        finally:
+            page.close()
 
-    return ValidationResult(is_valid=is_valid, reason=reason)
+    def close(self) -> None:
+        self.browser.close()
+        self.playwright.stop()
 
 
 EVALUATE_REDIRECT_REGEXES = re.compile(r"^https://getpocket\.com:443/explore/item/")
@@ -280,6 +277,7 @@ def _resolve_redirected_url(
 
 def _process_archived_bookmark(
     client: LinkdingAPIClient,
+    pagechecker: PageChecker,
     bookmark: dict,
     dry_run: bool,  # noqa: FBT001
 ) -> None:
@@ -291,7 +289,7 @@ def _process_archived_bookmark(
         f"Processing archived bookmark ID: {bookmark_id}, URL: {url}, title: {title}"
     )
 
-    validation_result = _is_bookmark_valid(bookmark)
+    validation_result = pagechecker.check_page_load(url)
     if validation_result.is_valid:
         _perform_bookmark_action(
             client, bookmark_id, url, "unarchive", dry_run, validation_result.reason
@@ -305,6 +303,7 @@ def _process_archived_bookmark(
 
 def _process_unarchived_bookmark(
     client: LinkdingAPIClient,
+    pagechecker: PageChecker,
     bookmark: dict,
     dry_run: bool,  # noqa: FBT001
     delete_bookmark: bool,  # noqa: FBT001
@@ -317,7 +316,7 @@ def _process_unarchived_bookmark(
 
     action_verb = "delete" if delete_bookmark else "archive"
 
-    validation_result = _is_bookmark_valid(bookmark, allow_redirects=True)
+    validation_result = pagechecker.check_page_load(url)
     if validation_result.is_valid:
         _clean_bookmark_title(client, bookmark, dry_run)
         _resolve_redirected_url(client, bookmark, dry_run)
@@ -365,6 +364,7 @@ def main() -> None:
             handler.setLevel(logging.DEBUG)
 
     client = LinkdingAPIClient(args.base_url, args.token)
+    checker = PageChecker()
 
     logger.info("Starting Linkding bookmark cleaning process...")
     try:
@@ -375,7 +375,9 @@ def main() -> None:
             unit="bookmark",
             smoothing=0,
         ):
-            _process_unarchived_bookmark(client, bookmark, args.dry_run, args.delete)
+            _process_unarchived_bookmark(
+                client, checker, bookmark, args.dry_run, args.delete
+            )
 
         archived_bookmarks = client.get_bookmarks(archived=True)
         for bookmark in tqdm(
@@ -384,12 +386,13 @@ def main() -> None:
             unit="bookmark",
             smoothing=0,
         ):
-            _process_archived_bookmark(client, bookmark, args.dry_run)
+            _process_archived_bookmark(client, checker, bookmark, args.dry_run)
 
     except requests.exceptions.RequestException as e:
         logger.critical(f"Failed to interact with Linkding API: {e}")
         sys.exit(1)
 
+    checker.close()
     logger.info("Linkding bookmark cleaning process finished.")
 
 
