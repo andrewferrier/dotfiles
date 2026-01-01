@@ -195,11 +195,29 @@ def _perform_bookmark_action(
 
 class PageChecker:
     def __init__(self) -> None:
-        self.playwright = sync_playwright().start()
-        self.browser: Browser = self.playwright.chromium.launch(headless=True)
+        self._check_count = 0
+        self._playwright = None
+        self._browser: Browser | None = None
+        self._initialize_browser()
+
+    def _initialize_browser(self) -> None:
+        if self._browser:
+            self._browser.close()
+        if self._playwright:
+            self._playwright.stop()
+
+        self._playwright = sync_playwright().start()
+        self._browser = self._playwright.chromium.launch(headless=True)
+        logger.debug("Playwright browser initialized.")
 
     def check_page_load(self, url: str, timeout: int = 30000) -> ValidationResult:
-        context = self.browser.new_context(
+        self._check_count += 1
+        if self._check_count >= 100:  # noqa: PLR2004
+            logger.debug("Re-initializing Playwright browser after 100 checks.")
+            self._initialize_browser()
+            self._check_count = 0
+
+        context = self._browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "
             "Chrome/115.0.0.0 Safari/537.36",
@@ -234,8 +252,10 @@ class PageChecker:
             page.close()
 
     def close(self) -> None:
-        self.browser.close()
-        self.playwright.stop()
+        if self._browser:
+            self._browser.close()
+        if self._playwright:
+            self._playwright.stop()
 
 
 EVALUATE_REDIRECT_REGEXES = re.compile(r"^https://getpocket\.com:443/explore/item/")
