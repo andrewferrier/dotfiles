@@ -13,7 +13,7 @@ import sys
 import urllib.parse
 from collections.abc import Callable
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Any, Literal
 
 import requests
@@ -41,6 +41,9 @@ XDG_CACHE_HOME = pathlib.Path(os.getenv("XDG_CACHE_HOME", "~/.cache")).expanduse
 LINKDING_CLEAN_CACHE_DIR = XDG_CACHE_HOME / "linkding-clean"
 LINKDING_CLEAN_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
+HTTP_OK_MIN = 200
+HTTP_OK_MAX = 300
+
 
 def disk_cache(
     expire_time_hours: int = 72,
@@ -60,7 +63,7 @@ def disk_cache(
 
                     cached_timestamp = datetime.fromisoformat(cache_data["timestamp"])
 
-                    if datetime.now() - cached_timestamp < timedelta(
+                    if datetime.now(timezone.UTC) - cached_timestamp < timedelta(
                         hours=expire_time_hours
                     ):
                         logger.debug(f"Cache hit for URL: {url} (ID: {cache_key})")
@@ -79,7 +82,7 @@ def disk_cache(
             with cache_file.open("w") as f:
                 json.dump(
                     {
-                        "timestamp": datetime.now().isoformat(),
+                        "timestamp": datetime.now(timezone.UTC).isoformat(),
                         "result": result.__dict__,  # Serialize dataclass to dict
                         "url": url,
                     },
@@ -300,7 +303,7 @@ class PageChecker:
                 )
 
             status = response.status
-            if 200 <= status < 300:
+            if HTTP_OK_MIN <= status < HTTP_OK_MAX:
                 return ValidationResult(is_valid=True, reason="OK")
             else:
                 return ValidationResult(
