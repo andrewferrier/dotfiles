@@ -105,12 +105,26 @@ class LinkdingAPIClient:
         self.session.headers.update({"Authorization": f"Token {token}"})
         logger.debug(f"LinkdingAPIClient initialized with base_url: {self.base_url}")
 
-    def get_bookmarks(self, archived: bool = False) -> Any:  # noqa: ANN401, FBT001, FBT002
+    def get_bookmarks(self, query: str | None = None, *, archived: bool = False) -> Any:  # noqa: ANN401
         endpoint = "archived/" if archived else ""
-        url = f"{self.base_url}bookmarks/{endpoint}?limit=100000"
+
+        params: dict[str, str] = {"limit": "100000"}
+
+        if query is not None:
+            params["q"] = query
+
+        url = f"{self.base_url}bookmarks/{endpoint}"
         logger.debug(
-            f"Fetching {'archived' if archived else 'unarchived'} bookmarks from: {url}"
+            f"Fetching {'archived' if archived else 'unarchived'} bookmarks "
+            f"with query '{query}', params '{params}' from: {url}"
         )
+        response = self.session.get(url, params=params)
+        response.raise_for_status()
+        data = response.json()
+        return data["results"]
+
+    def get_tags(self) -> Any:  # noqa: ANN401
+        url = f"{self.base_url}tags/?limit=100000"
         response = self.session.get(url)
         response.raise_for_status()
         data = response.json()
@@ -135,23 +149,46 @@ class LinkdingAPIClient:
         logger.debug(f"Successfully deleted bookmark ID: {bookmark_id}")
 
     def update_bookmark(
-        self, bookmark_id: int, title: str | None = None, url: str | None = None
+        self,
+        bookmark_id: int,
+        *,
+        title: str | None = None,
+        url: str | None = None,
+        unread: bool | None = None,
+        dry_run: bool = False,
     ) -> None:
         url_path = f"{self.base_url}bookmarks/{bookmark_id}/"
+
         payload = {}
         if title is not None:
             payload["title"] = title
         if url is not None:
             payload["url"] = url
+        if unread is not None:
+            payload["unread"] = unread
 
         if not payload:
             logger.debug(f"No update data provided for bookmark ID: {bookmark_id}")
             return
 
-        logger.info(f"Updating bookmark ID: {bookmark_id} with payload: {payload}")
-        response = self.session.patch(url_path, json=payload)
-        response.raise_for_status()
-        logger.debug(f"Successfully updated bookmark ID: {bookmark_id}")
+        if dry_run:
+            logger.info(
+                f"DRY RUN: Would update bookmark ID: {bookmark_id} with payload: "
+                f"{payload}"
+            )
+        else:
+            try:
+                logger.info(
+                    f"Updating bookmark ID: {bookmark_id} with payload: {payload}"
+                )
+                response = self.session.patch(url_path, json=payload)
+                response.raise_for_status()
+                logger.debug(f"Successfully updated bookmark ID: {bookmark_id}")
+            except requests.exceptions.RequestException:
+                logger.error(  # noqa: TRY400
+                    f"Failed to update bookmark ID: {bookmark_id} with payload: "
+                    f"{payload}"
+                )
 
     def get_remote_metadata(self, url: str) -> dict[str, Any] | None:
         escaped_url = urllib.parse.quote_plus(url)
