@@ -3,7 +3,6 @@ vim.filetype.add({
         bashrc = "bash",
         equivs = "debcontrol",
         jad = "java",
-        tf = "opentofu",
         tfstate = "json",
     },
     filename = {
