@@ -18,14 +18,6 @@ function watch_func() {
         echo
         systemctl --user list-units --type=service 2>&1 | grep -E -v 'LOAD|ACTIVE|SUB|JOB|loaded units listed|list-unit-files'
     fi
-
-    DOCKER_FORMAT="table {{.Image}}\t{{.Names}}\t{{.CreatedAt}}\t{{.Status}}"
-
-    if (command -v podman &>/dev/null); then
-        podman ps --format "${DOCKER_FORMAT}"
-    elif (command -v docker &>/dev/null); then
-        docker ps --format "${DOCKER_FORMAT}"
-    fi
 }
 
 export -f watch_func
