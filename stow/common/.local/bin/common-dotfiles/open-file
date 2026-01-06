@@ -89,6 +89,13 @@ function open-system() {
     else
         # 'nohup' is needed to ensure that when files are opened from lf
         # that closing lf doesn't close the target app.
+
+        if [[ "${XDG_PREVENT_RECURSION:-}" == "1" ]]; then
+            echo >&2 "XDG recursion triggered."
+            exit 1
+        fi
+
+        export XDG_PREVENT_RECURSION=1
         nohup xdg-open "${FILE}" &>/dev/null &
     fi
 }
