@@ -4,10 +4,9 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# If trash-cli is installed at /usr/bin/trash, delegate to it.
 if [[ -x /usr/bin/trash ]]; then
-    # If we already have trash-cli installed, use that in preference
-    /usr/bin/trash "$@"
-    exit $?
+    exec /usr/bin/trash "$@"
 fi
 
 TRASH_DIR="/tmp/trash-$(date +%Y-%m-%d)"
@@ -25,9 +24,9 @@ for ITEM in "$@"; do
 
         if [[ -e "${TRASH_DIR}/${ITEM_NAME}" ]]; then
             TIME=$(date "+%H-%M-%S")
-            mv -f "${ITEM}" "${TRASH_DIR}/${ITEM_NAME} ${TIME}"
+            mv -f -- "${ITEM}" "${TRASH_DIR}/${ITEM_NAME}_${TIME}"
         else
-            mv -f "${ITEM}" "${TRASH_DIR}/"
+            mv -f -- "${ITEM}" "${TRASH_DIR}/"
         fi
     else
         echo >&2 "trash: Cannot trash '${ITEM}'; no such file or directory."
