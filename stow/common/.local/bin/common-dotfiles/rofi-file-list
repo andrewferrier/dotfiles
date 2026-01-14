@@ -30,13 +30,15 @@ if "${FILES}"; then
     FILESFLAG="-f"
     THEME="openfile"
     ROFI_PROMPT="[Enter] = open/edit file"
+    ROFI_KB_CUSTOM=()
 else
     FILESFLAG="-d"
     THEME="opendir"
     ROFI_PROMPT="[Enter] = open directory, Ctrl-[T]ig"
+    ROFI_KB_CUSTOM=("-kb-custom-1" "Ctrl+t")
 fi
 
-ROFI_OUTPUT=$("${HOME}/.local/bin/common-dotfiles/file-list" "$FILESFLAG" -p | rofi -kb-custom-1 "Ctrl+t" -no-sort -theme "$THEME" -dmenu -i -p "${ROFI_PROMPT}") && ROFI_EXIT_CODE=$? || ROFI_EXIT_CODE=$?
+ROFI_OUTPUT=$("${HOME}/.local/bin/common-dotfiles/file-list" "$FILESFLAG" -p | rofi "${ROFI_KB_CUSTOM[@]}" -no-sort -theme "$THEME" -dmenu -i -p "${ROFI_PROMPT}") && ROFI_EXIT_CODE=$? || ROFI_EXIT_CODE=$?
 
 if [[ $ROFI_EXIT_CODE == 10 ]]; then
     # shellcheck disable=SC2154
