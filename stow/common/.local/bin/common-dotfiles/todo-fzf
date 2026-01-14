@@ -11,8 +11,8 @@ readonly SCRIPT_DIR
 readonly RELOAD="reload(todo --porcelain list | ${SCRIPT_DIR}/todo-fzf-formatter)"
 
 readonly DATE_FORMAT="+%Y-%m-%d"
-readonly DATE_FORMAT_AFTERNOON="'+%Y-%m-%d-15:00'"
-readonly DATE_FORMAT_EVENING="'+%Y-%m-%d-19:00'"
+readonly DATE_FORMAT_AFTERNOON="'+%Y-%m-%d-14:00'"
+readonly DATE_FORMAT_EVENING="'+%Y-%m-%d-18:00'"
 
 readonly TODAY="\$(date $DATE_FORMAT)"
 readonly TODAY_AFTERNOON="\$(date $DATE_FORMAT_AFTERNOON)"
