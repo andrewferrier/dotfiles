@@ -27,3 +27,18 @@ languages currently being worked with.
 - Add type annotations wherever practical.
 
 - Keep docstrings minimal unless you know the class/function is intended for reuse.
+
+## LaTeX
+
+- Always use A4 paper.
+
+- When it makes sense to do so - when there are repeated complex elements -
+  create custom commands to keep things DRY.
+
+- Use `booktabs` for nicer tables unless there's a reason otherwise.
+
+- By default, margins should be 2cm or less.
+
+- If there are URLs, use `hyperref` for clickable URL links.
+
+- For simple one-pagers, use `\pagenumbering{gobble}` to remove page numbers.
