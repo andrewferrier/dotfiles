@@ -219,6 +219,7 @@ H - toggle hidden files
 - Experiment with snippets
 - Fix issue where switching away when a diagnostic window is open leaves it open
 - Switch to vim.pack: <https://github.com/talha-akram/anvil/blob/master/lua/configuration/plugins/init.lua>
+- Current search highlight isn't showing
 
 ## Presentation Ideas
 
