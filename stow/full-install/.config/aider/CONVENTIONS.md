@@ -6,6 +6,10 @@ languages currently being worked with.
 
 ## General
 
+- Irrespective of any other commands below, don't change code unrelated to the
+  core features or bugs being added just to conform to standards or be more
+  idiomatic or 'correct'.
+
 - Write code in the idiomatic style for the language or context.
 
 - Use clear, meaningful names for functions, variables, etc. Avoid placeholders
@@ -27,6 +31,8 @@ languages currently being worked with.
 - Add type annotations wherever practical.
 
 - Keep docstrings minimal unless you know the class/function is intended for reuse.
+
+- Wherever possible, use modern pathlib (Path) functions.
 
 ## LaTeX
 
