@@ -1,0 +1,125 @@
+#!/usr/bin/env python3
+
+import argparse
+import datetime
+import logging
+import sys
+import urllib.request
+from logging.handlers import SysLogHandler
+from pathlib import Path
+
+CAL_BASE_PARENT_DIR = Path.home() / ".local" / "share" / "calendar"
+
+
+def setup_logging() -> logging.Logger:
+    logger = logging.getLogger("webcal-handler")
+    logger.setLevel(logging.INFO)
+
+    # systemd/journald via syslog
+    try:
+        handler = SysLogHandler(address="/dev/log")
+    except Exception:  # noqa: BLE001
+        handler = logging.StreamHandler(sys.stdout)
+
+    formatter = logging.Formatter("%(name)s: %(levelname)s: %(message)s")
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+    return logger
+
+
+def normalize_url(url: str) -> str:
+    if url.startswith("webcal://"):
+        return "https://" + url[len("webcal://") :]
+    return url
+
+
+def split_events(ics_text: str) -> list[str]:
+    events: list[str] = []
+    buf: list[str] = []
+    in_event = False
+
+    for line in ics_text.splitlines():
+        if line == "BEGIN:VEVENT":
+            buf = [line]
+            in_event = True
+        elif line == "END:VEVENT":
+            buf.append(line)
+            events.append("\n".join(buf))
+            buf = []
+            in_event = False
+        elif in_event:
+            buf.append(line)
+
+    return events
+
+
+def extract_uid(event_text: str) -> str:
+    for line in event_text.splitlines():
+        if line.startswith("UID:"):
+            return line[4:].strip()
+    return datetime.datetime.now(datetime.UTC).strftime("generated-%Y%m%d%H%M%S")
+
+
+def write_event(event_text: str, cal_dir: Path, logger: logging.Logger) -> None:
+    uid = extract_uid(event_text)
+    path = cal_dir / f"{uid}.ics"
+
+    calendar = f"BEGIN:VCALENDAR\nVERSION:2.0\n{event_text}\nEND:VCALENDAR\n"
+
+    path.write_text(calendar, encoding="utf-8")
+
+    logger.info("Saved event %s", path)
+
+
+def main() -> None:
+    logger = setup_logging()
+
+    parser = argparse.ArgumentParser(
+        description="Fetch an iCalendar feed from a webcal:// or https:// URL and save "
+        "events as individual .ics files."
+    )
+    parser.add_argument(
+        "url", help="The webcal:// or https:// URL of the iCalendar feed."
+    )
+    args = parser.parse_args()
+
+    url = normalize_url(args.url)
+
+    subdirs = [d for d in CAL_BASE_PARENT_DIR.iterdir() if d.is_dir()]
+
+    if not subdirs:
+        logger.error(
+            "No calendar subdirectories found under %s. Please create one.",
+            CAL_BASE_PARENT_DIR,
+        )
+        sys.exit(1)
+    elif len(subdirs) > 1:
+        logger.error(
+            "Multiple calendar subdirectories found under %s. "
+            "Please ensure only one exists.",
+            CAL_BASE_PARENT_DIR,
+        )
+        sys.exit(1)
+    else:
+        caldir = subdirs[0]
+        logger.info("Using calendar directory: %s", caldir)
+
+    logger.info("Fetching calendar from %s", url)
+
+    try:
+        with urllib.request.urlopen(url) as resp:  # noqa: S310
+            ics_data = resp.read().decode("utf-8", errors="replace")
+    except Exception:
+        logger.exception("Failed to download calendar: %s")
+        sys.exit(1)
+
+    events = split_events(ics_data)
+    logger.info("Found %d events", len(events))
+
+    for event in events:
+        write_event(event, caldir, logger)
+
+
+if __name__ == "__main__":
+    main()

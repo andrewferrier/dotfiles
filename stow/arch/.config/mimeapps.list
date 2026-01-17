@@ -10,6 +10,7 @@ x-scheme-handler/about=librewolf.desktop
 x-scheme-handler/http=librewolf.desktop
 x-scheme-handler/https=librewolf.desktop
 x-scheme-handler/unknown=librewolf.desktop
+x-scheme-handler/webcal=webcal-handler.desktop
 
 # Required to fix conflict with Calibre
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
