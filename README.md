@@ -1,107 +1,21 @@
-# Dotfiles - Master Cheatsheet
+# Andrew Ferrier's dotfiles
 
-```text
-awk     | <https://github.com/learnbyexample/Command-line-text-processing/blob/master/gnu_awk.md>
-bash/sh | ~/.config/bash.d/README.md
-i3      | ~/.config/i3/config
-kitty   | ~/.config/kitty/kitty.conf
-lf      | ~/.config/lf/lfrc
-make    | <https://makefiletutorial.com>
-mutt    | ~/.mutt/muttrc.common
-neovim  | ~/.config/nvim/README.md
-tmux    | ~/.config/tmux/tmux.conf
-zsh     | ~/.config/zsh/README.md
-```
+This is my [dotfiles](https://dotfiles.io/) collection. Most of it's not intended for direct public consumption, although you're welcome (subject to the [the license](LICENSE)) to use whatever you find in here. However, I've also realized over time that there are a few utility scripts that I build for myself, that are stored in this repo and that might be useful to others, but don't have quite the polish and documentation and don't necessarily justify the complexity of their own GitHub repo. So, for your convenience, they are listed here. These are provided as-is, with minimal documentation except in some cases a `--help` argument, under [this license](LICENSE).
 
-## MacOS
+* [ical-archive](stow/common/.local/bin/common-dotfiles/ical-archive) - From a directory of `.ics` [iCal](https://en.wikipedia.org/wiki/ICalendar) files, archive the ones older than a certain number of days old into another directory.
 
-```text
-caffeinate -i <somecommand> | prevent system from sleeping whilst command is running
-Ctrl-1/2/3                  | switch desktop
-Cmd-Shift-.                 | toggle hidden file display in Finder
-Option-Delete               | delete previous word
-```
+* [ical-summary](stow/common/.local/bin/common-dotfiles/ical-summary) - From a directory of `.ics` [iCal](https://en.wikipedia.org/wiki/ICalendar) files, provides a summary of events.
 
-## Firefox
+* [linkding-clean](stow/common/.local/bin/common-dotfiles/linkding-clean) - Cleans up [Linkding](https://github.com/sissbruecker/linkding) bookmarks.
 
-```text
-Cmd-Opt-R   | reader view
-Vimium keys | <https://github.com/philc/vimium#keyboard-bindings>
-```
+* [maildir-archive](stow/common/.local/bin/common-dotfiles/maildir-archive) - Archives old emails in a [Maildir](https://en.wikipedia.org/wiki/Maildir)-formatted mailbox.
 
-## zathura (PDF viewer)
+* [maildir-spamfilter](stow/common/.local/bin/common-dotfiles/maildir-spamfilter) - Filters spam from a [Maildir](https://en.wikipedia.org/wiki/Maildir)-formatted mailbox.
 
-```text
-a | zoom out to page
-r | rotate
-s | zoom to page width
-```
+* [todo-fzf](stow/common/.local/bin/common-dotfiles/todo-fzf) - Interactively select and manage [todoman](https://github.com/pimutils/todoman) items using [fzf](https://github.com/junegunn/fzf).
 
-## feh (image viewer)
+* [todo-fzf-formatter](stow/common/.local/bin/common-dotfiles/todo-fzf-formatter) - A helper script to format output for `todo-fzf`.
 
-```text
-/      | zoom out to show entire image
-<up>   | zoom in
-<down> | zoom out
-<, >   | rotate
-```
+* [todo-trash-item](stow/common/.local/bin/common-dotfiles/todo-trash-item) - Another helper script, moves a specific [todoman](https://github.com/pimutils/todoman) item to a trash directory.
 
-## mpv
-
-```text
-? | Show keys
-```
-
-## journalctl
-
-```text
-journalctl --since=yesterday                 | output from beginning of yesterday
-journalctl --since=-1week                    | output from 1 week ago
-journalctl CONTAINER_NAME="docker_container" | output from docker container
-journalctl --user -u xyz.service             | output from specific user service
-```
-
-## Linux
-
-```text
-Ctrl-Backspace                                  | delete previous word
-
-getent hosts <hostname>                         | look up DNS name
-hardlink                                        | combine duplicate files using hardlinks
-inotifywait -m -r ~/directory                   | watch a directory for changes
-lshw -short -sanitize                           | Summarize hardware for selling
-lynis                                           | Security audit
-pdfunite                                        | combine PDFs on comand line
-systemctl reset-failed                          | Remove stray systemctl units/timers
-xxd                                             | Hex dump
-speaker-test -c 2 -t wav                        | test speaker
-Cheese                                          | webcam test
-PulseAudio mixer                                | mic test
-```
-
-### Linux - Disks and Filesystems
-
-```text
-badblocks -b 8192 -wsv /dev/device              | test device for bad blocks (DESTRUCTIVE!)
-blkdiscard --secure -v -f /dev/device           | Securely erase SSD
-parted mkpart primary ext4 0% 100%              | create a single partition
-sdparm --clear=STANDBY --save -S /dev/device    | disable SCSI drive from going to sleep
-shred -vz /dev/device                           | Securely erase hard drive
-
-duperemove --hashfile=/tmp/x.hash -r -d /target | de-duplicate
-btrfs scrub /target                             | check checksums
-```
-
-## Audio file manipulation
-
-```text
-eyeD3 --add-image "cover.jpg:FRONT_COVER" test.mp3 | add image to MP3
-```
-
-## General Configuration Help
-
-```text
-* MacOS - <https://git.herrbischoff.com/awesome-macos-command-line/about/>
-```
-
-<!-- vim: set nospell: -->
+* [webcal-to-ics](stow/common/.local/bin/common-dotfiles/webcal-to-ics) - Converts a Webcal URL into a local `.ics` [iCal](https://en.wikipedia.org/wiki/ICalendar) file.
