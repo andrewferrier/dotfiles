@@ -7,4 +7,5 @@ set -o pipefail
 
 shopt -s inherit_errexit
 
+uv tool install --upgrade autotrash
 uv tool install --upgrade keepmenu
