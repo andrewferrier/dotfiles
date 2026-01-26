@@ -220,6 +220,7 @@ H - toggle hidden files
 - Fix issue where switching away when a diagnostic window is open leaves it open
 - Switch to vim.pack: <https://github.com/talha-akram/anvil/blob/master/lua/configuration/plugins/init.lua>
 - Current search highlight isn't showing
+- Add something like 'goa' which opens an aider session for the current file
 
 ## Presentation Ideas
 
