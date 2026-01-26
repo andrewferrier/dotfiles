@@ -49,10 +49,9 @@ elif "${FILES}" && [[ $ROFI_EXIT_CODE == 10 ]]; then
     # shellcheck disable=SC2154
     $TERMCMD "${DIR}" &
 elif "${FILES}" && [[ $ROFI_EXIT_CODE == 11 ]]; then
-    DIR=$(dirname "${ROFI_OUTPUT}")
-    DIR=$(eval echo "$DIR") # Expand any tilde in DIR
     # shellcheck disable=SC2154
-    $TERMCMD lf "${DIR}" &
+    FILE=$(eval echo "${ROFI_OUTPUT}") # Expand any tilde in ROFI_OUTPUT
+    $TERMCMD lf "${FILE}" &
 else
     open-file -I "$ROFI_OUTPUT"
 fi
