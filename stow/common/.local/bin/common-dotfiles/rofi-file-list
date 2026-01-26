@@ -29,20 +29,30 @@ fi
 if "${FILES}"; then
     FILESFLAG="-f"
     THEME="openfile"
-    ROFI_PROMPT="[Enter] = open/edit file"
-    ROFI_KB_CUSTOM=()
+    ROFI_PROMPT="[Enter] = open/edit file, Ctrl-[T]erminal for directory, Ctrl-lf file manage[R] for directory"
+    ROFI_KB_CUSTOM=("-kb-custom-1" "Ctrl+t" "-kb-custom-2" "Ctrl+r")
 else
     FILESFLAG="-d"
     THEME="opendir"
-    ROFI_PROMPT="[Enter] = open directory, Ctrl-[T]ig"
+    ROFI_PROMPT="[Enter] = open directory in file manager, Ctrl-[T]ig"
     ROFI_KB_CUSTOM=("-kb-custom-1" "Ctrl+t")
 fi
 
 ROFI_OUTPUT=$("${HOME}/.local/bin/common-dotfiles/file-list" "$FILESFLAG" -p | rofi "${ROFI_KB_CUSTOM[@]}" -no-sort -theme "$THEME" -dmenu -i -p "${ROFI_PROMPT}") && ROFI_EXIT_CODE=$? || ROFI_EXIT_CODE=$?
 
-if [[ $ROFI_EXIT_CODE == 10 ]]; then
+if (! "${FILES}") && [[ $ROFI_EXIT_CODE == 10 ]]; then
     # shellcheck disable=SC2154
     $TERMCMD --title "tig [$ROFI_OUTPUT]" sh -c "cd $ROFI_OUTPUT && tig"
+elif "${FILES}" && [[ $ROFI_EXIT_CODE == 10 ]]; then
+    DIR=$(dirname "${ROFI_OUTPUT}")
+    DIR=$(eval echo "$DIR") # Expand any tilde in DIR
+    # shellcheck disable=SC2154
+    $TERMCMD "${DIR}" &
+elif "${FILES}" && [[ $ROFI_EXIT_CODE == 11 ]]; then
+    DIR=$(dirname "${ROFI_OUTPUT}")
+    DIR=$(eval echo "$DIR") # Expand any tilde in DIR
+    # shellcheck disable=SC2154
+    $TERMCMD lf "${DIR}" &
 else
     open-file -I "$ROFI_OUTPUT"
 fi
