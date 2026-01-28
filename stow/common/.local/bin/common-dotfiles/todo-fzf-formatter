@@ -87,8 +87,10 @@ for entry in data:
         ):
             human_date = due_date.strftime("%A")
 
+    summary_to_print = entry["summary"].replace("\n", "\\n").replace("\r", "\\r")
+
     print(  # noqa: T201
         f"{entry['id']:5}{EM_SPACE}"
         + colored(f"{human_date:14}{EM_SPACE}", datecolor, force_color=True)
-        + colored(f"{entry['summary']}", entrycolor, force_color=True)
+        + colored(f"{summary_to_print}", entrycolor, force_color=True)
     )
