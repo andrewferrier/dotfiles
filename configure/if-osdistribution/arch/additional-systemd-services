@@ -9,6 +9,8 @@ mkdir -p "$TARGET_DIR"
 
 if [[ ! -h "${TARGET_DIR}" ]]; then
     systemctl enable --user --now darkman
+    systemctl enable --user --now mpd
+    systemctl enable --user --now mpd-notification
 else
     echo >&2 "${TARGET_DIR} cannot be a symlink."
 fi
