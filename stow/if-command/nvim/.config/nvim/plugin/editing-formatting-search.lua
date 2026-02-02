@@ -1,4 +1,7 @@
-vim.opt.clipboard = "unnamed" -- On OSX, unnamed=unnamedplus, on Linux, autocutsel syncs them anyway
+vim.schedule(function()
+    vim.opt.clipboard = "unnamed"
+end) -- On OSX, unnamed=unnamedplus, on Linux, autocutsel syncs them anyway
+
 vim.opt.expandtab = true
 vim.opt.formatoptions:append("l")
 vim.opt.ignorecase = true
