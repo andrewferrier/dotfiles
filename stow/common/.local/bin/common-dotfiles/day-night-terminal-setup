@@ -25,17 +25,13 @@ set_from_state_file() {
     fi
 }
 
-if [[ -z "${SSH_CONNECTION}" ]]; then
-    set_from_state_file
-else
+if [[ -n "${SSH_CONNECTION}" ]]; then
     if command -v dol >/dev/null 2>&1; then
         DOL_OUTPUT=$(dol)
 
         if [[ $DOL_OUTPUT == "dark" ]]; then
-            set_night_vars
             echo 'night' >! "${STATE_FILE}"
         else
-            set_day_vars
             echo 'day' >! "${STATE_FILE}"
         fi
     elif [[ -z "$TMUX" ]]; then
@@ -44,17 +40,16 @@ else
             BG_COLOR=$(kitten query-terminal background | cut -d'#' -f2)
 
             if [[ $BG_COLOR == "f9f5d7" ]]; then
-                set_day_vars
                 echo 'day' >! "${STATE_FILE}"
             else
-                set_night_vars
                 echo 'night'  >! "${STATE_FILE}"
             fi
         else
             echo >&2 "Cannot use kitten query-terminal."
             exit 1
         fi
-    else
-        set_from_state_file
     fi
+
 fi
+
+set_from_state_file
