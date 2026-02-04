@@ -7,6 +7,10 @@ set -o pipefail
 
 shopt -s inherit_errexit
 
+# See https://support.mozilla.org/sv/questions/1316956,
+# https://video.stackexchange.com/questions/13164/encoding-422-in-10-bit-with-libx264,
+# https://superuser.com/questions/859010/what-ffmpeg-command-line-produces-video-more-compatible-across-all-devices
+
 start() {
     screenkey &
     notify-send --urgency low --expire-time=2000 "screenkey started."
@@ -16,17 +20,18 @@ start() {
     sleep 1
     notify-send --urgency low --expire-time=800 "Screen recording starting in 1..."
     sleep 1
-    # See https://support.mozilla.org/sv/questions/1316956,
-    # https://video.stackexchange.com/questions/13164/encoding-422-in-10-bit-with-libx264,
-    # https://superuser.com/questions/859010/what-ffmpeg-command-line-produces-video-more-compatible-across-all-devices
+    TIMESTAMP=$(date +"%Y-%m-%dT%H-%M-%S")
+    OUTPUT_FILENAME="${TIMESTAMP}-screencast.mp4"
+
     ffmpeg \
-        -f x11grab \
-        -s 1920x1012 \
-        -i :0+0,30 \
-        -c:v libx264 -crf 23 -profile:v baseline -level 3.0 -pix_fmt yuv420p \
-        -c:a aac -ac 2 -b:a 128k \
+        -f x11grab -framerate 30 -video_size 1920x1010 -i :0.0+0,32 \
+        -f pulse -i default \
+        -vaapi_device /dev/dri/renderD128 \
+        -vf 'format=nv12,hwupload' \
+        -c:v h264_vaapi -qp 24 \
+        -c:a aac -b:a 160k -ac 1 \
         -movflags faststart \
-        "$HOME/$(date --iso-8601=seconds || true).mp4" 2>&1 | logger -t 'recordscreen'
+        "${OUTPUT_FILENAME}" 2>&1 | logger -t 'recordscreen'
 }
 
 stop() {
