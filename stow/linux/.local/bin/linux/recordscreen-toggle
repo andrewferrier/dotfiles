@@ -48,7 +48,7 @@ stop() {
     notify-send --urgency low "Screen recording stopped."
 }
 
-if pgrep screenkey >/dev/null; then
+if pgrep -a ffmpeg | grep -F screencast >/dev/null; then
     stop
 else
     start
