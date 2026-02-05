@@ -12,14 +12,20 @@ shopt -s inherit_errexit
 # https://superuser.com/questions/859010/what-ffmpeg-command-line-produces-video-more-compatible-across-all-devices
 
 start() {
-    screenkey &
-    notify-send --urgency low --expire-time=2000 "screenkey started."
+    USE_SCREENKEY=$(echo -e "Yes\nNo" | rofi -dmenu -p "Use screenkey?")
+
+    if [[ "$USE_SCREENKEY" == "Yes" ]]; then
+        screenkey -p fixed -g 60%x10%+20%-15% &
+        notify-send --urgency low --expire-time=2000 "screenkey started."
+    fi
+
     notify-send --urgency low --expire-time=950 "Screen recording starting in 3..."
     sleep 1
     notify-send --urgency low --expire-time=950 "Screen recording starting in 2..."
     sleep 1
     notify-send --urgency low --expire-time=800 "Screen recording starting in 1..."
     sleep 1
+
     TIMESTAMP=$(date +"%Y-%m-%dT%H-%M-%S")
     OUTPUT_FILENAME="${TIMESTAMP}-screencast.mp4"
 
