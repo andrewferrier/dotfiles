@@ -29,6 +29,7 @@ start() {
     TIMESTAMP=$(date +"%Y-%m-%dT%H-%M-%S")
     OUTPUT_FILENAME="${TIMESTAMP}-screencast.mp4"
 
+    dunstctl set-paused true
     ffmpeg \
         -f x11grab -framerate 30 -video_size 1920x1010 -i :0.0+0,32 \
         -f pulse -i default \
@@ -41,7 +42,9 @@ start() {
 }
 
 stop() {
-    killall ffmpeg screenkey
+    killall ffmpeg
+    killall screenkey || true
+    dunstctl set-paused false
     notify-send --urgency low "Screen recording stopped."
 }
 
