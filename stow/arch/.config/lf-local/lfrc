@@ -1,1 +1,4 @@
 map gd :cd /mnt/data
+
+# Requires lf 47+
+set mergeindicators true
