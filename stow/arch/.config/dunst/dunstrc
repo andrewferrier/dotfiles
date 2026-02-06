@@ -15,9 +15,9 @@ history_length = 100
 timeout = 5
 
 [urgency_normal]
-timeout = 5
+timeout = 8
 
 [urgency_critical]
-timeout = 180
+timeout = 0
 
 # vim: filetype=cfg
