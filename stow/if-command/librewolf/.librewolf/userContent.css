@@ -5,7 +5,8 @@
  * 2. If styles aren't working, use !important
  */
 
-/* ALL */
+/* Affect every site except google.com */
+@-moz-document regexp("^(?!https?://(www\\.)?google\\.com).*") {
 textarea {
     min-width: 50ex !important;
     min-height: 12em !important;
