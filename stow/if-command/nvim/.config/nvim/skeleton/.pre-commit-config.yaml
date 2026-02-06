@@ -34,7 +34,7 @@ repos:
     # Language-specific
 
     - repo: https://github.com/asottile/pyupgrade
-      rev: v3.19.1
+      rev: v3.21.2
       hooks:
           - id: pyupgrade
     - repo: https://github.com/astral-sh/ruff-pre-commit
@@ -43,7 +43,7 @@ repos:
           - id: ruff-check
           - id: ruff-format
     - repo: https://github.com/allganize/ty-pre-commit
-      rev: v0.0.4
+      rev: v0.0.15
       hooks:
           - id: ty-check
     - repo: https://github.com/Jarmos-san/shellcheck-precommit
