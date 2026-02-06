@@ -38,7 +38,7 @@ repos:
     # Language-specific
 
     - repo: https://github.com/asottile/pyupgrade
-      rev: v3.19.1
+      rev: v3.21.2
       hooks:
           - id: pyupgrade
     - repo: https://github.com/astral-sh/ruff-pre-commit
