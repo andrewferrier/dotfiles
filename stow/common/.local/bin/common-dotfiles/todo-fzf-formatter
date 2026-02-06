@@ -28,11 +28,49 @@ now_time = datetime.datetime.now(tz=current_timezone)
 now_date = now_time.date()
 
 
-def due_date_key_func(due_date: Entry) -> int:
-    if due_date["due"] is None:
+def is_time_agnostic(timestamp: int) -> bool:
+    due_time_naive_check = datetime.datetime.fromtimestamp(timestamp)  # noqa: DTZ006
+    return (
+        due_time_naive_check.hour == 0
+        and due_time_naive_check.minute == 0
+        and due_time_naive_check.second == 0
+    )
+
+
+def is_due_within_date_window(
+    due_date: datetime.date, now_date: datetime.date, near_days: int, far_days: int
+) -> bool:
+    date_difference: datetime.timedelta = due_date - now_date
+    return (
+        due_date > now_date
+        and date_difference < datetime.timedelta(days=far_days)
+        and date_difference > datetime.timedelta(days=near_days)
+    )
+
+
+def due_date_key_func(entry: Entry) -> int:
+    if entry["due"] is None:
+        # Assign a very large value for items with no due date,
+        # ensuring they are sorted last when `reverse=True` is used.
         return 9999999999999
     else:
-        return due_date["due"]
+        original_due_timestamp = entry["due"]
+
+        if is_time_agnostic(original_due_timestamp):
+            # If time-agnostic, adjust its time component to now_time for
+            # sorting purposes. This ensures items due "today" with no specific
+            # time are treated as due now, and past time-agnostic items are
+            # treated as due at the equivalent time in the past.
+
+            original_due_time = datetime.datetime.fromtimestamp(
+                original_due_timestamp, tz=current_timezone
+            )
+            adjusted_due_time = datetime.datetime.combine(
+                original_due_time.date(), now_time.time(), tzinfo=current_timezone
+            )
+            return int(adjusted_due_time.timestamp())
+        else:
+            return original_due_timestamp
 
 
 data = sorted(data, key=itemgetter("summary"))
@@ -56,20 +94,11 @@ for entry in data:
         due_time: datetime.datetime = datetime.datetime.fromtimestamp(
             entry["due"], tz=current_timezone
         )
-        due_time_naive: datetime.datetime = datetime.datetime.fromtimestamp(  # noqa: DTZ006
-            entry["due"]
-        )
         due_date: datetime.date = due_time.date()
-        date_difference: datetime.timedelta = due_date - now_date
 
-        human_date = humanize.naturalday(due_date, format="%Y-%m-%d")
+        human_date: str = humanize.naturalday(due_date, format="%Y-%m-%d")
 
-        if (
-            due_time_naive.hour == 0
-            and due_time_naive.minute == 0
-            and due_time_naive.second == 0
-        ):
-            # Time-agnostic timestamp
+        if is_time_agnostic(entry["due"]):
             if now_date > due_date:
                 datecolor = "red"
             elif now_date == due_date:
@@ -80,11 +109,7 @@ for entry in data:
             if now_time > due_time:
                 datecolor = "red"
 
-        if (
-            due_date > now_date
-            and date_difference < datetime.timedelta(days=7)
-            and date_difference > datetime.timedelta(days=1)
-        ):
+        if is_due_within_date_window(due_date, now_date, 1, 7):
             human_date = due_date.strftime("%A")
 
     summary_to_print = entry["summary"].replace("\n", "\\n").replace("\r", "\\r")
