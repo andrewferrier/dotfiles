@@ -9,6 +9,7 @@ horizontal_padding = 15
 frame_width = 1
 font = Monospace 10
 max_icon_size = 64
+history_length = 100
 
 [urgency_low]
 timeout = 5
