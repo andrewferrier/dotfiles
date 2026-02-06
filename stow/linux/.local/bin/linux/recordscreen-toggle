@@ -19,32 +19,39 @@ start() {
         notify-send --urgency low --expire-time=2000 "screenkey started."
     fi
 
-    notify-send --urgency low --expire-time=950 "Screen recording starting in 3..."
+    ID=$(notify-send --urgency low "Screen recording starting in 3..." --print-id --transient)
     sleep 1
-    notify-send --urgency low --expire-time=950 "Screen recording starting in 2..."
+    notify-send --urgency low "Screen recording starting in 2..." --replace-id="${ID}" --transient
     sleep 1
-    notify-send --urgency low --expire-time=800 "Screen recording starting in 1..."
+    notify-send --urgency low --expire-time=950 "Screen recording starting in 1..." --replace-id="${ID}" --transient
     sleep 1
 
     TIMESTAMP=$(date +"%Y-%m-%dT%H-%M-%S")
     OUTPUT_FILENAME="${TIMESTAMP}-screencast.mp4"
 
     dunstctl set-paused true
-    ffmpeg \
-        -f x11grab -framerate 30 -video_size 1920x1010 -i :0.0+0,32 \
-        -f pulse -i default \
-        -vaapi_device /dev/dri/renderD128 \
-        -vf 'format=nv12,hwupload' \
-        -c:v h264_vaapi -qp 24 \
-        -c:a aac -b:a 160k -ac 1 \
-        -movflags faststart \
-        "${OUTPUT_FILENAME}" 2>&1 | logger -t 'recordscreen'
+
+    (
+        set +o errexit
+        ffmpeg \
+            -f x11grab -framerate 30 -video_size 1920x1010 -i :0.0+0,32 \
+            -f pulse -i default \
+            -vaapi_device /dev/dri/renderD128 \
+            -vf 'format=nv12,hwupload' \
+            -c:v h264_vaapi -qp 24 \
+            -c:a aac -b:a 160k -ac 1 \
+            -movflags faststart \
+            "${OUTPUT_FILENAME}" 2>&1 | logger -t 'recordscreen'
+        set -o errexit
+    )
+
+    dunstctl set-paused false
+    killall screenkey || true
 }
 
 stop() {
-    killall ffmpeg
-    killall screenkey || true
-    dunstctl set-paused false
+    PID=$(pgrep -a ffmpeg | grep -F screencast | cut -d' ' -f1)
+    kill "$PID"
     notify-send --urgency low "Screen recording stopped."
 }
 
