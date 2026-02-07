@@ -1,7 +1,7 @@
 if vim.fn.has("nvim-0.12.0") == 1 then
     vim.o.cmdheight = 0
 
-    require("vim._extui").enable({
+    require("vim._core.ui2").enable({
         msg = {
             target = "msg",
             timeout = 2000,
