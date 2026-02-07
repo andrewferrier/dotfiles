@@ -13,6 +13,7 @@ XRESOURCES_FILE=$XDG_CONFIG_HOME/X11/.Xresources
 [[ -f $XRESOURCES_FILE ]] && xrdb -merge -I"${HOME}" "$XRESOURCES_FILE"
 
 xset s 180 # 3 minutes
+xset dpms 300 420 600 # 5, 7 (ignored?), 10 minutes
 xss-lock --transfer-sleep-lock -- i3lock --color=000000 --nofork &
 xautolock -time 20 -locker "${HOME}/.local/bin/linux/suspend-if-no-ac" &
 
