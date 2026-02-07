@@ -221,6 +221,7 @@ H - toggle hidden files
 - Switch to vim.pack: <https://github.com/talha-akram/anvil/blob/master/lua/configuration/plugins/init.lua>
 - Current search highlight isn't showing
 - Add something like 'goa' which opens an aider session for the current file
+- Skeleton logic doesn't work with DiffTool
 
 ## Presentation Ideas
 
