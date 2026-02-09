@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+import datetime
+import logging
+import signal
+import subprocess
+import sys
+
+import gi
+
+gi.require_version("Gst", "1.0")
+from gi.repository import GLib, GObject, Gst
+
+Gst.init(None)
+
+logger: logging.Logger = logging.getLogger("record-screen")
+syserr_handler: logging.Handler = logging.StreamHandler(stream=sys.stderr)
+syserr_handler.setFormatter(logging.Formatter("%(name)s: %(levelname)s: %(message)s"))
+logger.addHandler(syserr_handler)
+logger.setLevel(logging.INFO)
+
+TIMESTAMP: str = datetime.datetime.now(tz=datetime.UTC).strftime("%Y-%m-%dT%H-%M-%S")
+OUTPUT_FILE: str = f"{TIMESTAMP}-screencast.mp4"
+
+SCREEN_WIDTH: int = 1920
+SCREEN_HEIGHT: int = 1080
+# SCREEN_WIDTH: int = 3840
+# SCREEN_HEIGHT: int = 2160
+SCREEN_TOP_MARGIN: int = 32
+SCREEN_BOTTOM_MARGIN: int = 40
+SCREEN_FPS: int = 30
+INITIAL_FRAMES_TO_SKIP: int = SCREEN_FPS * 3
+
+WEBCAM_WIDTH: int = 640
+WEBCAM_HEIGHT: int = 480
+PIP_WIDTH: int = 320
+PIP_HEIGHT: int = 240
+PIP_X: int = SCREEN_WIDTH - PIP_WIDTH - 20
+PIP_Y: int = SCREEN_HEIGHT - PIP_HEIGHT - 40
+
+AUDIO_SOURCE: str = (
+    "alsa_input.usb-Samson_Technologies_Samson_Q2U_Microphone-00.analog-stereo"
+)
+
+
+def get_webcam_device() -> str:
+    result = subprocess.run(
+        [
+            "/usr/bin/v4l2-ctl",
+            "--list-devices",
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+
+    lines = result.splitlines()
+    for i, line in enumerate(lines):
+        if "OBSBOT Meet SE" in line and i + 1 < len(lines):
+            device_path = lines[i + 1].strip()
+            logger.info(f"Found webcam device: {device_path}")
+            return device_path
+
+    logger.error("OBSBOT Meet SE webcam not found.")
+    sys.exit(1)
+
+
+webcam_device: str = get_webcam_device()
+
+
+pipeline_str: str = f"""
+ximagesrc use-damage=0 !
+videocrop top=32 bottom=40 left=0 right=0 !
+video/x-raw,framerate={SCREEN_FPS}/1 ! queue ! comp.sink_0
+v4l2src device={webcam_device} ! video/x-raw,width={WEBCAM_WIDTH},height={WEBCAM_HEIGHT},framerate=30/1 !
+videoconvert ! videoscale ! video/x-raw,width={PIP_WIDTH},height={PIP_HEIGHT} ! queue ! comp.sink_1
+compositor name=comp background=black ! videoconvert ! vaapih264enc ! h264parse ! mp4mux name=mux ! filesink location={OUTPUT_FILE}
+pulsesrc device={AUDIO_SOURCE} ! audioconvert ! audioresample ! avenc_aac bitrate=160000 ! mux.
+"""  # noqa: E501
+
+pipeline: Gst.Pipeline = Gst.parse_launch(pipeline_str)
+
+comp: Gst.Element = pipeline.get_by_name("comp")
+comp_sink: Gst.Pad = comp.get_static_pad("sink_1")
+comp_sink.set_property("xpos", PIP_X)
+comp_sink.set_property("ypos", PIP_Y)
+
+skip_count: dict[str, int] = {"n": 0}
+
+
+def drop_first_frames(_pad: Gst.Pad, info: Gst.PadProbeInfo) -> Gst.PadProbeReturn:
+    if (info.type & Gst.PadProbeType.BUFFER) and (
+        skip_count["n"] < INITIAL_FRAMES_TO_SKIP
+    ):
+        skip_count["n"] += 1
+        return Gst.PadProbeReturn.DROP
+
+    # Let EOS and other events pass
+    return Gst.PadProbeReturn.OK
+
+
+comp_srcpad: Gst.Pad = comp.get_static_pad("src")
+comp_srcpad.add_probe(Gst.PadProbeType.BUFFER, drop_first_frames)
+
+
+loop: GLib.MainLoop = GLib.MainLoop()
+
+
+def signal_handler(_signal: int, _frame: object) -> None:
+    logger.info("Stopping capture, sending EOS...")
+    pipeline.send_event(Gst.Event.new_eos())
+
+
+signal.signal(signal.SIGINT, signal_handler)
+
+bus: Gst.Bus = pipeline.get_bus()
+bus.add_signal_watch()
+
+
+def bus_call(_bus: Gst.Bus, message: Gst.Message, loop: GLib.MainLoop) -> bool:
+    t: Gst.MessageType = message.type
+
+    if t == Gst.MessageType.EOS:
+        logger.info("EOS received, stopping pipeline...")
+        loop.quit()
+    elif t == Gst.MessageType.ERROR:
+        err, debug = message.parse_error()
+        logger.error(f"Error: {err}, {debug}")
+        loop.quit()
+
+    return True
+
+
+bus.connect("message", bus_call, loop)
+
+pipeline.set_state(Gst.State.PLAYING)
+logger.info(f"Recording started. Output file: {OUTPUT_FILE}")
+logger.info("Press Ctrl+C to stop recording.")
+
+try:
+    loop.run()
+except KeyboardInterrupt:
+    pass
+except Exception:
+    logger.exception("An unexpected error occurred")
+finally:
+    pipeline.set_state(Gst.State.NULL)
+    logger.info("Recording finished.")
