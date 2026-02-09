@@ -34,7 +34,15 @@ WEBCAM_WIDTH: int = 640
 WEBCAM_HEIGHT: int = 480
 PIP_WIDTH: int = 320
 PIP_HEIGHT: int = 240
-PIP_X: int = SCREEN_WIDTH - PIP_WIDTH - 20
+
+WEBCAM_CROP_WIDTH: int = 100
+
+PIP_X: int = (
+    SCREEN_WIDTH
+    - PIP_WIDTH
+    - 20
+    + int(PIP_WIDTH / WEBCAM_WIDTH * WEBCAM_CROP_WIDTH * 2)
+)
 PIP_Y: int = SCREEN_HEIGHT - PIP_HEIGHT - 40
 
 AUDIO_SOURCE: str = (
@@ -72,6 +80,7 @@ ximagesrc use-damage=0 !
 videocrop top=32 bottom=40 left=0 right=0 !
 video/x-raw,framerate={SCREEN_FPS}/1 ! queue ! comp.sink_0
 v4l2src device={webcam_device} ! video/x-raw,width={WEBCAM_WIDTH},height={WEBCAM_HEIGHT},framerate=30/1 !
+videocrop top=0 bottom=0 left={WEBCAM_CROP_WIDTH} right={WEBCAM_CROP_WIDTH} !
 videoconvert ! videoscale ! video/x-raw,width={PIP_WIDTH},height={PIP_HEIGHT} ! queue ! comp.sink_1
 compositor name=comp background=black ! videoconvert ! vaapih264enc ! h264parse ! mp4mux name=mux ! filesink location={OUTPUT_FILE}
 pulsesrc device={AUDIO_SOURCE} ! audioconvert ! audioresample ! avenc_aac bitrate=160000 ! mux.
