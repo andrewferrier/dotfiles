@@ -31,6 +31,29 @@ start() {
 
     dunstctl set-paused true
 
+    # WIP: Add capability to include webcam
+    # VIDEO_DEVICE=$(v4l2-ctl --list-devices | grep -A1 "OBSBOT Meet SE" | tail -n1 | tr -d ' \t')
+    #
+    # (
+    #     set +o errexit
+    #     ffmpeg \
+    #         -f x11grab -framerate 30 -video_size 1920x1010 -i :0.0+0,32 \
+    #         -f pulse -i default \
+    #         -f v4l2 -input_format nv12 -i "$VIDEO_DEVICE" -video_size 640x480 -framerate 30 \
+    #         -vaapi_device /dev/dri/renderD128 \
+    #         -filter_complex "
+    #     [0:v]format=nv12,hwupload=extra_hw_frames=8[screencast_hw];
+    #     [2:v]hwupload,scale_vaapi=format=nv12[webcam_scaled_hw];
+    #     [screencast_hw][webcam_scaled_hw]overlay_vaapi=x=W-w-20:y=H-h-20[out_v]" \
+    #         -map "[out_v]" \
+    #         -map 1:a \
+    #         -c:v h264_vaapi -qp 24 \
+    #         -c:a aac -b:a 160k -ac 1 \
+    #         -movflags faststart \
+    #         "${OUTPUT_FILENAME}"
+    #     set -o errexit
+    # )
+
     (
         set +o errexit
         ffmpeg \
