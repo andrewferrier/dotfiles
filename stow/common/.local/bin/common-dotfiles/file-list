@@ -31,8 +31,9 @@ PLAIN=false
 RECENT_ONLY=false
 MULTISELECT=false
 NULL=false
+INCLUDE_PATTERN=""
 
-while getopts "rsmfdtp0" o; do
+while getopts "rsmfdtp0i:" o; do
     case "$o" in
     f)
         FILES=true
@@ -61,6 +62,10 @@ while getopts "rsmfdtp0" o; do
         ;;
     0)
         NULL=true
+        ;;
+    i)
+        # Only display files that match the pattern
+        INCLUDE_PATTERN="$OPTARG"
         ;;
     *)
         exit 1
@@ -193,6 +198,7 @@ cat \
     <(wrapper_mdfind) \
     <(wrapper_fd ${SEARCH_DIRS[@]}) |
     "${GREP[@]}" -E -v -i --binary-files=text "$EXCLUDE_PATTERN" |
+    "${GREP[@]}" -E "$INCLUDE_PATTERN" |
     sed -e "s/$ESCAPED_HOME\//~\//" |
     awk '!seen[$0]++' |
     if "$DIRS"; then sed 's/\/\.$//'; else cat; fi |
