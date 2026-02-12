@@ -22,6 +22,12 @@ languages currently being worked with.
 
 - Where it makes sense to do so, store data using the XDG standard.
 
+- If there is a file .github/copilot-instructions.md in the repo you're working
+  with, please review it. It contains instructions for Copilot when it's being
+  used in agent mode against the repository. You are not an agent, so don't
+  follow what's in there blindly, but you may find a lot of useful information
+  about the repository that may be helpful.
+
 ## Bash / Shell Script
 
 - Where possible, try to follow conventions set by shellcheck. In particular,
