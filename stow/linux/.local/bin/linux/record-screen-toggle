@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
+PID_FILE="${XDG_RUNTIME_DIR:-/tmp}/record-screen.pid"
+
+start() {
+    USE_SCREENKEY=$(echo -e "Yes\nNo" | rofi -dmenu -p "Use screenkey?")
+    USE_WEBCAM=$(echo -e "Yes\nNo" | rofi -dmenu -p "Use webcam?")
+
+    if [[ "$USE_SCREENKEY" == "Yes" ]]; then
+        screenkey -p fixed -g 60%x10%+20%-15% &
+        notify-send --urgency low --expire-time=2000 "screenkey started."
+    fi
+
+    ID=$(notify-send --urgency low "Screen recording starting in 3..." --print-id --transient)
+    sleep 1
+    notify-send --urgency low "Screen recording starting in 2..." --replace-id="${ID}" --transient
+    sleep 1
+    notify-send --urgency low --expire-time=950 "Screen recording starting in 1..." --replace-id="${ID}" --transient
+    sleep 1
+
+    dunstctl set-paused true
+
+    if [[ "$USE_WEBCAM" == "Yes" ]]; then
+        "${SCRIPT_DIR}/record-screen" --pidfile "${PID_FILE}"
+    else
+        "${SCRIPT_DIR}/record-screen" --no-webcam --pidfile "${PID_FILE}"
+    fi
+
+    dunstctl set-paused false
+    killall screenkey || true
+}
+
+stop() {
+    PID=$(<"${PID_FILE}")
+    kill -INT "$PID"
+    rm -f "${PID_FILE}"
+    sleep 1
+    notify-send --urgency low "Screen recording stopped."
+}
+
+if [[ -f "${PID_FILE}" ]]; then
+    stop
+else
+    start
+fi

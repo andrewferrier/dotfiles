@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
+
+import argparse
 import datetime
 import logging
+import os
 import signal
 import subprocess
 import sys
+from pathlib import Path
 
 import gi
 
@@ -70,16 +74,45 @@ def get_webcam_device() -> str:
     sys.exit(1)
 
 
-webcam_device: str = get_webcam_device()
+parser = argparse.ArgumentParser(description="Record screen and audio.")
+parser.add_argument("--no-webcam", action="store_true")
+parser.add_argument("--pidfile", type=Path, required=True)
+args = parser.parse_args()
 
+if args.pidfile.exists():
+    try:
+        existing_pid = int(args.pidfile.read_text().strip())
+        # Signal 0 checks if process exists without killing it
+        os.kill(existing_pid, 0)
+        logger.error(
+            "Another instance of record-screen is already running "
+            f"(PID: {existing_pid})."
+        )
+        sys.exit(1)
+    except ValueError:
+        logger.warning(f"PID file {args.pidfile} contains invalid PID. Overwriting.")
+        args.pidfile.unlink()
+    except OSError:
+        logger.info(f"Stale PID file {args.pidfile} found, cleaning up.")
+        args.pidfile.unlink()
+
+args.pidfile.write_text(str(os.getpid()))
+
+webcam_pipeline_part: str = ""
+
+if not args.no_webcam:
+    webcam_device = get_webcam_device()
+    webcam_pipeline_part = f"""
+v4l2src device={webcam_device} ! video/x-raw,width={WEBCAM_WIDTH},height={WEBCAM_HEIGHT},framerate=30/1 !
+videocrop top=0 bottom=0 left={WEBCAM_CROP_WIDTH} right={WEBCAM_CROP_WIDTH} !
+videoconvert ! videoscale ! video/x-raw,width={PIP_WIDTH},height={PIP_HEIGHT} ! queue ! comp.sink_1
+"""  # noqa: E501
 
 pipeline_str: str = f"""
 ximagesrc use-damage=0 !
 videocrop top=32 bottom=40 left=0 right=0 !
 video/x-raw,framerate={SCREEN_FPS}/1 ! queue ! comp.sink_0
-v4l2src device={webcam_device} ! video/x-raw,width={WEBCAM_WIDTH},height={WEBCAM_HEIGHT},framerate=30/1 !
-videocrop top=0 bottom=0 left={WEBCAM_CROP_WIDTH} right={WEBCAM_CROP_WIDTH} !
-videoconvert ! videoscale ! video/x-raw,width={PIP_WIDTH},height={PIP_HEIGHT} ! queue ! comp.sink_1
+{webcam_pipeline_part}
 compositor name=comp background=black ! videoconvert ! vaapih264enc ! h264parse ! mp4mux name=mux ! filesink location={OUTPUT_FILE}
 pulsesrc device={AUDIO_SOURCE} ! audioconvert ! audioresample ! avenc_aac bitrate=160000 ! mux.
 """  # noqa: E501
@@ -87,9 +120,11 @@ pulsesrc device={AUDIO_SOURCE} ! audioconvert ! audioresample ! avenc_aac bitrat
 pipeline: Gst.Pipeline = Gst.parse_launch(pipeline_str)
 
 comp: Gst.Element = pipeline.get_by_name("comp")
-comp_sink: Gst.Pad = comp.get_static_pad("sink_1")
-comp_sink.set_property("xpos", PIP_X)
-comp_sink.set_property("ypos", PIP_Y)
+
+if not args.no_webcam:
+    comp_sink: Gst.Pad = comp.get_static_pad("sink_1")
+    comp_sink.set_property("xpos", PIP_X)
+    comp_sink.set_property("ypos", PIP_Y)
 
 skip_count: dict[str, int] = {"n": 0}
 
@@ -152,3 +187,5 @@ except Exception:
 finally:
     pipeline.set_state(Gst.State.NULL)
     logger.info("Recording finished.")
+    if args.pidfile.exists():
+        args.pidfile.unlink(missing_ok=True)
