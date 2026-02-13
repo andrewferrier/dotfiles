@@ -28,6 +28,9 @@ start() {
 
     dunstctl set-paused true
 
+    # shellcheck disable=SC2046,SC2312
+    xdotool mousemove $(xdotool getdisplaygeometry | awk '{print $1/2, $2/2}')
+
     if [[ "$USE_WEBCAM" == "Yes" ]]; then
         "${SCRIPT_DIR}/record-screen" --pidfile "${PID_FILE}"
     else
