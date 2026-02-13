@@ -19,11 +19,11 @@ start() {
         notify-send --urgency low --expire-time=2000 "screenkey started."
     fi
 
-    ID=$(notify-send --urgency low "Screen recording starting in 3..." --print-id --transient)
+    ID=$(notify-send --urgency low "Screen recording starting in 6..." --print-id --transient)
     sleep 1
-    notify-send --urgency low "Screen recording starting in 2..." --replace-id="${ID}" --transient
+    notify-send --urgency low "Screen recording starting in 5..." --replace-id="${ID}" --transient
     sleep 1
-    notify-send --urgency low --expire-time=950 "Screen recording starting in 1..." --replace-id="${ID}" --transient
+    notify-send --urgency low --expire-time=950 "Screen recording starting in 4..." --replace-id="${ID}" --transient
     sleep 1
 
     dunstctl set-paused true
