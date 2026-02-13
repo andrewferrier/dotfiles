@@ -10,9 +10,7 @@ return {
     keys = {
         {
             "yow",
-            function()
-                require("wrapping").toggle_wrap_mode()
-            end,
+            "<Plug>(wrapping-toggle-wrap-mode)",
             desc = "Toggle wrap mode",
             unique = true,
         },
