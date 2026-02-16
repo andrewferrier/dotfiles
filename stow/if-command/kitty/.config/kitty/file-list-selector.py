@@ -56,4 +56,4 @@ def handle_result(
 ) -> None:
     w = boss.window_id_map.get(target_window_id)
     if w is not None:
-        w.paste_text(answer)
+        w.paste_text(answer + "\n")
