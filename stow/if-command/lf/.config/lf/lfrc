@@ -2,8 +2,6 @@
 #
 # Keybindings:
 #
-# K - make directory
-# R - bulk rename directory
 # [, ] - goto prev/next directory in jumplist
 # i, a, r - rename file from beginning, end, entire file
 # w - launches shell
