@@ -46,8 +46,65 @@ uid() {
 THUMBNAIL="$IMAGE_CACHE_PATH/$(uid "$FILE_PATH").png"
 
 display_image() {
-    # Exiting with 1 disables preview cache, forcing cleaning
-    kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${1}" </dev/null >/dev/tty && exit 1
+    # shellcheck disable=SC2154
+    if [[ "$lf_user_view" == "default" ]]; then
+        # Exiting with 1 disables preview cache, forcing cleaning
+        kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${1}" </dev/null >/dev/tty && exit 1
+    fi
+}
+
+invoke_exiftool() {
+    exiftool -g \
+        '--Balance*' \
+        '--Blue*' \
+        '--Compatible*' \
+        '--Copyright*' \
+        '--Create*' \
+        '--Current*' \
+        '--Directory' \
+        '--Emphasis*' \
+        '--Exif*' \
+        '--ExifTool*' \
+        '--Graphics*' \
+        '--Green*' \
+        '--Handler*' \
+        '--Intensity*' \
+        '--MS*' \
+        '--Matrix*' \
+        '--Media*' \
+        '--Minor*' \
+        '--Modify*' \
+        '--Movie*' \
+        '--Op*' \
+        '--Original*' \
+        '--Poster*' \
+        '--Preferred*' \
+        '--Preview*' \
+        '--Red*' \
+        '--Selection*' \
+        '--Source*' \
+        '--Time*' \
+        '--Track*' \
+        '--Zip*' \
+        '--Warning*' \
+        '--White*' \
+        '--X*' \
+        '--Y*' \
+        "${FILE_PATH}" && exit 0
+}
+
+handle_hex() {
+    # shellcheck disable=SC2154
+    if [[ "$lf_user_view" = "hex" ]]; then
+        xxd -R always "${FILE_PATH}" && exit 0
+    fi
+}
+
+handle_metadata() {
+    # shellcheck disable=SC2154
+    if [[ "$lf_user_view" = "metadata" ]]; then
+        invoke_exiftool
+    fi
 }
 
 handle_extension_full() {
@@ -81,7 +138,7 @@ handle_extension() {
         ## Preview as text conversion
         pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | fmt -w "${WIDTH}" && exit 0
         mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | fmt -w "${WIDTH}" && exit 0
-        exiftool "${FILE_PATH}" && exit 0
+        invoke_exiftool
         exit 1
         ;;
 
@@ -133,43 +190,7 @@ handle_mime() {
     case "${MIMETYPE}" in
 
     image/* | video/* | audio/* | application/vnd.openxmlformats-officedocument*)
-        exiftool -g \
-            '--Balance*' \
-            '--Blue*' \
-            '--Compatible*' \
-            '--Copyright*' \
-            '--Create*' \
-            '--Current*' \
-            '--Directory' \
-            '--Emphasis*' \
-            '--Exif*' \
-            '--ExifTool*' \
-            '--Graphics*' \
-            '--Green*' \
-            '--Handler*' \
-            '--Intensity*' \
-            '--MS*' \
-            '--Matrix*' \
-            '--Media*' \
-            '--Minor*' \
-            '--Modify*' \
-            '--Movie*' \
-            '--Op*' \
-            '--Original*' \
-            '--Poster*' \
-            '--Preferred*' \
-            '--Preview*' \
-            '--Red*' \
-            '--Selection*' \
-            '--Source*' \
-            '--Time*' \
-            '--Track*' \
-            '--Zip*' \
-            '--Warning*' \
-            '--White*' \
-            '--X*' \
-            '--Y*' \
-            "${FILE_PATH}" && exit 0
+        invoke_exiftool
         exit 1
         ;;
 
@@ -196,6 +217,8 @@ handle_fallback() {
     exit 1
 }
 
+handle_hex
+handle_metadata
 handle_extension_full
 handle_extension
 handle_textual

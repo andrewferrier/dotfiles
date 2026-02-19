@@ -4,6 +4,7 @@
 #
 # [, ] - goto prev/next directory in jumplist
 # i, a, r - rename file from beginning, end, entire file
+# X - switch preview mode
 # w - launches shell
 #
 # Commands:
@@ -144,6 +145,23 @@ set scrolloff 5
 set timefmt "2006-01-02 15:04:05"
 set truncatechar "…"
 set watch
+
+cmd toggle_view &{{
+    if [ "$lf_user_view" == default ]; then
+        lf -remote "send $id :set user_view metadata; reload"
+        lf -remote "send $id echomsg 'Mode: metadata'"
+    elif [ "$lf_user_view" == metadata ]; then
+        lf -remote "send $id :set user_view hex; reload"
+        lf -remote "send $id echomsg 'Mode: hex'"
+    else
+        lf -remote "send $id :set user_view default; reload"
+        lf -remote "send $id echomsg 'Mode: default'"
+    fi
+}}
+
+set user_view default
+
+map X toggle_view
 
 set cleaner ~/.config/lf/cleaner.sh
 set previewer ~/.config/lf/preview.sh
