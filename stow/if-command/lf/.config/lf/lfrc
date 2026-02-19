@@ -155,7 +155,7 @@ map <c-f> :file-list-file
 map <c-g> :file-list-dir
 
 map <delete> $IFS="$(printf '\n\t')"; trash $fx
-map E $$EDITOR .
+map E $bash -c "cd $PWD; $EDITOR"
 map F
 map Fd :folderize_dated_prep
 map Fp :push :folderize<space>""<left>

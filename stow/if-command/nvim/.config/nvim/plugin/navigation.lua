@@ -1,8 +1,21 @@
 vim.api.nvim_create_autocmd({ "BufNew", "BufRead" }, {
     callback = function(ctx)
-        local root = vim.fs.root(ctx.buf, { ".git", "Makefile" })
-        if root then
-            vim.cmd.lcd(root)
+        local path = ctx.match
+        local stat = vim.loop.fs_stat(path)
+
+        if not stat then
+            return nil
+        end
+
+        if stat.type == "file" then
+            -- If the buffer is not a file (e.g. it's a directory instead),
+            -- probably doesn't make much sense to find the git root for the
+            -- current directory in NeoVim
+            local root = vim.fs.root(path, { ".git", "Makefile" })
+            vim.notify("Buffer is file, changing to dir " .. root)
+            if root then
+                vim.cmd.lcd(root)
+            end
         end
     end,
 })
