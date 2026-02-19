@@ -146,7 +146,7 @@ set truncatechar "…"
 set watch
 
 set cleaner ~/.config/lf/cleaner.sh
-set previewer ~/.config/lf/scope.sh
+set previewer ~/.config/lf/preview.sh
 
 set info size
 set dircounts
