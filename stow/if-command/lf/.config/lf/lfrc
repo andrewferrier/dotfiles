@@ -176,6 +176,7 @@ map gf :cd ~/dotfiles
 map gk :cd ~/Desktop
 map gl :cd ~/Downloads
 map gn :cd ~/notes
+map gt :cd /tmp
 
 # Repeat previous command
 map . :read; cmd-history-prev; cmd-enter
