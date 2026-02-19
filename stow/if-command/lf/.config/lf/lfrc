@@ -3,7 +3,8 @@
 # Keybindings:
 #
 # [, ] - goto prev/next directory in jumplist
-# i, a, r - rename file from beginning, end, entire file
+# I, A, r, R - rename file from beginning, end, entire file, entire directory
+# i - preview file in less
 # X - switch preview mode
 # w - launches shell
 #
@@ -201,8 +202,6 @@ map . :read; cmd-history-prev; cmd-enter
 map A :rename; cmd-end
 map I :rename; cmd-home
 map R $nvim "$PWD"
-map a :rename; cmd-end
-map i :rename; cmd-home
 map r :rename; cmd-delete-home
 
 source ~/.config/lf-local/lfrc
