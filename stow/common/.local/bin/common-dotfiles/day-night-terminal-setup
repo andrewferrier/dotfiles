@@ -40,9 +40,9 @@ if [[ -n "${SSH_CONNECTION}" ]]; then
             BG_COLOR=$(kitten query-terminal background | cut -d'#' -f2)
 
             if [[ $BG_COLOR == "f9f5d7" ]]; then
-                echo 'day' >"${STATE_FILE}"
+                echo 'day' >!"${STATE_FILE}"
             else
-                echo 'night' >"${STATE_FILE}"
+                echo 'night' >!"${STATE_FILE}"
             fi
         else
             echo >&2 "Cannot use kitten query-terminal."
