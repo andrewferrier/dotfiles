@@ -8,6 +8,7 @@
 # X - switch preview mode
 # w - launches shell
 # z - set information prefixes
+# s - sort
 # +x, -x - add or remove exec bit
 #
 # Commands:
