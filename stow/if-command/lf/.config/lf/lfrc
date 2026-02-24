@@ -7,6 +7,7 @@
 # i - preview file in less
 # X - switch preview mode
 # w - launches shell
+# +x, -x - add or remove exec bit
 #
 # Commands:
 #
@@ -194,6 +195,9 @@ map gk :cd ~/Desktop
 map gl :cd ~/Downloads
 map gn :cd ~/notes
 map gt :cd /tmp
+
+map +x $chmod +x $fx
+map -x $chmod -x $fx
 
 # Repeat previous command
 map . :read; cmd-history-prev; cmd-enter
