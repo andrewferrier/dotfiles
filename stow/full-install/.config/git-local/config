@@ -7,7 +7,7 @@
 [delta]
 	line-numbers = true
 	hyperlinks = true
-	navigate = true
+	navigate = true  # use n and N to move between diff sections
 	hunk-header-style = omit
 	file-decoration-style =
 	map-styles = bold purple => syntax magenta, bold cyan => syntax blue
