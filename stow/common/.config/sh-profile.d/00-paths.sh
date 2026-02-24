@@ -98,6 +98,7 @@ pupdate_append_singlex "${HOME}/.luarocks/bin" # luarocks/lua
 pupdate_append_singlex "${HOME}/.cargo/bin"
 pupdate_append_singlex "${HOME}/.local/share/cargo/bin"
 pupdate_append_singlex "${HOME}/memy/target/debug"
+pupdate_append_singlex "/home/linuxbrew/.linuxbrew/bin"
 
 if command -v npm >/dev/null 2>&1; then
     nupdate_append_singlex "${NPM_PACKAGES}/lib/node_modules"
