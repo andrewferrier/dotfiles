@@ -8,12 +8,7 @@ alias mkdir="mkdir -v"
 alias rm='rm -Iv'
 alias watch='watch --color'
 
-RSYNC_OPTIONS='--human-readable --progress --partial --verbose --times --links'
-
-# shellcheck disable=SC2139
-alias rsync="rsync ${RSYNC_OPTIONS}"
-# shellcheck disable=SC2139
-alias rsync-progress-job="rsync ${RSYNC_OPTIONS} --info=progress2 --info=name0"
+alias rsync="rsync --human-readable --info=progress2 --no-inc-recursive --partial --times --links"
 
 if (command -v uu-cp >/dev/null 2>&1); then
     # Rust coreutils are installed - Arch
