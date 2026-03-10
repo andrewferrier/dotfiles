@@ -43,7 +43,7 @@ start() {
 
 stop() {
     PID=$(<"${PID_FILE}")
-    kill -INT "$PID"
+    kill -INT "$PID" || true
     rm -f "${PID_FILE}"
     sleep 1
     notify-send --urgency low "Screen recording stopped."
