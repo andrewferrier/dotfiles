@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=gita-fzf git repo manager
+Icon=/usr/share/icons/elementary/emblems/16/emblem-git-modified.svg
+Exec=/usr/bin/kitty --title 'gita-fzf git repo manager' sh -c '~/.local/bin/common-dotfiles/gita-fzf'
+StartupNotify=true
+Categories=Internet;
