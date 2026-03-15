@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+readonly REPOS_CSV="${HOME}/.config/gita/repos.csv"
+
+get_repo_path() {
+    local selected_line="$1"
+    local best_path=""
+    local best_len=0
+    local path name name_len
+
+    # shellcheck disable=SC2034
+    while IFS=, read -r path name unused_field1 unused_field2; do
+        name="${name//$'\r'/}"
+        name_len="${#name}"
+        if [[ "$selected_line" == "$name"* ]]; then
+            if ((name_len > best_len)); then
+                best_len=$name_len
+                best_path="$path"
+            fi
+        fi
+    done <"$REPOS_CSV"
+
+    echo "$best_path"
+}
+
+case "${1:-}" in
+--open-tig)
+    repo_path="$(get_repo_path "${2:-}")"
+    if [[ -n "$repo_path" ]]; then
+        cd "$repo_path"
+        tig status
+    fi
+    ;;
+--open-shell)
+    repo_path="$(get_repo_path "${2:-}")"
+    if [[ -n "$repo_path" ]]; then
+        cd "$repo_path"
+        "${SHELL}"
+    fi
+    ;;
+--preview)
+    repo_path="$(get_repo_path "${2:-}")"
+    if [[ -n "$repo_path" ]]; then
+        cd "$repo_path"
+        git status
+    fi
+    ;;
+*)
+    readonly RELOAD="reload(gita ll)"
+
+    gita ll |
+        fzf --ansi \
+            --no-multi \
+            --tac \
+            --no-sort \
+            --tiebreak=index \
+            --preview "$0 --preview {}" \
+            --preview-window=top,border-bottom \
+            --header "Ctrl-[T]ig,re[L]oad,p[U]ll,pus[H],<Enter (shell)>" \
+            --bind "ctrl-t:execute($0 --open-tig {})+${RELOAD}" \
+            --bind "ctrl-u:execute(gita pull)+${RELOAD}" \
+            --bind "ctrl-h:execute(gita push)+${RELOAD}" \
+            --bind "enter:execute($0 --open-shell {})+${RELOAD}" \
+            --bind "ctrl-l:${RELOAD}"
+    ;;
+esac
