@@ -114,7 +114,7 @@ videocrop top=32 bottom=40 left=0 right=0 !
 video/x-raw,framerate={SCREEN_FPS}/1 ! queue ! comp.sink_0
 {webcam_pipeline_part}
 compositor name=comp background=black ! videoconvert ! vah264enc ! h264parse ! mp4mux name=mux ! filesink location={OUTPUT_FILE}
-pulsesrc device={AUDIO_SOURCE} ! audioconvert ! audioresample ! avenc_aac bitrate=160000 ! mux.
+pulsesrc device={AUDIO_SOURCE} ! audioconvert ! audio/x-raw,channels=1 ! audioresample ! avenc_aac bitrate=160000 ! mux.
 """  # noqa: E501
 
 pipeline: Gst.Pipeline = Gst.parse_launch(pipeline_str)
