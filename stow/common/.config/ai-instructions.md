@@ -1,7 +1,7 @@
 # Coding conventions
 
-This file lists general conventions and specific language conventions.
-Ignore any language-specific conventions which are not relevant to the
+This file lists general coding instructions and conventions, both general and
+language-specific. Ignore any language-specific conventions not relevant to the
 languages currently being worked with.
 
 ## General
@@ -23,10 +23,7 @@ languages currently being worked with.
 - Where it makes sense to do so, store data using the XDG standard.
 
 - If there is a file .github/copilot-instructions.md in the repo you're working
-  with, please review it. It contains instructions for Copilot when it's being
-  used in agent mode against the repository. You are not an agent, so don't
-  follow what's in there blindly, but you may find a lot of useful information
-  about the repository that may be helpful.
+  with, please review it.
 
 ## Bash / Shell Script
 
