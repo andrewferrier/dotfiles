@@ -108,12 +108,13 @@ videocrop top=0 bottom=0 left={WEBCAM_CROP_WIDTH} right={WEBCAM_CROP_WIDTH} !
 videoconvert ! videoscale ! video/x-raw,width={PIP_WIDTH},height={PIP_HEIGHT} ! queue ! comp.sink_1
 """  # noqa: E501
 
+# Bitrate below makes sure screencast looks good even if we're not using webcam
 pipeline_str: str = f"""
 ximagesrc use-damage=0 !
 videocrop top=32 bottom=40 left=0 right=0 !
 video/x-raw,framerate={SCREEN_FPS}/1 ! queue ! comp.sink_0
 {webcam_pipeline_part}
-compositor name=comp background=black ! videoconvert ! vah264enc ! h264parse ! mp4mux name=mux ! filesink location={OUTPUT_FILE}
+compositor name=comp background=black ! videoconvert ! vah264enc bitrate=4000 rate-control=vbr ! h264parse ! mp4mux name=mux ! filesink location={OUTPUT_FILE}
 pulsesrc device={AUDIO_SOURCE} ! audioconvert ! audio/x-raw,channels=1 ! audioresample ! avenc_aac bitrate=160000 ! mux.
 """  # noqa: E501
 
