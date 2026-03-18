@@ -8,7 +8,7 @@ function fzf-redraw-prompt() {
 }
 
 function file-list-fzf-get-dir() {
-    setopt localoptions pipefail no_aliases 2> /dev/null
+    setopt localoptions pipefail no_aliases 2>/dev/null
     local dir="$(file-list -d -s)"
     dir=${dir:s/~/$HOME}
     echo $dir
@@ -18,7 +18,7 @@ function file-list-fzf-switch-or-insert-dir() {
     dir=$(file-list-fzf-get-dir)
 
     # Check if only whitespace in line inserted so far.
-    if [[ -z "${BUFFER// }" ]]; then
+    if [[ -z "${BUFFER// /}" ]]; then
         if [[ -z "$dir" ]]; then
             zle redisplay
             return 0
@@ -37,17 +37,17 @@ function file-list-fzf-switch-or-insert-dir() {
     fi
 }
 
-zle     -N   file-list-fzf-switch-or-insert-dir
+zle -N file-list-fzf-switch-or-insert-dir
 bindkey '^G' file-list-fzf-switch-or-insert-dir
 
 function file-list-fzf-insert-file-select() {
-    setopt localoptions pipefail no_aliases 2> /dev/null
+    setopt localoptions pipefail no_aliases 2>/dev/null
     local files="$(file-list -f -s -m)"
     if [ ! -z $files ]; then
         echo "$files" | while read item; do
-        item=${item:s/~/$HOME}
-        echo -n "${(q)item} "
-    done
+            item=${item:s/~/$HOME}
+            echo -n "${(q)item} "
+        done
     fi
     local ret=$?
     echo
@@ -61,5 +61,5 @@ function file-list-fzf-insert-file() {
     return $ret
 }
 
-zle     -N   file-list-fzf-insert-file
+zle -N file-list-fzf-insert-file
 bindkey '^F' file-list-fzf-insert-file

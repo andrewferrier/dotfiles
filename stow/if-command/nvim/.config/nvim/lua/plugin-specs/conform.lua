@@ -34,6 +34,7 @@ local opts = {
         markdown = { "mdformat" },
         python = { "ruff_organize_imports" },
         sql = { "sqlfluff" },
+        zsh = { "shfmt" },
     },
     default_format_opts = {
         lsp_format = "first",
@@ -52,6 +53,17 @@ local opts = {
                         { buf = context.buf }
                     ),
                     "--tab-width",
+                    vim.api.nvim_get_option_value(
+                        "shiftwidth",
+                        { buf = context.buf }
+                    ),
+                }
+            end,
+        },
+        shfmt = {
+            prepend_args = function(_, context)
+                return {
+                    "--indent",
                     vim.api.nvim_get_option_value(
                         "shiftwidth",
                         { buf = context.buf }

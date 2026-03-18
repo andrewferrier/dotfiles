@@ -32,7 +32,7 @@ _dircycle_next() {
     _dircycle_update_cycled -0 || true
 }
 
-_dircycle_up () {
+_dircycle_up() {
     cd ..
     _dircycle-redraw-prompt
 }
@@ -44,6 +44,6 @@ zle -N _dircycle_up
 # Key bindings - use 'cat -v' to discover them (and bindkey to view and remove
 # potential conflicts)
 
-bindkey '^[[1;3D' _dircycle_prev  # Alt-Left
+bindkey '^[[1;3D' _dircycle_prev # Alt-Left
 bindkey '^[[1;3C' _dircycle_next # Alt-Right
-bindkey '^[[1;3A' _dircycle_up # Alt+Up
+bindkey '^[[1;3A' _dircycle_up   # Alt+Up
