@@ -28,12 +28,12 @@ local opts = {
     formatters_by_ft = {
         d2 = { "d2" },
         html = { "prettier" },
-        tex = { "latexindent" },
         lua = { "stylua" },
         make = { "bake" },
         markdown = { "mdformat" },
         python = { "ruff_organize_imports" },
         sql = { "sqlfluff" },
+        tex = { "latexindent" },
         zsh = { "shfmt" },
     },
     default_format_opts = {
