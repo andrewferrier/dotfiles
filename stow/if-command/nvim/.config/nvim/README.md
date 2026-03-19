@@ -221,7 +221,6 @@ H - toggle hidden files
 - Switch to vim.pack: <https://github.com/talha-akram/anvil/blob/master/lua/configuration/plugins/init.lua>, <https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#lazy-loading>
 - Current search highlight isn't showing
 - Add something like 'goa' which opens an aider/AI/Copilot session for the current file
-- Skeleton logic doesn't work with DiffTool
 - Add types for lsp configs: <https://www.reddit.com/r/neovim/comments/1rssfs9/a_new_use_for_lspconfig_providing_types_for_your/>
 
 ## Presentation Ideas

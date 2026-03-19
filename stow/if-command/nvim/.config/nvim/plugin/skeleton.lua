@@ -72,7 +72,10 @@ end
 vim.api.nvim_create_autocmd("BufNewFile", {
     pattern = "*",
     callback = function()
-        check_and_insert_skeleton(true)
+        -- Don't insert skeletons in diff mode; just confusing!
+        if vim.opt.diff:get() == false then
+            check_and_insert_skeleton(true)
+        end
     end,
 })
 
