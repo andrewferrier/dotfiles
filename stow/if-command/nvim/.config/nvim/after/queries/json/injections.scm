@@ -1,3 +1,5 @@
+;; extends
+
 (pair
   key: (string (string_content) @key (#eq? @key "scripts"))
   value: (object
