@@ -15,8 +15,11 @@ vim.opt.virtualedit = "block"
 vim.opt.wildmode = "longest:full"
 
 -- see https://vimways.org/2018/the-power-of-diff/
+vim.opt.diffopt:remove("inline:char")
+
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
+vim.opt.diffopt:append("inline:word")
 vim.opt.diffopt:append("vertical")
 
 vim.cmd.iabbrev("zDATE", '<C-R>=strftime("%F")<CR>')
