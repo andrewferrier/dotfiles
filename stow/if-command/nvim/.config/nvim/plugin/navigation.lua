@@ -12,8 +12,8 @@ vim.api.nvim_create_autocmd({ "BufNew", "BufRead" }, {
             -- probably doesn't make much sense to find the git root for the
             -- current directory in NeoVim
             local root = vim.fs.root(path, { ".git", "Makefile" })
-            if root then
-                vim.notify("Buffer is file, changing to dir " .. root)
+            if root and vim.fn.getcwd(0) ~= root then
+                vim.notify("Changing lcd to dir " .. root)
                 vim.cmd.lcd(root)
             end
         end
