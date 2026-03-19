@@ -1,3 +1,10 @@
+-- Enable treesitter on all filetypes
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(args)
+        pcall(vim.treesitter.start, args.buf)
+    end,
+})
+
 -- selene: allow(mixed_table)
 ---@type LazyPluginSpec
 return {
