@@ -5,7 +5,9 @@ return {
     event = "VeryLazy",
     opts = {
         overwrite = {
-            search = { enabled = true },
+            -- Search is too confusing, because the highlight we end up using
+            -- isn't clear once the animation has disappeared
+            search = { enabled = false },
             undo = { enabled = true },
             redo = { enabled = true },
         },
