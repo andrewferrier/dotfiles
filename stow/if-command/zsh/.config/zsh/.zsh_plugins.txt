@@ -6,6 +6,7 @@ zdharma-continuum/fast-syntax-highlighting kind:defer
 robbyrussell/oh-my-zsh path:plugins/direnv/direnv.plugin.zsh
 romkatv/gitstatus kind:defer
 softmoth/zsh-vim-mode
+kevinywlui/zlong_alert.zsh
 
 # fzf plugin must come after zsh-vim-mode to ensure Ctrl-R works.
 
