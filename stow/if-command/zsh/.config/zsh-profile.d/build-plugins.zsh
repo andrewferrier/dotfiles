@@ -1,16 +1,16 @@
-readonly ANTIDOTE_PLUGIN_LIST=${HOME}/.config/zsh-profile.d/plugins.cfg
-readonly ANTIDOTE_PLUGIN_SCRIPT=${ZSH_CACHE_FOLDER}/plugins.sh
-readonly ANTIDOTE_CLONE_HOME=${ZSH_CACHE_FOLDER}/antidote
+ANTIDOTE_INSTALL=${ZSH_CACHE_FOLDER}/antidote
+ZSH_PLUGINS=${ZDOTDIR:-~}/.zsh_plugins
 
-if [[ ! $ANTIDOTE_PLUGIN_SCRIPT -nt $ANTIDOTE_PLUGIN_LIST ]]; then
+if [[ ! -e $ANTIDOTE_INSTALL ]]; then
+    git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE_INSTALL
+fi
+
+# Lazy-load antidote from its functions directory.
+fpath=($ANTIDOTE_INSTALL/functions $fpath)
+autoload -Uz antidote
+
+if [[ ! ${ZSH_PLUGINS}.zsh -nt ${ZSH_PLUGINS}.txt ]]; then
     echo -n "Rebuilding plugin script... "
-    if [[ ! -e $ANTIDOTE_CLONE_HOME ]]; then
-        git clone --depth=1 https://github.com/mattmc3/antidote.git $ANTIDOTE_CLONE_HOME
-    fi
-
-    (
-        source $ANTIDOTE_CLONE_HOME/antidote.zsh
-        antidote bundle <$ANTIDOTE_PLUGIN_LIST >$ANTIDOTE_PLUGIN_SCRIPT
-    )
+    antidote bundle <${ZSH_PLUGINS}.txt >|${ZSH_PLUGINS}.zsh
     echo "done."
 fi
