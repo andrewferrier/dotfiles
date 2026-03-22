@@ -71,6 +71,13 @@ vim.keymap.set("n", "goT", function()
     )
 end, { desc = "Open lcd in terminal (external)", unique = true })
 
+vim.keymap.set("n", "goa", function()
+    require("open_filedirterm").open_terminal(
+        "copilot",
+        { cwd = vim.fn.getcwd(0), external = true }
+    )
+end, { desc = "Open copilot in terminal (external)", unique = true })
+
 vim.keymap.set("n", "<C-W>god", function()
     require("open_filedirterm").open_split_oil("%:p:h")
 end, { desc = "Open oil in directory of file", unique = true })
