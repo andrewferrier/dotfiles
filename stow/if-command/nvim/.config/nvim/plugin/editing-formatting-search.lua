@@ -19,8 +19,10 @@ vim.opt.diffopt:remove("inline:char")
 
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
-vim.opt.diffopt:append("inline:word")
 vim.opt.diffopt:append("vertical")
+if vim.fn.has("nvim-0.12.0") == 1 then
+    vim.opt.diffopt:append("inline:word")
+end
 
 vim.cmd.iabbrev("zDATE", '<C-R>=strftime("%F")<CR>')
 vim.cmd.iabbrev("zDATETIME", '<C-R>=strftime("%FT%H:%M:%S")<CR>')
