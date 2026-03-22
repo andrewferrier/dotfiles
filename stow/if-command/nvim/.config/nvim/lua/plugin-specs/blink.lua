@@ -2,7 +2,7 @@
 -- selene: allow(mixed_table)
 return {
     "saghen/blink.cmp",
-    version = "*",
+    version = "1.*",
     ---@type blink.cmp.Config
     opts = {
         keymap = {
