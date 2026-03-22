@@ -10,3 +10,5 @@ softmoth/zsh-vim-mode
 # fzf plugin must come after zsh-vim-mode to ensure Ctrl-R works.
 
 robbyrussell/oh-my-zsh path:plugins/fzf/fzf.plugin.zsh
+
+# vim: ft=cfg:
