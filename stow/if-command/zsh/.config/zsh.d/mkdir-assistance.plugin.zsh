@@ -1,8 +1,8 @@
 # Adapted from https://www.archlinux.org/packages/extra/any/grml-zsh-config/
-function mkdir-assistance-in-place-named () {
+function mkdir-assistance-in-place-named() {
     local PATHTOMKDIR
 
-    if ((REGION_ACTIVE==1)); then
+    if ((REGION_ACTIVE == 1)); then
         local F=$MARK T=$CURSOR
 
         if [[ $F -gt $T ]]; then
@@ -27,7 +27,7 @@ function mkdir-assistance-in-place-named () {
     if [[ -e "${PATHTOMKDIR}" ]]; then
         zle -M "Path ${PATHTOMKDIR} already exists, doing nothing."
     else
-        mkdir -p "${PATHTOMKDIR}" > /dev/null
+        mkdir -p "${PATHTOMKDIR}" >/dev/null
         zle -M "Path ${PATHTOMKDIR} made."
     fi
 }
@@ -35,7 +35,7 @@ function mkdir-assistance-in-place-named () {
 # Adapted from https://github.com/grml/grml-etc-core/blob/master/etc/zsh/zshrc
 function mkdir-assistance-in-place-temp() {
     DIR=/tmp/$(date +%Y-%m-%dT%H:%M:%S)
-    mkdir $DIR > /dev/null
+    mkdir $DIR >/dev/null
     zle -U "$DIR "
 }
 
