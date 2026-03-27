@@ -63,7 +63,7 @@ case "${1:-}" in
             --tiebreak=index \
             --preview "$0 --preview {}" \
             --preview-window=top,border-bottom \
-            --header "Ctrl-[T]ig,re[L]oad,p[U]ll,pus[H],<Enter (shell)>" \
+            --header "Ctrl-[T]ig,re[L]oad,p[U]ll all,pus[H] all,<Enter (shell)>" \
             --bind "ctrl-t:execute($0 --open-tig {})+${RELOAD}" \
             --bind "ctrl-u:execute(gita pull)+${RELOAD}" \
             --bind "ctrl-h:execute(gita push)+${RELOAD}" \
