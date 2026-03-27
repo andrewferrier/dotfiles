@@ -43,7 +43,7 @@ repos:
           - id: ruff-check
           - id: ruff-format
     - repo: https://github.com/allganize/ty-pre-commit
-      rev: v0.0.15
+      rev: v0.0.25
       hooks:
           - id: ty-check
     - repo: https://github.com/Jarmos-san/shellcheck-precommit
