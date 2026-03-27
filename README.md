@@ -2,6 +2,8 @@
 
 This is my [dotfiles](https://dotfiles.io/) collection. Most of it's not intended for direct public consumption, although you're welcome (subject to the [the license](LICENSE)) to use whatever you find in here. However, I've also realized over time that there are a few utility scripts that I build for myself, that are stored in this repo and that might be useful to others, but don't have quite the polish and documentation and don't necessarily justify the complexity of their own GitHub repo. So, for your convenience, they are listed here. These are provided as-is, with minimal documentation except in some cases a `--help` argument, under [this license](LICENSE).
 
+* [gita-fzf](stow/common/.local/bin/common-dotfiles/gita-fzf-) - A relatively simple wrapper around [gita](https://github.com/nosarthur/gita) which makes it even easier to work with multiple git repos, using [fzf](https://github.com/junegunn/fzf) as a frontend.
+
 * [ical-archive](stow/common/.local/bin/common-dotfiles/ical-archive) - From a directory of `.ics` [iCal](https://en.wikipedia.org/wiki/ICalendar) files, archive the ones older than a certain number of days old into another directory.
 
 * [ical-summary](stow/common/.local/bin/common-dotfiles/ical-summary) - From a directory of `.ics` [iCal](https://en.wikipedia.org/wiki/ICalendar) files, provides a summary of events.
