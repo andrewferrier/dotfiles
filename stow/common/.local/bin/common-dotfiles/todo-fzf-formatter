@@ -8,6 +8,7 @@ from operator import itemgetter
 from typing import Final, TypedDict
 
 import humanize
+import tzlocal
 from termcolor import colored
 
 
@@ -22,9 +23,7 @@ EM_SPACE: Final[str] = " "  # noqa: RUF001
 
 data: list[Entry] = json.load(sys.stdin)
 
-current_timezone = datetime.datetime.now().astimezone().tzinfo
-
-now_time = datetime.datetime.now(tz=current_timezone)
+now_time = datetime.datetime.now(tz=tzlocal.get_localzone())
 now_date = now_time.date()
 
 
@@ -35,6 +34,19 @@ def is_time_agnostic(timestamp: int) -> bool:
         and due_time_naive_check.minute == 0
         and due_time_naive_check.second == 0
     )
+
+
+def get_datetime_from_due(
+    timestamp: int,
+) -> tuple[datetime.datetime, datetime.date]:
+    due_time: datetime.datetime = datetime.datetime.fromtimestamp(
+        timestamp, tz=datetime.UTC
+    )
+    local_tz = tzlocal.get_localzone()
+    due_time = due_time.astimezone(local_tz)
+    due_date: datetime.date = due_time.date()
+
+    return (due_time, due_date)
 
 
 def is_due_within_date_window(
@@ -48,13 +60,14 @@ def is_due_within_date_window(
     )
 
 
-def due_date_key_func(entry: Entry) -> int:
+def due_date_key_func(entry: Entry) -> datetime.datetime:
     if entry["due"] is None:
-        # Assign a very large value for items with no due date,
+        # Assign far into the future for due-less items,
         # ensuring they are sorted last when `reverse=True` is used.
-        return 9999999999999
+        return datetime.datetime(3000, 12, 31, tzinfo=tzlocal.get_localzone())
     else:
         original_due_timestamp = entry["due"]
+        due_time, _ = get_datetime_from_due(original_due_timestamp)
 
         if is_time_agnostic(original_due_timestamp):
             # If time-agnostic, adjust its time component to now_time for
@@ -62,15 +75,11 @@ def due_date_key_func(entry: Entry) -> int:
             # time are treated as due now, and past time-agnostic items are
             # treated as due at the equivalent time in the past.
 
-            original_due_time = datetime.datetime.fromtimestamp(
-                original_due_timestamp, tz=current_timezone
+            return datetime.datetime.combine(
+                due_time.date(), now_time.time(), tzinfo=tzlocal.get_localzone()
             )
-            adjusted_due_time = datetime.datetime.combine(
-                original_due_time.date(), now_time.time(), tzinfo=current_timezone
-            )
-            return int(adjusted_due_time.timestamp())
         else:
-            return original_due_timestamp
+            return due_time
 
 
 data = sorted(data, key=itemgetter("summary"))
@@ -91,10 +100,7 @@ for entry in data:
     if entry["due"] is None:
         human_date = ""
     else:
-        due_time: datetime.datetime = datetime.datetime.fromtimestamp(
-            entry["due"], tz=current_timezone
-        )
-        due_date: datetime.date = due_time.date()
+        due_time, due_date = get_datetime_from_due(entry["due"])
 
         human_date: str = humanize.naturalday(due_date, format="%Y-%m-%d")
 
