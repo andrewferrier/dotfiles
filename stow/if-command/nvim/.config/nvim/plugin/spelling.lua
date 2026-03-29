@@ -1,11 +1,3 @@
-if vim.fn.has("nvim-0.12.0") == 0 then
-    local spelldir = vim.fs.joinpath(vim.fn.stdpath("data"), "spell")
-    local spelldir_expanded = vim.fn.expand(spelldir)
-    ---@cast spelldir_expanded string
-    vim.fn.mkdir(spelldir_expanded, "p")
-    vim.opt.spellfile = vim.fn.expand(spelldir .. "/en.utf-8.add")
-end
-
 vim.opt.dictionary:append("/usr/share/dict/words")
 vim.opt.dictionary:append(vim.opt.spellfile:get())
 

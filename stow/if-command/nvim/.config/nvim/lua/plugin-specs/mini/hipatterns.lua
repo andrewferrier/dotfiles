@@ -33,8 +33,4 @@ local highlighters = {
     },
 }
 
-if vim.fn.has("nvim-0.12.0") == 0 then
-    highlighters.hex_color = hipatterns.gen_highlighter.hex_color()
-end
-
 hipatterns.setup({ highlighters = highlighters })

@@ -69,38 +69,6 @@ M.featuresenabled = function()
 end
 
 ---@return string
-M.diagnosticstatus = function()
-    if vim.diagnostic.is_enabled() then
-        local diagnostics_counts = {}
-
-        for prefix, severity in pairs({
-            e = vim.diagnostic.severity.ERROR,
-            w = vim.diagnostic.severity.WARN,
-            i = vim.diagnostic.severity.INFO,
-            h = vim.diagnostic.severity.HINT,
-        }) do
-            local count = #vim.diagnostic.get(0, { severity = severity })
-
-            if count > 0 then
-                table.insert(diagnostics_counts, prefix .. count)
-            end
-        end
-
-        if #diagnostics_counts > 0 then
-            return LEFT_BRACE
-                .. "D "
-                .. table.concat(diagnostics_counts, ",")
-                .. RIGHT_BRACE
-                .. " "
-        else
-            return ""
-        end
-    end
-
-    return ""
-end
-
----@return string
 M.gitsigns = function()
     if vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" then
         return LEFT_BRACE .. vim.b.gitsigns_status .. RIGHT_BRACE .. " "
@@ -251,19 +219,10 @@ function M.render()
 
     -- RHS - Warnings
     sl = sl .. "%{v:lua.require('statusline').lspprogress()}"
-
-    if vim.fn.has("nvim-0.12.0") == 1 then
-        sl = sl .. vim.diagnostic.status() .. " "
-    else
-        sl = sl .. "%{v:lua.require('statusline').diagnosticstatus()}"
-    end
-
+    sl = sl .. vim.diagnostic.status() .. " "
     sl = sl .. "%{v:lua.require('statusline').spellingerrorcount()}"
     sl = sl .. "%{v:lua.require('statusline').gitsigns()}"
-
-    if vim.fn.has("nvim-0.12.0") == 1 then
-        sl = sl .. "%{v:lua.require('statusline').searchcount()}"
-    end
+    sl = sl .. "%{v:lua.require('statusline').searchcount()}"
 
     sl = sl .. SEPARATOR
 
