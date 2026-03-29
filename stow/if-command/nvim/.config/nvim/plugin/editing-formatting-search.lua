@@ -18,7 +18,6 @@ vim.opt.wildmode = "longest:full"
 vim.opt.diffopt:remove("inline:char")
 
 vim.opt.diffopt:append("algorithm:patience")
-vim.opt.diffopt:append("indent-heuristic")
 vim.opt.diffopt:append("inline:word")
 vim.opt.diffopt:append("vertical")
 
