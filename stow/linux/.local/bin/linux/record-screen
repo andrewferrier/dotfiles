@@ -40,10 +40,7 @@ PIP_HEIGHT: int = 240
 WEBCAM_CROP_WIDTH: int = 100
 
 PIP_X: int = (
-    SCREEN_WIDTH
-    - PIP_WIDTH
-    - 20
-    + int(PIP_WIDTH / WEBCAM_WIDTH * WEBCAM_CROP_WIDTH * 2)
+    SCREEN_WIDTH - PIP_WIDTH - 20 + (PIP_WIDTH // WEBCAM_WIDTH * WEBCAM_CROP_WIDTH * 2)
 )
 PIP_Y: int = SCREEN_HEIGHT - PIP_HEIGHT - 40
 
@@ -111,7 +108,7 @@ videoconvert ! videoscale ! video/x-raw,width={PIP_WIDTH},height={PIP_HEIGHT} ! 
 # Bitrate below makes sure screencast looks good even if we're not using webcam
 pipeline_str: str = f"""
 ximagesrc use-damage=0 !
-videocrop top=32 bottom=40 left=0 right=0 !
+videocrop top={SCREEN_TOP_MARGIN} bottom={SCREEN_BOTTOM_MARGIN} left=0 right=0 !
 video/x-raw,framerate={SCREEN_FPS}/1 ! queue ! comp.sink_0
 {webcam_pipeline_part}
 compositor name=comp background=black ! videoconvert ! vah264enc bitrate=4000 rate-control=vbr ! h264parse ! mp4mux name=mux ! filesink location={OUTPUT_FILE}
@@ -160,12 +157,10 @@ bus.add_signal_watch()
 
 
 def bus_call(_bus: Gst.Bus, message: Gst.Message, loop: GLib.MainLoop) -> bool:
-    t: Gst.MessageType = message.type
-
-    if t == Gst.MessageType.EOS:
+    if message.type == Gst.MessageType.EOS:
         logger.info("EOS received, stopping pipeline...")
         loop.quit()
-    elif t == Gst.MessageType.ERROR:
+    elif message.type == Gst.MessageType.ERROR:
         err, debug = message.parse_error()
         logger.error(f"Error: {err}, {debug}")
         loop.quit()
