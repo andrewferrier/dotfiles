@@ -217,6 +217,7 @@ H - toggle hidden files
 - Open a bug on NeoVim that 'confirm' when switching away from a dirty scratch buffer doesn't offer anything useful (see <https://github.com/ibhagwan/fzf-lua/issues/597#issuecomment-1373557215>)
 - Experiment with snippets
 - Switch to vim.pack: <https://github.com/talha-akram/anvil/blob/master/lua/configuration/plugins/init.lua>, <https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#lazy-loading>
+- Add progress and busy from default statusline, also improve rendering performance
 
 ## Presentation Ideas
 
