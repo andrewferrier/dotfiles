@@ -69,7 +69,7 @@ M.featuresenabled = function()
 end
 
 ---@return string
-M.gitsigns = function()
+local gitsigns = function()
     if vim.b.gitsigns_status ~= nil and vim.b.gitsigns_status ~= "" then
         return LEFT_BRACE .. vim.b.gitsigns_status .. RIGHT_BRACE .. " "
     else
@@ -78,7 +78,7 @@ M.gitsigns = function()
 end
 
 ---@return string
-M.indent = function()
+local indent = function()
     if vim.bo.buftype == "terminal" then
         return ""
     end
@@ -177,7 +177,7 @@ M.lspprogress = function()
     end
 end
 
-M.searchcount = function()
+local searchcount = function()
     local response
 
     if vim.v.hlsearch == 0 then
@@ -221,13 +221,13 @@ function M.render()
     sl = sl .. "%{v:lua.require('statusline').lspprogress()}"
     sl = sl .. vim.diagnostic.status() .. " "
     sl = sl .. "%{v:lua.require('statusline').spellingerrorcount()}"
-    sl = sl .. "%{v:lua.require('statusline').gitsigns()}"
-    sl = sl .. "%{v:lua.require('statusline').searchcount()}"
+    sl = sl .. gitsigns()
+    sl = sl .. searchcount()
 
     sl = sl .. SEPARATOR
 
     -- RHS - File and feature info
-    sl = sl .. "%{v:lua.require('statusline').indent()}"
+    sl = sl .. indent()
     sl = sl .. "%{&fileformat!=#'unix'?',ff='.&fileformat:''}"
     sl = sl .. "%{v:lua.require('statusline').wrappingmode()}"
     sl = sl .. "%{&spell?',S':''}"
