@@ -157,40 +157,27 @@ class LinkdingAPIClient:
         title: str | None = None,
         url: str | None = None,
         unread: bool | None = None,
-        dry_run: bool = False,
     ) -> None:
         url_path = f"{self.base_url}bookmarks/{bookmark_id}/"
-
-        payload = {}
-        if title is not None:
-            payload["title"] = title
-        if url is not None:
-            payload["url"] = url
-        if unread is not None:
-            payload["unread"] = unread
+        payload = {
+            k: v
+            for k, v in {"title": title, "url": url, "unread": unread}.items()
+            if v is not None
+        }
 
         if not payload:
             logger.debug(f"No update data provided for bookmark ID: {bookmark_id}")
             return
 
-        if dry_run:
-            logger.info(
-                f"DRY RUN: Would update bookmark ID: {bookmark_id} with payload: "
-                f"{payload}"
+        try:
+            logger.info(f"Updating bookmark ID: {bookmark_id} with payload: {payload}")
+            response = self.session.patch(url_path, json=payload)
+            response.raise_for_status()
+            logger.debug(f"Successfully updated bookmark ID: {bookmark_id}")
+        except requests.exceptions.RequestException:
+            logger.error(  # noqa: TRY400
+                f"Failed to update bookmark ID: {bookmark_id} with payload: {payload}"
             )
-        else:
-            try:
-                logger.info(
-                    f"Updating bookmark ID: {bookmark_id} with payload: {payload}"
-                )
-                response = self.session.patch(url_path, json=payload)
-                response.raise_for_status()
-                logger.debug(f"Successfully updated bookmark ID: {bookmark_id}")
-            except requests.exceptions.RequestException:
-                logger.error(  # noqa: TRY400
-                    f"Failed to update bookmark ID: {bookmark_id} with payload: "
-                    f"{payload}"
-                )
 
     def get_remote_metadata(self, url: str) -> dict[str, Any] | None:
         escaped_url = urllib.parse.quote_plus(url)
@@ -219,27 +206,21 @@ def _clean_bookmark_title(
 
     compare_len = min(len(original_title), len(bookmark_url), 20)
 
-    title_prefix_for_comparison = original_title[:compare_len]
-    url_prefix_for_comparison = bookmark_url[:compare_len]
-
-    if (not original_title) or title_prefix_for_comparison == url_prefix_for_comparison:
+    if (not original_title) or original_title[:compare_len] == bookmark_url[
+        :compare_len
+    ]:
         try:
             metadata = client.get_remote_metadata(bookmark_url)
             fetched_title = metadata.get("title") if metadata else None
 
             if fetched_title and fetched_title != original_title:
-                if dry_run:
-                    logger.info(
-                        f"DRY RUN: Would update title for bookmark ID: {bookmark_id} "
-                        f"from '{original_title}' to '{fetched_title}' "
-                        "(from remote metadata)."
-                    )
-                else:
-                    logger.info(
-                        f"Updating title for bookmark ID: {bookmark_id} "
-                        f"from '{original_title}' to '{fetched_title}' "
-                        "(from remote metadata)."
-                    )
+                action = "DRY RUN: Would update" if dry_run else "Updating"
+                logger.info(
+                    f"{action} title for bookmark ID: {bookmark_id} "
+                    f"from '{original_title}' to '{fetched_title}' "
+                    "(from remote metadata)."
+                )
+                if not dry_run:
                     client.update_bookmark(bookmark_id, title=fetched_title)
         except requests.exceptions.RequestException:
             logger.error(  # noqa: TRY400
@@ -251,20 +232,13 @@ def _clean_bookmark_title(
     cleaned_title = html.unescape(original_title)
 
     if cleaned_title != original_title:
-        if dry_run:
-            logger.info(
-                f"DRY RUN: Would update title for bookmark ID: {bookmark_id} "
-                f"from '{original_title}' to '{cleaned_title}'",
-            )
-        else:
-            try:
-                logger.info(
-                    f"Updating title for bookmark ID: {bookmark_id} "
-                    f"from '{original_title}' to '{cleaned_title}'",
-                )
-                client.update_bookmark(bookmark_id, title=cleaned_title)
-            except requests.exceptions.RequestException:
-                logger.error(f"Failed to update title for bookmark ID: {bookmark_id}")  # noqa: TRY400
+        action = "DRY RUN: Would update" if dry_run else "Updating"
+        logger.info(
+            f"{action} title for bookmark ID: {bookmark_id} "
+            f"from '{original_title}' to '{cleaned_title}'",
+        )
+        if not dry_run:
+            client.update_bookmark(bookmark_id, title=cleaned_title)
 
 
 def _perform_bookmark_action(
@@ -286,10 +260,11 @@ def _perform_bookmark_action(
                 f"ACTION: {action_type} bookmark ID: {bookmark_id}, URL: {url} "
                 f" because {validation_reason}",
             )
-            if action_type == "archive":
-                client.archive_bookmark(bookmark_id)
-            elif action_type == "unarchive":
-                client.unarchive_bookmark(bookmark_id)
+            actions = {
+                "archive": client.archive_bookmark,
+                "unarchive": client.unarchive_bookmark,
+            }
+            actions[action_type](bookmark_id)
         except requests.exceptions.RequestException:
             logger.error(  # noqa: TRY400
                 f"Failed to {action_type} bookmark ID: {bookmark_id}, URL: {url}",
@@ -342,16 +317,14 @@ class PageChecker:
             status = response.status
             if HTTP_OK_MIN <= status < HTTP_OK_MAX:
                 return ValidationResult(is_valid=True, reason="OK")
-            else:
-                return ValidationResult(
-                    is_valid=False, reason=f"HTTP status code {status}."
-                )
+            return ValidationResult(
+                is_valid=False, reason=f"HTTP status code {status}."
+            )
 
         except Exception as e:
             if "Download is starting" in str(e):
                 return ValidationResult(is_valid=True, reason=f"Download: {e!s}")
-            else:
-                return ValidationResult(is_valid=False, reason=f"Exception: {e!s}")
+            return ValidationResult(is_valid=False, reason=f"Exception: {e!s}")
         finally:
             page.close()
 
@@ -373,39 +346,30 @@ def _resolve_redirected_url(
     bookmark_id: int = bookmark["id"]
     original_url: str = bookmark["url"]
 
-    if EVALUATE_REDIRECT_REGEXES.match(original_url):
-        logger.debug(f"URL matches redirect pattern: {original_url}")
-        try:
-            r = requests.get(original_url, timeout=20, allow_redirects=True)
-            r.raise_for_status()
+    if not EVALUATE_REDIRECT_REGEXES.match(original_url):
+        return
 
-            final_url = r.url
+    logger.debug(f"URL matches redirect pattern: {original_url}")
+    try:
+        r = requests.get(original_url, timeout=20, allow_redirects=True)
+        r.raise_for_status()
+        final_url = r.url
 
-            if final_url != original_url:
-                if dry_run:
-                    logger.info(
-                        f"DRY RUN: Would update URL for bookmark ID: {bookmark_id} "
-                        f"from '{original_url}' to '{final_url}'",
-                    )
-                else:
-                    try:
-                        logger.info(
-                            f"Updating URL for bookmark ID: {bookmark_id} "
-                            f"from '{original_url}' to '{final_url}'",
-                        )
-                        client.update_bookmark(bookmark_id, url=final_url)
-                    except requests.exceptions.RequestException:
-                        logger.error(  # noqa: TRY400
-                            f"Failed to update URL for bookmark ID: {bookmark_id}"
-                        )
-            else:
-                logger.debug(f"URL {original_url} did not redirect.")
-
-        except requests.exceptions.RequestException:
-            logger.error(  # noqa: TRY400
-                f"Failed to resolve redirects for URL: {original_url} "
-                f"(ID: {bookmark_id})"
+        if final_url != original_url:
+            action = "DRY RUN: Would update" if dry_run else "Updating"
+            logger.info(
+                f"{action} URL for bookmark ID: {bookmark_id} "
+                f"from '{original_url}' to '{final_url}'",
             )
+            if not dry_run:
+                client.update_bookmark(bookmark_id, url=final_url)
+        else:
+            logger.debug(f"URL {original_url} did not redirect.")
+
+    except requests.exceptions.RequestException:
+        logger.error(  # noqa: TRY400
+            f"Failed to resolve redirects for URL: {original_url} (ID: {bookmark_id})"
+        )
 
 
 def _process_archived_bookmark(
