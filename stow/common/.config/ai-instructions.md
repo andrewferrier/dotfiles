@@ -6,6 +6,9 @@ languages currently being worked with.
 
 ## General
 
+- Never run `git commit`, `git push`, `git rebase`, or any other git write
+  operations. Leave all git commits and history management to the user.
+
 - Irrespective of any other commands below, don't change code unrelated to the
   core features or bugs being added just to conform to standards or be more
   idiomatic or 'correct'.
