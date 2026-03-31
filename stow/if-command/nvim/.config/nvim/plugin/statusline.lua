@@ -5,7 +5,7 @@ local delayed_redraw = function()
     redraw_timer = nil
 end
 
-local callback = function()
+local redraw_status = function()
     if redraw_timer ~= nil then
         vim.fn.timer_stop(redraw_timer)
     end
@@ -16,7 +16,16 @@ end
 
 vim.api.nvim_create_autocmd({ "DiagnosticChanged", "LspProgress" }, {
     pattern = "*",
-    callback = callback,
+    callback = redraw_status,
 })
 
+vim.api.nvim_create_autocmd("Progress", {
+    pattern = { "term" },
+    callback = function(ev)
+        print(string.format("Progress event: %s", vim.inspect(ev)))
+        redraw_status()
+    end,
+})
+
+vim.opt.showcmdloc = "statusline"
 vim.o.statusline = "%!v:lua.require('statusline').render()"

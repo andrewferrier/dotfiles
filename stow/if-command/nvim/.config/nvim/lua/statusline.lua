@@ -217,8 +217,11 @@ function M.render()
 
     sl = sl .. ALIGN_RHS
 
-    -- RHS - Warnings
+    -- RHS - Progress, Status and Warnings
+    sl = sl .. "%-10.S"
     sl = sl .. "%{v:lua.require('statusline').lspprogress()}"
+    sl = sl .. "%{v:lua.vim.ui.progress_status()}"
+    sl = sl .. "%{% &busy > 0 ? '◐ ' : '' %}"
     sl = sl .. vim.diagnostic.status() .. " "
     sl = sl .. "%{v:lua.require('statusline').spellingerrorcount()}"
     sl = sl .. gitsigns()
