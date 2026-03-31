@@ -8,6 +8,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- selene: allow(mixed_table)
 return {
     "nvim-treesitter/nvim-treesitter",
+    -- Without this, it keeps switching back to 'master' as the branch
+    branch = "main",
     build = function()
         vim.cmd.TSInstall("all")
         vim.cmd.TSUpdate()
