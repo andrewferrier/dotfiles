@@ -9,6 +9,7 @@ vim.opt.smoothscroll = true
 vim.opt.splitbelow = true
 vim.opt.splitkeep = "screen"
 vim.opt.splitright = true
+vim.opt.switchbuf = "useopen"
 
 vim.opt.number = true
 vim.opt.relativenumber = true
