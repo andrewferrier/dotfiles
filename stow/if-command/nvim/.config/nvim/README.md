@@ -218,6 +218,7 @@ H - toggle hidden files
 - Experiment with snippets
 - Switch to vim.pack: <https://github.com/talha-akram/anvil/blob/master/lua/configuration/plugins/init.lua>, <https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack#lazy-loading>
 - Add progress and busy from default statusline, also improve rendering performance
+- When neotree is loaded, turn on 'hidden'
 
 ## Presentation Ideas
 
