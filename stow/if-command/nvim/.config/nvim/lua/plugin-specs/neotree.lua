@@ -8,5 +8,16 @@ return {
         "MunifTanjim/nui.nvim",
         "antosha417/nvim-lsp-file-operations",
     },
+    opts = {
+        event_handlers = {
+            {
+                event = "neo_tree_buffer_enter",
+                handler = function(_)
+                    vim.opt.hidden = true
+                    vim.notify_once("'hidden' enabled", vim.log.levels.WARN)
+                end,
+            },
+        },
+    },
     lazy = false,
 }
