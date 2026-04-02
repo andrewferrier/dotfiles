@@ -4,4 +4,4 @@ model: gemini/gemini-2.5-flash
 auto-commits: false
 attribute-author: false
 analytics-disable: true
-read: [~/.config/aider/CONVENTIONS.md]
+read: [AGENTS.md, ~/.config/aider/CONVENTIONS.md]
