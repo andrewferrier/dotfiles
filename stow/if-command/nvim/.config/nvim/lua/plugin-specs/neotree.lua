@@ -18,6 +18,9 @@ return {
                 end,
             },
         },
+        filesystem = {
+            hijack_netrw_behavior = "disabled",
+        },
     },
     lazy = false,
 }
