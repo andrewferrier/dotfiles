@@ -53,10 +53,10 @@ mkdir -pv \
 
 chmod 700 "${GNUPGHOME}"
 
-pupdate_prepend_single() { [[ -d $1 ]] && case ":${PATH:=$1}:" in *:$1:*) ;; *) PATH="$1:${PATH}" ;; esac }
-pupdate_append_singlex() { [[ -d $1 ]] && case ":${PATH:=$1}:" in *:$1:*) ;; *) PATH="${PATH}:$1" ;; esac }
-nupdate_append_singlex() { [[ -d $1 ]] && case ":${NODE_PATH:=$1}:" in *:$1:*) ;; *) NODE_PATH="${NODE_PATH}:$1" ;; esac }
-pupdate_append_globxxx() {
+path_prepend() { [[ -d $1 ]] && case ":${PATH:=$1}:" in *:$1:*) ;; *) PATH="$1:${PATH}" ;; esac }
+path_append() { [[ -d $1 ]] && case ":${PATH:=$1}:" in *:$1:*) ;; *) PATH="${PATH}:$1" ;; esac }
+node_path_append() { [[ -d $1 ]] && case ":${NODE_PATH:=$1}:" in *:$1:*) ;; *) NODE_PATH="${NODE_PATH}:$1" ;; esac }
+path_append_glob() {
     glob=$1
 
     # based on https://stackoverflow.com/a/4264351
@@ -64,50 +64,50 @@ pupdate_append_globxxx() {
     if stat ${glob} >/dev/null 2>/dev/null; then
         # shellcheck disable=SC2044
         for dir in $(find -L ${glob} -maxdepth 0 -type d); do
-            pupdate_append_singlex "${dir}"
+            path_append "${dir}"
         done
     fi
 }
 
 # generic
-pupdate_prepend_single /usr/local/bin
-pupdate_prepend_single /usr/local/sbin
-pupdate_prepend_single /usr/local/opt/ruby/bin # for brew-installed ruby
-pupdate_prepend_single /opt/homebrew/bin
-pupdate_prepend_single /opt/homebrew/sbin
-pupdate_prepend_single /opt/homebrew/opt/openssl/bin
+path_prepend /usr/local/bin
+path_prepend /usr/local/sbin
+path_prepend /usr/local/opt/ruby/bin # for brew-installed ruby
+path_prepend /opt/homebrew/bin
+path_prepend /opt/homebrew/sbin
+path_prepend /opt/homebrew/opt/openssl/bin
 
 if command -v brew >/dev/null 2>&1; then
     BREW_PREFIX_PYTHON=$(brew --prefix python)
-    pupdate_prepend_single "${BREW_PREFIX_PYTHON}/libexec/bin"
+    path_prepend "${BREW_PREFIX_PYTHON}/libexec/bin"
 fi
 
-pupdate_prepend_single "${HOME}/.deno/bin"
+path_prepend "${HOME}/.deno/bin"
 
-pupdate_append_singlex "${HOME}/.local/bin"
-pupdate_append_globxxx "${HOME}/.local/bin/*"
-pupdate_append_globxxx "${HOME}/.local/bin/*/bin"
-pupdate_append_globxxx "${HOME}/.local/bin/*/*/bin"
-pupdate_append_singlex "${XDG_DATA_HOME}/bob/nvim-bin"
-pupdate_append_singlex "${HOME}/bookmarks/bin"
-pupdate_append_globxxx "${HOME}/Library/Python/*/bin" # from pip install --user
-pupdate_append_singlex "${GOPATH}/bin"
-pupdate_append_singlex "${GEM_HOME}/bin"
-pupdate_append_globxxx "${GEM_HOME}/ruby/*/bin"
-pupdate_append_singlex "${HOME}/.luarocks/bin" # luarocks/lua
-pupdate_append_singlex "${HOME}/.cargo/bin"
-pupdate_append_singlex "${HOME}/.local/share/cargo/bin"
-pupdate_append_singlex "${HOME}/memy/target/debug"
-pupdate_append_singlex "/home/linuxbrew/.linuxbrew/bin"
+path_append "${HOME}/.local/bin"
+path_append_glob "${HOME}/.local/bin/*"
+path_append_glob "${HOME}/.local/bin/*/bin"
+path_append_glob "${HOME}/.local/bin/*/*/bin"
+path_append "${XDG_DATA_HOME}/bob/nvim-bin"
+path_append "${HOME}/bookmarks/bin"
+path_append_glob "${HOME}/Library/Python/*/bin" # from pip install --user
+path_append "${GOPATH}/bin"
+path_append "${GEM_HOME}/bin"
+path_append_glob "${GEM_HOME}/ruby/*/bin"
+path_append "${HOME}/.luarocks/bin" # luarocks/lua
+path_append "${HOME}/.cargo/bin"
+path_append "${HOME}/.local/share/cargo/bin"
+path_append "${HOME}/memy/target/debug"
+path_append "/home/linuxbrew/.linuxbrew/bin"
 
 if command -v npm >/dev/null 2>&1; then
-    nupdate_append_singlex "${NPM_PACKAGES}/lib/node_modules"
-    nupdate_append_singlex /usr/lib/nodejs
-    nupdate_append_singlex /usr/local/lib/node
-    nupdate_append_singlex /usr/local/lib/node_modules
-    nupdate_append_singlex /usr/share/nodejs
-    pupdate_append_singlex /usr/local/share/npm/bin
-    pupdate_prepend_single "${NPM_PACKAGES}/bin"
+    node_path_append "${NPM_PACKAGES}/lib/node_modules"
+    node_path_append /usr/lib/nodejs
+    node_path_append /usr/local/lib/node
+    node_path_append /usr/local/lib/node_modules
+    node_path_append /usr/share/nodejs
+    path_append /usr/local/share/npm/bin
+    path_prepend "${NPM_PACKAGES}/bin"
 fi
 
 export NODE_PATH
