@@ -8,6 +8,8 @@ GIT_ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && git rev-parse
 # shellcheck disable=SC1091
 source "${GIT_ROOT_DIR}/common.sh"
 
+: "${OSDISTRIBUTION:?OSDISTRIBUTION must be set}"
+
 uv tool install --upgrade \
     --with mdformat-gfm \
     --with mdformat-frontmatter \
@@ -19,10 +21,10 @@ uv tool install --upgrade git+https://github.com/EbodShojaei/bake
 # Aider doesn't support Python 3.13: https://github.com/Aider-AI/aider/issues/3660
 uv tool install --managed-python --python 3.12 aider-chat@latest
 
-if [[ ${OSDISTRIBUTION:?} == "arch" ]]; then
+if [[ $OSDISTRIBUTION == "arch" ]]; then
     uv tool install --upgrade gitlint-core
     uv tool install --upgrade sqlfluff
-elif [[ ${OSDISTRIBUTION:?} == "macos" ]]; then
+elif [[ $OSDISTRIBUTION == "macos" ]]; then
     # All packages install via Homebrew
     exit
 else
