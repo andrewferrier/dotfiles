@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+
+LOCAL_BIN="${HOME}/.local/bin"
+
+# shellcheck disable=SC2154
+if [[ ${OSDISTRIBUTION} == "debian" ]]; then
+    # required for nvim-treesitter
+    eget --to "${LOCAL_BIN}" https://github.com/tree-sitter/tree-sitter --asset=cli
+fi
