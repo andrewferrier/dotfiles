@@ -13,16 +13,12 @@ for directory in "${ROOT_DIR}"/*; do
     COMMAND=$(basename "$directory")
 
     if command -v "$COMMAND" >/dev/null; then
-        AFTER_SCRIPT=$(realpath "${ROOT_DIR}")
+        AFTER_SCRIPT="${ROOT_DIR}/${COMMAND}"
 
-        if [[ -d "${AFTER_SCRIPT}" ]]; then
-            AFTER_SCRIPT="${AFTER_SCRIPT}/${COMMAND}"
-
-            if [[ -f "${AFTER_SCRIPT}" ]]; then
-                printf "${GREY}Running %s...${NORMAL}\n" "${AFTER_SCRIPT}"
-                ${AFTER_SCRIPT}
-                printf "%b${AFTER_SCRIPT} complete.%b\n\n" "${GREY}" "${NORMAL}"
-            fi
+        if [[ -f "${AFTER_SCRIPT}" ]]; then
+            printf "${GREY}Running %s...${NORMAL}\n" "${AFTER_SCRIPT}"
+            ${AFTER_SCRIPT}
+            printf "%b${AFTER_SCRIPT} complete.%b\n\n" "${GREY}" "${NORMAL}"
         fi
     fi
 done
