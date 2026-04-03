@@ -148,7 +148,8 @@ set mouse true
 set scrolloff 5
 set timefmt "2006-01-02 15:04:05"
 set truncatechar "…"
-set watch
+# Disabled because of: https://github.com/gokcehan/lf/issues/2485
+# set watch
 
 cmd toggle_view &{{
     if [ "$lf_user_view" == default ]; then
