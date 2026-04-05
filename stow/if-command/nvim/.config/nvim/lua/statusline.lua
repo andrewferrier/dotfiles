@@ -204,6 +204,16 @@ local searchcount = function()
     return "[" .. response .. "] "
 end
 
+local macrorecording = function()
+    local reg = vim.fn.reg_recording()
+
+    if not reg or reg == "" then
+        return ""
+    end
+
+    return "🔴" .. reg .. " "
+end
+
 function M.render()
     -- LHS - Filename & Filetype
     local sl = " %{v:lua.require('statusline').filename()}"
@@ -226,6 +236,7 @@ function M.render()
     sl = sl .. "%{v:lua.require('statusline').spellingerrorcount()}"
     sl = sl .. gitsigns()
     sl = sl .. searchcount()
+    sl = sl .. macrorecording()
 
     sl = sl .. SEPARATOR
 
