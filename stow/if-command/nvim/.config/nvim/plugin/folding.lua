@@ -1,6 +1,8 @@
-vim.opt.fillchars = "fold: "
 vim.opt.foldlevel = 99
 vim.opt.foldtext = ""
+vim.opt.fillchars = {
+    fold = "⠀",
+}
 
 local set_fold_method = function()
     if vim.wo.foldmethod == "manual" then
