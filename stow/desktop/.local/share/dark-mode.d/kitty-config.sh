@@ -18,7 +18,6 @@ KITTY_TRANSIENT="${XDG_CONFIG_HOME}/kitty/transient.conf"
 
 cat <<EOF >"$KITTY_TRANSIENT"
 env FZF_DEFAULT_OPTS=${FZF_COLORS}
-env BAT_THEME=gruvbox-${MODE_NAME}
 EOF
 
 if [[ ${OSTYPE} == darwin* ]]; then

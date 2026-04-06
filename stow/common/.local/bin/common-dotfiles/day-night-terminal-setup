@@ -7,14 +7,12 @@ set_day_vars() {
     # Built myself based on Gruvbox Dark below
     # shellcheck disable=SC2154
     export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS_LIGHT_COLORS
-    export BAT_THEME="gruvbox-light"
 }
 
 set_night_vars() {
     # See https://github.com/junegunn/fzf/wiki/Color-schemes#gruvbox-dark
     # shellcheck disable=SC2154
     export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS_DARK_COLORS
-    export BAT_THEME="gruvbox-dark"
 }
 
 set_from_state_file() {

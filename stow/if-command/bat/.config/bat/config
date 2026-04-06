@@ -4,3 +4,6 @@
 
 --map-syntax=*.mkd:Markdown
 --map-syntax=*.mkd.txt:Markdown
+
+--theme-dark=gruvbox-dark
+--theme-light=gruvbox-light
