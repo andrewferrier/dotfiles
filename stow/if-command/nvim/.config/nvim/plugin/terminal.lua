@@ -5,8 +5,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 vim.api.nvim_create_autocmd("TermClose", {
-    callback = function()
-        vim.api.nvim_input("<CR>")
+    callback = function(ev)
+        if vim.v.event.status ~= 0 then
+            -- Don't quit terminal if exit status != 0
+            return
+        end
+
+        vim.api.nvim_buf_delete(ev.buf, { force = true })
     end,
 })
 
