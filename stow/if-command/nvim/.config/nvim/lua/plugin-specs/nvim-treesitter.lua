@@ -13,19 +13,21 @@ return {
         -- Enable treesitter on all installed filetypes
         local parsers_installed =
             require("nvim-treesitter").get_installed("parsers")
-        local treesitter_start_group =
-            vim.api.nvim_create_augroup("treesitter-start-files", {})
 
-        for _, parser in pairs(parsers_installed) do
-            local filetypes = vim.treesitter.language.get_filetypes(parser)
-            vim.api.nvim_create_autocmd({ "FileType" }, {
-                group = treesitter_start_group,
-                pattern = filetypes,
-                callback = function()
-                    vim.treesitter.start()
-                end,
-            })
-        end
+        local all_filetypes = vim.iter(parsers_installed)
+            :map(function(parser)
+                return vim.treesitter.language.get_filetypes(parser)
+            end)
+            :flatten()
+            :totable()
+
+        vim.api.nvim_create_autocmd({ "FileType" }, {
+            group = vim.api.nvim_create_augroup("treesitter-start-files", {}),
+            pattern = all_filetypes,
+            callback = function()
+                vim.treesitter.start()
+            end,
+        })
     end,
     -- Don't use lazy initialization as TSInstall command is needed for build()
     -- function
