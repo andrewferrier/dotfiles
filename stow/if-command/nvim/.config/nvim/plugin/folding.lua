@@ -20,6 +20,6 @@ local set_fold_method = function()
     end
 end
 
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
     callback = set_fold_method,
 })
