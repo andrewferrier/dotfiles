@@ -9,7 +9,6 @@ from argparse import Namespace
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-import pytz
 import requests
 from icalendar.cal import Calendar, Component
 
@@ -34,7 +33,7 @@ def get_completed_tasks(
     directory: Path, number_of_days: int
 ) -> list[tuple[datetime.datetime, str]]:
     completed_tasks: list[tuple[datetime.datetime, str]] = []
-    cutoff_date = datetime.datetime.now(pytz.utc) - datetime.timedelta(
+    cutoff_date = datetime.datetime.now().astimezone() - datetime.timedelta(
         days=number_of_days
     )
 
@@ -48,6 +47,7 @@ def get_completed_tasks(
                         completed = component.get("COMPLETED")  # pyright: ignore[reportAny]
                         if completed is not None:
                             completed_date: datetime.datetime = completed.dt  # pyright: ignore[reportAny]
+                            completed_date = completed_date.astimezone()
                             summary: str = component.get("SUMMARY")  # pyright: ignore[reportAny]
 
                             if (
@@ -76,7 +76,7 @@ def send_email(email_address: str, subject: str, content: str) -> None:
 
 
 def format_relative_date(dt: datetime.datetime) -> str:
-    cutoff_7daysago = datetime.datetime.now(pytz.utc) - datetime.timedelta(days=7)
+    cutoff_7daysago = datetime.datetime.now().astimezone() - datetime.timedelta(days=7)
 
     if dt >= cutoff_7daysago:
         return dt.strftime("%A")
