@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd({ "BufNew", "BufRead" }, {
     callback = function(ctx)
         local path = ctx.match
-        local stat = vim.loop.fs_stat(path)
+        local stat = vim.uv.fs_stat(path)
 
         if not stat then
             return nil
