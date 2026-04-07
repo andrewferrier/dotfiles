@@ -1,6 +1,6 @@
 -- See https://www.reddit.com/r/neovim/comments/pl0p5v/comment/hc78cye/
-vim.opt.path:append("," .. vim.fn.stdpath("config") .. "/**")
-vim.opt.path:append("," .. vim.fn.stdpath("data") .. "/**")
+vim.opt_local.path:append("," .. vim.fn.stdpath("config") .. "/**")
+vim.opt_local.path:append("," .. vim.fn.stdpath("data") .. "/**")
 vim.opt_local.suffixesadd:prepend(".lua")
 vim.opt_local.suffixesadd:prepend("init.lua")
 
