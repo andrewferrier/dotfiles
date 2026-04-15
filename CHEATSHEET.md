@@ -77,6 +77,7 @@ xxd                                             | Hex dump
 speaker-test -c 2 -t wav                        | test speaker
 Cheese                                          | webcam test
 PulseAudio mixer                                | mic test
+netwatch                                        | watch network
 ```
 
 ### Linux - Disks and Filesystems
