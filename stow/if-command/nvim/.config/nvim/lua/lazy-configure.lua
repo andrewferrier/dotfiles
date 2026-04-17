@@ -45,6 +45,7 @@ local lazy_config = {
             },
             paths = { vim.fn.stdpath("data") .. "/skeleton" },
         },
+        reset_packpath = false,
     },
     change_detection = {
         enabled = false,
