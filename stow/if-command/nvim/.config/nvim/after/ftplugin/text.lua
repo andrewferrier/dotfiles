@@ -1,1 +1,0 @@
-require("filetype.text").setup()

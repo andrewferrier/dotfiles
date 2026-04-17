@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "spellwand.nvim": {
+      "rev": "ad3e01533ad94cadae8b5e837241c09929006415",
+      "src": "https://github.com/chaneyzorn/spellwand.nvim"
+    }
+  }
+}

@@ -1,5 +1,3 @@
-require("filetype.text").setup()
-
 -- Borrowed from
 -- https://github.com/wincent/wincent/blob/main/aspects/nvim/files/.config/nvim/after/ftplugin/mail.lua;
 -- 'If you use long lines, mutt will automatically switch to quoted-printable

@@ -1,5 +1,3 @@
-require("filetype.text").setup()
-
 vim.cmd.iabbrev(
     "<buffer>",
     "zTODO",

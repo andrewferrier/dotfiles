@@ -1,5 +1,3 @@
-require("filetype.text").setup()
-
 vim.keymap.set(
     "n",
     "gO",
