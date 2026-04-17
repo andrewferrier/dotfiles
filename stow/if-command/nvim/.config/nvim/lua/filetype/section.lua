@@ -11,7 +11,7 @@ local create_opts = function(desc)
 end
 
 ---@param pattern_start string
-local setup_outline = function(pattern_start)
+M.setup_outline = function(pattern_start)
     vim.keymap.set("n", "gO", function()
         local view = vim.fn.winsaveview()
         vim.cmd.vimgrep("'" .. pattern_start .. "'", "%")
@@ -66,13 +66,6 @@ M.setup_navigation = function(pattern_start, pattern_end)
             vim.fn.search(pattern_end, "bW")
         end, create_opts("Move to start of previous section"))
     end
-end
-
----@param pattern_start string
----@param pattern_end? string
-M.setup = function(pattern_start, pattern_end)
-    setup_outline(pattern_start)
-    M.setup_navigation(pattern_start, pattern_end)
 end
 
 return M
