@@ -28,4 +28,4 @@ vim.api.nvim_create_autocmd("Progress", {
 })
 
 vim.opt.showcmdloc = "statusline"
-vim.o.statusline = "%!v:lua.require('statusline').render()"
+vim.opt.statusline = "%!v:lua.require('statusline').render()"

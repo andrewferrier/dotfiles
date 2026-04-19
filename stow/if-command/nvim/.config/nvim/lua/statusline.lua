@@ -6,7 +6,6 @@ local WIN_WIDTH_DIR_FRACTION = 0.03
 local LEFT_BRACE = "‹"
 local RIGHT_BRACE = "›"
 
-local RESET_HIGHLIGHTING = "%*"
 local TRUNCATOR_POSITION = "%<"
 local ALIGN_RHS = "%="
 local SEPARATOR = "│ "
@@ -160,7 +159,6 @@ function M.render()
     sl = sl .. " " .. SEPARATOR
     sl = sl .. TRUNCATOR_POSITION
     sl = sl .. "%{v:lua.require('statusline').getcwd()}"
-    sl = sl .. RESET_HIGHLIGHTING
 
     sl = sl .. ALIGN_RHS
 
