@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "d2-vim": {
+      "rev": "cb3eb7fcb1a2d45c4304bf2e91077d787b724a39",
+      "src": "https://github.com/terrastruct/d2-vim"
+    },
     "gruvbox.nvim": {
       "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
