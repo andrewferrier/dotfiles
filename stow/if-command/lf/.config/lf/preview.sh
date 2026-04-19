@@ -40,16 +40,35 @@ else
 fi
 
 uid() {
-    stat -- "$(readlink -f "$1" || true)" | sha256sum | cut -d' ' -f1
+    stat -- "$(readlink -f "$1" || true)" | sha1sum | cut -d' ' -f1
 }
 
-THUMBNAIL="$IMAGE_CACHE_PATH/$(uid "$FILE_PATH").png"
+NON_IMAGE_THUMBNAIL="$IMAGE_CACHE_PATH/$(uid "$FILE_PATH").png"
+
+display_image_reduced_resolution() {
+    local HASH
+    HASH=$(uid "$1")
+
+    local OUT="${IMAGE_CACHE_PATH}/${HASH}.png"
+
+    if [[ ! -f "$OUT" ]]; then
+        magick "$1" \
+            -auto-orient \
+            -thumbnail 1024x1024\> \
+            -strip \
+            -define png:compression-level=1 \
+            "$OUT"
+    fi
+
+    printf '%s\n' "$OUT"
+}
 
 display_image() {
     # shellcheck disable=SC2154
     if [[ "$lf_user_view" == "default" ]]; then
+        REDUCED_RESOLUTION_IMAGE=$(display_image_reduced_resolution "${1}")
         # Exiting with 1 disables preview cache, forcing cleaning
-        kitty +icat --transfer-mode file --stdin no --scale-up --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${1}" </dev/null >/dev/tty && exit 1
+        kitty +icat --transfer-mode file --stdin no --scale-up --z-index -1 --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${REDUCED_RESOLUTION_IMAGE}" </dev/null >/dev/tty && exit 1
     fi
 }
 
@@ -132,8 +151,8 @@ handle_extension() {
 
     pdf)
         ## Preview as image
-        [[ ! -f $THUMBNAIL ]] && gs -o "${THUMBNAIL}" -sDEVICE=png16m -r200 -dLastPage=1 "${FILE_PATH}" >/dev/null
-        [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
+        [[ ! -f $NON_IMAGE_THUMBNAIL ]] && gs -o "${NON_IMAGE_THUMBNAIL}" -sDEVICE=png16m -r200 -dLastPage=1 "${FILE_PATH}" >/dev/null
+        [[ -f $NON_IMAGE_THUMBNAIL ]] && display_image "$NON_IMAGE_THUMBNAIL"
 
         ## Preview as text conversion
         pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | fmt -w "${WIDTH}" && exit 0
@@ -143,8 +162,8 @@ handle_extension() {
         ;;
 
     drawio)
-        [[ ! -f $THUMBNAIL ]] && ${DRAWIO} -x "${FILE_PATH}" -o "${THUMBNAIL}" --format png --width "${DEFAULT_IMAGE_WIDTH%x*}"
-        [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
+        [[ ! -f $NON_IMAGE_THUMBNAIL ]] && ${DRAWIO} -x "${FILE_PATH}" -o "${NON_IMAGE_THUMBNAIL}" --format png --width "${DEFAULT_IMAGE_WIDTH%x*}"
+        [[ -f $NON_IMAGE_THUMBNAIL ]] && display_image "$NON_IMAGE_THUMBNAIL"
         ;;
 
     svg)
@@ -176,8 +195,8 @@ handle_mime() {
         ;;
 
     video/*)
-        [[ ! -f $THUMBNAIL ]] && ffmpegthumbnailer -i "${FILE_PATH}" -o "${THUMBNAIL}" -s 0 -m
-        [[ -f $THUMBNAIL ]] && display_image "$THUMBNAIL"
+        [[ ! -f $NON_IMAGE_THUMBNAIL ]] && ffmpegthumbnailer -i "${FILE_PATH}" -o "${NON_IMAGE_THUMBNAIL}" -s 0 -m
+        [[ -f $NON_IMAGE_THUMBNAIL ]] && display_image "$NON_IMAGE_THUMBNAIL"
         ;;
 
     application/vnd.openxmlformats-officedocument.wordprocessingml.document)
