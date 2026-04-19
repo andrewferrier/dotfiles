@@ -10,27 +10,46 @@ local TRUNCATOR_POSITION = "%<"
 local ALIGN_RHS = "%="
 local SEPARATOR = "│ "
 
----@return string
-M.featuresenabled = function()
-    local return_string = ""
+---@return string[]
+local featuresenabled = function()
+    ---@type string[]
+    local returns = {}
 
     if vim.bo.filetype ~= "oil" and vim.bo.buftype ~= "terminal" then
         if not vim.diagnostic.is_enabled() then
-            return_string = return_string .. ",¬D"
+            table.insert(returns, "¬D")
         end
 
         if not vim.wo.list and not vim.bo.readonly then
-            return_string = return_string .. ",¬list"
+            table.insert(returns, "¬list")
         end
 
         if vim.bo.fileencoding == "" then
-            return_string = return_string .. ",fenc=?"
+            table.insert(returns, "fenc=?")
         elseif vim.bo.fileencoding ~= "utf-8" then
-            return_string = return_string .. ",fenc=" .. vim.bo.fileencoding
+            table.insert(returns, "fenc=" .. vim.bo.fileencoding)
         end
     end
 
-    return return_string
+    return returns
+end
+
+---@return string[]
+local fileformat = function()
+    if vim.opt.fileformat:get() ~= "unix" then
+        return { vim.opt.fileformat:get() }
+    end
+
+    return {}
+end
+
+---@return string[]
+local modified = function()
+    if vim.opt_local.modified:get() == true then
+        return { "+" }
+    end
+
+    return {}
 end
 
 ---@return string
@@ -42,27 +61,28 @@ local gitsigns = function()
     end
 end
 
----@return string
+---@return string[]
 local indent = function()
+    ---@type string[]
+    local returns = {}
+
     if vim.bo.buftype == "terminal" then
-        return ""
+        return {}
     end
 
-    local returnstring
-
     if vim.bo.expandtab then
-        returnstring = "sw=" .. vim.bo.shiftwidth
+        table.insert(returns, "sw=" .. vim.bo.shiftwidth)
     else
-        returnstring = "ts=" .. vim.bo.tabstop
+        table.insert(returns, "ts=" .. vim.bo.tabstop)
     end
 
     if vim.bo.textwidth ~= 80 and vim.bo.textwidth < 9999 then
         -- If textwidth is very high, we are in 'soft' wrapping mode, don't
         -- display textwidth.
-        returnstring = returnstring .. ",tw=" .. vim.bo.textwidth
+        table.insert(returns, "tw=" .. vim.bo.textwidth)
     end
 
-    return returnstring
+    return returns
 end
 
 ---@return string
@@ -91,15 +111,15 @@ M.getcwd = function()
     end
 end
 
----@return string
-M.wrappingmode = function()
+---@return string[]
+local wrappingmode = function()
     local currentmode = require("wrapping").get_current_mode()
 
     if currentmode ~= nil then
-        return "," .. currentmode
+        return { currentmode }
     end
 
-    return ""
+    return {}
 end
 
 ---@return string
@@ -175,11 +195,19 @@ function M.render()
     sl = sl .. SEPARATOR
 
     -- RHS - File and feature info
-    sl = sl .. indent()
-    sl = sl .. "%{&fileformat!=#'unix'?',ff='.&fileformat:''}"
-    sl = sl .. "%{v:lua.require('statusline').wrappingmode()}"
-    sl = sl .. "%{v:lua.require('statusline').featuresenabled()}"
-    sl = sl .. "%M"
+    sl = sl
+        .. table.concat(
+            vim.iter({
+                fileformat(),
+                indent(),
+                wrappingmode(),
+                featuresenabled(),
+                modified(),
+            })
+                :flatten()
+                :totable(),
+            ","
+        )
     sl = sl .. " " .. SEPARATOR
 
     -- RHS - Location
