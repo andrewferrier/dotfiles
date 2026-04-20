@@ -26,3 +26,14 @@ vim.opt.listchars = {
 }
 
 vim.opt.messagesopt = "hit-enter,history:10000"
+
+vim.pack.add({ { src = "https://github.com/rachartier/tiny-glimmer.nvim" } })
+require("tiny-glimmer").setup({
+    overwrite = {
+        -- Search is too confusing, because the highlight we end up using
+        -- isn't clear once the animation has disappeared
+        search = { enabled = false },
+        undo = { enabled = true },
+        redo = { enabled = true },
+    },
+})

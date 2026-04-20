@@ -1,3 +1,6 @@
+vim.pack.add({ { src = "https://github.com/smjonas/inc-rename.nvim" } })
+require("inc_rename").setup({ cmd_name = "LspRename" })
+
 local TREESITTER_RENAME_INEFFECTIVE = { "markdown", "latex" }
 
 vim.keymap.set("n", "grn", function()

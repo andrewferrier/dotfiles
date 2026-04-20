@@ -1,3 +1,30 @@
+vim.pack.add({ { src = "https://github.com/neovim/nvim-lspconfig" } })
+
+-- For doing diagnostics:
+-- vim.lsp.set_log_level("info")
+
+for _, lsp in ipairs({
+    "ansiblels",
+    "bashls",
+    "cssls",
+    "dockerls",
+    "gopls",
+    "jsonls",
+    "lemminx",
+    "lua_ls",
+    "ruff",
+    "rust_analyzer",
+    "taplo",
+    "texlab",
+    "tofu_ls",
+    "ts_ls",
+    "ty",
+    "vimls",
+    "yamlls",
+}) do
+    vim.lsp.enable(lsp)
+end
+
 vim.lsp.on_type_formatting.enable()
 vim.lsp.inlay_hint.enable()
 
