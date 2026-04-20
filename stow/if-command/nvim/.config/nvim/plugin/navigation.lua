@@ -13,7 +13,6 @@ vim.api.nvim_create_autocmd({ "BufNew", "BufRead" }, {
             -- current directory in NeoVim
             local root = vim.fs.root(path, { ".git", "Makefile" })
             if root and vim.fn.getcwd(0) ~= root then
-                vim.notify("Changing lcd to dir " .. root)
                 vim.cmd.lcd(root)
             end
         end
