@@ -3,12 +3,46 @@ local M = {}
 local WIN_WIDTH_FILENAME_FRACTION = 0.07
 local WIN_WIDTH_DIR_FRACTION = 0.03
 
+local MAX_SPELL_ERRORS = 20
+
 local LEFT_BRACE = "‹"
 local RIGHT_BRACE = "›"
 
 local TRUNCATOR_POSITION = "%<"
 local ALIGN_RHS = "%="
 local SEPARATOR = "│ "
+
+---@return integer
+local function get_spelling_count()
+    local view = vim.fn.winsaveview()
+    local oldwrapscan = vim.o.wrapscan
+    vim.o.wrapscan = false
+
+    local spell_count = 0
+    vim.fn.cursor(1, 1)
+
+    while true do
+        local lastline = vim.fn.line(".")
+        local lastcol = vim.fn.col(".")
+        vim.cmd.normal({ args = { "]S" }, bang = true })
+        if
+            (vim.fn.line(".") == lastline and vim.fn.col(".") == lastcol)
+            or spell_count > MAX_SPELL_ERRORS
+        then
+            break
+        end
+        spell_count = spell_count + 1
+    end
+
+    vim.fn.winrestview(view)
+    vim.o.wrapscan = oldwrapscan
+
+    if spell_count > MAX_SPELL_ERRORS then
+        spell_count = MAX_SPELL_ERRORS
+    end
+
+    return spell_count
+end
 
 ---@return string[]
 local featuresenabled = function()
@@ -18,6 +52,10 @@ local featuresenabled = function()
     if vim.bo.filetype ~= "oil" and vim.bo.buftype ~= "terminal" then
         if not vim.diagnostic.is_enabled() then
             table.insert(returns, "¬D")
+        end
+
+        if vim.opt_local.spell:get() then
+            table.insert(returns, "S")
         end
 
         if not vim.wo.list and not vim.bo.readonly then
@@ -122,6 +160,35 @@ local wrappingmode = function()
     return {}
 end
 
+vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufWritePost" }, {
+    callback = function()
+        vim.b.spelling_warning = nil
+    end,
+})
+
+---@return string
+M.spellingerrorcount = function()
+    if vim.wo.spell == true then
+        if vim.b.spelling_warning == nil then
+            local spelling_count = get_spelling_count()
+
+            if spelling_count > 0 then
+                vim.b.spelling_warning = LEFT_BRACE
+                    .. "S "
+                    .. spelling_count
+                    .. RIGHT_BRACE
+                    .. " "
+            else
+                vim.b.spelling_warning = ""
+            end
+        end
+    else
+        vim.b.spelling_warning = ""
+    end
+
+    return vim.b.spelling_warning
+end
+
 ---@return string
 M.lspprogress = function()
     local status = vim.trim(vim.lsp.status())
@@ -188,6 +255,7 @@ function M.render()
     sl = sl .. "%{v:lua.vim.ui.progress_status()}"
     sl = sl .. "%{% &busy > 0 ? '◐ ' : '' %}"
     sl = sl .. vim.diagnostic.status() .. " "
+    sl = sl .. "%{v:lua.require('statusline').spellingerrorcount()}"
     sl = sl .. gitsigns()
     sl = sl .. searchcount()
     sl = sl .. macrorecording()
