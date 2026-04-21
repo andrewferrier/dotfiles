@@ -1,4 +1,4 @@
-vim.api.nvim_create_user_command("EmptyRegisters", function()
+vim.api.nvim_create_user_command("EmptyLetteredRegisters", function()
     for c in
         ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"):gmatch(".")
     do
@@ -7,4 +7,5 @@ vim.api.nvim_create_user_command("EmptyRegisters", function()
         vim.cmd({ cmd = "call", args = { "setreg ('" .. c .. "', [])" } })
         vim.cmd({ cmd = "wshada", bang = true })
     end
+    vim.notify("Registers emptied.")
 end, {})
