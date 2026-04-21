@@ -1,27 +1,9 @@
-local format_key = function()
-    local opts = {}
-
-    if vim.o.filetype == "tex" then
-        -- Can't find a way to disable this in texlab configuration - texlab
-        -- causes latexindex to time out
-        opts = { lsp_format = "never", timeout_ms = 5000 }
-    end
-
-    require("conform").format(opts, function(err, did_edit)
-        if not err then
-            if did_edit then
-                vim.notify("Formatted document using conform.")
-            else
-                vim.notify("Formatted document using conform; no changes.")
-            end
-        else
-            vim.notify(
-                "Could not format document; " .. err .. ".",
-                vim.log.levels.ERROR
-            )
-        end
-    end)
-end
+vim.pack.add({
+    {
+        src = "https://github.com/stevearc/conform.nvim",
+        version = vim.version.range("*"),
+    },
+})
 
 ---@type conform.setupOpts
 local opts = {
@@ -92,18 +74,29 @@ local opts = {
     },
 }
 
----@type LazyPluginSpec
--- selene: allow(mixed_table)
-return {
-    "stevearc/conform.nvim",
-    opts = opts,
-    keys = {
-        {
-            "gQ",
-            format_key,
-            desc = "Format buffer",
-        },
-    },
-    cmd = { "ConformInfo" },
-    version = "*",
-}
+require("conform").setup(opts)
+
+vim.keymap.set("n", "gQ", function()
+    local format_opts = {}
+
+    if vim.o.filetype == "tex" then
+        -- Can't find a way to disable this in texlab configuration - texlab
+        -- causes latexindex to time out
+        format_opts = { lsp_format = "never", timeout_ms = 5000 }
+    end
+
+    require("conform").format(format_opts, function(err, did_edit)
+        if not err then
+            if did_edit then
+                vim.notify("Formatted document using conform.")
+            else
+                vim.notify("Formatted document using conform; no changes.")
+            end
+        else
+            vim.notify(
+                "Could not format document; " .. err .. ".",
+                vim.log.levels.ERROR
+            )
+        end
+    end)
+end, { desc = "Format buffer" })
