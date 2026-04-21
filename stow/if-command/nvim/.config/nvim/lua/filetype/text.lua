@@ -9,8 +9,6 @@ M.setup = function()
     then
         vim.opt_local.spell = true
     end
-
-    vim.b.text_based_filetype = true
 end
 
 return M
