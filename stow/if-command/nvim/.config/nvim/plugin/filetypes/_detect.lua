@@ -45,3 +45,13 @@ vim.filetype.add({
         [".*site.ya?ml"] = "yaml.ansible",
     },
 })
+
+-- If filetype is empty, try to detect it after writing
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "*",
+    callback = function()
+        if vim.bo.filetype == "" then
+            vim.cmd.filetype("detect")
+        end
+    end,
+})
