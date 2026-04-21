@@ -4,6 +4,7 @@ local attach = function(bufnr)
 
     local git_nav_hunk = function(lhs, direction)
         vim.keymap.set("n", lhs, function()
+            ---@diagnostic disable-next-line: missing-fields
             gitsigns.nav_hunk(string.lower(direction), { target = "all" })
         end, {
             desc = direction .. " hunk",
@@ -27,6 +28,7 @@ local attach = function(bufnr)
         vim.cmd.update()
         vim.schedule(function()
             gitsigns.stage_hunk()
+            ---@diagnostic disable-next-line: missing-fields
             gitsigns.nav_hunk("next", { target = "all" })
         end)
     end, { desc = "Stage/unstage hunk", buffer = bufnr })
@@ -55,6 +57,31 @@ local attach = function(bufnr)
     })
 end
 
+vim.pack.add({
+    {
+        src = "https://github.com/lewis6991/gitsigns.nvim",
+        version = vim.version.range("*"),
+    },
+})
+
+require("gitsigns").setup({
+    signs_staged = {
+        add = { text = "┋ " },
+        change = { text = "┋ " },
+        delete = { text = "﹍" },
+        topdelete = { text = "﹉" },
+        changedelete = { text = "┋ " },
+    },
+    signs = {
+        change = { show_count = true, text = "~" },
+        delete = { show_count = true },
+        topdelete = { show_count = true },
+        changedelete = { show_count = true, text = "⋍" },
+    },
+    sign_priority = 10,
+    on_attach = attach,
+})
+
 vim.api.nvim_create_user_command("GitQFList", function()
     if vim.fs.root(vim.fn.getcwd(0), ".git") then
         -- gitsigns always opens QuickFix list, async, even if empty
@@ -63,28 +90,3 @@ vim.api.nvim_create_user_command("GitQFList", function()
         vim.notify("Not in git directory", vim.log.levels.WARN)
     end
 end, {})
-
--- selene: allow(mixed_table)
----@type LazyPluginSpec
-return {
-    "lewis6991/gitsigns.nvim",
-    opts = {
-        signs_staged = {
-            add = { text = "┋ " },
-            change = { text = "┋ " },
-            delete = { text = "﹍" },
-            topdelete = { text = "﹉" },
-            changedelete = { text = "┋ " },
-        },
-        signs = {
-            change = { show_count = true, text = "~" },
-            delete = { show_count = true },
-            topdelete = { show_count = true },
-            changedelete = { show_count = true, text = "⋍" },
-        },
-        sign_priority = 10,
-        on_attach = attach,
-    },
-    event = "BufEnter",
-    version = "*",
-}

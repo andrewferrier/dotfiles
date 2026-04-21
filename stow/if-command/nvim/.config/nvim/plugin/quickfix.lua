@@ -1,4 +1,9 @@
-vim.pack.add({ { src = "https://github.com/stevearc/quicker.nvim" } })
+vim.pack.add({
+    {
+        src = "https://github.com/stevearc/quicker.nvim",
+        version = vim.version.range("*"),
+    },
+})
 
 -- selene: allow(mixed_table)
 ---@module "quicker"
