@@ -18,6 +18,11 @@ vim.api.nvim_create_autocmd({ "DiagnosticChanged", "LspProgress" }, {
     callback = redraw_status,
 })
 
+vim.api.nvim_create_autocmd("User", {
+    pattern = "GitSignsUpdate",
+    callback = redraw_status,
+})
+
 vim.api.nvim_create_autocmd("Progress", {
     pattern = { "term" },
     callback = function(ev)
