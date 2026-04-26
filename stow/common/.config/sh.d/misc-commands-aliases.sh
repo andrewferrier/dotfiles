@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 alias combine-into-pdf='convert -density 300 -quality 100'
+alias dirdiff='diff --color --brief --recursive --side-by-side'
 alias docker-cleanup="docker container prune -f ; docker image prune -f ; docker volume prune -f ; docker network prune -f"
 alias docker-rmi-interactive="docker images | sed -E 's%([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+).*%\\1:\\2 \\3%g' | tail -n +2 | sort -r | fzf -d' ' -m --with-nth=1 | cut -d' ' -f2 | xargs -t docker image rm"
 alias external-ip="curl -4 ifconfig.co"
@@ -12,7 +13,6 @@ alias ssh-audit='docker run -it -p 2222:2222 docker.io/positronsecurity/ssh-audi
 alias testssl='docker run -t --rm docker.io/mvance/testssl'
 alias webshare='python3 -m http.server'
 alias wgetmirror='wget --execute robots=off --mirror --page-requisites --adjust-extension --no-parent --convert-links'
-
 
 if [[ ${OSTYPE} == darwin* ]]; then
     alias listening="sudo lsof -iTCP -sTCP:LISTEN -n -P"
