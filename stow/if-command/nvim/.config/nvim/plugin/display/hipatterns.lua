@@ -1,4 +1,9 @@
-local hipatterns = require("mini.hipatterns")
+vim.pack.add({
+    {
+        src = "https://github.com/echasnovski/mini.nvim",
+        version = vim.version.range("*"),
+    },
+})
 
 ---@param pattern string
 ---@return function
@@ -33,4 +38,4 @@ local highlighters = {
     },
 }
 
-hipatterns.setup({ highlighters = highlighters })
+require("mini.hipatterns").setup({ highlighters = highlighters })
