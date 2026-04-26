@@ -252,7 +252,7 @@ function M.render()
     -- RHS - Progress, Status and Warnings
     sl = sl .. "%-10.S"
     sl = sl .. "%{v:lua.require('statusline').lspprogress()}"
-    sl = sl .. "%{v:lua.vim.ui.progress_status()}"
+    sl = sl .. vim.ui.progress_status()
     sl = sl .. "%{% &busy > 0 ? '◐ ' : '' %}"
     sl = sl .. vim.diagnostic.status() .. " "
     sl = sl .. "%{v:lua.require('statusline').spellingerrorcount()}"

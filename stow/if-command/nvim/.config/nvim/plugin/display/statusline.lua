@@ -23,13 +23,5 @@ vim.api.nvim_create_autocmd("User", {
     callback = redraw_status,
 })
 
-vim.api.nvim_create_autocmd("Progress", {
-    pattern = { "term" },
-    callback = function(ev)
-        print(string.format("Progress event: %s", vim.inspect(ev)))
-        redraw_status()
-    end,
-})
-
 vim.opt.showcmdloc = "statusline"
 vim.opt.statusline = "%!v:lua.require('statusline').render()"
