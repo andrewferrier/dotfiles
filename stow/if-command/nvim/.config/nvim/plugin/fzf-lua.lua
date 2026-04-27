@@ -12,6 +12,7 @@ fzf_lua.setup({
             title = false,
             flip_columns = 200,
             scrollbar = false,
+            ---@diagnostic disable-next-line: missing-fields
             winopts = {
                 cursorline = false,
                 number = false,
