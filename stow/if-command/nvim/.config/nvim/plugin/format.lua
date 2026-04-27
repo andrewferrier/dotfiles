@@ -5,8 +5,7 @@ vim.pack.add({
     },
 })
 
----@type conform.setupOpts
-local opts = {
+require("conform").setup({
     formatters_by_ft = {
         d2 = { "d2" },
         html = { "prettier" },
@@ -72,9 +71,7 @@ local opts = {
             end,
         },
     },
-}
-
-require("conform").setup(opts)
+})
 
 vim.keymap.set("n", "gQ", function()
     local format_opts = {}

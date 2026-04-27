@@ -5,13 +5,10 @@ vim.pack.add({
     },
 })
 
----@type snacks.Config
-local opts = {
+require("snacks").setup({
     -- See https://github.com/folke/snacks.nvim/issues/1022
     bigfile = { enabled = true },
-}
-
-require("snacks").setup(opts)
+})
 
 local bigfile_callback = function(regular_filetype)
     return function(path, buf)

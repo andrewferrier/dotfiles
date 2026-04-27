@@ -6,9 +6,7 @@ vim.pack.add({
 })
 
 -- selene: allow(mixed_table)
----@module "quicker"
----@type quicker.SetupOptions
-local opts = {
+require("quicker").setup({
     keys = {
         {
             ">",
@@ -21,9 +19,7 @@ local opts = {
             desc = "Collapse quickfix content",
         },
     },
-}
-
-require("quicker").setup(opts)
+})
 
 vim.api.nvim_create_autocmd({ "QuickFixCmdPost" }, {
     callback = function()
