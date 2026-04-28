@@ -1,23 +1,9 @@
-local STATEFILE = vim.fn.expand("~/.cache/day-night/state")
-
-local update_background = function()
-    if
-        vim.fn.filereadable(STATEFILE)
-        and vim.fn.index(vim.fn.readfile(STATEFILE), "day") >= 0
-    then
-        vim.opt.background = "light"
-    else
+vim.pack.add({ { src = "https://github.com/afonsofrancof/OSC11.nvim" } })
+require("osc11").setup({
+    on_dark = function()
         vim.opt.background = "dark"
-    end
-end
-
-vim.uv.new_fs_event():start(STATEFILE, {
-    watch_entry = true,
-    stat = true,
-}, function(err, _, _)
-    if not err then
-        vim.schedule(update_background)
-    end
-end)
-
-update_background()
+    end,
+    on_light = function()
+        vim.opt.background = "light"
+    end,
+})
