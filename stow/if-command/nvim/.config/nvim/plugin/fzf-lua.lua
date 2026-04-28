@@ -81,12 +81,10 @@ vim.keymap.set("n", "cvg", function()
             end,
         },
         fzf_opts = {
-            ["--preview"] = fzf_lua.shell.raw_preview_action_cmd(
-                function(items)
-                    return "eza --level 2 --tree --color=always --group-directories-first --no-quotes "
-                        .. vim.fn.escape(items[1], " (){}`'\"")
-                end
-            ),
+            ["--preview"] = fzf_lua.shell.stringify_cmd(function(items)
+                return "eza --level 2 --tree --color=always --group-directories-first --no-quotes "
+                    .. vim.fn.escape(items[1], " (){}`'\"")
+            end, {}, "{}"),
             ["--no-sort"] = "",
         },
     })
