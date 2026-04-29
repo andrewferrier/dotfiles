@@ -35,7 +35,6 @@ require("mini.basics").setup({
 -- turning them off
 vim.keymap.del("n", "yoh")
 vim.keymap.del("n", "yoi")
-vim.keymap.del("n", "yow")
 
 require("mini.bracketed").setup({
     comment = { suffix = "o" }, -- 'c' is used in diff mode for diffs
