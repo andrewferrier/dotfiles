@@ -1,10 +1,8 @@
-vim.pack.add({ { src = "https://github.com/smjonas/inc-rename.nvim" } })
+vim.pack.add({ "https://github.com/smjonas/inc-rename.nvim" })
 
 -- FIXME: Technically this plugin is deprecated, however it still seems to work,
 -- so keeping it for now
-vim.pack.add({
-    { src = "https://github.com/nvim-treesitter/nvim-treesitter-refactor" },
-})
+vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter-refactor" })
 
 require("inc_rename").setup({ cmd_name = "LspRename" })
 

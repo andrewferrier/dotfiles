@@ -1,4 +1,4 @@
-vim.pack.add({ { src = "https://github.com/jfryy/keytrail.nvim" } })
+vim.pack.add({ "https://github.com/jfryy/keytrail.nvim" })
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "json", "yaml" },

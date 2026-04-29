@@ -1,8 +1,6 @@
-vim.pack.add({ { src = "https://github.com/nvim-lua/plenary.nvim" } })
-vim.pack.add({ { src = "https://github.com/MunifTanjim/nui.nvim" } })
-vim.pack.add({
-    { src = "https://github.com/antosha417/nvim-lsp-file-operations" },
-})
+vim.pack.add({ "https://github.com/nvim-lua/plenary.nvim" })
+vim.pack.add({ "https://github.com/MunifTanjim/nui.nvim" })
+vim.pack.add({ "https://github.com/antosha417/nvim-lsp-file-operations" })
 vim.pack.add({
     {
         src = "https://github.com/nvim-neo-tree/neo-tree.nvim",

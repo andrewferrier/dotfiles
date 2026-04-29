@@ -1,4 +1,1 @@
-vim.pack.add(
-    { { src = "https://github.com/terrastruct/d2-vim" } },
-    { load = true }
-)
+vim.pack.add({ "https://github.com/terrastruct/d2-vim" }, { load = true })

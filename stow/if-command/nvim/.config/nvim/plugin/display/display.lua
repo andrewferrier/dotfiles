@@ -27,7 +27,7 @@ vim.opt.listchars = {
 
 vim.opt.messagesopt = "hit-enter,history:10000"
 
-vim.pack.add({ { src = "https://github.com/rachartier/tiny-glimmer.nvim" } })
+vim.pack.add({ "https://github.com/rachartier/tiny-glimmer.nvim" })
 require("tiny-glimmer").setup({
     overwrite = {
         -- Search is too confusing, because the highlight we end up using
