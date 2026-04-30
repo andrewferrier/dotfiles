@@ -3,7 +3,7 @@
 export PAGER=less
 export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME:-${HOME}/.config}/ripgrep/rc.conf
 
-export FZF_DEFAULT_OPTS_INITIAL='--exact'
+export FZF_DEFAULT_OPTS_INITIAL='--exact --gutter=" "'
 
 if command -v fzf >/dev/null 2>/dev/null; then
     # shellcheck disable=SC2312
