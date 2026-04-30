@@ -33,7 +33,7 @@ if [[ ${OSTYPE} == darwin* ]]; then
     alias sudo="sudo -p '[sudo] %p'\\''s password: '"
 else
     alias df='df --print-type --human-readable'
-    alias lsblk='lsblk --discard -o NAME,RM,RO,MOUNTPOINT,TYPE,FSTYPE,SIZE,FSUSED,UUID,LABEL,PARTLABEL,DISC-GRAN,DISC-MAX,PHY-SEC,LOG-SEC --paths'
+    alias lsblk='lsblk --discard -o NAME,MOUNTPOINT,UUID,TYPE,FSTYPE,FSUSED,SIZE,RO,LABEL,PARTLABEL,PHY-SEC,LOG-SEC --paths'
     alias ps='COLUMNS=10000 ps -e -f --forest'
 fi
 
