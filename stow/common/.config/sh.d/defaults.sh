@@ -2,7 +2,6 @@
 
 alias aria2c='aria2c --max-connection-per-server=5'
 alias gzip='gzip --rsyncable'
-alias ip='ip --color=auto'
 alias lzip="lzip --best -m128 -s128MiB"
 alias mkdir="mkdir -v"
 alias rm='rm -Iv'
