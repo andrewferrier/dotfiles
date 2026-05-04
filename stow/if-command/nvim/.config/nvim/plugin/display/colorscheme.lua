@@ -6,7 +6,6 @@ require("gruvbox").setup({
     transparent_mode = false,
     overrides = {
         DebugPrintLine = { link = "ErrorMsg" },
-        DiagnosticUnnecessary = { link = "Whitespace" },
         OilInfo = { link = "NonText" },
         SignColumn = { link = "LineNr" },
         ["@lsp.mod.readonly"] = { bold = true },
