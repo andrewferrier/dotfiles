@@ -18,8 +18,6 @@ fzf_lua.setup({
     },
     fzf_opts = {
         ["--layout"] = "default",
-        ["--color"] = "gutter:-1",
-        ["--preview-window"] = "border-none",
     },
     grep = {
         rg_opts = "--hidden --glob=!.git/ "
