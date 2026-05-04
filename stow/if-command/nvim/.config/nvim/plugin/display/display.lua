@@ -11,6 +11,10 @@ vim.opt.splitkeep = "screen"
 vim.opt.splitright = true
 vim.opt.switchbuf = "useopen"
 
+if vim.fn.has("nvim-0.13") == 1 then
+    vim.opt.shortmess:append("u")
+end
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 3
