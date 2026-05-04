@@ -245,7 +245,7 @@ function M.render()
     -- LHS - Cwd
     sl = sl .. " " .. SEPARATOR
     sl = sl .. TRUNCATOR_POSITION
-    sl = sl .. "%{v:lua.require('statusline').getcwd()}"
+    sl = sl .. "%{v:lua.require('statusline').getcwd()} "
 
     sl = sl .. ALIGN_RHS
 
