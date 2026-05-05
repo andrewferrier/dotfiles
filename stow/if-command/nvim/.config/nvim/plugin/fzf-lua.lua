@@ -99,3 +99,7 @@ end, { silent = true, desc = "Paste from register using fzf" })
 vim.keymap.set("n", "gO", function()
     fzf_lua.lsp_document_symbols()
 end)
+
+vim.keymap.set("n", "gra", function()
+    fzf_lua.lsp_code_actions()
+end, { silent = true })
