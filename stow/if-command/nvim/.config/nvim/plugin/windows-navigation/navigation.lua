@@ -84,3 +84,17 @@ end, { desc = "Open oil in directory of file", unique = true })
 vim.keymap.set("n", "<C-W>goD", function()
     require("open_filedirterm").open_split_oil(vim.fn.getcwd(0))
 end, { desc = "Open oil in lcd", unique = true })
+
+vim.keymap.set("n", "<C-W>gor", function()
+    require("neo-tree.command").execute({
+        reveal_file = vim.fn.expand("%:p"),
+        reveal_force_cwd = true,
+    })
+end, { desc = "Open Neotree at file", unique = true })
+
+vim.keymap.set("n", "<C-W>goR", function()
+    require("neo-tree.command").execute({
+        reveal_file = vim.fn.getcwd(0),
+        reveal_force_cwd = true,
+    })
+end, { desc = "Open oil in lcd", unique = true })
