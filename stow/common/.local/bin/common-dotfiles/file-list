@@ -153,9 +153,7 @@ function wrapper_fd() {
     done
 
     # Exclude directories which tend to have a lot of files but are not that
-    # interesting. Also, apply EXCLUDE_PATTERN in fd only because memy already
-    # has its own exclude mechanism. FIXME: refactor this in future so
-    # EXCLUDE_PATTERN is applied directly to fd -E.
+    # interesting.
     "$FD" \
         --absolute-path \
         --hidden \
@@ -163,7 +161,7 @@ function wrapper_fd() {
         -E .git/ \
         -E node_modules/ \
         . "${FD_DIRS[@]}" \
-        --type "$FD_TYPE" | sed 's|/$||' | "${GREP[@]}" -E -v -i --binary-files=text "$EXCLUDE_PATTERN"
+        --type "$FD_TYPE" | sed 's|/$||'
 }
 
 function wrapper_mdfind() {
@@ -199,6 +197,7 @@ cat \
     <(wrapper_memy) \
     <(wrapper_mdfind) \
     <(wrapper_fd ${SEARCH_DIRS[@]}) |
+    "${GREP[@]}" -E -v -i --binary-files=text "$EXCLUDE_PATTERN" |
     "${GREP[@]}" -E "$INCLUDE_PATTERN" |
     sed -e "s/$ESCAPED_HOME\//~\//" |
     awk '!seen[$0]++' |
