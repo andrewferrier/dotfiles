@@ -10,6 +10,12 @@ XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}"
 THEME_NAME=${THEME_NAME:-"Adwaita-dark"}
 DARK_INT=${DARK_INT:-1}
 
+if [[ "$DARK_INT" -eq 1 ]]; then
+    COLOR_SCHEME='prefer-dark'
+else
+    COLOR_SCHEME='prefer-light'
+fi
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     mkdir -p \
         "${XDG_CONFIG_HOME}/gtk-2.0" \
@@ -18,4 +24,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "gtk-theme-name=\"${THEME_NAME}\"" >"${XDG_CONFIG_HOME}/gtk-2.0/gtkrc2"
     printf "[Settings]\ngtk-theme-name=%s\ngtk-application-prefer-dark-theme=%s\n" "${THEME_NAME}" "${DARK_INT}" >"${XDG_CONFIG_HOME}/gtk-3.0/settings.ini"
     xfconf-query -c xsettings -p /Net/ThemeName -s "${THEME_NAME}"
+
+    gsettings set org.gnome.desktop.interface color-scheme "${COLOR_SCHEME}"
+    gsettings set org.gnome.desktop.interface gtk-theme "${THEME_NAME}"
 fi
