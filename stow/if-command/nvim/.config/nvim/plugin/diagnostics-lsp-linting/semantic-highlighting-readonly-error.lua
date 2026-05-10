@@ -33,6 +33,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         if filetype ~= "lua" then
             vim.api.nvim_create_autocmd("LspTokenUpdate", {
+                -- FIXME: In 0.13 this was renamed to 'buf', but keeping for
+                -- backward compatibility
                 buffer = args.buf,
                 callback = show_unconst_caps,
             })
