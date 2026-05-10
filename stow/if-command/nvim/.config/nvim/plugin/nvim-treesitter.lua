@@ -22,6 +22,27 @@ vim.pack.add({
 vim.cmd.packadd("nvim-treesitter")
 
 require("nvim-treesitter").setup()
+
+-- These are languages commonly injected into others, which are otherwise not
+-- installed by default
+require("nvim-treesitter")
+    .install({
+        "bash",
+        "comment",
+        "css",
+        "diff",
+        "html",
+        "json",
+        "luap",
+        "markdown",
+        "markdown_inline",
+        "printf",
+        "re2c",
+        "regex",
+        "xml",
+    })
+    :wait(120000)
+
 local available_to_install = require("nvim-treesitter").get_available()
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
