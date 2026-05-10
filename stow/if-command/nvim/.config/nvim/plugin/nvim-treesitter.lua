@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
                         .. filetype
                         .. "; installing..."
                 )
-                treesitter.install(filetype):wait(60000)
+                treesitter.install(treesitter_lang):wait(60000)
                 vim.treesitter.start(args.buf)
             end
         end
