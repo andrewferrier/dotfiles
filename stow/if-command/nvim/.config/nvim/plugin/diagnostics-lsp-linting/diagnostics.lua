@@ -16,7 +16,7 @@ end
 ---@param diagnostic vim.Diagnostic
 ---@return string
 local diagnostic_format = function(diagnostic)
-    local message = diagnostic.message
+    local message = vim.trim(diagnostic.message)
 
     local source = diagnostic_source(diagnostic)
 
@@ -39,6 +39,7 @@ vim.diagnostic.config({
             min = vim.diagnostic.severity.WARN,
             max = vim.diagnostic.severity.ERROR,
         },
+        spacing = 15,
     },
 })
 
