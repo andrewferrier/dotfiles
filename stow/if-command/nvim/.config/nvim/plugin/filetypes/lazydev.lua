@@ -11,6 +11,7 @@ local opts = {
         "oil.nvim",
         "quicker.nvim",
         "snacks.nvim",
+        "wrapping.nvim",
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
     },
 }
