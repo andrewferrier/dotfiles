@@ -1,10 +1,8 @@
 local M = {}
 
-vim.api.nvim_create_user_command("PackUpdate", function(_)
+vim.api.nvim_create_user_command("PackUpdateAndClean", function(_)
     vim.pack.update(nil)
-end, {})
 
-vim.api.nvim_create_user_command("PackClean", function(_)
     local inactive_names = vim.tbl_map(
         function(plugin)
             return plugin.spec.name
