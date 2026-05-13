@@ -21,19 +21,46 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-vim.keymap.set("i", "<Tab>", function()
-    if vim.fn.pumvisible() == 1 then
-        local info = vim.fn.complete_info()
+---@param key string
+---@param complete_key string
+local tab_handler = function(key, complete_key)
+    vim.keymap.set("i", key, function()
+        if vim.fn.pumvisible() == 1 then
+            local info = vim.fn.complete_info()
 
-        local count = #info.items
-        local is_item_selected = info.selected ~= -1
+            local count = #info.items
+            local is_item_selected = info.selected ~= -1
 
-        if is_item_selected and count == 1 then
-            return "<C-y>"
+            if is_item_selected and count == 1 then
+                return "<C-y>"
+            else
+                return complete_key
+            end
         else
-            return "<C-n>"
+            return key
         end
-    else
-        return "<Tab>"
-    end
-end, { expr = true, silent = true })
+    end, { expr = true, silent = true })
+end
+
+---@param key string
+---@param include_key boolean
+local accept_or_key = function(key, include_key)
+    vim.keymap.set("i", key, function()
+        if vim.fn.pumvisible() == 1 then
+            if include_key then
+                return "<C-y>" .. key
+            else
+                return "<C-y>"
+            end
+        else
+            return key
+        end
+    end, { expr = true, silent = true })
+end
+
+accept_or_key("(", true)
+accept_or_key("<CR>", false)
+accept_or_key("<Space>", true)
+accept_or_key("=", true)
+tab_handler("<S-Tab>", "<C-p>")
+tab_handler("<Tab>", "<C-n>")
