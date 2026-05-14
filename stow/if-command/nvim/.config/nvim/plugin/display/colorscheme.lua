@@ -1,6 +1,6 @@
 vim.pack.add({ "https://github.com/ellisonleao/gruvbox.nvim" })
 
-require("gruvbox").setup({
+local opts = {
     contrast = "hard",
     dim_inactive = true,
     transparent_mode = false,
@@ -14,6 +14,12 @@ require("gruvbox").setup({
     italic = {
         strings = false,
     },
-})
+}
+
+if vim.fn.has("nvim-0.13") == 1 then
+    opts.overrides.OilInfo = { link = "Dimmed" }
+end
+
+require("gruvbox").setup(opts)
 
 vim.cmd.colorscheme("gruvbox")
