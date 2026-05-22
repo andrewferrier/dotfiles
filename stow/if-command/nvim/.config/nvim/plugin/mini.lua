@@ -10,14 +10,6 @@ vim.pack.add({
     },
 })
 
-require("mini.ai").setup({
-    -- Disable setup of 'an'/'in' for new LSP mappings in NeoVim 0.12
-    mappings = {
-        around_next = "",
-        inside_next = "",
-    },
-})
-
 require("mini.align").setup({
     mappings = {
         start = "gl",
