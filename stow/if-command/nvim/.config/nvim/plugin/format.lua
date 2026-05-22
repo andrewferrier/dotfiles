@@ -34,10 +34,7 @@ require("conform").setup({
                         { buf = context.buf }
                     ),
                     "--tab-width",
-                    vim.api.nvim_get_option_value(
-                        "shiftwidth",
-                        { buf = context.buf }
-                    ),
+                    context.shiftwidth,
                 }
             end,
         },
@@ -61,10 +58,7 @@ require("conform").setup({
                         { buf = context.buf }
                     ),
                     "--indent-width",
-                    vim.api.nvim_get_option_value(
-                        "shiftwidth",
-                        { buf = context.buf }
-                    ),
+                    context.shiftwidth,
                     "--indent-type",
                     "spaces",
                 }
