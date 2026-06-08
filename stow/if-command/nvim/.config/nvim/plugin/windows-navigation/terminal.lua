@@ -19,6 +19,7 @@ vim.api.nvim_create_autocmd("TermClose", {
 ---@param lhs string
 ---@param rhs string
 local map = function(lhs, rhs)
+    -- FIXME: Can be refactored for lhs to be a table in NeoVim 0.13+
     vim.keymap.set(
         "t",
         lhs,
