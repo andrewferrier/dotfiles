@@ -1,5 +1,9 @@
 ifeq ($(origin MAKE_VERSION),undefined)
-  $(error GNU make is required. Please install GNU make and re-run.)
+  $(error GNU make >= 4 is required. Please install GNU make and re-run.)
+endif
+
+ifeq ($(shell [ "$(firstword $(subst ., ,$(MAKE_VERSION)))" -ge 4 ] && echo ok),)
+  $(error GNU make >= 4 is required. Found version $(MAKE_VERSION).)
 endif
 
 .PHONY: all configure pkgs pre-stow quick stow
