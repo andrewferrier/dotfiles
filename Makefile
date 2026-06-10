@@ -1,3 +1,7 @@
+ifeq ($(origin MAKE_VERSION),undefined)
+  $(error GNU make is required. Please install GNU make and re-run.)
+endif
+
 .PHONY: all configure pkgs pre-stow quick stow
 
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
