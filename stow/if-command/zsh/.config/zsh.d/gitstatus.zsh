@@ -1,6 +1,6 @@
 # Based on https://github.com/romkatv/gitstatus/blob/master/gitstatus.prompt.zsh
 
-source $(antidote home)/*gitstatus/gitstatus.plugin.zsh
+source $(antidote home)/**/*gitstatus*/gitstatus.plugin.zsh
 
 function gitstatus_prompt_update() {
   emulate -L zsh
