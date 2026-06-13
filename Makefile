@@ -7,8 +7,6 @@ ifneq ($(filter 0 1 2 3,$(MAKE_MAJOR)),)
   $(error GNU make >= 4 is required. Found version $(MAKE_VERSION). Run 'make --version' to check your current version.)
 endif
 
-.PHONY: all configure pkgs pre-stow quick stow
-
 MKFILE_PATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 PATH := $(MKFILE_PATH)/.bin:$(PATH)
 
@@ -38,18 +36,23 @@ else
   DESKTOP_SERVER := server
 endif
 
+.PHONY: all
 all: pkgs quick
 
+.PHONY: quick
 quick: stow configure
 
+.PHONY: pkgs
 pkgs:
 	(cd $(MKFILE_PATH)/pkgs/$(OSDISTRIBUTION) && $(MAKE))
 
+.PHONY: pre-stow
 pre-stow:
 	find . | grep DS_Store | ifne xargs rm
 	run-directory $(PRE_STOW)/common
 	run-directory $(PRE_STOW)/$(OS)
 
+.PHONY: stow
 stow: pre-stow
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow common
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(OS)
@@ -58,6 +61,7 @@ stow: pre-stow
 	stow --verbose --dir=$(STOW) --target=$(HOME) --stow $(DESKTOP_SERVER)
 	stow-if-command $(STOW)/if-command
 
+.PHONY: configure
 configure:
 	run-directory $(CONFIGURE)/all
 	run-directory $(CONFIGURE)/if-os/$(OS)

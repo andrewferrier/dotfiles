@@ -1,3 +1,4 @@
+.PHONY: all
 all: getTrueName day-night-notifier
 
 day-night-notifier: day-night-notifier-src/main.swift

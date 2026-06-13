@@ -1,5 +1,5 @@
-.PHONY: all clean test
 
+.PHONY: all
 all:
 	./bootstrap-pacaur
 	./upgrade-all-aur
