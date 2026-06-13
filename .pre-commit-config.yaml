@@ -74,10 +74,3 @@ repos:
       hooks:
           - id: mbake-format
           - id: mbake-validate
-    - repo: local
-      hooks:
-          - id: makefile-final-newline
-            name: Restore final newline stripped by mbake-format
-            entry: bash -c 'for f in "$@"; do [ -n "$(tail -c1 "$f")" ] && printf "\n" >> "$f"; done' --
-            language: system
-            types: [makefile]

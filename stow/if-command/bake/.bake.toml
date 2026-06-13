@@ -1,2 +1,3 @@
 [formatter]
 auto_insert_phony_declarations = true
+ensure_final_newline = true
