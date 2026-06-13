@@ -1,7 +1,5 @@
 ---@diagnostic disable: missing-fields
-if
-    #vim.fn.globpath(vim.o.packpath, "pack/*/opt/wrapping.nvim", 0, 1) > 0
-then
+if #vim.fn.globpath(vim.o.packpath, "pack/*/opt/wrapping.nvim", 0, 1) > 0 then
     vim.cmd.packadd("wrapping.nvim")
 else
     vim.pack.add({ "https://github.com/andrewferrier/wrapping.nvim" })
