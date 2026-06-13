@@ -1,7 +1,7 @@
 # AGENTS.md
 
-This repository requires Conventional Commits for every commit message that
-GitHub Copilot creates or suggests.
+This repository requires Conventional Commits for every commit message that an
+AI agent creates or suggests.
 
 ## Commit message rules
 
