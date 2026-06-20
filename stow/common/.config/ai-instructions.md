@@ -62,3 +62,9 @@ languages currently being worked with.
 - If there are URLs, use `hyperref` for clickable URL links.
 
 - For simple one-pagers, use `\pagenumbering{gobble}` to remove page numbers.
+
+## Markdown
+
+- Always run `mdformat` (or another tool if the repository appears to already
+  use it) to format Markdown. In particular, tables should always be formatted
+  correctly with whitespace whenever they are changed.
