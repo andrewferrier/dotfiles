@@ -2,7 +2,7 @@
 
 # Some commands (e.g. abcde) don't use VISUAL properly, so EDITOR is needed.
 
-if command -v nvim >/dev/null 2>/dev/null; then
+if command -v nvim >/dev/null 2>&1; then
     VISUAL=$(command -v nvim)
 else
     VISUAL=$(command -v vim)

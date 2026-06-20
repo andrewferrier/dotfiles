@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-if type zsh &>/dev/null; then
+if command -v zsh &>/dev/null; then
     zsh -i -c 'antidote update'
 fi
