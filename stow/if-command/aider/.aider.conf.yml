@@ -4,4 +4,6 @@ model: gemini/gemini-2.5-flash
 auto-commits: false
 attribute-author: false
 analytics-disable: true
-read: [AGENTS.md, ~/.config/aider/CONVENTIONS.md]
+chat-history-file: /dev/null
+input-history-file: /dev/null
+read: [AGENTS.md, ~/.config/ai-instructions.md]

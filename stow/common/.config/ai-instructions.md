@@ -25,8 +25,9 @@ languages currently being worked with.
 
 - Where it makes sense to do so, store data using the XDG standard.
 
-- If there is a file .github/copilot-instructions.md in the repo you're working
-  with, please review it.
+- If there is an AI instructions file in the repo (e.g. `AGENTS.md`, `CLAUDE.md`,
+  `.github/copilot-instructions.md`, `CONVENTIONS.md`), review it and follow
+  instructions in it.
 
 ## Bash / Shell Script
 
