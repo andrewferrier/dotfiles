@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o noglob
+set -o nounset
+set -o pipefail
+
+shopt -s inherit_errexit
+
+get_default_branch() {
+    git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|.*/||' || echo "main"
+}
+
+is_merged() {
+    local branch="$1"
+    local default_branch="$2"
+
+    if git branch -r --merged "origin/${default_branch}" 2>/dev/null |
+        grep -qE "(^|[[:space:]])origin/${branch}$"; then
+        echo "true"
+        return
+    fi
+
+    if command -v gh &>/dev/null; then
+        local count
+        count=$(gh pr list --state merged --head "$branch" --json number --jq 'length' 2>/dev/null || echo 0)
+        if [[ "$count" -gt 0 ]]; then
+            echo "true"
+            return
+        fi
+    fi
+
+    echo "false"
+}
+
+list_branches() {
+    git branch -r | grep -v 'HEAD' | sed 's|^[[:space:]]*origin/||' | sort
+}
+
+case "${1:-}" in
+--open-shell)
+    if ! git diff --quiet || ! git diff --cached --quiet; then
+        echo "Cannot switch to '${2}': working tree has uncommitted changes."
+        exit 1
+    fi
+    git switch "${2}" 2>&1
+    exec "${SHELL}"
+    ;;
+--preview)
+    git log --oneline --color=always --graph -20 "origin/${2}"
+    ;;
+--delete)
+    shift
+    DEFAULT_BRANCH=$(get_default_branch)
+    EXIT_CODE=0
+
+    for BRANCH in "$@"; do
+        MERGED=$(is_merged "$BRANCH" "$DEFAULT_BRANCH")
+        if [[ "$MERGED" == "true" ]]; then
+            if git push origin --delete "$BRANCH" 2>&1; then
+                echo "✓ Deleted ${BRANCH} (merged)"
+            else
+                echo "✗ Failed to delete ${BRANCH}"
+                EXIT_CODE=1
+            fi
+        else
+            echo ""
+            echo "⚠  Branch '${BRANCH}' has unmerged commits (not in ${DEFAULT_BRANCH} and no merged PR):"
+            echo ""
+            git log --oneline --color=always "origin/${DEFAULT_BRANCH}..origin/${BRANCH}" | head -15
+            echo ""
+            printf "Force-delete unmerged branch '%s'? [y/N] " "$BRANCH"
+            read -r CONFIRM </dev/tty
+            if [[ "$CONFIRM" == "y" || "$CONFIRM" == "Y" ]]; then
+                if git push origin --delete "$BRANCH" 2>&1; then
+                    echo "✓ Force-deleted ${BRANCH}"
+                else
+                    echo "✗ Failed to delete ${BRANCH}"
+                    EXIT_CODE=1
+                fi
+            else
+                echo "✗ Skipped ${BRANCH}"
+            fi
+        fi
+        echo ""
+    done
+
+    exit "$EXIT_CODE"
+    ;;
+*)
+    SCRIPT="$0"
+    RELOAD="reload(git branch -r | grep -v 'HEAD' | sed 's|^[[:space:]]*origin/||' | sort)"
+    FETCH_RELOAD="reload(git fetch --prune 2>/dev/null; git branch -r | grep -v 'HEAD' | sed 's|^[[:space:]]*origin/||' | sort)"
+
+    git fetch --prune 2>/dev/null
+
+    list_branches |
+        fzf --multi \
+            --ansi \
+            --tiebreak=index \
+            --preview "${SCRIPT} --preview {}" \
+            --preview-window=right,60%,border-left \
+            --header "ctrl-[D]elete, ctrl-[L]oad+fetch, <Enter (shell)>, <Space (mark)>" \
+            --bind "ctrl-d:execute(${SCRIPT} --delete {+})+${RELOAD}" \
+            --bind "ctrl-l:${FETCH_RELOAD}" \
+            --bind "enter:execute(${SCRIPT} --open-shell {})"
+    ;;
+esac
