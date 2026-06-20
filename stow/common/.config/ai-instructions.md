@@ -36,7 +36,7 @@ languages currently being worked with.
 ## Bash / Shell Script
 
 - Where possible, try to follow conventions set by shellcheck. In particular,
-  ensure that [[]] are always used in preference to [].
+  ensure that `[[]]` are always used in preference to `[]`.
 
 - Use uppercase for variable names.
 
