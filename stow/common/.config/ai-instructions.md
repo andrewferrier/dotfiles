@@ -29,6 +29,10 @@ languages currently being worked with.
   `.github/copilot-instructions.md`, `CONVENTIONS.md`), review it and follow
   instructions in it.
 
+- There are skeleton files for various file formats in
+  `~/dotfiles/stow/if-command/nvim/.config/nvim/skeleton/`. Use those as general
+  guidance for formatting or constructing new files as appropriate.
+
 ## Bash / Shell Script
 
 - Where possible, try to follow conventions set by shellcheck. In particular,
