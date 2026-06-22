@@ -19,6 +19,21 @@ zsh     | ~/.config/zsh/README.md
 caffeinate -i <somecommand> | prevent system from sleeping whilst command is running
 Ctrl-1/2/3                  | switch desktop
 Cmd-Shift-.                 | toggle hidden file display in Finder
+Fn-Ctrl-Left                | tile window to left half
+Fn-Ctrl-Right               | tile window to right half
+Fn-Ctrl-Up                  | tile window to top half
+Fn-Ctrl-Down                | tile window to bottom half
+Fn-Ctrl-F                   | fill window
+Fn-Ctrl-C                   | center window
+Fn-Ctrl-R                   | restore previous window size
+Fn-Ctrl-Shift-Left          | left & right arrangement
+Fn-Ctrl-Shift-Right         | right & left arrangement
+Fn-Ctrl-Shift-Up            | top & bottom arrangement
+Fn-Ctrl-Shift-Down          | bottom & top arrangement
+Fn-Ctrl-Opt-Shift-Left      | left & quarters arrangement
+Fn-Ctrl-Opt-Shift-Right     | right & quarters arrangement
+Fn-Ctrl-Opt-Shift-Up        | top & quarters arrangement
+Fn-Ctrl-Opt-Shift-Down      | bottom & quarters arrangement
 Option-Delete               | delete previous word
 ```
 
