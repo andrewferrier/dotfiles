@@ -44,6 +44,17 @@ def build_commit_message(staged_files: list[Path]) -> str:
     else:
         common = Path(os.path.commonpath([str(d) for d in dirs]))
 
+    if common == Path():
+        top_level_components = []
+        for path in staged_files:
+            if len(path.parts) == 1:
+                top_level_components.append(path.name)
+            elif path.parts[0] not in IGNORE_COMPONENTS:
+                top_level_components.append(path.parts[0])
+
+        unique_components = list(dict.fromkeys(top_level_components))
+        return ", ".join(unique_components) if unique_components else "."
+
     filtered_parts = [p for p in common.parts if p not in IGNORE_COMPONENTS]
     return str(Path(*filtered_parts)) if filtered_parts else str(common)
 
