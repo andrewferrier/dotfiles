@@ -8,6 +8,8 @@ This is my [dotfiles](https://dotfiles.io/) collection. Most of it's not intende
 
 - [ical-summary](stow/common/.local/bin/common-dotfiles/ical-summary) - From a directory of `.ics` [iCal](https://en.wikipedia.org/wiki/ICalendar) files, provides a summary of events.
 
+- [kanboard2md](stow/common/.local/bin/common-dotfiles/kanboard2md) - Convert [kanboard](https://kanboard.org/) boards to Markdown files.
+
 - [linkding-clean](stow/common/.local/bin/common-dotfiles/linkding-clean) - Cleans up [Linkding](https://github.com/sissbruecker/linkding) bookmarks.
 
 - [maildir-archive](stow/common/.local/bin/common-dotfiles/maildir-archive) - Archives old emails in a [Maildir](https://en.wikipedia.org/wiki/Maildir)-formatted mailbox.

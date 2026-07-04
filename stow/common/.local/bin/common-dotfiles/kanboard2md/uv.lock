@@ -1,0 +1,23 @@
+version = 1
+revision = 3
+requires-python = ">=3.11"
+
+[[package]]
+name = "kanboard"
+version = "1.1.8"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d8/de/0a31e6533512071c54cf37c346fe11e97b0cd85ce9451ce4f5803bfb6a25/kanboard-1.1.8.tar.gz", hash = "sha256:a26e00c7e9e7cb034840fc8505946f4834ff10721da5eae5225cc3b00ce3c7bb", size = 7700, upload-time = "2026-03-25T03:37:09.125Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/06/83/7e0207d00effaf988cc6ff4ed06cb46c27524a52a7bbec3710b50dfd9462/kanboard-1.1.8-py3-none-any.whl", hash = "sha256:0208db86424488876a2eda51f8aed01fa9df3470e900efd7f2a9b9d578742858", size = 6642, upload-time = "2026-03-25T03:37:07.89Z" },
+]
+
+[[package]]
+name = "kanboard2md"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "kanboard" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "kanboard" }]
