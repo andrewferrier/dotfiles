@@ -25,9 +25,11 @@ languages currently being worked with.
 
 - Where it makes sense to do so, store data using the XDG standard.
 
-- If there is an AI instructions file in the repo (e.g. `AGENTS.md`, `CLAUDE.md`,
-  `.github/copilot-instructions.md`, `CONVENTIONS.md`), review it and follow
-  instructions in it.
+- If there is an AI instructions file in the repo (e.g. `AGENTS.md`,
+  `CLAUDE.md`, `.github/copilot-instructions.md`, `CONVENTIONS.md`), review it
+  and follow instructions in it. When making major functional or wide-ranging
+  refactoring or other large changes in a repo, review those AI instructions
+  files to see if they need to be updated, and update them accordingly.
 
 - There are skeleton files for various file formats in
   `~/dotfiles/stow/if-command/nvim/.config/nvim/skeleton/`. Use those as general
