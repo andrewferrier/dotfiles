@@ -68,7 +68,7 @@ display_image() {
     if [[ "$lf_user_view" == "default" ]]; then
         REDUCED_RESOLUTION_IMAGE=$(display_image_reduced_resolution "${1}")
         # Exiting with 1 disables preview cache, forcing cleaning
-        kitty +icat --transfer-mode file --stdin no --scale-up --z-index -1 --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${REDUCED_RESOLUTION_IMAGE}" </dev/null >/dev/tty && exit 1
+        kitten icat --transfer-mode memory --stdin no --place "${WIDTH}x${HEIGHT}@${HORIZ_POS}x${VERT_POS}" "${REDUCED_RESOLUTION_IMAGE}" </dev/null >/dev/tty && sleep 1 && exit 1
     fi
 }
 
@@ -235,6 +235,9 @@ handle_fallback() {
     file --dereference --uncompress --no-sandbox --brief -- "${FILE_PATH}" | fmt -w "${WIDTH}" && exit 0
     exit 1
 }
+
+# Needed in case this is run outside lf
+lf_user_view="${lf_user_view:=default}"
 
 handle_hex
 handle_metadata
