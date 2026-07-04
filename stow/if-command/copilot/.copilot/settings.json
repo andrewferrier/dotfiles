@@ -1,0 +1,19 @@
+{
+  "showReasoning": false,
+  "allowedUrls": [
+    "http://localhost:3001",
+    "http://localhost:4000",
+    "http://localhost:5173",
+    "https://raw.githubusercontent.com",
+    "https://github.com",
+    "https://docs.anthropic.com",
+    "https://code.claude.com",
+    "https://docs.factory.ai",
+    "https://aider.chat",
+    "https://api.github.com",
+    "https://nvim-mini.org"
+  ],
+  "model": "auto",
+  "theme": "default",
+  "memory": false
+}
