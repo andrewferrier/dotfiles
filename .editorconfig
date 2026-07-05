@@ -9,3 +9,6 @@ indent_size = 4
 
 [Makefile]
 indent_style = tabs
+
+[*.md]
+indent_size = unset

@@ -35,6 +35,9 @@ languages currently being worked with.
   `~/dotfiles/stow/if-command/nvim/.config/nvim/skeleton/`. Use those as general
   guidance for formatting or constructing new files as appropriate.
 
+- Where possible use and apply `.editorconfig` files found in repos to write or
+  update code to the standards specified.
+
 ## Bash / Shell Script
 
 - Where possible, try to follow conventions set by shellcheck. In particular,
