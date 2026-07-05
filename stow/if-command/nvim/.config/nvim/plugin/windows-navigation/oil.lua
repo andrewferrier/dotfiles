@@ -34,6 +34,10 @@ end
 
 require("oil").setup(opts)
 
+if vim.fn.has("nvim-0.13") == 1 then
+    vim.keymap.del("n", "-")
+end
+
 vim.keymap.set("n", "-", function()
     require("oil").open()
 end, { desc = "Open parent directory", unique = true })
