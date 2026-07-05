@@ -6,8 +6,8 @@
 set -o errexit
 set -o nounset
 
-if (( $# == 0 )) ; then
-    awk '!a[$0]++' < /dev/stdin
+if (($# == 0)); then
+    awk '!a[$0]++' </dev/stdin
 else
     awk '!a[$0]++' "$1"
 fi

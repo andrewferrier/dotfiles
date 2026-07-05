@@ -14,7 +14,7 @@ for PLIST in *.plist; do
     PLIST="${PLIST%.*}"
     echo "Checking $PLIST..."
     plutil -lint "${PLIST}.plist"
-    if ! (launchctl list | grep "${PLIST}" > /dev/null); then
+    if ! (launchctl list | grep "${PLIST}" >/dev/null); then
         echo "$PLIST is not marked as loaded, loading..."
         launchctl load -w "${PLIST}.plist"
     else

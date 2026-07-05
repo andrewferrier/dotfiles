@@ -22,7 +22,7 @@ function lpr-image-fitpage() {
     HEIGHT=$(echo "$DIMENSIONS" | cut -d'x' -f2)
 
     local ORIENTATION="portrait"
-    if (( WIDTH * 210 > HEIGHT * 297 )); then # A4 landscape aspect ratio: 297/210
+    if ((WIDTH * 210 > HEIGHT * 297)); then # A4 landscape aspect ratio: 297/210
         ORIENTATION="landscape"
     fi
 

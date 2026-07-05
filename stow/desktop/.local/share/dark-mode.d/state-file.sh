@@ -9,4 +9,4 @@ XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/.cache}"
 
 STATE="${STATE:-night}"
 
-echo "$STATE" > "${XDG_CACHE_HOME}/day-night/state"
+echo "$STATE" >"${XDG_CACHE_HOME}/day-night/state"

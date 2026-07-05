@@ -7,12 +7,12 @@ TIMERS_DIR=${XDG_CONFIG_HOME:-${HOME}/.config}/systemd/user/timers.target.wants
 
 mkdir -p "${DEFAULT_DIR}" "${TIMERS_DIR}"
 
-if [[ -h $DEFAULT_DIR ]]; then
+if [[ -L $DEFAULT_DIR ]]; then
     echo >&2 "${DEFAULT_DIR} cannot be a symlink."
     exit 1
 fi
 
-if [[ -h $TIMERS_DIR ]]; then
+if [[ -L $TIMERS_DIR ]]; then
     echo >&2 "${TIMERS_DIR} cannot be a symlink."
     exit 1
 fi
