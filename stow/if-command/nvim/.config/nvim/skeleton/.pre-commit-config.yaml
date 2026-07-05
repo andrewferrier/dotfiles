@@ -39,6 +39,12 @@ repos:
       rev: v3.21.2
       hooks:
           - id: pyupgrade
+    - repo: https://github.com/doublify/pre-commit-rust
+      rev: v1.0
+      hooks:
+          - id: clippy
+          - id: cargo-check
+          - id: fmt
     - repo: https://github.com/astral-sh/ruff-pre-commit
       rev: v0.14.10
       hooks:
@@ -53,6 +59,10 @@ repos:
       hooks:
           - id: shellcheck-system
             types_or: [bash, sh]
+    - repo: https://github.com/scop/pre-commit-shfmt
+      rev: v3.13.1-1
+      hooks:
+          - id: shfmt
     - repo: https://github.com/JohnnyMorganz/StyLua
       rev: v2.0.2
       hooks:
