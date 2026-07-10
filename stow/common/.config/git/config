@@ -32,10 +32,8 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 
-[github]
-	user = andrewferrier
-
 [include]
+	path = ~/.config/git-install/config
 	path = ~/.config/git-local/config
 
 [init]
@@ -70,7 +68,6 @@
 
 [user]
 	name = Andrew Ferrier
-	email = 107015+andrewferrier@users.noreply.github.com
 
 [web]
 	browser = open
