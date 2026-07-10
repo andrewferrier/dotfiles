@@ -2,5 +2,5 @@
 @import "common"
 
 entry {
-  width: 90%;
+    width: 90%;
 }

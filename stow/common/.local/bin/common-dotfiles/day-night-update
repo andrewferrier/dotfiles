@@ -86,7 +86,7 @@ if state != current_state:
             result: subprocess.CompletedProcess[bytes] = subprocess.run(
                 [sh_file], check=True, capture_output=True
             )
-        except subprocess.CalledProcessError as e:  # noqa: PERF203
+        except subprocess.CalledProcessError as e:
             logger.exception(
                 f"Warning: Script {sh_file} failed with return code {e.returncode}"
             )

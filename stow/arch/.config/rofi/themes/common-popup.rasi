@@ -2,10 +2,10 @@
 @import "common"
 
 * {
-  text-color: #ffffff;
+    text-color: #ffffff;
 }
 
 window {
-  height: 70%;
-  width: 90%;
+    height: 70%;
+    width: 90%;
 }

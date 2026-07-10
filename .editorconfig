@@ -8,7 +8,10 @@ trim_trailing_whitespace = true
 indent_size = 4
 
 [Makefile]
-indent_style = tabs
+indent_style = tab
 
-[*.md]
+[*.{md,yaml,yml}]
 indent_size = unset
+
+[**/git*/config]
+indent_style = tab

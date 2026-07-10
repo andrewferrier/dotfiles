@@ -17,8 +17,10 @@ repos:
           - id: check-shebang-scripts-are-executable
             exclude: |
                 (?x)^(
+                    stow/arch/.config/X11/xinitrc.*|
                     stow/common/\.bash.*|
                     stow/common/\.config/(bash\.d|sh\.d|sh-profile\.d)/.*|
+                    stow/if-command/nvim/.config/nvim/skeleton.*|
                     stow/if-command/zsh/.*
                 )$
           - id: check-symlinks

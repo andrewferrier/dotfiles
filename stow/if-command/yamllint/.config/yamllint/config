@@ -2,8 +2,8 @@
 extends: default
 
 rules:
-  line-length:
-    max: 132
-    level: warning
+    line-length:
+        max: 132
+        level: warning
 
 # vim: set ft=yaml:

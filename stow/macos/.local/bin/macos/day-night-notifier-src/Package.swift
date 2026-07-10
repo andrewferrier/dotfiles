@@ -6,10 +6,10 @@ let package = Package(
     dependencies: [
     ],
     targets: [
-    	.target(
-		name: "day-night-notifier",
-		path: "."
-	)
+        .target(
+            name: "day-night-notifier",
+            path: "."
+        )
     ]
 )
 

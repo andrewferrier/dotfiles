@@ -1,5 +1,5 @@
 @import "common-popup"
 
 * {
-  background-color: #007223;
+    background-color: #007223;
 }

@@ -30,7 +30,7 @@ def get_mean_brightness_normalized(filename: Path) -> float:
     try:
         cmd = subprocess.run(  # noqa: S603
             [
-                "convert",
+                "/usr/bin/convert",
                 str(filename),
                 "-colorspace",
                 "Gray",
