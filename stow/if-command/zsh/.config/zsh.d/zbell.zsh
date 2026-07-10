@@ -23,10 +23,10 @@ zmodload zsh/datetime || return
 autoload -Uz add-zsh-hook || return
 
 # initialize zbell_duration if not set
-(( ${+zbell_duration} )) || zbell_duration=15
+((${+zbell_duration})) || zbell_duration=15
 
 # initialize zbell_ignore if not set
-(( ${+zbell_ignore} )) || zbell_ignore=($EDITOR $PAGER)
+((${+zbell_ignore})) || zbell_ignore=($EDITOR $PAGER)
 
 # initialize it because otherwise we compare a date and an empty string
 # the first time we see the prompt. it's fine to have lastcmd empty on the
@@ -36,32 +36,32 @@ zbell_timestamp=$EPOCHSECONDS
 
 # right before we begin to execute something, store the time it started at
 zbell_begin() {
-	zbell_timestamp=$EPOCHSECONDS
-	zbell_lastcmd=$1
+    zbell_timestamp=$EPOCHSECONDS
+    zbell_lastcmd=$1
 }
 
 # when it finishes, if it's been running longer than $zbell_duration,
 # and we dont have an ignored command in the line, then print a bell.
 zbell_end() {
-	ran_long=$(( $EPOCHSECONDS - $zbell_timestamp >= $zbell_duration ))
+    ran_long=$(($EPOCHSECONDS - $zbell_timestamp >= $zbell_duration))
 
-	has_ignored_cmd=0
-	for cmd in ${(s:;:)zbell_lastcmd//|/;}; do
-		words=(${(z)cmd})
-		util=${words[1]}
-		if (( ${zbell_ignore[(i)$util]} <= ${#zbell_ignore} )); then
-			has_ignored_cmd=1
-			break
-		fi
-	done
+    has_ignored_cmd=0
+    for cmd in ${(s:;:)zbell_lastcmd//|/;}; do
+        words=(${(z)cmd})
+        util=${words[1]}
+        if ((${zbell_ignore[(i)$util]} <= ${#zbell_ignore})); then
+            has_ignored_cmd=1
+            break
+        fi
+    done
 
-	if (( ! $has_ignored_cmd )) && (( ran_long )); then
-		if command -v xdotool &>/dev/null; then
-			if [ "$(xdotool getwindowfocus)" -ne "$WINDOWID" ]; then
-				print -n "\a"
-			fi
-		fi
-	fi
+    if ((!$has_ignored_cmd)) && ((ran_long)); then
+        if command -v xdotool &>/dev/null; then
+            if [ "$(xdotool getwindowfocus)" -ne "$WINDOWID" ]; then
+                print -n "\a"
+            fi
+        fi
+    fi
 }
 
 # register the functions as hooks
