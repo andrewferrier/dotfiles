@@ -1,5 +1,6 @@
 Backups
 Cache/
+CachedConfigurations/
 CachedData/
 CachedExtensionVSIXs/
 CachedExtensions/
@@ -8,11 +9,13 @@ Code Cache/
 Cookies
 Cookies-journal
 Crashpad/
+DIPS/
 DawnCache/
 DawnGraphiteCache/
 DawnWebGPUCache/
 Dictionaries/
 GPUCache/
+Local State/
 Local Storage/
 Network Persistent State
 Preferences
@@ -23,6 +26,7 @@ SharedStorage
 TransportSecurity
 Trust Tokens*
 User/History/
+User/chatLanguageModels.json
 User/globalStorage/
 User/workspaceStorage/
 WebStorage/
