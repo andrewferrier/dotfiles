@@ -1,3 +1,3 @@
 build: main.swift
-	rm -r .build/
+	rm -rf .build/
 	swift build -c release --disable-sandbox
