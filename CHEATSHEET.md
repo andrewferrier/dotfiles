@@ -76,6 +76,14 @@ journalctl CONTAINER_NAME="docker_container" | output from docker container
 journalctl --user -u xyz.service             | output from specific user service
 ```
 
+## git
+
+```text
+git history fixup <commit>                      | fixup a commit with currently staged content
+git history reword <commit>                     | re-word a commit
+git history split <commit>                      | interactively split a commit
+```
+
 ## Linux
 
 ```text
