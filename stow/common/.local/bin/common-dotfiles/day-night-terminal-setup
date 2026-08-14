@@ -24,7 +24,9 @@ set_from_state_file() {
 }
 
 if [[ -n "${SSH_CONNECTION}" ]]; then
-    if command -v dol >/dev/null 2>&1; then
+    if [[ -n "$TMUX" ]]; then
+        true
+    elif command -v dol >/dev/null 2>&1 && DOL_OUTPUT=$(dol 2>/dev/null); then
         DOL_OUTPUT=$(dol)
 
         if [[ $DOL_OUTPUT == "dark" ]]; then
@@ -32,7 +34,7 @@ if [[ -n "${SSH_CONNECTION}" ]]; then
         else
             echo 'day' >"${STATE_FILE}"
         fi
-    elif [[ -z "$TMUX" ]]; then
+    else
         if command -v kitten >/dev/null 2>&1; then
             # shellcheck disable=SC2312
             BG_COLOR=$(kitten query-terminal background | cut -d'#' -f2)
@@ -47,7 +49,6 @@ if [[ -n "${SSH_CONNECTION}" ]]; then
             exit 1
         fi
     fi
-
 fi
 
 set_from_state_file
