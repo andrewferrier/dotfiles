@@ -134,7 +134,7 @@ else
 fi
 
 function wrapper_memy() {
-    memy "${MEMY_PARAMS[@]}" | tac
+    memy "${MEMY_PARAMS[@]}"
 }
 
 function wrapper_fd() {
