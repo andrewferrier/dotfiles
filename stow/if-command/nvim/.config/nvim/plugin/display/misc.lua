@@ -29,8 +29,6 @@ vim.opt.listchars = {
     nbsp = "␣",
 }
 
-vim.opt.messagesopt = "hit-enter,history:10000"
-
 vim.pack.add({ "https://github.com/rachartier/tiny-glimmer.nvim" })
 require("tiny-glimmer").setup({
     overwrite = {
