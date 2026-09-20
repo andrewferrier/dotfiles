@@ -74,8 +74,8 @@ end
 
 ---@return string[]
 local fileformat = function()
-    if vim.opt.fileformat:get() ~= "unix" then
-        return { vim.opt.fileformat:get() }
+    if vim.bo.fileformat ~= "unix" then
+        return { vim.bo.fileformat }
     end
 
     return {}
