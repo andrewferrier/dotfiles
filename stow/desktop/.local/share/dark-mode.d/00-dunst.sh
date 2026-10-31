@@ -7,4 +7,4 @@ set -o pipefail
 
 shopt -s inherit_errexit
 
-killall dunst
+killall dunst || true
