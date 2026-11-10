@@ -1,6 +1,7 @@
 vim.filetype.add({
     extension = {
         bashrc = "bash",
+        caddy = "caddy",
         equivs = "debcontrol",
         jad = "java",
         tfstate = "json",
@@ -9,6 +10,7 @@ vim.filetype.add({
         [".ansible-lint"] = "yaml",
         [".dclintrc"] = "json",
         [".sqlfluff"] = "cfg",
+        ["Caddyfile"] = "caddy",
         ["control_template"] = "debcontrol",
         ["shellcheckrc"] = "conf",
 
