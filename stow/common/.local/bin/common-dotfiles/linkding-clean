@@ -181,7 +181,7 @@ class LinkdingAPIClient:
 
     def get_remote_metadata(self, url: str) -> dict[str, Any] | None:
         escaped_url = urllib.parse.quote_plus(url)
-        check_url = f"http://192.168.1.10:8084/api/bookmarks/check/?url={escaped_url}"
+        check_url = f"https://linkding.local.andrewferrier.com/api/bookmarks/check/?url={escaped_url}"
         logger.debug(f"Checking remote metadata for URL: {url} using {check_url}")
         try:
             response = self.session.get(check_url, timeout=30)
