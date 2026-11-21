@@ -2,21 +2,21 @@
 # by Miek Gieben: https://github.com/miekg/lean
 
 readonly COLOR_SECONDARY="%F{8}" # grey
-readonly COLOR_PRIMARY="%F{2}" # green
-readonly COLOR_WARNING="%F{9}" # red
-readonly COLOR_ERROR="%F{1}" # bright red
+readonly COLOR_PRIMARY="%F{2}"   # green
+readonly COLOR_WARNING="%F{9}"   # red
+readonly COLOR_ERROR="%F{1}"     # bright red
 
 PROMPT_CMD_MAX_EXEC_TIME=${PROMPT_CMD_MAX_EXEC_TIME:=60}
 
 human_readable_time() {
     local tmp=$1
-    local days=$(( tmp / 60 / 60 / 24 ))
-    local hours=$(( tmp / 60 / 60 % 24 ))
-    local minutes=$(( tmp / 60 % 60 ))
-    local seconds=$(( tmp % 60 ))
-    (( $days > 0 )) && echo -n "${days}d "
-    (( $hours > 0 )) && echo -n "${hours}h "
-    (( $minutes > 0 )) && echo -n "${minutes}m "
+    local days=$((tmp / 60 / 60 / 24))
+    local hours=$((tmp / 60 / 60 % 24))
+    local minutes=$((tmp / 60 % 60))
+    local seconds=$((tmp % 60))
+    (($days > 0)) && echo -n "${days}d "
+    (($hours > 0)) && echo -n "${hours}h "
+    (($minutes > 0)) && echo -n "${minutes}m "
     echo "${seconds}s "
 }
 
@@ -45,10 +45,11 @@ prompt_precmd() {
     local jobs
 
     unset jobs
-    for a (${(k)jobstates}) {
-        j=$jobstates[$a];i='${${(@s,:,)j}[2]}'
+    for a in ${(k)jobstates}; do
+        j=$jobstates[$a]
+        i='${${(@s,:,)j}[2]}'
         jobs+=($a${i//[^+-]/})
-    }
+    done
 
     prompt_jobs=""
     [[ -n $jobs ]] && prompt_jobs="["${(j:,:)jobs}"] "

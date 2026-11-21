@@ -11,7 +11,7 @@ indent_size = 4
 # It is possible to mix tabs and spaces for good reason
 indent_style = unset
 
-[*.{md,yaml,yml}]
+[*.{json,md,xml,yaml,yml}]
 indent_size = unset
 
 [**/git*/config]
