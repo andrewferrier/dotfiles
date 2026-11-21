@@ -9,4 +9,5 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 [Makefile]
-indent_style = tabs
+# It is possible to mix tabs and spaces for good reason
+indent_style = unset
