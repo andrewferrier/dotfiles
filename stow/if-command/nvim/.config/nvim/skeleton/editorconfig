@@ -11,3 +11,6 @@ trim_trailing_whitespace = true
 [Makefile]
 # It is possible to mix tabs and spaces for good reason
 indent_style = unset
+
+[*.{md,yaml,yml}]
+indent_size = unset
