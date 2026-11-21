@@ -4,6 +4,7 @@ alias combine-into-pdf='convert -density 300 -quality 100'
 alias dirdiff='diff --color --brief --recursive --side-by-side'
 alias docker-cleanup="docker container prune -f ; docker image prune -f ; docker volume prune -f ; docker network prune -f"
 alias docker-rmi-interactive="docker images | sed -E 's%([^[:space:]]+)[[:space:]]+([^[:space:]]+)[[:space:]]+([^[:space:]]+).*%\\1:\\2 \\3%g' | tail -n +2 | sort -r | fzf -d' ' -m --with-nth=1 | cut -d' ' -f2 | xargs -t docker image rm"
+alias docker-rm-volume-interactive='docker volume ls --format "{{.Name}}" | fzf --multi --prompt="Select volumes to delete: " | xargs -r docker volume rm'
 alias external-ip="curl -4 ifconfig.co"
 alias find-case-insensitive-clashes="find . | tr '[:upper:]' '[:lower:]' | LC_ALL=C sort | LC_ALL=C uniq -d"
 alias rm-broken-links='find . -xtype l | fzf -m | xargs rm'
